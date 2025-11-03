@@ -1,0 +1,14 @@
+D:\Projects\Console\Qlang\bin\Debug\net9.0\Qlang.exe
+D:\Projects\Console\Qlang\bin\Debug\net9.0\Qlang.deps.json
+D:\Projects\Console\Qlang\bin\Debug\net9.0\Qlang.runtimeconfig.json
+D:\Projects\Console\Qlang\bin\Debug\net9.0\Qlang.dll
+D:\Projects\Console\Qlang\bin\Debug\net9.0\Qlang.pdb
+D:\Projects\Console\Qlang\obj\Debug\net9.0\Qlang.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Console\Qlang\obj\Debug\net9.0\Qlang.AssemblyInfoInputs.cache
+D:\Projects\Console\Qlang\obj\Debug\net9.0\Qlang.AssemblyInfo.cs
+D:\Projects\Console\Qlang\obj\Debug\net9.0\Qlang.csproj.CoreCompileInputs.cache
+D:\Projects\Console\Qlang\obj\Debug\net9.0\Qlang.dll
+D:\Projects\Console\Qlang\obj\Debug\net9.0\refint\Qlang.dll
+D:\Projects\Console\Qlang\obj\Debug\net9.0\Qlang.pdb
+D:\Projects\Console\Qlang\obj\Debug\net9.0\Qlang.genruntimeconfig.cache
+D:\Projects\Console\Qlang\obj\Debug\net9.0\ref\Qlang.dll
