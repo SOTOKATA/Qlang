@@ -7,22 +7,19 @@ Variable(operator) Equals Identifier(this) Dot Identifier(ask) LParen Identifier
 Keyword(if) Variable(operator) Equals Equals Identifier(___STRING_3___) Colon NewLine 
 Indent 
 Indent
-IndentVariable(result) Equals Identifier(Math) Dot Identifier(sum) LParen Variable(num1) Comma Variable(num2) RParen NewLine 
-Identifier(Term) Dot Identifier(println) LParen Variable(num1) Comma Variable(operator) Comma Variable(num2) Comma Identifier(___STRING_4___) Comma Variable(result) RParen NewLine 
+IndentIdentifier(Term) Dot Identifier(println) LParen Variable(num1) Comma Variable(operator) Comma Variable(num2) Comma Identifier(___STRING_4___) Comma Identifier(Math) Dot Identifier(sum) LParen Variable(num1) Comma Variable(num2) RParen RParen NewLine 
 Dedent 
 Dedent
 DedentKeyword(else) Keyword(if) Variable(operator) Equals Equals Identifier(___STRING_5___) Colon NewLine 
 Indent 
 Indent
-IndentVariable(result) Equals Identifier(Math) Dot Identifier(sub) LParen Variable(num1) Comma Variable(num2) RParen NewLine 
-Identifier(Term) Dot Identifier(println) LParen Variable(num1) Comma Variable(operator) Comma Variable(num2) Comma Identifier(___STRING_6___) Comma Variable(result) RParen NewLine 
+IndentIdentifier(Term) Dot Identifier(println) LParen Variable(num1) Comma Variable(operator) Comma Variable(num2) Comma Identifier(___STRING_6___) Comma Identifier(Math) Dot Identifier(sub) LParen Variable(num1) Comma Variable(num2) RParen RParen NewLine 
 Dedent 
 Dedent
 DedentKeyword(else) Keyword(if) Variable(operator) Equals Equals Identifier(___STRING_7___) Colon NewLine 
 Indent 
 Indent
-IndentVariable(result) Equals Identifier(Math) Dot Identifier(mult) LParen Variable(num1) Comma Variable(num2) RParen NewLine 
-Identifier(Term) Dot Identifier(println) LParen Variable(num1) Comma Variable(operator) Comma Variable(num2) Comma Identifier(___STRING_8___) Comma Variable(result) RParen NewLine 
+IndentIdentifier(Term) Dot Identifier(println) LParen Variable(num1) Comma Variable(operator) Comma Variable(num2) Comma Identifier(___STRING_8___) Comma Identifier(Math) Dot Identifier(mult) LParen Variable(num1) Comma Variable(num2) RParen RParen NewLine 
 Dedent 
 Dedent
 DedentKeyword(else) Keyword(if) Variable(operator) Equals Equals Identifier(___STRING_9___) Colon NewLine 
@@ -32,13 +29,13 @@ IndentKeyword(if) Variable(num2) Equals Equals Identifier(___STRING_10___) Colon
 Indent 
 Indent
 IndentIdentifier(Term) Dot Identifier(println) LParen Identifier(___STRING_11___) RParen NewLine 
+Keyword(return) Identifier(___STRING_12___) NewLine 
 Dedent 
 Dedent
 DedentKeyword(else) Colon NewLine 
 Indent 
 Indent
-IndentVariable(result) Equals Identifier(Math) Dot Identifier(div) LParen Variable(num1) Comma Variable(num2) RParen NewLine 
-Identifier(Term) Dot Identifier(println) LParen Variable(num1) Comma Variable(operator) Comma Variable(num2) Comma Identifier(___STRING_12___) Comma Variable(result) RParen NewLine 
+IndentIdentifier(Term) Dot Identifier(println) LParen Variable(num1) Comma Variable(operator) Comma Variable(num2) Comma Identifier(___STRING_13___) Comma Identifier(Math) Dot Identifier(div) LParen Variable(num1) Comma Variable(num2) RParen RParen NewLine 
 Dedent 
 Dedent
 DedentDedent 
@@ -46,10 +43,11 @@ Dedent
 DedentKeyword(else) Colon NewLine 
 Indent 
 Indent
-IndentIdentifier(Term) Dot Identifier(println) LParen Identifier(___STRING_13___) RParen NewLine 
+IndentIdentifier(Term) Dot Identifier(println) LParen Identifier(___STRING_14___) RParen NewLine 
 Dedent 
 Dedent
-DedentDedent 
+DedentIdentifier(Term) Dot Identifier(println) LParen Identifier(___STRING_15___) RParen NewLine 
+Dedent 
 Dedent
 DedentKeyword(function) Identifier(ask) LParen Variable(message) RParen Colon NewLine 
 Indent 

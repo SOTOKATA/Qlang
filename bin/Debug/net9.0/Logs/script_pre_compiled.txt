@@ -6,22 +6,21 @@ function main():
     $operator = this.ask(___STRING_2___)
 
     if $operator == ___STRING_3___:
-        $result = Math.sum($num1, $num2)
-        Term.println($num1, $operator, $num2, ___STRING_4___, $result)
+        Term.println($num1, $operator, $num2, ___STRING_4___, Math.sum($num1, $num2))
     else if $operator == ___STRING_5___:
-        $result = Math.sub($num1, $num2)
-        Term.println($num1, $operator, $num2, ___STRING_6___, $result)
+        Term.println($num1, $operator, $num2, ___STRING_6___, Math.sub($num1, $num2))
     else if $operator == ___STRING_7___:
-        $result = Math.mult($num1, $num2)
-        Term.println($num1, $operator, $num2, ___STRING_8___, $result)
+        Term.println($num1, $operator, $num2, ___STRING_8___, Math.mult($num1, $num2))
     else if $operator == ___STRING_9___:
         if $num2 == ___STRING_10___:
             Term.println(___STRING_11___)
+            return ___STRING_12___
         else:
-            $result = Math.div($num1, $num2)
-            Term.println($num1, $operator, $num2, ___STRING_12___, $result)
+            Term.println($num1, $operator, $num2, ___STRING_13___, Math.div($num1, $num2))
     else:
-        Term.println(___STRING_13___)
+        Term.println(___STRING_14___)
+
+    Term.println(___STRING_15___)
 
 function ask($message):
     Term.print($message)

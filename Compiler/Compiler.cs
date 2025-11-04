@@ -71,7 +71,7 @@ public partial class Compiler
         
         fl.SetPath("Logs\\script_parsed.txt");
         
-        fl.Log(string.Join(' ', programNode.Statements));
+        fl.Log(programNode.GetTree());
         
         return programNode;
     }

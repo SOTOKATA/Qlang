@@ -6,22 +6,21 @@ function main():
     $operator = this.ask("Type operator: ")
 
     if $operator == "+":
-        $result = Math.sum($num1, $num2)
-        Term.println($num1, $operator, $num2, "=", $result)
+        Term.println($num1, $operator, $num2, "=", Math.sum($num1, $num2))
     else if $operator == "-":
-        $result = Math.sub($num1, $num2)
-        Term.println($num1, $operator, $num2, "=", $result)
+        Term.println($num1, $operator, $num2, "=", Math.sub($num1, $num2))
     else if $operator == "*":
-        $result = Math.mult($num1, $num2)
-        Term.println($num1, $operator, $num2, "=", $result)
+        Term.println($num1, $operator, $num2, "=", Math.mult($num1, $num2))
     else if $operator == "/":
         if $num2 == "0":
             Term.println("Error: can't divide by 0")
+            return ""
         else:
-            $result = Math.div($num1, $num2)
-            Term.println($num1, $operator, $num2, "=", $result)
+            Term.println($num1, $operator, $num2, "=", Math.div($num1, $num2))
     else:
         Term.println("Error: operator is not identificated!")
+
+    Term.println("Execution ended")
 
 function ask($message):
     Term.print($message)

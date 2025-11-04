@@ -1,1 +1,62 @@
-Qlang.AST.FunctionNode Qlang.AST.FunctionNode
+Function: main
+  Body:
+    VariableName: num1 &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    VariableName: num2 &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    VariableName: operator &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    Condition: Qlang.AST.BinaryOperationNode System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String] System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    Term.println: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+
+Function: main
+  Body:
+    VariableName: num1 &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    VariableName: num2 &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    VariableName: operator &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    Condition: Qlang.AST.BinaryOperationNode System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String] System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    Term.println: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+
+Function: ask
+Function: main
+  Body:
+    VariableName: num1 &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    VariableName: num2 &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    VariableName: operator &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    Condition: Qlang.AST.BinaryOperationNode System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String] System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    Term.println: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+
+  Parameters: messageFunction: main
+  Body:
+    VariableName: num1 &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    VariableName: num2 &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    VariableName: operator &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    Condition: Qlang.AST.BinaryOperationNode System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String] System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    Term.println: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+
+  Body:
+Function: main
+  Body:
+    VariableName: num1 &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    VariableName: num2 &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    VariableName: operator &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    Condition: Qlang.AST.BinaryOperationNode System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String] System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    Term.println: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+
+    Term.print: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+Function: main
+  Body:
+    VariableName: num1 &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    VariableName: num2 &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    VariableName: operator &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    Condition: Qlang.AST.BinaryOperationNode System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String] System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    Term.println: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+
+    ReturnValue: Function: main
+  Body:
+    VariableName: num1 &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    VariableName: num2 &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    VariableName: operator &     this.ask: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    Condition: Qlang.AST.BinaryOperationNode System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String] System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+    Term.println: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+
+    Term.read: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+
+

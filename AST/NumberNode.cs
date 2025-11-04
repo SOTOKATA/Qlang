@@ -3,4 +3,9 @@
 public class NumberNode : ASTNode
 {
     public double Value { get; set; }
+
+    public override string GetTree(string indent = "")
+    {
+        return $"{indent}Value: {Value}";
+    }
 }
