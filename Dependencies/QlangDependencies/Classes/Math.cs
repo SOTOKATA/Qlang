@@ -2,11 +2,11 @@
 
 namespace Qlang.Dependencies.QlangDependencies.Classes;
 
-public class Term : Class
+public class Math : Class
 {
-    public override string GetName() => "Term";
+    public override string GetName() => "Math";
 
     public override List<Function> GetFunctions() => [
-        new Print(), new Read(), new PrintLine()
+        new Sum(), new Sub(), new Div(), new Mult()
     ];
 }

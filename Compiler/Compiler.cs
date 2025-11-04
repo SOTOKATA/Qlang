@@ -23,7 +23,7 @@ public partial class Compiler
   
     public ProgramNode Compile(string script)
     {
-        FileLogger fl = new FileLogger("script.txt");
+        FileLogger fl = new("Logs\\script.txt");
         
         _originalScript = script;
         
@@ -33,7 +33,7 @@ public partial class Compiler
         
         // Console.WriteLine($"Code (ExtractStrings): \n{_outputScript}\n");
         
-        fl.SetPath("script_pre_compiled.txt");
+        fl.SetPath("Logs\\script_pre_compiled.txt");
         
         _outputScript = ClearComments(_outputScript);
 
@@ -44,7 +44,7 @@ public partial class Compiler
         List<Token> tokens = _lexer.Lex(_outputScript);
 
         
-        fl.SetPath("script_tokenized.txt");
+        fl.SetPath("Logs\\script_tokenized.txt");
 
         string line = "";
         foreach (Token token in tokens)
@@ -69,7 +69,7 @@ public partial class Compiler
 
         ProgramNode programNode = _parser.Parse(tokens);
         
-        fl.SetPath("script_parsed.txt");
+        fl.SetPath("Logs\\script_parsed.txt");
         
         fl.Log(string.Join(' ', programNode.Statements));
         

@@ -24,5 +24,6 @@ public enum Tokens
     StringRef,
     Indent,
     Dedent,
-    NewLine
+    NewLine,
+    Return
 }

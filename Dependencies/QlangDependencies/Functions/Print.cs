@@ -6,7 +6,7 @@ public class Print : Function
 
     public override string Execute(object[] args)
     {
-        Console.WriteLine(string.Join(" ", args));
+        Console.Write(string.Join("", args));
 
         return "";
     }

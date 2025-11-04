@@ -30,7 +30,7 @@ public class Parser
                 continue;
             }
 
-            Console.WriteLine("Parsing Statement");
+            // Console.WriteLine("Parsing Statement");
             program.Statements.Add(ParseStatement());
         }
 
@@ -47,28 +47,35 @@ public class Parser
         // function declaration
         if (Check(Tokens.Keyword) && Current().Value == "function")
         {
-            Console.WriteLine("Detected: Function declaration");
+            // Console.WriteLine("Detected: Function declaration");
             return ParseFunction();
         }
 
         // if statement
         if (Check(Tokens.Keyword) && Current().Value == "if")
         {
-            Console.WriteLine("Detected: If block");
+            // Console.WriteLine("Detected: If block");
             return ParseIf();
+        }
+        
+        // return statement
+        if (Check(Tokens.Keyword) && Current().Value == "return")
+        {
+            // Console.WriteLine("Detected: If block");
+            return ParseReturn();
         }
 
         // assignment
         if (Check(Tokens.Variable))
         {
-            Console.WriteLine("Detected: Variable assignment");
+            // Console.WriteLine("Detected: Variable assignment");
             return ParseAssignment();
         }
 
         // method call (Term.print(...))
         if (Check(Tokens.Identifier))
         {
-            Console.WriteLine("Detected: Method call");
+            // Console.WriteLine("Detected: Method call");
             return ParseMethodCall();
         }
 
@@ -85,7 +92,7 @@ public class Parser
         string name = Expect(Tokens.Identifier).Value;
         Expect(Tokens.LParen);
         
-        var parameters = new List<string>();
+        List<string> parameters = [];
         while (!Check(Tokens.RParen))
         {
             if (Check(Tokens.Variable))
@@ -188,13 +195,13 @@ public class Parser
     private MethodCallNode ParseMethodCall()
     {
         string objectName = Expect(Tokens.Identifier).Value;
-        Console.WriteLine("Object Name: " + objectName);
+        // Console.WriteLine("ParseMethodCall/Object Name: " + objectName);
         Expect(Tokens.Dot);
         string methodName = Expect(Tokens.Identifier).Value;
-        Console.WriteLine("Method Name: " + methodName);
+        // Console.WriteLine("ParseMethodCall/Method Name: " + methodName);
         Expect(Tokens.LParen);
 
-        var arguments = new List<ASTNode>();
+        List<ASTNode> arguments = [];
         while (!Check(Tokens.RParen))
         {
             arguments.Add(ParseExpression());
@@ -203,9 +210,22 @@ public class Parser
         }
 
         Expect(Tokens.RParen);
-        Expect(Tokens.NewLine);
+        
+        if (Peek()?.TokenType == Tokens.NewLine)
+            Expect(Tokens.NewLine);
 
         return new MethodCallNode { ObjectName = objectName, MethodName = methodName, Arguments = arguments };
+    }
+
+    private ASTNode ParseReturn()
+    {
+        Expect(Tokens.Keyword);
+        
+        ASTNode node = ParsePrimary();
+        
+        Expect(Tokens.NewLine);
+        
+        return new ReturnNode { ReturnValue = node };
     }
 
     /// <summary>
@@ -230,7 +250,7 @@ public class Parser
         {
             string op = Current().TokenType.ToString();
             Advance();
-            var right = ParseExpression();
+            ASTNode right = ParseExpression();
             return new BinaryOperationNode { Left = left, Operator = op, Right = right };
         }
 
@@ -277,6 +297,7 @@ public class Parser
     private Token Advance()
     {
         if (!IsAtEnd()) _position++;
+        // Console.WriteLine("TokenType: " + _tokens[_position - 1].TokenType);
         return _tokens[_position - 1];
     }
 
@@ -290,7 +311,11 @@ public class Parser
     private Token Expect(Tokens type, string? value = null)
     {
         if (!Check(type))
-            throw new Exception($"Expected {type}, got {Current().TokenType}");
+        {
+            Token current = Current();
+            
+            throw new Exception($"Expected {type}, got {current.TokenType} (Value: {(current.Value == "" ? "Null" : current.Value)}) ");
+        }
         
         if (value != null && Current().Value != value)
             throw new Exception($"Expected '{value}', got '{Current().Value}'");

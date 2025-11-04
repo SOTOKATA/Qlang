@@ -1,0 +1,28 @@
+function main():
+    $num1 = this.ask(___STRING_0___)
+
+    $num2 = this.ask(___STRING_1___)
+
+    $operator = this.ask(___STRING_2___)
+
+    if $operator == ___STRING_3___:
+        $result = Math.sum($num1, $num2)
+        Term.println($num1, $operator, $num2, ___STRING_4___, $result)
+    else if $operator == ___STRING_5___:
+        $result = Math.sub($num1, $num2)
+        Term.println($num1, $operator, $num2, ___STRING_6___, $result)
+    else if $operator == ___STRING_7___:
+        $result = Math.mult($num1, $num2)
+        Term.println($num1, $operator, $num2, ___STRING_8___, $result)
+    else if $operator == ___STRING_9___:
+        if $num2 == ___STRING_10___:
+            Term.println(___STRING_11___)
+        else:
+            $result = Math.div($num1, $num2)
+            Term.println($num1, $operator, $num2, ___STRING_12___, $result)
+    else:
+        Term.println(___STRING_13___)
+
+function ask($message):
+    Term.print($message)
+    return Term.read()
