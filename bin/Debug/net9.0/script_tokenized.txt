@@ -1,0 +1,32 @@
+Keyword(function) Identifier(main) LParen RParen Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(Term) Dot Identifier(print) LParen Identifier(___STRING_0___) RParen NewLine 
+Variable(var) Equals Identifier(Term) Dot Identifier(read) LParen RParen NewLine 
+Identifier(this) Dot Identifier(printer) LParen Variable(var) RParen NewLine 
+Keyword(if) Variable(var) Equals Equals Identifier(___STRING_1___) Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(Term) Dot Identifier(print) LParen Identifier(___STRING_2___) RParen NewLine 
+Dedent 
+Dedent
+DedentKeyword(else) Keyword(if) Variable(var) Equals Equals Identifier(___STRING_3___) Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(Term) Dot Identifier(print) LParen Identifier(___STRING_4___) RParen NewLine 
+Dedent 
+Dedent
+DedentKeyword(else) Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(Term) Dot Identifier(print) LParen Identifier(___STRING_5___) Comma Variable(var) RParen NewLine 
+Dedent 
+Dedent
+DedentDedent 
+Dedent
+DedentKeyword(function) Identifier(printer) LParen Variable(toprint) RParen Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(Term) Dot Identifier(print) LParen Variable(toprint) RParen NewLine 
+Dedent 
+Dedent

@@ -1,6 +1,6 @@
 ﻿namespace Qlang.Dependencies.QlangDependencies;
 
-public class Print : QFunction
+public class Print : Function
 {
     public override string GetName() => "print";
 

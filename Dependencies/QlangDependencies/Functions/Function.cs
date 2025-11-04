@@ -1,6 +1,6 @@
 ﻿namespace Qlang.Dependencies.QlangDependencies;
 
-public abstract class QFunction
+public abstract class Function
 {
     public abstract string GetName();
     

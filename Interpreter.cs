@@ -10,11 +10,16 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
 
     public void Execute(ProgramNode program)
     {
+        Console.WriteLine($"Execution process started");
+        
         // Сначала регистрируем все функции
         foreach (var statement in program.Statements)
         {
-            if (statement is FunctionNode func)
-                _functions[func.Name] = func;
+            if (statement is not FunctionNode func)
+                continue;
+            
+            _functions[func.Name] = func;
+            Console.WriteLine($"{func.Name}: {func}");
         }
 
         // Запускаем функцию main
@@ -37,6 +42,7 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
 
     private void ExecuteStatement(ASTNode statement)
     {
+        Console.WriteLine(statement);
         switch (statement)
         {
             case AssignmentNode assign:
@@ -70,8 +76,15 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
 
     private void ExecuteMethodCall(MethodCallNode call)
     {
+        // Пользовательские функции
+        if (call.ObjectName == "this" && _functions.TryGetValue(call.MethodName, out var func))
+        {
+            ExecuteFunction(func, call.Arguments.ConvertAll(EvaluateExpression));
+            return;
+        }
+        
         // Встроенные классы
-        foreach (QClass qClass in QNamespace.GetClassList())
+        foreach (Class qClass in Namespace.GetClassList())
         {
             // Console.WriteLine("Debug: (1)" + qClass.GetName() + " " + call.ObjectName);
             if (qClass.GetName() != call.ObjectName) 

@@ -8,30 +8,72 @@ public partial class Compiler
 {
     public Compiler()
     {
-        _parser = new(this);
+        _parser = new();
         _lexer = new(this);
     }
     
-    private string OriginalScript = "";
+    private string _originalScript = "";
     
-    private string OutputScript = "";
+    private string _outputScript = "";
     
-    public Dictionary<string, string> StringDictionary = [];
+    public readonly Dictionary<string, string> StringDictionary = [];
 
-    private Parser _parser;
-    private Lexer _lexer;
+    private readonly Parser _parser;
+    private readonly Lexer _lexer;
   
     public ProgramNode Compile(string script)
     {
-        OriginalScript = script;
+        FileLogger fl = new FileLogger("script.txt");
         
-        OutputScript = ExtractStrings(OriginalScript);
+        _originalScript = script;
         
-        OutputScript = ClearComments(OutputScript);
+        fl.Log(_originalScript);
+        
+        _outputScript = ExtractStrings(_originalScript);
+        
+        // Console.WriteLine($"Code (ExtractStrings): \n{_outputScript}\n");
+        
+        fl.SetPath("script_pre_compiled.txt");
+        
+        _outputScript = ClearComments(_outputScript);
 
-        List<Token> tokens = _lexer.Lex(OutputScript);
+        // Console.WriteLine($"Code (ClearComments): \n{_outputScript}\n");
+        
+        fl.Log(_outputScript);
+        
+        List<Token> tokens = _lexer.Lex(_outputScript);
 
-        return _parser.Parse(tokens);
+        
+        fl.SetPath("script_tokenized.txt");
+
+        string line = "";
+        foreach (Token token in tokens)
+        {
+            line += $"{token.TokenType}{(token.Value == "" ? "" : ($"({token.Value})"))} ";
+
+            switch (token.TokenType)
+            {
+                case Tokens.Indent or Tokens.Dedent:
+                    fl.Log(line);
+                
+                    line = token.TokenType.ToString();
+                
+                    fl.Log(line);
+                    break;
+                case Tokens.NewLine:
+                    fl.Log(line);
+                    line = "";
+                    break;
+            }
+        }
+
+        ProgramNode programNode = _parser.Parse(tokens);
+        
+        fl.SetPath("script_parsed.txt");
+        
+        fl.Log(string.Join(' ', programNode.Statements));
+        
+        return programNode;
     }
     
     // Вставляет вместо "[content]" это: ___STRING_[counter]___

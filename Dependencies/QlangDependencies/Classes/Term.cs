@@ -1,10 +1,10 @@
 ﻿namespace Qlang.Dependencies.QlangDependencies.Classes;
 
-public class Term : QClass
+public class Term : Class
 {
     public override string GetName() => "Term";
 
-    public override List<QFunction> GetFunctions() => [
-        new Print()
+    public override List<Function> GetFunctions() => [
+        new Print(), new Read()
     ];
 }

@@ -4,26 +4,28 @@ namespace Qlang;
 
 public class QLang
 {
-    private Compiler.Compiler _compiler = new();
-    private Interpreter _interpreter;
-    
     private ProgramNode? _programNode;
     private Dictionary<string, string> _stringDictionary = [];
     
     public void Compile(string code)
     {
-        _programNode = _compiler.Compile(code);
+        Compiler.Compiler c = new();
+        
+        _programNode = c.Compile(code);
 
-        _stringDictionary = _compiler.StringDictionary;
+        _stringDictionary = c.StringDictionary;
     }
 
     public void Run()
     {
         if (_programNode == null)
+        {
+            throw new Exception("Program Node is null (program is not compiled)");
             return;
+        }
         
-        _interpreter = new Interpreter(_stringDictionary);
+        Interpreter interpreter = new(_stringDictionary);
         
-        _interpreter.Execute(_programNode);
+        interpreter.Execute(_programNode);
     }
 }

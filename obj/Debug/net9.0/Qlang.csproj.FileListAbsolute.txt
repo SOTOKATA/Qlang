@@ -12,3 +12,4 @@ D:\Projects\Console\Qlang\obj\Debug\net9.0\refint\Qlang.dll
 D:\Projects\Console\Qlang\obj\Debug\net9.0\Qlang.pdb
 D:\Projects\Console\Qlang\obj\Debug\net9.0\Qlang.genruntimeconfig.cache
 D:\Projects\Console\Qlang\obj\Debug\net9.0\ref\Qlang.dll
+D:\Projects\Console\Qlang\obj\Debug\net9.0\Qlang.sourcelink.json

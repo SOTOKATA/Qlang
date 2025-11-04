@@ -5,8 +5,9 @@ using Qlang.Compiler;
 string functionScript = """
                         function main():
                             // Comment
-                            $var = "Hello World!"
-                            printLine($var)
+                            Term.print("Type anything: ")
+                            $var = Term.read()
+                            this.printer($var)
                             
                             if $var == "Hello World!":
                                 Term.print("Hello!")
@@ -14,8 +15,9 @@ string functionScript = """
                                 Term.print("You type nothing...")
                             else:
                                 Term.print("You typed: ", $var)
-                        function printLine(line):
-                            Term.print(line)
+                                
+                        function printer($toprint):
+                            Term.print($toprint)
                         """;
 
 

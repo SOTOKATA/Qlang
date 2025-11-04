@@ -2,9 +2,9 @@
 
 namespace Qlang.Dependencies.QlangDependencies;
 
-public class QNamespace
+public class Namespace
 {
-    public static List<QClass> GetClassList() =>
+    public static List<Class> GetClassList() =>
     [
         new Term()
     ];

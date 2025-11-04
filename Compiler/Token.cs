@@ -25,5 +25,4 @@ public enum Tokens
     Indent,
     Dedent,
     NewLine
-    
 }

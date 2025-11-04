@@ -1,10 +1,10 @@
 ﻿namespace Qlang.Dependencies.QlangDependencies;
 
-public abstract class QClass
+public abstract class Class
 {
     public abstract string GetName();
     
-    public abstract List<QFunction> GetFunctions();
+    public abstract List<Function> GetFunctions();
 
     public virtual string GetDescription() => "";
 }
