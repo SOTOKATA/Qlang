@@ -1,147 +1,4 @@
-﻿// using Qlang.AST;
-// using Qlang.Dependencies.QlangDependencies;
-//
-// namespace Qlang;
-//
-// public class Interpreter(Dictionary<string, string> stringDictionary)
-// {
-//     private readonly Dictionary<string, object> _variables = new();
-//     private readonly Dictionary<string, FunctionNode> _functions = new();
-//
-//     public void Execute(ProgramNode program)
-//     {
-//         // Console.WriteLine($"Execution process started");
-//         
-//         // Сначала регистрируем все функции
-//         foreach (ASTNode statement in program.Statements)
-//         {
-//             if (statement is not FunctionNode func)
-//                 continue;
-//             
-//             _functions[func.Name] = func;
-//             // Console.WriteLine($"{func.Name}: {func}");
-//         }
-//
-//         // Запускаем функцию main
-//         if (_functions.TryGetValue("main", out FunctionNode? function))
-//             ExecuteFunction(function, []);
-//         else
-//             throw new Exception("No 'main' function found!");
-//     }
-//
-//     private string ExecuteFunction(FunctionNode function, List<object> arguments)
-//     {
-//         // Создаём локальные переменные для параметров
-//         for (int i = 0; i < function.Parameters.Count; i++)
-//             _variables[function.Parameters[i]] = arguments[i];
-//
-//         // Выполняем тело функции
-//         string last = null;
-//         foreach (ASTNode statement in function.Body)
-//             if (statement is ReturnNode returnNode)
-//             {
-//                 last = EvaluateExpression(returnNode.ReturnValue).ToString();
-//                 break;
-//             }
-//             else ExecuteStatement(statement);
-//         
-//         return last;
-//     }
-//
-//     private string ExecuteStatement(ASTNode statement)
-//     {
-//         switch (statement)
-//         {
-//             case AssignmentNode assign:
-//                 _variables[assign.VariableName] = EvaluateExpression(assign.Value);
-//                 break;
-//
-//             case MethodCallNode call:
-//                 return ExecuteMethodCall(call);
-//                 break;
-//
-//             case IfNode ifNode:
-//                 ExecuteIf(ifNode);
-//                 break;
-//
-//             default:
-//                 throw new Exception($"Unknown statement type: {statement.GetType()}");
-//         }
-//
-//         return null;
-//     }
-//
-//     private void ExecuteIf(IfNode ifNode)
-//     {
-//         bool condition = (bool)EvaluateExpression(ifNode.Condition);
-//
-//         if (condition)
-//             foreach (var statement in ifNode.ThenBlock)
-//                 ExecuteStatement(statement);
-//         else if (ifNode.ElseBlock.Count > 0)
-//             foreach (var statement in ifNode.ElseBlock)
-//                 ExecuteStatement(statement);
-//     }
-//
-//     private string ExecuteMethodCall(MethodCallNode call)
-//     {
-//         // Пользовательские функции
-//         if (call.ObjectName == "this" && _functions.TryGetValue(call.MethodName, out var func))
-//         {
-//             return ExecuteFunction(func, call.Arguments.ConvertAll(EvaluateExpression));
-//         }
-//         
-//         // Встроенные классы
-//         foreach (Class qClass in Namespace.GetClassList())
-//         {
-//             if (qClass.GetName() != call.ObjectName) 
-//                 continue;
-//             
-//             var function = qClass.GetFunctions().FirstOrDefault(fn => fn.GetName() == call.MethodName);
-//                 
-//             if (function == null)
-//                 throw new Exception($"Method {call.ObjectName} is not a function!");
-//
-//             return function.Execute(call.Arguments.ConvertAll(EvaluateExpression).ToArray());
-//         }
-//
-//         throw new Exception($"Method {call.MethodName} is not a function!");
-//     }
-//
-//     private object EvaluateExpression(ASTNode expr)
-//     {
-//         return expr switch
-//         {
-//             VariableNode varNode => _variables[varNode.Name],
-//             StringRefNode strRef => stringDictionary[$"___STRING_{strRef.Index}___"],
-//             NumberNode num => num.Value,
-//             BinaryOperationNode binOp => EvaluateBinaryOp(binOp),
-//             MethodCallNode methodCall => ExecuteMethodCall(methodCall),
-//             _ => throw new Exception($"Unknown expression type: {expr.GetType()}")
-//         };
-//     }
-//
-//     private object EvaluateBinaryOp(BinaryOperationNode binOp)
-//     {
-//         var left = EvaluateExpression(binOp.Left);
-//         var right = EvaluateExpression(binOp.Right);
-//
-//         if (binOp.Operator == "Plus" && (left is string || right is string))
-//             return left.ToString() + right;
-//         
-//         return binOp.Operator switch
-//         {
-//             "==" => Equals(left, right),
-//             "Plus" => (double)left + (double)right,
-//             "Minus" => (double)left - (double)right,
-//             "Star" => (double)left * (double)right,
-//             "Slash" => (double)left / (double)right,
-//             _ => throw new Exception($"Unknown operator: {binOp.Operator}")
-//         };
-//     }
-// }
-
-using Qlang.AST;
+﻿using Qlang.AST;
 using Qlang.Dependencies.QlangDependencies;
 
 namespace Qlang;
@@ -192,18 +49,17 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
         foreach (ASTNode statement in function.Body)
         {
             if (_break)
-                return _return.ReturnValue.ToString();
+                return EvaluateExpression(_return.ReturnValue) as string;
+            
             if (statement is ReturnNode returnNode)
             {
                 // Если встретили return - вычисляем значение и выходим
                 returnValue = EvaluateExpression(returnNode.ReturnValue).ToString();
                 break;
             }
-            else
-            {
-                // Иначе просто выполняем statement
-                ExecuteStatement(statement);
-            }
+
+            // Иначе просто выполняем statement
+            ExecuteStatement(statement);
         }
         
         return returnValue;
@@ -213,7 +69,7 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
     /// ВЫПОЛНЯЕТ ДЕЙСТВИЕ (statement) - не возвращает значение
     /// Примеры: $x = 5, Term.print("Hi"), if $x == 5: ...
     /// </summary>
-    private bool ExecuteStatement(ASTNode statement)
+    private void ExecuteStatement(ASTNode statement)
     {
         switch (statement)
         {
@@ -233,20 +89,53 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
 
             // Условие: if $x == 5: ...
             case IfNode ifNode:
-                _break = ExecuteIf(ifNode);
-                return _break;
-
+                ExecuteIf(ifNode);
+                break;
+            
+            case WhileNode whileNode:
+                ExecuteWhile(whileNode);
+                break;
+            
             default:
                 throw new Exception($"Unknown statement type: {statement.GetType()}");
         }
+    }
+    
+    /// <summary>
+    /// Выполняет while-блок
+    /// </summary>
+    private void ExecuteWhile(WhileNode whileNode)
+    {
+        // 1. Вычисляем условие (expression -> bool)
+        bool condition = (bool)EvaluateExpression(whileNode.Condition);
 
-        return false; // Statements не возвращают значения
+        // 2. Выполняем нужный блок
+        bool isBreak = false;
+        while (condition)
+        {
+            foreach (ASTNode statement in whileNode.Body)
+            {
+                if (_break)
+                    return;
+
+                if (statement is ReturnNode returnNode)
+                {
+                    _break = true;
+                    _return = returnNode;
+                    return;
+                }
+                
+                ExecuteStatement(statement);
+            }
+            
+            condition = (bool)EvaluateExpression(whileNode.Condition);
+        }
     }
 
     /// <summary>
     /// Выполняет if-блок
     /// </summary>
-    private bool ExecuteIf(IfNode ifNode)
+    private void ExecuteIf(IfNode ifNode)
     {
         // 1. Вычисляем условие (expression -> bool)
         bool condition = (bool)EvaluateExpression(ifNode.Condition);
@@ -255,24 +144,38 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
         bool isBreak = false;
         if (condition)
         {
-            foreach (var statement in ifNode.ThenBlock)
+            foreach (ASTNode statement in ifNode.ThenBlock)
             {
-                if (statement is ReturnNode || isBreak)
-                    return true;
-                isBreak = ExecuteStatement(statement);
+                if (_break)
+                    return;
+
+                if (statement is ReturnNode returnNode)
+                {
+                    _break = true;
+                    _return = returnNode;
+                    return;
+                }
+                
+                ExecuteStatement(statement);
             }
         }
         else if (ifNode.ElseBlock.Count > 0)
         {
-            foreach (var statement in ifNode.ElseBlock)
+            foreach (ASTNode statement in ifNode.ElseBlock)
             {
-                if (statement is ReturnNode || isBreak)
-                    return true;
-                isBreak = ExecuteStatement(statement);
+                if (_break)
+                    return;
+                
+                if (statement is ReturnNode returnNode)
+                {
+                    _break = true;
+                    _return = returnNode;
+                    return;
+                }
+                
+                ExecuteStatement(statement);
             }
         }
-
-        return false;
     }
 
     /// <summary>
@@ -281,7 +184,7 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
     private string ExecuteMethodCall(MethodCallNode call)
     {
         // 1. ПОЛЬЗОВАТЕЛЬСКИЕ ФУНКЦИИ: this.myFunc(...)
-        if (call.ObjectName == "this" && _functions.TryGetValue(call.MethodName, out var func))
+        if (call.ObjectName == "this" && _functions.TryGetValue(call.MethodName, out FunctionNode? func))
         {
             // Вычисляем все аргументы и вызываем функцию
             List<object> args = call.Arguments.ConvertAll(EvaluateExpression);
@@ -295,7 +198,7 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
                 continue;
             
             // Ищем метод в классе
-            var function = qClass.GetFunctions().FirstOrDefault(fn => fn.GetName() == call.MethodName);
+            Function? function = qClass.GetFunctions().FirstOrDefault(fn => fn.GetName() == call.MethodName);
                 
             if (function == null)
                 throw new Exception($"Method '{call.MethodName}' not found in {call.ObjectName}!");
@@ -326,7 +229,7 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
             NumberNode num => num.Value,
             
             // Бинарная операция: 2 + 3, $x == 5
-            BinaryOperationNode binOp => EvaluateBinaryOp(binOp),
+            BinaryOperationNode binOp => EvaluateBinaryOperation(binOp),
             
             // Вызов функции/метода: ask("Name?")
             MethodCallNode methodCall => ExecuteMethodCall(methodCall),
@@ -338,11 +241,11 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
     /// <summary>
     /// Вычисляет бинарные операторы: +, -, *, /, ==
     /// </summary>
-    private object EvaluateBinaryOp(BinaryOperationNode binOp)
+    private object EvaluateBinaryOperation(BinaryOperationNode binOp)
     {
         // 1. Вычисляем обе стороны
-        var left = EvaluateExpression(binOp.Left);
-        var right = EvaluateExpression(binOp.Right);
+        object left = EvaluateExpression(binOp.Left);
+        object right = EvaluateExpression(binOp.Right);
 
         // 2. Конкатенация строк (если хотя бы одна сторона - строка)
         if (binOp.Operator == "Plus" && (left is string || right is string))
@@ -352,6 +255,11 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
         return binOp.Operator switch
         {
             "==" => Equals(left, right),           // Сравнение
+            "!=" => !Equals(left, right),
+            "Less" => double.Parse(left.ToString()) < double.Parse(right.ToString()),
+            "<=" => double.Parse(left.ToString()) <= double.Parse(right.ToString()),
+            "Greater" => double.Parse(left.ToString()) > double.Parse(right.ToString()),
+            ">=" => double.Parse(left.ToString()) >= double.Parse(right.ToString()),
             "Plus" => (double)left + (double)right,   // Сложение
             "Minus" => (double)left - (double)right,  // Вычитание
             "Star" => (double)left * (double)right,   // Умножение

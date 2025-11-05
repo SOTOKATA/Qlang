@@ -6,8 +6,14 @@ public class PrintLine : Function
 
     public override string Execute(object[] args)
     {
-        Console.WriteLine(string.Join("", args));
+        List<object> list = args.ToList();
+        
+        list.Add(Environment.NewLine);
 
+        args = list.ToArray();
+        
+        new Print().Execute(args);
+        
         return "";
     }
 }

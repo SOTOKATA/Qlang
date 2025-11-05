@@ -137,7 +137,7 @@ public class Lexer(Compiler compiler)
 
     private static bool IsIdentifierStart(char c)
     {
-        return char.IsLetter(c) || c == '_';
+        return char.IsLetter(c) || char.IsNumber(c) || c == '_';
     }
 
     private static bool IsIdentifierChar(char c)
@@ -196,6 +196,9 @@ public class Lexer(Compiler compiler)
             ':' => new Token(Tokens.Colon),
             ',' => new Token(Tokens.Comma),
             '.' => new Token(Tokens.Dot),
+            '!' => new Token(Tokens.Not),
+            '>' => new Token(Tokens.Greater),
+            '<' => new Token(Tokens.Less),
             _ => null
         };
         

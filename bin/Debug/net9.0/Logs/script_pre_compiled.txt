@@ -1,26 +1,19 @@
 function main():
-    $num1 = this.ask(___STRING_0___)
+    Term.println(___STRING_0___)
 
-    $num2 = this.ask(___STRING_1___)
+    $num1 = 0
 
-    $operator = this.ask(___STRING_2___)
+    Term.println(___STRING_1___)
+    while $num1 < 10:
+        $tblock = 0
+        while $tblock < $num1:
+            $tblock = Math.sum($tblock, 1)
+            Term.print(___STRING_2___)
 
-    if $operator == ___STRING_3___:
-        Term.println($num1, $operator, $num2, ___STRING_4___, Math.sum($num1, $num2))
-    else if $operator == ___STRING_5___:
-        Term.println($num1, $operator, $num2, ___STRING_6___, Math.sub($num1, $num2))
-    else if $operator == ___STRING_7___:
-        Term.println($num1, $operator, $num2, ___STRING_8___, Math.mult($num1, $num2))
-    else if $operator == ___STRING_9___:
-        if $num2 == ___STRING_10___:
-            Term.println(___STRING_11___)
-            return ___STRING_12___
-        else:
-            Term.println($num1, $operator, $num2, ___STRING_13___, Math.div($num1, $num2))
-    else:
-        Term.println(___STRING_14___)
+        $num1 = Math.sum(1, $num1)
+        Term.println(___STRING_3___ + $num1)
 
-    Term.println(___STRING_15___)
+    Term.println(___STRING_4___)
 
 function ask($message):
     Term.print($message)

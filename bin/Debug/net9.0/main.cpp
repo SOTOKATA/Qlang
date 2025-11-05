@@ -1,24 +1,17 @@
 function main():
-    $num1 = this.ask("Type first number: ")
+    Term.println("{While} demo:\n")
 
-    $num2 = this.ask("Type second number: ")
+    $num1 = 0
 
-    $operator = this.ask("Type operator: ")
+    Term.println("To end while cyrcle type 'Esc'")
+    while $num1 < 10:
+        $tblock = 0
+        while $tblock < $num1:
+            $tblock = Math.sum($tblock, 1)
+            Term.print("\t")
 
-    if $operator == "+":
-        Term.println($num1, $operator, $num2, "=", Math.sum($num1, $num2))
-    else if $operator == "-":
-        Term.println($num1, $operator, $num2, "=", Math.sub($num1, $num2))
-    else if $operator == "*":
-        Term.println($num1, $operator, $num2, "=", Math.mult($num1, $num2))
-    else if $operator == "/":
-        if $num2 == "0":
-            Term.println("Error: can't divide by 0")
-            return ""
-        else:
-            Term.println($num1, $operator, $num2, "=", Math.div($num1, $num2))
-    else:
-        Term.println("Error: operator is not identificated!")
+        $num1 = Math.sum(1, $num1)
+        Term.println("Number: " + $num1)
 
     Term.println("Execution ended")
 
