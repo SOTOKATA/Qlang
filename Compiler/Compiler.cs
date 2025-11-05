@@ -43,7 +43,6 @@ public partial class Compiler
         
         List<Token> tokens = _lexer.Lex(_outputScript);
 
-        
         fl.SetPath("Logs\\script_tokenized.txt");
 
         string line = "";

@@ -33,6 +33,10 @@ public class Parser
         // function declaration
         if (Check(Tokens.Keyword) && Current().Value == "function")
             return ParseFunction();
+        
+        // class declaration
+        if (Check(Tokens.Keyword) && Current().Value == "class")
+            return ParseClass();
 
         // if statement
         if (Check(Tokens.Keyword) && Current().Value == "if")
@@ -41,6 +45,10 @@ public class Parser
         // while statement
         if (Check(Tokens.Keyword) && Current().Value == "while")
             return ParseWhile();
+        
+        // do-while statement
+        if (Check(Tokens.Keyword) && Current().Value == "do_while")
+            return ParseWhile(true);
         
         // return statement
         if (Check(Tokens.Keyword) && Current().Value == "return")
@@ -88,14 +96,25 @@ public class Parser
         return new FunctionNode { Name = name, Parameters = parameters, Body = body };
     }
 
-    private NumberNode ParseNumber()
+    private ClassNode ParseClass()
     {
-        return new NumberNode { Value = double.Parse(Expect(Tokens.Identifier).Value) };
+        Expect(Tokens.Keyword, "class");
+        string name = Expect(Tokens.Identifier).Value;
+        
+        Expect(Tokens.Colon);
+        Expect(Tokens.NewLine);
+        Expect(Tokens.Indent);
+
+        List<ASTNode> body = ParseBlock();
+
+        Expect(Tokens.Dedent);
+
+        return new ClassNode { Name = name, Body = body };
     }
     
-    private WhileNode ParseWhile()
+    private WhileNode ParseWhile(bool isDoWhile = false)
     {
-        Expect(Tokens.Keyword, "while");
+        Expect(Tokens.Keyword, isDoWhile ? "do_while" : "while");
         ASTNode condition = ParseExpression();
         Expect(Tokens.Colon);
         Expect(Tokens.NewLine);
@@ -105,7 +124,7 @@ public class Parser
 
         Expect(Tokens.Dedent);
 
-        return new WhileNode { Condition = condition, Body = whileBlock };
+        return new WhileNode { Condition = condition, Body = whileBlock, IsDoWhile = isDoWhile };
     }
 
     private IfNode ParseIf()
@@ -346,6 +365,7 @@ public class Parser
     private Token Advance()
     {
         if (!IsAtEnd()) _position++;
+        // Console.WriteLine("Current::Token: " + _tokens[_position - 1].TokenType);
         return _tokens[_position - 1];
     }
 

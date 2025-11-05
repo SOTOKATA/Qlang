@@ -10,17 +10,27 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
     
     // Хранилище пользовательских функций: "myFunc" -> FunctionNode
     private readonly Dictionary<string, FunctionNode> _functions = new();
+    
+    private readonly Dictionary<string, ClassNode> _classes = new();
 
     /// <summary>
     /// Главная точка входа: выполняет всю программу
     /// </summary>
     public void Execute(ProgramNode program)
     {
-        // ШАГ 1: Регистрируем все функции (чтобы можно было вызывать до объявления)
+        // ШАГ 1: Регистрируем все функции и классы (чтобы можно было вызывать до объявления)
+        
         foreach (ASTNode statement in program.Statements)
         {
-            if (statement is FunctionNode func)
-                _functions[func.Name] = func;
+            switch (statement)
+            {
+                case ClassNode classNode:
+                    _classes[classNode.Name] = classNode;
+                    break;
+                case FunctionNode func:
+                    _functions[func.Name] = func;
+                    break;
+            }
         }
 
         // ШАГ 2: Запускаем функцию main()
@@ -40,8 +50,9 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
     {
         // Привязываем аргументы к параметрам функции
         // Например: function greet($name) -> arguments[0] = "Alice"
-        for (int i = 0; i < function.Parameters.Count; i++)
-            _variables[function.Parameters[i]] = arguments[i];
+        if (arguments.Count == function.Parameters.Count)
+            for (int i = 0; i < function.Parameters.Count; i++)
+                _variables[function.Parameters[i]] = arguments[i];
 
         // Выполняем тело функции построчно
         string returnValue = null;
@@ -49,7 +60,10 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
         foreach (ASTNode statement in function.Body)
         {
             if (_break)
+            {
+                _break = false;
                 return EvaluateExpression(_return.ReturnValue) as string;
+            }
             
             if (statement is ReturnNode returnNode)
             {
@@ -107,7 +121,7 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
     private void ExecuteWhile(WhileNode whileNode)
     {
         // 1. Вычисляем условие (expression -> bool)
-        bool condition = (bool)EvaluateExpression(whileNode.Condition);
+        bool condition = whileNode.IsDoWhile || (bool)EvaluateExpression(whileNode.Condition);
 
         // 2. Выполняем нужный блок
         bool isBreak = false;
@@ -184,7 +198,7 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
     private string ExecuteMethodCall(MethodCallNode call)
     {
         // 1. ПОЛЬЗОВАТЕЛЬСКИЕ ФУНКЦИИ: this.myFunc(...)
-        if (call.ObjectName == "this" && _functions.TryGetValue(call.MethodName, out FunctionNode? func))
+        if (call.ObjectName is "this" or "" && _functions.TryGetValue(call.MethodName, out FunctionNode? func))
         {
             // Вычисляем все аргументы и вызываем функцию
             List<object> args = call.Arguments.ConvertAll(EvaluateExpression);
@@ -206,6 +220,16 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
             // Вычисляем аргументы и вызываем встроенный метод
             object[] args = call.Arguments.ConvertAll(EvaluateExpression).ToArray();
             return function.Execute(args);
+        }
+
+        // Detect user's classes and execute function if exists
+        if (_classes.TryGetValue(call.ObjectName, out ClassNode? classNode))
+        {
+            if (classNode.Body.FirstOrDefault(astNode => astNode is FunctionNode fn && fn.Name == call.MethodName) is not FunctionNode node) 
+                throw new Exception($"Unknown object/function: {call.ObjectName}.{call.MethodName}");
+            
+            List<object> args = call.Arguments?.ConvertAll(EvaluateExpression) ?? [];
+            return ExecuteFunction(node, args);
         }
 
         throw new Exception($"Unknown object/function: {call.ObjectName}.{call.MethodName}");
@@ -254,7 +278,7 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
         // 3. Обычные операторы
         return binOp.Operator switch
         {
-            "==" => Equals(left, right),           // Сравнение
+            "==" => Equals(left, right),
             "!=" => !Equals(left, right),
             "Less" => double.Parse(left.ToString()) < double.Parse(right.ToString()),
             "<=" => double.Parse(left.ToString()) <= double.Parse(right.ToString()),

@@ -1,20 +1,18 @@
 function main():
-    Term.println("{While} demo:\n")
+    Console.Write("Write number: ")
+    
+    $name = Console.ReadLine()
 
-    $num1 = 0
+    Console.WriteLine(math.square($name))
+    
+class Console:
+    function Write($message):
+        Term.print($message)
+    function WriteLine($message):
+        Console.Write($message + "\n")
+    function ReadLine():
+        return Term.read()
 
-    Term.println("To end while cyrcle type 'Esc'")
-    while $num1 < 10:
-        $tblock = 0
-        while $tblock < $num1:
-            $tblock = Math.sum($tblock, 1)
-            Term.print("\t")
-
-        $num1 = Math.sum(1, $num1)
-        Term.println("Number: " + $num1)
-
-    Term.println("Execution ended")
-
-function ask($message):
-    Term.print($message)
-    return Term.read()
+class math:
+    function square($num):
+        return Math.mult($num, $num)

@@ -1,20 +1,18 @@
 function main():
-    Term.println(___STRING_0___)
+    Console.Write(___STRING_0___)
+    
+    $name = Console.ReadLine()
 
-    $num1 = 0
+    Console.WriteLine(math.square($name))
+    
+class Console:
+    function Write($message):
+        Term.print($message)
+    function WriteLine($message):
+        Console.Write($message + ___STRING_1___)
+    function ReadLine():
+        return Term.read()
 
-    Term.println(___STRING_1___)
-    while $num1 < 10:
-        $tblock = 0
-        while $tblock < $num1:
-            $tblock = Math.sum($tblock, 1)
-            Term.print(___STRING_2___)
-
-        $num1 = Math.sum(1, $num1)
-        Term.println(___STRING_3___ + $num1)
-
-    Term.println(___STRING_4___)
-
-function ask($message):
-    Term.print($message)
-    return Term.read()
+class math:
+    function square($num):
+        return Math.mult($num, $num)

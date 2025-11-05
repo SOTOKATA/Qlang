@@ -1,31 +1,42 @@
 Keyword(function) Identifier(main) LParen RParen Colon NewLine 
 Indent 
 Indent
-IndentIdentifier(Term) Dot Identifier(println) LParen Identifier(___STRING_0___) RParen NewLine 
-Variable(num1) Equals Identifier(0) NewLine 
-Identifier(Term) Dot Identifier(println) LParen Identifier(___STRING_1___) RParen NewLine 
-Keyword(while) Variable(num1) Less Identifier(10) Colon NewLine 
+IndentIdentifier(Console) Dot Identifier(Write) LParen Identifier(___STRING_0___) RParen NewLine 
+Variable(name) Equals Identifier(Console) Dot Identifier(ReadLine) LParen RParen NewLine 
+Identifier(Console) Dot Identifier(WriteLine) LParen Identifier(math) Dot Identifier(square) LParen Variable(name) RParen RParen NewLine 
+Dedent 
+Dedent
+DedentKeyword(class) Identifier(Console) Colon NewLine 
 Indent 
 Indent
-IndentVariable(tblock) Equals Identifier(0) NewLine 
-Keyword(while) Variable(tblock) Less Variable(num1) Colon NewLine 
-Indent 
-Indent
-IndentVariable(tblock) Equals Identifier(Math) Dot Identifier(sum) LParen Variable(tblock) Comma Identifier(1) RParen NewLine 
-Identifier(Term) Dot Identifier(print) LParen Identifier(___STRING_2___) RParen NewLine 
-Dedent 
-Dedent
-DedentVariable(num1) Equals Identifier(Math) Dot Identifier(sum) LParen Identifier(1) Comma Variable(num1) RParen NewLine 
-Identifier(Term) Dot Identifier(println) LParen Identifier(___STRING_3___) Plus Variable(num1) RParen NewLine 
-Dedent 
-Dedent
-DedentIdentifier(Term) Dot Identifier(println) LParen Identifier(___STRING_4___) RParen NewLine 
-Dedent 
-Dedent
-DedentKeyword(function) Identifier(ask) LParen Variable(message) RParen Colon NewLine 
+IndentKeyword(function) Identifier(Write) LParen Variable(message) RParen Colon NewLine 
 Indent 
 Indent
 IndentIdentifier(Term) Dot Identifier(print) LParen Variable(message) RParen NewLine 
-Keyword(return) Identifier(Term) Dot Identifier(read) LParen RParen NewLine 
 Dedent 
+Dedent
+DedentKeyword(function) Identifier(WriteLine) LParen Variable(message) RParen Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(Console) Dot Identifier(Write) LParen Variable(message) Plus Identifier(___STRING_1___) RParen NewLine 
+Dedent 
+Dedent
+DedentKeyword(function) Identifier(ReadLine) LParen RParen Colon NewLine 
+Indent 
+Indent
+IndentKeyword(return) Identifier(Term) Dot Identifier(read) LParen RParen NewLine 
+Dedent 
+Dedent
+DedentDedent 
+Dedent
+DedentKeyword(class) Identifier(math) Colon NewLine 
+Indent 
+Indent
+IndentKeyword(function) Identifier(square) LParen Variable(num) RParen Colon NewLine 
+Indent 
+Indent
+IndentKeyword(return) Identifier(Math) Dot Identifier(mult) LParen Variable(num) Comma Variable(num) RParen NewLine 
+Dedent 
+Dedent
+DedentDedent 
 Dedent
