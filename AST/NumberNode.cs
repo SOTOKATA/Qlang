@@ -6,6 +6,6 @@ public class NumberNode : ASTNode
 
     public override string GetTree(string indent = "")
     {
-        return $"{indent}Value: {Value}";
+        return ASTGetTreeBuilder.Build(nameof(NumberNode), [Value], indent);
     }
 }

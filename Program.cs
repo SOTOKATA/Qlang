@@ -1,4 +1,4 @@
-﻿using Qlang;
+﻿namespace Qlang;
 
 public class Program
 {
@@ -14,12 +14,12 @@ public class Program
 //                                """);
 //             return;
             string dcode = """
-                          function main():
-                              Term.print("Type your name: ")
-                              $name = Term.read()
-                              
-                              Term.println("Hello " + $name + "!")
-                          """;
+                           function main():
+                               Term.print("Type your name: ")
+                               $name = Term.read()
+                               
+                               Term.println("Hello " + $name + "!")
+                           """;
             
             QLang dlang = new();
             dlang.Compile(dcode);

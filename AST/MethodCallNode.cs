@@ -7,6 +7,6 @@ public class MethodCallNode : ASTNode
     public List<ASTNode> Arguments { get; set; } = [];
     public override string GetTree(string indent = "")
     {
-        return $"{indent}{ObjectName}.{MethodName}: {Arguments.Select(a => a.GetTree(indent))}";
+        return ASTGetTreeBuilder.Build(nameof(MethodCallNode), [ObjectName, MethodName, Arguments], indent);
     }
 }

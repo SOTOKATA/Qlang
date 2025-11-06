@@ -19,10 +19,7 @@ public class QLang
     public void Run()
     {
         if (_programNode == null)
-        {
             throw new Exception("Program Node is null (program is not compiled)");
-            return;
-        }
         
         Interpreter interpreter = new(_stringDictionary);
         

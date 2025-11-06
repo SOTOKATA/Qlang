@@ -8,8 +8,10 @@ function main():
 class Console:
     function Write($message):
         Term.print($message)
+    
     function WriteLine($message):
-        Console.Write($message + "\n")
+        Write($message + "\n")
+
     function ReadLine():
         return Term.read()
 

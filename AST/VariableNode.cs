@@ -6,6 +6,6 @@ public class VariableNode : ASTNode
 
     public override string GetTree(string indent = "")
     {
-        return $"{indent}Variable: {Name}";
+        return ASTGetTreeBuilder.Build(nameof(VariableNode), [Name], indent);
     }
 }

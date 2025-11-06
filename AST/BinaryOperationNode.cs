@@ -8,6 +8,8 @@ public class BinaryOperationNode : ASTNode
 
     public override string GetTree(string indent = "")
     {
-        return $"{indent}{Left?.GetTree(indent)}{Operator} {Right?.GetTree(indent)}";
+        return ASTGetTreeBuilder.Build(nameof(BinaryOperationNode), 
+            [Left, Operator, Right]
+            , indent);
     }
 }

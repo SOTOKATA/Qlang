@@ -10,10 +10,6 @@ public class WhileNode : ASTNode
     
     public override string GetTree(string indent = "")
     {
-        string str = indent + Condition.GetTree(indent + "\t");
-
-        str = Body.Aggregate(str, (current, node) => current + (indent + node.GetTree(indent + "\t") + "\n"));
-
-        return str;
+        return ASTGetTreeBuilder.Build(nameof(WhileNode), [Condition, Body, IsDoWhile], indent);
     }
 }

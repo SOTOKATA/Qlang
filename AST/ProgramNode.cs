@@ -6,6 +6,6 @@ public class ProgramNode : ASTNode
 
     public override string GetTree(string indent = "")
     {
-        return Statements.Aggregate("", (current, statement) => current + (statement.GetTree(current) + Environment.NewLine));
+        return ASTGetTreeBuilder.Build(nameof(ProgramNode), [Statements], indent);
     }
 }

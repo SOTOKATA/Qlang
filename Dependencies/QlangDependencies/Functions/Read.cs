@@ -1,4 +1,4 @@
-﻿namespace Qlang.Dependencies.QlangDependencies;
+﻿namespace Qlang.Dependencies.QlangDependencies.Functions;
 
 public class Read : Function
 {
@@ -6,6 +6,9 @@ public class Read : Function
 
     public override string Execute(object[] args)
     {
-        return Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
+        string input = Console.ReadLine();
+        Console.ResetColor();
+        return input;
     }
 }

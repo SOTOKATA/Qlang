@@ -1,9 +1,88 @@
-Function: main
-  Body:
-    Console.Write: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
-    VariableName: name &     Console.ReadLine: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
-    Console.WriteLine: System.Linq.Enumerable+ListSelectIterator`2[Qlang.AST.ASTNode,System.String]
+@ProgramNode:
+
+[--]@FunctionNode:
+[--]main
+[--]True
 
 
+[--]@MethodCallNode:
+[--]Console
+[--]Write
+
+[--]@StringRefNode:
+[--]0
+[--]@AssignmentNode:
+[--]name
+[--]@MethodCallNode:
+[--]Console
+[--]ReadLine
+
+[--]@MethodCallNode:
+[--]Console
+[--]WriteLine
+
+[--]@MethodCallNode:
+[--]math
+[--]square
+
+[--]@VariableNode:
+[--]name
+[--]@ClassNode:
+[--]Console
+
+[--]@FunctionNode:
+[--]Write
+[--]True
+
+[--]message
+
+[--]@MethodCallNode:
+[--]Term
+[--]print
+
+[--]@VariableNode:
+[--]message
+[--]@FunctionNode:
+[--]WriteLine
+[--]True
+
+[--]message
+
+[--]@MethodCallNode:
+[--]
+[--]Write
+
+[--]@BinaryOperationNode:
+[--]@VariableNode:
+[--]message
+[--]Plus
+[--]@StringRefNode:
+[--]1
+[--]@FunctionNode:
+[--]ReadLine
+[--]True
 
 
+[--]@ReturnNode:
+[--]@MethodCallNode:
+[--]Term
+[--]read
+
+[--]@ClassNode:
+[--]math
+
+[--]@FunctionNode:
+[--]square
+[--]True
+
+[--]num
+
+[--]@ReturnNode:
+[--]@MethodCallNode:
+[--]Math
+[--]mult
+
+[--]@VariableNode:
+[--]num
+[--]@VariableNode:
+[--]num

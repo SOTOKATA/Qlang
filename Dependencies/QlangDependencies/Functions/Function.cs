@@ -1,4 +1,4 @@
-﻿namespace Qlang.Dependencies.QlangDependencies;
+﻿namespace Qlang.Dependencies.QlangDependencies.Functions;
 
 public abstract class Function
 {

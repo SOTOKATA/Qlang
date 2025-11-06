@@ -18,7 +18,7 @@ Dedent
 DedentKeyword(function) Identifier(WriteLine) LParen Variable(message) RParen Colon NewLine 
 Indent 
 Indent
-IndentIdentifier(Console) Dot Identifier(Write) LParen Variable(message) Plus Identifier(___STRING_1___) RParen NewLine 
+IndentIdentifier(Write) LParen Variable(message) Plus Identifier(___STRING_1___) RParen NewLine 
 Dedent 
 Dedent
 DedentKeyword(function) Identifier(ReadLine) LParen RParen Colon NewLine 

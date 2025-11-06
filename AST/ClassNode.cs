@@ -7,6 +7,6 @@ public class ClassNode : ASTNode
     
     public override string GetTree(string indent = "")
     {
-        return "";
+        return ASTGetTreeBuilder.Build(nameof(ClassNode), [Name, Body], indent);
     }
 }

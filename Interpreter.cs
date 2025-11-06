@@ -1,5 +1,7 @@
 ﻿using Qlang.AST;
 using Qlang.Dependencies.QlangDependencies;
+using Qlang.Dependencies.QlangDependencies.Classes;
+using Qlang.Dependencies.QlangDependencies.Functions;
 
 namespace Qlang;
 
@@ -12,6 +14,9 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
     private readonly Dictionary<string, FunctionNode> _functions = new();
     
     private readonly Dictionary<string, ClassNode> _classes = new();
+
+    private readonly Stack<ASTContext> _contextStack = new();
+    private ASTContext CurrentContext => _contextStack.Count > 0 ? _contextStack.Peek() : new ASTContext();
 
     /// <summary>
     /// Главная точка входа: выполняет всю программу
@@ -48,35 +53,76 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
     private ReturnNode _return;
     private string ExecuteFunction(FunctionNode function, List<object> arguments)
     {
-        // Привязываем аргументы к параметрам функции
-        // Например: function greet($name) -> arguments[0] = "Alice"
-        if (arguments.Count == function.Parameters.Count)
-            for (int i = 0; i < function.Parameters.Count; i++)
-                _variables[function.Parameters[i]] = arguments[i];
-
-        // Выполняем тело функции построчно
-        string returnValue = null;
-        _break = false;
-        foreach (ASTNode statement in function.Body)
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine(function.GetTree());
+        Console.ResetColor();
+    
+        // Создаём новый контекст и помещаем в стек
+        ASTContext newContext = new() { Function = function };
+        _contextStack.Push(newContext);
+    
+        try
         {
-            if (_break)
-            {
-                _break = false;
-                return EvaluateExpression(_return.ReturnValue) as string;
-            }
-            
-            if (statement is ReturnNode returnNode)
-            {
-                // Если встретили return - вычисляем значение и выходим
-                returnValue = EvaluateExpression(returnNode.ReturnValue).ToString();
-                break;
-            }
+            if (arguments.Count == function.Parameters.Count)
+                for (int i = 0; i < function.Parameters.Count; i++)
+                    _variables[function.Parameters[i]] = arguments[i];
 
-            // Иначе просто выполняем statement
-            ExecuteStatement(statement);
-        }
+            string returnValue = null;
+            _break = false;
+            foreach (ASTNode statement in function.Body)
+            {
+                if (_break)
+                {
+                    _break = false;
+                    return EvaluateExpression(_return.ReturnValue).ToString();
+                }
+            
+                if (statement is ReturnNode returnNode)
+                {
+                    returnValue = EvaluateExpression(returnNode.ReturnValue).ToString();
+                    break;
+                }
+
+                ExecuteStatement(statement);
+            }
         
-        return returnValue;
+            return returnValue;
+        }
+        finally
+        {
+            // ВАЖНО: Всегда восстанавливаем предыдущий контекст
+            _contextStack.Pop();
+        }
+        // Console.WriteLine(function.GetTree());
+        // CurrentContext.Function = function;
+        //
+        // if (arguments.Count == function.Parameters.Count)
+        //     for (int i = 0; i < function.Parameters.Count; i++)
+        //         _variables[function.Parameters[i]] = arguments[i];
+        //
+        // // Выполняем тело функции построчно
+        // string returnValue = null;
+        // _break = false;
+        // foreach (ASTNode statement in function.Body)
+        // {
+        //     if (_break)
+        //     {
+        //         _break = false;
+        //         return EvaluateExpression(_return.ReturnValue) as string;
+        //     }
+        //     
+        //     if (statement is ReturnNode returnNode)
+        //     {
+        //         // Если встретили return - вычисляем значение и выходим
+        //         returnValue = EvaluateExpression(returnNode.ReturnValue).ToString();
+        //         break;
+        //     }
+        //
+        //     // Иначе просто выполняем statement
+        //     ExecuteStatement(statement);
+        // }
+        //
+        // return returnValue;
     }
 
     /// <summary>
@@ -112,6 +158,7 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
             
             default:
                 throw new Exception($"Unknown statement type: {statement.GetType()}");
+                break;
         }
     }
     
@@ -197,6 +244,8 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
     /// </summary>
     private string ExecuteMethodCall(MethodCallNode call)
     {
+        Console.WriteLine($"@Info<MethodCallNode>: class={call.ObjectName}, method={call.MethodName}");
+        
         // 1. ПОЛЬЗОВАТЕЛЬСКИЕ ФУНКЦИИ: this.myFunc(...)
         if (call.ObjectName is "this" or "" && _functions.TryGetValue(call.MethodName, out FunctionNode? func))
         {
@@ -223,16 +272,31 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
         }
 
         // Detect user's classes and execute function if exists
+        if (CurrentContext.Class?.Name == call.ObjectName)
+            return ExecuteMethodCallClass(CurrentContext.Class, call);
+        
+        // Detect user's classes and execute function if exists
         if (_classes.TryGetValue(call.ObjectName, out ClassNode? classNode))
+            return ExecuteMethodCallClass(classNode, call);
+        
+        return (string)throw new Exception($"Unknown object/function: {call.ObjectName}.{call.MethodName}({string.Join(",", call.Arguments)})");
+    }
+
+    private string ExecuteMethodCallClass(ClassNode classNode, MethodCallNode call)
+    {
+        if (classNode.Body.FirstOrDefault(astNode => astNode is FunctionNode fn && fn.Name == call.MethodName) is not FunctionNode node) {
+            throw new Exception($"User class detection error: Unknown object/function: {call.ObjectName}.{call.MethodName}");
+            return null;
+        }
+        
+        if (_contextStack.Count > 0)
         {
-            if (classNode.Body.FirstOrDefault(astNode => astNode is FunctionNode fn && fn.Name == call.MethodName) is not FunctionNode node) 
-                throw new Exception($"Unknown object/function: {call.ObjectName}.{call.MethodName}");
-            
-            List<object> args = call.Arguments?.ConvertAll(EvaluateExpression) ?? [];
-            return ExecuteFunction(node, args);
+            CurrentContext.Class = classNode;
+            Console.WriteLine("@ContextClass=" + classNode.Name);
         }
 
-        throw new Exception($"Unknown object/function: {call.ObjectName}.{call.MethodName}");
+        List<object> args = call.Arguments?.ConvertAll(EvaluateExpression) ?? [];
+        return ExecuteFunction(node, args);
     }
 
     /// <summary>
