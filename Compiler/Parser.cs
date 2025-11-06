@@ -353,7 +353,7 @@ public class Parser
             return new VariableNode { Name = firstIdentifier };
         }
         
-        return (ASTNode)throw new Exception($"Unexpected token in expression: {Current().TokenType}");
+        throw new Exception($"Unexpected token in expression: {Current().TokenType}");
     }
 
     // Вспомогательные методы

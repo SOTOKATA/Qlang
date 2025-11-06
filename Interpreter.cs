@@ -2,47 +2,58 @@
 using Qlang.Dependencies.QlangDependencies;
 using Qlang.Dependencies.QlangDependencies.Classes;
 using Qlang.Dependencies.QlangDependencies.Functions;
+using Math = System.Math;
 
 namespace Qlang;
 
 public class Interpreter(Dictionary<string, string> stringDictionary)
 {
-    // Хранилище переменных: "$x" -> значение
     private readonly Dictionary<string, object> _variables = new();
     
-    // Хранилище пользовательских функций: "myFunc" -> FunctionNode
     private readonly Dictionary<string, FunctionNode> _functions = new();
     
     private readonly Dictionary<string, ClassNode> _classes = new();
 
     private readonly Stack<ASTContext> _contextStack = new();
     private ASTContext CurrentContext => _contextStack.Count > 0 ? _contextStack.Peek() : new ASTContext();
-
-    /// <summary>
-    /// Главная точка входа: выполняет всю программу
-    /// </summary>
+    
     public void Execute(ProgramNode program)
     {
-        // ШАГ 1: Регистрируем все функции и классы (чтобы можно было вызывать до объявления)
-        
-        foreach (ASTNode statement in program.Statements)
+        try
         {
-            switch (statement)
+            // Регистрация функций и классов
+            foreach (ASTNode statement in program.Statements)
             {
-                case ClassNode classNode:
-                    _classes[classNode.Name] = classNode;
-                    break;
-                case FunctionNode func:
-                    _functions[func.Name] = func;
-                    break;
+                switch (statement)
+                {
+                    case ClassNode classNode:
+                        _classes[classNode.Name] = classNode;
+                        break;
+                    case FunctionNode func:
+                        _functions[func.Name] = func;
+                        break;
+                }
             }
-        }
 
-        // ШАГ 2: Запускаем функцию main()
-        if (_functions.TryGetValue("main", out FunctionNode? mainFunction))
+            // Запуск main()
+            if (!_functions.TryGetValue("main", out FunctionNode? mainFunction))
+            {
+                throw new QlangRuntimeException(
+                    "No 'main' function found in program",
+                    program.Statements.FirstOrDefault() ?? new ProgramNode(),
+                    []);
+            }
+        
             ExecuteFunction(mainFunction, []);
-        else
-            throw new Exception("No 'main' function found!");
+        }
+        catch (QlangRuntimeException ex)
+        {
+            // Красивый вывод ошибки
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(ex.ToString());
+            Console.ResetColor();
+            throw;
+        }
     }
 
     /// <summary>
@@ -91,38 +102,8 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
         finally
         {
             // ВАЖНО: Всегда восстанавливаем предыдущий контекст
-            _contextStack.Pop();
+            Console.WriteLine("Restored stack: class=" + _contextStack.Pop().Class?.Name);
         }
-        // Console.WriteLine(function.GetTree());
-        // CurrentContext.Function = function;
-        //
-        // if (arguments.Count == function.Parameters.Count)
-        //     for (int i = 0; i < function.Parameters.Count; i++)
-        //         _variables[function.Parameters[i]] = arguments[i];
-        //
-        // // Выполняем тело функции построчно
-        // string returnValue = null;
-        // _break = false;
-        // foreach (ASTNode statement in function.Body)
-        // {
-        //     if (_break)
-        //     {
-        //         _break = false;
-        //         return EvaluateExpression(_return.ReturnValue) as string;
-        //     }
-        //     
-        //     if (statement is ReturnNode returnNode)
-        //     {
-        //         // Если встретили return - вычисляем значение и выходим
-        //         returnValue = EvaluateExpression(returnNode.ReturnValue).ToString();
-        //         break;
-        //     }
-        //
-        //     // Иначе просто выполняем statement
-        //     ExecuteStatement(statement);
-        // }
-        //
-        // return returnValue;
     }
 
     /// <summary>
@@ -157,8 +138,7 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
                 break;
             
             default:
-                throw new Exception($"Unknown statement type: {statement.GetType()}");
-                break;
+                throw new QlangRuntimeException($"Unknown statement type: {statement.GetType()}", statement, GetStackTrace());
         }
     }
     
@@ -243,87 +223,163 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
     /// Выполняет вызов метода или функции
     /// </summary>
     private string ExecuteMethodCall(MethodCallNode call)
+{
+    Console.WriteLine($"@Info<MethodCallNode>: class={call.ObjectName}, method={call.MethodName}");
+    Console.WriteLine($"@Info<ASTContext>: class={CurrentContext.Class?.Name}, method={CurrentContext.Function?.Name}");
+    
+    // 1. ПОЛЬЗОВАТЕЛЬСКИЕ ФУНКЦИИ: this.myFunc(...) или вызов внутри класса
+    if (call.ObjectName is "this" or "")
     {
-        Console.WriteLine($"@Info<MethodCallNode>: class={call.ObjectName}, method={call.MethodName}");
-        
-        // 1. ПОЛЬЗОВАТЕЛЬСКИЕ ФУНКЦИИ: this.myFunc(...)
-        if (call.ObjectName is "this" or "" && _functions.TryGetValue(call.MethodName, out FunctionNode? func))
+        // Сначала проверяем, есть ли метод в текущем контексте класса
+        if (CurrentContext.Class != null)
         {
-            // Вычисляем все аргументы и вызываем функцию
+            var classMethod = CurrentContext.Class.Body
+                .FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) as FunctionNode;
+            
+            if (classMethod != null)
+            {
+                List<object> args = call.Arguments.ConvertAll(EvaluateExpression);
+                return ExecuteFunction(classMethod, args);
+            }
+        }
+       
+        if (_functions.TryGetValue(call.MethodName, out FunctionNode? func))
+        {
             List<object> args = call.Arguments.ConvertAll(EvaluateExpression);
             return ExecuteFunction(func, args);
         }
-        
-        // 2. ВСТРОЕННЫЕ КЛАССЫ: Term.print(...), IO.readFile(...)
-        foreach (Class qClass in Namespace.GetClassList())
-        {
-            if (qClass.GetName() != call.ObjectName) 
-                continue;
-            
-            // Ищем метод в классе
-            Function? function = qClass.GetFunctions().FirstOrDefault(fn => fn.GetName() == call.MethodName);
-                
-            if (function == null)
-                throw new Exception($"Method '{call.MethodName}' not found in {call.ObjectName}!");
-
-            // Вычисляем аргументы и вызываем встроенный метод
-            object[] args = call.Arguments.ConvertAll(EvaluateExpression).ToArray();
-            return function.Execute(args);
-        }
-
-        // Detect user's classes and execute function if exists
-        if (CurrentContext.Class?.Name == call.ObjectName)
-            return ExecuteMethodCallClass(CurrentContext.Class, call);
-        
-        // Detect user's classes and execute function if exists
-        if (_classes.TryGetValue(call.ObjectName, out ClassNode? classNode))
-            return ExecuteMethodCallClass(classNode, call);
-        
-        return (string)throw new Exception($"Unknown object/function: {call.ObjectName}.{call.MethodName}({string.Join(",", call.Arguments)})");
     }
+    
+    foreach (Class qClass in Namespace.GetClassList())
+    {
+        if (qClass.GetName() != call.ObjectName) 
+            continue;
+        
+        Function? function = qClass.GetFunctions().FirstOrDefault(fn => fn.GetName() == call.MethodName);
+            
+        if (function == null)
+            throw new QlangRuntimeException($"Method '{call.MethodName}' not found in {call.ObjectName}!", call, 
+                GetStackTrace());
+
+        object[] args = call.Arguments.ConvertAll(EvaluateExpression).ToArray();
+        return function.Execute(args);
+    }
+
+    if (_classes.TryGetValue(call.ObjectName, out ClassNode? classNode))
+        return ExecuteMethodCallClass(classNode, call);
+
+    foreach (ASTContext item in _contextStack)
+    {
+        Console.WriteLine($"StackItem: class='{item.Class?.Name}' method='{item.Function?.Name}'");
+    }
+    Console.WriteLine($"CurrentStackItem: class='{CurrentContext.Class?.Name}' method='{CurrentContext.Function?.Name}'");
+    
+    throw new QlangRuntimeException($"Unknown object/function: {call.ObjectName}.{call.MethodName}({string.Join(",", call.Arguments)})", call, 
+        GetStackTrace());
+}
 
     private string ExecuteMethodCallClass(ClassNode classNode, MethodCallNode call)
     {
-        if (classNode.Body.FirstOrDefault(astNode => astNode is FunctionNode fn && fn.Name == call.MethodName) is not FunctionNode node) {
-            throw new Exception($"User class detection error: Unknown object/function: {call.ObjectName}.{call.MethodName}");
-            return null;
-        }
+        if (classNode.Body.FirstOrDefault(astNode => astNode is FunctionNode fn && fn.Name == call.MethodName) is not FunctionNode node)
+            
+            throw new QlangRuntimeException($"User class detection error: Unknown object/function: {call.ObjectName}.{call.MethodName}", call, GetStackTrace());
         
+        ClassNode previousClass = CurrentContext.Class;
+    
         if (_contextStack.Count > 0)
         {
             CurrentContext.Class = classNode;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("@ContextClass=" + classNode.Name);
+            Console.ResetColor();
         }
 
-        List<object> args = call.Arguments?.ConvertAll(EvaluateExpression) ?? [];
-        return ExecuteFunction(node, args);
+        try
+        {
+            List<object> args = call.Arguments?.ConvertAll(EvaluateExpression) ?? [];
+            return ExecuteFunction(node, args);
+        }
+        finally
+        {
+            // Восстанавливаем предыдущий контекст класса
+            if (_contextStack.Count > 0)
+                CurrentContext.Class = previousClass;
+        }
     }
-
-    /// <summary>
-    /// ВЫЧИСЛЯЕТ ЗНАЧЕНИЕ (expression) - ВСЕГДА возвращает результат
-    /// Примеры: $x, "hello", 2 + 3, ask("Name?")
-    /// </summary>
+    
     private object EvaluateExpression(ASTNode expr)
     {
-        return expr switch
+        if (_contextStack.Count > 0)
+            CurrentContext.CurrentNode = expr;
+    
+        try
         {
-            // Переменная: $x -> её значение
-            VariableNode varNode => _variables[varNode.Name],
-            
-            // Строка: ___STRING_0___ -> "actual string"
-            StringRefNode strRef => stringDictionary[$"___STRING_{strRef.Index}___"],
-            
-            // Число: 42
-            NumberNode num => num.Value,
-            
-            // Бинарная операция: 2 + 3, $x == 5
-            BinaryOperationNode binOp => EvaluateBinaryOperation(binOp),
-            
-            // Вызов функции/метода: ask("Name?")
-            MethodCallNode methodCall => ExecuteMethodCall(methodCall),
-            
-            _ => throw new Exception($"Unknown expression type: {expr.GetType()}")
-        };
+            return expr switch
+            {
+                VariableNode varNode => GetVariable(varNode),
+                StringRefNode strRef => GetStringRef(strRef),
+                NumberNode num => num.Value,
+                BinaryOperationNode binOp => EvaluateBinaryOperation(binOp),
+                MethodCallNode methodCall => ExecuteMethodCall(methodCall),
+                _ => throw new QlangRuntimeException(
+                    $"Unknown expression type: {expr.GetType().Name}", 
+                    expr, 
+                    GetStackTrace())
+            };
+        }
+        catch (QlangRuntimeException)
+        {
+            throw; 
+        }
+        catch (Exception ex)
+        {
+            throw new QlangRuntimeException(
+                $"Internal error: {ex.Message}", 
+                expr, 
+                GetStackTrace());
+        }
+    }
+    
+    private double DivideWithCheck(object left, object right, BinaryOperationNode node)
+    {
+        var divisor = Convert.ToDouble(right);
+        if (Math.Abs(divisor) < double.Epsilon)
+        {
+            throw new QlangRuntimeException(
+                "Division by zero",
+                node,
+                GetStackTrace());
+        }
+        return Convert.ToDouble(left) / divisor;
+    }
+
+    private static bool IsNumeric(object value)
+    {
+        return value is int or long or float or double or decimal;
+    }
+    
+    private object GetVariable(VariableNode varNode)
+    {
+        if (!_variables.TryGetValue(varNode.Name, out var value))
+        {
+            throw new QlangRuntimeException(
+                $"Undefined variable: {varNode.Name}", 
+                varNode, 
+                GetStackTrace());
+        }
+        return value;
+    }
+    
+    private string GetStringRef(StringRefNode strRef)
+    {
+        if (!stringDictionary.TryGetValue($"___STRING_{strRef.Index}___", out var value))
+        {
+            throw new QlangRuntimeException(
+                $"Undefined string reference: {value}", 
+                strRef, 
+                GetStackTrace());
+        }
+        return value;
     }
 
     /// <summary>
@@ -331,28 +387,61 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
     /// </summary>
     private object EvaluateBinaryOperation(BinaryOperationNode binOp)
     {
-        // 1. Вычисляем обе стороны
-        object left = EvaluateExpression(binOp.Left);
-        object right = EvaluateExpression(binOp.Right);
+        object? left = EvaluateExpression(binOp.Left);
+        object? right = EvaluateExpression(binOp.Right);
 
-        // 2. Конкатенация строк (если хотя бы одна сторона - строка)
+        // Конкатенация строк
         if (binOp.Operator == "Plus" && (left is string || right is string))
             return left.ToString() + right;
-        
-        // 3. Обычные операторы
-        return binOp.Operator switch
+    
+        // Проверка типов для числовых операций
+        if (!IsNumeric(left) || !IsNumeric(right))
         {
-            "==" => Equals(left, right),
-            "!=" => !Equals(left, right),
-            "Less" => double.Parse(left.ToString()) < double.Parse(right.ToString()),
-            "<=" => double.Parse(left.ToString()) <= double.Parse(right.ToString()),
-            "Greater" => double.Parse(left.ToString()) > double.Parse(right.ToString()),
-            ">=" => double.Parse(left.ToString()) >= double.Parse(right.ToString()),
-            "Plus" => (double)left + (double)right,   // Сложение
-            "Minus" => (double)left - (double)right,  // Вычитание
-            "Star" => (double)left * (double)right,   // Умножение
-            "Slash" => (double)left / (double)right,  // Деление
-            _ => throw new Exception($"Unknown operator: {binOp.Operator}")
-        };
+            throw new QlangRuntimeException(
+                $"Type error: Cannot apply operator '{binOp.Operator}' to " +
+                $"'{left?.GetType().Name ?? "null"}' and '{right?.GetType().Name ?? "null"}'",
+                binOp,
+                GetStackTrace());
+        }
+    
+        try
+        {
+            return binOp.Operator switch
+            {
+                "==" => Equals(left, right),
+                "!=" => !Equals(left, right),
+                "Less" => Convert.ToDouble(left) < Convert.ToDouble(right),
+                "Plus" => Convert.ToDouble(left) + Convert.ToDouble(right),
+                "Slash" => DivideWithCheck(left, right, binOp),
+                _ => throw new QlangRuntimeException(
+                    $"Unknown operator: {binOp.Operator}", 
+                    binOp, 
+                    GetStackTrace())
+            };
+        }
+        catch (QlangRuntimeException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            throw new QlangRuntimeException(
+                $"Error evaluating operation: {ex.Message}",
+                binOp,
+                GetStackTrace());
+        }
+    }
+    
+    private List<string> GetStackTrace()
+    {
+        return (from context in _contextStack.Reverse()
+            let location = context.CurrentNode != null
+                ? $"{context.CurrentNode.SourceFile}:{context.CurrentNode.Line}"
+                : "unknown"
+            let funcName = context.Function?.Name ?? "global"
+            let className = context.Class?.Name
+            select className != null
+                ? $"at {className}.{funcName} ({location})"
+                : $"at {funcName} ({location})").ToList();
     }
 }
