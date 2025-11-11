@@ -11,8 +11,8 @@ public class Div : Function
         if (args.Length < 2)
             throw new ArgumentException("You must provide at least 2 arguments");
         
-        if (!(args[0].ToString()).TryParseNumber(out double a) || 
-            !(args[1].ToString()).TryParseNumber(out double b))
+        if (!(args[0].ToString()).TryParseNumber(out var a) || 
+            !(args[1].ToString()).TryParseNumber(out var b))
             throw new Exception($"The arguments must be number ('{args[0]}', '{args[1]}')");
         
         if (b == 0)

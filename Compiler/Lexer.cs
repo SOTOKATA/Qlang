@@ -11,11 +11,11 @@ public class Lexer(Compiler compiler)
         List<Token> tokens = [];
         List<string> scriptLines = script.Split('\n').ToList();
 
-        foreach (string rawLine in scriptLines)
+        foreach (var rawLine in scriptLines)
         {
             // Обрабатываем отступы ДО trim
-            int indent = CountLeadingSpaces(rawLine);
-            string line = rawLine.TrimStart();
+            var indent = CountLeadingSpaces(rawLine);
+            var line = rawLine.TrimStart();
             
             // Пропускаем пустые строки
             if (string.IsNullOrWhiteSpace(line))
@@ -25,7 +25,7 @@ public class Lexer(Compiler compiler)
             HandleIndentation(indent, tokens);
 
             // Токенизация строки
-            int pos = 0;
+            var pos = 0;
             while (pos < line.Length)
             {
                 // Пропускаем пробелы внутри строки
@@ -36,7 +36,7 @@ public class Lexer(Compiler compiler)
                 }
 
                 // Проверяем односимвольные токены
-                if (TryCharToToken(line[pos], out Token? charToken))
+                if (TryCharToToken(line[pos], out var charToken))
                 {
                     tokens.Add(charToken!);
                     pos++;
@@ -44,7 +44,7 @@ public class Lexer(Compiler compiler)
                 }
 
                 // Читаем слово/переменную/идентификатор
-                int startPos = pos;
+                var startPos = pos;
                 
                 // Переменная начинается с $
                 if (line[pos] == '$')
@@ -53,8 +53,8 @@ public class Lexer(Compiler compiler)
                     while (pos < line.Length && IsIdentifierChar(line[pos]))
                         pos++;
                     
-                    string varName = line[startPos..pos];
-                    if (IsVariable(varName, out Token? varToken))
+                    var varName = line[startPos..pos];
+                    if (IsVariable(varName, out var varToken))
                     {
                         tokens.Add(varToken!);
                         continue;
@@ -67,8 +67,8 @@ public class Lexer(Compiler compiler)
                     while (pos < line.Length && IsIdentifierChar(line[pos]))
                         pos++;
                     
-                    string word = line[startPos..pos];
-                    if (TryWordToToken(word, out Token? wordToken))
+                    var word = line[startPos..pos];
+                    if (TryWordToToken(word, out var wordToken))
                     {
                         tokens.Add(wordToken!);
                         continue;
@@ -95,7 +95,7 @@ public class Lexer(Compiler compiler)
 
     private void HandleIndentation(int currentIndent, List<Token> tokens)
     {
-        int previousIndent = _indentStack.Peek();
+        var previousIndent = _indentStack.Peek();
 
         if (currentIndent > previousIndent)
         {
@@ -122,8 +122,8 @@ public class Lexer(Compiler compiler)
 
     private int CountLeadingSpaces(string line)
     {
-        int count = 0;
-        foreach (char c in line)
+        var count = 0;
+        foreach (var c in line)
         {
             if (c == ' ')
                 count++;
@@ -170,7 +170,7 @@ public class Lexer(Compiler compiler)
     private static bool IsKeyword(string word, out Token? token)
     {
         // Список ключевых слов твоего языка
-        string[] keywords = ["class", "function", "if", "else", "while", "do_while", "return", "for", "break", "continue"];
+        string[] keywords = ["class", "function", "if", "else", "while", "do_while", "return", "static", "for", "break", "continue"];
         
         if (keywords.Contains(word.ToLower()))
         {

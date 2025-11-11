@@ -11,7 +11,7 @@ public class QlangRuntimeException : Exception
     public QlangRuntimeException(
         string message, 
         ASTNode node, 
-        List<string> stackTrace = null) 
+        List<string>? stackTrace = null) 
         : base(message)
     {
         Line = node.Line;
@@ -34,7 +34,7 @@ public class QlangRuntimeException : Exception
             return sb.ToString();
         
         sb.AppendLine("\nCall Stack:");
-        foreach (string? frame in StackTrace)
+        foreach (var frame in StackTrace)
             sb.AppendLine($"  {frame}");
 
         return sb.ToString();

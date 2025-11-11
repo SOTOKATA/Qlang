@@ -1,5 +1,21 @@
 function main():
-    Term.print("Type your name: ")
-    $name = Term.read()
+    // $console = Console.new()
+    // $console.WriteLine("--- test program ver.0.1 ---")
+    Console.write_internal_message()
+
+class Console: 
+    $internal_message = "Hello World! (internal)"
+    function write_internal_message():
+        Write($internal_message)
+    function Write($message):
+        Term.print($message)
     
-    Term.println("Hello " + $name + "!")
+    function WriteLine($message):
+        Write($message + "\n")
+
+    function ReadLine():
+        return Term.read()
+
+class math:
+    function square($num):
+        return Math.mult($num, $num)

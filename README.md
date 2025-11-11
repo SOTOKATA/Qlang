@@ -100,13 +100,16 @@ for [variable_definition], [condition], [variable_change]:
 
 `[variable_change]` - изменение созданой переменной
 
-### Список всех классов и их функций
+### Список всех классов и их функций в библиотеке `Base`
 
-Term
+Console
 
 - `print` - print arguments
 - `println` - print arguments and add new line on end
 - `read` - read the user's input from console
+- `setForeColor` - set foreground color
+- `setBackColor` - set background color
+- `resetColor` - reset foreground and background colors
 
 Math
 
@@ -122,3 +125,7 @@ Math
 Возможна только компиляция и интерпретация кода.
 
 Для этого установите Qlang и используйте следущую команду: `qlang [file_path]`
+
+# Version history
+
+## 0.0.1

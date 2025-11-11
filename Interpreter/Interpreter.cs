@@ -2,6 +2,7 @@
 using Qlang.Dependencies.QlangDependencies;
 using Qlang.Dependencies.QlangDependencies.Classes;
 using Qlang.Dependencies.QlangDependencies.Functions;
+using Qlang.Dynamic;
 using Math = System.Math;
 
 namespace Qlang.Interpreter;
@@ -19,7 +20,7 @@ public partial class Interpreter
     
     private readonly Dictionary<string, FunctionNode> _functions = new();
     
-    private readonly Dictionary<string, ClassNode> _classes = new();
+    private readonly Dictionary<string, DynamicClass> _dynamicClasses = new();
 
     private readonly Stack<ASTContext> _contextStack = new();
     private ASTContext CurrentContext => _contextStack.Count > 0 ? _contextStack.Peek() : new ASTContext();
@@ -28,12 +29,12 @@ public partial class Interpreter
     {
         try
         {
-            foreach (ASTNode statement in program.Statements)
+            foreach (var statement in program.Statements)
             {
                 switch (statement)
                 {
                     case ClassNode classNode:
-                        _classes[classNode.Name] = classNode;
+                        _dynamicClasses[classNode.Name] = ToDynamicClass(classNode);
                         break;
                     case FunctionNode func:
                         _functions[func.Name] = func;
@@ -41,7 +42,7 @@ public partial class Interpreter
                 }
             }
 
-            if (!_functions.TryGetValue("main", out FunctionNode? mainFunction))
+            if (!_functions.TryGetValue("main", out var mainFunction))
             {
                 throw new QlangRuntimeException(
                     "No 'main' function found in program",
@@ -58,25 +59,41 @@ public partial class Interpreter
         }
     }
 
+    private DynamicClass ToDynamicClass(ClassNode classNode)
+    {
+        DynamicClass dynamicClass = new(classNode.Name);
+
+        foreach (ASTNode node in classNode.Body)
+            if (node is AssignmentNode assignmentNode)
+                dynamicClass.Variables[assignmentNode.VariableName] = EvaluateExpression(assignmentNode.Value);
+        
+        dynamicClass.Body = classNode.Body;
+        
+        return dynamicClass;
+    }
+
     private bool _break;
     private ReturnNode _return;
     private object ExecuteFunction(FunctionNode? function, List<object> arguments)
     {
-        Logger.Logger.Log(function?.GetTree());
+        if (function is null)
+            return null;
+        
+        Logger.Logger.Log(function.GetTree());
     
-        ClassNode? node = _contextStack.Count > 0 ? CurrentContext.Class : new ClassNode();
+        var node = _contextStack.Count > 0 ? CurrentContext.Class : new DynamicClass("");
         ASTContext newContext = new() { Function = function, Class = node };
         _contextStack.Push(newContext);
 
         try
         {
             if (arguments.Count == function.Parameters.Count)
-                for (int i = 0; i < function.Parameters.Count; i++)
+                for (var i = 0; i < function.Parameters.Count; i++)
                     _variables[function.Parameters[i]] = arguments[i];
 
             string returnValue = null;
             _break = false;
-            foreach (ASTNode statement in function.Body)
+            foreach (var statement in function.Body)
             {
                 if (_break)
                 {
@@ -106,7 +123,7 @@ public partial class Interpreter
         switch (statement)
         {
             case AssignmentNode assign:
-                object value = EvaluateExpression(assign.Value);
+                var value = EvaluateExpression(assign.Value);
                 _variables[assign.VariableName] = value;
                 break;
 
@@ -142,8 +159,8 @@ public partial class Interpreter
     Logger.Logger.Log($"@Info<MethodCallNode>: class={call.ObjectName}, method={call.MethodName}");
     Logger.Logger.Log($"@Info<ASTContext>: class={CurrentContext.Class?.Name}, method={CurrentContext.Function?.Name}");
 
-    if (_classes.ContainsKey(call.ObjectName) && call.MethodName == "new")
-        return _classes[call.ObjectName];
+    if (_dynamicClasses.TryGetValue(call.ObjectName, out DynamicClass? value) && call.MethodName == "new")
+        return value;
     
     if (call.ObjectName is "this" or "")
     {
@@ -151,16 +168,16 @@ public partial class Interpreter
                 .FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) is FunctionNode classMethod)
             return ExecuteFunction(classMethod, args.ToList());
 
-        if (_functions.TryGetValue(call.MethodName, out FunctionNode? func))
+        if (_functions.TryGetValue(call.MethodName, out var func))
             return ExecuteFunction(func, args.ToList());
     }
     
-    foreach (Class qClass in Namespace.GetClassList())
+    foreach (var qClass in Namespace.GetClassList())
     {
         if (qClass.GetName() != call.ObjectName) 
             continue;
         
-        Function? function = qClass.GetFunctions().FirstOrDefault(fn => fn.GetName() == call.MethodName);
+        var function = qClass.GetFunctions().FirstOrDefault(fn => fn.GetName() == call.MethodName);
             
         if (function == null)
             throw new QlangRuntimeException($"Method '{call.MethodName}' not found in {call.ObjectName}!", call, 
@@ -169,14 +186,14 @@ public partial class Interpreter
         return function.Execute(args);
     }
 
-    if (_classes.TryGetValue(call.ObjectName, out ClassNode? classNode))
+    if (_dynamicClasses.TryGetValue(call.ObjectName, out var classNode))
         return ExecuteMethodCallClass(classNode, call);
 
-    if (_variables.TryGetValue(call.ObjectName, out object? variable))
+    if (_variables.TryGetValue(call.ObjectName, out var variable))
     {
         Logger.Logger.Log("Object detected as class pointer", ConsoleColor.Magenta);
         
-        ClassNode? @class = variable as ClassNode;
+        var @class = variable as DynamicClass;
 
         if (@class?.Body.FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) is FunctionNode
             function)
@@ -186,7 +203,7 @@ public partial class Interpreter
         }
     }
     
-    foreach (ASTContext item in _contextStack)
+    foreach (var item in _contextStack)
     {
         Logger.Logger.Log($"StackItem: class='{item.Class?.Name}' method='{item.Function?.Name}'");
     }
@@ -196,12 +213,12 @@ public partial class Interpreter
         GetStackTrace());
 }
 
-    private object ExecuteMethodCallClass(ClassNode classNode, MethodCallNode call)
+    private object ExecuteMethodCallClass(DynamicClass classNode, MethodCallNode call)
     {
         if (classNode.Body.FirstOrDefault(astNode => astNode is FunctionNode fn && fn.Name == call.MethodName) is not FunctionNode node)
             throw new QlangRuntimeException($"User class detection error: Unknown object/function: {call.ObjectName}.{call.MethodName}", call, GetStackTrace());
         
-        ClassNode? previousClass = CurrentContext?.Class;
+        var previousClass = CurrentContext?.Class;
     
         if (_contextStack.Count > 0)
         {
@@ -257,7 +274,7 @@ public partial class Interpreter
     
     private double DivideWithCheck(object left, object right, BinaryOperationNode node)
     {
-        double divisor = Convert.ToDouble(right);
+        var divisor = Convert.ToDouble(right);
         if (Math.Abs(divisor) < double.Epsilon)
         {
             throw new QlangRuntimeException(
@@ -275,19 +292,22 @@ public partial class Interpreter
     
     private object GetVariable(VariableNode varNode)
     {
-        if (!_variables.TryGetValue(varNode.Name, out object? value))
-        {
-            throw new QlangRuntimeException(
-                $"Undefined variable: {varNode.Name}", 
-                varNode, 
-                GetStackTrace());
-        }
-        return value;
+        if (_variables.TryGetValue(varNode.Name, out var value))
+            return value;
+
+        if (_contextStack.Count > 0 && CurrentContext?.Class != null && CurrentContext.Class.Variables.TryGetValue(varNode.Name, out value))
+            return value;
+        
+        throw new QlangRuntimeException(
+            $"Undefined variable: {varNode.Name}", 
+            varNode, 
+            GetStackTrace());
+        
     }
     
     private string GetStringRef(StringRefNode strRef)
     {
-        if (!_stringDictionary.TryGetValue($"___STRING_{strRef.Index}___", out string? value))
+        if (!_stringDictionary.TryGetValue($"___STRING_{strRef.Index}___", out var value))
         {
             throw new QlangRuntimeException(
                 $"Undefined string reference: {value}", 
@@ -299,8 +319,8 @@ public partial class Interpreter
 
     private object EvaluateBinaryOperation(BinaryOperationNode binOp)
     {
-        object? left = EvaluateExpression(binOp.Left);
-        object? right = EvaluateExpression(binOp.Right);
+        var left = EvaluateExpression(binOp.Left);
+        var right = EvaluateExpression(binOp.Right);
 
         if (binOp.Operator == "Plus" && (left is string || right is string))
             return left.ToString() + right;

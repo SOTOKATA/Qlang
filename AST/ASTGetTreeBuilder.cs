@@ -4,13 +4,13 @@ public class ASTGetTreeBuilder
 {
     public static string Build(string astName, List<object> nodes, string indent = "")
     {
-        string result = $"{indent}@{astName}:";
+        var result = $"{indent}@{astName}:";
 
-        foreach (object node in nodes)
+        foreach (var node in nodes)
         {
-            string toWrite = ""; //$"{indent}" + "|---"
+            var toWrite = ""; //$"{indent}" + "|---"
             
-            string subIndent = "[--]";
+            var subIndent = "[--]";
             
             toWrite += node switch
             {

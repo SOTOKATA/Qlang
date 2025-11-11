@@ -6,11 +6,11 @@ public partial class Interpreter
 {
     private void ExecuteWhile(WhileNode whileNode)
     {
-        bool condition = whileNode.IsDoWhile || (bool)EvaluateExpression(whileNode.Condition);
+        var condition = whileNode.IsDoWhile || (bool)EvaluateExpression(whileNode.Condition);
 
         while (condition)
         {
-            foreach (ASTNode statement in whileNode.Body)
+            foreach (var statement in whileNode.Body)
             {
                 if (_break)
                     return;
@@ -32,13 +32,12 @@ public partial class Interpreter
     private void ExecuteIf(IfNode ifNode)
     {
         // 1. Вычисляем условие (expression -> bool)
-        bool condition = (bool)EvaluateExpression(ifNode.Condition);
+        var condition = (bool)EvaluateExpression(ifNode.Condition);
 
         // 2. Выполняем нужный блок
-        bool isBreak = false;
         if (condition)
         {
-            foreach (ASTNode statement in ifNode.ThenBlock)
+            foreach (var statement in ifNode.ThenBlock)
             {
                 if (_break)
                     return;
@@ -55,7 +54,7 @@ public partial class Interpreter
         }
         else if (ifNode.ElseBlock.Count > 0)
         {
-            foreach (ASTNode statement in ifNode.ElseBlock)
+            foreach (var statement in ifNode.ElseBlock)
             {
                 if (_break)
                     return;

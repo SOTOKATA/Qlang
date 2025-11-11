@@ -11,16 +11,33 @@ public class QLang
 
     public QLang()
     {
-        Settings? settings = Settings.Load();
+        var settings = Settings.Load();
         
         Settings = settings ?? new Settings();
         
         Settings.Save();
     }
 
-    public void SetSettings(string name, string value)
+    public void SetSettings(string name, string? value)
     {
         // TODO: add settings change 
+        
+        switch (name)
+        {
+            case "debug":
+                if (value is null)
+                {
+                    Console.WriteLine($"Current value of \"{name}\" is: " + Settings.Debug);
+                    return;
+                }
+                
+                var @bool = bool.Parse(value);
+                Settings.Debug = @bool;
+                Settings.Save();
+                
+                Console.WriteLine($"Current value of \"{name}\" is: " + Settings.Debug);
+                break;
+        }
     }
     
     public void Compile(string code)

@@ -6,31 +6,20 @@ public class Program
     {
         if (args.Length < 1)
         {
-//             Console.WriteLine($"""
-//                                Help (command structure):
-//                                Qlang.exe [file-path] --[arg]
-//                                
-//                                To run code example type "Qlang.exe --test"
-//                                """);
-//             return;
-            string dcode = """
-                           function main():
-                               Term.print("Type your name: ")
-                               $name = Term.read()
-                               
-                               Term.println("Hello " + $name + "!")
-                           """;
-            
-            QLang dlang = new();
-            dlang.Compile(dcode);
-            dlang.Run();
-
-            return;
+             Console.WriteLine($"""
+                                Help (command structure):
+                                Qlang.exe [file-path] --[arg]
+                                
+                                To run code example type "Qlang.exe --test"
+                                To change settings use "--s" and write settings name and new value
+                                To get current settings value write "--s" and name of setting
+                                """);
+             return;
         }
 
-        string filePath = args[0];
+        var filePath = args[0];
         
-        string code;
+        string? code = null;
 
         if (filePath == "--test")
         {
@@ -43,32 +32,30 @@ public class Program
                        Term.println("Hello, ", $name, "!")
                    """;
         }
-        else 
-            code = File.ReadAllText(filePath);
         
         QLang lang = new();
+
+        switch (args)
+        {
+            case ["--s", _, _, ..]:
+                lang.SetSettings(args[1].Trim(), args[2].Trim());
+                return;
+            case ["--s", _, ..]:
+                lang.SetSettings(args[1].Trim(), null);   
+                return;
+        }
+
+        if (File.Exists(filePath))
+            code = File.ReadAllText(filePath);
+        else if (code == null)
+        {
+            Console.WriteLine("File not found: " + filePath);
+            return;
+        }
+        
         lang.Compile(code);
         lang.Run();
     }
 }
-
-// string functionScript = """
-//                         function main():
-//                             // Comment
-//                             Term.print("Type anything: ")
-//                             $var = Term.read()
-//                             
-//                             this.printer($var)
-//                             
-//                             if $var == "Hello World!":
-//                                 Term.println("Hello!")
-//                             else if $var == "":
-//                                 Term.println("You type nothing...")
-//                             else:
-//                                 Term.println("You typed: ", $var)
-//                                 
-//                         function printer($toprint):
-//                             Term.println($toprint)
-//                         """;
 
 

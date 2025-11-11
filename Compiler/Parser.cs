@@ -30,6 +30,15 @@ public class Parser
 
     private ASTNode ParseStatement()
     {
+        if (Check(Tokens.Keyword) && Current().Value == "static")
+        {
+            Advance();
+            if (Current().Value == "function")
+                return ParseFunction(true);
+            if (Current().TokenType == Tokens.Variable)
+                return ParseAssignment(true);
+        }
+        
         // function declaration
         if (Check(Tokens.Keyword) && Current().Value == "function")
             return ParseFunction();
@@ -57,7 +66,7 @@ public class Parser
         // Call method from class pointer
         if (Check(Tokens.Variable) && Peek()?.TokenType == Tokens.Dot)
         {
-            ASTNode expr = ParseExpression();
+            var expr = ParseExpression();
             Expect(Tokens.NewLine);
             return expr;
         }
@@ -69,7 +78,7 @@ public class Parser
         // method call statement (Object.method(...))
         if (Check(Tokens.Identifier))
         {
-            ASTNode expr = ParseExpression();
+            var expr = ParseExpression();
             Expect(Tokens.NewLine);
             return expr;
         }
@@ -77,10 +86,10 @@ public class Parser
         throw new Exception($"Unexpected token: {Current().TokenType}");
     }
 
-    private FunctionNode ParseFunction()
+    private FunctionNode ParseFunction(bool isStatic = false)
     {
         Expect(Tokens.Keyword, "function");
-        string name = Expect(Tokens.Identifier).Value;
+        var name = Expect(Tokens.Identifier).Value;
         Expect(Tokens.LParen);
         
         List<string> parameters = [];
@@ -101,13 +110,13 @@ public class Parser
 
         Expect(Tokens.Dedent);
 
-        return new FunctionNode { Name = name, Parameters = parameters, Body = body };
+        return new FunctionNode { Name = name, Parameters = parameters, Body = body, IsStatic = isStatic };
     }
 
     private ClassNode ParseClass()
     {
         Expect(Tokens.Keyword, "class");
-        string name = Expect(Tokens.Identifier).Value;
+        var name = Expect(Tokens.Identifier).Value;
         
         Expect(Tokens.Colon);
         Expect(Tokens.NewLine);
@@ -123,7 +132,7 @@ public class Parser
     private WhileNode ParseWhile(bool isDoWhile = false)
     {
         Expect(Tokens.Keyword, isDoWhile ? "do_while" : "while");
-        ASTNode condition = ParseExpression();
+        var condition = ParseExpression();
         Expect(Tokens.Colon);
         Expect(Tokens.NewLine);
         Expect(Tokens.Indent);
@@ -138,7 +147,7 @@ public class Parser
     private IfNode ParseIf()
     {
         Expect(Tokens.Keyword, "if");
-        ASTNode condition = ParseExpression();
+        var condition = ParseExpression();
         Expect(Tokens.Colon);
         Expect(Tokens.NewLine);
         Expect(Tokens.Indent);
@@ -185,21 +194,21 @@ public class Parser
         return statements;
     }
 
-    private AssignmentNode ParseAssignment()
+    private AssignmentNode ParseAssignment(bool isStatic = false)
     {
-        string varName = Expect(Tokens.Variable).Value;
+        var varName = Expect(Tokens.Variable).Value;
         Expect(Tokens.Equals);
-        ASTNode value = ParseExpression();
+        var value = ParseExpression();
         Expect(Tokens.NewLine);
 
-        return new AssignmentNode { VariableName = varName, Value = value };
+        return new AssignmentNode { VariableName = varName, Value = value, IsStatic = isStatic };
     }
 
     private ReturnNode ParseReturn()
     {
         Expect(Tokens.Keyword);
         
-        ASTNode node = ParseExpression();
+        var node = ParseExpression();
         
         Expect(Tokens.NewLine);
         
@@ -211,14 +220,14 @@ public class Parser
     /// </summary>
     private ASTNode ParseExpression()
     {
-        ASTNode left = ParsePrimary();
+        var left = ParsePrimary();
 
         // Операторы сравнения: ==
         if (Check(Tokens.Equals) && Peek()?.TokenType == Tokens.Equals)
         {
             Advance(); // первый =
             Advance(); // второй =
-            ASTNode right = ParseExpression();
+            var right = ParseExpression();
             return new BinaryOperationNode { Left = left, Operator = "==", Right = right };
         }
         
@@ -226,7 +235,7 @@ public class Parser
         {
             Advance(); // первый !
             Advance(); // второй =
-            ASTNode right = ParseExpression();
+            var right = ParseExpression();
             return new BinaryOperationNode { Left = left, Operator = "!=", Right = right };
         }
         
@@ -245,7 +254,7 @@ public class Parser
                 op = "Less";
             }
             
-            ASTNode right = ParseExpression();
+            var right = ParseExpression();
             return new BinaryOperationNode { Left = left, Operator = op, Right = right };
         }
         
@@ -264,16 +273,16 @@ public class Parser
                 op = "Greater";
             }
             
-            ASTNode right = ParseExpression();
+            var right = ParseExpression();
             return new BinaryOperationNode { Left = left, Operator = op, Right = right };
         }
 
         // Арифметические операторы: +, -, *, /
         if (Check(Tokens.Plus) || Check(Tokens.Minus) || Check(Tokens.Star) || Check(Tokens.Slash))
         {
-            string op = Current().TokenType.ToString();
+            var op = Current().TokenType.ToString();
             Advance();
-            ASTNode right = ParseExpression();
+            var right = ParseExpression();
             return new BinaryOperationNode { Left = left, Operator = op, Right = right };
         }
 
@@ -296,23 +305,23 @@ public class Parser
         // Identifier - может быть вызовом метода или функции
         if (Check(Tokens.Identifier) || Check(Tokens.Variable))
         {
-            string firstIdentifier = Advance().Value;
+            var firstIdentifier = Advance().Value;
             
             // Проверяем на специальные строковые константы
             if (firstIdentifier.StartsWith("___STRING_"))
             {
-                int index = int.Parse(firstIdentifier.Replace("___STRING_", "").Replace("___", ""));
+                var index = int.Parse(firstIdentifier.Replace("___STRING_", "").Replace("___", ""));
                 return new StringRefNode { Index = index };
             }
             
-            if (double.TryParse(firstIdentifier, out double result))
+            if (double.TryParse(firstIdentifier, out var result))
                 return new NumberNode { Value = result };
             
             // Вызов метода: Object.method(...)
             if (Check(Tokens.Dot))
             {
                 Advance(); // consume '.'
-                string methodName = Expect(Tokens.Identifier).Value;
+                var methodName = Expect(Tokens.Identifier).Value;
                 Expect(Tokens.LParen);
 
                 List<ASTNode> arguments = [];
@@ -381,7 +390,7 @@ public class Parser
     {
         if (!Check(type))
         {
-            Token current = Current();
+            var current = Current();
             throw new Exception($"Expected {type}, got {current.TokenType} (Value: {(current.Value == "" ? "Null" : current.Value)}) ");
         }
         

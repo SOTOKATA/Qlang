@@ -1,5 +1,21 @@
 function main():
-    Term.print(___STRING_0___)
-    $name = Term.read()
     
-    Term.println(___STRING_1___ + $name + ___STRING_2___)
+    
+    Console.write_internal_message()
+
+class Console: 
+    $internal_message = ___STRING_1___
+    function write_internal_message():
+        Write($internal_message)
+    function Write($message):
+        Term.print($message)
+    
+    function WriteLine($message):
+        Write($message + ___STRING_2___)
+
+    function ReadLine():
+        return Term.read()
+
+class math:
+    function square($num):
+        return Math.mult($num, $num)

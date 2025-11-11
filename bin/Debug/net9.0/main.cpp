@@ -1,13 +1,12 @@
 function main():
-    $console = Console.new()
-    $console.WriteLine("--- test program ver.0.1 ---")
-    Console.Write("Write name: ")
-
-    $name = Console.ReadLine()
-
-    Console.WriteLine("Hello, " + $name + "!")
+    // $console = Console.new()
+    // $console.WriteLine("--- test program ver.0.1 ---")
+    Console.write_internal_message()
 
 class Console: 
+    $internal_message = "Hello World! (internal)"
+    function write_internal_message():
+        Write($internal_message)
     function Write($message):
         Term.print($message)
     

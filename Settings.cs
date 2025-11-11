@@ -16,9 +16,9 @@ public class Settings()
         if (!File.Exists(Path.Combine(path, "settings.json")))
             return null;
         
-        string content = File.ReadAllText(Path.Combine(path, "settings.json"));
+        var content = File.ReadAllText(Path.Combine(path, "settings.json"));
         
-        Settings? settings = JsonSerializer.Deserialize<Settings>(content);
+        var settings = JsonSerializer.Deserialize<Settings>(content);
 
         return settings;
     }

@@ -2,7 +2,7 @@
 
 public partial class Interpreter
 {
-    private List<string> GetStackTrace()
+    private List<string>? GetStackTrace()
     {
         return (from context in _contextStack.Reverse()
             let location = context.CurrentNode != null

@@ -45,8 +45,8 @@ public partial class Compiler
 
         fl.SetPath("Logs\\script_tokenized.txt");
 
-        string line = "";
-        foreach (Token token in tokens)
+        var line = "";
+        foreach (var token in tokens)
         {
             line += $"{token.TokenType}{(token.Value == "" ? "" : ($"({token.Value})"))} ";
 
@@ -66,7 +66,7 @@ public partial class Compiler
             }
         }
 
-        ProgramNode programNode = _parser.Parse(tokens);
+        var programNode = _parser.Parse(tokens);
         
         fl.SetPath("Logs\\script_parsed.txt");
         
@@ -80,16 +80,16 @@ public partial class Compiler
     {
         StringDictionary.Clear();
         
-        int stringCounter = 0;
+        var stringCounter = 0;
         
         const string pattern = """
                                "(?:[^"\\]|\\.)*"
                                """;
         
-        string result = Regex.Replace(script, pattern, match => 
+        var result = Regex.Replace(script, pattern, match => 
         {
-            string stringValue = match.Value;
-            string key = $"___STRING_{stringCounter}___";
+            var stringValue = match.Value;
+            var key = $"___STRING_{stringCounter}___";
             
             StringDictionary[key] = stringValue.Substring(1, stringValue.Length - 2);
             
@@ -105,7 +105,7 @@ public partial class Compiler
     {
         const string pattern = @"//[^\r\n]*|/\*[\s\S]*?\*/";
         
-        string result = Regex.Replace(script, pattern, "");
+        var result = Regex.Replace(script, pattern, "");
         
         return result;
     }
