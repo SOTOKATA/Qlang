@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Qlang")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f0f2226b8ac91144ad4f1d1cd455bc5ab1127de")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3e8d98c16419b38b5d7a30293da8062197d22763")]
 [assembly: System.Reflection.AssemblyProductAttribute("Qlang")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Qlang")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

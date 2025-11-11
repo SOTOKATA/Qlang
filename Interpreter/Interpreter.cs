@@ -4,10 +4,17 @@ using Qlang.Dependencies.QlangDependencies.Classes;
 using Qlang.Dependencies.QlangDependencies.Functions;
 using Math = System.Math;
 
-namespace Qlang;
+namespace Qlang.Interpreter;
 
-public class Interpreter(Dictionary<string, string> stringDictionary)
+public partial class Interpreter
 {
+    public Interpreter(Dictionary<string, string> stringDictionary)
+    {
+        _stringDictionary = stringDictionary;
+    }
+
+    private readonly Dictionary<string, string> _stringDictionary;
+    
     private readonly Dictionary<string, object> _variables = new();
     
     private readonly Dictionary<string, FunctionNode> _functions = new();
@@ -21,7 +28,6 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
     {
         try
         {
-            // Регистрация функций и классов
             foreach (ASTNode statement in program.Statements)
             {
                 switch (statement)
@@ -35,7 +41,6 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
                 }
             }
 
-            // Запуск main()
             if (!_functions.TryGetValue("main", out FunctionNode? mainFunction))
             {
                 throw new QlangRuntimeException(
@@ -48,30 +53,21 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
         }
         catch (QlangRuntimeException ex)
         {
-            // Красивый вывод ошибки
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(ex.ToString());
-            Console.ResetColor();
+            Logger.Logger.Error(ex.ToString());
             throw;
         }
     }
 
-    /// <summary>
-    /// Выполняет пользовательскую функцию с аргументами
-    /// </summary>
-    ///
     private bool _break;
     private ReturnNode _return;
-    private string ExecuteFunction(FunctionNode function, List<object> arguments)
+    private object ExecuteFunction(FunctionNode? function, List<object> arguments)
     {
-        Console.ForegroundColor = ConsoleColor.DarkGray;
-        Console.WriteLine(function.GetTree());
-        Console.ResetColor();
+        Logger.Logger.Log(function?.GetTree());
     
-        // Создаём новый контекст и помещаем в стек
-        ASTContext newContext = new() { Function = function };
+        ClassNode? node = _contextStack.Count > 0 ? CurrentContext.Class : new ClassNode();
+        ASTContext newContext = new() { Function = function, Class = node };
         _contextStack.Push(newContext);
-    
+
         try
         {
             if (arguments.Count == function.Parameters.Count)
@@ -101,34 +97,23 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
         }
         finally
         {
-            // ВАЖНО: Всегда восстанавливаем предыдущий контекст
-            Console.WriteLine("Restored stack: class=" + _contextStack.Pop().Class?.Name);
+            Logger.Logger.Log("Restored stack: class=" + _contextStack.Pop().Class?.Name);
         }
     }
 
-    /// <summary>
-    /// ВЫПОЛНЯЕТ ДЕЙСТВИЕ (statement) - не возвращает значение
-    /// Примеры: $x = 5, Term.print("Hi"), if $x == 5: ...
-    /// </summary>
     private void ExecuteStatement(ASTNode statement)
     {
         switch (statement)
         {
-            // Присваивание: $x = выражение
             case AssignmentNode assign:
-                // 1. Вычисляем правую часть (выражение)
                 object value = EvaluateExpression(assign.Value);
-                // 2. Сохраняем в переменную
                 _variables[assign.VariableName] = value;
                 break;
 
-            // Вызов метода: Term.print(...) или ask(...)
             case MethodCallNode call:
-                // Выполняем вызов (может быть side effect, например print)
                 ExecuteMethodCall(call);
                 break;
 
-            // Условие: if $x == 5: ...
             case IfNode ifNode:
                 ExecuteIf(ifNode);
                 break;
@@ -145,109 +130,29 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
     /// <summary>
     /// Выполняет while-блок
     /// </summary>
-    private void ExecuteWhile(WhileNode whileNode)
-    {
-        // 1. Вычисляем условие (expression -> bool)
-        bool condition = whileNode.IsDoWhile || (bool)EvaluateExpression(whileNode.Condition);
-
-        // 2. Выполняем нужный блок
-        bool isBreak = false;
-        while (condition)
-        {
-            foreach (ASTNode statement in whileNode.Body)
-            {
-                if (_break)
-                    return;
-
-                if (statement is ReturnNode returnNode)
-                {
-                    _break = true;
-                    _return = returnNode;
-                    return;
-                }
-                
-                ExecuteStatement(statement);
-            }
-            
-            condition = (bool)EvaluateExpression(whileNode.Condition);
-        }
-    }
-
-    /// <summary>
-    /// Выполняет if-блок
-    /// </summary>
-    private void ExecuteIf(IfNode ifNode)
-    {
-        // 1. Вычисляем условие (expression -> bool)
-        bool condition = (bool)EvaluateExpression(ifNode.Condition);
-
-        // 2. Выполняем нужный блок
-        bool isBreak = false;
-        if (condition)
-        {
-            foreach (ASTNode statement in ifNode.ThenBlock)
-            {
-                if (_break)
-                    return;
-
-                if (statement is ReturnNode returnNode)
-                {
-                    _break = true;
-                    _return = returnNode;
-                    return;
-                }
-                
-                ExecuteStatement(statement);
-            }
-        }
-        else if (ifNode.ElseBlock.Count > 0)
-        {
-            foreach (ASTNode statement in ifNode.ElseBlock)
-            {
-                if (_break)
-                    return;
-                
-                if (statement is ReturnNode returnNode)
-                {
-                    _break = true;
-                    _return = returnNode;
-                    return;
-                }
-                
-                ExecuteStatement(statement);
-            }
-        }
-    }
+    
 
     /// <summary>
     /// Выполняет вызов метода или функции
     /// </summary>
-    private string ExecuteMethodCall(MethodCallNode call)
+    private object ExecuteMethodCall(MethodCallNode call)
 {
-    Console.WriteLine($"@Info<MethodCallNode>: class={call.ObjectName}, method={call.MethodName}");
-    Console.WriteLine($"@Info<ASTContext>: class={CurrentContext.Class?.Name}, method={CurrentContext.Function?.Name}");
+    object[] args = call.Arguments.ConvertAll(EvaluateExpression).ToArray();
     
-    // 1. ПОЛЬЗОВАТЕЛЬСКИЕ ФУНКЦИИ: this.myFunc(...) или вызов внутри класса
+    Logger.Logger.Log($"@Info<MethodCallNode>: class={call.ObjectName}, method={call.MethodName}");
+    Logger.Logger.Log($"@Info<ASTContext>: class={CurrentContext.Class?.Name}, method={CurrentContext.Function?.Name}");
+
+    if (_classes.ContainsKey(call.ObjectName) && call.MethodName == "new")
+        return _classes[call.ObjectName];
+    
     if (call.ObjectName is "this" or "")
     {
-        // Сначала проверяем, есть ли метод в текущем контексте класса
-        if (CurrentContext.Class != null)
-        {
-            var classMethod = CurrentContext.Class.Body
-                .FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) as FunctionNode;
-            
-            if (classMethod != null)
-            {
-                List<object> args = call.Arguments.ConvertAll(EvaluateExpression);
-                return ExecuteFunction(classMethod, args);
-            }
-        }
-       
+        if (CurrentContext.Class?.Body?
+                .FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) is FunctionNode classMethod)
+            return ExecuteFunction(classMethod, args.ToList());
+
         if (_functions.TryGetValue(call.MethodName, out FunctionNode? func))
-        {
-            List<object> args = call.Arguments.ConvertAll(EvaluateExpression);
-            return ExecuteFunction(func, args);
-        }
+            return ExecuteFunction(func, args.ToList());
     }
     
     foreach (Class qClass in Namespace.GetClassList())
@@ -261,37 +166,47 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
             throw new QlangRuntimeException($"Method '{call.MethodName}' not found in {call.ObjectName}!", call, 
                 GetStackTrace());
 
-        object[] args = call.Arguments.ConvertAll(EvaluateExpression).ToArray();
         return function.Execute(args);
     }
 
     if (_classes.TryGetValue(call.ObjectName, out ClassNode? classNode))
         return ExecuteMethodCallClass(classNode, call);
 
+    if (_variables.TryGetValue(call.ObjectName, out object? variable))
+    {
+        Logger.Logger.Log("Object detected as class pointer", ConsoleColor.Magenta);
+        
+        ClassNode? @class = variable as ClassNode;
+
+        if (@class?.Body.FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) is FunctionNode
+            function)
+        {
+            CurrentContext.Class = @class;
+            return ExecuteFunction(function, args.ToList());
+        }
+    }
+    
     foreach (ASTContext item in _contextStack)
     {
-        Console.WriteLine($"StackItem: class='{item.Class?.Name}' method='{item.Function?.Name}'");
+        Logger.Logger.Log($"StackItem: class='{item.Class?.Name}' method='{item.Function?.Name}'");
     }
-    Console.WriteLine($"CurrentStackItem: class='{CurrentContext.Class?.Name}' method='{CurrentContext.Function?.Name}'");
+    Logger.Logger.Log($"CurrentStackItem: class='{CurrentContext.Class?.Name}' method='{CurrentContext.Function?.Name}'");
     
     throw new QlangRuntimeException($"Unknown object/function: {call.ObjectName}.{call.MethodName}({string.Join(",", call.Arguments)})", call, 
         GetStackTrace());
 }
 
-    private string ExecuteMethodCallClass(ClassNode classNode, MethodCallNode call)
+    private object ExecuteMethodCallClass(ClassNode classNode, MethodCallNode call)
     {
         if (classNode.Body.FirstOrDefault(astNode => astNode is FunctionNode fn && fn.Name == call.MethodName) is not FunctionNode node)
-            
             throw new QlangRuntimeException($"User class detection error: Unknown object/function: {call.ObjectName}.{call.MethodName}", call, GetStackTrace());
         
-        ClassNode previousClass = CurrentContext.Class;
+        ClassNode? previousClass = CurrentContext?.Class;
     
         if (_contextStack.Count > 0)
         {
             CurrentContext.Class = classNode;
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("@ContextClass=" + classNode.Name);
-            Console.ResetColor();
+            Logger.Logger.Log("@ContextClass=" + classNode.Name, ConsoleColor.Green);
         }
 
         try
@@ -321,7 +236,7 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
                 NumberNode num => num.Value,
                 BinaryOperationNode binOp => EvaluateBinaryOperation(binOp),
                 MethodCallNode methodCall => ExecuteMethodCall(methodCall),
-                _ => throw new QlangRuntimeException(
+                var _ => throw new QlangRuntimeException(
                     $"Unknown expression type: {expr.GetType().Name}", 
                     expr, 
                     GetStackTrace())
@@ -342,7 +257,7 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
     
     private double DivideWithCheck(object left, object right, BinaryOperationNode node)
     {
-        var divisor = Convert.ToDouble(right);
+        double divisor = Convert.ToDouble(right);
         if (Math.Abs(divisor) < double.Epsilon)
         {
             throw new QlangRuntimeException(
@@ -360,7 +275,7 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
     
     private object GetVariable(VariableNode varNode)
     {
-        if (!_variables.TryGetValue(varNode.Name, out var value))
+        if (!_variables.TryGetValue(varNode.Name, out object? value))
         {
             throw new QlangRuntimeException(
                 $"Undefined variable: {varNode.Name}", 
@@ -372,7 +287,7 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
     
     private string GetStringRef(StringRefNode strRef)
     {
-        if (!stringDictionary.TryGetValue($"___STRING_{strRef.Index}___", out var value))
+        if (!_stringDictionary.TryGetValue($"___STRING_{strRef.Index}___", out string? value))
         {
             throw new QlangRuntimeException(
                 $"Undefined string reference: {value}", 
@@ -382,19 +297,14 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
         return value;
     }
 
-    /// <summary>
-    /// Вычисляет бинарные операторы: +, -, *, /, ==
-    /// </summary>
     private object EvaluateBinaryOperation(BinaryOperationNode binOp)
     {
         object? left = EvaluateExpression(binOp.Left);
         object? right = EvaluateExpression(binOp.Right);
 
-        // Конкатенация строк
         if (binOp.Operator == "Plus" && (left is string || right is string))
             return left.ToString() + right;
     
-        // Проверка типов для числовых операций
         if (!IsNumeric(left) || !IsNumeric(right))
         {
             throw new QlangRuntimeException(
@@ -413,7 +323,7 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
                 "Less" => Convert.ToDouble(left) < Convert.ToDouble(right),
                 "Plus" => Convert.ToDouble(left) + Convert.ToDouble(right),
                 "Slash" => DivideWithCheck(left, right, binOp),
-                _ => throw new QlangRuntimeException(
+                var _ => throw new QlangRuntimeException(
                     $"Unknown operator: {binOp.Operator}", 
                     binOp, 
                     GetStackTrace())
@@ -432,16 +342,5 @@ public class Interpreter(Dictionary<string, string> stringDictionary)
         }
     }
     
-    private List<string> GetStackTrace()
-    {
-        return (from context in _contextStack.Reverse()
-            let location = context.CurrentNode != null
-                ? $"{context.CurrentNode.SourceFile}:{context.CurrentNode.Line}"
-                : "unknown"
-            let funcName = context.Function?.Name ?? "global"
-            let className = context.Class?.Name
-            select className != null
-                ? $"at {className}.{funcName} ({location})"
-                : $"at {funcName} ({location})").ToList();
-    }
+    
 }

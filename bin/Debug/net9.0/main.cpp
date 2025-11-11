@@ -1,11 +1,13 @@
 function main():
-    Console.Write("Write number: ")
-    
+    $console = Console.new()
+    $console.WriteLine("--- test program ver.0.1 ---")
+    Console.Write("Write name: ")
+
     $name = Console.ReadLine()
 
-    Console.WriteLine(math.square($name))
-    
-class Console:
+    Console.WriteLine("Hello, " + $name + "!")
+
+class Console: 
     function Write($message):
         Term.print($message)
     

@@ -1,20 +1,5 @@
 function main():
-    Console.Write(___STRING_0___)
+    Term.print(___STRING_0___)
+    $name = Term.read()
     
-    $name = Console.ReadLine()
-
-    Console.WriteLine(math.square($name))
-    
-class Console:
-    function Write($message):
-        Term.print($message)
-    
-    function WriteLine($message):
-        Write($message + ___STRING_1___)
-
-    function ReadLine():
-        return Term.read()
-
-class math:
-    function square($num):
-        return Math.mult($num, $num)
+    Term.println(___STRING_1___ + $name + ___STRING_2___)

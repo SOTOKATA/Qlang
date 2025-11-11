@@ -54,6 +54,14 @@ public class Parser
         if (Check(Tokens.Keyword) && Current().Value == "return")
             return ParseReturn();
 
+        // Call method from class pointer
+        if (Check(Tokens.Variable) && Peek()?.TokenType == Tokens.Dot)
+        {
+            ASTNode expr = ParseExpression();
+            Expect(Tokens.NewLine);
+            return expr;
+        }
+        
         // assignment
         if (Check(Tokens.Variable))
             return ParseAssignment();
@@ -278,7 +286,7 @@ public class Parser
     private ASTNode ParsePrimary()
     {
         // Variable
-        if (Check(Tokens.Variable))
+        if (Check(Tokens.Variable) && Peek()?.TokenType != Tokens.Dot)
             return new VariableNode { Name = Advance().Value };
 
         // String reference
@@ -286,7 +294,7 @@ public class Parser
             return new StringRefNode { Index = int.Parse(Advance().Value) };
 
         // Identifier - может быть вызовом метода или функции
-        if (Check(Tokens.Identifier))
+        if (Check(Tokens.Identifier) || Check(Tokens.Variable))
         {
             string firstIdentifier = Advance().Value;
             
@@ -353,7 +361,7 @@ public class Parser
             return new VariableNode { Name = firstIdentifier };
         }
         
-        throw new Exception($"Unexpected token in expression: {Current().TokenType}");
+        throw new Exception($"Unexpected token in expression: {Current().TokenType} ({(Current().Value == "" ? "Null" : Current().Value)})");
     }
 
     // Вспомогательные методы

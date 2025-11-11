@@ -6,6 +6,22 @@ public class QLang
 {
     private ProgramNode? _programNode;
     private Dictionary<string, string> _stringDictionary = [];
+
+    public static Settings Settings;
+
+    public QLang()
+    {
+        Settings? settings = Settings.Load();
+        
+        Settings = settings ?? new Settings();
+        
+        Settings.Save();
+    }
+
+    public void SetSettings(string name, string value)
+    {
+        // TODO: add settings change 
+    }
     
     public void Compile(string code)
     {
@@ -21,7 +37,7 @@ public class QLang
         if (_programNode == null)
             throw new Exception("Program Node is null (program is not compiled)");
         
-        Interpreter interpreter = new(_stringDictionary);
+        Interpreter.Interpreter interpreter = new(_stringDictionary);
         
         interpreter.Execute(_programNode);
     }

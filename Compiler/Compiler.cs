@@ -8,8 +8,8 @@ public partial class Compiler
 {
     public Compiler()
     {
-        _parser = new();
-        _lexer = new(this);
+        _parser = new Parser();
+        _lexer = new Lexer(this);
     }
     
     private string _originalScript = "";
@@ -82,7 +82,9 @@ public partial class Compiler
         
         int stringCounter = 0;
         
-        const string pattern = @"""(?:[^""\\]|\\.)*""";
+        const string pattern = """
+                               "(?:[^"\\]|\\.)*"
+                               """;
         
         string result = Regex.Replace(script, pattern, match => 
         {

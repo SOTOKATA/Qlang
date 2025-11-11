@@ -199,7 +199,7 @@ public class Lexer(Compiler compiler)
             '!' => new Token(Tokens.Not),
             '>' => new Token(Tokens.Greater),
             '<' => new Token(Tokens.Less),
-            _ => null
+            var _ => null
         };
         
         return token != null;
