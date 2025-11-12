@@ -1,20 +1,23 @@
 function main():
-    
-    
-    Console.write_internal_message()
+    $console = Console.new()
+    $console.WriteLine(___STRING_0___)
+
+    $console.$internal_message = ___STRING_1___
+
+    Console.WriteLine($console.$internal_message)
 
 class Console: 
-    $internal_message = ___STRING_1___
+    $internal_message = ___STRING_2___
     function write_internal_message():
         Write($internal_message)
     function Write($message):
-        Term.print($message)
+        csharp(___STRING_3___ + $message)
     
     function WriteLine($message):
-        Write($message + ___STRING_2___)
+        Write($message + ___STRING_4___)
 
     function ReadLine():
-        return Term.read()
+        return csharp(___STRING_5___)
 
 class math:
     function square($num):

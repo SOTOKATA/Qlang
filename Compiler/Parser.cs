@@ -30,6 +30,11 @@ public class Parser
 
     private ASTNode ParseStatement()
     {
+        // TODO: FINISH DECLARATION
+        if (Check(Tokens.Variable) && Peek()?.TokenType == Tokens.Variable)
+        {
+        }
+        
         if (Check(Tokens.Keyword) && Current().Value == "static")
         {
             Advance();
@@ -321,6 +326,16 @@ public class Parser
             if (Check(Tokens.Dot))
             {
                 Advance(); // consume '.'
+
+                // Call variable from class
+                if (Check(Tokens.Variable))
+                {
+                    // TODO: variable assign and get from class
+
+                    // get from class
+                    return new VariableNode { Name = Expect(Tokens.Variable).Value};
+                }
+                
                 var methodName = Expect(Tokens.Identifier).Value;
                 Expect(Tokens.LParen);
 

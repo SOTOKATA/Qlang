@@ -1,13 +1,16 @@
 Keyword(function) Identifier(main) LParen RParen Colon NewLine 
 Indent 
 Indent
-IndentIdentifier(Console) Dot Identifier(write_internal_message) LParen RParen NewLine 
+IndentVariable(console) Equals Identifier(Console) Dot Identifier(new) LParen RParen NewLine 
+Variable(console) Dot Identifier(WriteLine) LParen Identifier(___STRING_0___) RParen NewLine 
+Variable(console) Dot Variable(internal_message) Equals Identifier(___STRING_1___) NewLine 
+Identifier(Console) Dot Identifier(WriteLine) LParen Variable(console) Dot Variable(internal_message) RParen NewLine 
 Dedent 
 Dedent
 DedentKeyword(class) Identifier(Console) Colon NewLine 
 Indent 
 Indent
-IndentVariable(internal_message) Equals Identifier(___STRING_1___) NewLine 
+IndentVariable(internal_message) Equals Identifier(___STRING_2___) NewLine 
 Keyword(function) Identifier(write_internal_message) LParen RParen Colon NewLine 
 Indent 
 Indent
@@ -17,19 +20,19 @@ Dedent
 DedentKeyword(function) Identifier(Write) LParen Variable(message) RParen Colon NewLine 
 Indent 
 Indent
-IndentIdentifier(Term) Dot Identifier(print) LParen Variable(message) RParen NewLine 
+IndentIdentifier(csharp) LParen Identifier(___STRING_3___) Plus Variable(message) RParen NewLine 
 Dedent 
 Dedent
 DedentKeyword(function) Identifier(WriteLine) LParen Variable(message) RParen Colon NewLine 
 Indent 
 Indent
-IndentIdentifier(Write) LParen Variable(message) Plus Identifier(___STRING_2___) RParen NewLine 
+IndentIdentifier(Write) LParen Variable(message) Plus Identifier(___STRING_4___) RParen NewLine 
 Dedent 
 Dedent
 DedentKeyword(function) Identifier(ReadLine) LParen RParen Colon NewLine 
 Indent 
 Indent
-IndentKeyword(return) Identifier(Term) Dot Identifier(read) LParen RParen NewLine 
+IndentKeyword(return) Identifier(csharp) LParen Identifier(___STRING_5___) RParen NewLine 
 Dedent 
 Dedent
 DedentDedent 

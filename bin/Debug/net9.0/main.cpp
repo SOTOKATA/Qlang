@@ -1,20 +1,23 @@
 function main():
-    // $console = Console.new()
-    // $console.WriteLine("--- test program ver.0.1 ---")
-    Console.write_internal_message()
+    $console = Console.new()
+    $console.WriteLine("--- test program ver.0.1 ---")
+
+    $console.$internal_message = "Hello World!"
+
+    Console.WriteLine($console.$internal_message)
 
 class Console: 
-    $internal_message = "Hello World! (internal)"
+    $internal_message = "csharp(term.print=static ref <local> code;)"
     function write_internal_message():
         Write($internal_message)
     function Write($message):
-        Term.print($message)
+        csharp("term.print=" + $message)
     
     function WriteLine($message):
         Write($message + "\n")
 
     function ReadLine():
-        return Term.read()
+        return csharp("term.read")
 
 class math:
     function square($num):

@@ -79,7 +79,7 @@ public partial class Interpreter
         if (function is null)
             return null;
         
-        Logger.Logger.Log(function.GetTree());
+        //Logger.Logger.Log(function.GetTree());
     
         var node = _contextStack.Count > 0 ? CurrentContext.Class : new DynamicClass("");
         ASTContext newContext = new() { Function = function, Class = node };
@@ -156,11 +156,14 @@ public partial class Interpreter
 {
     object[] args = call.Arguments.ConvertAll(EvaluateExpression).ToArray();
     
-    Logger.Logger.Log($"@Info<MethodCallNode>: class={call.ObjectName}, method={call.MethodName}");
-    Logger.Logger.Log($"@Info<ASTContext>: class={CurrentContext.Class?.Name}, method={CurrentContext.Function?.Name}");
+    Logger.Logger.Log($"Interpreter.ExecuteMethodCall: class = '{call.ObjectName}'; method = '{call.MethodName}'");
+    Logger.Logger.Log($"Interpreter.CurrentContext: class = '{CurrentContext.Class?.Name}', method = '{CurrentContext.Function?.Name}'");
 
     if (_dynamicClasses.TryGetValue(call.ObjectName, out DynamicClass? value) && call.MethodName == "new")
         return value;
+    
+    if (call is { ObjectName: "", MethodName: "csharp" })
+        return CSharp.Execute(args.FirstOrDefault());
     
     if (call.ObjectName is "this" or "")
     {
@@ -171,27 +174,13 @@ public partial class Interpreter
         if (_functions.TryGetValue(call.MethodName, out var func))
             return ExecuteFunction(func, args.ToList());
     }
-    
-    foreach (var qClass in Namespace.GetClassList())
-    {
-        if (qClass.GetName() != call.ObjectName) 
-            continue;
-        
-        var function = qClass.GetFunctions().FirstOrDefault(fn => fn.GetName() == call.MethodName);
-            
-        if (function == null)
-            throw new QlangRuntimeException($"Method '{call.MethodName}' not found in {call.ObjectName}!", call, 
-                GetStackTrace());
-
-        return function.Execute(args);
-    }
 
     if (_dynamicClasses.TryGetValue(call.ObjectName, out var classNode))
         return ExecuteMethodCallClass(classNode, call);
 
     if (_variables.TryGetValue(call.ObjectName, out var variable))
     {
-        Logger.Logger.Log("Object detected as class pointer", ConsoleColor.Magenta);
+        Logger.Logger.Log("Interpreter.ExecuteMethodCall: Object detected as class pointer", ConsoleColor.Magenta);
         
         var @class = variable as DynamicClass;
 
@@ -204,10 +193,8 @@ public partial class Interpreter
     }
     
     foreach (var item in _contextStack)
-    {
-        Logger.Logger.Log($"StackItem: class='{item.Class?.Name}' method='{item.Function?.Name}'");
-    }
-    Logger.Logger.Log($"CurrentStackItem: class='{CurrentContext.Class?.Name}' method='{CurrentContext.Function?.Name}'");
+        Logger.Logger.Log($"Interpreter.ExecuteMethodCall.StackItem: class = '{item.Class?.Name}' method = '{item.Function?.Name}'");
+    Logger.Logger.Log($"Interpreter.CurrentContext (After call): class = '{CurrentContext.Class?.Name}' method = '{CurrentContext.Function?.Name}'");
     
     throw new QlangRuntimeException($"Unknown object/function: {call.ObjectName}.{call.MethodName}({string.Join(",", call.Arguments)})", call, 
         GetStackTrace());
@@ -223,7 +210,7 @@ public partial class Interpreter
         if (_contextStack.Count > 0)
         {
             CurrentContext.Class = classNode;
-            Logger.Logger.Log("@ContextClass=" + classNode.Name, ConsoleColor.Green);
+            Logger.Logger.Log("ExecuteMethodCallClass.ContextClass: " + classNode.Name, ConsoleColor.Green);
         }
 
         try

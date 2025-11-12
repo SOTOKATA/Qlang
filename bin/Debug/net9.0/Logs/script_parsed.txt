@@ -5,10 +5,25 @@
 [--]False
 
 
+[--]@AssignmentNode:
+[--]console
 [--]@MethodCallNode:
 [--]Console
-[--]write_internal_message
+[--]new
 
+[--]False
+[--]@MethodCallNode:
+[--]console
+[--]WriteLine
+
+[--]@StringRefNode:
+[--]0
+[--]@MethodCallNode:
+[--]Console
+[--]WriteLine
+
+[--]@VariableNode:
+[--]internal_message
 [--]@ClassNode:
 [--]Console
 
@@ -35,9 +50,13 @@
 [--]message
 
 [--]@MethodCallNode:
-[--]Term
-[--]print
+[--]
+[--]csharp
 
+[--]@BinaryOperationNode:
+[--]@StringRefNode:
+[--]2
+[--]Plus
 [--]@VariableNode:
 [--]message
 [--]@FunctionNode:
@@ -55,7 +74,7 @@
 [--]message
 [--]Plus
 [--]@StringRefNode:
-[--]2
+[--]3
 [--]@FunctionNode:
 [--]ReadLine
 [--]False
@@ -63,9 +82,11 @@
 
 [--]@ReturnNode:
 [--]@MethodCallNode:
-[--]Term
-[--]read
+[--]
+[--]csharp
 
+[--]@StringRefNode:
+[--]4
 [--]@ClassNode:
 [--]math
 
