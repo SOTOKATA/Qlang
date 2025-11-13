@@ -23,21 +23,16 @@ public class Compiler
     public ProgramNode Compile(string script)
     {
         _originalScript = script;
-        
+
         FileLogger fl = new("Logs\\script.txt");
         fl.Log(_originalScript);
 
-        _outputScript = PreCompile.IncludeFiles(script);
-        
-        (_outputScript, StringDictionary) = PreCompile.ExtractStrings(_originalScript);
-        
-        // Console.WriteLine($"Code (ExtractStrings): \n{_outputScript}\n");
-        
-        
+        _outputScript = PreCompile.IncludeFiles(_originalScript);
+
+        (_outputScript, StringDictionary) = PreCompile.ExtractStrings(_outputScript);
+
         _outputScript = PreCompile.ClearComments(_outputScript);
 
-        // Console.WriteLine($"Code (ClearComments): \n{_outputScript}\n");
-        
         fl.SetPath("Logs\\script_pre_compiled.txt");
         fl.Log(_outputScript);
         

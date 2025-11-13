@@ -33,4 +33,3 @@ class Mathematic:
             Throw.exception("Can't divide by 0!")
 
         return $num1 / $num2
-

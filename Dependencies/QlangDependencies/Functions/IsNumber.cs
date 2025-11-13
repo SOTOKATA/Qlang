@@ -9,6 +9,8 @@ public class IsNumber : Function
         if (args.Length == 0)
             throw new ArgumentException("Arguments is empty");
         
-        return double.TryParse(args[0].ToString(), out double _).ToString();
+        Logger.Logger.Warn("isNumber: " + args[0].ToString().TryParseNumber(out _).ToString());
+        
+        return args[0].ToString().TryParseNumber(out _).ToString();
     }
 }

@@ -10,12 +10,12 @@ public class CSharp
     public static object? Execute(object? ln)
     {
         if (ln is not string line)
-            return null;
+            throw new QlangRuntimeException($"Line is not a string", null);
         
         object[]? args = GetArguments(line);
 
         if (args != null)
-            line = line[..line.IndexOf("=", StringComparison.Ordinal)];
+            line = line[..line.IndexOf('=')];
 
         line = line.ToLower().Trim();
 
@@ -34,7 +34,7 @@ public class CSharp
             return fn.Execute(args ?? []);
         }
 
-        return null;
+        throw new QlangRuntimeException($"Internal csharp path is not founded. ({line})", null);
     }
 
     private static object[]? GetArguments(string line)

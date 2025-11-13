@@ -299,6 +299,8 @@ public class Parser
     /// </summary>
     private ASTNode ParsePrimary()
     {
+        if (Check(Tokens.Keyword) && (Current().Value == "false" || Current().Value == "true"))
+            return new BooleanNode { Value = bool.Parse(Advance().Value) };
         // Variable
         if (Check(Tokens.Variable) && Peek()?.TokenType != Tokens.Dot)
             return new VariableNode { Name = Advance().Value };

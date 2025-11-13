@@ -170,7 +170,8 @@ public class Lexer(Compiler compiler)
     private static bool IsKeyword(string word, out Token? token)
     {
         // Список ключевых слов твоего языка
-        string[] keywords = ["class", "function", "if", "else", "while", "do_while", "return", "static", "for", "include", "break", "continue"];
+        string[] keywords = ["class", "function", "if", "else", "while", "false", "true", "do_while", "return", "static",
+                "for", "include", "break", "continue"];
         
         if (keywords.Contains(word.ToLower()))
         {

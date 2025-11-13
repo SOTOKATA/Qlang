@@ -181,7 +181,7 @@ public partial class Interpreter
 
     if (_variables.TryGetValue(call.ObjectName, out var variable))
     {
-        Logger.Logger.Log("Interpreter.ExecuteMethodCall: Object detected as class pointer", ConsoleColor.Magenta);
+        Logger.Logger.Log("Interpreter.ExecuteMethodCall: Object detected as class pointer");
         
         var @class = variable as DynamicClass;
 
@@ -211,7 +211,7 @@ public partial class Interpreter
         if (_contextStack.Count > 0)
         {
             CurrentContext.Class = classNode;
-            Logger.Logger.Log("ExecuteMethodCallClass.ContextClass: " + classNode.Name, ConsoleColor.Green);
+            Logger.Logger.Succ("ExecuteMethodCallClass.ContextClass: " + classNode.Name);
         }
 
         try
@@ -238,10 +238,11 @@ public partial class Interpreter
             {
                 VariableNode varNode => GetVariable(varNode),
                 StringRefNode strRef => GetStringRef(strRef),
+                BooleanNode booleanNode => booleanNode.Value,
                 NumberNode num => num.Value,
                 BinaryOperationNode binOp => EvaluateBinaryOperation(binOp),
                 MethodCallNode methodCall => ExecuteMethodCall(methodCall),
-                var _ => throw new QlangRuntimeException(
+                _ => throw new QlangRuntimeException(
                     $"Unknown expression type: {expr.GetType().Name}", 
                     expr, 
                     GetStackTrace())
@@ -311,6 +312,13 @@ public partial class Interpreter
 
         if (binOp.Operator == "Plus" && (left.ToString().IsNumber() == false || left.ToString().IsNumber() == false))
             return left.ToString() + right.ToString();
+
+        if (left is bool || right is bool)
+            return binOp.Operator switch
+            {
+                "==" => Equals(left, right),
+                "!=" => !Equals(left, right)
+            };
         
         if (left.ToString().IsNumber() == false || right.ToString().IsNumber() == false)
         {
