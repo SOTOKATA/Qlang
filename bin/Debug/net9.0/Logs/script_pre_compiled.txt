@@ -1,24 +1,43 @@
+include ___STRING_0___
+include ___STRING_1___
+include ___STRING_2___
+include ___STRING_3___
+include ___STRING_4___
+
 function main():
     $console = Console.new()
-    $console.WriteLine(___STRING_0___)
-
-    $console.$internal_message = ___STRING_1___
-
-    Console.WriteLine($console.$internal_message)
-
-class Console: 
-    $internal_message = ___STRING_2___
-    function write_internal_message():
-        Write($internal_message)
-    function Write($message):
-        csharp(___STRING_3___ + $message)
     
-    function WriteLine($message):
-        Write($message + ___STRING_4___)
+    $console.println(___STRING_5___)
+    
+    $console.setForeColor(___STRING_6___)
+    
+    $console.println(___STRING_7___)
+    
+    $console.setBackColor(___STRING_8___)
+    
+    $console.println(___STRING_9___)
 
-    function ReadLine():
-        return csharp(___STRING_5___)
+    $console.resetColors()
 
-class math:
-    function square($num):
-        return Math.mult($num, $num)
+    $str = String.new()
+
+    $str.setValue(___STRING_10___)
+
+    $console.println($str.$value)
+
+    
+    
+    $var = $console.readln()
+    
+    $console.println(___STRING_11___ + $var + ___STRING_12___ + Math.sum(Number.getMaxValue(), Number.getMinValue()))
+
+
+
+
+
+
+
+
+
+
+

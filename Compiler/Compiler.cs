@@ -1,10 +1,9 @@
-﻿using System.Text.RegularExpressions;
-using Qlang.AST;
+﻿using Qlang.AST;
 using Qlang.Dependencies;
 
 namespace Qlang.Compiler;
 
-public partial class Compiler
+public class Compiler
 {
     public Compiler()
     {
@@ -16,29 +15,30 @@ public partial class Compiler
     
     private string _outputScript = "";
     
-    public readonly Dictionary<string, string> StringDictionary = [];
+    public Dictionary<string, string> StringDictionary = [];
 
     private readonly Parser _parser;
     private readonly Lexer _lexer;
   
     public ProgramNode Compile(string script)
     {
-        FileLogger fl = new("Logs\\script.txt");
-        
         _originalScript = script;
         
+        FileLogger fl = new("Logs\\script.txt");
         fl.Log(_originalScript);
+
+        _outputScript = PreCompile.IncludeFiles(script);
         
-        _outputScript = ExtractStrings(_originalScript);
+        (_outputScript, StringDictionary) = PreCompile.ExtractStrings(_originalScript);
         
         // Console.WriteLine($"Code (ExtractStrings): \n{_outputScript}\n");
         
-        fl.SetPath("Logs\\script_pre_compiled.txt");
         
-        _outputScript = ClearComments(_outputScript);
+        _outputScript = PreCompile.ClearComments(_outputScript);
 
         // Console.WriteLine($"Code (ClearComments): \n{_outputScript}\n");
         
+        fl.SetPath("Logs\\script_pre_compiled.txt");
         fl.Log(_outputScript);
         
         List<Token> tokens = _lexer.Lex(_outputScript);
@@ -73,40 +73,5 @@ public partial class Compiler
         fl.Log(programNode.GetTree());
         
         return programNode;
-    }
-    
-    // Вставляет вместо "[content]" это: ___STRING_[counter]___
-    private string ExtractStrings(string script)
-    {
-        StringDictionary.Clear();
-        
-        var stringCounter = 0;
-        
-        const string pattern = """
-                               "(?:[^"\\]|\\.)*"
-                               """;
-        
-        var result = Regex.Replace(script, pattern, match => 
-        {
-            var stringValue = match.Value;
-            var key = $"___STRING_{stringCounter}___";
-            
-            StringDictionary[key] = stringValue.Substring(1, stringValue.Length - 2);
-            
-            stringCounter++;
-            
-            return key;
-        });
-        
-        return result;
-    }
-
-    private static string ClearComments(string script)
-    {
-        const string pattern = @"//[^\r\n]*|/\*[\s\S]*?\*/";
-        
-        var result = Regex.Replace(script, pattern, "");
-        
-        return result;
     }
 }

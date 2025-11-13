@@ -1,4 +1,5 @@
 ﻿using Qlang.AST;
+using Qlang.Dependencies;
 using Qlang.Dependencies.QlangDependencies;
 using Qlang.Dependencies.QlangDependencies.Classes;
 using Qlang.Dependencies.QlangDependencies.Functions;
@@ -261,7 +262,8 @@ public partial class Interpreter
     
     private double DivideWithCheck(object left, object right, BinaryOperationNode node)
     {
-        var divisor = Convert.ToDouble(right);
+        var divisor = right.ToString().ParseNumber();
+
         if (Math.Abs(divisor) < double.Epsilon)
         {
             throw new QlangRuntimeException(
@@ -270,11 +272,6 @@ public partial class Interpreter
                 GetStackTrace());
         }
         return Convert.ToDouble(left) / divisor;
-    }
-
-    private static bool IsNumeric(object value)
-    {
-        return value is int or long or float or double or decimal;
     }
     
     private object GetVariable(VariableNode varNode)
@@ -308,27 +305,38 @@ public partial class Interpreter
     {
         var left = EvaluateExpression(binOp.Left);
         var right = EvaluateExpression(binOp.Right);
+        
+        Logger.Logger.Log($"EvaluateBinaryOperation.IsNumeric: ({left.ToString()})=" + left.ToString().IsNumber());
+        Logger.Logger.Log($"EvaluateBinaryOperation.IsNumeric: ({right.ToString()})=" + right.ToString().IsNumber());
 
-        if (binOp.Operator == "Plus" && (left is string || right is string))
-            return left.ToString() + right;
-    
-        if (!IsNumeric(left) || !IsNumeric(right))
+        if (binOp.Operator == "Plus" && (left.ToString().IsNumber() == false || left.ToString().IsNumber() == false))
+            return left.ToString() + right.ToString();
+        
+        if (left.ToString().IsNumber() == false || right.ToString().IsNumber() == false)
         {
+            
             throw new QlangRuntimeException(
                 $"Type error: Cannot apply operator '{binOp.Operator}' to " +
-                $"'{left?.GetType().Name ?? "null"}' and '{right?.GetType().Name ?? "null"}'",
+                $"'{left?.ToString() ?? "null"}' and '{right?.ToString() ?? "null"}'",
                 binOp,
                 GetStackTrace());
         }
     
         try
         {
+            double leftNum = left.ToString().ParseNumber();
+            double rightNum = right.ToString().ParseNumber();
             return binOp.Operator switch
             {
                 "==" => Equals(left, right),
                 "!=" => !Equals(left, right),
-                "Less" => Convert.ToDouble(left) < Convert.ToDouble(right),
-                "Plus" => Convert.ToDouble(left) + Convert.ToDouble(right),
+                "Less" => leftNum < rightNum,
+                "Greater" => leftNum > rightNum,
+                ">=" => leftNum >= rightNum,
+                "<=" => leftNum <= rightNum,
+                "Plus" => leftNum + rightNum,
+                "Minus" => leftNum - rightNum,
+                "Star" => leftNum * rightNum,
                 "Slash" => DivideWithCheck(left, right, binOp),
                 var _ => throw new QlangRuntimeException(
                     $"Unknown operator: {binOp.Operator}", 

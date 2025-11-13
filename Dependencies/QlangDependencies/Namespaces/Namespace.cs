@@ -7,6 +7,6 @@ public class Namespace
 {
     public static List<Class> GetClassList() =>
     [
-        new Term(), new Math()
+        new Term(), new Math(), new Number(), new Throw()
     ];
 }

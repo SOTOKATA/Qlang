@@ -6,9 +6,9 @@ public class Read : Function
 
     public override string Execute(object[] args)
     {
-        Console.ForegroundColor = ConsoleColor.DarkYellow;
+        // Console.ForegroundColor = ConsoleColor.DarkYellow;
         var input = Console.ReadLine();
-        Console.ResetColor();
+        // Console.ResetColor();
         return input;
     }
 }

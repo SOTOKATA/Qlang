@@ -8,9 +8,9 @@ public class Print : Function
 
     public override string Execute(object[] args)
     {
-        Console.ForegroundColor = ConsoleColor.Yellow;
+        // Console.ForegroundColor = ConsoleColor.Yellow;
         Console.Write(Regex.Unescape(string.Join("", args)));
-        Console.ResetColor();
+        // Console.ResetColor();
         
         return "";
     }

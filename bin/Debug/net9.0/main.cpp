@@ -1,24 +1,42 @@
+include "lib/console"
+include "lib/math"
+include "lib/number"
+include "lib/string"
+include "lib/throw"
+
 function main():
     $console = Console.new()
-    $console.WriteLine("--- test program ver.0.1 ---")
-
-    $console.$internal_message = "Hello World!"
-
-    Console.WriteLine($console.$internal_message)
-
-class Console: 
-    $internal_message = "csharp(term.print=static ref <local> code;)"
-    function write_internal_message():
-        Write($internal_message)
-    function Write($message):
-        csharp("term.print=" + $message)
     
-    function WriteLine($message):
-        Write($message + "\n")
+    $console.println("--- test program ver.0.1 ---")
+    
+    $console.setForeColor("Red")
+    
+    $console.println("Hello World!")
+    
+    $console.setBackColor("Yellow")
+    
+    $console.println("Hello World!")
 
-    function ReadLine():
-        return csharp("term.read")
+    $console.resetColors()
 
-class math:
-    function square($num):
-        return Math.mult($num, $num)
+    $str = String.new()
+
+    $str.setValue("Hello World!")
+
+    $console.println($str.$value)
+
+    // $console.println($str.getLength())
+    
+    $var = $console.readln()
+    
+    $console.println("You printed: " + $var + " | " + Math.sum(Number.getMaxValue(), Number.getMinValue()))
+
+
+
+
+
+
+
+
+
+

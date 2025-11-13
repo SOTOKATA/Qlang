@@ -31,9 +31,9 @@ public class Parser
     private ASTNode ParseStatement()
     {
         // TODO: FINISH DECLARATION
-        if (Check(Tokens.Variable) && Peek()?.TokenType == Tokens.Variable)
-        {
-        }
+        // if (Check(Tokens.Variable) && Peek()?.TokenType == Tokens.Variable)
+        // {
+        // }
         
         if (Check(Tokens.Keyword) && Current().Value == "static")
         {
