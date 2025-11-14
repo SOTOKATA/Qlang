@@ -5,20 +5,14 @@ namespace Qlang.Compiler;
 
 public class Compiler
 {
-    public Compiler()
-    {
-        _parser = new Parser();
-        _lexer = new Lexer(this);
-    }
-    
     private string _originalScript = "";
     
     private string _outputScript = "";
     
     public Dictionary<string, string> StringDictionary = [];
 
-    private readonly Parser _parser;
-    private readonly Lexer _lexer;
+    private readonly Parser _parser = new();
+    private readonly Lexer _lexer = new();
   
     public ProgramNode Compile(string script)
     {
@@ -27,11 +21,11 @@ public class Compiler
         FileLogger fl = new("Logs\\script.txt");
         fl.Log(_originalScript);
 
-        _outputScript = PreCompile.IncludeFiles(_originalScript);
+        _outputScript = PreCompile.PreCompile.IncludeFiles(_originalScript);
 
-        (_outputScript, StringDictionary) = PreCompile.ExtractStrings(_outputScript);
+        (_outputScript, StringDictionary) = PreCompile.PreCompile.ExtractStrings(_outputScript);
 
-        _outputScript = PreCompile.ClearComments(_outputScript);
+        _outputScript = PreCompile.PreCompile.ClearComments(_outputScript);
 
         fl.SetPath("Logs\\script_pre_compiled.txt");
         fl.Log(_outputScript);

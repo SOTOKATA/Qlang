@@ -13,7 +13,10 @@ public partial class Interpreter
             foreach (var statement in whileNode.Body)
             {
                 if (_break)
+                {
+                    Logger.Logger.Warn("Is break!");
                     return;
+                }
 
                 if (statement is ReturnNode returnNode)
                 {

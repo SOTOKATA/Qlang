@@ -1,67 +1,91 @@
 class Console: 
-    $defFColor = ___STRING_0___
-    $defBColor = ___STRING_1___
+    let<String> defFColor = ___STRING_0___
+    let<String> defBColor = ___STRING_1___
 
-    function print($message): 
-        csharp(___STRING_2___ + $message)
+    function print(let<String> message): 
+        csharp(___STRING_2___ + message)
     
-    function println($message):
-        print($message + ___STRING_3___)
+    function println(let<String> message):
+        print(message + ___STRING_3___)
 
     function readln():
         return csharp(___STRING_4___)
 
-    function setForeColor($color):
-        csharp(___STRING_5___ + $color)
+    function setForeColor(let<String> color):
+        csharp(___STRING_5___ + color)
     
-    function setBackColor($color):
-        csharp(___STRING_6___ + $color)
+    function setBackColor(let<String> color):
+        csharp(___STRING_6___ + color)
 
     function resetColors():
-        setForeColor($defFColor)
-        setBackColor($defBColor)
+        setForeColor(defFColor)
+        setBackColor(defBColor)
 class Throw:
-    function exception($message):
-        csharp(___STRING_7___ + $message)
+    function exception(let<String> message):
+        csharp(___STRING_7___ + message)
+
 class Number:
+    let value = 0
+
     function getMinValue():
         return csharp(___STRING_8___)
 
     function getMaxValue():
         return csharp(___STRING_9___)
 
-    function isNumber($var):
-        return csharp(___STRING_10___ + $var)
+    function isNumber(let<Number> var):
+        let<String> method = ___STRING_10___ + var
+        Console.println(___STRING_11___ + method)
+        return csharp(method)
+class String:
+    let value = ___STRING_12___
+
+    function setValue(let<String> str):
+        value = str
+
+    function getValue():
+        return value
+
+    function append(let<String> str2):
+        value = value + str2
+
+    function getLength():
+        return csharp(___STRING_13___ + value)
 
 function main():
-    Console.print(___STRING_11___)
+    Console.print(___STRING_14___)
 
-    $name = Console.readln()
+    let<String> name = Console.readln()
 
-    Console.println(___STRING_12___ + $name + ___STRING_13___)
+    Console.println(___STRING_15___ + name + ___STRING_16___)
 
-    $number1 = ___STRING_14___
+    let<String> input1 = ___STRING_17___
+    let<Number> number1
 
-    while Number.isNumber($number1) == true: 
-        Console.println(___STRING_15___)
-        $number1 = Console.readln()
+    do_while Number.isNumber(input1) == false: 
+        Console.println(___STRING_18___)
+        input1 = Console.readln()
 
+    number1 = input1
 
-    $number2 = ___STRING_16___
+    let<String> input2 = ___STRING_19___
+    let<Number> number2
 
-    do_while Number.isNumber($number2) == false: 
-        Console.println(___STRING_17___)
-        $number2 = Console.readln()
+    do_while Number.isNumber(input2) == false: 
+        Console.println(___STRING_20___)
+        input2 = Console.readln()
+    
+    number2 = input2
 
-    Console.println(___STRING_18___ + div($number1, $number2))
+    Console.println(___STRING_21___ + div(number1, number2))
 
-function div($num1, $num2):
-    return Mathematic.div($num1, $num2)
+function div(let<Number> num1, let<Number> num2):
+    return Mathematic.div(num1, num2)
 
 class Mathematic:
-    function div($num1, $num2):
-        if $num2 == 0:
-            Throw.exception(___STRING_19___)
+    function div(let<Number> num1, let<Number> num2):
+        if num2 == 0:
+            Throw.exception(___STRING_22___)
 
-        return $num1 / $num2
+        return num1 / num2
 

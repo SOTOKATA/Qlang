@@ -90,7 +90,7 @@ public partial class Interpreter
         {
             if (arguments.Count == function.Parameters.Count)
                 for (var i = 0; i < function.Parameters.Count; i++)
-                    _variables[function.Parameters[i]] = arguments[i];
+                    _variables[function.Parameters[i].VariableName] = arguments[i];
 
             string returnValue = null;
             _break = false;
@@ -124,19 +124,23 @@ public partial class Interpreter
         switch (statement)
         {
             case AssignmentNode assign:
+                Logger.Logger.Log("Interpreter: Execute statement (AssignmentNode)");
                 var value = EvaluateExpression(assign.Value);
                 _variables[assign.VariableName] = value;
                 break;
 
             case MethodCallNode call:
+                Logger.Logger.Log("Interpreter: Execute statement (MehtodCallNode)");
                 ExecuteMethodCall(call);
                 break;
 
             case IfNode ifNode:
+                Logger.Logger.Log("Interpreter: Execute statement (IfNode)");
                 ExecuteIf(ifNode);
                 break;
             
             case WhileNode whileNode:
+                Logger.Logger.Log("Interpreter: Execute statement (WhileNode)");
                 ExecuteWhile(whileNode);
                 break;
             
@@ -227,10 +231,15 @@ public partial class Interpreter
         }
     }
     
-    private object EvaluateExpression(ASTNode expr)
+    private object EvaluateExpression(ASTNode? expr)
     {
+        if (expr is null)
+            return null;
+        
         if (_contextStack.Count > 0)
             CurrentContext.CurrentNode = expr;
+        
+        Logger.Logger.Warn("TypeofExpression: " + expr.GetType().Name);
     
         try
         {
@@ -304,6 +313,7 @@ public partial class Interpreter
 
     private object EvaluateBinaryOperation(BinaryOperationNode binOp)
     {
+        Logger.Logger.Warn("Detected binary operation");
         var left = EvaluateExpression(binOp.Left);
         var right = EvaluateExpression(binOp.Right);
         

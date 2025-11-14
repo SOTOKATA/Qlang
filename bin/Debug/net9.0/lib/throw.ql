@@ -1,3 +1,3 @@
 class Throw:
-    function exception($message):
-        csharp("throw.exception=" + $message)
+    function exception(let<String> message):
+        csharp("throw.exception=" + message)

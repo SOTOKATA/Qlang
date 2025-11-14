@@ -16,8 +16,7 @@
 [--]@FunctionNode:
 [--]print
 [--]False
-
-[--]message
+[--]System.Collections.Generic.List`1[Qlang.AST.AssignmentNode]
 
 [--]@MethodCallNode:
 [--]
@@ -32,8 +31,7 @@
 [--]@FunctionNode:
 [--]println
 [--]False
-
-[--]message
+[--]System.Collections.Generic.List`1[Qlang.AST.AssignmentNode]
 
 [--]@MethodCallNode:
 [--]
@@ -48,7 +46,7 @@
 [--]@FunctionNode:
 [--]readln
 [--]False
-
+[--]System.Collections.Generic.List`1[Qlang.AST.AssignmentNode]
 
 [--]@ReturnNode:
 [--]@MethodCallNode:
@@ -60,8 +58,7 @@
 [--]@FunctionNode:
 [--]setForeColor
 [--]False
-
-[--]color
+[--]System.Collections.Generic.List`1[Qlang.AST.AssignmentNode]
 
 [--]@MethodCallNode:
 [--]
@@ -76,8 +73,7 @@
 [--]@FunctionNode:
 [--]setBackColor
 [--]False
-
-[--]color
+[--]System.Collections.Generic.List`1[Qlang.AST.AssignmentNode]
 
 [--]@MethodCallNode:
 [--]
@@ -92,7 +88,7 @@
 [--]@FunctionNode:
 [--]resetColors
 [--]False
-
+[--]System.Collections.Generic.List`1[Qlang.AST.AssignmentNode]
 
 [--]@MethodCallNode:
 [--]
@@ -112,8 +108,7 @@
 [--]@FunctionNode:
 [--]exception
 [--]False
-
-[--]message
+[--]System.Collections.Generic.List`1[Qlang.AST.AssignmentNode]
 
 [--]@MethodCallNode:
 [--]
@@ -128,10 +123,15 @@
 [--]@ClassNode:
 [--]Number
 
+[--]@AssignmentNode:
+[--]value
+[--]@NumberNode:
+[--]0
+[--]False
 [--]@FunctionNode:
 [--]getMinValue
 [--]False
-
+[--]System.Collections.Generic.List`1[Qlang.AST.AssignmentNode]
 
 [--]@ReturnNode:
 [--]@MethodCallNode:
@@ -143,7 +143,7 @@
 [--]@FunctionNode:
 [--]getMaxValue
 [--]False
-
+[--]System.Collections.Generic.List`1[Qlang.AST.AssignmentNode]
 
 [--]@ReturnNode:
 [--]@MethodCallNode:
@@ -155,8 +155,78 @@
 [--]@FunctionNode:
 [--]isNumber
 [--]False
+[--]System.Collections.Generic.List`1[Qlang.AST.AssignmentNode]
 
+[--]@AssignmentNode:
+[--]method
+[--]@BinaryOperationNode:
+[--]@StringRefNode:
+[--]10
+[--]Plus
+[--]@VariableNode:
 [--]var
+[--]False
+[--]@MethodCallNode:
+[--]Console
+[--]println
+
+[--]@BinaryOperationNode:
+[--]@StringRefNode:
+[--]11
+[--]Plus
+[--]@VariableNode:
+[--]method
+[--]@ReturnNode:
+[--]@MethodCallNode:
+[--]
+[--]csharp
+
+[--]@VariableNode:
+[--]method
+[--]@ClassNode:
+[--]String
+
+[--]@AssignmentNode:
+[--]value
+[--]@StringRefNode:
+[--]12
+[--]False
+[--]@FunctionNode:
+[--]setValue
+[--]False
+[--]System.Collections.Generic.List`1[Qlang.AST.AssignmentNode]
+
+[--]@AssignmentNode:
+[--]value
+[--]@VariableNode:
+[--]str
+[--]False
+[--]@FunctionNode:
+[--]getValue
+[--]False
+[--]System.Collections.Generic.List`1[Qlang.AST.AssignmentNode]
+
+[--]@ReturnNode:
+[--]@VariableNode:
+[--]value
+[--]@FunctionNode:
+[--]append
+[--]False
+[--]System.Collections.Generic.List`1[Qlang.AST.AssignmentNode]
+
+[--]@AssignmentNode:
+[--]value
+[--]@BinaryOperationNode:
+[--]@VariableNode:
+[--]value
+[--]Plus
+[--]@VariableNode:
+[--]str2
+[--]False
+[--]@FunctionNode:
+[--]getLength
+[--]False
+[--]System.Collections.Generic.List`1[Qlang.AST.AssignmentNode]
 
 [--]@ReturnNode:
 [--]@MethodCallNode:
@@ -165,21 +235,21 @@
 
 [--]@BinaryOperationNode:
 [--]@StringRefNode:
-[--]10
+[--]13
 [--]Plus
 [--]@VariableNode:
-[--]var
+[--]value
 [--]@FunctionNode:
 [--]main
 [--]False
-
+[--]System.Collections.Generic.List`1[Qlang.AST.AssignmentNode]
 
 [--]@MethodCallNode:
 [--]Console
 [--]print
 
 [--]@StringRefNode:
-[--]11
+[--]14
 [--]@AssignmentNode:
 [--]name
 [--]@MethodCallNode:
@@ -192,49 +262,23 @@
 [--]println
 
 [--]@BinaryOperationNode:
-[--]@StringRefNode:
-[--]12
-[--]Plus
-[--]@BinaryOperationNode:
-[--]@VariableNode:
-[--]name
-[--]Plus
-[--]@StringRefNode:
-[--]13
-[--]@AssignmentNode:
-[--]number1
-[--]@StringRefNode:
-[--]14
-[--]False
-[--]@WhileNode:
-[--]@BinaryOperationNode:
-[--]@MethodCallNode:
-[--]Number
-[--]isNumber
-
-[--]@VariableNode:
-[--]number1
-[--]==
-True
-
-[--]@MethodCallNode:
-[--]Console
-[--]println
-
 [--]@StringRefNode:
 [--]15
-[--]@AssignmentNode:
-[--]number1
-[--]@MethodCallNode:
-[--]Console
-[--]readln
-
-[--]False
-[--]False
-[--]@AssignmentNode:
-[--]number2
+[--]Plus
+[--]@BinaryOperationNode:
+[--]@VariableNode:
+[--]name
+[--]Plus
 [--]@StringRefNode:
 [--]16
+[--]@AssignmentNode:
+[--]input1
+[--]@StringRefNode:
+[--]17
+[--]False
+[--]@AssignmentNode:
+[--]number1
+[--]
 [--]False
 [--]@WhileNode:
 [--]@BinaryOperationNode:
@@ -243,7 +287,7 @@ True
 [--]isNumber
 
 [--]@VariableNode:
-[--]number2
+[--]input1
 [--]==
 False
 
@@ -252,22 +296,66 @@ False
 [--]println
 
 [--]@StringRefNode:
-[--]17
+[--]18
 [--]@AssignmentNode:
-[--]number2
+[--]input1
 [--]@MethodCallNode:
 [--]Console
 [--]readln
 
 [--]False
 [--]True
+[--]@AssignmentNode:
+[--]number1
+[--]@VariableNode:
+[--]input1
+[--]False
+[--]@AssignmentNode:
+[--]input2
+[--]@StringRefNode:
+[--]19
+[--]False
+[--]@AssignmentNode:
+[--]number2
+[--]
+[--]False
+[--]@WhileNode:
+[--]@BinaryOperationNode:
+[--]@MethodCallNode:
+[--]Number
+[--]isNumber
+
+[--]@VariableNode:
+[--]input2
+[--]==
+False
+
+[--]@MethodCallNode:
+[--]Console
+[--]println
+
+[--]@StringRefNode:
+[--]20
+[--]@AssignmentNode:
+[--]input2
+[--]@MethodCallNode:
+[--]Console
+[--]readln
+
+[--]False
+[--]True
+[--]@AssignmentNode:
+[--]number2
+[--]@VariableNode:
+[--]input2
+[--]False
 [--]@MethodCallNode:
 [--]Console
 [--]println
 
 [--]@BinaryOperationNode:
 [--]@StringRefNode:
-[--]18
+[--]21
 [--]Plus
 [--]@MethodCallNode:
 [--]
@@ -280,9 +368,7 @@ False
 [--]@FunctionNode:
 [--]div
 [--]False
-
-[--]num1
-[--]num2
+[--]System.Collections.Generic.List`1[Qlang.AST.AssignmentNode]
 
 [--]@ReturnNode:
 [--]@MethodCallNode:
@@ -299,9 +385,7 @@ False
 [--]@FunctionNode:
 [--]div
 [--]False
-
-[--]num1
-[--]num2
+[--]System.Collections.Generic.List`1[Qlang.AST.AssignmentNode]
 
 [--]@IfNode:
 [--]@BinaryOperationNode:
@@ -316,7 +400,7 @@ False
 [--]exception
 
 [--]@StringRefNode:
-[--]19
+[--]22
 
 [--]@ReturnNode:
 [--]@BinaryOperationNode:

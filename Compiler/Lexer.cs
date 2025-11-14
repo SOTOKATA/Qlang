@@ -1,9 +1,7 @@
 ﻿namespace Qlang.Compiler;
 
-public class Lexer(Compiler compiler)
+public class Lexer()
 {
-    private Compiler _compiler = compiler;
-
     private readonly Stack<int> _indentStack = new([0]);
 
     public List<Token> Lex(string script)
@@ -11,12 +9,13 @@ public class Lexer(Compiler compiler)
         List<Token> tokens = [];
         List<string> scriptLines = script.Split('\n').ToList();
 
-        foreach (var rawLine in scriptLines)
+        for (int index = 0; index < scriptLines.Count; index++)
         {
+            string? rawLine = scriptLines[index];
             // Обрабатываем отступы ДО trim
             var indent = CountLeadingSpaces(rawLine);
             var line = rawLine.TrimStart();
-            
+
             // Пропускаем пустые строки
             if (string.IsNullOrWhiteSpace(line))
                 continue;
@@ -38,38 +37,29 @@ public class Lexer(Compiler compiler)
                 // Проверяем односимвольные токены
                 if (TryCharToToken(line[pos], out var charToken))
                 {
-                    tokens.Add(charToken!);
+                    charToken.Line = index;
+                    charToken.Index = pos;
+                    
+                    tokens.Add(charToken);
                     pos++;
                     continue;
                 }
 
                 // Читаем слово/переменную/идентификатор
                 var startPos = pos;
-                
-                // Переменная начинается с $
-                if (line[pos] == '$')
-                {
-                    pos++; // Пропускаем $
-                    while (pos < line.Length && IsIdentifierChar(line[pos]))
-                        pos++;
-                    
-                    var varName = line[startPos..pos];
-                    if (IsVariable(varName, out var varToken))
-                    {
-                        tokens.Add(varToken!);
-                        continue;
-                    }
-                }
-                
+
                 // Обычное слово (keyword или identifier)
                 if (IsIdentifierStart(line[pos]))
                 {
                     while (pos < line.Length && IsIdentifierChar(line[pos]))
                         pos++;
-                    
+
                     var word = line[startPos..pos];
                     if (TryWordToToken(word, out var wordToken))
                     {
+                        wordToken.Line = index;
+                        wordToken.Index = pos;
+                        
                         tokens.Add(wordToken!);
                         continue;
                     }
@@ -80,13 +70,13 @@ public class Lexer(Compiler compiler)
                 pos++;
             }
 
-            tokens.Add(new Token(Tokens.NewLine));
+            tokens.Add(new Token(Tokens.NewLine, index, pos));
         }
 
         // Закрываем все открытые блоки в конце файла
         while (_indentStack.Count > 1)
         {
-            tokens.Add(new Token(Tokens.Dedent));
+            tokens.Add(new Token(Tokens.Dedent, -1, -1));
             _indentStack.Pop();
         }
 
@@ -100,7 +90,7 @@ public class Lexer(Compiler compiler)
         if (currentIndent > previousIndent)
         {
             // Увеличился отступ - новый блок
-            tokens.Add(new Token(Tokens.Indent));
+            tokens.Add(new Token(Tokens.Indent, -1, -1));
             _indentStack.Push(currentIndent);
         }
         else if (currentIndent < previousIndent)
@@ -108,7 +98,7 @@ public class Lexer(Compiler compiler)
             // Уменьшился отступ - закрываем блоки
             while (_indentStack.Count > 0 && _indentStack.Peek() > currentIndent)
             {
-                tokens.Add(new Token(Tokens.Dedent));
+                tokens.Add(new Token(Tokens.Dedent, -1, -1));
                 _indentStack.Pop();
             }
 
@@ -151,31 +141,19 @@ public class Lexer(Compiler compiler)
             return true;
         
         // Если не ключевое слово - это идентификатор
-        token = new Token(Tokens.Identifier, word);
-        return true;
-    }
-
-    private static bool IsVariable(string word, out Token? token)
-    {
-        if (!word.StartsWith("$") || word.Length < 2)
-        {
-            token = null;
-            return false;
-        }
-        
-        token = new Token(Tokens.Variable, word[1..]); // Без $
+        token = new Token(Tokens.Identifier, -1, -1, word);
         return true;
     }
 
     private static bool IsKeyword(string word, out Token? token)
     {
         // Список ключевых слов твоего языка
-        string[] keywords = ["class", "function", "if", "else", "while", "false", "true", "do_while", "return", "static",
+        string[] keywords = ["class", "function", "if", "let", "else", "while", "false", "true", "do_while", "return", "static",
                 "for", "include", "break", "continue"];
         
         if (keywords.Contains(word.ToLower()))
         {
-            token = new Token(Tokens.Keyword, word);
+            token = new Token(Tokens.Keyword, -1, -1, word);
             return true;
         }
         
@@ -187,120 +165,22 @@ public class Lexer(Compiler compiler)
     {
         token = keychar switch
         {
-            '=' => new Token(Tokens.Equals),
-            '+' => new Token(Tokens.Plus),
-            '-' => new Token(Tokens.Minus),
-            '*' => new Token(Tokens.Star),
-            '/' => new Token(Tokens.Slash),
-            '(' => new Token(Tokens.LParen),
-            ')' => new Token(Tokens.RParen),
-            ':' => new Token(Tokens.Colon),
-            ',' => new Token(Tokens.Comma),
-            '.' => new Token(Tokens.Dot),
-            '!' => new Token(Tokens.Not),
-            '>' => new Token(Tokens.Greater),
-            '<' => new Token(Tokens.Less),
+            '=' => new Token(Tokens.Equals, -1, -1),
+            '+' => new Token(Tokens.Plus, -1, -1),
+            '-' => new Token(Tokens.Minus, -1, -1),
+            '*' => new Token(Tokens.Star, -1, -1),
+            '/' => new Token(Tokens.Slash, -1, -1),
+            '(' => new Token(Tokens.LParen, -1, -1),
+            ')' => new Token(Tokens.RParen, -1, -1),
+            ':' => new Token(Tokens.Colon, -1, -1),
+            ',' => new Token(Tokens.Comma, -1, -1),
+            '.' => new Token(Tokens.Dot, -1, -1),
+            '!' => new Token(Tokens.Not, -1, -1),
+            '>' => new Token(Tokens.Greater, -1, -1),
+            '<' => new Token(Tokens.Less, -1, -1),
             var _ => null
         };
         
         return token != null;
     }
-    
-    // public List<Token> Lex(string script)
-    // {
-    //     List<Token> tokens = [];
-    //
-    //     List<string> scriptLines = script.Split("\n").ToList();
-    //
-    //     foreach (string line in scriptLines.Select(line => line.Trim()))
-    //     {
-    //         int startPos = 0;
-    //         int pos = 0;
-    //         foreach (char letter in line)
-    //         {
-    //             Token token;
-    //             
-    //             if (TryCharToToken(letter, out token))
-    //             {
-    //                 tokens.Add(token);
-    //                 startPos = pos;
-    //                 continue;
-    //             }
-    //
-    //             string word = line[startPos..pos];
-    //             if (TryWordToToken(word, out token))
-    //             {
-    //                 tokens.Add(token);
-    //                 startPos = pos;
-    //                 continue;
-    //             }
-    //                   
-    //             Console.WriteLine("Failed to detect: " + letter);
-    //             pos++;
-    //         }
-    //     }
-    //
-    //     return tokens;
-    // }
-    //
-    // private bool TryWordToToken(string word, out Token? token)
-    // {
-    //     if (IsVariable(word, out token))
-    //         return true;
-    //     if (IsKeyword(word, out token))
-    //         return true;
-    //     
-    //     return false;
-    // }
-    //
-    // private bool IsVariable(string word, out Token? token)
-    // {
-    //     if (!word.StartsWith("$"))
-    //     {
-    //         token = null;
-    //         return false;
-    //     }
-    //     
-    //     token = new Token(Tokens.Variable, word[1..]);
-    //     return true;
-    // }
-    //
-    // private bool IsKeyword(string word, out Token? token)
-    // {
-    //     if (Enum.TryParse(word, true, out Tokens tk))
-    //     {
-    //         token = new Token(tk, word);
-    //         return true;
-    //     }
-    //     
-    //     token = null;
-    //     return false;
-    // }
-    //
-    // private bool TryCharToToken(char keychar, out Token? token)
-    // {
-    //     try
-    //     {
-    //         token = new Token(keychar switch
-    //         {
-    //             '=' => Tokens.Equals,
-    //             '+' => Tokens.Plus,
-    //             '-' => Tokens.Minus,
-    //             '*' => Tokens.Star,
-    //             '/' => Tokens.Slash,
-    //             '(' => Tokens.LParen,
-    //             ')' => Tokens.RParen,
-    //             ':' => Tokens.Colon,
-    //             ',' => Tokens.Comma,
-    //             '.' => Tokens.Dot,
-    //             '\n' => Tokens.NewLine,
-    //         });
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         token = null;
-    //     }
-    //     
-    //     return token == null;
-    // }
 }

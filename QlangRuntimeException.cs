@@ -15,7 +15,7 @@ public class QlangRuntimeException : Exception
         : base(message)
     {
         Line = node.Line;
-        Column = node.Column;
+        Column = node.LineIndex;
         SourceFile = node.SourceFile;
         // SourceText = node.SourceText;
         StackTrace = stackTrace ?? [];

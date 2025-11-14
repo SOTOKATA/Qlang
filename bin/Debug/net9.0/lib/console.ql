@@ -1,22 +1,22 @@
 class Console: 
-    $defFColor = "gray"
-    $defBColor = "black"
+    let<String> defFColor = "gray"
+    let<String> defBColor = "black"
 
-    function print($message): 
-        csharp("term.print=" + $message)
+    function print(let<String> message): 
+        csharp("term.print=" + message)
     
-    function println($message):
-        print($message + "\n")
+    function println(let<String> message):
+        print(message + "\n")
 
     function readln():
         return csharp("term.read")
 
-    function setForeColor($color):
-        csharp("term.fcolor=" + $color)
+    function setForeColor(let<String> color):
+        csharp("term.fcolor=" + color)
     
-    function setBackColor($color):
-        csharp("term.bcolor=" + $color)
+    function setBackColor(let<String> color):
+        csharp("term.bcolor=" + color)
 
     function resetColors():
-        setForeColor($defFColor)
-        setBackColor($defBColor)
+        setForeColor(defFColor)
+        setBackColor(defBColor)

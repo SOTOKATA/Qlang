@@ -5,7 +5,7 @@ public class FunctionNode : ASTNode
     public string Name { get; set; }
 
     public bool IsStatic { get; set; } = true;
-    public List<string> Parameters { get; set; } = [];
+    public List<AssignmentNode> Parameters { get; set; } = [];
     public List<ASTNode> Body { get; set; } = [];
 
     public override string GetTree(string indent = "")

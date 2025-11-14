@@ -1,9 +1,13 @@
 ﻿namespace Qlang.Compiler;
 
-public class Token(Tokens token, string value = "")
+public class Token(Tokens token, int line, int index, string value = "")
 {
     public readonly Tokens TokenType = token;
     public readonly string Value = value;
+    
+    // Debug variables
+    public int Line = line;
+    public int Index = index;
 }
 
 public enum Tokens
@@ -15,7 +19,6 @@ public enum Tokens
     Colon,
     Comma,
     Dot,
-    Variable,
     Not,
     Equals,
     Less,

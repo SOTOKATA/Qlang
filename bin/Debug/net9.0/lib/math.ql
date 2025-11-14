@@ -1,16 +1,16 @@
 include "@lib/throw"
 
 class Math:
-    function sum($num, $num2):
-        return $num + $num2
+    function sum(let<Number> num, let<Number> num2):
+        return num + num2
 
-    function sub($num, $num2):
-        return $num - $num2
+    function sub(let<Number> num, let<Number> num2):
+        return num - num2
         
-    function mult($num, $num2):
-        return $num * $num2
+    function mult(let<Number> num, let<Number> num2):
+        return num * num2
 
-    function div($num, $num2):
-        if $num2 == 0:
+    function div(let<Number> num, let<Number> num2):
+        if num2 == 0:
             Throw.exception("Can't divide by 0")
-        return $num / $num2
+        return num / num2

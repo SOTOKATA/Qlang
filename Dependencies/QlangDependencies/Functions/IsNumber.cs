@@ -9,7 +9,7 @@ public class IsNumber : Function
         if (args.Length == 0)
             throw new ArgumentException("Arguments is empty");
         
-        Logger.Logger.Warn("isNumber: " + args[0].ToString().TryParseNumber(out _).ToString());
+        Logger.Logger.Warn("Internal.isNumber: " + args[0].ToString().TryParseNumber(out _));
         
         return args[0].ToString().TryParseNumber(out _).ToString();
     }

@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Qlang.Compiler;
+namespace Qlang.PreCompile;
 
 public static class PreCompile
 {
@@ -26,19 +26,15 @@ public static class PreCompile
             string line = includeLine.Replace("include ", "").Replace("\"", "");
             Logger.Logger.Log("ForEach.Path: " + line);
 
-            int slashIndex = line.IndexOf('/');
-            if (slashIndex == -1)
-                throw new Exception($"Invalid include path: '{line}' (must be namespace/filename)");
+            string fullPath;
 
-            string nameSpace = line[..slashIndex];
-            string fileName = line[(slashIndex + 1)..];
-
-            string fullPath = "";
-
-            if (nameSpace.StartsWith('@'))
-                fullPath = Path.Combine(Directory.GetCurrentDirectory(), nameSpace[1..], fileName) + ".ql";
+            if (line.StartsWith('@'))
+                fullPath = Path.Combine(Directory.GetCurrentDirectory(), line[1..]) + ".ql";
             else
-                fullPath = Path.Combine(Directory.GetCurrentDirectory(), nameSpace, fileName);
+                fullPath = Path.Combine(Directory.GetCurrentDirectory(), line);
+            
+            fullPath = fullPath.Replace('\\', Path.DirectorySeparatorChar);
+            fullPath = fullPath.Replace('/', Path.DirectorySeparatorChar);
 
             Logger.Logger.Log("ForEach.FullPath: " + fullPath);
 
