@@ -4,8 +4,6 @@ public class AssignmentNode : ASTNode
 {
     public string VariableName { get; set; }
     
-    public object Type { get; set; }
-    
     public ASTNode Value { get; set; }
     
     public bool IsStatic { get; set; }

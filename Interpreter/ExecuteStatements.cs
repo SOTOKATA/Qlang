@@ -7,6 +7,7 @@ public partial class Interpreter
     private void ExecuteWhile(WhileNode whileNode)
     {
         var condition = whileNode.IsDoWhile || (bool)EvaluateExpression(whileNode.Condition);
+        Logger.Logger.Log("Interpreter.While: condition=" + condition, ConsoleColor.Magenta);
 
         while (condition)
         {
@@ -29,7 +30,10 @@ public partial class Interpreter
             }
             
             condition = (bool)EvaluateExpression(whileNode.Condition);
+            Logger.Logger.Log("Interpreter.While: condition=" + condition, ConsoleColor.Magenta);
         }
+        
+        Logger.Logger.Log("Interpreter.While.End", ConsoleColor.Magenta);
     }
 
     private void ExecuteIf(IfNode ifNode)

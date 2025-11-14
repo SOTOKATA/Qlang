@@ -1,4 +1,5 @@
-﻿using Qlang.AST;
+﻿using System.Globalization;
+using Qlang.AST;
 using Qlang.Dependencies.QlangDependencies;
 using Qlang.Dependencies.QlangDependencies.Classes;
 using Qlang.Dependencies.QlangDependencies.Functions;
@@ -12,20 +13,20 @@ public class CSharp
         if (ln is not string line)
             throw new QlangRuntimeException($"Line is not a string", null);
         
-        object[]? args = GetArguments(line);
+        var args = GetArguments(line);
 
         if (args != null)
             line = line[..line.IndexOf('=')];
 
         line = line.ToLower().Trim();
 
-        string className = line[..line.IndexOf('.')];
+        var className = line[..line.IndexOf('.')];
         Logger.Logger.Log("Interpreter.CSharp: ClassName = " + className);
-        foreach (Class @class in Namespace.GetClassList().Where(@class => @class.GetName().ToLower() == className))
+        foreach (var @class in Namespace.GetClassList().Where(@class => @class.GetName().ToLower() == className))
         {
             line = line[(@class.GetName().Length + 1)..];
 
-            Function? fn = @class.GetFunctions().Find(fn => fn.GetName() == line);
+            var fn = @class.GetFunctions().Find(fn => fn.GetName() == line);
             if (fn == null)
                 continue;
                     

@@ -6,35 +6,35 @@ include "@lib/datatypes/string"
 function main():
     Console.print("Write your name: ")
 
-    let<String> name = Console.readln()
+    let name = Console.readln()
 
     Console.println("Hello, " + name + "!")
 
-    let<String> input1 = ""
-    let<Number> number1
+    let number1
 
-    do_while Number.isNumber(input1) == false: 
+    do_while Number.isNumber(number1) == false: 
         Console.println("Write first number: ")
-        input1 = Console.readln()
+        number1 = Console.readln()
 
-    number1 = input1
+        if Number.isNumber(number1) == false:
+            Console.println("Your input is not number!")
 
-    let<String> input2 = ""
-    let<Number> number2
+    let number2
 
-    do_while Number.isNumber(input2) == false: 
+    do_while Number.isNumber(number2) == false: 
         Console.println("Write second number: ")
-        input2 = Console.readln()
-    
-    number2 = input2
+        number2 = Console.readln()
+
+        if Number.isNumber(number2) == false:
+            Console.println("Your input is not number!")
 
     Console.println("Result of division: " + div(number1, number2))
 
-function div(let<Number> num1, let<Number> num2):
+function div(let num1, let num2):
     return Mathematic.div(num1, num2)
 
 class Mathematic:
-    function div(let<Number> num1, let<Number> num2):
+    function div(let num1, let num2):
         if num2 == 0:
             Throw.exception("Can't divide by 0!")
 

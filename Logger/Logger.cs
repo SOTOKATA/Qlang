@@ -1,7 +1,10 @@
-﻿namespace Qlang.Logger;
+﻿using Qlang.Dependencies;
+
+namespace Qlang.Logger;
 
 public static class Logger
 {
+    static FileLogger fileLogger = new FileLogger("Logs\\debug.txt");
     public static void Log(string message, ConsoleColor? color = null)
     {
         if (!QLang.Settings.Debug)
@@ -9,6 +12,7 @@ public static class Logger
         
         Console.ForegroundColor = color ?? ConsoleColor.DarkGray;
         Console.WriteLine(message);
+        fileLogger.Log(message);
         Console.ResetColor();
     }
 

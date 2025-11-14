@@ -64,13 +64,25 @@ public partial class Interpreter
     {
         DynamicClass dynamicClass = new(classNode.Name);
 
-        foreach (ASTNode node in classNode.Body)
+        foreach (var node in classNode.Body)
             if (node is AssignmentNode assignmentNode)
                 dynamicClass.Variables[assignmentNode.VariableName] = EvaluateExpression(assignmentNode.Value);
         
         dynamicClass.Body = classNode.Body;
         
         return dynamicClass;
+    }
+
+    private string GetQType(object? o)
+    {
+        if (o is null)
+            return "null";
+        
+        if (o is ClassNode classNode)
+            return classNode.Name.Trim();
+        return o.GetType().ToString().StartsWith("System.") ? 
+            o.GetType().ToString()["System.".Length..].Trim() 
+            : o.GetType().ToString().Trim();
     }
 
     private bool _break;
@@ -80,8 +92,6 @@ public partial class Interpreter
         if (function is null)
             return null;
         
-        //Logger.Logger.Log(function.GetTree());
-    
         var node = _contextStack.Count > 0 ? CurrentContext.Class : new DynamicClass("");
         ASTContext newContext = new() { Function = function, Class = node };
         _contextStack.Push(newContext);
@@ -158,52 +168,59 @@ public partial class Interpreter
     /// Выполняет вызов метода или функции
     /// </summary>
     private object ExecuteMethodCall(MethodCallNode call)
-{
-    object[] args = call.Arguments.ConvertAll(EvaluateExpression).ToArray();
-    
-    Logger.Logger.Log($"Interpreter.ExecuteMethodCall: class = '{call.ObjectName}'; method = '{call.MethodName}'");
-    Logger.Logger.Log($"Interpreter.CurrentContext: class = '{CurrentContext.Class?.Name}', method = '{CurrentContext.Function?.Name}'");
-
-    if (_dynamicClasses.TryGetValue(call.ObjectName, out DynamicClass? value) && call.MethodName == "new")
-        return value;
-    
-    if (call is { ObjectName: "", MethodName: "csharp" })
-        return CSharp.Execute(args.FirstOrDefault());
-    
-    if (call.ObjectName is "this" or "")
     {
-        if (CurrentContext.Class?.Body?
-                .FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) is FunctionNode classMethod)
-            return ExecuteFunction(classMethod, args.ToList());
-
-        if (_functions.TryGetValue(call.MethodName, out var func))
-            return ExecuteFunction(func, args.ToList());
-    }
-
-    if (_dynamicClasses.TryGetValue(call.ObjectName, out var classNode))
-        return ExecuteMethodCallClass(classNode, call);
-
-    if (_variables.TryGetValue(call.ObjectName, out var variable))
-    {
-        Logger.Logger.Log("Interpreter.ExecuteMethodCall: Object detected as class pointer");
+        object[] args = call.Arguments.ConvertAll(EvaluateExpression).ToArray();
         
-        var @class = variable as DynamicClass;
+        Logger.Logger.Log($"Interpreter.ExecuteMethodCall: class = '{call.ObjectName}'; method = '{call.MethodName}'");
+        Logger.Logger.Log($"Interpreter.CurrentContext: class = '{CurrentContext.Class?.Name}', method = '{CurrentContext.Function?.Name}'");
 
-        if (@class?.Body.FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) is FunctionNode
-            function)
+        if (_dynamicClasses.TryGetValue(call.ObjectName, out var value) && call.MethodName == "new")
+            return value;
+
+        if (call is { ObjectName: "", MethodName: "csharp" })
         {
-            CurrentContext.Class = @class;
-            return ExecuteFunction(function, args.ToList());
+            var returnValue = CSharp.Execute(args.FirstOrDefault());
+            Logger.Logger.Warn("Interpreter.ExecuteMethodCall: csharp.return_value: " + (returnValue == null ? "null" :
+                returnValue.ToString()));
+            return returnValue;
         }
+        
+        if (call.ObjectName is "this" or "")
+        {
+            if (CurrentContext.Class?.Body?
+                    .FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) is FunctionNode classMethod)
+                return ExecuteFunction(classMethod, args.ToList());
+
+            if (_functions.TryGetValue(call.MethodName, out var func))
+                return ExecuteFunction(func, args.ToList());
+        }
+
+        if (_dynamicClasses.TryGetValue(call.ObjectName, out var classNode))
+            return ExecuteMethodCallClass(classNode, call);
+
+        if (_variables.TryGetValue(call.ObjectName, out var variable))
+        {
+            var varValue = variable;
+            
+            Logger.Logger.Log("Interpreter.ExecuteMethodCall: Object detected as class pointer");
+            
+            var @class = varValue as DynamicClass;
+
+            if (@class?.Body.FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) is FunctionNode
+                function)
+            {
+                CurrentContext.Class = @class;
+                return ExecuteFunction(function, args.ToList());
+            }
+        }
+        
+        foreach (var item in _contextStack)
+            Logger.Logger.Log($"Interpreter.ExecuteMethodCall.StackItem: class = '{item.Class?.Name}' method = '{item.Function?.Name}'");
+        Logger.Logger.Log($"Interpreter.CurrentContext (After call): class = '{CurrentContext.Class?.Name}' method = '{CurrentContext.Function?.Name}'");
+        
+        throw new QlangRuntimeException($"Unknown object/function: {call.ObjectName}.{call.MethodName}({string.Join(",", call.Arguments)})", call, 
+            GetStackTrace());
     }
-    
-    foreach (var item in _contextStack)
-        Logger.Logger.Log($"Interpreter.ExecuteMethodCall.StackItem: class = '{item.Class?.Name}' method = '{item.Function?.Name}'");
-    Logger.Logger.Log($"Interpreter.CurrentContext (After call): class = '{CurrentContext.Class?.Name}' method = '{CurrentContext.Function?.Name}'");
-    
-    throw new QlangRuntimeException($"Unknown object/function: {call.ObjectName}.{call.MethodName}({string.Join(",", call.Arguments)})", call, 
-        GetStackTrace());
-}
 
     private object ExecuteMethodCallClass(DynamicClass classNode, MethodCallNode call)
     {
@@ -239,7 +256,7 @@ public partial class Interpreter
         if (_contextStack.Count > 0)
             CurrentContext.CurrentNode = expr;
         
-        Logger.Logger.Warn("TypeofExpression: " + expr.GetType().Name);
+        Logger.Logger.Log("TypeofExpression: " + expr.GetType().Name);
     
         try
         {
@@ -281,7 +298,7 @@ public partial class Interpreter
                 node,
                 GetStackTrace());
         }
-        return Convert.ToDouble(left) / divisor;
+        return left.ToString().ParseNumber() / divisor;
     }
     
     private object GetVariable(VariableNode varNode)
@@ -320,30 +337,33 @@ public partial class Interpreter
         Logger.Logger.Log($"EvaluateBinaryOperation.IsNumeric: ({left.ToString()})=" + left.ToString().IsNumber());
         Logger.Logger.Log($"EvaluateBinaryOperation.IsNumeric: ({right.ToString()})=" + right.ToString().IsNumber());
 
-        if (binOp.Operator == "Plus" && (left.ToString().IsNumber() == false || left.ToString().IsNumber() == false))
-            return left.ToString() + right.ToString();
-
-        if (left is bool || right is bool)
+        if (bool.TryParse(left.ToString(), out var leftBool) && bool.TryParse(right.ToString(), out var rightBool))
+        {
+            Logger.Logger.Warn($"IsBooleanOperation: {left}{binOp.Operator}{right}");
             return binOp.Operator switch
             {
-                "==" => Equals(left, right),
-                "!=" => !Equals(left, right)
+                "==" => Equals(leftBool, rightBool),
+                "!=" => !Equals(leftBool, rightBool)
             };
-        
+        }
+
+        if (binOp.Operator == "Plus" && (left.ToString().IsNumber() == false || right.ToString().IsNumber() == false))
+            return left.ToString() + right.ToString();
+
         if (left.ToString().IsNumber() == false || right.ToString().IsNumber() == false)
         {
             
             throw new QlangRuntimeException(
                 $"Type error: Cannot apply operator '{binOp.Operator}' to " +
-                $"'{left?.ToString() ?? "null"}' and '{right?.ToString() ?? "null"}'",
+                $"'{left?.ToString() ?? "null"}' (type={left?.GetType().Name}) and '{right?.ToString() ?? "null"}' (type={right?.GetType().Name})",
                 binOp,
                 GetStackTrace());
         }
     
         try
         {
-            double leftNum = left.ToString().ParseNumber();
-            double rightNum = right.ToString().ParseNumber();
+            var leftNum = left.ToString().ParseNumber();
+            var rightNum = right.ToString().ParseNumber();
             return binOp.Operator switch
             {
                 "==" => Equals(left, right),

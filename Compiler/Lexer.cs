@@ -9,9 +9,9 @@ public class Lexer()
         List<Token> tokens = [];
         List<string> scriptLines = script.Split('\n').ToList();
 
-        for (int index = 0; index < scriptLines.Count; index++)
+        for (var index = 0; index < scriptLines.Count; index++)
         {
-            string? rawLine = scriptLines[index];
+            var rawLine = scriptLines[index];
             // Обрабатываем отступы ДО trim
             var indent = CountLeadingSpaces(rawLine);
             var line = rawLine.TrimStart();

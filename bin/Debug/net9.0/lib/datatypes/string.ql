@@ -1,14 +1,6 @@
 class String:
-    let value = ""
+    function append(let str, let str2):
+        return str + str2
 
-    function setValue(let<String> str):
-        value = str
-
-    function getValue():
-        return value
-
-    function append(let<String> str2):
-        value = value + str2
-
-    function getLength():
-        return csharp("string.getlength=" + value)
+    function getLength(let str):
+        return csharp("string.getlength=" + str)

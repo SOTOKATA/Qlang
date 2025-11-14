@@ -17,7 +17,9 @@ public class Div : Function
         
         if (b == 0)
             throw new Exception("The number of arguments must be 0");
-        
-        return (a / b).ToString(CultureInfo.InvariantCulture);
+
+        var result = (a / b).ToString(CultureInfo.InvariantCulture);
+        Logger.Logger.Warn("XYZ " + result);
+        return result;
     }
 }

@@ -23,7 +23,7 @@ public static class PreCompile
         {
             Logger.Logger.Log("ForEach: " + includeLine);
 
-            string line = includeLine.Replace("include ", "").Replace("\"", "");
+            var line = includeLine.Replace("include ", "").Replace("\"", "");
             Logger.Logger.Log("ForEach.Path: " + line);
 
             string fullPath;
@@ -51,9 +51,9 @@ public static class PreCompile
                 continue;
             }
 
-            string content = File.ReadAllText(fullPath);
+            var content = File.ReadAllText(fullPath);
 
-            string subScript = IncludeFiles(content);
+            var subScript = IncludeFiles(content);
 
             files.Add(subScript);
         }

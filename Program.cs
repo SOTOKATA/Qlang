@@ -1,9 +1,14 @@
-﻿namespace Qlang;
+﻿using System.Globalization;
+
+namespace Qlang;
 
 public class Program
 {
     public static void Main(string[] args)
     {
+        // to double write with dot (not comma)
+        Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+
         if (args.Length < 1)
         {
              Console.WriteLine($"""

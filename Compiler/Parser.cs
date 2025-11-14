@@ -102,16 +102,7 @@ public class Parser
         
         Advance();
         
-        // Типизация
-        string type = "auto";
-        if (Check(Tokens.Less))
-        {
-            Expect(Tokens.Less);
-            type = Expect(Tokens.Identifier).Value;
-            Expect(Tokens.Greater);
-        }
-        
-        string name = Expect(Tokens.Identifier).Value;
+        var name = Expect(Tokens.Identifier).Value;
 
         ASTNode value = null;
         if (Current().TokenType == Tokens.Equals)
@@ -120,8 +111,8 @@ public class Parser
             value = ParseExpression();
         }
         
-        Logger.Logger.Log($"CompilationProcess.End: Parsing Variable declaration (Name: {name} Type: {type} Value: {value?.GetType().Name ?? "Null"})");
-        return new AssignmentNode { VariableName = name, Type = type, Value = value };
+        Logger.Logger.Log($"CompilationProcess.End: Parsing Variable declaration (Name: {name} Value: {value?.GetType().Name ?? "Null"})");
+        return new AssignmentNode { VariableName = name, Value = value };
     }
 
     private FunctionNode ParseFunction(bool isStatic = false)
@@ -461,7 +452,7 @@ public class Parser
     private Token Advance()
     {
         if (!IsAtEnd()) _position++;
-        Token token = _tokens[_position - 1];
+        var token = _tokens[_position - 1];
         
         Logger.Logger.Log($"Token (Ln:{token.Line} Idx:{token.Index}): " + token.TokenType);
         return token;
