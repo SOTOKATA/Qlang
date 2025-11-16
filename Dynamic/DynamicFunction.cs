@@ -8,7 +8,10 @@ public class DynamicFunction(string name)
     
     public List<string> Parameters = [];
     
-    public readonly Dictionary<string, object> Variables = [];
+    public bool IsStatic = false;
+    public bool IsPrivate = false;
+    
+    public readonly Dictionary<string, Variable> Variables = [];
 
     public List<ASTNode> Body = [];
 }

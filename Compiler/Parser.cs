@@ -31,13 +31,30 @@ public class Parser
 
     private ASTNode ParseStatement()
     {
-        Logger.Logger.Log("CompilationProcess: Parsing statement");
+        Logger.Logger.Log($"CompilationProcess: Parsing statement ({Current().TokenType}, {Current().Value})");
+
+        bool isStatic = false;
+        bool isPrivate = false;
+
+        if (Check(Tokens.Keyword) && Current().Value == "static")
+        {
+            Logger.Logger.Warn("IsStatic = true");
+            isStatic = true;
+            Advance();
+        }
+
+        if (Check(Tokens.Keyword) && Current().Value == "private")
+        {
+            Logger.Logger.Warn("IsPrivate = true");
+            isPrivate = true;
+            Advance();
+        }
         
         // function declaration
         if (Check(Tokens.Keyword) && Current().Value == "function")
         {
             Logger.Logger.Log("CompilationProcess.End: Parsing statement");
-            return ParseFunction();
+            return ParseFunction(isStatic, isPrivate);
         }
         
         // class declaration
@@ -79,7 +96,7 @@ public class Parser
         if (Check(Tokens.Keyword) && Current().Value == "let")
         {
             Logger.Logger.Log("CompilationProcess.End: Parsing statement");
-            return ParseVariableDeclaration();
+            return ParseVariableDeclaration(isStatic, isPrivate);
         }
 
         // method call statement (Object.method(...)) || Call method from class pointer
@@ -94,7 +111,7 @@ public class Parser
         throw new Exception($"Unexpected token: {Current().TokenType}");
     }
 
-    private AssignmentNode ParseVariableDeclaration()
+    private AssignmentNode ParseVariableDeclaration(bool isStatic = false, bool isPrivate = false)
     {
         Logger.Logger.Log("CompilationProcess: Parsing variable declaration");
         if (!Check(Tokens.Keyword) || Current().Value != "let")
@@ -112,10 +129,13 @@ public class Parser
         }
         
         Logger.Logger.Log($"CompilationProcess.End: Parsing Variable declaration (Name: {name} Value: {value?.GetType().Name ?? "Null"})");
-        return new AssignmentNode { VariableName = name, Value = value };
+        return new AssignmentNode(isStatic, isPrivate) { 
+            VariableName = name, 
+            Value = value
+        };
     }
 
-    private FunctionNode ParseFunction(bool isStatic = false)
+    private FunctionNode ParseFunction(bool isStatic = false, bool isPrivate = false)
     {
         Logger.Logger.Log("CompilationProcess: Parsing function");
         
@@ -142,7 +162,13 @@ public class Parser
         Expect(Tokens.Dedent);
 
         Logger.Logger.Log("CompilationProcess.End: Parsing function");
-        return new FunctionNode { Name = name, Parameters = parameters, Body = body, IsStatic = isStatic };
+        return new FunctionNode 
+        { Name = name, 
+            Parameters = parameters, 
+            Body = body, 
+            IsStatic = isStatic, 
+            IsPrivate = isPrivate 
+        };
     }
 
     private ClassNode ParseClass()
@@ -378,18 +404,19 @@ public class Parser
             if (Check(Tokens.Dot))
             {
                 Advance(); // consume '.'
+                
+                var name = Expect(Tokens.Identifier).Value;
 
                 // Call variable from class
-                // if (Check(Tokens.Variable))\
-                // {
-                //     // TODO: variable assign and get from class
-                //
-                //     // get from class
-                //     return new VariableNode { Name = Expect(Tokens.Variable).Value};
-                // }
+                // structure: objName.name <- without '('
+                if (Current().TokenType != Tokens.LParen)
+                {
+                    // TODO: variable assign
                 
-                var methodName = Expect(Tokens.Identifier).Value;
-
+                    // get from class
+                    Logger.Logger.Log("CompilationProcess.End: Parsing primary (VariableNode)");
+                    return new VariableNode { ClassName = firstIdentifier, Name = name };
+                }
                 
                 Expect(Tokens.LParen);
 
@@ -407,7 +434,7 @@ public class Parser
                 return new MethodCallNode 
                 { 
                     ObjectName = firstIdentifier, 
-                    MethodName = methodName, 
+                    MethodName = name, 
                     Arguments = arguments 
                 };
             }
@@ -441,7 +468,7 @@ public class Parser
             {
                 Logger.Logger.Log($"CompilationProcess.End: Parsing primary (AssignmentNode)");
                 Advance();
-                return new AssignmentNode
+                return new AssignmentNode(false, false)
                 {
                     VariableName = firstIdentifier,
                     Value = ParseExpression(),

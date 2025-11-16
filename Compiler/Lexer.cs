@@ -7,34 +7,29 @@ public class Lexer()
     public List<Token> Lex(string script)
     {
         List<Token> tokens = [];
-        List<string> scriptLines = script.Split('\n').ToList();
+        var scriptLines = script.Split('\n').ToList();
 
         for (var index = 0; index < scriptLines.Count; index++)
         {
             var rawLine = scriptLines[index];
-            // Обрабатываем отступы ДО trim
+            
             var indent = CountLeadingSpaces(rawLine);
             var line = rawLine.TrimStart();
 
-            // Пропускаем пустые строки
             if (string.IsNullOrWhiteSpace(line))
                 continue;
 
-            // Добавляем INDENT/DEDENT токены
             HandleIndentation(indent, tokens);
 
-            // Токенизация строки
             var pos = 0;
             while (pos < line.Length)
             {
-                // Пропускаем пробелы внутри строки
                 if (char.IsWhiteSpace(line[pos]))
                 {
                     pos++;
                     continue;
                 }
 
-                // Проверяем односимвольные токены
                 if (TryCharToToken(line[pos], out var charToken))
                 {
                     charToken.Line = index;
@@ -45,10 +40,8 @@ public class Lexer()
                     continue;
                 }
 
-                // Читаем слово/переменную/идентификатор
                 var startPos = pos;
 
-                // Обычное слово (keyword или identifier)
                 if (IsIdentifierStart(line[pos]))
                 {
                     while (pos < line.Length && IsIdentifierChar(line[pos]))
@@ -73,7 +66,6 @@ public class Lexer()
             tokens.Add(new Token(Tokens.NewLine, index, pos));
         }
 
-        // Закрываем все открытые блоки в конце файла
         while (_indentStack.Count > 1)
         {
             tokens.Add(new Token(Tokens.Dedent, -1, -1));
@@ -89,28 +81,23 @@ public class Lexer()
 
         if (currentIndent > previousIndent)
         {
-            // Увеличился отступ - новый блок
             tokens.Add(new Token(Tokens.Indent, -1, -1));
             _indentStack.Push(currentIndent);
         }
         else if (currentIndent < previousIndent)
         {
-            // Уменьшился отступ - закрываем блоки
             while (_indentStack.Count > 0 && _indentStack.Peek() > currentIndent)
             {
                 tokens.Add(new Token(Tokens.Dedent, -1, -1));
                 _indentStack.Pop();
             }
 
-            // Проверка на некорректный отступ
             if (_indentStack.Peek() != currentIndent)
-            {
                 throw new Exception($"Inconsistent indentation: expected {_indentStack.Peek()}, got {currentIndent}");
-            }
         }
     }
 
-    private int CountLeadingSpaces(string line)
+    private static int CountLeadingSpaces(string line)
     {
         var count = 0;
         foreach (var c in line)
@@ -118,7 +105,7 @@ public class Lexer()
             if (c == ' ')
                 count++;
             else if (c == '\t')
-                count += 4; // Табуляция = 4 пробела
+                count += 4; 
             else
                 break;
         }
@@ -135,21 +122,20 @@ public class Lexer()
         return char.IsLetterOrDigit(c) || c == '_';
     }
 
-    private bool TryWordToToken(string word, out Token? token)
+    private static bool TryWordToToken(string word, out Token? token)
     {
         if (IsKeyword(word, out token))
             return true;
         
-        // Если не ключевое слово - это идентификатор
         token = new Token(Tokens.Identifier, -1, -1, word);
         return true;
     }
-
+ 
     private static bool IsKeyword(string word, out Token? token)
     {
         // Список ключевых слов твоего языка
-        string[] keywords = ["class", "function", "if", "let", "else", "while", "false", "true", "do_while", "return", "static",
-                "for", "include", "break", "continue"];
+        string[] keywords = ["class", "function", "if", "let", "else", "while", "false", "true", "do_while", "private", "return", "static",
+                "for", "include"];
         
         if (keywords.Contains(word.ToLower()))
         {

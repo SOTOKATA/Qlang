@@ -19,7 +19,7 @@ public partial class Interpreter
     
     private readonly Dictionary<string, string> _numberDictionary;
     
-    private readonly Dictionary<string, object> _variables = new();
+    private readonly Dictionary<string, Variable> _variables = new();
     
     private readonly Dictionary<string, DynamicFunction> _functions = new();
     
@@ -27,6 +27,7 @@ public partial class Interpreter
 
     private readonly Stack<ASTContext> _contextStack = new();
     private ASTContext CurrentContext => _contextStack.Count > 0 ? _contextStack.Peek() : new ASTContext();
+    private ASTContext PreviousCurrentContext => _contextStack.Count > 0 ? _contextStack.ToArray()[^2] : new ASTContext();
     
     public void Execute(ProgramNode program)
     {
@@ -69,7 +70,9 @@ public partial class Interpreter
 
         foreach (var node in classNode.Body)
             if (node is AssignmentNode assignmentNode)
-                dynamicClass.Variables[assignmentNode.VariableName] = EvaluateExpression(assignmentNode.Value);
+                dynamicClass.Variables[assignmentNode.VariableName] = new Variable(assignmentNode.VariableName, 
+                    EvaluateExpression(assignmentNode.Value), assignmentNode.IsStatic, assignmentNode
+                    .IsPrivate);
         
         dynamicClass.Body = classNode.Body;
         
@@ -82,25 +85,20 @@ public partial class Interpreter
 
         foreach (var node in functionNode.Parameters)
         {
-            dynamicFunction.Variables[node.VariableName] = EvaluateExpression(node.Value);
+            dynamicFunction.Variables[node.VariableName] = new Variable(
+                node.VariableName, 
+                EvaluateExpression(node.Value),
+                node.IsStatic,
+                node.IsPrivate);
+            
             dynamicFunction.Parameters.Add(node.VariableName);
         }
         
         dynamicFunction.Body = functionNode.Body;
+        dynamicFunction.IsStatic = functionNode.IsStatic;
+        dynamicFunction.IsPrivate = functionNode.IsPrivate;
         
         return dynamicFunction;
-    }
-
-    private string GetQType(object? o)
-    {
-        if (o is null)
-            return "null";
-        
-        if (o is ClassNode classNode)
-            return classNode.Name.Trim();
-        return o.GetType().ToString().StartsWith("System.") ? 
-            o.GetType().ToString()["System.".Length..].Trim() 
-            : o.GetType().ToString().Trim();
     }
 
     private bool _break;
@@ -122,7 +120,11 @@ public partial class Interpreter
 
             if (arguments.Count == function.Variables.Count)
                 for (var i = 0; i < function.Variables.Count; i++)
-                    function.Variables[function.Parameters[i]] = arguments[i];
+                    function.Variables[function.Parameters[i]] = new Variable(
+                        function.Parameters[i], 
+                        arguments[i],
+                        function.IsStatic,
+                        false);
             
             string returnValue = null;
             _break = false;
@@ -158,7 +160,11 @@ public partial class Interpreter
             case AssignmentNode assign:
                 Logger.Logger.Log("Interpreter: Execute statement (AssignmentNode)");
                 var value = EvaluateExpression(assign.Value);
-                CurrentContext.Function.Variables[assign.VariableName] = value;
+                CurrentContext.Function.Variables[assign.VariableName] = new Variable(
+                    assign.VariableName, 
+                    value, 
+                    assign.IsStatic,
+                    assign.IsPrivate);
                 // _variables[assign.VariableName] = value;
                 break;
 
@@ -210,6 +216,13 @@ public partial class Interpreter
             Logger.Logger.Warn("Interpreter.ExecuteMethodCall: csharp.return_value: " + (returnValue == null ? "null" :
                 returnValue.Result?.ToString()));
             
+            _contextStack.Push(new ASTContext
+            {
+                Class = null,
+                Function = null,
+                CurrentNode = call
+            });
+            
             return returnValue?.Result;
         }
         
@@ -232,7 +245,7 @@ public partial class Interpreter
             
             Logger.Logger.Log("Interpreter.ExecuteMethodCall: Object detected as class pointer");
             
-            var @class = varValue as DynamicClass;
+            var @class = varValue.Value as DynamicClass;
 
             if (@class?.Body.FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) is FunctionNode
                 function)
@@ -254,14 +267,27 @@ public partial class Interpreter
     {
         if (classNode.Body.FirstOrDefault(astNode => astNode is FunctionNode fn && fn.Name == call.MethodName) is not FunctionNode node)
             throw new QlangRuntimeException($"User class detection error: Unknown object/function: {call.ObjectName}.{call.MethodName}", call, GetStackTrace());
+
+        if (node.IsPrivate)
+            throw new QlangRuntimeException("This function is private but called from external class", call,
+                GetStackTrace());
         
         var previousClass = CurrentContext?.Class;
     
         if (_contextStack.Count > 0)
         {
-            CurrentContext.Class = classNode;
-            Logger.Logger.Succ("ExecuteMethodCallClass.ContextClass: " + classNode.Name);
+            
+            
+            // CurrentContext.Class = classNode;
         }
+        
+        _contextStack.Push(new ASTContext
+        {
+            Class = classNode,
+            Function = ToDynamicFunction(node),
+            CurrentNode = call
+        });
+        Logger.Logger.Succ("ExecuteMethodCallClass.ContextClass: " + classNode.Name);
 
         try
         {
@@ -343,16 +369,40 @@ public partial class Interpreter
         {
             if (_contextStack.Count > 0 && CurrentContext?.Function != null &&
                 CurrentContext.Function.Variables.TryGetValue
-                    (varNode.Name, out var value))
-                return value;
+                    (varNode.Name, out var var))
+                return var.Value;
 
             if (_contextStack.Count > 0 && CurrentContext?.Class != null && CurrentContext.Class.Variables.TryGetValue
-                    (varNode.Name, out value))
-                return value;
+                    (varNode.Name, out var))
+                return var.Value;
+            
+            if (_dynamicClasses.TryGetValue(varNode.ClassName, out var dynamicClass) &&
+                dynamicClass.Variables.TryGetValue(varNode.Name, out var))
+            {
+                if (var.IsPrivate)
+                    throw new QlangRuntimeException("Scope can't be call from external class " +
+                                                    "because of is private scope" + 
+                                                    $" (class: {dynamicClass.Name}, scope: {var.Name})", 
+                        varNode, GetStackTrace());
+                
+                Logger.Logger.Error($"Is not private variable ({var.IsPrivate})");
+                return var.Value;
+            }
 
-            if (_variables.TryGetValue(varNode.Name, out value))
-                return value;
+            if (_variables.TryGetValue(varNode.Name, out var))
+                return var.Value;
 
+            if (CurrentContext?.Class != null)
+            {
+                Logger.Logger.Log("Current var count: " + CurrentContext.Class.Variables.Count);
+                Logger.Logger.Log("Current class name: " + CurrentContext.Class.Name);
+                foreach (var var2 in CurrentContext.Class.Variables)
+                {
+                    object val = var2.Value.Value;
+                    string name = var2.Value.Name;
+                    Logger.Logger.Log($"Variable: {name} {val}");
+                }
+            } else Logger.Logger.Log($"Context Class is null");
         }
         catch (QlangRuntimeException)
         {

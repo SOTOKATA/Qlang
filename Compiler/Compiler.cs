@@ -30,7 +30,7 @@ public class Compiler
 
         _outputScript = PreCompile.PreCompile.ClearComments(_outputScript);
 
-        fl.SetPath("Logs\\script_pre_compiled.txt");
+        fl.SetPath("Logs\\script_pre_compiled.ql");
         fl.Log(_outputScript);
         
         List<Token> tokens = _lexer.Lex(_outputScript);

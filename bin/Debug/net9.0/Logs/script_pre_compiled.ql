@@ -36,7 +36,7 @@ class Console:
         setBackColor(defBColor)
 
 class Number:
-    private function getUsings():
+    function getUsings():
         return usings
 
     private let usings = ___STRING_19___
@@ -118,8 +118,6 @@ class Math:
         return num / num2
 
 function main():
-    Console.println(Number.usings)
-
     Console.println(___STRING_46___)
     Console.println(___STRING_47___)
 

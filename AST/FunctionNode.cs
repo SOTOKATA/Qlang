@@ -5,6 +5,8 @@ public class FunctionNode : ASTNode
     public string Name { get; set; }
 
     public bool IsStatic { get; set; } = true;
+    
+    public bool IsPrivate { get; set; } = false;
     public List<AssignmentNode> Parameters { get; set; } = [];
     public List<ASTNode> Body { get; set; } = [];
 
