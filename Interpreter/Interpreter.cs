@@ -1,8 +1,7 @@
-﻿using Qlang.AST;
+﻿using Microsoft.CodeAnalysis.CSharp.Scripting;
+using Microsoft.CodeAnalysis.Scripting;
+using Qlang.AST;
 using Qlang.Dependencies;
-using Qlang.Dependencies.QlangDependencies;
-using Qlang.Dependencies.QlangDependencies.Classes;
-using Qlang.Dependencies.QlangDependencies.Functions;
 using Qlang.Dynamic;
 using Math = System.Math;
 
@@ -10,16 +9,19 @@ namespace Qlang.Interpreter;
 
 public partial class Interpreter
 {
-    public Interpreter(Dictionary<string, string> stringDictionary)
+    public Interpreter(Dictionary<string, string> stringDictionary, Dictionary<string, string> numberDictionary)
     {
         _stringDictionary = stringDictionary;
+        _numberDictionary = numberDictionary;
     }
 
     private readonly Dictionary<string, string> _stringDictionary;
     
+    private readonly Dictionary<string, string> _numberDictionary;
+    
     private readonly Dictionary<string, object> _variables = new();
     
-    private readonly Dictionary<string, FunctionNode> _functions = new();
+    private readonly Dictionary<string, DynamicFunction> _functions = new();
     
     private readonly Dictionary<string, DynamicClass> _dynamicClasses = new();
 
@@ -38,7 +40,7 @@ public partial class Interpreter
                         _dynamicClasses[classNode.Name] = ToDynamicClass(classNode);
                         break;
                     case FunctionNode func:
-                        _functions[func.Name] = func;
+                        _functions[func.Name] = ToDynamicFunction(func);
                         break;
                 }
             }
@@ -55,6 +57,7 @@ public partial class Interpreter
         }
         catch (QlangRuntimeException ex)
         {
+            Logger.Logger.Error("Interpreter error:");
             Logger.Logger.Error(ex.ToString());
             throw;
         }
@@ -72,6 +75,21 @@ public partial class Interpreter
         
         return dynamicClass;
     }
+    
+    private DynamicFunction ToDynamicFunction(FunctionNode functionNode)
+    {
+        DynamicFunction dynamicFunction = new(functionNode.Name);
+
+        foreach (var node in functionNode.Parameters)
+        {
+            dynamicFunction.Variables[node.VariableName] = EvaluateExpression(node.Value);
+            dynamicFunction.Parameters.Add(node.VariableName);
+        }
+        
+        dynamicFunction.Body = functionNode.Body;
+        
+        return dynamicFunction;
+    }
 
     private string GetQType(object? o)
     {
@@ -87,7 +105,7 @@ public partial class Interpreter
 
     private bool _break;
     private ReturnNode _return;
-    private object ExecuteFunction(FunctionNode? function, List<object> arguments)
+    private object ExecuteFunction(DynamicFunction? function, List<object> arguments)
     {
         if (function is null)
             return null;
@@ -98,10 +116,14 @@ public partial class Interpreter
 
         try
         {
-            if (arguments.Count == function.Parameters.Count)
-                for (var i = 0; i < function.Parameters.Count; i++)
-                    _variables[function.Parameters[i].VariableName] = arguments[i];
+            // if (arguments.Count == function.Variables.Count)
+            //     for (var i = 0; i < function.Variables.Count; i++)
+            //         _variables[function.Parameters[i]] = arguments[i];
 
+            if (arguments.Count == function.Variables.Count)
+                for (var i = 0; i < function.Variables.Count; i++)
+                    function.Variables[function.Parameters[i]] = arguments[i];
+            
             string returnValue = null;
             _break = false;
             foreach (var statement in function.Body)
@@ -136,11 +158,12 @@ public partial class Interpreter
             case AssignmentNode assign:
                 Logger.Logger.Log("Interpreter: Execute statement (AssignmentNode)");
                 var value = EvaluateExpression(assign.Value);
-                _variables[assign.VariableName] = value;
+                CurrentContext.Function.Variables[assign.VariableName] = value;
+                // _variables[assign.VariableName] = value;
                 break;
 
             case MethodCallNode call:
-                Logger.Logger.Log("Interpreter: Execute statement (MehtodCallNode)");
+                Logger.Logger.Log("Interpreter: Execute statement (MethodCallNode)");
                 ExecuteMethodCall(call);
                 break;
 
@@ -169,7 +192,7 @@ public partial class Interpreter
     /// </summary>
     private object ExecuteMethodCall(MethodCallNode call)
     {
-        object[] args = call.Arguments.ConvertAll(EvaluateExpression).ToArray();
+        var args = call.Arguments.ConvertAll(EvaluateExpression).ToArray();
         
         Logger.Logger.Log($"Interpreter.ExecuteMethodCall: class = '{call.ObjectName}'; method = '{call.MethodName}'");
         Logger.Logger.Log($"Interpreter.CurrentContext: class = '{CurrentContext.Class?.Name}', method = '{CurrentContext.Function?.Name}'");
@@ -179,17 +202,22 @@ public partial class Interpreter
 
         if (call is { ObjectName: "", MethodName: "csharp" })
         {
-            var returnValue = CSharp.Execute(args.FirstOrDefault());
+            //CSharp.Execute(args.FirstOrDefault());
+            var returnValue = CSharpCall($"{string.Join(",", args)}");
+
+            returnValue.Wait();
+            
             Logger.Logger.Warn("Interpreter.ExecuteMethodCall: csharp.return_value: " + (returnValue == null ? "null" :
-                returnValue.ToString()));
-            return returnValue;
+                returnValue.Result?.ToString()));
+            
+            return returnValue?.Result;
         }
         
         if (call.ObjectName is "this" or "")
         {
             if (CurrentContext.Class?.Body?
                     .FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) is FunctionNode classMethod)
-                return ExecuteFunction(classMethod, args.ToList());
+                return ExecuteFunction(ToDynamicFunction(classMethod), args.ToList());
 
             if (_functions.TryGetValue(call.MethodName, out var func))
                 return ExecuteFunction(func, args.ToList());
@@ -210,7 +238,7 @@ public partial class Interpreter
                 function)
             {
                 CurrentContext.Class = @class;
-                return ExecuteFunction(function, args.ToList());
+                return ExecuteFunction(ToDynamicFunction(function), args.ToList());
             }
         }
         
@@ -237,8 +265,8 @@ public partial class Interpreter
 
         try
         {
-            List<object> args = call.Arguments?.ConvertAll(EvaluateExpression) ?? [];
-            return ExecuteFunction(node, args);
+            var args = call.Arguments?.ConvertAll(EvaluateExpression) ?? [];
+            return ExecuteFunction(ToDynamicFunction(node), args);
         }
         finally
         {
@@ -264,6 +292,7 @@ public partial class Interpreter
             {
                 VariableNode varNode => GetVariable(varNode),
                 StringRefNode strRef => GetStringRef(strRef),
+                NumberRefNode numberRef => GetNumberRef(numberRef),
                 BooleanNode booleanNode => booleanNode.Value,
                 NumberNode num => num.Value,
                 BinaryOperationNode binOp => EvaluateBinaryOperation(binOp),
@@ -280,6 +309,13 @@ public partial class Interpreter
         }
         catch (Exception ex)
         {
+            Logger.Logger.Error("Exception from EvaluateExpression");
+            Logger.Logger.Error("Expression: " + expr);
+            
+            if (expr is BinaryOperationNode binOp)
+                Logger.Logger.Error($"expr is BinaryOperationNode [{(binOp.Left as VariableNode)?.Name},{binOp
+                .Operator},{(binOp.Right as StringRefNode)?.Index}]");
+            
             throw new QlangRuntimeException(
                 $"Internal error: {ex.Message}", 
                 expr, 
@@ -303,12 +339,27 @@ public partial class Interpreter
     
     private object GetVariable(VariableNode varNode)
     {
-        if (_variables.TryGetValue(varNode.Name, out var value))
-            return value;
+        try
+        {
+            if (_contextStack.Count > 0 && CurrentContext?.Function != null &&
+                CurrentContext.Function.Variables.TryGetValue
+                    (varNode.Name, out var value))
+                return value;
 
-        if (_contextStack.Count > 0 && CurrentContext?.Class != null && CurrentContext.Class.Variables.TryGetValue(varNode.Name, out value))
-            return value;
-        
+            if (_contextStack.Count > 0 && CurrentContext?.Class != null && CurrentContext.Class.Variables.TryGetValue
+                    (varNode.Name, out value))
+                return value;
+
+            if (_variables.TryGetValue(varNode.Name, out value))
+                return value;
+
+        }
+        catch (QlangRuntimeException)
+        {
+            Logger.Logger.Error("GetVariable exception");
+            throw;
+        }
+
         throw new QlangRuntimeException(
             $"Undefined variable: {varNode.Name}", 
             varNode, 
@@ -323,6 +374,18 @@ public partial class Interpreter
             throw new QlangRuntimeException(
                 $"Undefined string reference: {value}", 
                 strRef, 
+                GetStackTrace());
+        }
+        return value;
+    }
+    
+    private string GetNumberRef(NumberRefNode numberRef)
+    {
+        if (!_numberDictionary.TryGetValue($"___NUMBER_{numberRef.Index}___", out var value))
+        {
+            throw new QlangRuntimeException(
+                $"Undefined number reference: {value}", 
+                numberRef, 
                 GetStackTrace());
         }
         return value;
@@ -364,10 +427,11 @@ public partial class Interpreter
         {
             var leftNum = left.ToString().ParseNumber();
             var rightNum = right.ToString().ParseNumber();
+            Logger.Logger.Warn($"Operation: {left}{binOp.Operator}{right}");
             return binOp.Operator switch
             {
-                "==" => Equals(left, right),
-                "!=" => !Equals(left, right),
+                "==" => Equals(leftNum, rightNum),
+                "!=" => !Equals(leftNum, rightNum),
                 "Less" => leftNum < rightNum,
                 "Greater" => leftNum > rightNum,
                 ">=" => leftNum >= rightNum,
@@ -375,7 +439,7 @@ public partial class Interpreter
                 "Plus" => leftNum + rightNum,
                 "Minus" => leftNum - rightNum,
                 "Star" => leftNum * rightNum,
-                "Slash" => DivideWithCheck(left, right, binOp),
+                "Slash" => DivideWithCheck(leftNum, rightNum, binOp),
                 var _ => throw new QlangRuntimeException(
                     $"Unknown operator: {binOp.Operator}", 
                     binOp, 
@@ -394,6 +458,42 @@ public partial class Interpreter
                 GetStackTrace());
         }
     }
+
+    private Task<object> CSharpCall(string call)
+    {
+        //
+        // var type = Type.GetType(className);
+        // var method = type?.GetMethod(methodName, [typeof(string)]);
+        //
+        // return method?.Invoke(null, args ?? []);
+        
+        call = call.Replace("\\\"", "\"");
+        Logger.Logger.Warn("C#_Script: " + call);
+        
+        try
+        {
+            return Task.FromResult(CSharpScript.EvaluateAsync(call).Result);
+        }
+        catch (AggregateException ex)
+        {
+            var inner = ex.InnerException;
+
+            if (inner is CompilationErrorException cex)
+            {
+                Logger.Logger.Error("CompilationErrorException:");
+                throw new Exception(string.Join("\n", cex.Diagnostics));
+            }
+
+            Logger.Logger.Error("AggregateException:");
+            throw new QlangRuntimeException(inner?.Message ?? ex.Message, null, GetStackTrace());
+        }
+        catch (CompilationErrorException cex)
+        {
+            Logger.Logger.Error("CompilationErrorException:");
+            throw new QlangRuntimeException(string.Join("\n", cex.Diagnostics), null, GetStackTrace());
+        }
+    }
+    
     
     
 }

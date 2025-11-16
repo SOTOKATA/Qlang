@@ -10,6 +10,7 @@ public class Compiler
     private string _outputScript = "";
     
     public Dictionary<string, string> StringDictionary = [];
+    public Dictionary<string, string> NumberDictionary = [];
 
     private readonly Parser _parser = new();
     private readonly Lexer _lexer = new();
@@ -24,6 +25,8 @@ public class Compiler
         _outputScript = PreCompile.PreCompile.IncludeFiles(_originalScript);
 
         (_outputScript, StringDictionary) = PreCompile.PreCompile.ExtractStrings(_outputScript);
+        
+        (_outputScript, NumberDictionary) = PreCompile.PreCompile.ExtractNumbers(_outputScript);
 
         _outputScript = PreCompile.PreCompile.ClearComments(_outputScript);
 

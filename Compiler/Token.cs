@@ -28,6 +28,7 @@ public enum Tokens
     Star,
     Slash,
     StringRef,
+    NumberRef,
     Indent,
     Dedent,
     NewLine,

@@ -2,7 +2,7 @@
 
 public class PrintLine : Function
 {
-    public override string GetName() => "println";
+    public override string GetName() => "";
 
     public override string Execute(object[] args)
     {

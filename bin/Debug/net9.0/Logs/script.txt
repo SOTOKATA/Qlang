@@ -1,42 +1,93 @@
-include "@lib/console"
 include "@lib/throw"
+include "@lib/console"
 include "@lib/datatypes/number"
 include "@lib/datatypes/string"
+include "@lib/math"
 
 function main():
-    Console.print("Write your name: ")
+    Console.println("<--- Menu demo --->")
+    Console.println("1. Numeric")
 
-    let name = Console.readln()
+    Console.print("Print choice (1-5): ")
+    let choice = Console.readln()
 
-    Console.println("Hello, " + name + "!")
+    if choice == 1:
+        numericDemo()
 
-    let number1
+function numericDemo():
+    Console.println("Welcome to numeric demo!")
 
-    do_while Number.isNumber(number1) == false: 
-        Console.println("Write first number: ")
-        number1 = Console.readln()
+    let num1 = getNumberFromConsole("Write first number: ")
+    let num2 = getNumberFromConsole("Write second number: ")
 
-        if Number.isNumber(number1) == false:
-            Console.println("Your input is not number!")
+    Console.println("First number: " + num1)
+    Console.println("Second number: " + num2)
 
-    let number2
+    Console.println("<--- Math --->")
+    Console.println("Sum: " + Math.sum(num1, num2))
+    Console.println("Substration: " + Math.sub(num1, num2))
+    Console.println("Multiplication: " + Math.mult(num1, num2))
 
-    do_while Number.isNumber(number2) == false: 
-        Console.println("Write second number: ")
-        number2 = Console.readln()
+    if num2 != 0:
+        Console.println("Division: " + Math.div(num1, num2))
+    else:
+        Console.println("Division: Can't divide by 0!")
 
-        if Number.isNumber(number2) == false:
-            Console.println("Your input is not number!")
+function printException(let msg):
+    Console.setForeColor("red")
+    Console.println(msg)
+    Console.resetColors()
 
-    Console.println("Result of division: " + div(number1, number2))
+function getNumberFromConsole(let msg):
+    let num = ""
 
-function div(let num1, let num2):
-    return Mathematic.div(num1, num2)
+    do_while Number.isNumber(num) == false:
+        Console.print(msg) 
+        num = Console.readln()
 
-class Mathematic:
-    function div(let num1, let num2):
-        if num2 == 0:
-            Throw.exception("Can't divide by 0!")
+        if Number.isNumber(num) == false:
+            printException("Input is not number!")
 
-        return num1 / num2
+    return num
+
+// include "@lib/console"
+// include "@lib/throw"
+// include "@lib/datatypes/number"
+
+// function main():
+//     Console.print("Write your name: ")
+
+//     let name = Console.readln()
+
+//     Console.println("Hello, " + name + "!")
+
+//     let number1
+
+//     do_while Number.isNumber(number1) == false: 
+//         Console.println("Write first number: ")
+//         number1 = Console.readln()
+
+//         if Number.isNumber(number1) == false:
+//             Console.println("Your input is not number!")
+
+//     let number2
+
+//     do_while Number.isNumber(number2) == false: 
+//         Console.println("Write second number: ")
+//         number2 = Console.readln()
+
+//         if Number.isNumber(number2) == false:
+//             Console.println("Your input is not number!")
+
+//     Console.println("Result of division: " + div(number1, number2))
+
+// function div(let num1, let num2):
+//     return Mathematic.div(num1, num2)
+
+// class Mathematic:
+//     function div(let num1, let num2):
+//         if num2 == 0:
+//             Throw.exception("Can't divide by 0!")
+
+//         return num1 / num2
 

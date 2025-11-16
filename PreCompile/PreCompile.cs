@@ -66,6 +66,29 @@ public static class PreCompile
 
     }
     
+    public static (string outScript, Dictionary<string, string> dictionary) ExtractNumbers(string script)
+    {
+        Dictionary<string, string> numberDictionary = [];
+        
+        var numberCounter = 0;
+
+        const string pattern = @"(?<![\p{L}_])\d+(?:\.\d+)?(?:[eE][+-]?\d+)?(?![\p{L}_])";
+        
+        var result = Regex.Replace(script, pattern, match => 
+        {
+            var numberValue = match.Value;
+            var key = $"___NUMBER_{numberCounter}___";
+            
+            numberDictionary[key] = numberValue;
+            
+            numberCounter++;
+            
+            return key;
+        });
+        
+        return (result, numberDictionary);
+    }
+    
     public static (string outScript, Dictionary<string, string> dictionary) ExtractStrings(string script)
     {
         Dictionary<string, string> stringDictionary = [];

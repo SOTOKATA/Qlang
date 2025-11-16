@@ -346,6 +346,12 @@ public class Parser
             Logger.Logger.Log("CompilationProcess.End: Parsing primary (StringRef)");
             return new StringRefNode { Index = int.Parse(Advance().Value) };
         }
+        
+        if (Check(Tokens.NumberRef))
+        {
+            Logger.Logger.Log("CompilationProcess.End: Parsing primary (NumberRef)");
+            return new NumberRefNode { Index = int.Parse(Advance().Value) };
+        }
 
         // Identifier - может быть вызовом метода или функции
         if (Check(Tokens.Identifier))
@@ -357,6 +363,12 @@ public class Parser
             {
                 var index = int.Parse(firstIdentifier.Replace("___STRING_", "").Replace("___", ""));
                 return new StringRefNode { Index = index };
+            }
+            
+            if (firstIdentifier.StartsWith("___NUMBER_"))
+            {
+                var index = int.Parse(firstIdentifier.Replace("___NUMBER_", "").Replace("___", ""));
+                return new NumberRefNode { Index = index };
             }
             
             if (firstIdentifier.TryParseNumber(out var result))

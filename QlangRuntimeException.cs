@@ -10,14 +10,17 @@ public class QlangRuntimeException : Exception
 
     public QlangRuntimeException(
         string message, 
-        ASTNode node, 
+        ASTNode? node, 
         List<string>? stackTrace = null) 
         : base(message)
     {
-        Line = node.Line;
-        Column = node.LineIndex;
-        SourceFile = node.SourceFile;
-        // SourceText = node.SourceText;
+        if (node is not null)
+        {
+            Line = node.Line;
+            Column = node.LineIndex;
+            SourceFile = node.SourceFile;
+        }
+
         StackTrace = stackTrace ?? [];
     }
 
@@ -26,9 +29,6 @@ public class QlangRuntimeException : Exception
         StringBuilder sb = new();
         sb.AppendLine($"Runtime Error: {Message}");
         sb.AppendLine($"  at {SourceFile}:{Line}:{Column}");
-        
-        // if (!string.IsNullOrEmpty(SourceText))
-            // sb.AppendLine($"  Source: {SourceText}");
 
         if (StackTrace.Count <= 0) 
             return sb.ToString();

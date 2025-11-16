@@ -1,3 +1,3 @@
 class Throw:
     function exception(let message):
-        csharp("throw.exception=" + message)
+        csharp("throw new System.Exception(\"" + message + "\");")
