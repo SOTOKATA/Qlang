@@ -163,13 +163,19 @@ public partial class Interpreter
         {
             case AssignmentNode assign:
 
-                if (CurrentContext.Blocks[^1].Variables.TryGetValue(assign.VariableName, out var variable)&& variable
-                        .IsConst)
+                Variable? variable = null;
+                
+                if (CurrentContext.Blocks.Count > 0 &&
+                    CurrentContext.Blocks[^1].Variables.TryGetValue(assign.VariableName, out variable) && 
+                    variable.IsConst)
                     throw new QlangRuntimeException($"Can't re-assign const variable '{assign.VariableName}'",
                         assign, GetStackTrace());
+                
+                Logger.Logger.Log("Interpreter: Execute statement (AssignmentNode)");
+                var value = EvaluateExpression(assign.Value);
 
-                // block contains this variable
-                if (variable is not null)
+                // block contains this variable or assignment is in any block (for, while, etc.)
+                if (variable is not null || CurrentContext.Blocks.Count > 0)
                 {
                     CurrentContext.Blocks[^1].Variables[assign.VariableName] = new Variable(
                         assign.VariableName, 
@@ -177,6 +183,8 @@ public partial class Interpreter
                         assign.IsStatic,
                         assign.IsPrivate,
                         assign.IsConst);
+                    
+                    break;
                 }
                 
                 
@@ -185,8 +193,6 @@ public partial class Interpreter
                     throw new QlangRuntimeException($"Can't re-assign const variable '{assign.VariableName}'",
                         assign, GetStackTrace());
                 
-                Logger.Logger.Log("Interpreter: Execute statement (AssignmentNode)");
-                var value = EvaluateExpression(assign.Value);
                 CurrentContext.Function.Variables[assign.VariableName] = new Variable(
                     assign.VariableName, 
                     value, 
@@ -431,6 +437,16 @@ public partial class Interpreter
     {
         try
         {
+            if (_contextStack.Count > 0 && CurrentContext.Blocks.Count > 0)
+                for (var i = CurrentContext.Blocks.Count; i > 0; i--)
+                {
+                    if (!CurrentContext.Blocks[^1].Variables.TryGetValue(varNode.Name, out var var1))
+                        continue;
+                    
+                    return var1.Value;
+                }  
+            
+            
             if (_contextStack.Count > 0 && CurrentContext?.Function != null &&
                 CurrentContext.Function.Variables.TryGetValue
                     (varNode.Name, out var var))
@@ -512,65 +528,62 @@ public partial class Interpreter
     private object EvaluateBinaryOperation(BinaryOperationNode binOp)
     {
         Logger.Logger.Warn("Detected binary operation");
-        object left;
-        object right;
+        Logger.Logger.Warn($"Params: {binOp.Left} {binOp.Operator} {binOp.Right}");
+        var left = EvaluateExpression(binOp.Left);
+        var right = EvaluateExpression(binOp.Right);
         bool leftBool;
         bool rightBool;
-        // Обработка логических операторов с ленивой оценкой
-        if (binOp.Operator == "&&")
+        
+        switch (binOp.Operator)
         {
-            left = EvaluateExpression(binOp.Left);
-            if (!bool.TryParse(left.ToString(), out leftBool))
-                throw new QlangRuntimeException(
-                    $"Type error: Left operand of '&&' must be boolean, got '{left}'",
-                    binOp, GetStackTrace());
-            
-            // Short-circuit: если левая часть false, правую не вычисляем
-            if (!leftBool) 
+            // Обработка логических операторов с ленивой оценкой
+            case "&&":
             {
-                Logger.Logger.Warn($"Short-circuit &&: left is false, returning false");
-                return false;
+                left = EvaluateExpression(binOp.Left);
+                if (!bool.TryParse(left.ToString(), out leftBool))
+                    throw new QlangRuntimeException(
+                        $"Type error: Left operand of '&&' must be boolean, got '{left}'",
+                        binOp, GetStackTrace());
+            
+                // Short-circuit: если левая часть false, правую не вычисляем
+                if (!leftBool) 
+                {
+                    Logger.Logger.Warn($"Short-circuit &&: left is false, returning false");
+                    return false;
+                }
+            
+                if (!bool.TryParse(right.ToString(), out rightBool))
+                    throw new QlangRuntimeException(
+                        $"Type error: Right operand of '&&' must be boolean, got '{right}'",
+                        binOp, GetStackTrace());
+            
+                Logger.Logger.Warn($"Operation &&: {leftBool} && {rightBool} = {rightBool}");
+                return rightBool;
             }
-            
-            right = EvaluateExpression(binOp.Right);
-            if (!bool.TryParse(right.ToString(), out rightBool))
-                throw new QlangRuntimeException(
-                    $"Type error: Right operand of '&&' must be boolean, got '{right}'",
-                    binOp, GetStackTrace());
-            
-            Logger.Logger.Warn($"Operation &&: {leftBool} && {rightBool} = {rightBool}");
-            return rightBool;
-        }
-        
-        if (binOp.Operator == "||")
-        {
-            left = EvaluateExpression(binOp.Left);
-            if (!bool.TryParse(left.ToString(), out leftBool))
-                throw new QlangRuntimeException(
-                    $"Type error: Left operand of '||' must be boolean, got '{left}'",
-                    binOp, GetStackTrace());
-            
-            // Short-circuit: если левая часть true, правую не вычисляем
-            if (leftBool) 
+            case "||":
             {
-                Logger.Logger.Warn($"Short-circuit ||: left is true, returning true");
-                return true;
+                if (!bool.TryParse(left.ToString(), out leftBool))
+                    throw new QlangRuntimeException(
+                        $"Type error: Left operand of '||' must be boolean, got '{left}'",
+                        binOp, GetStackTrace());
+            
+                // Short-circuit: если левая часть true, правую не вычисляем
+                if (leftBool) 
+                {
+                    Logger.Logger.Warn($"Short-circuit ||: left is true, returning true");
+                    return true;
+                }
+            
+                if (!bool.TryParse(right.ToString(), out rightBool))
+                    throw new QlangRuntimeException(
+                        $"Type error: Right operand of '||' must be boolean, got '{right}'",
+                        binOp, GetStackTrace());
+            
+                Logger.Logger.Warn($"Operation ||: {leftBool} || {rightBool} = {rightBool}");
+                return rightBool;
             }
-            
-            right = EvaluateExpression(binOp.Right);
-            if (!bool.TryParse(right.ToString(), out rightBool))
-                throw new QlangRuntimeException(
-                    $"Type error: Right operand of '||' must be boolean, got '{right}'",
-                    binOp, GetStackTrace());
-            
-            Logger.Logger.Warn($"Operation ||: {leftBool} || {rightBool} = {rightBool}");
-            return rightBool;
         }
-        
-        // Для остальных операторов вычисляем обе части
-        left = EvaluateExpression(binOp.Left);
-        right = EvaluateExpression(binOp.Right);
-        
+
         Logger.Logger.Log($"EvaluateBinaryOperation.IsNumeric: ({left.ToString()})=" + left.ToString().IsNumber());
         Logger.Logger.Log($"EvaluateBinaryOperation.IsNumeric: ({right.ToString()})=" + right.ToString().IsNumber());
 

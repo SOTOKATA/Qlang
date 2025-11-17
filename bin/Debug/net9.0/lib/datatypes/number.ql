@@ -15,6 +15,9 @@ class Number:
 
     // get random number with range 'min' to 'max'
     function randInt(let min, let max):
+        if isNumber(min) == true && isNumber(max) == false && min < 0:
+            Throw.exception("One or two input is not a number")
+
         if min >= max:
             Throw.exception("Minimum can't be more than maximum")
 
@@ -30,4 +33,4 @@ class Number:
 
     // Change numeric style (ex.: '3.214' to '3.2' with pattern '0.0')
     function toFixed(let number, let pattern):
-        return _csharp(usings + number + ".ToString(" + _str(pattern) + ")")
+        return _csharp(usings + "(" + number + ").ToString(" + _str(pattern) + ")")

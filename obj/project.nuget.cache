@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PHAkV+XnEXE=",
+  "dgSpecHash": "vSASJiEbXt0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\Qlang.csproj",
+  "projectFilePath": "D:\\Projects\\Console\\Qlang\\Qlang.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sotok\\.nuget\\packages\\cs-script.lib\\3.30.5.1\\cs-script.lib.3.30.5.1.nupkg.sha512",
     "C:\\Users\\sotok\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.11.0\\microsoft.codeanalysis.analyzers.3.11.0.nupkg.sha512",
