@@ -5,7 +5,7 @@ namespace Qlang.PreCompile;
 public static class PreCompile
 {
     private static readonly HashSet<string> Included = new(StringComparer.OrdinalIgnoreCase);
-
+    
     public static string IncludeFiles(string script)
     {
         var includeLines = script
@@ -103,8 +103,12 @@ public static class PreCompile
         {
             var stringValue = match.Value;
             var key = $"___STRING_{stringCounter}___";
+
+            var value = stringValue.Substring(1, stringValue.Length - 2);
             
-            stringDictionary[key] = stringValue.Substring(1, stringValue.Length - 2);
+            value = value.Replace("\"", "\"\"");
+            
+            stringDictionary[key] = value;
             
             stringCounter++;
             

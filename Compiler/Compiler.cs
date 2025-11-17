@@ -22,14 +22,19 @@ public class Compiler
         FileLogger fl = new("Logs\\script.txt");
         fl.Log(_originalScript);
 
+        _originalScript = """
+                           include "@lib/throw"
+                           
+                           """ + _originalScript;
+        
         _outputScript = PreCompile.PreCompile.IncludeFiles(_originalScript);
-
+        
         (_outputScript, StringDictionary) = PreCompile.PreCompile.ExtractStrings(_outputScript);
         
         (_outputScript, NumberDictionary) = PreCompile.PreCompile.ExtractNumbers(_outputScript);
 
         _outputScript = PreCompile.PreCompile.ClearComments(_outputScript);
-
+        
         fl.SetPath("Logs\\script_pre_compiled.ql");
         fl.Log(_outputScript);
         

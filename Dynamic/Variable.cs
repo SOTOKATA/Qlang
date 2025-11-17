@@ -1,6 +1,6 @@
 ﻿namespace Qlang.Dynamic;
 
-public class Variable(string name, object value, bool isStatic, bool isPrivate)
+public class Variable(string name, object value, bool isStatic, bool isPrivate, bool isConst)
 {
     public override string ToString()
     {
@@ -11,6 +11,8 @@ public class Variable(string name, object value, bool isStatic, bool isPrivate)
     public object Value { get; set; } = value;
     
     public bool IsStatic { get; set; } = isStatic;
+    
+    public bool IsConst { get; set; } = isStatic;
     
     public bool IsPrivate { get; set; } = isPrivate;
     

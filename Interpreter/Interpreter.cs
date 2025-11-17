@@ -1,4 +1,6 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Scripting;
+﻿using System.Text;
+using CSScriptLibrary;
+using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 using Qlang.AST;
 using Qlang.Dependencies;
@@ -15,6 +17,8 @@ public partial class Interpreter
         _numberDictionary = numberDictionary;
     }
 
+    private CSharpCaller CSharpCaller { get; set; } = new();
+
     private readonly Dictionary<string, string> _stringDictionary;
     
     private readonly Dictionary<string, string> _numberDictionary;
@@ -27,8 +31,7 @@ public partial class Interpreter
 
     private readonly Stack<ASTContext> _contextStack = new();
     private ASTContext CurrentContext => _contextStack.Count > 0 ? _contextStack.Peek() : new ASTContext();
-    private ASTContext PreviousCurrentContext => _contextStack.Count > 0 ? _contextStack.ToArray()[^2] : new ASTContext();
-    
+
     public void Execute(ProgramNode program)
     {
         try
@@ -72,7 +75,7 @@ public partial class Interpreter
             if (node is AssignmentNode assignmentNode)
                 dynamicClass.Variables[assignmentNode.VariableName] = new Variable(assignmentNode.VariableName, 
                     EvaluateExpression(assignmentNode.Value), assignmentNode.IsStatic, assignmentNode
-                    .IsPrivate);
+                    .IsPrivate, assignmentNode.IsConst);
         
         dynamicClass.Body = classNode.Body;
         
@@ -89,7 +92,8 @@ public partial class Interpreter
                 node.VariableName, 
                 EvaluateExpression(node.Value),
                 node.IsStatic,
-                node.IsPrivate);
+                node.IsPrivate,
+                node.IsConst);
             
             dynamicFunction.Parameters.Add(node.VariableName);
         }
@@ -114,17 +118,17 @@ public partial class Interpreter
 
         try
         {
-            // if (arguments.Count == function.Variables.Count)
-            //     for (var i = 0; i < function.Variables.Count; i++)
-            //         _variables[function.Parameters[i]] = arguments[i];
-
-            if (arguments.Count == function.Variables.Count)
-                for (var i = 0; i < function.Variables.Count; i++)
+            if (arguments.Count == function.Parameters.Count)
+                for (var i = 0; i < function.Parameters.Count; i++)
                     function.Variables[function.Parameters[i]] = new Variable(
                         function.Parameters[i], 
                         arguments[i],
                         function.IsStatic,
+                        false,
                         false);
+            else 
+                throw new QlangRuntimeException("The number of arguments must be equal to the number of params", 
+                    null, GetStackTrace());
             
             string returnValue = null;
             _break = false;
@@ -158,13 +162,19 @@ public partial class Interpreter
         switch (statement)
         {
             case AssignmentNode assign:
+                if (CurrentContext.Function.Variables.TryGetValue(assign.VariableName, out var variable) && variable
+                        .IsConst)
+                    throw new QlangRuntimeException($"Can't re-assign const variable '{assign.VariableName}'",
+                        assign, GetStackTrace());
+                
                 Logger.Logger.Log("Interpreter: Execute statement (AssignmentNode)");
                 var value = EvaluateExpression(assign.Value);
                 CurrentContext.Function.Variables[assign.VariableName] = new Variable(
                     assign.VariableName, 
                     value, 
                     assign.IsStatic,
-                    assign.IsPrivate);
+                    assign.IsPrivate,
+                    assign.IsConst);
                 // _variables[assign.VariableName] = value;
                 break;
 
@@ -206,24 +216,25 @@ public partial class Interpreter
         if (_dynamicClasses.TryGetValue(call.ObjectName, out var value) && call.MethodName == "new")
             return value;
 
-        if (call is { ObjectName: "", MethodName: "csharp" })
+        if (call is { ObjectName: "", MethodName: "_str" })
+            return ParseString(string.Join("", args.Cast<string>()));
+
+        if (call is { ObjectName: "", MethodName: "_csharp" })
         {
             //CSharp.Execute(args.FirstOrDefault());
             var returnValue = CSharpCall($"{string.Join(",", args)}");
-
-            returnValue.Wait();
             
             Logger.Logger.Warn("Interpreter.ExecuteMethodCall: csharp.return_value: " + (returnValue == null ? "null" :
-                returnValue.Result?.ToString()));
+                returnValue.ToString()));
             
-            _contextStack.Push(new ASTContext
-            {
-                Class = null,
-                Function = null,
-                CurrentNode = call
-            });
+            // _contextStack.Push(new ASTContext
+            // {
+            //     Class = null,
+            //     Function = null,
+            //     CurrentNode = call
+            // });
             
-            return returnValue?.Result;
+            return returnValue;
         }
         
         if (call.ObjectName is "this" or "")
@@ -263,6 +274,45 @@ public partial class Interpreter
             GetStackTrace());
     }
 
+    // WARNING: is ChatGPT code
+    private static string ParseString(string input)
+    {
+        var sb = new StringBuilder();
+        for (var i = 0; i < input.Length; i++)
+        {
+            if (input[i] == '\\' && i + 1 < input.Length)
+            {
+                var next = input[i + 1];
+                switch (next)
+                {
+                    case 'n': sb.Append('\n');
+                        break;
+                    case 't': sb.Append('\t');
+                        break;
+                    case '\\': sb.Append('\\');
+                        break;
+                    case '"': sb.Append('"');
+                        break;
+                    default:
+                        sb.Append('\\').Append(next);
+                        break; // оставляем неизвестные
+                }
+
+                i++;
+            }
+            else
+                sb.Append(input[i]);
+        }
+
+        var processed = sb.ToString();
+
+        // 2) Экранируем кавычки для verbatim-строки (@"" -> двойные "")
+        processed = processed.Replace("\"", "\"\"");
+
+        // 3) Возвращаем вербатим-строку, которую можно вставлять в C# код
+        return $"@\"{processed}\"";
+    }
+
     private object ExecuteMethodCallClass(DynamicClass classNode, MethodCallNode call)
     {
         if (classNode.Body.FirstOrDefault(astNode => astNode is FunctionNode fn && fn.Name == call.MethodName) is not FunctionNode node)
@@ -276,18 +326,9 @@ public partial class Interpreter
     
         if (_contextStack.Count > 0)
         {
-            
-            
-            // CurrentContext.Class = classNode;
+            CurrentContext.Class = classNode;
+            Logger.Logger.Succ("ExecuteMethodCallClass.ContextClass: " + classNode.Name);
         }
-        
-        _contextStack.Push(new ASTContext
-        {
-            Class = classNode,
-            Function = ToDynamicFunction(node),
-            CurrentNode = call
-        });
-        Logger.Logger.Succ("ExecuteMethodCallClass.ContextClass: " + classNode.Name);
 
         try
         {
@@ -341,7 +382,7 @@ public partial class Interpreter
             if (expr is BinaryOperationNode binOp)
                 Logger.Logger.Error($"expr is BinaryOperationNode [{(binOp.Left as VariableNode)?.Name},{binOp
                 .Operator},{(binOp.Right as StringRefNode)?.Index}]");
-            
+
             throw new QlangRuntimeException(
                 $"Internal error: {ex.Message}", 
                 expr, 
@@ -375,17 +416,16 @@ public partial class Interpreter
             if (_contextStack.Count > 0 && CurrentContext?.Class != null && CurrentContext.Class.Variables.TryGetValue
                     (varNode.Name, out var))
                 return var.Value;
-            
+
             if (_dynamicClasses.TryGetValue(varNode.ClassName, out var dynamicClass) &&
                 dynamicClass.Variables.TryGetValue(varNode.Name, out var))
             {
                 if (var.IsPrivate)
                     throw new QlangRuntimeException("Scope can't be call from external class " +
-                                                    "because of is private scope" + 
-                                                    $" (class: {dynamicClass.Name}, scope: {var.Name})", 
+                                                    "because of is private scope" +
+                                                    $" (class: {dynamicClass.Name}, scope: {var.Name})",
                         varNode, GetStackTrace());
-                
-                Logger.Logger.Error($"Is not private variable ({var.IsPrivate})");
+
                 return var.Value;
             }
 
@@ -402,12 +442,17 @@ public partial class Interpreter
                     string name = var2.Value.Name;
                     Logger.Logger.Log($"Variable: {name} {val}");
                 }
-            } else Logger.Logger.Log($"Context Class is null");
+            }
+            else Logger.Logger.Log($"Context Class is null");
         }
         catch (QlangRuntimeException)
         {
             Logger.Logger.Error("GetVariable exception");
             throw;
+        }
+        catch (Exception ex)
+        {
+            Logger.Logger.Error(ex.ToString());
         }
 
         throw new QlangRuntimeException(
@@ -442,6 +487,141 @@ public partial class Interpreter
     }
 
     private object EvaluateBinaryOperation(BinaryOperationNode binOp)
+    {
+        Logger.Logger.Warn("Detected binary operation");
+        object left;
+        object right;
+        bool leftBool;
+        bool rightBool;
+        // Обработка логических операторов с ленивой оценкой
+        if (binOp.Operator == "&&")
+        {
+            left = EvaluateExpression(binOp.Left);
+            if (!bool.TryParse(left.ToString(), out leftBool))
+                throw new QlangRuntimeException(
+                    $"Type error: Left operand of '&&' must be boolean, got '{left}'",
+                    binOp, GetStackTrace());
+            
+            // Short-circuit: если левая часть false, правую не вычисляем
+            if (!leftBool) 
+            {
+                Logger.Logger.Warn($"Short-circuit &&: left is false, returning false");
+                return false;
+            }
+            
+            right = EvaluateExpression(binOp.Right);
+            if (!bool.TryParse(right.ToString(), out rightBool))
+                throw new QlangRuntimeException(
+                    $"Type error: Right operand of '&&' must be boolean, got '{right}'",
+                    binOp, GetStackTrace());
+            
+            Logger.Logger.Warn($"Operation &&: {leftBool} && {rightBool} = {rightBool}");
+            return rightBool;
+        }
+        
+        if (binOp.Operator == "||")
+        {
+            left = EvaluateExpression(binOp.Left);
+            if (!bool.TryParse(left.ToString(), out leftBool))
+                throw new QlangRuntimeException(
+                    $"Type error: Left operand of '||' must be boolean, got '{left}'",
+                    binOp, GetStackTrace());
+            
+            // Short-circuit: если левая часть true, правую не вычисляем
+            if (leftBool) 
+            {
+                Logger.Logger.Warn($"Short-circuit ||: left is true, returning true");
+                return true;
+            }
+            
+            right = EvaluateExpression(binOp.Right);
+            if (!bool.TryParse(right.ToString(), out rightBool))
+                throw new QlangRuntimeException(
+                    $"Type error: Right operand of '||' must be boolean, got '{right}'",
+                    binOp, GetStackTrace());
+            
+            Logger.Logger.Warn($"Operation ||: {leftBool} || {rightBool} = {rightBool}");
+            return rightBool;
+        }
+        
+        // Для остальных операторов вычисляем обе части
+        left = EvaluateExpression(binOp.Left);
+        right = EvaluateExpression(binOp.Right);
+        
+        Logger.Logger.Log($"EvaluateBinaryOperation.IsNumeric: ({left.ToString()})=" + left.ToString().IsNumber());
+        Logger.Logger.Log($"EvaluateBinaryOperation.IsNumeric: ({right.ToString()})=" + right.ToString().IsNumber());
+
+        if (bool.TryParse(left.ToString(), out leftBool) && bool.TryParse(right.ToString(), out rightBool))
+        {
+            Logger.Logger.Warn($"IsBooleanOperation: {left}{binOp.Operator}{right}");
+            return binOp.Operator switch
+            {
+                "==" => Equals(leftBool, rightBool),
+                "!=" => !Equals(leftBool, rightBool),
+                _ => throw new QlangRuntimeException(
+                    $"Unknown operator for boolean: {binOp.Operator}", 
+                    binOp, 
+                    GetStackTrace())
+            };
+        }
+
+        if (binOp.Operator == "Plus" && (left.ToString().IsNumber() == false || right.ToString().IsNumber() == false))
+            return left.ToString() + right.ToString();
+
+
+        if (left.ToString().IsNumber() == false || right.ToString().IsNumber() == false)
+        {
+            if (binOp.Operator is "==" or "!=")
+                return binOp.Operator switch
+                {
+                    "==" => Equals(left.ToString(), right.ToString()),
+                    "!=" => !Equals(left.ToString(), right.ToString()),
+                };
+            
+            throw new QlangRuntimeException(
+                $"Type error: Cannot apply operator '{binOp.Operator}' to " +
+                $"'{left?.ToString() ?? "null"}' (type={left?.GetType().Name}) and '{right?.ToString() ?? "null"}' (type={right?.GetType().Name})",
+                binOp,
+                GetStackTrace());
+        }
+        
+        try
+        {
+            var leftNum = left.ToString().ParseNumber();
+            var rightNum = right.ToString().ParseNumber();
+            Logger.Logger.Warn($"Operation: {left}{binOp.Operator}{right}");
+            return binOp.Operator switch
+            {
+                "==" => Equals(leftNum, rightNum),
+                "!=" => !Equals(leftNum, rightNum),
+                "Less" => leftNum < rightNum,
+                "Greater" => leftNum > rightNum,
+                ">=" => leftNum >= rightNum,
+                "<=" => leftNum <= rightNum,
+                "Plus" => leftNum + rightNum,
+                "Minus" => leftNum - rightNum,
+                "Star" => leftNum * rightNum,
+                "Slash" => DivideWithCheck(leftNum, rightNum, binOp),
+                _ => throw new QlangRuntimeException(
+                    $"Unknown operator: {binOp.Operator}", 
+                    binOp, 
+                    GetStackTrace())
+            };
+        }
+        catch (QlangRuntimeException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            throw new QlangRuntimeException(
+                $"Error evaluating operation: {ex.Message}",
+                binOp,
+                GetStackTrace());
+        }
+    }
+    
+   /* private object EvaluateBinaryOperation(BinaryOperationNode binOp)
     {
         Logger.Logger.Warn("Detected binary operation");
         var left = EvaluateExpression(binOp.Left);
@@ -507,22 +687,22 @@ public partial class Interpreter
                 binOp,
                 GetStackTrace());
         }
-    }
+    }*/
 
-    private Task<object> CSharpCall(string call)
+    private object CSharpCall(string call)
     {
         //
         // var type = Type.GetType(className);
         // var method = type?.GetMethod(methodName, [typeof(string)]);
         //
         // return method?.Invoke(null, args ?? []);
-        
         call = call.Replace("\\\"", "\"");
         Logger.Logger.Warn("C#_Script: " + call);
         
         try
         {
-            return Task.FromResult(CSharpScript.EvaluateAsync(call).Result);
+            return CSharpCaller.Call(call);
+            // return Task.FromResult(CSharpScript.EvaluateAsync(call).Result);
         }
         catch (AggregateException ex)
         {

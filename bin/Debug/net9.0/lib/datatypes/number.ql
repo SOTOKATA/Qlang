@@ -1,25 +1,33 @@
-include "@lib/console"
 include "@lib/throw"
 
+// Class to make operations with numbers
 class Number:
-    function getUsings():
-        return usings
-
+    // Basic c# usings for this class
     private let usings = "using System; using System.Globalization; "
-        
-    function getMinValue():
-        return csharp(usings + "double.MinValue.ToString(CultureInfo.InvariantCulture)")
 
-    function getMaxValue():
-        return csharp(usings + "double.MaxValue.ToString(CultureInfo.InvariantCulture)")
+    // used string because of number structure with E+
+    const let MIN_VALUE = "-1.7976931348623157E+308"
+    const let MAX_VALUE = "1.7976931348623157E+308"
 
+    // check if 'var' is number
     function isNumber(let var):
-        return csharp(usings + "double.TryParse(\"" + var + "\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)")
+        return _csharp(usings + "double.TryParse(" + _str(var) + ", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)")
 
+    // get random number with range 'min' to 'max'
     function randInt(let min, let max):
         if min >= max:
             Throw.exception("Minimum can't be more than maximum")
-        return csharp(usings + "new Random().Next(" + min + "," + max + ")")
 
+        // Convert '3.42...' to '3'
+        min = toInt(min)
+        max = toInt(max)
+
+        return _csharp(usings + "new Random().Next(" + min + "," + max + ")")
+
+    // Get int styled number ('3.421' to '3')
+    function toInt(let float):
+        return toFixed(float, "0")
+
+    // Change numeric style (ex.: '3.214' to '3.2' with pattern '0.0')
     function toFixed(let number, let pattern):
-        return csharp(usings + number + ".ToString(\"" + pattern + "\")")
+        return _csharp(usings + number + ".ToString(" + _str(pattern) + ")")

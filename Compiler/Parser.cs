@@ -34,12 +34,20 @@ public class Parser
         Logger.Logger.Log($"CompilationProcess: Parsing statement ({Current().TokenType}, {Current().Value})");
 
         bool isStatic = false;
+        bool isConst = false;
         bool isPrivate = false;
 
         if (Check(Tokens.Keyword) && Current().Value == "static")
         {
             Logger.Logger.Warn("IsStatic = true");
             isStatic = true;
+            Advance();
+        }
+        
+        if (Check(Tokens.Keyword) && Current().Value == "const")
+        {
+            Logger.Logger.Warn("IsConst = true");
+            isConst = true;
             Advance();
         }
 
@@ -51,52 +59,52 @@ public class Parser
         }
         
         // function declaration
-        if (Check(Tokens.Keyword) && Current().Value == "function")
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.FunctionDeclaration)
         {
             Logger.Logger.Log("CompilationProcess.End: Parsing statement");
             return ParseFunction(isStatic, isPrivate);
         }
         
         // class declaration
-        if (Check(Tokens.Keyword) && Current().Value == "class")
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.ClassDeclaration)
         {
             Logger.Logger.Log("CompilationProcess.End: Parsing statement");
             return ParseClass();
         }
 
         // if statement
-        if (Check(Tokens.Keyword) && Current().Value == "if")
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.IfBlock)
         {
             Logger.Logger.Log("CompilationProcess.End: Parsing statement");
             return ParseIf();
         }
         
         // while statement
-        if (Check(Tokens.Keyword) && Current().Value == "while")
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.WhileBlock)
         {
             Logger.Logger.Log("CompilationProcess.End: Parsing statement");
             return ParseWhile();
         }
         
         // do-while statement
-        if (Check(Tokens.Keyword) && Current().Value == "do_while")
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.DoWhileBlock)
         {
             Logger.Logger.Log("CompilationProcess.End: Parsing statement");
             return ParseWhile(true);
         }
         
         // return statement
-        if (Check(Tokens.Keyword) && Current().Value == "return")
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.ReturnKeyword)
         {
             Logger.Logger.Log("CompilationProcess.End: Parsing statement");
             return ParseReturn();
         }
 
         // assignment
-        if (Check(Tokens.Keyword) && Current().Value == "let")
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.VariableDeclaration)
         {
             Logger.Logger.Log("CompilationProcess.End: Parsing statement");
-            return ParseVariableDeclaration(isStatic, isPrivate);
+            return ParseVariableDeclaration(isStatic, isPrivate, isConst);
         }
 
         // method call statement (Object.method(...)) || Call method from class pointer
@@ -111,10 +119,10 @@ public class Parser
         throw new Exception($"Unexpected token: {Current().TokenType}");
     }
 
-    private AssignmentNode ParseVariableDeclaration(bool isStatic = false, bool isPrivate = false)
+    private AssignmentNode ParseVariableDeclaration(bool isStatic = false, bool isPrivate = false, bool isConst = false)
     {
         Logger.Logger.Log("CompilationProcess: Parsing variable declaration");
-        if (!Check(Tokens.Keyword) || Current().Value != "let")
+        if (!Check(Tokens.Keyword) || Current().Value != Keywords.VariableDeclaration)
             throw new Exception($"(ParseVariableDeclaration) Unexpected token: {Current().TokenType}");
         
         Advance();
@@ -129,7 +137,7 @@ public class Parser
         }
         
         Logger.Logger.Log($"CompilationProcess.End: Parsing Variable declaration (Name: {name} Value: {value?.GetType().Name ?? "Null"})");
-        return new AssignmentNode(isStatic, isPrivate) { 
+        return new AssignmentNode(isStatic, isPrivate, isConst) { 
             VariableName = name, 
             Value = value
         };
@@ -139,7 +147,7 @@ public class Parser
     {
         Logger.Logger.Log("CompilationProcess: Parsing function");
         
-        Expect(Tokens.Keyword, "function");
+        Expect(Tokens.Keyword, Keywords.FunctionDeclaration);
         var name = Expect(Tokens.Identifier).Value;
         Expect(Tokens.LParen);
         
@@ -174,7 +182,7 @@ public class Parser
     private ClassNode ParseClass()
     {
         Logger.Logger.Log("CompilationProcess: Parsing class");
-        Expect(Tokens.Keyword, "class");
+        Expect(Tokens.Keyword, Keywords.ClassDeclaration);
         var name = Expect(Tokens.Identifier).Value;
         
         Expect(Tokens.Colon);
@@ -192,7 +200,7 @@ public class Parser
     private WhileNode ParseWhile(bool isDoWhile = false)
     {
         Logger.Logger.Log("CompilationProcess: Parsing while");
-        Expect(Tokens.Keyword, isDoWhile ? "do_while" : "while");
+        Expect(Tokens.Keyword, isDoWhile ? Keywords.DoWhileBlock : Keywords.WhileBlock);
         var condition = ParseExpression();
         Expect(Tokens.Colon);
         Expect(Tokens.NewLine);
@@ -209,7 +217,7 @@ public class Parser
     private IfNode ParseIf()
     {
         Logger.Logger.Log("CompilationProcess: Parsing if");
-        Expect(Tokens.Keyword, "if");
+        Expect(Tokens.Keyword, Keywords.IfBlock);
         var condition = ParseExpression();
         Expect(Tokens.Colon);
         Expect(Tokens.NewLine);
@@ -221,11 +229,11 @@ public class Parser
 
         List<ASTNode> elseBlock = [];
         
-        if (Check(Tokens.Keyword) && Current().Value == "else")
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.ElseBlock)
         {
             Advance();
             
-            if (Check(Tokens.Keyword) && Current().Value == "if")
+            if (Check(Tokens.Keyword) && Current().Value == Keywords.IfBlock)
                 elseBlock.Add(ParseIf());
             else
             {
@@ -280,6 +288,24 @@ public class Parser
     {
         Logger.Logger.Log("CompilationProcess: Parsing expression");
         var left = ParsePrimary();
+        
+        if (Check(Tokens.And) && Peek()?.TokenType == Tokens.And)
+        {
+            Advance(); // первый &
+            Advance(); // второй &
+            var right = ParseExpression();
+            Logger.Logger.Log("CompilationProcess.End: Parsing expression");
+            return new BinaryOperationNode { Left = left, Operator = "&&", Right = right };
+        }
+    
+        if (Check(Tokens.Or) && Peek()?.TokenType == Tokens.Or)
+        {
+            Advance(); // первый |
+            Advance(); // второй |
+            var right = ParseExpression();
+            Logger.Logger.Log("CompilationProcess.End: Parsing expression");
+            return new BinaryOperationNode { Left = left, Operator = "||", Right = right };
+        }
 
         // Операторы сравнения: ==
         if (Check(Tokens.Equals) && Peek()?.TokenType == Tokens.Equals)
@@ -360,7 +386,7 @@ public class Parser
     {
         Logger.Logger.Log("CompilationProcess: Parsing primary");
         // bool return
-        if (Check(Tokens.Keyword) && (Current().Value == "false" || Current().Value == "true"))
+        if (Check(Tokens.Keyword) && (Current().Value == Keywords.FalseKeyword || Current().Value == Keywords.TrueKeyword))
         {
             Logger.Logger.Log("CompilationProcess.End: Parsing primary");
             return new BooleanNode { Value = bool.Parse(Advance().Value) };
@@ -468,7 +494,7 @@ public class Parser
             {
                 Logger.Logger.Log($"CompilationProcess.End: Parsing primary (AssignmentNode)");
                 Advance();
-                return new AssignmentNode(false, false)
+                return new AssignmentNode(false, false, false)
                 {
                     VariableName = firstIdentifier,
                     Value = ParseExpression(),

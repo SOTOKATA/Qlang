@@ -1,49 +1,87 @@
-include "@lib/throw"
 include "@lib/console"
 include "@lib/datatypes/number"
 include "@lib/datatypes/string"
 include "@lib/math"
+// In development
+// include "@lib/compatibility/csharp"
 
 function main():
     Console.println("<--- Menu demo --->")
     Console.println("1. Numeric")
+    Console.println("2. Strings")
+    
+    // TODO: bool re-write parsing (with || and &&)
+    do_while String.isNullOrWhiteSpace(choice) == true || Number.isNumber(choice) == false:
+        Console.print("Print choice (1-2): ")
+        let choice = Console.readln()
 
-    Console.print("Print choice (1-5): ")
-    let choice = Console.readln()
+        if String.isNullOrWhiteSpace(choice) == true:
+            printException("You print empty string!")
 
-    if choice == 1:
+        if Number.isNumber(choice) == false:
+            printException("You print not number!")
+
+    if choice == "1":
         numericDemo()
-    else if choice == 2:
+    else if choice == "2":
         stringDemo()
 
+    Console.println("\nCurrent presentation ended")
+
 function stringDemo():
-    return ""
+    Console.println("")
+
+    do_while String.isNullOrWhiteSpace(input) == true: 
+        Console.print("Print anything: ")
+        let input = Console.readln()
+
+        if String.isNullOrWhiteSpace(input) == true:
+            printException("You must to print anything!")
+     
+    Console.println("\nInput length: " + String.getLength(input))
+    Console.println("Input trim: '" + String.trim(input) + "'")
+    Console.println("Input trim start: '" + String.trimStart(input) + "'")
+    Console.println("Input trim end: '" + String.trimEnd(input) + "'")
+    
+    if String.getLength(input) > 2:
+        Console.println("Input first two characters: '" + String.subString(input, 0, 2) + "'")
 
 function numericDemo():
-    Console.println("Welcome to numeric demo!")
+    Console.println("\nWelcome to numeric demo!")
 
     let num1 = getNumberFromConsole("Write first number: ")
     let num2 = getNumberFromConsole("Write second number: ")
 
-    Console.println("First number: " + num1)
+    Console.println("\nFirst number: " + num1)
     Console.println("Second number: " + num2)
 
-    Console.println("<--- Math --->")
+    Console.println("\n<--- Math --->")
     Console.println("Sum: " + Math.sum(num1, num2))
     Console.println("Substration: " + Math.sub(num1, num2))
     Console.println("Multiplication: " + Math.mult(num1, num2))
 
-    let res = Number.toFixed(Math.div(num1, num2), "0.00")
-
     if num2 != 0:
-        Console.println("Division: " + res)
+        Console.println("Division: " + Number.toFixed(Math.div(num1, num2), "0.00"))
     else:
-        Console.println("Division: Can't divide by 0!")
+        printException("Division: Can't divide by 0!")
 
     if num1 < num2:
         Console.println("Random number (range: " + num1 + "-" + num2 + "): " + Number.randInt(num1, num2))
     else:
-        Console.println("Random number: Error, first number can't be more than or equal second")
+        printException("Random number: Error, first number can't be more than or equal second")
+
+    Console.println("\n<--- Number class --->")
+    Console.println("First number as integer: " + Number.toInt(num1))
+    Console.println("Second number as integer: " + Number.toInt(num2))
+
+    Console.println("\nFirst number with pattern '0.00': " + Number.toFixed(num1, "0.00"))
+    Console.println("Second number with pattern '0.00': " + Number.toFixed(num2, "0.00"))
+
+    Console.println("\nPI: " + Math.PI)
+
+    Console.println("\nMinimum number value: " + Number.MIN_VALUE)
+    Console.println("Maximum number value: " + Number.MAX_VALUE)
+
 
 function printException(let msg):
     Console.setForeColor("red")

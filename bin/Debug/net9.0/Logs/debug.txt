@@ -1736,139 +1736,109 @@ Token (Ln:120 Idx:15): Identifier
 Token (Ln:120 Idx:15): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:120 Idx:22): Identifier
-Token (Ln:120 Idx:22): Dot
-Token (Ln:120 Idx:32): Identifier
-Token (Ln:120 Idx:32): LParen
-Token (Ln:120 Idx:33): RParen
+Token (Ln:120 Idx:31): Identifier
+Token (Ln:120 Idx:31): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:120 Idx:34): RParen
-CompilationProcess.End: Parsing primary
-Token (Ln:120 Idx:36): NewLine
+Token (Ln:120 Idx:33): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing statement (Identifier, Console)
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
 Token (Ln:121 Idx:7): Identifier
 Token (Ln:121 Idx:7): Dot
-Token (Ln:121 Idx:14): Identifier
-Token (Ln:121 Idx:14): LParen
-Token (Ln:121 Idx:15): RParen
+Token (Ln:121 Idx:15): Identifier
+Token (Ln:121 Idx:15): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:121 Idx:31): Identifier
+Token (Ln:121 Idx:31): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:121 Idx:17): NewLine
+Token (Ln:121 Idx:33): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing statement (Identifier, Console)
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
 Token (Ln:123 Idx:7): Identifier
 Token (Ln:123 Idx:7): Dot
-Token (Ln:123 Idx:15): Identifier
-Token (Ln:123 Idx:15): LParen
+Token (Ln:123 Idx:13): Identifier
+Token (Ln:123 Idx:13): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:123 Idx:31): Identifier
-Token (Ln:123 Idx:31): RParen
+Token (Ln:123 Idx:29): Identifier
+Token (Ln:123 Idx:29): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:123 Idx:33): NewLine
-CompilationProcess.End: Parsing statement
-CompilationProcess: Parsing statement (Identifier, Console)
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:124 Idx:7): Identifier
-Token (Ln:124 Idx:7): Dot
-Token (Ln:124 Idx:15): Identifier
-Token (Ln:124 Idx:15): LParen
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:124 Idx:31): Identifier
-Token (Ln:124 Idx:31): RParen
-CompilationProcess.End: Parsing primary
-Token (Ln:124 Idx:33): NewLine
-CompilationProcess.End: Parsing statement
-CompilationProcess: Parsing statement (Identifier, Console)
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:126 Idx:7): Identifier
-Token (Ln:126 Idx:7): Dot
-Token (Ln:126 Idx:13): Identifier
-Token (Ln:126 Idx:13): LParen
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:126 Idx:29): Identifier
-Token (Ln:126 Idx:29): RParen
-CompilationProcess.End: Parsing primary
-Token (Ln:126 Idx:31): NewLine
+Token (Ln:123 Idx:31): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing statement (Keyword, let)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing variable declaration
-Token (Ln:127 Idx:3): Keyword
-Token (Ln:127 Idx:10): Identifier
-Token (Ln:127 Idx:11): Equals
+Token (Ln:124 Idx:3): Keyword
+Token (Ln:124 Idx:10): Identifier
+Token (Ln:124 Idx:11): Equals
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:127 Idx:20): Identifier
-Token (Ln:127 Idx:20): Dot
-Token (Ln:127 Idx:27): Identifier
-Token (Ln:127 Idx:27): LParen
-Token (Ln:127 Idx:28): RParen
+Token (Ln:124 Idx:20): Identifier
+Token (Ln:124 Idx:20): Dot
+Token (Ln:124 Idx:27): Identifier
+Token (Ln:124 Idx:27): LParen
+Token (Ln:124 Idx:28): RParen
 CompilationProcess.End: Parsing primary
 CompilationProcess.End: Parsing Variable declaration (Name: choice Value: MethodCallNode)
-Token (Ln:127 Idx:30): NewLine
+Token (Ln:124 Idx:30): NewLine
 CompilationProcess: Parsing statement (Keyword, if)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing if
-Token (Ln:129 Idx:2): Keyword
+Token (Ln:126 Idx:2): Keyword
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:129 Idx:9): Identifier
+Token (Ln:126 Idx:9): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: choice)
-Token (Ln:129 Idx:10): Equals
-Token (Ln:129 Idx:11): Equals
+Token (Ln:126 Idx:10): Equals
+Token (Ln:126 Idx:11): Equals
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:129 Idx:27): Identifier
+Token (Ln:126 Idx:27): Identifier
 CompilationProcess.End: Parsing expression
-Token (Ln:129 Idx:27): Colon
-Token (Ln:129 Idx:29): NewLine
+Token (Ln:126 Idx:27): Colon
+Token (Ln:126 Idx:29): NewLine
 Token (Ln:-1 Idx:-1): Indent
 CompilationProcess: Parsing block
 CompilationProcess: Parsing statement (Identifier, numericDemo)
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:130 Idx:11): Identifier
-Token (Ln:130 Idx:11): LParen
-Token (Ln:130 Idx:12): RParen
+Token (Ln:127 Idx:11): Identifier
+Token (Ln:127 Idx:11): LParen
+Token (Ln:127 Idx:12): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:130 Idx:14): NewLine
+Token (Ln:127 Idx:14): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess.End: Parsing block
 Token (Ln:-1 Idx:-1): Dedent
-Token (Ln:131 Idx:4): Keyword
+Token (Ln:128 Idx:4): Keyword
 CompilationProcess: Parsing if
-Token (Ln:131 Idx:7): Keyword
+Token (Ln:128 Idx:7): Keyword
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:131 Idx:14): Identifier
+Token (Ln:128 Idx:14): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: choice)
-Token (Ln:131 Idx:15): Equals
-Token (Ln:131 Idx:16): Equals
+Token (Ln:128 Idx:15): Equals
+Token (Ln:128 Idx:16): Equals
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:131 Idx:32): Identifier
+Token (Ln:128 Idx:32): Identifier
 CompilationProcess.End: Parsing expression
-Token (Ln:131 Idx:32): Colon
-Token (Ln:131 Idx:34): NewLine
+Token (Ln:128 Idx:32): Colon
+Token (Ln:128 Idx:34): NewLine
 Token (Ln:-1 Idx:-1): Indent
 CompilationProcess: Parsing block
 CompilationProcess: Parsing statement (Identifier, stringDemo)
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:132 Idx:10): Identifier
-Token (Ln:132 Idx:10): LParen
-Token (Ln:132 Idx:11): RParen
+Token (Ln:129 Idx:10): Identifier
+Token (Ln:129 Idx:10): LParen
+Token (Ln:129 Idx:11): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:132 Idx:13): NewLine
+Token (Ln:129 Idx:13): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess.End: Parsing block
 Token (Ln:-1 Idx:-1): Dedent
@@ -1880,22 +1850,22 @@ CompilationProcess.End: Parsing function
 CompilationProcess: Parsing statement (Keyword, function)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing function
-Token (Ln:134 Idx:8): Keyword
-Token (Ln:134 Idx:19): Identifier
-Token (Ln:134 Idx:19): LParen
-Token (Ln:134 Idx:20): RParen
-Token (Ln:134 Idx:21): Colon
-Token (Ln:134 Idx:23): NewLine
+Token (Ln:131 Idx:8): Keyword
+Token (Ln:131 Idx:19): Identifier
+Token (Ln:131 Idx:19): LParen
+Token (Ln:131 Idx:20): RParen
+Token (Ln:131 Idx:21): Colon
+Token (Ln:131 Idx:23): NewLine
 Token (Ln:-1 Idx:-1): Indent
 CompilationProcess: Parsing block
 CompilationProcess: Parsing statement (Keyword, return)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing return
-Token (Ln:135 Idx:6): Keyword
+Token (Ln:132 Idx:6): Keyword
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:135 Idx:22): Identifier
-Token (Ln:135 Idx:23): NewLine
+Token (Ln:132 Idx:22): Identifier
+Token (Ln:132 Idx:23): NewLine
 CompilationProcess.End: Parsing return
 CompilationProcess.End: Parsing block
 Token (Ln:-1 Idx:-1): Dedent
@@ -1903,62 +1873,102 @@ CompilationProcess.End: Parsing function
 CompilationProcess: Parsing statement (Keyword, function)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing function
-Token (Ln:137 Idx:8): Keyword
-Token (Ln:137 Idx:20): Identifier
-Token (Ln:137 Idx:20): LParen
-Token (Ln:137 Idx:21): RParen
-Token (Ln:137 Idx:22): Colon
-Token (Ln:137 Idx:24): NewLine
+Token (Ln:134 Idx:8): Keyword
+Token (Ln:134 Idx:20): Identifier
+Token (Ln:134 Idx:20): LParen
+Token (Ln:134 Idx:21): RParen
+Token (Ln:134 Idx:22): Colon
+Token (Ln:134 Idx:24): NewLine
 Token (Ln:-1 Idx:-1): Indent
 CompilationProcess: Parsing block
 CompilationProcess: Parsing statement (Identifier, Console)
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:138 Idx:7): Identifier
-Token (Ln:138 Idx:7): Dot
-Token (Ln:138 Idx:15): Identifier
-Token (Ln:138 Idx:15): LParen
+Token (Ln:135 Idx:7): Identifier
+Token (Ln:135 Idx:7): Dot
+Token (Ln:135 Idx:15): Identifier
+Token (Ln:135 Idx:15): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:135 Idx:31): Identifier
+Token (Ln:135 Idx:31): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:135 Idx:33): NewLine
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing statement (Keyword, let)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing variable declaration
+Token (Ln:137 Idx:3): Keyword
+Token (Ln:137 Idx:8): Identifier
+Token (Ln:137 Idx:9): Equals
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:137 Idx:31): Identifier
+Token (Ln:137 Idx:31): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:137 Idx:47): Identifier
+Token (Ln:137 Idx:47): RParen
+CompilationProcess.End: Parsing primary
+CompilationProcess.End: Parsing Variable declaration (Name: num1 Value: MethodCallNode)
+Token (Ln:137 Idx:49): NewLine
+CompilationProcess: Parsing statement (Keyword, let)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing variable declaration
+Token (Ln:138 Idx:3): Keyword
+Token (Ln:138 Idx:8): Identifier
+Token (Ln:138 Idx:9): Equals
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
 Token (Ln:138 Idx:31): Identifier
-Token (Ln:138 Idx:31): RParen
+Token (Ln:138 Idx:31): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:138 Idx:47): Identifier
+Token (Ln:138 Idx:47): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:138 Idx:33): NewLine
-CompilationProcess.End: Parsing statement
-CompilationProcess: Parsing statement (Keyword, let)
-CompilationProcess.End: Parsing statement
-CompilationProcess: Parsing variable declaration
-Token (Ln:140 Idx:3): Keyword
-Token (Ln:140 Idx:8): Identifier
-Token (Ln:140 Idx:9): Equals
+CompilationProcess.End: Parsing Variable declaration (Name: num2 Value: MethodCallNode)
+Token (Ln:138 Idx:49): NewLine
+CompilationProcess: Parsing statement (Identifier, Console)
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:140 Idx:7): Identifier
+Token (Ln:140 Idx:7): Dot
+Token (Ln:140 Idx:15): Identifier
+Token (Ln:140 Idx:15): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
 Token (Ln:140 Idx:31): Identifier
-Token (Ln:140 Idx:31): LParen
+Token (Ln:140 Idx:32): Plus
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:140 Idx:47): Identifier
-Token (Ln:140 Idx:47): RParen
+Token (Ln:140 Idx:38): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: num1)
+CompilationProcess.End: Parsing expression
+Token (Ln:140 Idx:38): RParen
 CompilationProcess.End: Parsing primary
-CompilationProcess.End: Parsing Variable declaration (Name: num1 Value: MethodCallNode)
-Token (Ln:140 Idx:49): NewLine
-CompilationProcess: Parsing statement (Keyword, let)
+Token (Ln:140 Idx:40): NewLine
 CompilationProcess.End: Parsing statement
-CompilationProcess: Parsing variable declaration
-Token (Ln:141 Idx:3): Keyword
-Token (Ln:141 Idx:8): Identifier
-Token (Ln:141 Idx:9): Equals
+CompilationProcess: Parsing statement (Identifier, Console)
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:141 Idx:7): Identifier
+Token (Ln:141 Idx:7): Dot
+Token (Ln:141 Idx:15): Identifier
+Token (Ln:141 Idx:15): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
 Token (Ln:141 Idx:31): Identifier
-Token (Ln:141 Idx:31): LParen
+Token (Ln:141 Idx:32): Plus
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:141 Idx:47): Identifier
-Token (Ln:141 Idx:47): RParen
+Token (Ln:141 Idx:38): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: num2)
+CompilationProcess.End: Parsing expression
+Token (Ln:141 Idx:38): RParen
 CompilationProcess.End: Parsing primary
-CompilationProcess.End: Parsing Variable declaration (Name: num2 Value: MethodCallNode)
-Token (Ln:141 Idx:49): NewLine
+Token (Ln:141 Idx:40): NewLine
+CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing statement (Identifier, Console)
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
@@ -1969,15 +1979,9 @@ Token (Ln:143 Idx:15): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
 Token (Ln:143 Idx:31): Identifier
-Token (Ln:143 Idx:32): Plus
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:143 Idx:38): Identifier
-CompilationProcess.End: Parsing primary (VariableNode: num1)
-CompilationProcess.End: Parsing expression
-Token (Ln:143 Idx:38): RParen
+Token (Ln:143 Idx:31): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:143 Idx:40): NewLine
+Token (Ln:143 Idx:33): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing statement (Identifier, Console)
 CompilationProcess: Parsing expression
@@ -1993,11 +1997,57 @@ Token (Ln:144 Idx:32): Plus
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
 Token (Ln:144 Idx:38): Identifier
+Token (Ln:144 Idx:38): Dot
+Token (Ln:144 Idx:42): Identifier
+Token (Ln:144 Idx:42): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:144 Idx:47): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: num1)
+Token (Ln:144 Idx:47): Comma
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:144 Idx:53): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: num2)
-CompilationProcess.End: Parsing expression
-Token (Ln:144 Idx:38): RParen
+Token (Ln:144 Idx:53): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:144 Idx:40): NewLine
+CompilationProcess.End: Parsing expression
+Token (Ln:144 Idx:54): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:144 Idx:56): NewLine
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing statement (Identifier, Console)
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:145 Idx:7): Identifier
+Token (Ln:145 Idx:7): Dot
+Token (Ln:145 Idx:15): Identifier
+Token (Ln:145 Idx:15): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:145 Idx:31): Identifier
+Token (Ln:145 Idx:32): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:145 Idx:38): Identifier
+Token (Ln:145 Idx:38): Dot
+Token (Ln:145 Idx:42): Identifier
+Token (Ln:145 Idx:42): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:145 Idx:47): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: num1)
+Token (Ln:145 Idx:47): Comma
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:145 Idx:53): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: num2)
+Token (Ln:145 Idx:53): RParen
+CompilationProcess.End: Parsing primary
+CompilationProcess.End: Parsing expression
+Token (Ln:145 Idx:54): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:145 Idx:56): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing statement (Identifier, Console)
 CompilationProcess: Parsing expression
@@ -2009,189 +2059,144 @@ Token (Ln:146 Idx:15): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
 Token (Ln:146 Idx:31): Identifier
-Token (Ln:146 Idx:31): RParen
-CompilationProcess.End: Parsing primary
-Token (Ln:146 Idx:33): NewLine
-CompilationProcess.End: Parsing statement
-CompilationProcess: Parsing statement (Identifier, Console)
+Token (Ln:146 Idx:32): Plus
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:147 Idx:7): Identifier
-Token (Ln:147 Idx:7): Dot
-Token (Ln:147 Idx:15): Identifier
-Token (Ln:147 Idx:15): LParen
+Token (Ln:146 Idx:38): Identifier
+Token (Ln:146 Idx:38): Dot
+Token (Ln:146 Idx:43): Identifier
+Token (Ln:146 Idx:43): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:147 Idx:31): Identifier
-Token (Ln:147 Idx:32): Plus
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:147 Idx:38): Identifier
-Token (Ln:147 Idx:38): Dot
-Token (Ln:147 Idx:42): Identifier
-Token (Ln:147 Idx:42): LParen
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:147 Idx:47): Identifier
+Token (Ln:146 Idx:48): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: num1)
-Token (Ln:147 Idx:47): Comma
+Token (Ln:146 Idx:48): Comma
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:147 Idx:53): Identifier
+Token (Ln:146 Idx:54): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: num2)
-Token (Ln:147 Idx:53): RParen
+Token (Ln:146 Idx:54): RParen
 CompilationProcess.End: Parsing primary
 CompilationProcess.End: Parsing expression
-Token (Ln:147 Idx:54): RParen
+Token (Ln:146 Idx:55): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:147 Idx:56): NewLine
-CompilationProcess.End: Parsing statement
-CompilationProcess: Parsing statement (Identifier, Console)
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:148 Idx:7): Identifier
-Token (Ln:148 Idx:7): Dot
-Token (Ln:148 Idx:15): Identifier
-Token (Ln:148 Idx:15): LParen
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:148 Idx:31): Identifier
-Token (Ln:148 Idx:32): Plus
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:148 Idx:38): Identifier
-Token (Ln:148 Idx:38): Dot
-Token (Ln:148 Idx:42): Identifier
-Token (Ln:148 Idx:42): LParen
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:148 Idx:47): Identifier
-CompilationProcess.End: Parsing primary (VariableNode: num1)
-Token (Ln:148 Idx:47): Comma
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:148 Idx:53): Identifier
-CompilationProcess.End: Parsing primary (VariableNode: num2)
-Token (Ln:148 Idx:53): RParen
-CompilationProcess.End: Parsing primary
-CompilationProcess.End: Parsing expression
-Token (Ln:148 Idx:54): RParen
-CompilationProcess.End: Parsing primary
-Token (Ln:148 Idx:56): NewLine
-CompilationProcess.End: Parsing statement
-CompilationProcess: Parsing statement (Identifier, Console)
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:149 Idx:7): Identifier
-Token (Ln:149 Idx:7): Dot
-Token (Ln:149 Idx:15): Identifier
-Token (Ln:149 Idx:15): LParen
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:149 Idx:31): Identifier
-Token (Ln:149 Idx:32): Plus
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:149 Idx:38): Identifier
-Token (Ln:149 Idx:38): Dot
-Token (Ln:149 Idx:43): Identifier
-Token (Ln:149 Idx:43): LParen
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:149 Idx:48): Identifier
-CompilationProcess.End: Parsing primary (VariableNode: num1)
-Token (Ln:149 Idx:48): Comma
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:149 Idx:54): Identifier
-CompilationProcess.End: Parsing primary (VariableNode: num2)
-Token (Ln:149 Idx:54): RParen
-CompilationProcess.End: Parsing primary
-CompilationProcess.End: Parsing expression
-Token (Ln:149 Idx:55): RParen
-CompilationProcess.End: Parsing primary
-Token (Ln:149 Idx:57): NewLine
+Token (Ln:146 Idx:57): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing statement (Keyword, let)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing variable declaration
-Token (Ln:151 Idx:3): Keyword
-Token (Ln:151 Idx:7): Identifier
-Token (Ln:151 Idx:8): Equals
+Token (Ln:148 Idx:3): Keyword
+Token (Ln:148 Idx:7): Identifier
+Token (Ln:148 Idx:8): Equals
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:151 Idx:16): Identifier
-Token (Ln:151 Idx:16): Dot
-Token (Ln:151 Idx:24): Identifier
-Token (Ln:151 Idx:24): LParen
+Token (Ln:148 Idx:16): Identifier
+Token (Ln:148 Idx:16): Dot
+Token (Ln:148 Idx:24): Identifier
+Token (Ln:148 Idx:24): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:151 Idx:29): Identifier
-Token (Ln:151 Idx:29): Dot
-Token (Ln:151 Idx:33): Identifier
-Token (Ln:151 Idx:33): LParen
+Token (Ln:148 Idx:29): Identifier
+Token (Ln:148 Idx:29): Dot
+Token (Ln:148 Idx:33): Identifier
+Token (Ln:148 Idx:33): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:151 Idx:38): Identifier
+Token (Ln:148 Idx:38): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: num1)
-Token (Ln:151 Idx:38): Comma
+Token (Ln:148 Idx:38): Comma
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:151 Idx:44): Identifier
+Token (Ln:148 Idx:44): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: num2)
-Token (Ln:151 Idx:44): RParen
+Token (Ln:148 Idx:44): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:151 Idx:45): Comma
+Token (Ln:148 Idx:45): Comma
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:151 Idx:62): Identifier
-Token (Ln:151 Idx:62): RParen
+Token (Ln:148 Idx:62): Identifier
+Token (Ln:148 Idx:62): RParen
 CompilationProcess.End: Parsing primary
 CompilationProcess.End: Parsing Variable declaration (Name: res Value: MethodCallNode)
-Token (Ln:151 Idx:64): NewLine
+Token (Ln:148 Idx:64): NewLine
 CompilationProcess: Parsing statement (Keyword, if)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing if
-Token (Ln:153 Idx:2): Keyword
+Token (Ln:150 Idx:2): Keyword
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:153 Idx:7): Identifier
+Token (Ln:150 Idx:7): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: num2)
-Token (Ln:153 Idx:8): Not
-Token (Ln:153 Idx:9): Equals
+Token (Ln:150 Idx:8): Not
+Token (Ln:150 Idx:9): Equals
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:153 Idx:25): Identifier
+Token (Ln:150 Idx:25): Identifier
 CompilationProcess.End: Parsing expression
-Token (Ln:153 Idx:25): Colon
-Token (Ln:153 Idx:27): NewLine
+Token (Ln:150 Idx:25): Colon
+Token (Ln:150 Idx:27): NewLine
 Token (Ln:-1 Idx:-1): Indent
 CompilationProcess: Parsing block
 CompilationProcess: Parsing statement (Identifier, Console)
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:154 Idx:7): Identifier
-Token (Ln:154 Idx:7): Dot
-Token (Ln:154 Idx:15): Identifier
-Token (Ln:154 Idx:15): LParen
+Token (Ln:151 Idx:7): Identifier
+Token (Ln:151 Idx:7): Dot
+Token (Ln:151 Idx:15): Identifier
+Token (Ln:151 Idx:15): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:154 Idx:31): Identifier
-Token (Ln:154 Idx:32): Plus
+Token (Ln:151 Idx:31): Identifier
+Token (Ln:151 Idx:32): Plus
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:154 Idx:37): Identifier
+Token (Ln:151 Idx:37): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: res)
 CompilationProcess.End: Parsing expression
-Token (Ln:154 Idx:37): RParen
+Token (Ln:151 Idx:37): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:154 Idx:39): NewLine
+Token (Ln:151 Idx:39): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess.End: Parsing block
 Token (Ln:-1 Idx:-1): Dedent
-Token (Ln:155 Idx:4): Keyword
-Token (Ln:155 Idx:4): Colon
-Token (Ln:155 Idx:6): NewLine
+Token (Ln:152 Idx:4): Keyword
+Token (Ln:152 Idx:4): Colon
+Token (Ln:152 Idx:6): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Identifier, Console)
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:153 Idx:7): Identifier
+Token (Ln:153 Idx:7): Dot
+Token (Ln:153 Idx:15): Identifier
+Token (Ln:153 Idx:15): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:153 Idx:31): Identifier
+Token (Ln:153 Idx:31): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:153 Idx:33): NewLine
+CompilationProcess.End: Parsing statement
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing if
+CompilationProcess: Parsing statement (Keyword, if)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing if
+Token (Ln:155 Idx:2): Keyword
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:155 Idx:7): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: num1)
+Token (Ln:155 Idx:8): Less
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:155 Idx:14): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: num2)
+CompilationProcess.End: Parsing expression
+Token (Ln:155 Idx:14): Colon
+Token (Ln:155 Idx:16): NewLine
 Token (Ln:-1 Idx:-1): Indent
 CompilationProcess: Parsing block
 CompilationProcess: Parsing statement (Identifier, Console)
@@ -2204,91 +2209,91 @@ Token (Ln:156 Idx:15): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
 Token (Ln:156 Idx:31): Identifier
-Token (Ln:156 Idx:31): RParen
+Token (Ln:156 Idx:32): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:156 Idx:38): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: num1)
+Token (Ln:156 Idx:39): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:156 Idx:56): Identifier
+Token (Ln:156 Idx:57): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:156 Idx:63): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: num2)
+Token (Ln:156 Idx:64): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:156 Idx:81): Identifier
+Token (Ln:156 Idx:82): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:156 Idx:90): Identifier
+Token (Ln:156 Idx:90): Dot
+Token (Ln:156 Idx:98): Identifier
+Token (Ln:156 Idx:98): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:156 Idx:103): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: num1)
+Token (Ln:156 Idx:103): Comma
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:156 Idx:109): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: num2)
+Token (Ln:156 Idx:109): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:156 Idx:33): NewLine
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+Token (Ln:156 Idx:110): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:156 Idx:112): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess.End: Parsing block
 Token (Ln:-1 Idx:-1): Dedent
-CompilationProcess.End: Parsing if
-CompilationProcess: Parsing statement (Keyword, if)
-CompilationProcess.End: Parsing statement
-CompilationProcess: Parsing if
-Token (Ln:158 Idx:2): Keyword
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:158 Idx:7): Identifier
-CompilationProcess.End: Parsing primary (VariableNode: num1)
-Token (Ln:158 Idx:8): Less
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:158 Idx:14): Identifier
-CompilationProcess.End: Parsing primary (VariableNode: num2)
-CompilationProcess.End: Parsing expression
-Token (Ln:158 Idx:14): Colon
-Token (Ln:158 Idx:16): NewLine
+Token (Ln:157 Idx:4): Keyword
+Token (Ln:157 Idx:4): Colon
+Token (Ln:157 Idx:6): NewLine
 Token (Ln:-1 Idx:-1): Indent
 CompilationProcess: Parsing block
 CompilationProcess: Parsing statement (Identifier, Console)
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:159 Idx:7): Identifier
-Token (Ln:159 Idx:7): Dot
-Token (Ln:159 Idx:15): Identifier
-Token (Ln:159 Idx:15): LParen
+Token (Ln:158 Idx:7): Identifier
+Token (Ln:158 Idx:7): Dot
+Token (Ln:158 Idx:15): Identifier
+Token (Ln:158 Idx:15): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:159 Idx:31): Identifier
-Token (Ln:159 Idx:32): Plus
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:159 Idx:38): Identifier
-CompilationProcess.End: Parsing primary (VariableNode: num1)
-Token (Ln:159 Idx:39): Plus
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:159 Idx:56): Identifier
-Token (Ln:159 Idx:57): Plus
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:159 Idx:63): Identifier
-CompilationProcess.End: Parsing primary (VariableNode: num2)
-Token (Ln:159 Idx:64): Plus
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:159 Idx:81): Identifier
-Token (Ln:159 Idx:82): Plus
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:159 Idx:90): Identifier
-Token (Ln:159 Idx:90): Dot
-Token (Ln:159 Idx:98): Identifier
-Token (Ln:159 Idx:98): LParen
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:159 Idx:103): Identifier
-CompilationProcess.End: Parsing primary (VariableNode: num1)
-Token (Ln:159 Idx:103): Comma
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:159 Idx:109): Identifier
-CompilationProcess.End: Parsing primary (VariableNode: num2)
-Token (Ln:159 Idx:109): RParen
+Token (Ln:158 Idx:31): Identifier
+Token (Ln:158 Idx:31): RParen
 CompilationProcess.End: Parsing primary
-CompilationProcess.End: Parsing expression
-CompilationProcess.End: Parsing expression
-CompilationProcess.End: Parsing expression
-CompilationProcess.End: Parsing expression
-CompilationProcess.End: Parsing expression
-Token (Ln:159 Idx:110): RParen
-CompilationProcess.End: Parsing primary
-Token (Ln:159 Idx:112): NewLine
+Token (Ln:158 Idx:33): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess.End: Parsing block
 Token (Ln:-1 Idx:-1): Dedent
-Token (Ln:160 Idx:4): Keyword
-Token (Ln:160 Idx:4): Colon
-Token (Ln:160 Idx:6): NewLine
+CompilationProcess.End: Parsing if
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing function
+CompilationProcess: Parsing statement (Keyword, function)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing function
+Token (Ln:160 Idx:8): Keyword
+Token (Ln:160 Idx:23): Identifier
+Token (Ln:160 Idx:23): LParen
+CompilationProcess: Parsing variable declaration
+Token (Ln:160 Idx:27): Keyword
+Token (Ln:160 Idx:31): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: msg Value: Null)
+Token (Ln:160 Idx:31): RParen
+Token (Ln:160 Idx:32): Colon
+Token (Ln:160 Idx:34): NewLine
 Token (Ln:-1 Idx:-1): Indent
 CompilationProcess: Parsing block
 CompilationProcess: Parsing statement (Identifier, Console)
@@ -2296,75 +2301,40 @@ CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
 Token (Ln:161 Idx:7): Identifier
 Token (Ln:161 Idx:7): Dot
-Token (Ln:161 Idx:15): Identifier
-Token (Ln:161 Idx:15): LParen
+Token (Ln:161 Idx:20): Identifier
+Token (Ln:161 Idx:20): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:161 Idx:31): Identifier
-Token (Ln:161 Idx:31): RParen
+Token (Ln:161 Idx:36): Identifier
+Token (Ln:161 Idx:36): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:161 Idx:33): NewLine
-CompilationProcess.End: Parsing statement
-CompilationProcess.End: Parsing block
-Token (Ln:-1 Idx:-1): Dedent
-CompilationProcess.End: Parsing if
-CompilationProcess.End: Parsing block
-Token (Ln:-1 Idx:-1): Dedent
-CompilationProcess.End: Parsing function
-CompilationProcess: Parsing statement (Keyword, function)
-CompilationProcess.End: Parsing statement
-CompilationProcess: Parsing function
-Token (Ln:163 Idx:8): Keyword
-Token (Ln:163 Idx:23): Identifier
-Token (Ln:163 Idx:23): LParen
-CompilationProcess: Parsing variable declaration
-Token (Ln:163 Idx:27): Keyword
-Token (Ln:163 Idx:31): Identifier
-CompilationProcess.End: Parsing Variable declaration (Name: msg Value: Null)
-Token (Ln:163 Idx:31): RParen
-Token (Ln:163 Idx:32): Colon
-Token (Ln:163 Idx:34): NewLine
-Token (Ln:-1 Idx:-1): Indent
-CompilationProcess: Parsing block
-CompilationProcess: Parsing statement (Identifier, Console)
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:164 Idx:7): Identifier
-Token (Ln:164 Idx:7): Dot
-Token (Ln:164 Idx:20): Identifier
-Token (Ln:164 Idx:20): LParen
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:164 Idx:36): Identifier
-Token (Ln:164 Idx:36): RParen
-CompilationProcess.End: Parsing primary
-Token (Ln:164 Idx:38): NewLine
+Token (Ln:161 Idx:38): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing statement (Identifier, Console)
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:165 Idx:7): Identifier
-Token (Ln:165 Idx:7): Dot
-Token (Ln:165 Idx:15): Identifier
-Token (Ln:165 Idx:15): LParen
+Token (Ln:162 Idx:7): Identifier
+Token (Ln:162 Idx:7): Dot
+Token (Ln:162 Idx:15): Identifier
+Token (Ln:162 Idx:15): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:165 Idx:19): Identifier
+Token (Ln:162 Idx:19): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: msg)
-Token (Ln:165 Idx:19): RParen
+Token (Ln:162 Idx:19): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:165 Idx:21): NewLine
+Token (Ln:162 Idx:21): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing statement (Identifier, Console)
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:166 Idx:7): Identifier
-Token (Ln:166 Idx:7): Dot
-Token (Ln:166 Idx:19): Identifier
-Token (Ln:166 Idx:19): LParen
-Token (Ln:166 Idx:20): RParen
+Token (Ln:163 Idx:7): Identifier
+Token (Ln:163 Idx:7): Dot
+Token (Ln:163 Idx:19): Identifier
+Token (Ln:163 Idx:19): LParen
+Token (Ln:163 Idx:20): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:166 Idx:22): NewLine
+Token (Ln:163 Idx:22): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess.End: Parsing block
 Token (Ln:-1 Idx:-1): Dedent
@@ -2372,125 +2342,125 @@ CompilationProcess.End: Parsing function
 CompilationProcess: Parsing statement (Keyword, function)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing function
-Token (Ln:168 Idx:8): Keyword
-Token (Ln:168 Idx:29): Identifier
-Token (Ln:168 Idx:29): LParen
+Token (Ln:165 Idx:8): Keyword
+Token (Ln:165 Idx:29): Identifier
+Token (Ln:165 Idx:29): LParen
 CompilationProcess: Parsing variable declaration
-Token (Ln:168 Idx:33): Keyword
-Token (Ln:168 Idx:37): Identifier
+Token (Ln:165 Idx:33): Keyword
+Token (Ln:165 Idx:37): Identifier
 CompilationProcess.End: Parsing Variable declaration (Name: msg Value: Null)
-Token (Ln:168 Idx:37): RParen
-Token (Ln:168 Idx:38): Colon
-Token (Ln:168 Idx:40): NewLine
+Token (Ln:165 Idx:37): RParen
+Token (Ln:165 Idx:38): Colon
+Token (Ln:165 Idx:40): NewLine
 Token (Ln:-1 Idx:-1): Indent
 CompilationProcess: Parsing block
 CompilationProcess: Parsing statement (Keyword, let)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing variable declaration
-Token (Ln:169 Idx:3): Keyword
-Token (Ln:169 Idx:7): Identifier
-Token (Ln:169 Idx:8): Equals
+Token (Ln:166 Idx:3): Keyword
+Token (Ln:166 Idx:7): Identifier
+Token (Ln:166 Idx:8): Equals
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:169 Idx:25): Identifier
+Token (Ln:166 Idx:25): Identifier
 CompilationProcess.End: Parsing Variable declaration (Name: num Value: StringRefNode)
-Token (Ln:169 Idx:26): NewLine
+Token (Ln:166 Idx:26): NewLine
 CompilationProcess: Parsing statement (Keyword, do_while)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing while
-Token (Ln:171 Idx:8): Keyword
+Token (Ln:168 Idx:8): Keyword
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:171 Idx:15): Identifier
-Token (Ln:171 Idx:15): Dot
-Token (Ln:171 Idx:24): Identifier
-Token (Ln:171 Idx:24): LParen
+Token (Ln:168 Idx:15): Identifier
+Token (Ln:168 Idx:15): Dot
+Token (Ln:168 Idx:24): Identifier
+Token (Ln:168 Idx:24): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:171 Idx:28): Identifier
+Token (Ln:168 Idx:28): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: num)
-Token (Ln:171 Idx:28): RParen
+Token (Ln:168 Idx:28): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:171 Idx:30): Equals
-Token (Ln:171 Idx:31): Equals
+Token (Ln:168 Idx:30): Equals
+Token (Ln:168 Idx:31): Equals
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
 CompilationProcess.End: Parsing primary
-Token (Ln:171 Idx:38): Keyword
+Token (Ln:168 Idx:38): Keyword
 CompilationProcess.End: Parsing expression
-Token (Ln:171 Idx:38): Colon
-Token (Ln:171 Idx:40): NewLine
+Token (Ln:168 Idx:38): Colon
+Token (Ln:168 Idx:40): NewLine
 Token (Ln:-1 Idx:-1): Indent
 CompilationProcess: Parsing block
 CompilationProcess: Parsing statement (Identifier, Console)
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:172 Idx:7): Identifier
-Token (Ln:172 Idx:7): Dot
-Token (Ln:172 Idx:13): Identifier
-Token (Ln:172 Idx:13): LParen
+Token (Ln:169 Idx:7): Identifier
+Token (Ln:169 Idx:7): Dot
+Token (Ln:169 Idx:13): Identifier
+Token (Ln:169 Idx:13): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:172 Idx:17): Identifier
+Token (Ln:169 Idx:17): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: msg)
-Token (Ln:172 Idx:17): RParen
+Token (Ln:169 Idx:17): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:172 Idx:20): NewLine
+Token (Ln:169 Idx:20): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing statement (Identifier, num)
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:173 Idx:3): Identifier
+Token (Ln:170 Idx:3): Identifier
 CompilationProcess.End: Parsing primary (AssignmentNode)
-Token (Ln:173 Idx:4): Equals
+Token (Ln:170 Idx:4): Equals
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:173 Idx:13): Identifier
-Token (Ln:173 Idx:13): Dot
-Token (Ln:173 Idx:20): Identifier
-Token (Ln:173 Idx:20): LParen
-Token (Ln:173 Idx:21): RParen
+Token (Ln:170 Idx:13): Identifier
+Token (Ln:170 Idx:13): Dot
+Token (Ln:170 Idx:20): Identifier
+Token (Ln:170 Idx:20): LParen
+Token (Ln:170 Idx:21): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:173 Idx:23): NewLine
+Token (Ln:170 Idx:23): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing statement (Keyword, if)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing if
-Token (Ln:175 Idx:2): Keyword
+Token (Ln:172 Idx:2): Keyword
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:175 Idx:9): Identifier
-Token (Ln:175 Idx:9): Dot
-Token (Ln:175 Idx:18): Identifier
-Token (Ln:175 Idx:18): LParen
+Token (Ln:172 Idx:9): Identifier
+Token (Ln:172 Idx:9): Dot
+Token (Ln:172 Idx:18): Identifier
+Token (Ln:172 Idx:18): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:175 Idx:22): Identifier
+Token (Ln:172 Idx:22): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: num)
-Token (Ln:175 Idx:22): RParen
+Token (Ln:172 Idx:22): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:175 Idx:24): Equals
-Token (Ln:175 Idx:25): Equals
+Token (Ln:172 Idx:24): Equals
+Token (Ln:172 Idx:25): Equals
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
 CompilationProcess.End: Parsing primary
-Token (Ln:175 Idx:32): Keyword
+Token (Ln:172 Idx:32): Keyword
 CompilationProcess.End: Parsing expression
-Token (Ln:175 Idx:32): Colon
-Token (Ln:175 Idx:34): NewLine
+Token (Ln:172 Idx:32): Colon
+Token (Ln:172 Idx:34): NewLine
 Token (Ln:-1 Idx:-1): Indent
 CompilationProcess: Parsing block
 CompilationProcess: Parsing statement (Identifier, printException)
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:176 Idx:14): Identifier
-Token (Ln:176 Idx:14): LParen
+Token (Ln:173 Idx:14): Identifier
+Token (Ln:173 Idx:14): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:176 Idx:30): Identifier
-Token (Ln:176 Idx:30): RParen
+Token (Ln:173 Idx:30): Identifier
+Token (Ln:173 Idx:30): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:176 Idx:32): NewLine
+Token (Ln:173 Idx:32): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess.End: Parsing block
 Token (Ln:-1 Idx:-1): Dedent
@@ -2501,12 +2471,12 @@ CompilationProcess.End: Parsing while
 CompilationProcess: Parsing statement (Keyword, return)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing return
-Token (Ln:178 Idx:6): Keyword
+Token (Ln:175 Idx:6): Keyword
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:178 Idx:10): Identifier
+Token (Ln:175 Idx:10): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: num)
-Token (Ln:178 Idx:10): NewLine
+Token (Ln:175 Idx:10): NewLine
 CompilationProcess.End: Parsing return
 CompilationProcess.End: Parsing block
 Token (Ln:-1 Idx:-1): Dedent
@@ -2516,73 +2486,9 @@ TypeofExpression: StringRefNode
 TypeofExpression: StringRefNode
 TypeofExpression: StringRefNode
 Interpreter: Execute statement (MethodCallNode)
-TypeofExpression: MethodCallNode
-Interpreter.ExecuteMethodCall: class = 'Number'; method = 'getUsings'
+TypeofExpression: StringRefNode
+Interpreter.ExecuteMethodCall: class = 'Console'; method = 'println'
 Interpreter.CurrentContext: class = '', method = 'main'
-SUCC: ExecuteMethodCallClass.ContextClass: Number
-TypeofExpression: VariableNode
-Restored stack: class=Number
-Interpreter.ExecuteMethodCall: class = 'Console'; method = 'println'
-Interpreter.CurrentContext: class = '', method = 'getUsings'
-SUCC: ExecuteMethodCallClass.ContextClass: Console
-TypeofExpression: MethodCallNode
-Interpreter.ExecuteMethodCall: class = 'Number'; method = 'getUsings'
-Interpreter.CurrentContext: class = 'Console', method = 'println'
-SUCC: ExecuteMethodCallClass.ContextClass: Number
-TypeofExpression: VariableNode
-Restored stack: class=Number
-Interpreter: Execute statement (MethodCallNode)
-TypeofExpression: BinaryOperationNode
-WARN: Detected binary operation
-TypeofExpression: VariableNode
-TypeofExpression: StringRefNode
-EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
-EvaluateBinaryOperation.IsNumeric: (\n)=False
-Interpreter.ExecuteMethodCall: class = ''; method = 'print'
-Interpreter.CurrentContext: class = 'Console', method = 'println'
-Interpreter: Execute statement (MethodCallNode)
-TypeofExpression: BinaryOperationNode
-WARN: Detected binary operation
-TypeofExpression: VariableNode
-TypeofExpression: BinaryOperationNode
-WARN: Detected binary operation
-TypeofExpression: StringRefNode
-TypeofExpression: BinaryOperationNode
-WARN: Detected binary operation
-TypeofExpression: VariableNode
-TypeofExpression: StringRefNode
-EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; \n)=False
-EvaluateBinaryOperation.IsNumeric: (\"))=False
-EvaluateBinaryOperation.IsNumeric: (Console.Write(\")=False
-EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; \n\"))=False
-EvaluateBinaryOperation.IsNumeric: (using System; )=False
-EvaluateBinaryOperation.IsNumeric: (Console.Write(\"using System; using System.Globalization; \n\"))=False
-Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
-Interpreter.CurrentContext: class = 'Console', method = 'print'
-WARN: C#_Script: using System; Console.Write("using System; using System.Globalization; \n")
-WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 
-Restored stack: class=
-Restored stack: class=Console
-Interpreter: Execute statement (MethodCallNode)
-Interpreter.ExecuteMethodCall: class = 'Console'; method = 'readln'
-Interpreter.CurrentContext: class = '', method = 'println'
-SUCC: ExecuteMethodCallClass.ContextClass: Console
-TypeofExpression: MethodCallNode
-TypeofExpression: BinaryOperationNode
-WARN: Detected binary operation
-TypeofExpression: VariableNode
-TypeofExpression: StringRefNode
-EvaluateBinaryOperation.IsNumeric: (using System; )=False
-EvaluateBinaryOperation.IsNumeric: (Console.ReadLine())=False
-Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
-Interpreter.CurrentContext: class = 'Console', method = 'readln'
-WARN: C#_Script: using System; Console.ReadLine()
-WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 1
-Restored stack: class=
-Interpreter: Execute statement (MethodCallNode)
-TypeofExpression: StringRefNode
-Interpreter.ExecuteMethodCall: class = 'Console'; method = 'println'
-Interpreter.CurrentContext: class = '', method = 'readln'
 SUCC: ExecuteMethodCallClass.ContextClass: Console
 TypeofExpression: StringRefNode
 Interpreter: Execute statement (MethodCallNode)
@@ -2615,12 +2521,12 @@ Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
 Interpreter.CurrentContext: class = 'Console', method = 'print'
 WARN: C#_Script: using System; Console.Write("<--- Menu demo --->\n")
 WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 
-Restored stack: class=
+Restored stack: class=Console
 Restored stack: class=Console
 Interpreter: Execute statement (MethodCallNode)
 TypeofExpression: StringRefNode
 Interpreter.ExecuteMethodCall: class = 'Console'; method = 'println'
-Interpreter.CurrentContext: class = '', method = 'println'
+Interpreter.CurrentContext: class = '', method = 'main'
 SUCC: ExecuteMethodCallClass.ContextClass: Console
 TypeofExpression: StringRefNode
 Interpreter: Execute statement (MethodCallNode)
@@ -2653,12 +2559,12 @@ Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
 Interpreter.CurrentContext: class = 'Console', method = 'print'
 WARN: C#_Script: using System; Console.Write("1. Numeric\n")
 WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 
-Restored stack: class=
+Restored stack: class=Console
 Restored stack: class=Console
 Interpreter: Execute statement (MethodCallNode)
 TypeofExpression: StringRefNode
 Interpreter.ExecuteMethodCall: class = 'Console'; method = 'print'
-Interpreter.CurrentContext: class = '', method = 'println'
+Interpreter.CurrentContext: class = '', method = 'main'
 SUCC: ExecuteMethodCallClass.ContextClass: Console
 TypeofExpression: StringRefNode
 Interpreter: Execute statement (MethodCallNode)
@@ -2681,3 +2587,1423 @@ EvaluateBinaryOperation.IsNumeric: (Console.Write(\"Print choice (1-5): \"))=Fal
 Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
 Interpreter.CurrentContext: class = 'Console', method = 'print'
 WARN: C#_Script: using System; Console.Write("Print choice (1-5): ")
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 
+Restored stack: class=Console
+Interpreter: Execute statement (AssignmentNode)
+TypeofExpression: MethodCallNode
+Interpreter.ExecuteMethodCall: class = 'Console'; method = 'readln'
+Interpreter.CurrentContext: class = '', method = 'main'
+SUCC: ExecuteMethodCallClass.ContextClass: Console
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (using System; )=False
+EvaluateBinaryOperation.IsNumeric: (Console.ReadLine())=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Console', method = 'readln'
+WARN: C#_Script: using System; Console.ReadLine()
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 1
+Restored stack: class=Console
+Interpreter: Execute statement (IfNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: NumberRefNode
+EvaluateBinaryOperation.IsNumeric: (1)=True
+EvaluateBinaryOperation.IsNumeric: (1)=True
+WARN: Operation: 1==1
+Interpreter: Execute statement (MethodCallNode)
+Interpreter.ExecuteMethodCall: class = ''; method = 'numericDemo'
+Interpreter.CurrentContext: class = '', method = 'main'
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: StringRefNode
+Interpreter.ExecuteMethodCall: class = 'Console'; method = 'println'
+Interpreter.CurrentContext: class = '', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Console
+TypeofExpression: StringRefNode
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (Welcome to numeric demo!)=False
+EvaluateBinaryOperation.IsNumeric: (\n)=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'print'
+Interpreter.CurrentContext: class = 'Console', method = 'println'
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (Welcome to numeric demo!\n)=False
+EvaluateBinaryOperation.IsNumeric: (\"))=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\")=False
+EvaluateBinaryOperation.IsNumeric: (Welcome to numeric demo!\n\"))=False
+EvaluateBinaryOperation.IsNumeric: (using System; )=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\"Welcome to numeric demo!\n\"))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Console', method = 'print'
+WARN: C#_Script: using System; Console.Write("Welcome to numeric demo!\n")
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 
+Restored stack: class=Console
+Restored stack: class=Console
+Interpreter: Execute statement (AssignmentNode)
+TypeofExpression: MethodCallNode
+TypeofExpression: StringRefNode
+Interpreter.ExecuteMethodCall: class = ''; method = 'getNumberFromConsole'
+Interpreter.CurrentContext: class = '', method = 'numericDemo'
+Interpreter: Execute statement (AssignmentNode)
+TypeofExpression: StringRefNode
+Interpreter: Execute statement (WhileNode)
+Interpreter.While: condition=True
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Console'; method = 'print'
+Interpreter.CurrentContext: class = '', method = 'getNumberFromConsole'
+SUCC: ExecuteMethodCallClass.ContextClass: Console
+TypeofExpression: VariableNode
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (Write first number: )=False
+EvaluateBinaryOperation.IsNumeric: (\"))=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\")=False
+EvaluateBinaryOperation.IsNumeric: (Write first number: \"))=False
+EvaluateBinaryOperation.IsNumeric: (using System; )=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\"Write first number: \"))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Console', method = 'print'
+WARN: C#_Script: using System; Console.Write("Write first number: ")
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 
+Restored stack: class=Console
+Interpreter: Execute statement (AssignmentNode)
+TypeofExpression: MethodCallNode
+Interpreter.ExecuteMethodCall: class = 'Console'; method = 'readln'
+Interpreter.CurrentContext: class = '', method = 'getNumberFromConsole'
+SUCC: ExecuteMethodCallClass.ContextClass: Console
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (using System; )=False
+EvaluateBinaryOperation.IsNumeric: (Console.ReadLine())=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Console', method = 'readln'
+WARN: C#_Script: using System; Console.ReadLine()
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 2
+Restored stack: class=Console
+Interpreter: Execute statement (IfNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+Interpreter.CurrentContext: class = '', method = 'getNumberFromConsole'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\")=False
+EvaluateBinaryOperation.IsNumeric: (2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\"2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse("2", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: True
+Restored stack: class=Number
+TypeofExpression: BooleanNode
+EvaluateBinaryOperation.IsNumeric: (True)=False
+EvaluateBinaryOperation.IsNumeric: (False)=False
+WARN: IsBooleanOperation: True==False
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+Interpreter.CurrentContext: class = '', method = 'getNumberFromConsole'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\")=False
+EvaluateBinaryOperation.IsNumeric: (2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\"2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse("2", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: True
+Restored stack: class=Number
+TypeofExpression: BooleanNode
+EvaluateBinaryOperation.IsNumeric: (True)=False
+EvaluateBinaryOperation.IsNumeric: (False)=False
+WARN: IsBooleanOperation: True==False
+Interpreter.While: condition=False
+Interpreter.While.End
+TypeofExpression: VariableNode
+Restored stack: class=
+Interpreter: Execute statement (AssignmentNode)
+TypeofExpression: MethodCallNode
+TypeofExpression: StringRefNode
+Interpreter.ExecuteMethodCall: class = ''; method = 'getNumberFromConsole'
+Interpreter.CurrentContext: class = '', method = 'numericDemo'
+Interpreter: Execute statement (AssignmentNode)
+TypeofExpression: StringRefNode
+Interpreter: Execute statement (WhileNode)
+Interpreter.While: condition=True
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Console'; method = 'print'
+Interpreter.CurrentContext: class = '', method = 'getNumberFromConsole'
+SUCC: ExecuteMethodCallClass.ContextClass: Console
+TypeofExpression: VariableNode
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (Write first number: )=False
+EvaluateBinaryOperation.IsNumeric: (\"))=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\")=False
+EvaluateBinaryOperation.IsNumeric: (Write first number: \"))=False
+EvaluateBinaryOperation.IsNumeric: (using System; )=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\"Write first number: \"))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Console', method = 'print'
+WARN: C#_Script: using System; Console.Write("Write first number: ")
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 
+Restored stack: class=Console
+Interpreter: Execute statement (AssignmentNode)
+TypeofExpression: MethodCallNode
+Interpreter.ExecuteMethodCall: class = 'Console'; method = 'readln'
+Interpreter.CurrentContext: class = '', method = 'getNumberFromConsole'
+SUCC: ExecuteMethodCallClass.ContextClass: Console
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (using System; )=False
+EvaluateBinaryOperation.IsNumeric: (Console.ReadLine())=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Console', method = 'readln'
+WARN: C#_Script: using System; Console.ReadLine()
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 4
+Restored stack: class=Console
+Interpreter: Execute statement (IfNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+Interpreter.CurrentContext: class = '', method = 'getNumberFromConsole'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (4)=True
+EvaluateBinaryOperation.IsNumeric: (\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\")=False
+EvaluateBinaryOperation.IsNumeric: (4\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\"4\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse("4", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: True
+Restored stack: class=Number
+TypeofExpression: BooleanNode
+EvaluateBinaryOperation.IsNumeric: (True)=False
+EvaluateBinaryOperation.IsNumeric: (False)=False
+WARN: IsBooleanOperation: True==False
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+Interpreter.CurrentContext: class = '', method = 'getNumberFromConsole'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (4)=True
+EvaluateBinaryOperation.IsNumeric: (\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\")=False
+EvaluateBinaryOperation.IsNumeric: (4\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\"4\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse("4", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: True
+Restored stack: class=Number
+TypeofExpression: BooleanNode
+EvaluateBinaryOperation.IsNumeric: (True)=False
+EvaluateBinaryOperation.IsNumeric: (False)=False
+WARN: IsBooleanOperation: True==False
+Interpreter.While: condition=False
+Interpreter.While.End
+TypeofExpression: VariableNode
+Restored stack: class=
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: VariableNode
+EvaluateBinaryOperation.IsNumeric: (First number: )=False
+EvaluateBinaryOperation.IsNumeric: (2)=True
+Interpreter.ExecuteMethodCall: class = 'Console'; method = 'println'
+Interpreter.CurrentContext: class = '', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Console
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: VariableNode
+EvaluateBinaryOperation.IsNumeric: (First number: )=False
+EvaluateBinaryOperation.IsNumeric: (2)=True
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (First number: 2)=False
+EvaluateBinaryOperation.IsNumeric: (\n)=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'print'
+Interpreter.CurrentContext: class = 'Console', method = 'println'
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (First number: 2\n)=False
+EvaluateBinaryOperation.IsNumeric: (\"))=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\")=False
+EvaluateBinaryOperation.IsNumeric: (First number: 2\n\"))=False
+EvaluateBinaryOperation.IsNumeric: (using System; )=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\"First number: 2\n\"))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Console', method = 'print'
+WARN: C#_Script: using System; Console.Write("First number: 2\n")
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 
+Restored stack: class=Console
+Restored stack: class=Console
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: VariableNode
+EvaluateBinaryOperation.IsNumeric: (Second number: )=False
+EvaluateBinaryOperation.IsNumeric: (4)=True
+Interpreter.ExecuteMethodCall: class = 'Console'; method = 'println'
+Interpreter.CurrentContext: class = '', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Console
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: VariableNode
+EvaluateBinaryOperation.IsNumeric: (Second number: )=False
+EvaluateBinaryOperation.IsNumeric: (4)=True
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (Second number: 4)=False
+EvaluateBinaryOperation.IsNumeric: (\n)=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'print'
+Interpreter.CurrentContext: class = 'Console', method = 'println'
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (Second number: 4\n)=False
+EvaluateBinaryOperation.IsNumeric: (\"))=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\")=False
+EvaluateBinaryOperation.IsNumeric: (Second number: 4\n\"))=False
+EvaluateBinaryOperation.IsNumeric: (using System; )=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\"Second number: 4\n\"))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Console', method = 'print'
+WARN: C#_Script: using System; Console.Write("Second number: 4\n")
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 
+Restored stack: class=Console
+Restored stack: class=Console
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: StringRefNode
+Interpreter.ExecuteMethodCall: class = 'Console'; method = 'println'
+Interpreter.CurrentContext: class = '', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Console
+TypeofExpression: StringRefNode
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (<--- Math --->)=False
+EvaluateBinaryOperation.IsNumeric: (\n)=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'print'
+Interpreter.CurrentContext: class = 'Console', method = 'println'
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (<--- Math --->\n)=False
+EvaluateBinaryOperation.IsNumeric: (\"))=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\")=False
+EvaluateBinaryOperation.IsNumeric: (<--- Math --->\n\"))=False
+EvaluateBinaryOperation.IsNumeric: (using System; )=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\"<--- Math --->\n\"))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Console', method = 'print'
+WARN: C#_Script: using System; Console.Write("<--- Math --->\n")
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 
+Restored stack: class=Console
+Restored stack: class=Console
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Math'; method = 'sum'
+Interpreter.CurrentContext: class = '', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Math
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = 'throwException'
+Interpreter.CurrentContext: class = 'Math', method = 'sum'
+Interpreter: Execute statement (IfNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+Interpreter.CurrentContext: class = 'Math', method = 'throwException'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\")=False
+EvaluateBinaryOperation.IsNumeric: (2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\"2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse("2", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: True
+Restored stack: class=Number
+TypeofExpression: BooleanNode
+EvaluateBinaryOperation.IsNumeric: (True)=False
+EvaluateBinaryOperation.IsNumeric: (False)=False
+WARN: IsBooleanOperation: True==False
+Restored stack: class=Math
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (4)=True
+WARN: Operation: 2Plus4
+Restored stack: class=Math
+EvaluateBinaryOperation.IsNumeric: (Sum: )=False
+EvaluateBinaryOperation.IsNumeric: (6)=True
+Interpreter.ExecuteMethodCall: class = 'Console'; method = 'println'
+Interpreter.CurrentContext: class = '', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Console
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Math'; method = 'sum'
+Interpreter.CurrentContext: class = 'Console', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Math
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = 'throwException'
+Interpreter.CurrentContext: class = 'Math', method = 'sum'
+Interpreter: Execute statement (IfNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+Interpreter.CurrentContext: class = 'Math', method = 'throwException'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\")=False
+EvaluateBinaryOperation.IsNumeric: (2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\"2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse("2", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: True
+Restored stack: class=Number
+TypeofExpression: BooleanNode
+EvaluateBinaryOperation.IsNumeric: (True)=False
+EvaluateBinaryOperation.IsNumeric: (False)=False
+WARN: IsBooleanOperation: True==False
+Restored stack: class=Math
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (4)=True
+WARN: Operation: 2Plus4
+Restored stack: class=Math
+EvaluateBinaryOperation.IsNumeric: (Sum: )=False
+EvaluateBinaryOperation.IsNumeric: (6)=True
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (Sum: 6)=False
+EvaluateBinaryOperation.IsNumeric: (\n)=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'print'
+Interpreter.CurrentContext: class = 'Console', method = 'println'
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (Sum: 6\n)=False
+EvaluateBinaryOperation.IsNumeric: (\"))=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\")=False
+EvaluateBinaryOperation.IsNumeric: (Sum: 6\n\"))=False
+EvaluateBinaryOperation.IsNumeric: (using System; )=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\"Sum: 6\n\"))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Console', method = 'print'
+WARN: C#_Script: using System; Console.Write("Sum: 6\n")
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 
+Restored stack: class=Console
+Restored stack: class=Console
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Math'; method = 'sub'
+Interpreter.CurrentContext: class = '', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Math
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = 'throwException'
+Interpreter.CurrentContext: class = 'Math', method = 'sub'
+Interpreter: Execute statement (IfNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+Interpreter.CurrentContext: class = 'Math', method = 'throwException'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\")=False
+EvaluateBinaryOperation.IsNumeric: (2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\"2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse("2", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: True
+Restored stack: class=Number
+TypeofExpression: BooleanNode
+EvaluateBinaryOperation.IsNumeric: (True)=False
+EvaluateBinaryOperation.IsNumeric: (False)=False
+WARN: IsBooleanOperation: True==False
+Restored stack: class=Math
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (4)=True
+WARN: Operation: 2Minus4
+Restored stack: class=Math
+EvaluateBinaryOperation.IsNumeric: (Substration: )=False
+EvaluateBinaryOperation.IsNumeric: (-2)=True
+Interpreter.ExecuteMethodCall: class = 'Console'; method = 'println'
+Interpreter.CurrentContext: class = '', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Console
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Math'; method = 'sub'
+Interpreter.CurrentContext: class = 'Console', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Math
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = 'throwException'
+Interpreter.CurrentContext: class = 'Math', method = 'sub'
+Interpreter: Execute statement (IfNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+Interpreter.CurrentContext: class = 'Math', method = 'throwException'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\")=False
+EvaluateBinaryOperation.IsNumeric: (2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\"2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse("2", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: True
+Restored stack: class=Number
+TypeofExpression: BooleanNode
+EvaluateBinaryOperation.IsNumeric: (True)=False
+EvaluateBinaryOperation.IsNumeric: (False)=False
+WARN: IsBooleanOperation: True==False
+Restored stack: class=Math
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (4)=True
+WARN: Operation: 2Minus4
+Restored stack: class=Math
+EvaluateBinaryOperation.IsNumeric: (Substration: )=False
+EvaluateBinaryOperation.IsNumeric: (-2)=True
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (Substration: -2)=False
+EvaluateBinaryOperation.IsNumeric: (\n)=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'print'
+Interpreter.CurrentContext: class = 'Console', method = 'println'
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (Substration: -2\n)=False
+EvaluateBinaryOperation.IsNumeric: (\"))=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\")=False
+EvaluateBinaryOperation.IsNumeric: (Substration: -2\n\"))=False
+EvaluateBinaryOperation.IsNumeric: (using System; )=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\"Substration: -2\n\"))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Console', method = 'print'
+WARN: C#_Script: using System; Console.Write("Substration: -2\n")
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 
+Restored stack: class=Console
+Restored stack: class=Console
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Math'; method = 'mult'
+Interpreter.CurrentContext: class = '', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Math
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = 'throwException'
+Interpreter.CurrentContext: class = 'Math', method = 'mult'
+Interpreter: Execute statement (IfNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+Interpreter.CurrentContext: class = 'Math', method = 'throwException'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\")=False
+EvaluateBinaryOperation.IsNumeric: (2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\"2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse("2", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: True
+Restored stack: class=Number
+TypeofExpression: BooleanNode
+EvaluateBinaryOperation.IsNumeric: (True)=False
+EvaluateBinaryOperation.IsNumeric: (False)=False
+WARN: IsBooleanOperation: True==False
+Restored stack: class=Math
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (4)=True
+WARN: Operation: 2Star4
+Restored stack: class=Math
+EvaluateBinaryOperation.IsNumeric: (Multiplication: )=False
+EvaluateBinaryOperation.IsNumeric: (8)=True
+Interpreter.ExecuteMethodCall: class = 'Console'; method = 'println'
+Interpreter.CurrentContext: class = '', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Console
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Math'; method = 'mult'
+Interpreter.CurrentContext: class = 'Console', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Math
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = 'throwException'
+Interpreter.CurrentContext: class = 'Math', method = 'mult'
+Interpreter: Execute statement (IfNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+Interpreter.CurrentContext: class = 'Math', method = 'throwException'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\")=False
+EvaluateBinaryOperation.IsNumeric: (2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\"2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse("2", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: True
+Restored stack: class=Number
+TypeofExpression: BooleanNode
+EvaluateBinaryOperation.IsNumeric: (True)=False
+EvaluateBinaryOperation.IsNumeric: (False)=False
+WARN: IsBooleanOperation: True==False
+Restored stack: class=Math
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (4)=True
+WARN: Operation: 2Star4
+Restored stack: class=Math
+EvaluateBinaryOperation.IsNumeric: (Multiplication: )=False
+EvaluateBinaryOperation.IsNumeric: (8)=True
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (Multiplication: 8)=False
+EvaluateBinaryOperation.IsNumeric: (\n)=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'print'
+Interpreter.CurrentContext: class = 'Console', method = 'println'
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (Multiplication: 8\n)=False
+EvaluateBinaryOperation.IsNumeric: (\"))=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\")=False
+EvaluateBinaryOperation.IsNumeric: (Multiplication: 8\n\"))=False
+EvaluateBinaryOperation.IsNumeric: (using System; )=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\"Multiplication: 8\n\"))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Console', method = 'print'
+WARN: C#_Script: using System; Console.Write("Multiplication: 8\n")
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 
+Restored stack: class=Console
+Restored stack: class=Console
+Interpreter: Execute statement (AssignmentNode)
+TypeofExpression: MethodCallNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Math'; method = 'div'
+Interpreter.CurrentContext: class = '', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Math
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = 'throwException'
+Interpreter.CurrentContext: class = 'Math', method = 'div'
+Interpreter: Execute statement (IfNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+Interpreter.CurrentContext: class = 'Math', method = 'throwException'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\")=False
+EvaluateBinaryOperation.IsNumeric: (2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\"2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse("2", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: True
+Restored stack: class=Number
+TypeofExpression: BooleanNode
+EvaluateBinaryOperation.IsNumeric: (True)=False
+EvaluateBinaryOperation.IsNumeric: (False)=False
+WARN: IsBooleanOperation: True==False
+Restored stack: class=Math
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = 'throwException'
+Interpreter.CurrentContext: class = 'Math', method = 'div'
+Interpreter: Execute statement (IfNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+Interpreter.CurrentContext: class = 'Math', method = 'throwException'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (4)=True
+EvaluateBinaryOperation.IsNumeric: (\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\")=False
+EvaluateBinaryOperation.IsNumeric: (4\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\"4\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse("4", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: True
+Restored stack: class=Number
+TypeofExpression: BooleanNode
+EvaluateBinaryOperation.IsNumeric: (True)=False
+EvaluateBinaryOperation.IsNumeric: (False)=False
+WARN: IsBooleanOperation: True==False
+Restored stack: class=Math
+Interpreter: Execute statement (IfNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: NumberRefNode
+EvaluateBinaryOperation.IsNumeric: (4)=True
+EvaluateBinaryOperation.IsNumeric: (0)=True
+WARN: Operation: 4==0
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (4)=True
+WARN: Operation: 2Slash4
+Restored stack: class=Math
+TypeofExpression: StringRefNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'toFixed'
+Interpreter.CurrentContext: class = '', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Math'; method = 'div'
+Interpreter.CurrentContext: class = 'Number', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Math
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = 'throwException'
+Interpreter.CurrentContext: class = 'Math', method = 'div'
+Interpreter: Execute statement (IfNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+Interpreter.CurrentContext: class = 'Math', method = 'throwException'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\")=False
+EvaluateBinaryOperation.IsNumeric: (2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\"2\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse("2", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: True
+Restored stack: class=Number
+TypeofExpression: BooleanNode
+EvaluateBinaryOperation.IsNumeric: (True)=False
+EvaluateBinaryOperation.IsNumeric: (False)=False
+WARN: IsBooleanOperation: True==False
+Restored stack: class=Math
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = 'throwException'
+Interpreter.CurrentContext: class = 'Math', method = 'div'
+Interpreter: Execute statement (IfNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+Interpreter.CurrentContext: class = 'Math', method = 'throwException'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (4)=True
+EvaluateBinaryOperation.IsNumeric: (\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\")=False
+EvaluateBinaryOperation.IsNumeric: (4\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(\"4\", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse("4", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: True
+Restored stack: class=Number
+TypeofExpression: BooleanNode
+EvaluateBinaryOperation.IsNumeric: (True)=False
+EvaluateBinaryOperation.IsNumeric: (False)=False
+WARN: IsBooleanOperation: True==False
+Restored stack: class=Math
+Interpreter: Execute statement (IfNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: NumberRefNode
+EvaluateBinaryOperation.IsNumeric: (4)=True
+EvaluateBinaryOperation.IsNumeric: (0)=True
+WARN: Operation: 4==0
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (4)=True
+WARN: Operation: 2Slash4
+Restored stack: class=Math
+TypeofExpression: StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (0.00)=True
+EvaluateBinaryOperation.IsNumeric: (\"))=False
+EvaluateBinaryOperation.IsNumeric: (.ToString(\")=False
+EvaluateBinaryOperation.IsNumeric: (0.00\"))=False
+EvaluateBinaryOperation.IsNumeric: (0.5)=True
+EvaluateBinaryOperation.IsNumeric: (.ToString(\"0.00\"))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (0.5.ToString(\"0.00\"))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'toFixed'
+WARN: C#_Script: using System; using System.Globalization; 0.5.ToString("0.00")
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 0.50
+Restored stack: class=Number
+Interpreter: Execute statement (IfNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: NumberRefNode
+EvaluateBinaryOperation.IsNumeric: (4)=True
+EvaluateBinaryOperation.IsNumeric: (0)=True
+WARN: Operation: 4!=0
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: VariableNode
+EvaluateBinaryOperation.IsNumeric: (Division: )=False
+EvaluateBinaryOperation.IsNumeric: (0.50)=True
+Interpreter.ExecuteMethodCall: class = 'Console'; method = 'println'
+Interpreter.CurrentContext: class = '', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Console
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: VariableNode
+EvaluateBinaryOperation.IsNumeric: (Division: )=False
+EvaluateBinaryOperation.IsNumeric: (0.50)=True
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (Division: 0.50)=False
+EvaluateBinaryOperation.IsNumeric: (\n)=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'print'
+Interpreter.CurrentContext: class = 'Console', method = 'println'
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (Division: 0.50\n)=False
+EvaluateBinaryOperation.IsNumeric: (\"))=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\")=False
+EvaluateBinaryOperation.IsNumeric: (Division: 0.50\n\"))=False
+EvaluateBinaryOperation.IsNumeric: (using System; )=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\"Division: 0.50\n\"))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Console', method = 'print'
+WARN: C#_Script: using System; Console.Write("Division: 0.50\n")
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 
+Restored stack: class=Console
+Restored stack: class=Console
+Interpreter: Execute statement (IfNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (4)=True
+WARN: Operation: 2Less4
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'randInt'
+Interpreter.CurrentContext: class = '', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter: Execute statement (IfNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (4)=True
+WARN: Operation: 2>=4
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (4)=True
+EvaluateBinaryOperation.IsNumeric: ())=False
+EvaluateBinaryOperation.IsNumeric: (,)=False
+EvaluateBinaryOperation.IsNumeric: (4))=False
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (,4))=False
+EvaluateBinaryOperation.IsNumeric: (new Random().Next()=False
+EvaluateBinaryOperation.IsNumeric: (2,4))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (new Random().Next(2,4))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'randInt'
+WARN: C#_Script: using System; using System.Globalization; new Random().Next(2,4)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 3
+Restored stack: class=Number
+EvaluateBinaryOperation.IsNumeric: (): )=False
+EvaluateBinaryOperation.IsNumeric: (3)=True
+EvaluateBinaryOperation.IsNumeric: (4)=True
+EvaluateBinaryOperation.IsNumeric: (): 3)=False
+EvaluateBinaryOperation.IsNumeric: (-)=False
+EvaluateBinaryOperation.IsNumeric: (4): 3)=False
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (-4): 3)=False
+EvaluateBinaryOperation.IsNumeric: (Random number (range: )=False
+EvaluateBinaryOperation.IsNumeric: (2-4): 3)=False
+Interpreter.ExecuteMethodCall: class = 'Console'; method = 'println'
+Interpreter.CurrentContext: class = '', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Console
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'randInt'
+Interpreter.CurrentContext: class = 'Console', method = 'numericDemo'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+Interpreter: Execute statement (IfNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (4)=True
+WARN: Operation: 2>=4
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (4)=True
+EvaluateBinaryOperation.IsNumeric: ())=False
+EvaluateBinaryOperation.IsNumeric: (,)=False
+EvaluateBinaryOperation.IsNumeric: (4))=False
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (,4))=False
+EvaluateBinaryOperation.IsNumeric: (new Random().Next()=False
+EvaluateBinaryOperation.IsNumeric: (2,4))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (new Random().Next(2,4))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'randInt'
+WARN: C#_Script: using System; using System.Globalization; new Random().Next(2,4)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 2
+Restored stack: class=Number
+EvaluateBinaryOperation.IsNumeric: (): )=False
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (4)=True
+EvaluateBinaryOperation.IsNumeric: (): 2)=False
+EvaluateBinaryOperation.IsNumeric: (-)=False
+EvaluateBinaryOperation.IsNumeric: (4): 2)=False
+EvaluateBinaryOperation.IsNumeric: (2)=True
+EvaluateBinaryOperation.IsNumeric: (-4): 2)=False
+EvaluateBinaryOperation.IsNumeric: (Random number (range: )=False
+EvaluateBinaryOperation.IsNumeric: (2-4): 2)=False
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (Random number (range: 2-4): 2)=False
+EvaluateBinaryOperation.IsNumeric: (\n)=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'print'
+Interpreter.CurrentContext: class = 'Console', method = 'println'
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (Random number (range: 2-4): 2\n)=False
+EvaluateBinaryOperation.IsNumeric: (\"))=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\")=False
+EvaluateBinaryOperation.IsNumeric: (Random number (range: 2-4): 2\n\"))=False
+EvaluateBinaryOperation.IsNumeric: (using System; )=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(\"Random number (range: 2-4): 2\n\"))=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'csharp'
+Interpreter.CurrentContext: class = 'Console', method = 'print'
+WARN: C#_Script: using System; Console.Write("Random number (range: 2-4): 2\n")
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: 
+Restored stack: class=Console
+Restored stack: class=Console
+Restored stack: class=
+Restored stack: class=

@@ -1,6 +1,6 @@
 ﻿namespace Qlang.AST;
 
-public class AssignmentNode(bool isStatic, bool isPrivate) : ASTNode
+public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst) : ASTNode
 {
     public string VariableName { get; set; }
     
@@ -9,6 +9,8 @@ public class AssignmentNode(bool isStatic, bool isPrivate) : ASTNode
     public bool IsStatic { get; set; } = isStatic;
 
     public bool IsPrivate { get; set; } = isPrivate;
+
+    public bool IsConst { get; set; } = isConst;
 
     public override string GetTree(string indent = "")
     {

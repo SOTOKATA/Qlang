@@ -8,10 +8,19 @@
     ".NETCoreApp,Version=v9.0": {
       "ql/1.0.0": {
         "dependencies": {
+          "CS-Script.lib": "3.30.5.1",
           "Microsoft.CodeAnalysis.CSharp.Scripting": "4.14.0"
         },
         "runtime": {
           "ql.dll": {}
+        }
+      },
+      "CS-Script.lib/3.30.5.1": {
+        "runtime": {
+          "lib/net45/CSScriptLibrary.dll": {
+            "assemblyVersion": "3.30.5.1",
+            "fileVersion": "3.30.5.1"
+          }
         }
       },
       "Microsoft.CodeAnalysis.Analyzers/3.11.0": {},
@@ -247,6 +256,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "CS-Script.lib/3.30.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9AVoy+uMJjEE9z20lcyCV0LRLRAb6HDTSK/MAiSUEqkQya6FFspxzC5M9Wh//QQJj6UX/fORzja+mvlOjkTgdA==",
+      "path": "cs-script.lib/3.30.5.1",
+      "hashPath": "cs-script.lib.3.30.5.1.nupkg.sha512"
     },
     "Microsoft.CodeAnalysis.Analyzers/3.11.0": {
       "type": "package",

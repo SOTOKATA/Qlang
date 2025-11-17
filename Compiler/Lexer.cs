@@ -134,8 +134,7 @@ public class Lexer()
     private static bool IsKeyword(string word, out Token? token)
     {
         // Список ключевых слов твоего языка
-        string[] keywords = ["class", "function", "if", "let", "else", "while", "false", "true", "do_while", "private", "return", "static",
-                "for", "include"];
+        var keywords = Keywords.GetKeywords().ToArray();
         
         if (keywords.Contains(word.ToLower()))
         {
@@ -164,6 +163,8 @@ public class Lexer()
             '!' => new Token(Tokens.Not, -1, -1),
             '>' => new Token(Tokens.Greater, -1, -1),
             '<' => new Token(Tokens.Less, -1, -1),
+            '|' => new Token(Tokens.Or, -1, -1),
+            '&' => new Token(Tokens.And, -1, -1),
             var _ => null
         };
         

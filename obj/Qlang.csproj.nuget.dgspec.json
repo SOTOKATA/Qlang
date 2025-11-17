@@ -51,6 +51,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "CS-Script.lib": {
+              "target": "Package",
+              "version": "[3.30.5.1, )"
+            },
             "Microsoft.CodeAnalysis.CSharp.Scripting": {
               "target": "Package",
               "version": "[4.14.0, )"

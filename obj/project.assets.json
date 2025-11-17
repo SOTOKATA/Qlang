@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net9.0": {
+      "CS-Script.lib/3.30.5.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/CSScriptLibrary.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/CSScriptLibrary.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.CodeAnalysis.Analyzers/3.11.0": {
         "type": "package",
         "build": {
@@ -295,6 +308,19 @@
     }
   },
   "libraries": {
+    "CS-Script.lib/3.30.5.1": {
+      "sha512": "9AVoy+uMJjEE9z20lcyCV0LRLRAb6HDTSK/MAiSUEqkQya6FFspxzC5M9Wh//QQJj6UX/fORzja+mvlOjkTgdA==",
+      "type": "package",
+      "path": "cs-script.lib/3.30.5.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "cs-script.lib.3.30.5.1.nupkg.sha512",
+        "cs-script.lib.nuspec",
+        "lib/net45/CSScriptLibrary.dll",
+        "lib/net45/CSScriptLibrary.xml"
+      ]
+    },
     "Microsoft.CodeAnalysis.Analyzers/3.11.0": {
       "sha512": "v/EW3UE8/lbEYHoC2Qq7AR/DnmvpgdtAMndfQNmpuIMx/Mto8L5JnuCfdBYtgvalQOtfNCnxFejxuRrryvUTsg==",
       "type": "package",
@@ -1369,6 +1395,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "CS-Script.lib >= 3.30.5.1",
       "Microsoft.CodeAnalysis.CSharp.Scripting >= 4.14.0"
     ]
   },
@@ -1423,6 +1450,10 @@
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
+          "CS-Script.lib": {
+            "target": "Package",
+            "version": "[3.30.5.1, )"
+          },
           "Microsoft.CodeAnalysis.CSharp.Scripting": {
             "target": "Package",
             "version": "[4.14.0, )"
@@ -1447,5 +1478,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'CS-Script.lib 3.30.5.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0'. This package may not be fully compatible with your project.",
+      "libraryId": "CS-Script.lib",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }
