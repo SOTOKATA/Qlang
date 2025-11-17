@@ -28,19 +28,19 @@ public static class PreCompile
 
             string fullPath;
 
-            if (line.StartsWith('@'))
-                fullPath = Path.Combine(Directory.GetCurrentDirectory(), line[1..]) + ".ql";
-            else
-                fullPath = Path.Combine(Directory.GetCurrentDirectory(), line);
-            
+            fullPath = Path.Combine(Directory.GetCurrentDirectory(), line.StartsWith('@') ? line[1..] : line);
+
             fullPath = fullPath.Replace('\\', Path.DirectorySeparatorChar);
             fullPath = fullPath.Replace('/', Path.DirectorySeparatorChar);
 
             Logger.Logger.Log("ForEach.FullPath: " + fullPath);
 
-            if (!File.Exists(fullPath))
-                throw new FileNotFoundException($"Include file not found: {fullPath}");
+            if (!Directory.Exists(fullPath) && !File.Exists(fullPath + ".ql"))
+                throw new FileNotFoundException($"Include file or directory not found: {fullPath}");
 
+            if (!Directory.Exists(fullPath))
+                fullPath += ".ql";
+                
             script = script.Replace(includeLine + "\r\n", "")
                 .Replace(includeLine + "\n", "")
                 .Replace(includeLine, "");
@@ -50,9 +50,18 @@ public static class PreCompile
                 Logger.Logger.Warn($"Skipped (already included): {fullPath}");
                 continue;
             }
+            
+            var content = "";
 
-            var content = File.ReadAllText(fullPath);
-
+            if (fullPath.EndsWith(".ql"))
+                content = File.ReadAllText(fullPath);
+            else
+            {
+                content = Directory.GetFiles(fullPath)
+                    .Where(file => Path.GetExtension(file) == ".ql")
+                    .Aggregate(content, (current, fileName) => current + (File.ReadAllText(fileName) + "\n"));
+            }
+            
             var subScript = IncludeFiles(content);
 
             files.Add(subScript);
