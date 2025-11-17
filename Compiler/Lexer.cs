@@ -158,6 +158,7 @@ public class Lexer()
             '(' => new Token(Tokens.LParen, -1, -1),
             ')' => new Token(Tokens.RParen, -1, -1),
             ':' => new Token(Tokens.Colon, -1, -1),
+            ';' => new Token(Tokens.CommaColon, -1, -1),
             ',' => new Token(Tokens.Comma, -1, -1),
             '.' => new Token(Tokens.Dot, -1, -1),
             '!' => new Token(Tokens.Not, -1, -1),

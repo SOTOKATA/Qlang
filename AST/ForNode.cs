@@ -1,6 +1,6 @@
 ﻿namespace Qlang.AST;
 
-public class ForNode : ASTNode
+public class ForNode : ASTBlock
 {
     public AssignmentNode Assignment { get; set; }
     public ASTNode Condition { get; set; }

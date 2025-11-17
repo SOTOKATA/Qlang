@@ -1,8 +1,14 @@
-include "@lib/datatypes"
+include "base_include"
+include "printer"
 
 function main():
-    let array = Array.empty()
+    let pathExample = Path.combine("C:\\Anything", "file.ql")
 
-    array = Array.append(array, "Hello World!")
+    printException("Hello World!")
+    for let i = 0; i < 100; i = i + 1:
+        Console.println("Index=" + i)
 
-    Console.println(Array.at(array, 0))
+    Console.println("Path: " + pathExample)
+    Console.println("FileExtension: " + Path.getExtension(pathExample))
+    Console.println("Dir separator: " + Path.getDirSeparator())
+    Console.println("AltDir separator: " + Path.getAltDirSeparator())

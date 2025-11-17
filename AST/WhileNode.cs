@@ -1,6 +1,6 @@
 ﻿namespace Qlang.AST;
 
-public class WhileNode : ASTNode
+public class WhileNode : ASTBlock
 {
     public ASTNode Condition { get; set; }
 

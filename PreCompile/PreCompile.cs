@@ -44,7 +44,7 @@ public static class PreCompile
             script = script.Replace(includeLine + "\r\n", "")
                 .Replace(includeLine + "\n", "")
                 .Replace(includeLine, "");
-            
+
             if (!Included.Add(fullPath))
             {
                 Logger.Logger.Warn($"Skipped (already included): {fullPath}");
@@ -57,9 +57,17 @@ public static class PreCompile
                 content = File.ReadAllText(fullPath);
             else
             {
-                content = Directory.GetFiles(fullPath)
-                    .Where(file => Path.GetExtension(file) == ".ql")
-                    .Aggregate(content, (current, fileName) => current + (File.ReadAllText(fileName) + "\n"));
+                foreach (string file in Directory.GetFiles(fullPath))
+                {
+                    if (!Included.Add(file))
+                    {
+                        Logger.Logger.Warn($"Skipped (already included): {fullPath}");
+                        continue;
+                    }
+                    
+                    if (Path.GetExtension(file) == ".ql") 
+                        content = content + (File.ReadAllText(file) + "\n");
+                }
             }
             
             var subScript = IncludeFiles(content);
@@ -81,8 +89,10 @@ public static class PreCompile
         
         var numberCounter = 0;
 
-        const string pattern = @"(?<![\p{L}_])\d+(?:\.\d+)?(?:[eE][+-]?\d+)?(?![\p{L}_])";
-        
+        // const string pattern = @"(?<![\p{L}_])\d+(?:\.\d+)?(?:[eE][+-]?\d+)?(?![\p{L}_])";
+        const string pattern =
+            @"(?<!___[A-Z]+_)\b\d+(?:\.\d+)?(?:[eE][+-]?\d+)?\b(?!___)";
+
         var result = Regex.Replace(script, pattern, match => 
         {
             var numberValue = match.Value;

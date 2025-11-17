@@ -1,5 +1,6 @@
 ﻿using Qlang.AST;
 using Qlang.Dependencies;
+using Exception = System.Exception;
 
 namespace Qlang.Compiler;
 
@@ -72,6 +73,12 @@ public class Parser
             return ParseClass();
         }
 
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.ForBlock)
+        {
+            Logger.Logger.Log("CompilationProcess.End: Parsing statement");
+            return ParseFor();
+        }
+        
         // if statement
         if (Check(Tokens.Keyword) && Current().Value == Keywords.IfBlock)
         {
@@ -195,6 +202,29 @@ public class Parser
 
         Logger.Logger.Log("CompilationProcess.End: Parsing class");
         return new ClassNode { Name = name, Body = body };
+    }
+    
+    private ForNode ParseFor()
+    {
+        Logger.Logger.Log("CompilationProcess: Parsing for");
+        Expect(Tokens.Keyword, Keywords.ForBlock);
+        
+        AssignmentNode assignment = ParseVariableDeclaration();
+        Expect(Tokens.CommaColon);
+        var condition = ParseExpression();
+        Expect(Tokens.CommaColon);
+        var statement = ParseExpression();
+        
+        Expect(Tokens.Colon);
+        Expect(Tokens.NewLine);
+        Expect(Tokens.Indent);
+
+        List<ASTNode> forBlock = ParseBlock();
+
+        Expect(Tokens.Dedent);
+
+        Logger.Logger.Log("CompilationProcess.End: Parsing for");
+        return new ForNode { Assignment = assignment, Statement = statement, Condition = condition, Body = forBlock };
     }
     
     private WhileNode ParseWhile(bool isDoWhile = false)

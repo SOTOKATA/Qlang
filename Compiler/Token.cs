@@ -12,6 +12,7 @@ public class Token(Tokens token, int line, int index, string value = "")
 
 public enum Tokens
 {
+    CommaColon,
     Or,
     And,
     Keyword,

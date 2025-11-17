@@ -1,6 +1,6 @@
 ﻿namespace Qlang.AST;
 
-public class IfNode : ASTNode
+public class IfNode : ASTBlock
 {
     public ASTNode Condition { get; set; }
     public List<ASTNode> ThenBlock { get; set; } = [];

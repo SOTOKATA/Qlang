@@ -36,6 +36,38 @@ public partial class Interpreter
         Logger.Logger.Log("Interpreter.While.End", ConsoleColor.Magenta);
     }
 
+    private void ExecuteFor(ForNode forNode)
+    {
+        var condition = (bool)EvaluateExpression(forNode.Condition);
+        Logger.Logger.Log("Interpreter.For: condition=" + condition, ConsoleColor.Magenta);
+
+        while (condition)
+        {
+            foreach (var statement in forNode.Body)
+            {
+                if (_break)
+                {
+                    Logger.Logger.Warn("Is break!");
+                    return;
+                }
+
+                if (statement is ReturnNode returnNode)
+                {
+                    _break = true;
+                    _return = returnNode;
+                    return;
+                }
+                
+                ExecuteStatement(statement);
+            }
+            
+            condition = (bool)EvaluateExpression(forNode.Condition);
+            Logger.Logger.Log("Interpreter.While: condition=" + condition, ConsoleColor.Magenta);
+        }
+        
+        Logger.Logger.Log("Interpreter.While.End", ConsoleColor.Magenta);
+    }
+    
     private void ExecuteIf(IfNode ifNode)
     {
         // 1. Вычисляем условие (expression -> bool)

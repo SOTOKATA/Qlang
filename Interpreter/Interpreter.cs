@@ -162,7 +162,25 @@ public partial class Interpreter
         switch (statement)
         {
             case AssignmentNode assign:
-                if (CurrentContext.Function.Variables.TryGetValue(assign.VariableName, out var variable) && variable
+
+                if (CurrentContext.Blocks[^1].Variables.TryGetValue(assign.VariableName, out var variable)&& variable
+                        .IsConst)
+                    throw new QlangRuntimeException($"Can't re-assign const variable '{assign.VariableName}'",
+                        assign, GetStackTrace());
+
+                // block contains this variable
+                if (variable is not null)
+                {
+                    CurrentContext.Blocks[^1].Variables[assign.VariableName] = new Variable(
+                        assign.VariableName, 
+                        value, 
+                        assign.IsStatic,
+                        assign.IsPrivate,
+                        assign.IsConst);
+                }
+                
+                
+                if (CurrentContext.Function.Variables.TryGetValue(assign.VariableName, out variable) && variable
                         .IsConst)
                     throw new QlangRuntimeException($"Can't re-assign const variable '{assign.VariableName}'",
                         assign, GetStackTrace());
@@ -191,6 +209,11 @@ public partial class Interpreter
             case WhileNode whileNode:
                 Logger.Logger.Log("Interpreter: Execute statement (WhileNode)");
                 ExecuteWhile(whileNode);
+                break;
+            
+            case ForNode forNode:
+                Logger.Logger.Log("Interpreter: Execute statement (ForNode)");
+                ExecuteFor(forNode);
                 break;
             
             default:
@@ -462,13 +485,13 @@ public partial class Interpreter
         
     }
     
-    private string GetStringRef(StringRefNode strRef)
+    private string GetStringRef(StringRefNode strStringRef)
     {
-        if (!_stringDictionary.TryGetValue($"___STRING_{strRef.Index}___", out var value))
+        if (!_stringDictionary.TryGetValue($"___STRING_{strStringRef.Index}___", out var value))
         {
             throw new QlangRuntimeException(
                 $"Undefined string reference: {value}", 
-                strRef, 
+                strStringRef, 
                 GetStackTrace());
         }
         return value;

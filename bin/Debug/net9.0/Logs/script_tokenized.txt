@@ -49,88 +49,13 @@ Dedent
 Dedent
 DedentDedent 
 Dedent
-DedentKeyword(class) Identifier(Array) Colon NewLine 
-Indent 
-Indent
-IndentKeyword(private) Keyword(function) Identifier(_csharpArr) LParen Keyword(let) Identifier(qarray) RParen Colon NewLine 
-Indent 
-Indent
-IndentKeyword(return) Identifier(_csharp) LParen Identifier(___STRING_14___) Plus Identifier(qarray) Plus Identifier(___STRING_15___) RParen NewLine 
-Dedent 
-Dedent
-DedentKeyword(function) Identifier(empty) LParen RParen Colon NewLine 
-Indent 
-Indent
-IndentKeyword(return) Identifier(_csharp) LParen Identifier(___STRING_16___) RParen NewLine 
-Dedent 
-Dedent
-DedentKeyword(function) Identifier(at) LParen Keyword(let) Identifier(array) Comma Keyword(let) Identifier(index) RParen Colon NewLine 
-Indent 
-Indent
-IndentKeyword(if) Identifier(Number) Dot Identifier(isNumber) LParen Identifier(index) RParen Equals Equals Keyword(false) Colon NewLine 
-Indent 
-Indent
-IndentIdentifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_17___) RParen NewLine 
-Dedent 
-Dedent
-DedentKeyword(return) Identifier(_csharp) LParen Identifier(_csharpArr) LParen Identifier(array) RParen Plus Identifier(___STRING_18___) Plus Identifier(index) Plus Identifier(___STRING_19___) RParen NewLine 
-Dedent 
-Dedent
-DedentKeyword(function) Identifier(append) LParen Keyword(let) Identifier(array) Comma Keyword(let) Identifier(item) RParen Colon NewLine 
-Indent 
-Indent
-IndentIdentifier(_csharp) LParen Identifier(_csharpArr) LParen Identifier(array) RParen Plus Identifier(___STRING_20___) RParen NewLine 
-Dedent 
-Dedent
-DedentDedent 
-Dedent
-DedentKeyword(class) Identifier(Number) Colon NewLine 
-Indent 
-Indent
-IndentKeyword(private) Keyword(let) Identifier(usings) Equals Identifier(___STRING_21___) NewLine 
-Keyword(const) Keyword(let) Identifier(MIN_VALUE) Equals Identifier(___STRING_22___) NewLine 
-Keyword(const) Keyword(let) Identifier(MAX_VALUE) Equals Identifier(___STRING_23___) NewLine 
-Keyword(function) Identifier(isNumber) LParen Keyword(let) Identifier(var) RParen Colon NewLine 
-Indent 
-Indent
-IndentKeyword(return) Identifier(_csharp) LParen Identifier(usings) Plus Identifier(___STRING_24___) Plus Identifier(_str) LParen Identifier(var) RParen Plus Identifier(___STRING_25___) RParen NewLine 
-Dedent 
-Dedent
-DedentKeyword(function) Identifier(randInt) LParen Keyword(let) Identifier(min) Comma Keyword(let) Identifier(max) RParen Colon NewLine 
-Indent 
-Indent
-IndentKeyword(if) Identifier(min) Greater Equals Identifier(max) Colon NewLine 
-Indent 
-Indent
-IndentIdentifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_26___) RParen NewLine 
-Dedent 
-Dedent
-DedentIdentifier(min) Equals Identifier(toInt) LParen Identifier(min) RParen NewLine 
-Identifier(max) Equals Identifier(toInt) LParen Identifier(max) RParen NewLine 
-Keyword(return) Identifier(_csharp) LParen Identifier(usings) Plus Identifier(___STRING_27___) Plus Identifier(min) Plus Identifier(___STRING_28___) Plus Identifier(max) Plus Identifier(___STRING_29___) RParen NewLine 
-Dedent 
-Dedent
-DedentKeyword(function) Identifier(toInt) LParen Keyword(let) Identifier(float) RParen Colon NewLine 
-Indent 
-Indent
-IndentKeyword(return) Identifier(toFixed) LParen Identifier(float) Comma Identifier(___STRING_30___) RParen NewLine 
-Dedent 
-Dedent
-DedentKeyword(function) Identifier(toFixed) LParen Keyword(let) Identifier(number) Comma Keyword(let) Identifier(pattern) RParen Colon NewLine 
-Indent 
-Indent
-IndentKeyword(return) Identifier(_csharp) LParen Identifier(usings) Plus Identifier(number) Plus Identifier(___STRING_31___) Plus Identifier(_str) LParen Identifier(pattern) RParen Plus Identifier(___STRING_32___) RParen NewLine 
-Dedent 
-Dedent
-DedentDedent 
-Dedent
 DedentKeyword(class) Identifier(String) Colon NewLine 
 Indent 
 Indent
 IndentKeyword(private) Keyword(function) Identifier(getStr) LParen Keyword(let) Identifier(str) RParen Colon NewLine 
 Indent 
 Indent
-IndentKeyword(return) Identifier(___STRING_33___) Plus Identifier(_str) LParen Identifier(str) RParen Plus Identifier(___STRING_34___) NewLine 
+IndentKeyword(return) Identifier(___STRING_14___) Plus Identifier(_str) LParen Identifier(str) RParen Plus Identifier(___STRING_15___) NewLine 
 Dedent 
 Dedent
 DedentKeyword(function) Identifier(append) LParen Keyword(let) Identifier(str) Comma Keyword(let) Identifier(str2) RParen Colon NewLine 
@@ -142,37 +67,37 @@ Dedent
 DedentKeyword(function) Identifier(getLength) LParen Keyword(let) Identifier(str) RParen Colon NewLine 
 Indent 
 Indent
-IndentKeyword(return) Identifier(_csharp) LParen Identifier(getStr) LParen Identifier(str) RParen Plus Identifier(___STRING_35___) RParen NewLine 
+IndentKeyword(return) Identifier(_csharp) LParen Identifier(getStr) LParen Identifier(str) RParen Plus Identifier(___STRING_16___) RParen NewLine 
 Dedent 
 Dedent
 DedentKeyword(function) Identifier(isNullOrEmpty) LParen Keyword(let) Identifier(str) RParen Colon NewLine 
 Indent 
 Indent
-IndentKeyword(return) Identifier(_csharp) LParen Identifier(___STRING_36___) Plus Identifier(_str) LParen Identifier(str) RParen Plus Identifier(___STRING_37___) RParen NewLine 
+IndentKeyword(return) Identifier(_csharp) LParen Identifier(___STRING_17___) Plus Identifier(_str) LParen Identifier(str) RParen Plus Identifier(___STRING_18___) RParen NewLine 
 Dedent 
 Dedent
 DedentKeyword(function) Identifier(isNullOrWhiteSpace) LParen Keyword(let) Identifier(str) RParen Colon NewLine 
 Indent 
 Indent
-IndentKeyword(return) Identifier(_csharp) LParen Identifier(___STRING_38___) Plus Identifier(_str) LParen Identifier(str) RParen Plus Identifier(___STRING_39___) RParen NewLine 
+IndentKeyword(return) Identifier(_csharp) LParen Identifier(___STRING_19___) Plus Identifier(_str) LParen Identifier(str) RParen Plus Identifier(___STRING_20___) RParen NewLine 
 Dedent 
 Dedent
 DedentKeyword(function) Identifier(trim) LParen Keyword(let) Identifier(str) RParen Colon NewLine 
 Indent 
 Indent
-IndentKeyword(return) Identifier(_csharp) LParen Identifier(getStr) LParen Identifier(str) RParen Plus Identifier(___STRING_40___) RParen NewLine 
+IndentKeyword(return) Identifier(_csharp) LParen Identifier(getStr) LParen Identifier(str) RParen Plus Identifier(___STRING_21___) RParen NewLine 
 Dedent 
 Dedent
 DedentKeyword(function) Identifier(trimStart) LParen Keyword(let) Identifier(str) RParen Colon NewLine 
 Indent 
 Indent
-IndentKeyword(return) Identifier(_csharp) LParen Identifier(getStr) LParen Identifier(str) RParen Plus Identifier(___STRING_41___) RParen NewLine 
+IndentKeyword(return) Identifier(_csharp) LParen Identifier(getStr) LParen Identifier(str) RParen Plus Identifier(___STRING_22___) RParen NewLine 
 Dedent 
 Dedent
 DedentKeyword(function) Identifier(trimEnd) LParen Keyword(let) Identifier(str) RParen Colon NewLine 
 Indent 
 Indent
-IndentKeyword(return) Identifier(_csharp) LParen Identifier(getStr) LParen Identifier(str) RParen Plus Identifier(___STRING_42___) RParen NewLine 
+IndentKeyword(return) Identifier(_csharp) LParen Identifier(getStr) LParen Identifier(str) RParen Plus Identifier(___STRING_23___) RParen NewLine 
 Dedent 
 Dedent
 DedentKeyword(function) Identifier(subString) LParen Keyword(let) Identifier(str) Comma Keyword(let) Identifier(startPos) Comma Keyword(let) Identifier(length) RParen Colon NewLine 
@@ -181,25 +106,207 @@ Indent
 IndentKeyword(if) Identifier(Number) Dot Identifier(isNumber) LParen Identifier(startPos) RParen Equals Equals Keyword(false) Colon NewLine 
 Indent 
 Indent
-IndentIdentifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_43___) RParen NewLine 
+IndentIdentifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_24___) RParen NewLine 
 Dedent 
 Dedent
 DedentKeyword(if) Identifier(Number) Dot Identifier(isNumber) LParen Identifier(length) RParen Equals Equals Keyword(false) Colon NewLine 
 Indent 
 Indent
-IndentIdentifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_44___) RParen NewLine 
+IndentIdentifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_25___) RParen NewLine 
 Dedent 
 Dedent
-DedentKeyword(return) Identifier(_csharp) LParen Identifier(getStr) LParen Identifier(str) RParen Plus Identifier(___STRING_45___) Plus Identifier(startPos) Plus Identifier(___STRING_46___) Plus Identifier(length) Plus Identifier(___STRING_47___) RParen NewLine 
+DedentKeyword(return) Identifier(_csharp) LParen Identifier(getStr) LParen Identifier(str) RParen Plus Identifier(___STRING_26___) Plus Identifier(startPos) Plus Identifier(___STRING_27___) Plus Identifier(length) Plus Identifier(___STRING_28___) RParen NewLine 
 Dedent 
 Dedent
 DedentDedent 
 Dedent
+DedentKeyword(class) Identifier(Math) Colon NewLine 
+Indent 
+Indent
+IndentKeyword(private) Keyword(function) Identifier(throwException) LParen Keyword(let) Identifier(num) RParen Colon NewLine 
+Indent 
+Indent
+IndentKeyword(if) Identifier(Number) Dot Identifier(isNumber) LParen Identifier(num) RParen Equals Equals Keyword(false) Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_29___) Plus Identifier(num) Plus Identifier(___STRING_30___) RParen NewLine 
+Dedent 
+Dedent
+DedentDedent 
+Dedent
+DedentKeyword(const) Keyword(let) Identifier(PI) Equals Identifier(___NUMBER_7___) NewLine 
+Keyword(function) Identifier(abs) LParen Keyword(let) Identifier(num) RParen Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(throwException) LParen Identifier(num) RParen NewLine 
+Keyword(return) Identifier(___NUMBER_8___) Minus Identifier(num) NewLine 
+Dedent 
+Dedent
+DedentKeyword(function) Identifier(sum) LParen Keyword(let) Identifier(num) Comma Keyword(let) Identifier(num2) RParen Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(throwException) LParen Identifier(num) RParen NewLine 
+Identifier(throwException) LParen Identifier(num2) RParen NewLine 
+Keyword(return) Identifier(num) Plus Identifier(num2) NewLine 
+Dedent 
+Dedent
+DedentKeyword(function) Identifier(sub) LParen Keyword(let) Identifier(num) Comma Keyword(let) Identifier(num2) RParen Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(throwException) LParen Identifier(num) RParen NewLine 
+Identifier(throwException) LParen Identifier(num2) RParen NewLine 
+Keyword(return) Identifier(num) Minus Identifier(num2) NewLine 
+Dedent 
+Dedent
+DedentKeyword(function) Identifier(mult) LParen Keyword(let) Identifier(num) Comma Keyword(let) Identifier(num2) RParen Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(throwException) LParen Identifier(num) RParen NewLine 
+Identifier(throwException) LParen Identifier(num2) RParen NewLine 
+Keyword(return) Identifier(num) Star Identifier(num2) NewLine 
+Dedent 
+Dedent
+DedentKeyword(function) Identifier(div) LParen Keyword(let) Identifier(num) Comma Keyword(let) Identifier(num2) RParen Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(throwException) LParen Identifier(num) RParen NewLine 
+Identifier(throwException) LParen Identifier(num2) RParen NewLine 
+Keyword(if) Identifier(num2) Equals Equals Identifier(___NUMBER_9___) Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_31___) RParen NewLine 
+Dedent 
+Dedent
+DedentKeyword(return) Identifier(num) Slash Identifier(num2) NewLine 
+Dedent 
+Dedent
+DedentDedent 
+Dedent
+DedentKeyword(class) Identifier(Console) Colon NewLine 
+Indent 
+Indent
+IndentKeyword(private) Keyword(let) Identifier(usings) Equals Identifier(___STRING_32___) NewLine 
+Keyword(private) Keyword(let) Identifier(defFColor) Equals Identifier(___STRING_33___) NewLine 
+Keyword(private) Keyword(let) Identifier(defBColor) Equals Identifier(___STRING_34___) NewLine 
+Keyword(function) Identifier(print) LParen Keyword(let) Identifier(message) RParen Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(_csharp) LParen Identifier(usings) Plus Identifier(___STRING_35___) Plus Identifier(_str) LParen Identifier(message) RParen Plus Identifier(___STRING_36___) RParen NewLine 
+Dedent 
+Dedent
+DedentKeyword(function) Identifier(println) LParen Keyword(let) Identifier(message) RParen Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(print) LParen Identifier(message) Plus Identifier(___STRING_37___) RParen NewLine 
+Dedent 
+Dedent
+DedentKeyword(function) Identifier(readln) LParen RParen Colon NewLine 
+Indent 
+Indent
+IndentKeyword(return) Identifier(_csharp) LParen Identifier(usings) Plus Identifier(___STRING_38___) RParen NewLine 
+Dedent 
+Dedent
+DedentKeyword(function) Identifier(clear) LParen RParen Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(_csharp) LParen Identifier(usings) Plus Identifier(___STRING_39___) RParen NewLine 
+Dedent 
+Dedent
+DedentKeyword(function) Identifier(setCursorPosition) LParen Keyword(let) Identifier(x) Comma Keyword(let) Identifier(y) RParen Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(_csharp) LParen Identifier(usings) Plus Identifier(___STRING_40___) Plus Identifier(x) Plus Identifier(___STRING_41___) Plus Identifier(y) Plus Identifier(___STRING_42___) RParen NewLine 
+Dedent 
+Dedent
+DedentKeyword(function) Identifier(setForeColor) LParen Keyword(let) Identifier(color) RParen Colon NewLine 
+Indent 
+Indent
+IndentKeyword(let) Identifier(line1) Equals Identifier(___STRING_43___) Plus Identifier(_str) LParen Identifier(color) RParen Plus Identifier(___STRING_44___) NewLine 
+Keyword(let) Identifier(line2) Equals Identifier(___STRING_45___) NewLine 
+Identifier(_csharp) LParen Identifier(usings) Plus Identifier(line1) Plus Identifier(line2) RParen NewLine 
+Dedent 
+Dedent
+DedentKeyword(function) Identifier(setBackColor) LParen Keyword(let) Identifier(color) RParen Colon NewLine 
+Indent 
+Indent
+IndentKeyword(let) Identifier(line1) Equals Identifier(___STRING_46___) Plus Identifier(_str) LParen Identifier(color) RParen Plus Identifier(___STRING_47___) NewLine 
+Keyword(let) Identifier(line2) Equals Identifier(___STRING_48___) NewLine 
+Identifier(_csharp) LParen Identifier(usings) Plus Identifier(line1) Plus Identifier(line2) RParen NewLine 
+Dedent 
+Dedent
+DedentKeyword(function) Identifier(resetColors) LParen RParen Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(setForeColor) LParen Identifier(defFColor) RParen NewLine 
+Identifier(setBackColor) LParen Identifier(defBColor) RParen NewLine 
+Dedent 
+Dedent
+DedentDedent 
+Dedent
+DedentKeyword(class) Identifier(File) Colon NewLine 
+Indent 
+Indent
+IndentKeyword(private) Keyword(let) Identifier(usings) Equals Identifier(___STRING_49___) NewLine 
+Keyword(function) Identifier(exists) LParen Keyword(let) Identifier(message) RParen Colon NewLine 
+Indent 
+Indent
+IndentKeyword(return) Identifier(_csharp) LParen Identifier(usings) Plus Identifier(___STRING_50___) Plus Identifier(_str) LParen Identifier(message) RParen Plus Identifier(___STRING_51___) RParen NewLine 
+Dedent 
+Dedent
+DedentDedent 
+Dedent
+DedentKeyword(class) Identifier(Path) Colon NewLine 
+Indent 
+Indent
+IndentKeyword(private) Keyword(let) Identifier(usings) Equals Identifier(___STRING_52___) NewLine 
+Keyword(function) Identifier(getExtension) LParen Keyword(let) Identifier(path) RParen Colon NewLine 
+Indent 
+Indent
+IndentKeyword(return) Identifier(_csharp) LParen Identifier(usings) Plus Identifier(___STRING_53___) Plus Identifier(_str) LParen Identifier(path) RParen Plus Identifier(___STRING_54___) RParen NewLine 
+Dedent 
+Dedent
+DedentKeyword(function) Identifier(combine) LParen Keyword(let) Identifier(first) Comma Keyword(let) Identifier(second) RParen Colon NewLine 
+Indent 
+Indent
+IndentKeyword(return) Identifier(_csharp) LParen Identifier(usings) Plus Identifier(___STRING_55___) Plus Identifier(_str) LParen Identifier(first) RParen Plus Identifier(___STRING_56___) Plus Identifier(_str) LParen Identifier(second) RParen Plus Identifier(___STRING_57___) RParen NewLine 
+Dedent 
+Dedent
+DedentKeyword(function) Identifier(getDirSeparator) LParen RParen Colon NewLine 
+Indent 
+Indent
+IndentKeyword(return) Identifier(_csharp) LParen Identifier(usings) Plus Identifier(___STRING_58___) RParen NewLine 
+Dedent 
+Dedent
+DedentKeyword(function) Identifier(getAltDirSeparator) LParen RParen Colon NewLine 
+Indent 
+Indent
+IndentKeyword(return) Identifier(_csharp) LParen Identifier(usings) Plus Identifier(___STRING_59___) RParen NewLine 
+Dedent 
+Dedent
+DedentDedent 
+Dedent
+DedentKeyword(function) Identifier(printException) LParen Keyword(let) Identifier(message) RParen Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(Console) Dot Identifier(setForeColor) LParen Identifier(___STRING_60___) RParen NewLine 
+Identifier(Console) Dot Identifier(println) LParen Identifier(message) RParen NewLine 
+Identifier(Console) Dot Identifier(resetColors) LParen RParen NewLine 
+Dedent 
+Dedent
 DedentKeyword(function) Identifier(main) LParen RParen Colon NewLine 
 Indent 
 Indent
-IndentKeyword(let) Identifier(array) Equals Identifier(Array) Dot Identifier(empty) LParen RParen NewLine 
-Identifier(array) Equals Identifier(Array) Dot Identifier(append) LParen Identifier(array) Comma Identifier(___STRING_48___) RParen NewLine 
-Identifier(Console) Dot Identifier(println) LParen Identifier(Array) Dot Identifier(at) LParen Identifier(array) Comma Identifier(___NUMBER_14___) RParen RParen NewLine 
+IndentKeyword(let) Identifier(pathExample) Equals Identifier(Path) Dot Identifier(combine) LParen Identifier(___STRING_61___) Comma Identifier(___STRING_62___) RParen NewLine 
+Identifier(printException) LParen Identifier(___STRING_63___) RParen NewLine 
+Keyword(for) Keyword(let) Identifier(i) Equals Identifier(___NUMBER_10___) CommaColon Identifier(i) Less Identifier(___NUMBER_11___) CommaColon Identifier(i) Equals Identifier(i) Plus Identifier(___NUMBER_12___) Colon NewLine 
+Indent 
+Indent
+IndentIdentifier(Console) Dot Identifier(println) LParen Identifier(___STRING_64___) Plus Identifier(i) RParen NewLine 
+Dedent 
+Dedent
+DedentIdentifier(Console) Dot Identifier(println) LParen Identifier(___STRING_65___) Plus Identifier(pathExample) RParen NewLine 
+Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_66___) Plus Identifier(Path) Dot Identifier(getExtension) LParen Identifier(pathExample) RParen RParen NewLine 
+Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_67___) Plus Identifier(Path) Dot Identifier(getDirSeparator) LParen RParen RParen NewLine 
+Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_68___) Plus Identifier(Path) Dot Identifier(getAltDirSeparator) LParen RParen RParen NewLine 
 Dedent 
 Dedent

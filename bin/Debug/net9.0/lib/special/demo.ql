@@ -14,7 +14,7 @@ class LanguageDemo:
             let choice = Console.readln()
 
             if String.isNullOrWhiteSpace(choice) == true:
-                printException("You print empty string!")Catarin2313#*
+                printException("You print empty string!")
 
             if Number.isNumber(choice) == false:
                 printException("You print not number!")
