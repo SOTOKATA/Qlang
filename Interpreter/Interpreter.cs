@@ -246,7 +246,7 @@ public partial class Interpreter
             return value;
 
         if (call is { ObjectName: "", MethodName: "_str" })
-            return ParseString(string.Join("", args.Cast<string>()));
+            return ParseString(string.Join("", args.Select(a => a.ToString())));
 
         if (call is { ObjectName: "", MethodName: "_csharp" })
         {
@@ -522,7 +522,7 @@ public partial class Interpreter
                 numberRef, 
                 GetStackTrace());
         }
-        return value;
+        return numberRef.IsNegative ? $"-{value}" : value;
     }
 
     private object EvaluateBinaryOperation(BinaryOperationNode binOp)

@@ -9,10 +9,25 @@ ForEach.Path: @lib/datatypes/number
 ForEach.FullPath: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\datatypes\number
 IncludeLines:
 include "@lib/throw"
+include "@lib/datatypes/string"
+include "@lib/console"
 ForEach: include "@lib/throw"
 ForEach.Path: @lib/throw
 ForEach.FullPath: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\throw
 WARN: Skipped (already included): D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\throw.ql
+ForEach: include "@lib/datatypes/string"
+ForEach.Path: @lib/datatypes/string
+ForEach.FullPath: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\datatypes\string
+IncludeLines:
+include "@lib/throw"
+ForEach: include "@lib/throw"
+ForEach.Path: @lib/throw
+ForEach.FullPath: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\throw
+WARN: Skipped (already included): D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\throw.ql
+ForEach: include "@lib/console"
+ForEach.Path: @lib/console
+ForEach.FullPath: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\console
+SUCC: All includes processed successfully.
 SUCC: All includes processed successfully.
 CompilationProcess: Parsing statement (Keyword, class)
 CompilationProcess.End: Parsing statement
@@ -86,93 +101,44 @@ CompilationProcess: Parsing statement (Keyword, private)
 WARN: IsPrivate = true
 Token (Ln:9 Idx:7): Keyword
 CompilationProcess.End: Parsing statement
-CompilationProcess: Parsing variable declaration
-Token (Ln:9 Idx:11): Keyword
-Token (Ln:9 Idx:18): Identifier
-Token (Ln:9 Idx:19): Equals
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:9 Idx:35): Identifier
-CompilationProcess.End: Parsing Variable declaration (Name: usings Value: StringRefNode)
-Token (Ln:9 Idx:36): NewLine
-CompilationProcess: Parsing statement (Keyword, const)
-WARN: IsConst = true
-Token (Ln:12 Idx:5): Keyword
-CompilationProcess.End: Parsing statement
-CompilationProcess: Parsing variable declaration
-Token (Ln:12 Idx:9): Keyword
-Token (Ln:12 Idx:19): Identifier
-Token (Ln:12 Idx:20): Equals
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:12 Idx:36): Identifier
-CompilationProcess.End: Parsing Variable declaration (Name: MIN_VALUE Value: StringRefNode)
-Token (Ln:12 Idx:37): NewLine
-CompilationProcess: Parsing statement (Keyword, const)
-WARN: IsConst = true
-Token (Ln:13 Idx:5): Keyword
-CompilationProcess.End: Parsing statement
-CompilationProcess: Parsing variable declaration
-Token (Ln:13 Idx:9): Keyword
-Token (Ln:13 Idx:19): Identifier
-Token (Ln:13 Idx:20): Equals
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:13 Idx:36): Identifier
-CompilationProcess.End: Parsing Variable declaration (Name: MAX_VALUE Value: StringRefNode)
-Token (Ln:13 Idx:37): NewLine
-CompilationProcess: Parsing statement (Keyword, function)
-CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing function
-Token (Ln:16 Idx:8): Keyword
-Token (Ln:16 Idx:17): Identifier
-Token (Ln:16 Idx:17): LParen
+Token (Ln:9 Idx:16): Keyword
+Token (Ln:9 Idx:23): Identifier
+Token (Ln:9 Idx:23): LParen
 CompilationProcess: Parsing variable declaration
-Token (Ln:16 Idx:21): Keyword
-Token (Ln:16 Idx:25): Identifier
-CompilationProcess.End: Parsing Variable declaration (Name: var Value: Null)
-Token (Ln:16 Idx:25): RParen
-Token (Ln:16 Idx:26): Colon
-Token (Ln:16 Idx:28): NewLine
+Token (Ln:9 Idx:27): Keyword
+Token (Ln:9 Idx:31): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: str Value: Null)
+Token (Ln:9 Idx:31): RParen
+Token (Ln:9 Idx:32): Colon
+Token (Ln:9 Idx:34): NewLine
 Token (Ln:-1 Idx:-1): Indent
 CompilationProcess: Parsing block
 CompilationProcess: Parsing statement (Keyword, return)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing return
-Token (Ln:17 Idx:6): Keyword
+Token (Ln:10 Idx:6): Keyword
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:17 Idx:14): Identifier
-Token (Ln:17 Idx:14): LParen
+Token (Ln:10 Idx:21): Identifier
+Token (Ln:10 Idx:22): Plus
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:17 Idx:21): Identifier
-CompilationProcess.End: Parsing primary (VariableNode: usings)
-Token (Ln:17 Idx:22): Plus
+Token (Ln:10 Idx:28): Identifier
+Token (Ln:10 Idx:28): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:17 Idx:38): Identifier
-Token (Ln:17 Idx:39): Plus
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:17 Idx:45): Identifier
-Token (Ln:17 Idx:45): LParen
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:17 Idx:49): Identifier
-CompilationProcess.End: Parsing primary (VariableNode: var)
-Token (Ln:17 Idx:49): RParen
+Token (Ln:10 Idx:32): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: str)
+Token (Ln:10 Idx:32): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:17 Idx:51): Plus
+Token (Ln:10 Idx:34): Plus
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:17 Idx:67): Identifier
+Token (Ln:10 Idx:50): Identifier
 CompilationProcess.End: Parsing expression
 CompilationProcess.End: Parsing expression
-CompilationProcess.End: Parsing expression
-Token (Ln:17 Idx:67): RParen
-CompilationProcess.End: Parsing primary
-Token (Ln:17 Idx:69): NewLine
+Token (Ln:10 Idx:51): NewLine
 CompilationProcess.End: Parsing return
 CompilationProcess.End: Parsing block
 Token (Ln:-1 Idx:-1): Dedent
@@ -180,93 +146,387 @@ CompilationProcess.End: Parsing function
 CompilationProcess: Parsing statement (Keyword, function)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing function
-Token (Ln:20 Idx:8): Keyword
-Token (Ln:20 Idx:16): Identifier
-Token (Ln:20 Idx:16): LParen
+Token (Ln:13 Idx:8): Keyword
+Token (Ln:13 Idx:15): Identifier
+Token (Ln:13 Idx:15): LParen
 CompilationProcess: Parsing variable declaration
-Token (Ln:20 Idx:20): Keyword
-Token (Ln:20 Idx:24): Identifier
-CompilationProcess.End: Parsing Variable declaration (Name: min Value: Null)
-Token (Ln:20 Idx:24): Comma
+Token (Ln:13 Idx:19): Keyword
+Token (Ln:13 Idx:23): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: str Value: Null)
+Token (Ln:13 Idx:23): Comma
 CompilationProcess: Parsing variable declaration
-Token (Ln:20 Idx:29): Keyword
-Token (Ln:20 Idx:33): Identifier
-CompilationProcess.End: Parsing Variable declaration (Name: max Value: Null)
-Token (Ln:20 Idx:33): RParen
-Token (Ln:20 Idx:34): Colon
-Token (Ln:20 Idx:36): NewLine
+Token (Ln:13 Idx:28): Keyword
+Token (Ln:13 Idx:33): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: str2 Value: Null)
+Token (Ln:13 Idx:33): RParen
+Token (Ln:13 Idx:34): Colon
+Token (Ln:13 Idx:36): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Keyword, return)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing return
+Token (Ln:14 Idx:6): Keyword
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:14 Idx:10): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: str)
+Token (Ln:14 Idx:11): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:14 Idx:17): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: str2)
+CompilationProcess.End: Parsing expression
+Token (Ln:14 Idx:18): NewLine
+CompilationProcess.End: Parsing return
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing function
+CompilationProcess: Parsing statement (Keyword, function)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing function
+Token (Ln:17 Idx:8): Keyword
+Token (Ln:17 Idx:18): Identifier
+Token (Ln:17 Idx:18): LParen
+CompilationProcess: Parsing variable declaration
+Token (Ln:17 Idx:22): Keyword
+Token (Ln:17 Idx:26): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: str Value: Null)
+Token (Ln:17 Idx:26): RParen
+Token (Ln:17 Idx:27): Colon
+Token (Ln:17 Idx:29): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Keyword, return)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing return
+Token (Ln:18 Idx:6): Keyword
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:18 Idx:14): Identifier
+Token (Ln:18 Idx:14): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:18 Idx:21): Identifier
+Token (Ln:18 Idx:21): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:18 Idx:25): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: str)
+Token (Ln:18 Idx:25): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:18 Idx:27): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:18 Idx:43): Identifier
+CompilationProcess.End: Parsing expression
+Token (Ln:18 Idx:43): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:18 Idx:45): NewLine
+CompilationProcess.End: Parsing return
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing function
+CompilationProcess: Parsing statement (Keyword, function)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing function
+Token (Ln:21 Idx:8): Keyword
+Token (Ln:21 Idx:22): Identifier
+Token (Ln:21 Idx:22): LParen
+CompilationProcess: Parsing variable declaration
+Token (Ln:21 Idx:26): Keyword
+Token (Ln:21 Idx:30): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: str Value: Null)
+Token (Ln:21 Idx:30): RParen
+Token (Ln:21 Idx:31): Colon
+Token (Ln:21 Idx:33): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Keyword, return)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing return
+Token (Ln:22 Idx:6): Keyword
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:22 Idx:14): Identifier
+Token (Ln:22 Idx:14): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:22 Idx:29): Identifier
+Token (Ln:22 Idx:30): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:22 Idx:36): Identifier
+Token (Ln:22 Idx:36): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:22 Idx:40): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: str)
+Token (Ln:22 Idx:40): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:22 Idx:42): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:22 Idx:58): Identifier
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+Token (Ln:22 Idx:58): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:22 Idx:60): NewLine
+CompilationProcess.End: Parsing return
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing function
+CompilationProcess: Parsing statement (Keyword, function)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing function
+Token (Ln:25 Idx:8): Keyword
+Token (Ln:25 Idx:27): Identifier
+Token (Ln:25 Idx:27): LParen
+CompilationProcess: Parsing variable declaration
+Token (Ln:25 Idx:31): Keyword
+Token (Ln:25 Idx:35): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: str Value: Null)
+Token (Ln:25 Idx:35): RParen
+Token (Ln:25 Idx:36): Colon
+Token (Ln:25 Idx:38): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Keyword, return)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing return
+Token (Ln:26 Idx:6): Keyword
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:26 Idx:14): Identifier
+Token (Ln:26 Idx:14): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:26 Idx:29): Identifier
+Token (Ln:26 Idx:30): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:26 Idx:36): Identifier
+Token (Ln:26 Idx:36): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:26 Idx:40): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: str)
+Token (Ln:26 Idx:40): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:26 Idx:42): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:26 Idx:58): Identifier
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+Token (Ln:26 Idx:58): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:26 Idx:60): NewLine
+CompilationProcess.End: Parsing return
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing function
+CompilationProcess: Parsing statement (Keyword, function)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing function
+Token (Ln:29 Idx:8): Keyword
+Token (Ln:29 Idx:13): Identifier
+Token (Ln:29 Idx:13): LParen
+CompilationProcess: Parsing variable declaration
+Token (Ln:29 Idx:17): Keyword
+Token (Ln:29 Idx:21): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: str Value: Null)
+Token (Ln:29 Idx:21): RParen
+Token (Ln:29 Idx:22): Colon
+Token (Ln:29 Idx:24): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Keyword, return)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing return
+Token (Ln:30 Idx:6): Keyword
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:30 Idx:14): Identifier
+Token (Ln:30 Idx:14): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:30 Idx:21): Identifier
+Token (Ln:30 Idx:21): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:30 Idx:25): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: str)
+Token (Ln:30 Idx:25): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:30 Idx:27): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:30 Idx:43): Identifier
+CompilationProcess.End: Parsing expression
+Token (Ln:30 Idx:43): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:30 Idx:45): NewLine
+CompilationProcess.End: Parsing return
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing function
+CompilationProcess: Parsing statement (Keyword, function)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing function
+Token (Ln:33 Idx:8): Keyword
+Token (Ln:33 Idx:18): Identifier
+Token (Ln:33 Idx:18): LParen
+CompilationProcess: Parsing variable declaration
+Token (Ln:33 Idx:22): Keyword
+Token (Ln:33 Idx:26): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: str Value: Null)
+Token (Ln:33 Idx:26): RParen
+Token (Ln:33 Idx:27): Colon
+Token (Ln:33 Idx:29): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Keyword, return)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing return
+Token (Ln:34 Idx:6): Keyword
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:34 Idx:14): Identifier
+Token (Ln:34 Idx:14): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:34 Idx:21): Identifier
+Token (Ln:34 Idx:21): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:34 Idx:25): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: str)
+Token (Ln:34 Idx:25): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:34 Idx:27): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:34 Idx:44): Identifier
+CompilationProcess.End: Parsing expression
+Token (Ln:34 Idx:44): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:34 Idx:46): NewLine
+CompilationProcess.End: Parsing return
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing function
+CompilationProcess: Parsing statement (Keyword, function)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing function
+Token (Ln:37 Idx:8): Keyword
+Token (Ln:37 Idx:16): Identifier
+Token (Ln:37 Idx:16): LParen
+CompilationProcess: Parsing variable declaration
+Token (Ln:37 Idx:20): Keyword
+Token (Ln:37 Idx:24): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: str Value: Null)
+Token (Ln:37 Idx:24): RParen
+Token (Ln:37 Idx:25): Colon
+Token (Ln:37 Idx:27): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Keyword, return)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing return
+Token (Ln:38 Idx:6): Keyword
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:38 Idx:14): Identifier
+Token (Ln:38 Idx:14): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:38 Idx:21): Identifier
+Token (Ln:38 Idx:21): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:38 Idx:25): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: str)
+Token (Ln:38 Idx:25): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:38 Idx:27): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:38 Idx:44): Identifier
+CompilationProcess.End: Parsing expression
+Token (Ln:38 Idx:44): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:38 Idx:46): NewLine
+CompilationProcess.End: Parsing return
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing function
+CompilationProcess: Parsing statement (Keyword, function)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing function
+Token (Ln:41 Idx:8): Keyword
+Token (Ln:41 Idx:18): Identifier
+Token (Ln:41 Idx:18): LParen
+CompilationProcess: Parsing variable declaration
+Token (Ln:41 Idx:22): Keyword
+Token (Ln:41 Idx:26): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: str Value: Null)
+Token (Ln:41 Idx:26): Comma
+CompilationProcess: Parsing variable declaration
+Token (Ln:41 Idx:31): Keyword
+Token (Ln:41 Idx:40): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: startPos Value: Null)
+Token (Ln:41 Idx:40): Comma
+CompilationProcess: Parsing variable declaration
+Token (Ln:41 Idx:45): Keyword
+Token (Ln:41 Idx:52): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: length Value: Null)
+Token (Ln:41 Idx:52): RParen
+Token (Ln:41 Idx:53): Colon
+Token (Ln:41 Idx:55): NewLine
 Token (Ln:-1 Idx:-1): Indent
 CompilationProcess: Parsing block
 CompilationProcess: Parsing statement (Keyword, if)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing if
-Token (Ln:21 Idx:2): Keyword
+Token (Ln:42 Idx:2): Keyword
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:21 Idx:11): Identifier
-Token (Ln:21 Idx:11): LParen
+Token (Ln:42 Idx:9): Identifier
+Token (Ln:42 Idx:9): Dot
+Token (Ln:42 Idx:18): Identifier
+Token (Ln:42 Idx:18): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:21 Idx:15): Identifier
-CompilationProcess.End: Parsing primary (VariableNode: min)
-Token (Ln:21 Idx:15): RParen
+Token (Ln:42 Idx:27): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: startPos)
+Token (Ln:42 Idx:27): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:21 Idx:17): Equals
-Token (Ln:21 Idx:18): Equals
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-CompilationProcess.End: Parsing primary
-Token (Ln:21 Idx:24): Keyword
-Token (Ln:21 Idx:25): And
-Token (Ln:21 Idx:26): And
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:21 Idx:36): Identifier
-Token (Ln:21 Idx:36): LParen
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:21 Idx:40): Identifier
-CompilationProcess.End: Parsing primary (VariableNode: max)
-Token (Ln:21 Idx:40): RParen
-CompilationProcess.End: Parsing primary
-Token (Ln:21 Idx:42): Equals
-Token (Ln:21 Idx:43): Equals
+Token (Ln:42 Idx:29): Equals
+Token (Ln:42 Idx:30): Equals
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
 CompilationProcess.End: Parsing primary
-Token (Ln:21 Idx:50): Keyword
-Token (Ln:21 Idx:51): And
-Token (Ln:21 Idx:52): And
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:21 Idx:57): Identifier
-CompilationProcess.End: Parsing primary (VariableNode: min)
-Token (Ln:21 Idx:58): Less
-CompilationProcess: Parsing expression
-CompilationProcess: Parsing primary
-Token (Ln:21 Idx:74): Identifier
+Token (Ln:42 Idx:37): Keyword
 CompilationProcess.End: Parsing expression
-CompilationProcess.End: Parsing expression
-CompilationProcess.End: Parsing expression
-CompilationProcess.End: Parsing expression
-CompilationProcess.End: Parsing expression
-Token (Ln:21 Idx:74): Colon
-Token (Ln:21 Idx:76): NewLine
+Token (Ln:42 Idx:37): Colon
+Token (Ln:42 Idx:39): NewLine
 Token (Ln:-1 Idx:-1): Indent
 CompilationProcess: Parsing block
 CompilationProcess: Parsing statement (Identifier, Throw)
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:22 Idx:5): Identifier
-Token (Ln:22 Idx:5): Dot
-Token (Ln:22 Idx:15): Identifier
-Token (Ln:22 Idx:15): LParen
+Token (Ln:43 Idx:5): Identifier
+Token (Ln:43 Idx:5): Dot
+Token (Ln:43 Idx:15): Identifier
+Token (Ln:43 Idx:15): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:22 Idx:30): Identifier
-Token (Ln:22 Idx:30): RParen
+Token (Ln:43 Idx:31): Identifier
+Token (Ln:43 Idx:31): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:22 Idx:32): NewLine
+Token (Ln:43 Idx:33): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess.End: Parsing block
 Token (Ln:-1 Idx:-1): Dedent
@@ -274,35 +534,894 @@ CompilationProcess.End: Parsing if
 CompilationProcess: Parsing statement (Keyword, if)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing if
-Token (Ln:24 Idx:2): Keyword
+Token (Ln:45 Idx:2): Keyword
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:24 Idx:6): Identifier
-CompilationProcess.End: Parsing primary (VariableNode: min)
-Token (Ln:24 Idx:7): Greater
-Token (Ln:24 Idx:8): Equals
+Token (Ln:45 Idx:9): Identifier
+Token (Ln:45 Idx:9): Dot
+Token (Ln:45 Idx:18): Identifier
+Token (Ln:45 Idx:18): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:24 Idx:13): Identifier
-CompilationProcess.End: Parsing primary (VariableNode: max)
+Token (Ln:45 Idx:25): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: length)
+Token (Ln:45 Idx:25): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:45 Idx:27): Equals
+Token (Ln:45 Idx:28): Equals
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+CompilationProcess.End: Parsing primary
+Token (Ln:45 Idx:35): Keyword
 CompilationProcess.End: Parsing expression
-Token (Ln:24 Idx:13): Colon
-Token (Ln:24 Idx:15): NewLine
+Token (Ln:45 Idx:35): Colon
+Token (Ln:45 Idx:37): NewLine
 Token (Ln:-1 Idx:-1): Indent
 CompilationProcess: Parsing block
 CompilationProcess: Parsing statement (Identifier, Throw)
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:25 Idx:5): Identifier
-Token (Ln:25 Idx:5): Dot
-Token (Ln:25 Idx:15): Identifier
-Token (Ln:25 Idx:15): LParen
+Token (Ln:46 Idx:5): Identifier
+Token (Ln:46 Idx:5): Dot
+Token (Ln:46 Idx:15): Identifier
+Token (Ln:46 Idx:15): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:25 Idx:30): Identifier
-Token (Ln:25 Idx:30): RParen
+Token (Ln:46 Idx:31): Identifier
+Token (Ln:46 Idx:31): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:25 Idx:32): NewLine
+Token (Ln:46 Idx:33): NewLine
+CompilationProcess.End: Parsing statement
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing if
+CompilationProcess: Parsing statement (Keyword, return)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing return
+Token (Ln:48 Idx:6): Keyword
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:48 Idx:14): Identifier
+Token (Ln:48 Idx:14): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:48 Idx:21): Identifier
+Token (Ln:48 Idx:21): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:48 Idx:25): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: str)
+Token (Ln:48 Idx:25): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:48 Idx:27): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:48 Idx:44): Identifier
+Token (Ln:48 Idx:45): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:48 Idx:55): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: startPos)
+Token (Ln:48 Idx:56): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:48 Idx:73): Identifier
+Token (Ln:48 Idx:74): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:48 Idx:82): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: length)
+Token (Ln:48 Idx:83): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:48 Idx:100): Identifier
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+Token (Ln:48 Idx:100): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:48 Idx:102): NewLine
+CompilationProcess.End: Parsing return
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing function
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing class
+CompilationProcess: Parsing statement (Keyword, class)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing class
+Token (Ln:50 Idx:5): Keyword
+Token (Ln:50 Idx:13): Identifier
+Token (Ln:50 Idx:13): Colon
+Token (Ln:50 Idx:16): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Keyword, private)
+WARN: IsPrivate = true
+Token (Ln:51 Idx:7): Keyword
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing variable declaration
+Token (Ln:51 Idx:11): Keyword
+Token (Ln:51 Idx:18): Identifier
+Token (Ln:51 Idx:19): Equals
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:51 Idx:36): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: usings Value: StringRefNode)
+Token (Ln:51 Idx:37): NewLine
+CompilationProcess: Parsing statement (Keyword, private)
+WARN: IsPrivate = true
+Token (Ln:52 Idx:7): Keyword
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing variable declaration
+Token (Ln:52 Idx:11): Keyword
+Token (Ln:52 Idx:21): Identifier
+Token (Ln:52 Idx:22): Equals
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:52 Idx:39): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: defFColor Value: StringRefNode)
+Token (Ln:52 Idx:40): NewLine
+CompilationProcess: Parsing statement (Keyword, private)
+WARN: IsPrivate = true
+Token (Ln:53 Idx:7): Keyword
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing variable declaration
+Token (Ln:53 Idx:11): Keyword
+Token (Ln:53 Idx:21): Identifier
+Token (Ln:53 Idx:22): Equals
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:53 Idx:39): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: defBColor Value: StringRefNode)
+Token (Ln:53 Idx:40): NewLine
+CompilationProcess: Parsing statement (Keyword, function)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing function
+Token (Ln:56 Idx:8): Keyword
+Token (Ln:56 Idx:14): Identifier
+Token (Ln:56 Idx:14): LParen
+CompilationProcess: Parsing variable declaration
+Token (Ln:56 Idx:18): Keyword
+Token (Ln:56 Idx:26): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: message Value: Null)
+Token (Ln:56 Idx:26): RParen
+Token (Ln:56 Idx:27): Colon
+Token (Ln:56 Idx:30): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Identifier, _csharp)
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:57 Idx:7): Identifier
+Token (Ln:57 Idx:7): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:57 Idx:14): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: usings)
+Token (Ln:57 Idx:15): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:57 Idx:32): Identifier
+Token (Ln:57 Idx:33): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:57 Idx:39): Identifier
+Token (Ln:57 Idx:39): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:57 Idx:47): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: message)
+Token (Ln:57 Idx:47): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:57 Idx:49): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:57 Idx:66): Identifier
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+Token (Ln:57 Idx:66): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:57 Idx:68): NewLine
+CompilationProcess.End: Parsing statement
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing function
+CompilationProcess: Parsing statement (Keyword, function)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing function
+Token (Ln:60 Idx:8): Keyword
+Token (Ln:60 Idx:16): Identifier
+Token (Ln:60 Idx:16): LParen
+CompilationProcess: Parsing variable declaration
+Token (Ln:60 Idx:20): Keyword
+Token (Ln:60 Idx:28): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: message Value: Null)
+Token (Ln:60 Idx:28): RParen
+Token (Ln:60 Idx:29): Colon
+Token (Ln:60 Idx:31): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Identifier, print)
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:61 Idx:5): Identifier
+Token (Ln:61 Idx:5): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:61 Idx:13): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: message)
+Token (Ln:61 Idx:14): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:61 Idx:31): Identifier
+CompilationProcess.End: Parsing expression
+Token (Ln:61 Idx:31): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:61 Idx:33): NewLine
+CompilationProcess.End: Parsing statement
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing function
+CompilationProcess: Parsing statement (Keyword, function)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing function
+Token (Ln:64 Idx:8): Keyword
+Token (Ln:64 Idx:15): Identifier
+Token (Ln:64 Idx:15): LParen
+Token (Ln:64 Idx:16): RParen
+Token (Ln:64 Idx:17): Colon
+Token (Ln:64 Idx:19): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Keyword, return)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing return
+Token (Ln:65 Idx:6): Keyword
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:65 Idx:14): Identifier
+Token (Ln:65 Idx:14): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:65 Idx:21): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: usings)
+Token (Ln:65 Idx:22): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:65 Idx:39): Identifier
+CompilationProcess.End: Parsing expression
+Token (Ln:65 Idx:39): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:65 Idx:41): NewLine
+CompilationProcess.End: Parsing return
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing function
+CompilationProcess: Parsing statement (Keyword, function)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing function
+Token (Ln:68 Idx:8): Keyword
+Token (Ln:68 Idx:14): Identifier
+Token (Ln:68 Idx:14): LParen
+Token (Ln:68 Idx:15): RParen
+Token (Ln:68 Idx:16): Colon
+Token (Ln:68 Idx:18): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Identifier, _csharp)
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:69 Idx:7): Identifier
+Token (Ln:69 Idx:7): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:69 Idx:14): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: usings)
+Token (Ln:69 Idx:15): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:69 Idx:32): Identifier
+CompilationProcess.End: Parsing expression
+Token (Ln:69 Idx:32): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:69 Idx:34): NewLine
+CompilationProcess.End: Parsing statement
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing function
+CompilationProcess: Parsing statement (Keyword, function)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing function
+Token (Ln:72 Idx:8): Keyword
+Token (Ln:72 Idx:26): Identifier
+Token (Ln:72 Idx:26): LParen
+CompilationProcess: Parsing variable declaration
+Token (Ln:72 Idx:30): Keyword
+Token (Ln:72 Idx:32): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: x Value: Null)
+Token (Ln:72 Idx:32): Comma
+CompilationProcess: Parsing variable declaration
+Token (Ln:72 Idx:37): Keyword
+Token (Ln:72 Idx:39): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: y Value: Null)
+Token (Ln:72 Idx:39): RParen
+Token (Ln:72 Idx:40): Colon
+Token (Ln:72 Idx:42): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Identifier, _csharp)
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:73 Idx:7): Identifier
+Token (Ln:73 Idx:7): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:73 Idx:14): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: usings)
+Token (Ln:73 Idx:15): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:73 Idx:32): Identifier
+Token (Ln:73 Idx:33): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:73 Idx:36): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: x)
+Token (Ln:73 Idx:37): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:73 Idx:54): Identifier
+Token (Ln:73 Idx:55): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:73 Idx:58): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: y)
+Token (Ln:73 Idx:59): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:73 Idx:76): Identifier
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+Token (Ln:73 Idx:76): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:73 Idx:78): NewLine
+CompilationProcess.End: Parsing statement
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing function
+CompilationProcess: Parsing statement (Keyword, function)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing function
+Token (Ln:76 Idx:8): Keyword
+Token (Ln:76 Idx:21): Identifier
+Token (Ln:76 Idx:21): LParen
+CompilationProcess: Parsing variable declaration
+Token (Ln:76 Idx:25): Keyword
+Token (Ln:76 Idx:31): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: color Value: Null)
+Token (Ln:76 Idx:31): RParen
+Token (Ln:76 Idx:32): Colon
+Token (Ln:76 Idx:34): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Keyword, let)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing variable declaration
+Token (Ln:77 Idx:3): Keyword
+Token (Ln:77 Idx:9): Identifier
+Token (Ln:77 Idx:10): Equals
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:77 Idx:27): Identifier
+Token (Ln:77 Idx:28): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:77 Idx:34): Identifier
+Token (Ln:77 Idx:34): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:77 Idx:40): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: color)
+Token (Ln:77 Idx:40): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:77 Idx:42): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:77 Idx:59): Identifier
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing Variable declaration (Name: line1 Value: BinaryOperationNode)
+Token (Ln:77 Idx:60): NewLine
+CompilationProcess: Parsing statement (Keyword, let)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing variable declaration
+Token (Ln:78 Idx:3): Keyword
+Token (Ln:78 Idx:9): Identifier
+Token (Ln:78 Idx:10): Equals
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:78 Idx:27): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: line2 Value: StringRefNode)
+Token (Ln:78 Idx:28): NewLine
+CompilationProcess: Parsing statement (Identifier, _csharp)
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:79 Idx:7): Identifier
+Token (Ln:79 Idx:7): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:79 Idx:14): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: usings)
+Token (Ln:79 Idx:15): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:79 Idx:22): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: line1)
+Token (Ln:79 Idx:23): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:79 Idx:30): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: line2)
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+Token (Ln:79 Idx:30): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:79 Idx:32): NewLine
+CompilationProcess.End: Parsing statement
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing function
+CompilationProcess: Parsing statement (Keyword, function)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing function
+Token (Ln:82 Idx:8): Keyword
+Token (Ln:82 Idx:21): Identifier
+Token (Ln:82 Idx:21): LParen
+CompilationProcess: Parsing variable declaration
+Token (Ln:82 Idx:25): Keyword
+Token (Ln:82 Idx:31): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: color Value: Null)
+Token (Ln:82 Idx:31): RParen
+Token (Ln:82 Idx:32): Colon
+Token (Ln:82 Idx:34): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Keyword, let)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing variable declaration
+Token (Ln:83 Idx:3): Keyword
+Token (Ln:83 Idx:9): Identifier
+Token (Ln:83 Idx:10): Equals
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:83 Idx:27): Identifier
+Token (Ln:83 Idx:28): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:83 Idx:34): Identifier
+Token (Ln:83 Idx:34): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:83 Idx:40): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: color)
+Token (Ln:83 Idx:40): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:83 Idx:42): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:83 Idx:59): Identifier
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing Variable declaration (Name: line1 Value: BinaryOperationNode)
+Token (Ln:83 Idx:60): NewLine
+CompilationProcess: Parsing statement (Keyword, let)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing variable declaration
+Token (Ln:84 Idx:3): Keyword
+Token (Ln:84 Idx:9): Identifier
+Token (Ln:84 Idx:10): Equals
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:84 Idx:27): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: line2 Value: StringRefNode)
+Token (Ln:84 Idx:28): NewLine
+CompilationProcess: Parsing statement (Identifier, _csharp)
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:85 Idx:7): Identifier
+Token (Ln:85 Idx:7): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:85 Idx:14): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: usings)
+Token (Ln:85 Idx:15): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:85 Idx:22): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: line1)
+Token (Ln:85 Idx:23): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:85 Idx:30): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: line2)
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+Token (Ln:85 Idx:30): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:85 Idx:32): NewLine
+CompilationProcess.End: Parsing statement
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing function
+CompilationProcess: Parsing statement (Keyword, function)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing function
+Token (Ln:88 Idx:8): Keyword
+Token (Ln:88 Idx:20): Identifier
+Token (Ln:88 Idx:20): LParen
+Token (Ln:88 Idx:21): RParen
+Token (Ln:88 Idx:22): Colon
+Token (Ln:88 Idx:24): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Identifier, setForeColor)
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:89 Idx:12): Identifier
+Token (Ln:89 Idx:12): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:89 Idx:22): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: defFColor)
+Token (Ln:89 Idx:22): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:89 Idx:24): NewLine
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing statement (Identifier, setBackColor)
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:90 Idx:12): Identifier
+Token (Ln:90 Idx:12): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:90 Idx:22): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: defBColor)
+Token (Ln:90 Idx:22): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:90 Idx:24): NewLine
+CompilationProcess.End: Parsing statement
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing function
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing class
+CompilationProcess: Parsing statement (Keyword, class)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing class
+Token (Ln:93 Idx:5): Keyword
+Token (Ln:93 Idx:12): Identifier
+Token (Ln:93 Idx:12): Colon
+Token (Ln:93 Idx:14): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Keyword, private)
+WARN: IsPrivate = true
+Token (Ln:95 Idx:7): Keyword
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing variable declaration
+Token (Ln:95 Idx:11): Keyword
+Token (Ln:95 Idx:18): Identifier
+Token (Ln:95 Idx:19): Equals
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:95 Idx:36): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: usings Value: StringRefNode)
+Token (Ln:95 Idx:37): NewLine
+CompilationProcess: Parsing statement (Keyword, const)
+WARN: IsConst = true
+Token (Ln:98 Idx:5): Keyword
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing variable declaration
+Token (Ln:98 Idx:9): Keyword
+Token (Ln:98 Idx:19): Identifier
+Token (Ln:98 Idx:20): Equals
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:98 Idx:37): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: MIN_VALUE Value: StringRefNode)
+Token (Ln:98 Idx:38): NewLine
+CompilationProcess: Parsing statement (Keyword, const)
+WARN: IsConst = true
+Token (Ln:99 Idx:5): Keyword
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing variable declaration
+Token (Ln:99 Idx:9): Keyword
+Token (Ln:99 Idx:19): Identifier
+Token (Ln:99 Idx:20): Equals
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:99 Idx:37): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: MAX_VALUE Value: StringRefNode)
+Token (Ln:99 Idx:38): NewLine
+CompilationProcess: Parsing statement (Keyword, function)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing function
+Token (Ln:102 Idx:8): Keyword
+Token (Ln:102 Idx:17): Identifier
+Token (Ln:102 Idx:17): LParen
+CompilationProcess: Parsing variable declaration
+Token (Ln:102 Idx:21): Keyword
+Token (Ln:102 Idx:25): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: var Value: Null)
+Token (Ln:102 Idx:25): RParen
+Token (Ln:102 Idx:26): Colon
+Token (Ln:102 Idx:28): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Keyword, return)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing return
+Token (Ln:103 Idx:6): Keyword
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:103 Idx:14): Identifier
+Token (Ln:103 Idx:14): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:103 Idx:21): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: usings)
+Token (Ln:103 Idx:22): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:103 Idx:39): Identifier
+Token (Ln:103 Idx:40): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:103 Idx:46): Identifier
+Token (Ln:103 Idx:46): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:103 Idx:50): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: var)
+Token (Ln:103 Idx:50): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:103 Idx:52): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:103 Idx:69): Identifier
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+Token (Ln:103 Idx:69): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:103 Idx:71): NewLine
+CompilationProcess.End: Parsing return
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing function
+CompilationProcess: Parsing statement (Keyword, function)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing function
+Token (Ln:106 Idx:8): Keyword
+Token (Ln:106 Idx:16): Identifier
+Token (Ln:106 Idx:16): LParen
+CompilationProcess: Parsing variable declaration
+Token (Ln:106 Idx:20): Keyword
+Token (Ln:106 Idx:24): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: min Value: Null)
+Token (Ln:106 Idx:24): Comma
+CompilationProcess: Parsing variable declaration
+Token (Ln:106 Idx:29): Keyword
+Token (Ln:106 Idx:33): Identifier
+CompilationProcess.End: Parsing Variable declaration (Name: max Value: Null)
+Token (Ln:106 Idx:33): RParen
+Token (Ln:106 Idx:34): Colon
+Token (Ln:106 Idx:36): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Identifier, Console)
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:107 Idx:7): Identifier
+Token (Ln:107 Idx:7): Dot
+Token (Ln:107 Idx:15): Identifier
+Token (Ln:107 Idx:15): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:107 Idx:31): Identifier
+Token (Ln:107 Idx:32): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:107 Idx:40): Identifier
+Token (Ln:107 Idx:40): Dot
+Token (Ln:107 Idx:49): Identifier
+Token (Ln:107 Idx:49): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:107 Idx:53): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: min)
+Token (Ln:107 Idx:53): RParen
+CompilationProcess.End: Parsing primary
+CompilationProcess.End: Parsing expression
+Token (Ln:107 Idx:54): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:107 Idx:56): NewLine
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing statement (Identifier, Console)
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:108 Idx:7): Identifier
+Token (Ln:108 Idx:7): Dot
+Token (Ln:108 Idx:15): Identifier
+Token (Ln:108 Idx:15): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:108 Idx:31): Identifier
+Token (Ln:108 Idx:32): Plus
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:108 Idx:40): Identifier
+Token (Ln:108 Idx:40): Dot
+Token (Ln:108 Idx:49): Identifier
+Token (Ln:108 Idx:49): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:108 Idx:53): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: max)
+Token (Ln:108 Idx:53): RParen
+CompilationProcess.End: Parsing primary
+CompilationProcess.End: Parsing expression
+Token (Ln:108 Idx:54): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:108 Idx:56): NewLine
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing statement (Identifier, Console)
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:109 Idx:7): Identifier
+Token (Ln:109 Idx:7): Dot
+Token (Ln:109 Idx:15): Identifier
+Token (Ln:109 Idx:15): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:109 Idx:22): Identifier
+Token (Ln:109 Idx:22): Dot
+Token (Ln:109 Idx:29): Identifier
+Token (Ln:109 Idx:29): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:109 Idx:45): Identifier
+Token (Ln:109 Idx:45): Comma
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:109 Idx:50): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: min)
+Token (Ln:109 Idx:51): Less
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:109 Idx:67): Identifier
+CompilationProcess.End: Parsing expression
+Token (Ln:109 Idx:67): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:109 Idx:68): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:109 Idx:70): NewLine
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing statement (Keyword, if)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing if
+Token (Ln:110 Idx:2): Keyword
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:110 Idx:11): Identifier
+Token (Ln:110 Idx:11): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:110 Idx:15): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: min)
+Token (Ln:110 Idx:15): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:110 Idx:17): Equals
+Token (Ln:110 Idx:18): Equals
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+CompilationProcess.End: Parsing primary
+Token (Ln:110 Idx:24): Keyword
+Token (Ln:110 Idx:25): And
+Token (Ln:110 Idx:26): And
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:110 Idx:36): Identifier
+Token (Ln:110 Idx:36): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:110 Idx:40): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: max)
+Token (Ln:110 Idx:40): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:110 Idx:42): Equals
+Token (Ln:110 Idx:43): Equals
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+CompilationProcess.End: Parsing primary
+Token (Ln:110 Idx:50): Keyword
+Token (Ln:110 Idx:51): And
+Token (Ln:110 Idx:52): And
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:110 Idx:57): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: min)
+Token (Ln:110 Idx:58): Less
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:110 Idx:74): Identifier
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+CompilationProcess.End: Parsing expression
+Token (Ln:110 Idx:74): Colon
+Token (Ln:110 Idx:76): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Identifier, Throw)
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:111 Idx:5): Identifier
+Token (Ln:111 Idx:5): Dot
+Token (Ln:111 Idx:15): Identifier
+Token (Ln:111 Idx:15): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:111 Idx:31): Identifier
+Token (Ln:111 Idx:31): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:111 Idx:33): NewLine
+CompilationProcess.End: Parsing statement
+CompilationProcess.End: Parsing block
+Token (Ln:-1 Idx:-1): Dedent
+CompilationProcess.End: Parsing if
+CompilationProcess: Parsing statement (Keyword, if)
+CompilationProcess.End: Parsing statement
+CompilationProcess: Parsing if
+Token (Ln:113 Idx:2): Keyword
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:113 Idx:6): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: min)
+Token (Ln:113 Idx:7): Greater
+Token (Ln:113 Idx:8): Equals
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:113 Idx:13): Identifier
+CompilationProcess.End: Parsing primary (VariableNode: max)
+CompilationProcess.End: Parsing expression
+Token (Ln:113 Idx:13): Colon
+Token (Ln:113 Idx:15): NewLine
+Token (Ln:-1 Idx:-1): Indent
+CompilationProcess: Parsing block
+CompilationProcess: Parsing statement (Identifier, Throw)
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:114 Idx:5): Identifier
+Token (Ln:114 Idx:5): Dot
+Token (Ln:114 Idx:15): Identifier
+Token (Ln:114 Idx:15): LParen
+CompilationProcess: Parsing expression
+CompilationProcess: Parsing primary
+Token (Ln:114 Idx:31): Identifier
+Token (Ln:114 Idx:31): RParen
+CompilationProcess.End: Parsing primary
+Token (Ln:114 Idx:33): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess.End: Parsing block
 Token (Ln:-1 Idx:-1): Dedent
@@ -310,81 +1429,81 @@ CompilationProcess.End: Parsing if
 CompilationProcess: Parsing statement (Identifier, min)
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:28 Idx:3): Identifier
+Token (Ln:117 Idx:3): Identifier
 CompilationProcess.End: Parsing primary (AssignmentNode)
-Token (Ln:28 Idx:4): Equals
+Token (Ln:117 Idx:4): Equals
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:28 Idx:11): Identifier
-Token (Ln:28 Idx:11): LParen
+Token (Ln:117 Idx:11): Identifier
+Token (Ln:117 Idx:11): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:28 Idx:15): Identifier
+Token (Ln:117 Idx:15): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: min)
-Token (Ln:28 Idx:15): RParen
+Token (Ln:117 Idx:15): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:28 Idx:17): NewLine
+Token (Ln:117 Idx:17): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing statement (Identifier, max)
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:29 Idx:3): Identifier
+Token (Ln:118 Idx:3): Identifier
 CompilationProcess.End: Parsing primary (AssignmentNode)
-Token (Ln:29 Idx:4): Equals
+Token (Ln:118 Idx:4): Equals
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:29 Idx:11): Identifier
-Token (Ln:29 Idx:11): LParen
+Token (Ln:118 Idx:11): Identifier
+Token (Ln:118 Idx:11): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:29 Idx:15): Identifier
+Token (Ln:118 Idx:15): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: max)
-Token (Ln:29 Idx:15): RParen
+Token (Ln:118 Idx:15): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:29 Idx:17): NewLine
+Token (Ln:118 Idx:17): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing statement (Keyword, return)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing return
-Token (Ln:31 Idx:6): Keyword
+Token (Ln:120 Idx:6): Keyword
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:31 Idx:14): Identifier
-Token (Ln:31 Idx:14): LParen
+Token (Ln:120 Idx:14): Identifier
+Token (Ln:120 Idx:14): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:31 Idx:21): Identifier
+Token (Ln:120 Idx:21): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: usings)
-Token (Ln:31 Idx:22): Plus
+Token (Ln:120 Idx:22): Plus
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:31 Idx:38): Identifier
-Token (Ln:31 Idx:39): Plus
+Token (Ln:120 Idx:39): Identifier
+Token (Ln:120 Idx:40): Plus
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:31 Idx:44): Identifier
+Token (Ln:120 Idx:45): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: min)
-Token (Ln:31 Idx:45): Plus
+Token (Ln:120 Idx:46): Plus
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:31 Idx:62): Identifier
-Token (Ln:31 Idx:63): Plus
+Token (Ln:120 Idx:63): Identifier
+Token (Ln:120 Idx:64): Plus
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:31 Idx:68): Identifier
+Token (Ln:120 Idx:69): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: max)
-Token (Ln:31 Idx:69): Plus
+Token (Ln:120 Idx:70): Plus
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:31 Idx:86): Identifier
+Token (Ln:120 Idx:87): Identifier
 CompilationProcess.End: Parsing expression
 CompilationProcess.End: Parsing expression
 CompilationProcess.End: Parsing expression
 CompilationProcess.End: Parsing expression
 CompilationProcess.End: Parsing expression
-Token (Ln:31 Idx:86): RParen
+Token (Ln:120 Idx:87): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:31 Idx:88): NewLine
+Token (Ln:120 Idx:89): NewLine
 CompilationProcess.End: Parsing return
 CompilationProcess.End: Parsing block
 Token (Ln:-1 Idx:-1): Dedent
@@ -392,37 +1511,37 @@ CompilationProcess.End: Parsing function
 CompilationProcess: Parsing statement (Keyword, function)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing function
-Token (Ln:34 Idx:8): Keyword
-Token (Ln:34 Idx:14): Identifier
-Token (Ln:34 Idx:14): LParen
+Token (Ln:123 Idx:8): Keyword
+Token (Ln:123 Idx:14): Identifier
+Token (Ln:123 Idx:14): LParen
 CompilationProcess: Parsing variable declaration
-Token (Ln:34 Idx:18): Keyword
-Token (Ln:34 Idx:24): Identifier
+Token (Ln:123 Idx:18): Keyword
+Token (Ln:123 Idx:24): Identifier
 CompilationProcess.End: Parsing Variable declaration (Name: float Value: Null)
-Token (Ln:34 Idx:24): RParen
-Token (Ln:34 Idx:25): Colon
-Token (Ln:34 Idx:27): NewLine
+Token (Ln:123 Idx:24): RParen
+Token (Ln:123 Idx:25): Colon
+Token (Ln:123 Idx:27): NewLine
 Token (Ln:-1 Idx:-1): Indent
 CompilationProcess: Parsing block
 CompilationProcess: Parsing statement (Keyword, return)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing return
-Token (Ln:35 Idx:6): Keyword
+Token (Ln:124 Idx:6): Keyword
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:35 Idx:14): Identifier
-Token (Ln:35 Idx:14): LParen
+Token (Ln:124 Idx:14): Identifier
+Token (Ln:124 Idx:14): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:35 Idx:20): Identifier
+Token (Ln:124 Idx:20): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: float)
-Token (Ln:35 Idx:20): Comma
+Token (Ln:124 Idx:20): Comma
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:35 Idx:37): Identifier
-Token (Ln:35 Idx:37): RParen
+Token (Ln:124 Idx:37): Identifier
+Token (Ln:124 Idx:37): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:35 Idx:39): NewLine
+Token (Ln:124 Idx:39): NewLine
 CompilationProcess.End: Parsing return
 CompilationProcess.End: Parsing block
 Token (Ln:-1 Idx:-1): Dedent
@@ -430,71 +1549,71 @@ CompilationProcess.End: Parsing function
 CompilationProcess: Parsing statement (Keyword, function)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing function
-Token (Ln:38 Idx:8): Keyword
-Token (Ln:38 Idx:16): Identifier
-Token (Ln:38 Idx:16): LParen
+Token (Ln:127 Idx:8): Keyword
+Token (Ln:127 Idx:16): Identifier
+Token (Ln:127 Idx:16): LParen
 CompilationProcess: Parsing variable declaration
-Token (Ln:38 Idx:20): Keyword
-Token (Ln:38 Idx:27): Identifier
+Token (Ln:127 Idx:20): Keyword
+Token (Ln:127 Idx:27): Identifier
 CompilationProcess.End: Parsing Variable declaration (Name: number Value: Null)
-Token (Ln:38 Idx:27): Comma
+Token (Ln:127 Idx:27): Comma
 CompilationProcess: Parsing variable declaration
-Token (Ln:38 Idx:32): Keyword
-Token (Ln:38 Idx:40): Identifier
+Token (Ln:127 Idx:32): Keyword
+Token (Ln:127 Idx:40): Identifier
 CompilationProcess.End: Parsing Variable declaration (Name: pattern Value: Null)
-Token (Ln:38 Idx:40): RParen
-Token (Ln:38 Idx:41): Colon
-Token (Ln:38 Idx:43): NewLine
+Token (Ln:127 Idx:40): RParen
+Token (Ln:127 Idx:41): Colon
+Token (Ln:127 Idx:43): NewLine
 Token (Ln:-1 Idx:-1): Indent
 CompilationProcess: Parsing block
 CompilationProcess: Parsing statement (Keyword, return)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing return
-Token (Ln:39 Idx:6): Keyword
+Token (Ln:128 Idx:6): Keyword
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:39 Idx:14): Identifier
-Token (Ln:39 Idx:14): LParen
+Token (Ln:128 Idx:14): Identifier
+Token (Ln:128 Idx:14): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:39 Idx:21): Identifier
+Token (Ln:128 Idx:21): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: usings)
-Token (Ln:39 Idx:22): Plus
+Token (Ln:128 Idx:22): Plus
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:39 Idx:39): Identifier
-Token (Ln:39 Idx:40): Plus
+Token (Ln:128 Idx:39): Identifier
+Token (Ln:128 Idx:40): Plus
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:39 Idx:48): Identifier
+Token (Ln:128 Idx:48): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: number)
-Token (Ln:39 Idx:49): Plus
+Token (Ln:128 Idx:49): Plus
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:39 Idx:66): Identifier
-Token (Ln:39 Idx:67): Plus
+Token (Ln:128 Idx:66): Identifier
+Token (Ln:128 Idx:67): Plus
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:39 Idx:73): Identifier
-Token (Ln:39 Idx:73): LParen
+Token (Ln:128 Idx:73): Identifier
+Token (Ln:128 Idx:73): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:39 Idx:81): Identifier
+Token (Ln:128 Idx:81): Identifier
 CompilationProcess.End: Parsing primary (VariableNode: pattern)
-Token (Ln:39 Idx:81): RParen
+Token (Ln:128 Idx:81): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:39 Idx:83): Plus
+Token (Ln:128 Idx:83): Plus
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:39 Idx:100): Identifier
+Token (Ln:128 Idx:100): Identifier
 CompilationProcess.End: Parsing expression
 CompilationProcess.End: Parsing expression
 CompilationProcess.End: Parsing expression
 CompilationProcess.End: Parsing expression
 CompilationProcess.End: Parsing expression
-Token (Ln:39 Idx:100): RParen
+Token (Ln:128 Idx:100): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:39 Idx:102): NewLine
+Token (Ln:128 Idx:102): NewLine
 CompilationProcess.End: Parsing return
 CompilationProcess.End: Parsing block
 Token (Ln:-1 Idx:-1): Dedent
@@ -505,40 +1624,43 @@ CompilationProcess.End: Parsing class
 CompilationProcess: Parsing statement (Keyword, function)
 CompilationProcess.End: Parsing statement
 CompilationProcess: Parsing function
-Token (Ln:41 Idx:8): Keyword
-Token (Ln:41 Idx:13): Identifier
-Token (Ln:41 Idx:13): LParen
-Token (Ln:41 Idx:14): RParen
-Token (Ln:41 Idx:15): Colon
-Token (Ln:41 Idx:17): NewLine
+Token (Ln:130 Idx:8): Keyword
+Token (Ln:130 Idx:13): Identifier
+Token (Ln:130 Idx:13): LParen
+Token (Ln:130 Idx:14): RParen
+Token (Ln:130 Idx:15): Colon
+Token (Ln:130 Idx:17): NewLine
 Token (Ln:-1 Idx:-1): Indent
 CompilationProcess: Parsing block
 CompilationProcess: Parsing statement (Identifier, Number)
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:42 Idx:6): Identifier
-Token (Ln:42 Idx:6): Dot
-Token (Ln:42 Idx:14): Identifier
-Token (Ln:42 Idx:14): LParen
+Token (Ln:131 Idx:6): Identifier
+Token (Ln:131 Idx:6): Dot
+Token (Ln:131 Idx:14): Identifier
+Token (Ln:131 Idx:14): LParen
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:42 Idx:29): Identifier
-Token (Ln:42 Idx:29): Minus
+Token (Ln:131 Idx:29): Identifier
+Token (Ln:131 Idx:29): Minus
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:42 Idx:44): Identifier
+Token (Ln:131 Idx:45): Identifier
 CompilationProcess.End: Parsing expression
-Token (Ln:42 Idx:44): Comma
+Token (Ln:131 Idx:45): Comma
 CompilationProcess: Parsing expression
 CompilationProcess: Parsing primary
-Token (Ln:42 Idx:61): Identifier
-Token (Ln:42 Idx:61): RParen
+Token (Ln:131 Idx:62): Identifier
+Token (Ln:131 Idx:62): RParen
 CompilationProcess.End: Parsing primary
-Token (Ln:42 Idx:63): NewLine
+Token (Ln:131 Idx:64): NewLine
 CompilationProcess.End: Parsing statement
 CompilationProcess.End: Parsing block
 Token (Ln:-1 Idx:-1): Dedent
 CompilationProcess.End: Parsing function
+TypeofExpression: StringRefNode
+TypeofExpression: StringRefNode
+TypeofExpression: StringRefNode
 TypeofExpression: StringRefNode
 TypeofExpression: StringRefNode
 TypeofExpression: StringRefNode
@@ -564,6 +1686,367 @@ EvaluateBinaryOperation.IsNumeric: (0)=True
 EvaluateBinaryOperation.IsNumeric: (3)=True
 WARN: Operation: 0Minus3
 TypeofExpression: StringRefNode
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.StringRefNode Plus Qlang.AST.MethodCallNode
+TypeofExpression: StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+Interpreter.CurrentContext: class = 'Number', method = 'randInt'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = '_str'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (@"-3")=False
+EvaluateBinaryOperation.IsNumeric: (, NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse()=False
+EvaluateBinaryOperation.IsNumeric: (@"-3", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(@"-3", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = '_csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse(@"-3", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: True
+Restored stack: class=Number
+EvaluateBinaryOperation.IsNumeric: (Min: )=False
+EvaluateBinaryOperation.IsNumeric: (True)=False
+Interpreter.ExecuteMethodCall: class = 'Console'; method = 'println'
+Interpreter.CurrentContext: class = 'Number', method = 'randInt'
+SUCC: ExecuteMethodCallClass.ContextClass: Console
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.StringRefNode Plus Qlang.AST.MethodCallNode
+TypeofExpression: StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+Interpreter.CurrentContext: class = 'Console', method = 'randInt'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = '_str'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (@"-3")=False
+EvaluateBinaryOperation.IsNumeric: (, NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse()=False
+EvaluateBinaryOperation.IsNumeric: (@"-3", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(@"-3", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = '_csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse(@"-3", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: True
+Restored stack: class=Number
+EvaluateBinaryOperation.IsNumeric: (Min: )=False
+EvaluateBinaryOperation.IsNumeric: (True)=False
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (Min: True)=False
+EvaluateBinaryOperation.IsNumeric: (\n)=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'print'
+Interpreter.CurrentContext: class = 'Console', method = 'println'
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = '_str'
+Interpreter.CurrentContext: class = 'Console', method = 'print'
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (@"Min: True
+")=False
+EvaluateBinaryOperation.IsNumeric: ())=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write()=False
+EvaluateBinaryOperation.IsNumeric: (@"Min: True
+"))=False
+EvaluateBinaryOperation.IsNumeric: (using System; )=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(@"Min: True
+"))=False
+Interpreter.ExecuteMethodCall: class = ''; method = '_csharp'
+Interpreter.CurrentContext: class = 'Console', method = 'print'
+WARN: C#_Script: using System; Console.Write(@"Min: True
+")
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: null
+Restored stack: class=Console
+Restored stack: class=Console
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.StringRefNode Plus Qlang.AST.MethodCallNode
+TypeofExpression: StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+Interpreter.CurrentContext: class = 'Number', method = 'randInt'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = '_str'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (@"dasd")=False
+EvaluateBinaryOperation.IsNumeric: (, NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse()=False
+EvaluateBinaryOperation.IsNumeric: (@"dasd", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(@"dasd", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = '_csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse(@"dasd", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: False
+Restored stack: class=Number
+EvaluateBinaryOperation.IsNumeric: (Max: )=False
+EvaluateBinaryOperation.IsNumeric: (False)=False
+Interpreter.ExecuteMethodCall: class = 'Console'; method = 'println'
+Interpreter.CurrentContext: class = 'Number', method = 'randInt'
+SUCC: ExecuteMethodCallClass.ContextClass: Console
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.StringRefNode Plus Qlang.AST.MethodCallNode
+TypeofExpression: StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+Interpreter.CurrentContext: class = 'Console', method = 'randInt'
+SUCC: ExecuteMethodCallClass.ContextClass: Number
+TypeofExpression: VariableNode
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = '_str'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (@"dasd")=False
+EvaluateBinaryOperation.IsNumeric: (, NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse()=False
+EvaluateBinaryOperation.IsNumeric: (@"dasd", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(@"dasd", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = '_csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse(@"dasd", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: False
+Restored stack: class=Number
+EvaluateBinaryOperation.IsNumeric: (Max: )=False
+EvaluateBinaryOperation.IsNumeric: (False)=False
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (Max: False)=False
+EvaluateBinaryOperation.IsNumeric: (\n)=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'print'
+Interpreter.CurrentContext: class = 'Console', method = 'println'
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = '_str'
+Interpreter.CurrentContext: class = 'Console', method = 'print'
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (@"Max: False
+")=False
+EvaluateBinaryOperation.IsNumeric: ())=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write()=False
+EvaluateBinaryOperation.IsNumeric: (@"Max: False
+"))=False
+EvaluateBinaryOperation.IsNumeric: (using System; )=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(@"Max: False
+"))=False
+Interpreter.ExecuteMethodCall: class = ''; method = '_csharp'
+Interpreter.CurrentContext: class = 'Console', method = 'print'
+WARN: C#_Script: using System; Console.Write(@"Max: False
+")
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: null
+Restored stack: class=Console
+Restored stack: class=Console
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: MethodCallNode
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.VariableNode Less Qlang.AST.NumberRefNode
+TypeofExpression: VariableNode
+TypeofExpression: NumberRefNode
+EvaluateBinaryOperation.IsNumeric: (-3)=True
+EvaluateBinaryOperation.IsNumeric: (0)=True
+WARN: Operation: -3Less0
+Interpreter.ExecuteMethodCall: class = 'String'; method = 'append'
+Interpreter.CurrentContext: class = 'Number', method = 'randInt'
+SUCC: ExecuteMethodCallClass.ContextClass: String
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.VariableNode Less Qlang.AST.NumberRefNode
+TypeofExpression: VariableNode
+TypeofExpression: NumberRefNode
+EvaluateBinaryOperation.IsNumeric: (-3)=True
+EvaluateBinaryOperation.IsNumeric: (0)=True
+WARN: Operation: -3Less0
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.VariableNode Plus Qlang.AST.VariableNode
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+EvaluateBinaryOperation.IsNumeric: (Min < 0: )=False
+EvaluateBinaryOperation.IsNumeric: (True)=False
+Restored stack: class=String
+Interpreter.ExecuteMethodCall: class = 'Console'; method = 'println'
+Interpreter.CurrentContext: class = 'Number', method = 'randInt'
+SUCC: ExecuteMethodCallClass.ContextClass: Console
+TypeofExpression: MethodCallNode
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.VariableNode Less Qlang.AST.NumberRefNode
+TypeofExpression: VariableNode
+TypeofExpression: NumberRefNode
+EvaluateBinaryOperation.IsNumeric: (-3)=True
+EvaluateBinaryOperation.IsNumeric: (0)=True
+WARN: Operation: -3Less0
+Interpreter.ExecuteMethodCall: class = 'String'; method = 'append'
+Interpreter.CurrentContext: class = 'Console', method = 'randInt'
+SUCC: ExecuteMethodCallClass.ContextClass: String
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.VariableNode Less Qlang.AST.NumberRefNode
+TypeofExpression: VariableNode
+TypeofExpression: NumberRefNode
+EvaluateBinaryOperation.IsNumeric: (-3)=True
+EvaluateBinaryOperation.IsNumeric: (0)=True
+WARN: Operation: -3Less0
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.VariableNode Plus Qlang.AST.VariableNode
+TypeofExpression: VariableNode
+TypeofExpression: VariableNode
+EvaluateBinaryOperation.IsNumeric: (Min < 0: )=False
+EvaluateBinaryOperation.IsNumeric: (True)=False
+Restored stack: class=String
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+TypeofExpression: VariableNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (Min < 0: True)=False
+EvaluateBinaryOperation.IsNumeric: (\n)=False
+Interpreter.ExecuteMethodCall: class = ''; method = 'print'
+Interpreter.CurrentContext: class = 'Console', method = 'println'
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = '_str'
+Interpreter.CurrentContext: class = 'Console', method = 'print'
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (@"Min < 0: True
+")=False
+EvaluateBinaryOperation.IsNumeric: ())=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write()=False
+EvaluateBinaryOperation.IsNumeric: (@"Min < 0: True
+"))=False
+EvaluateBinaryOperation.IsNumeric: (using System; )=False
+EvaluateBinaryOperation.IsNumeric: (Console.Write(@"Min < 0: True
+"))=False
+Interpreter.ExecuteMethodCall: class = ''; method = '_csharp'
+Interpreter.CurrentContext: class = 'Console', method = 'print'
+WARN: C#_Script: using System; Console.Write(@"Min < 0: True
+")
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: null
+Restored stack: class=Console
+Restored stack: class=Console
 Interpreter: Execute statement (IfNode)
 TypeofExpression: BinaryOperationNode
 WARN: Detected binary operation
@@ -588,17 +2071,115 @@ TypeofExpression: MethodCallNode
 TypeofExpression: VariableNode
 Interpreter.ExecuteMethodCall: class = ''; method = '_str'
 Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
-ERROR: Exception from EvaluateExpression
-ERROR: Expression: Qlang.AST.MethodCallNode
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (@"-3")=False
+EvaluateBinaryOperation.IsNumeric: (, NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse()=False
+EvaluateBinaryOperation.IsNumeric: (@"-3", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(@"-3", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = '_csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse(@"-3", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: True
 Restored stack: class=Number
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.BooleanNode && Qlang.AST.BinaryOperationNode
+TypeofExpression: BooleanNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.MethodCallNode == Qlang.AST.BinaryOperationNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = 'isNumber'
+Interpreter.CurrentContext: class = 'Number', method = 'randInt'
+TypeofExpression: MethodCallNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+TypeofExpression: VariableNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = '_str'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (@"dasd")=False
+EvaluateBinaryOperation.IsNumeric: (, NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse()=False
+EvaluateBinaryOperation.IsNumeric: (@"dasd", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+EvaluateBinaryOperation.IsNumeric: (double.TryParse(@"dasd", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+Interpreter.ExecuteMethodCall: class = ''; method = '_csharp'
+Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
+WARN: C#_Script: using System; using System.Globalization; double.TryParse(@"dasd", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+WARN: Interpreter.ExecuteMethodCall: csharp.return_value: False
+Restored stack: class=Number
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.BooleanNode && Qlang.AST.BinaryOperationNode
+TypeofExpression: BooleanNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.VariableNode Less Qlang.AST.NumberRefNode
+TypeofExpression: VariableNode
+TypeofExpression: NumberRefNode
+EvaluateBinaryOperation.IsNumeric: (-3)=True
+EvaluateBinaryOperation.IsNumeric: (0)=True
+WARN: Operation: -3Less0
+TypeofExpression: BooleanNode
+WARN: Short-circuit &&: left is false, returning false
+EvaluateBinaryOperation.IsNumeric: (False)=False
+EvaluateBinaryOperation.IsNumeric: (False)=False
+WARN: IsBooleanOperation: False==False
+TypeofExpression: BooleanNode
+WARN: Operation &&: True && True = True
+EvaluateBinaryOperation.IsNumeric: (True)=False
+EvaluateBinaryOperation.IsNumeric: (True)=False
+WARN: IsBooleanOperation: True==True
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: StringRefNode
+Interpreter.ExecuteMethodCall: class = 'Throw'; method = 'exception'
+Interpreter.CurrentContext: class = 'Number', method = 'randInt'
+SUCC: ExecuteMethodCallClass.ContextClass: Throw
+TypeofExpression: StringRefNode
+Interpreter: Execute statement (MethodCallNode)
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+TypeofExpression: StringRefNode
+TypeofExpression: BinaryOperationNode
+WARN: Detected binary operation
+WARN: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+TypeofExpression: MethodCallNode
+TypeofExpression: VariableNode
+Interpreter.ExecuteMethodCall: class = ''; method = '_str'
+Interpreter.CurrentContext: class = 'Throw', method = 'exception'
+TypeofExpression: StringRefNode
+EvaluateBinaryOperation.IsNumeric: (@"One or two input is not a number")=False
+EvaluateBinaryOperation.IsNumeric: ();)=False
+EvaluateBinaryOperation.IsNumeric: (throw new System.Exception()=False
+EvaluateBinaryOperation.IsNumeric: (@"One or two input is not a number");)=False
+Interpreter.ExecuteMethodCall: class = ''; method = '_csharp'
+Interpreter.CurrentContext: class = 'Throw', method = 'exception'
+WARN: C#_Script: throw new System.Exception(@"One or two input is not a number");
+ERROR: AggregateException:
+Restored stack: class=Throw
 Restored stack: class=Number
 Restored stack: class=
 ERROR: Interpreter error:
-ERROR: Runtime Error: Internal error: Unable to cast object of type 'System.Double' to type 'System.String'.
+ERROR: Runtime Error: One or two input is not a number
   at :0:0
 
 Call Stack:
   at Number.main (:0)
-  at Number.randInt (:0)
-  at Number.isNumber (:0)
+  at Throw.randInt (:0)
+  at Throw.exception (:0)
 

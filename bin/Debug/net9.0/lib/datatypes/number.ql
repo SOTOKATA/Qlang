@@ -1,4 +1,6 @@
 include "@lib/throw"
+include "@lib/datatypes/string"
+include "@lib/console"
 
 // Class to make operations with numbers
 class Number:
@@ -15,15 +17,15 @@ class Number:
 
     // get random number with range 'min' to 'max'
     function randInt(let min, let max):
-        if isNumber(min) == true && isNumber(max) == false && min < 0:
+        if isNumber(min) == false || isNumber(max) == false:
             Throw.exception("One or two input is not a number")
-
-        if min >= max:
-            Throw.exception("Minimum can't be more than maximum")
 
         // Convert '3.42...' to '3'
         min = toInt(min)
         max = toInt(max)
+
+        if min >= max:
+            Throw.exception("Minimum can't be more than maximum")
 
         return _csharp(usings + "new Random().Next(" + min + "," + max + ")")
 

@@ -2,6 +2,7 @@
 
 public class NumberRefNode : ASTNode
 {
+    public bool IsNegative { get; set; } = false;
     public int Index { get; set; }
 
     public override string GetTree(string indent = "")

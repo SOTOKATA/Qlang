@@ -38,21 +38,21 @@ public class Parser
         bool isConst = false;
         bool isPrivate = false;
 
-        if (Check(Tokens.Keyword) && Current().Value == "static")
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.StaticModificator)
         {
             Logger.Logger.Warn("IsStatic = true");
             isStatic = true;
             Advance();
         }
         
-        if (Check(Tokens.Keyword) && Current().Value == "const")
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.ConstModificator)
         {
             Logger.Logger.Warn("IsConst = true");
             isConst = true;
             Advance();
         }
 
-        if (Check(Tokens.Keyword) && Current().Value == "private")
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.PrivateModificator)
         {
             Logger.Logger.Warn("IsPrivate = true");
             isPrivate = true;
@@ -415,11 +415,22 @@ public class Parser
     private ASTNode ParsePrimary()
     {
         Logger.Logger.Log("CompilationProcess: Parsing primary");
+        
+        bool isMinus = false;
+        if (Check(Tokens.Minus))
+        {
+            isMinus = true;
+            Advance();
+        }
+        
         // bool return
         if (Check(Tokens.Keyword) && (Current().Value == Keywords.FalseKeyword || Current().Value == Keywords.TrueKeyword))
         {
             Logger.Logger.Log("CompilationProcess.End: Parsing primary");
-            return new BooleanNode { Value = bool.Parse(Advance().Value) };
+            return new BooleanNode
+            {
+                Value = isMinus ? !bool.Parse(Advance().Value) : bool.Parse(Advance().Value)
+            };
         }
 
         // String reference
@@ -432,7 +443,11 @@ public class Parser
         if (Check(Tokens.NumberRef))
         {
             Logger.Logger.Log("CompilationProcess.End: Parsing primary (NumberRef)");
-            return new NumberRefNode { Index = int.Parse(Advance().Value) };
+            return new NumberRefNode
+            {
+                IsNegative = isMinus,
+                Index = int.Parse(Advance().Value)
+            };
         }
 
         // Identifier - может быть вызовом метода или функции
@@ -450,7 +465,11 @@ public class Parser
             if (firstIdentifier.StartsWith("___NUMBER_"))
             {
                 var index = int.Parse(firstIdentifier.Replace("___NUMBER_", "").Replace("___", ""));
-                return new NumberRefNode { Index = index };
+                return new NumberRefNode
+                {
+                    IsNegative = isMinus,
+                    Index = index
+                };
             }
             
             if (firstIdentifier.TryParseNumber(out var result))

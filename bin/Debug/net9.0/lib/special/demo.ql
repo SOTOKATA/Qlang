@@ -4,13 +4,15 @@ include "@lib/math"
 
 class LanguageDemo:
     function run():
+
         Console.println("<--- Menu demo --->")
         Console.println("1. Numeric")
         Console.println("2. Strings")
+        Console.println("3. Circles")
         
         // TODO: bool re-write parsing (with || and &&)
         do_while String.isNullOrWhiteSpace(choice) == true || Number.isNumber(choice) == false:
-            Console.print("Print choice (1-2): ")
+            Console.print("Print choice (1-3): ")
             let choice = Console.readln()
 
             if String.isNullOrWhiteSpace(choice) == true:
@@ -23,6 +25,8 @@ class LanguageDemo:
             numericDemo()
         else if choice == "2":
             stringDemo()
+        else if choice == "3":
+            circleDemo()
 
         Console.println("\nCurrent presentation ended")
 
@@ -68,6 +72,9 @@ class LanguageDemo:
         else:
             printException("Random number: Error, first number can't be more than or equal second")
 
+        for let i = num1 - 10; i < num1; i = i + 1:
+            Console.println("Index: " + i)
+
         Console.println("\n<--- Number class --->")
         Console.println("First number as integer: " + Number.toInt(num1))
         Console.println("Second number as integer: " + Number.toInt(num2))
@@ -80,6 +87,35 @@ class LanguageDemo:
         Console.println("\nMinimum number value: " + Number.MIN_VALUE)
         Console.println("Maximum number value: " + Number.MAX_VALUE)
 
+    function circleDemo():
+        Console.println("\nWelcome to circles demo!")
+
+        Console.println("\nWhile example (while random number is not 0):")
+        Console.print("Numbers: ")
+        let randNum = 0-1
+        while randNum != 0:
+            randNum = Number.randInt(0, 3)
+            Console.print(randNum + ", ")
+        Console.println("Ocurre 0!")
+        Console.println("You exit from while.")
+
+        acceptContinue()
+
+        Console.println("\ndo-While example:")
+        do_while input != "0":
+            Console.print("Type '0' to break do-While: ")
+            let input = Console.readln()
+        Console.println("You exit from do_while.")
+
+        acceptContinue()
+
+        Console.println("For example (0-10): ")
+        for let i = 0; i < 10; i = i + 1:
+            Console.println("Index: " + i)
+
+    function acceptContinue():
+        Console.println("\nPress enter to continue")
+        Console.readln()
 
     function printException(let msg):
         Console.setForeColor("red")

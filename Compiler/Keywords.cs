@@ -13,6 +13,8 @@ public class Keywords
     public static string ForBlock => "for";
     
     public static string ReturnKeyword => "return";
+    public static string BreakKeyword => "break";
+    public static string ContinueKeyword => "continue";
     
     public static string TrueKeyword => "true";
     public static string FalseKeyword => "false";
@@ -27,6 +29,6 @@ public class Keywords
     [
         FunctionDeclaration, ClassDeclaration, VariableDeclaration, IfBlock, ElseBlock, WhileBlock, DoWhileBlock, 
         ForBlock, ReturnKeyword, TrueKeyword, FalseKeyword, IncludeKeyword, PrivateModificator, 
-        StaticModificator, ConstModificator
+        StaticModificator, ConstModificator, ContinueKeyword, BreakKeyword
     ];
 }
