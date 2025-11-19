@@ -1,4 +1,5 @@
-include "@lib/special"
-
+include "@lib/datatypes/number"
 function main():
-    LanguageDemo.run()
+    let numberClass = Number.new()
+
+    Console.println(numberClass.isNumber(0))

@@ -4,15 +4,16 @@ namespace Qlang.Logger;
 
 public static class Logger
 {
-    static FileLogger fileLogger = new FileLogger("Logs\\debug.txt");
+    private static readonly FileLogger FileLogger = new("Logs\\debug.txt");
     public static void Log(string message, ConsoleColor? color = null)
     {
+        FileLogger.Log(message);
+        
         if (!QLang.Settings.Debug)
             return;
         
         Console.ForegroundColor = color ?? ConsoleColor.DarkGray;
         Console.WriteLine(message);
-        fileLogger.Log(message);
         Console.ResetColor();
     }
 

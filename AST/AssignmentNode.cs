@@ -4,13 +4,22 @@ public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst) : ASTNo
 {
     public string VariableName { get; set; }
     
-    public ASTNode Value { get; set; }
+    public ASTNode? Value { get; set; }
 
     public bool IsStatic { get; set; } = isStatic;
 
     public bool IsPrivate { get; set; } = isPrivate;
 
     public bool IsConst { get; set; } = isConst;
+
+    public override ASTNode Clone()
+    {
+        return new AssignmentNode(IsStatic, IsPrivate, IsConst)
+        {
+            VariableName = VariableName,
+            Value = Value?.Clone() ?? null,
+        };
+    }
 
     public override string GetTree(string indent = "")
     {

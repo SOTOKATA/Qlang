@@ -4,6 +4,14 @@ include "@lib/console"
 
 // Class to make operations with numbers
 class Number:
+    // Will return Number as object
+    // function new():
+    //     isUsr = true
+    //     Console.println(isUsr)
+    //     return Number
+
+    private let isUsr = false
+
     // Basic c# usings for this class
     private let usings = "using System; using System.Globalization; "
 
@@ -17,7 +25,7 @@ class Number:
 
     // get random number with range 'min' to 'max'
     function randInt(let min, let max):
-        if isNumber(min) == false || isNumber(max) == false:
+        if (isNumber(min) == false) || (isNumber(max) == false):
             Throw.exception("One or two input is not a number")
 
         // Convert '3.42...' to '3'

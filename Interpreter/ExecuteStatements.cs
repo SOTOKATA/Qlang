@@ -22,6 +22,7 @@ public partial class Interpreter
         AddBlockToContext(whileNode);
         
         var condition = whileNode.IsDoWhile || (bool)EvaluateExpression(whileNode.Condition);
+        Logger.Logger.Log("Interpreter.While: until.condition=\n" + whileNode.Condition.GetTree("     "), ConsoleColor.Magenta);
         Logger.Logger.Log("Interpreter.While: condition=" + condition, ConsoleColor.Magenta);
 
         while (condition)

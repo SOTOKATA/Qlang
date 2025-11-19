@@ -242,26 +242,22 @@ public partial class Interpreter
         Logger.Logger.Log($"Interpreter.ExecuteMethodCall: class = '{call.ObjectName}'; method = '{call.MethodName}'");
         Logger.Logger.Log($"Interpreter.CurrentContext: class = '{CurrentContext.Class?.Name}', method = '{CurrentContext.Function?.Name}'");
 
+        // Create new class instance (non-linked)
         if (_dynamicClasses.TryGetValue(call.ObjectName, out var value) && call.MethodName == "new")
-            return value;
+        {
+            CurrentContext.Class = value;
+            return GetNewClass(value, args.ToList());
+        }
 
         if (call is { ObjectName: "", MethodName: "_str" })
             return ParseString(string.Join("", args.Select(a => a.ToString())));
 
         if (call is { ObjectName: "", MethodName: "_csharp" })
         {
-            //CSharp.Execute(args.FirstOrDefault());
             var returnValue = CSharpCall($"{string.Join(",", args)}");
             
             Logger.Logger.Warn("Interpreter.ExecuteMethodCall: csharp.return_value: " + (returnValue == null ? "null" :
                 returnValue.ToString()));
-            
-            // _contextStack.Push(new ASTContext
-            // {
-            //     Class = null,
-            //     Function = null,
-            //     CurrentNode = call
-            // });
             
             return returnValue;
         }
@@ -279,28 +275,48 @@ public partial class Interpreter
         if (_dynamicClasses.TryGetValue(call.ObjectName, out var classNode))
             return ExecuteMethodCallClass(classNode, call);
 
-        if (_variables.TryGetValue(call.ObjectName, out var variable))
+        var variable = GetVariable(new VariableNode { Name = call.ObjectName });
+        if (variable is DynamicClass @class)
         {
-            var varValue = variable;
-            
             Logger.Logger.Log("Interpreter.ExecuteMethodCall: Object detected as class pointer");
             
-            var @class = varValue.Value as DynamicClass;
-
             if (@class?.Body.FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) is FunctionNode
                 function)
             {
                 CurrentContext.Class = @class;
                 return ExecuteFunction(ToDynamicFunction(function), args.ToList());
             }
+
+            Logger.Logger.Error("Interpreter.ExecuteMethodCall.VariableClass: function is not found");
         }
         
         foreach (var item in _contextStack)
             Logger.Logger.Log($"Interpreter.ExecuteMethodCall.StackItem: class = '{item.Class?.Name}' method = '{item.Function?.Name}'");
         Logger.Logger.Log($"Interpreter.CurrentContext (After call): class = '{CurrentContext.Class?.Name}' method = '{CurrentContext.Function?.Name}'");
+
+        foreach (var dictItem in _dynamicClasses)
+        {
+            Logger.Logger.Warn("DynamicClasses: " + dictItem.Key + " : " + dictItem.Value);
+        }
         
         throw new QlangRuntimeException($"Unknown object/function: {call.ObjectName}.{call.MethodName}({string.Join(",", call.Arguments)})", call, 
             GetStackTrace());
+    }
+
+    private DynamicClass GetNewClass(DynamicClass dynamicClass, List<object> args)
+    {
+        Logger.Logger.Warn("Interpreter.GetNewClass: Is new instance class");
+        var functionNode = dynamicClass.Body.FirstOrDefault(node => node is FunctionNode { Name: "new" });
+
+        var dClass = dynamicClass.Clone();
+        
+        if (_contextStack.Count > 0)
+            CurrentContext.Class = dClass;
+        
+        if (functionNode != null)
+            ExecuteFunction(ToDynamicFunction(functionNode as FunctionNode), args);
+        
+        return dClass;
     }
 
     // WARNING: is ChatGPT code
@@ -413,7 +429,7 @@ public partial class Interpreter
                 .Operator},{(binOp.Right as StringRefNode)?.Index}]");
 
             throw new QlangRuntimeException(
-                $"Internal error: {ex.Message}", 
+                $"Internal error: {ex}", 
                 expr, 
                 GetStackTrace());
         }
@@ -479,7 +495,7 @@ public partial class Interpreter
                 {
                     object val = var2.Value.Value;
                     string name = var2.Value.Name;
-                    Logger.Logger.Log($"Variable: {name} {val}");
+                    Logger.Logger.Log($"Variable: {name} = {val}");
                 }
             }
             else Logger.Logger.Log($"Context Class is null");
@@ -495,7 +511,7 @@ public partial class Interpreter
         }
 
         throw new QlangRuntimeException(
-            $"Undefined variable: {varNode.Name}", 
+            $"Undefined variable: '{varNode.Name}'", 
             varNode, 
             GetStackTrace());
         
@@ -551,7 +567,7 @@ public partial class Interpreter
                     Logger.Logger.Warn($"Short-circuit &&: left is false, returning false");
                     return false;
                 }
-            
+                
                 if (!bool.TryParse(right.ToString(), out rightBool))
                     throw new QlangRuntimeException(
                         $"Type error: Right operand of '&&' must be boolean, got '{right}'",
@@ -570,9 +586,12 @@ public partial class Interpreter
                 // Short-circuit: если левая часть true, правую не вычисляем
                 if (leftBool) 
                 {
+                    Logger.Logger.Warn("LeftRight: " + binOp.Left.GetTree() + " and " + binOp.Right.GetTree());
                     Logger.Logger.Warn($"Short-circuit ||: left is true, returning true");
                     return true;
                 }
+                
+                Logger.Logger.Warn($"Short-circuit ||: left not is true, continue");
             
                 if (!bool.TryParse(right.ToString(), out rightBool))
                     throw new QlangRuntimeException(

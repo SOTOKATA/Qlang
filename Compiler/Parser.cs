@@ -298,6 +298,15 @@ public class Parser
         return statements;
     }
 
+    private ASTNode ParseParens()
+    {
+        Expect(Tokens.LParen);
+        var parsed = ParseExpression();
+        Expect(Tokens.RParen);
+
+        return parsed;
+    }
+
     private ReturnNode ParseReturn()
     {
         Logger.Logger.Log("CompilationProcess: Parsing return");
@@ -421,6 +430,13 @@ public class Parser
         {
             isMinus = true;
             Advance();
+        }
+        
+        // parse: ([expression])
+        if (Check(Tokens.LParen))
+        {
+            Logger.Logger.Warn("Parsing parents");
+            return ParseParens();
         }
         
         // bool return
