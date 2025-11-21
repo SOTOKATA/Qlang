@@ -1639,7 +1639,7 @@ Interpreter: Execute statement (MethodCallNode)
 TypeofExpression: MethodCallNode
 TypeofExpression: NumberRefNode
 Interpreter.ExecuteMethodCall: class = 'numberClass'; method = 'isNumber'
-Interpreter.CurrentContext: class = 'Number', method = 'main'
+Interpreter.CurrentContext: class = '', method = 'main'
 Interpreter.ExecuteMethodCall: Object detected as class pointer
 TypeofExpression: MethodCallNode
 TypeofExpression: BinaryOperationNode
@@ -1668,7 +1668,7 @@ Interpreter.ExecuteMethodCall: class = ''; method = '_csharp'
 Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
 WARN: C#_Script: using System; using System.Globalization; double.TryParse(@"0", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
 WARN: Interpreter.ExecuteMethodCall: csharp.return_value: True
-Restored stack: class=Number
+WARN: RestoreContextStack: currentClass=Number
 Interpreter.ExecuteMethodCall: class = 'Console'; method = 'println'
 Interpreter.CurrentContext: class = 'Number', method = 'main'
 SUCC: ExecuteMethodCallClass.ContextClass: Console
@@ -1704,7 +1704,7 @@ Interpreter.ExecuteMethodCall: class = ''; method = '_csharp'
 Interpreter.CurrentContext: class = 'Number', method = 'isNumber'
 WARN: C#_Script: using System; using System.Globalization; double.TryParse(@"0", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
 WARN: Interpreter.ExecuteMethodCall: csharp.return_value: True
-Restored stack: class=Number
+WARN: RestoreContextStack: currentClass=Number
 Interpreter: Execute statement (MethodCallNode)
 TypeofExpression: BinaryOperationNode
 WARN: Detected binary operation
@@ -1721,8 +1721,8 @@ Variable: isUsr = False
 Variable: usings = using System; using System.Globalization; 
 Variable: MIN_VALUE = -1.7976931348623157E+308
 Variable: MAX_VALUE = 1.7976931348623157E+308
-Restored stack: class=Number
-Restored stack: class=Number
+WARN: RestoreContextStack: currentClass=Number
+WARN: RestoreContextStack: currentClass=Number
 ERROR: Interpreter error:
 ERROR: Runtime Error: Undefined variable: ''
   at :0:0

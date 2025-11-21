@@ -17,8 +17,6 @@ public partial class Interpreter
         _numberDictionary = numberDictionary;
     }
 
-    private CSharpCaller CSharpCaller { get; set; } = new();
-
     private readonly Dictionary<string, string> _stringDictionary;
     
     private readonly Dictionary<string, string> _numberDictionary;
@@ -153,7 +151,7 @@ public partial class Interpreter
         }
         finally
         {
-            Logger.Logger.Log("Restored stack: class=" + _contextStack.Pop().Class?.Name);
+            RestoreContextStack();
         }
     }
 
@@ -187,18 +185,19 @@ public partial class Interpreter
                     break;
                 }
                 
-                
-                if (CurrentContext.Function.Variables.TryGetValue(assign.VariableName, out variable) && variable
-                        .IsConst)
+                if (_contextStack.Count > 0)
+                    if (CurrentContext.Function.Variables.TryGetValue(assign.VariableName, out variable) && variable
+                            .IsConst)
                     throw new QlangRuntimeException($"Can't re-assign const variable '{assign.VariableName}'",
                         assign, GetStackTrace());
                 
-                CurrentContext.Function.Variables[assign.VariableName] = new Variable(
-                    assign.VariableName, 
-                    value, 
-                    assign.IsStatic,
-                    assign.IsPrivate,
-                    assign.IsConst);
+                if (_contextStack.Count > 0)
+                    CurrentContext.Function.Variables[assign.VariableName] = new Variable(
+                        assign.VariableName, 
+                        value, 
+                        assign.IsStatic,
+                        assign.IsPrivate,
+                        assign.IsConst);
                 // _variables[assign.VariableName] = value;
                 break;
 
@@ -245,7 +244,7 @@ public partial class Interpreter
         // Create new class instance (non-linked)
         if (_dynamicClasses.TryGetValue(call.ObjectName, out var value) && call.MethodName == "new")
         {
-            CurrentContext.Class = value;
+            // CurrentContext.Class = value;
             return GetNewClass(value, args.ToList());
         }
 
@@ -279,6 +278,7 @@ public partial class Interpreter
         if (variable is DynamicClass @class)
         {
             Logger.Logger.Log("Interpreter.ExecuteMethodCall: Object detected as class pointer");
+            Console.WriteLine("Interpreter.ExecuteMethodCall: Object detected as class pointer");
             
             if (@class?.Body.FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) is FunctionNode
                 function)
@@ -295,9 +295,7 @@ public partial class Interpreter
         Logger.Logger.Log($"Interpreter.CurrentContext (After call): class = '{CurrentContext.Class?.Name}' method = '{CurrentContext.Function?.Name}'");
 
         foreach (var dictItem in _dynamicClasses)
-        {
             Logger.Logger.Warn("DynamicClasses: " + dictItem.Key + " : " + dictItem.Value);
-        }
         
         throw new QlangRuntimeException($"Unknown object/function: {call.ObjectName}.{call.MethodName}({string.Join(",", call.Arguments)})", call, 
             GetStackTrace());
@@ -310,13 +308,16 @@ public partial class Interpreter
 
         var dClass = dynamicClass.Clone();
         
-        if (_contextStack.Count > 0)
-            CurrentContext.Class = dClass;
-        
         if (functionNode != null)
             ExecuteFunction(ToDynamicFunction(functionNode as FunctionNode), args);
-        
+
         return dClass;
+    }
+
+    private void RestoreContextStack()
+    {
+        if (_contextStack.Count > 0)
+            Logger.Logger.Warn("RestoreContextStack: currentClass=" + _contextStack.Pop().Class?.Name);
     }
 
     // WARNING: is ChatGPT code
