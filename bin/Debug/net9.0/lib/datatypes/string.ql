@@ -2,17 +2,25 @@ include "@lib/throw"
 
 // Class to make string operations
 class String:
+    private let _value = ""
+
+    function new(let input):
+        _value = input
+
+    function toString():
+        return _value
+
     // Get new c# string (internal)
     private function getStr(let str):
         return "new string(" + _str(str) + ")"
 
     // Append two strings
-    function append(let str, let str2):
-        return str + str2
+    function append(let str):
+        return _value + str
 
     // Get length of string
-    function getLength(let str):
-        return _csharp(getStr(str) + ".Length")
+    function length():
+        return _csharp(getStr(_value) + ".Length")
 
     // Check if string is empty or null
     function isNullOrEmpty(let str):
@@ -23,23 +31,23 @@ class String:
         return _csharp("string.IsNullOrWhiteSpace(" + _str(str) + ")")
 
     // Trim string
-    function trim(let str):
+    function trim():
         return _csharp(getStr(str) + ".Trim()")
 
     // Trim start string
-    function trimStart(let str):
-        return _csharp(getStr(str) + ".TrimStart()")
+    function trimStart():
+        return _csharp(getStr(_value) + ".TrimStart()")
 
     // Trim end string
-    function trimEnd(let str):
-        return _csharp(getStr(str) + ".TrimEnd()")
+    function trimEnd():
+        return _csharp(getStr(_value) + ".TrimEnd()")
 
     // Cut string by 'startPos' and 'length'
-    function subString(let str, let startPos, let length):
+    function subString(let startPos, let length):
         if Number.isNumber(startPos) == false:
             Throw.exception("subString error: startPos must be number")
 
         if Number.isNumber(length) == false:
             Throw.exception("subString error: length must be number")
 
-        return _csharp(getStr(str) + ".Substring(" + startPos + "," + length + ")")
+        return _csharp(getStr(_value) + ".Substring(" + startPos + "," + length + ")")

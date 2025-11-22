@@ -2,6 +2,7 @@ include "@lib/throw"
 include "@lib/datatypes/string"
 include "@lib/console"
 
+// Full static class
 // Class to make operations with numbers
 class Number:
     // Will return Number as object
@@ -9,8 +10,6 @@ class Number:
     //     isUsr = true
     //     Console.println(isUsr)
     //     return Number
-
-    private let isUsr = false
 
     // Basic c# usings for this class
     private let usings = "using System; using System.Globalization; "

@@ -4,7 +4,7 @@ namespace Qlang.Dynamic;
 
 public class DynamicClass(string name)
 {
-    public readonly string Name = name;
+    public string Name = name;
     
     public Dictionary<string, Variable> Variables = [];
 

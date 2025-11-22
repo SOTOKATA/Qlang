@@ -1,6 +1,4 @@
 ﻿using System.Text;
-using CSScriptLibrary;
-using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 using Qlang.AST;
 using Qlang.Dependencies;
@@ -32,6 +30,9 @@ public partial class Interpreter
 
     public void Execute(ProgramNode program)
     {
+        Logger.Logger.SetLoggerPath("Logs\\debug.txt");
+        Logger.Logger.Warn("----------- Interpreter -----------");
+        
         try
         {
             foreach (var statement in program.Statements)
@@ -55,7 +56,7 @@ public partial class Interpreter
                     []);
             }
         
-            ExecuteFunction(mainFunction, []);
+            ExecuteFunction(mainFunction, [], null);
         }
         catch (QlangRuntimeException ex)
         {
@@ -105,13 +106,15 @@ public partial class Interpreter
 
     private bool _break;
     private ReturnNode _return;
-    private object ExecuteFunction(DynamicFunction? function, List<object> arguments)
+    private object ExecuteFunction(DynamicFunction? function, List<object> arguments, DynamicClass? ownerClass)
     {
         if (function is null)
             return null;
         
-        var node = _contextStack.Count > 0 ? CurrentContext.Class : new DynamicClass("");
-        ASTContext newContext = new() { Function = function, Class = node };
+        Logger.Logger.Log($"'{function.Name}'({string.Join(", ", arguments)})");
+        
+        var contextClass = ownerClass ?? (_contextStack.Count > 0 ? CurrentContext.Class : null);
+        ASTContext newContext = new() { Function = function, Class = contextClass };
         _contextStack.Push(newContext);
 
         try
@@ -160,64 +163,27 @@ public partial class Interpreter
         switch (statement)
         {
             case AssignmentNode assign:
-
-                Variable? variable = null;
-                
-                if (CurrentContext.Blocks.Count > 0 &&
-                    CurrentContext.Blocks[^1].Variables.TryGetValue(assign.VariableName, out variable) && 
-                    variable.IsConst)
-                    throw new QlangRuntimeException($"Can't re-assign const variable '{assign.VariableName}'",
-                        assign, GetStackTrace());
-                
-                Logger.Logger.Log("Interpreter: Execute statement (AssignmentNode)");
-                var value = EvaluateExpression(assign.Value);
-
-                // block contains this variable or assignment is in any block (for, while, etc.)
-                if (variable is not null || CurrentContext.Blocks.Count > 0)
-                {
-                    CurrentContext.Blocks[^1].Variables[assign.VariableName] = new Variable(
-                        assign.VariableName, 
-                        value, 
-                        assign.IsStatic,
-                        assign.IsPrivate,
-                        assign.IsConst);
-                    
-                    break;
-                }
-                
-                if (_contextStack.Count > 0)
-                    if (CurrentContext.Function.Variables.TryGetValue(assign.VariableName, out variable) && variable
-                            .IsConst)
-                    throw new QlangRuntimeException($"Can't re-assign const variable '{assign.VariableName}'",
-                        assign, GetStackTrace());
-                
-                if (_contextStack.Count > 0)
-                    CurrentContext.Function.Variables[assign.VariableName] = new Variable(
-                        assign.VariableName, 
-                        value, 
-                        assign.IsStatic,
-                        assign.IsPrivate,
-                        assign.IsConst);
-                // _variables[assign.VariableName] = value;
+                Logger.Logger.Warn($"Context: class='{CurrentContext.Class?.Name}' function='{CurrentContext.Function?.Name}'");
+                AssignmentNode(assign);
                 break;
 
             case MethodCallNode call:
-                Logger.Logger.Log("Interpreter: Execute statement (MethodCallNode)");
+                Logger.Logger.Log("MethodCallNode");
                 ExecuteMethodCall(call);
                 break;
 
             case IfNode ifNode:
-                Logger.Logger.Log("Interpreter: Execute statement (IfNode)");
+                Logger.Logger.Log("IfNode");
                 ExecuteIf(ifNode);
                 break;
             
             case WhileNode whileNode:
-                Logger.Logger.Log("Interpreter: Execute statement (WhileNode)");
+                Logger.Logger.Log("WhileNode");
                 ExecuteWhile(whileNode);
                 break;
             
             case ForNode forNode:
-                Logger.Logger.Log("Interpreter: Execute statement (ForNode)");
+                Logger.Logger.Log("ForNode");
                 ExecuteFor(forNode);
                 break;
             
@@ -225,10 +191,100 @@ public partial class Interpreter
                 throw new QlangRuntimeException($"Unknown statement type: {statement.GetType()}", statement, GetStackTrace());
         }
     }
-    
-    /// <summary>
-    /// Выполняет while-блок
-    /// </summary>
+
+    private void AssignmentNode(AssignmentNode assign)
+    {
+        if (_contextStack.Count == 0)
+            return;
+        
+        var value = EvaluateExpression(assign.Value);
+        Logger.Logger.Log($"name='{assign.VariableName}' value='{assign.Value}' value(after evaluating)='{value}'", "AssignmentNode");
+        
+        if (value is DynamicClass dynamicClass)
+        {
+            Logger.Logger.Log($"Change name old='{dynamicClass.Name}' new='{assign.VariableName}'", "AssignmentNode");
+            dynamicClass.Name = assign.VariableName;
+        }
+
+        // Context class
+        if (CurrentContext.Class != null)
+        {
+            if (CurrentContext.Class.Variables.TryGetValue(assign.VariableName, out var var))
+            {
+                if (var.IsConst)
+                    throw new QlangRuntimeException($"Can't re-assign const variable '{assign.VariableName}'",
+                        assign, GetStackTrace());
+
+                CurrentContext.Class.Variables[assign.VariableName] = new Variable(
+                    assign.VariableName,
+                    value,
+                    assign.IsStatic,
+                    assign.IsPrivate,
+                    assign.IsConst);
+            }
+        }
+        
+        // Context block
+        if (CurrentContext.Blocks.Count > 0)
+        {
+            for (int i = CurrentContext.Blocks.Count - 1; i >= 0; i--)
+            {
+                if (!CurrentContext.Blocks[i].Variables.TryGetValue(assign.VariableName, out var var))
+                    continue;
+                
+                if (var.IsConst)
+                    throw new QlangRuntimeException($"Can't re-assign const variable '{assign.VariableName}'",
+                        assign, GetStackTrace());
+
+                CurrentContext.Blocks[i].Variables[assign.VariableName] = new Variable(
+                    assign.VariableName, 
+                    value, 
+                    assign.IsStatic,
+                    assign.IsPrivate,
+                    assign.IsConst);
+                return;
+            }
+
+            if (CurrentContext.Blocks.Count > 0)
+            {
+                CurrentContext.Blocks[^1].Variables[assign.VariableName] = new Variable(
+                    assign.VariableName,
+                    value,
+                    assign.IsStatic,
+                    assign.IsPrivate,
+                    assign.IsConst);
+                return;
+            }
+        }
+
+        // Context function
+        if (CurrentContext.Function != null)
+        {
+            if (CurrentContext.Function.Variables.TryGetValue(assign.VariableName, out var var))
+            {
+                if (var.IsConst)
+                    throw new QlangRuntimeException($"Can't re-assign const variable '{assign.VariableName}'",
+                        assign, GetStackTrace());
+
+                CurrentContext.Function.Variables[assign.VariableName] = new Variable(
+                    assign.VariableName,
+                    value,
+                    assign.IsStatic,
+                    assign.IsPrivate,
+                    assign.IsConst);
+            }
+            
+            CurrentContext.Function.Variables[assign.VariableName] = new Variable(
+                assign.VariableName,
+                value,
+                assign.IsStatic,
+                assign.IsPrivate,
+                assign.IsConst);
+            return;
+        }
+
+        throw new QlangRuntimeException("Place to assign is not detected", assign, GetStackTrace());
+    }
     
 
     /// <summary>
@@ -238,8 +294,8 @@ public partial class Interpreter
     {
         var args = call.Arguments.ConvertAll(EvaluateExpression).ToArray();
         
-        Logger.Logger.Log($"Interpreter.ExecuteMethodCall: class = '{call.ObjectName}'; method = '{call.MethodName}'");
-        Logger.Logger.Log($"Interpreter.CurrentContext: class = '{CurrentContext.Class?.Name}', method = '{CurrentContext.Function?.Name}'");
+        Logger.Logger.Log($"class = '{call.ObjectName}'; method = '{call.MethodName}'");
+        Logger.Logger.Log($"CurrentContext: class = '{CurrentContext.Class?.Name}', method = '{CurrentContext.Function?.Name}'");
 
         // Create new class instance (non-linked)
         if (_dynamicClasses.TryGetValue(call.ObjectName, out var value) && call.MethodName == "new")
@@ -255,7 +311,7 @@ public partial class Interpreter
         {
             var returnValue = CSharpCall($"{string.Join(",", args)}");
             
-            Logger.Logger.Warn("Interpreter.ExecuteMethodCall: csharp.return_value: " + (returnValue == null ? "null" :
+            Logger.Logger.Warn("csharp.return_value: " + (returnValue == null ? "null" :
                 returnValue.ToString()));
             
             return returnValue;
@@ -265,34 +321,43 @@ public partial class Interpreter
         {
             if (CurrentContext.Class?.Body?
                     .FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) is FunctionNode classMethod)
-                return ExecuteFunction(ToDynamicFunction(classMethod), args.ToList());
+                return ExecuteFunction(ToDynamicFunction(classMethod), args.ToList(), CurrentContext.Class);
 
             if (_functions.TryGetValue(call.MethodName, out var func))
-                return ExecuteFunction(func, args.ToList());
+                return ExecuteFunction(func, args.ToList(), null);
         }
 
         if (_dynamicClasses.TryGetValue(call.ObjectName, out var classNode))
             return ExecuteMethodCallClass(classNode, call);
 
-        var variable = GetVariable(new VariableNode { Name = call.ObjectName });
+        object? variable = null;
+        try
+        {
+            variable = GetVariable(new VariableNode { Name = call.ObjectName });
+        }
+        catch (Exception e)
+        {
+            Logger.Logger.Error(e.ToString());
+        }
+
         if (variable is DynamicClass @class)
         {
-            Logger.Logger.Log("Interpreter.ExecuteMethodCall: Object detected as class pointer");
-            Console.WriteLine("Interpreter.ExecuteMethodCall: Object detected as class pointer");
+            Logger.Logger.Log("Object detected as class pointer");
             
             if (@class?.Body.FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) is FunctionNode
                 function)
             {
                 CurrentContext.Class = @class;
-                return ExecuteFunction(ToDynamicFunction(function), args.ToList());
+                Logger.Logger.Warn("VariableClass:Class: " + CurrentContext.Class.Name);
+                return ExecuteFunction(ToDynamicFunction(function), args.ToList(), CurrentContext.Class);
             }
 
-            Logger.Logger.Error("Interpreter.ExecuteMethodCall.VariableClass: function is not found");
+            Logger.Logger.Error("VariableClass: function is not found");
         }
         
         foreach (var item in _contextStack)
-            Logger.Logger.Log($"Interpreter.ExecuteMethodCall.StackItem: class = '{item.Class?.Name}' method = '{item.Function?.Name}'");
-        Logger.Logger.Log($"Interpreter.CurrentContext (After call): class = '{CurrentContext.Class?.Name}' method = '{CurrentContext.Function?.Name}'");
+            Logger.Logger.Log($"StackItem: class = '{item.Class?.Name}' method = '{item.Function?.Name}'");
+        Logger.Logger.Log($"CurrentContext (After call): class = '{CurrentContext.Class?.Name}' method = '{CurrentContext.Function?.Name}'");
 
         foreach (var dictItem in _dynamicClasses)
             Logger.Logger.Warn("DynamicClasses: " + dictItem.Key + " : " + dictItem.Value);
@@ -303,13 +368,13 @@ public partial class Interpreter
 
     private DynamicClass GetNewClass(DynamicClass dynamicClass, List<object> args)
     {
-        Logger.Logger.Warn("Interpreter.GetNewClass: Is new instance class");
+        Logger.Logger.Warn("Is new instance class");
         var functionNode = dynamicClass.Body.FirstOrDefault(node => node is FunctionNode { Name: "new" });
 
         var dClass = dynamicClass.Clone();
         
         if (functionNode != null)
-            ExecuteFunction(ToDynamicFunction(functionNode as FunctionNode), args);
+            ExecuteFunction(ToDynamicFunction(functionNode as FunctionNode), args, dClass);
 
         return dClass;
     }
@@ -317,7 +382,10 @@ public partial class Interpreter
     private void RestoreContextStack()
     {
         if (_contextStack.Count > 0)
-            Logger.Logger.Warn("RestoreContextStack: currentClass=" + _contextStack.Pop().Class?.Name);
+        {
+            var context = _contextStack.Pop();
+            Logger.Logger.Warn($"class='{context.Class?.Name}' function='{context.Function?.Name}'", "RestoreContextStack");
+        }
     }
 
     // WARNING: is ChatGPT code
@@ -368,25 +436,18 @@ public partial class Interpreter
             throw new QlangRuntimeException("This function is private but called from external class", call,
                 GetStackTrace());
         
-        var previousClass = CurrentContext?.Class;
+        // var previousClass = CurrentContext?.Class;
     
-        if (_contextStack.Count > 0)
-        {
-            CurrentContext.Class = classNode;
-            Logger.Logger.Succ("ExecuteMethodCallClass.ContextClass: " + classNode.Name);
-        }
+        // if (_contextStack.Count > 0)
+        // {
+        //     CurrentContext.Class = classNode;
+        //     Logger.Logger.Warn("ExecuteMethodClass:Class: " + CurrentContext.Class.Name);
+        // }
 
-        try
-        {
-            var args = call.Arguments?.ConvertAll(EvaluateExpression) ?? [];
-            return ExecuteFunction(ToDynamicFunction(node), args);
-        }
-        finally
-        {
-            // Восстанавливаем предыдущий контекст класса
-            if (_contextStack.Count > 0)
-                CurrentContext.Class = previousClass;
-        }
+        var dynamicFunction = ToDynamicFunction(node);
+        
+        var args = call.Arguments?.ConvertAll(EvaluateExpression) ?? [];
+        return ExecuteFunction(dynamicFunction, args, classNode);
     }
     
     private object EvaluateExpression(ASTNode? expr)
@@ -473,6 +534,8 @@ public partial class Interpreter
                     (varNode.Name, out var))
                 return var.Value;
 
+            
+            // static classes
             if (_dynamicClasses.TryGetValue(varNode.ClassName, out var dynamicClass) &&
                 dynamicClass.Variables.TryGetValue(varNode.Name, out var))
             {
@@ -496,10 +559,23 @@ public partial class Interpreter
                 {
                     object val = var2.Value.Value;
                     string name = var2.Value.Name;
-                    Logger.Logger.Log($"Variable: {name} = {val}");
+                    Logger.Logger.Log($"\tVariable: '{name}' = '{val}'");
                 }
             }
-            else Logger.Logger.Log($"Context Class is null");
+            else Logger.Logger.Error($"Context Class is null");
+            
+            if (CurrentContext?.Function != null)
+            {
+                Logger.Logger.Log("Current var count: " + CurrentContext.Function.Variables.Count);
+                Logger.Logger.Log("Current function name: " + CurrentContext.Function.Name);
+                foreach (var var2 in CurrentContext.Function.Variables)
+                {
+                    object val = var2.Value.Value;
+                    string name = var2.Value.Name;
+                    Logger.Logger.Log($"\tVariable: '{name}' = '{val}'");
+                }
+            }
+            else Logger.Logger.Error($"Context Class is null");
         }
         catch (QlangRuntimeException)
         {

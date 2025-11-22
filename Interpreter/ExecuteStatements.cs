@@ -22,8 +22,8 @@ public partial class Interpreter
         AddBlockToContext(whileNode);
         
         var condition = whileNode.IsDoWhile || (bool)EvaluateExpression(whileNode.Condition);
-        Logger.Logger.Log("Interpreter.While: until.condition=\n" + whileNode.Condition.GetTree("     "), ConsoleColor.Magenta);
-        Logger.Logger.Log("Interpreter.While: condition=" + condition, ConsoleColor.Magenta);
+        Logger.Logger.Log("FirstCheck (node)\n" + whileNode.Condition.GetTree("     "), "While.Condition", ConsoleColor.Magenta);
+        Logger.Logger.Log("FirstCheck: \n" +  condition, "While.Condition", ConsoleColor.Magenta);
 
         while (condition)
         {
@@ -48,11 +48,11 @@ public partial class Interpreter
             }
             
             condition = (bool)EvaluateExpression(whileNode.Condition);
-            Logger.Logger.Log("Interpreter.While: condition=" + condition, ConsoleColor.Magenta);
+            Logger.Logger.Log("FirstCheck: \n" +  condition, "While.Condition", ConsoleColor.Magenta);
         }
         
         RemoveLastBlockFromContext();
-        Logger.Logger.Log("Interpreter.While.End", ConsoleColor.Magenta);
+        Logger.Logger.Log("Ended", "While", ConsoleColor.Magenta);
     }
 
     private void ExecuteFor(ForNode forNode)
@@ -64,8 +64,8 @@ public partial class Interpreter
         
         // Add condition
         var condition = (bool)EvaluateExpression(forNode.Condition);
-        Logger.Logger.Log("Interpreter.For: condition=" + condition, ConsoleColor.Magenta);
-
+        Logger.Logger.Log("FirstCheck: \n" +  condition, "For.Condition", ConsoleColor.Magenta);
+        
         while (condition)
         {
             foreach (var statement in forNode.Body)
@@ -90,11 +90,12 @@ public partial class Interpreter
 
             ExecuteStatement(forNode.Statement);
             condition = (bool)EvaluateExpression(forNode.Condition);
-            Logger.Logger.Log("Interpreter.While: condition=" + condition, ConsoleColor.Magenta);
+            Logger.Logger.Log("FirstCheck: \n" +  condition, "For.Condition", ConsoleColor.Magenta);
         }
         
         RemoveLastBlockFromContext();
-        Logger.Logger.Log("Interpreter.While.End", ConsoleColor.Magenta);
+        Logger.Logger.Log("Ended", "For", ConsoleColor.Magenta);
+
     }
     
     private void ExecuteIf(IfNode ifNode)

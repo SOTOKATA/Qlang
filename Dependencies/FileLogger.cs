@@ -13,6 +13,9 @@ public class FileLogger
     {
         _filePath = path;
         
+        if (!File.Exists(path))
+            File.Create(_filePath).Close();
+        
         if (!append)
             File.WriteAllText(_filePath, "");
     }

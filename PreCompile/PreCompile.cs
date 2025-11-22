@@ -66,7 +66,7 @@ public static class PreCompile
                     }
                     
                     if (Path.GetExtension(file) == ".ql") 
-                        content = content + (File.ReadAllText(file) + "\n");
+                        content += (File.ReadAllText(file) + "\n");
                 }
             }
             

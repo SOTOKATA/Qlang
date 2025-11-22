@@ -16,6 +16,8 @@ public class Parser
 
         ProgramNode program = new();
 
+        Logger.Logger.SetLoggerPath("Logs\\debug_parser.txt");
+        Logger.Logger.Warn("----------- Parser -----------");
         while (!IsAtEnd())
         {
             if (Check(Tokens.NewLine))
@@ -32,7 +34,7 @@ public class Parser
 
     private ASTNode ParseStatement()
     {
-        Logger.Logger.Log($"CompilationProcess: Parsing statement ({Current().TokenType}, {Current().Value})");
+        Logger.Logger.Log($"Parsing statement ({Current().TokenType}, {Current().Value})", "CompilationProcess");
 
         bool isStatic = false;
         bool isConst = false;
@@ -62,73 +64,52 @@ public class Parser
         // function declaration
         if (Check(Tokens.Keyword) && Current().Value == Keywords.FunctionDeclaration)
         {
-            Logger.Logger.Log("CompilationProcess.End: Parsing statement");
             return ParseFunction(isStatic, isPrivate);
         }
         
         // class declaration
         if (Check(Tokens.Keyword) && Current().Value == Keywords.ClassDeclaration)
-        {
-            Logger.Logger.Log("CompilationProcess.End: Parsing statement");
             return ParseClass();
-        }
 
+        // for statement
         if (Check(Tokens.Keyword) && Current().Value == Keywords.ForBlock)
-        {
-            Logger.Logger.Log("CompilationProcess.End: Parsing statement");
             return ParseFor();
-        }
         
         // if statement
         if (Check(Tokens.Keyword) && Current().Value == Keywords.IfBlock)
-        {
-            Logger.Logger.Log("CompilationProcess.End: Parsing statement");
             return ParseIf();
-        }
         
         // while statement
         if (Check(Tokens.Keyword) && Current().Value == Keywords.WhileBlock)
-        {
-            Logger.Logger.Log("CompilationProcess.End: Parsing statement");
             return ParseWhile();
-        }
         
         // do-while statement
         if (Check(Tokens.Keyword) && Current().Value == Keywords.DoWhileBlock)
-        {
-            Logger.Logger.Log("CompilationProcess.End: Parsing statement");
             return ParseWhile(true);
-        }
         
         // return statement
         if (Check(Tokens.Keyword) && Current().Value == Keywords.ReturnKeyword)
-        {
-            Logger.Logger.Log("CompilationProcess.End: Parsing statement");
             return ParseReturn();
-        }
 
         // assignment
         if (Check(Tokens.Keyword) && Current().Value == Keywords.VariableDeclaration)
-        {
-            Logger.Logger.Log("CompilationProcess.End: Parsing statement");
-            return ParseVariableDeclaration(isStatic, isPrivate, isConst);
-        }
+            return ParseVariableDeclaration(isStatic, isPrivate, isConst, true);
 
         // method call statement (Object.method(...)) || Call method from class pointer
         if (Check(Tokens.Identifier))
         {
             var expr = ParseExpression();
             Expect(Tokens.NewLine);
-            Logger.Logger.Log("CompilationProcess.End: Parsing statement");
+            Logger.Logger.Log("Ended parsing statement (identifier)", "CompilationProcess");
             return expr;
         }
 
         throw new Exception($"Unexpected token: {Current().TokenType}");
     }
 
-    private AssignmentNode ParseVariableDeclaration(bool isStatic = false, bool isPrivate = false, bool isConst = false)
+    private AssignmentNode ParseVariableDeclaration(bool isStatic = false, bool isPrivate = false, bool isConst = false, bool isNew = false)
     {
-        Logger.Logger.Log("CompilationProcess: Parsing variable declaration");
+        Logger.Logger.Log("Parsing variable declaration", "CompilationProcess");
         if (!Check(Tokens.Keyword) || Current().Value != Keywords.VariableDeclaration)
             throw new Exception($"(ParseVariableDeclaration) Unexpected token: {Current().TokenType}");
         
@@ -144,7 +125,7 @@ public class Parser
         }
         
         Logger.Logger.Log($"CompilationProcess.End: Parsing Variable declaration (Name: {name} Value: {value?.GetType().Name ?? "Null"})");
-        return new AssignmentNode(isStatic, isPrivate, isConst) { 
+        return new AssignmentNode(isStatic, isPrivate, isConst, isNew) { 
             VariableName = name, 
             Value = value
         };
@@ -559,7 +540,7 @@ public class Parser
             {
                 Logger.Logger.Log($"CompilationProcess.End: Parsing primary (AssignmentNode)");
                 Advance();
-                return new AssignmentNode(false, false, false)
+                return new AssignmentNode(false, false, false, false)
                 {
                     VariableName = firstIdentifier,
                     Value = ParseExpression(),
@@ -584,7 +565,7 @@ public class Parser
         if (!IsAtEnd()) _position++;
         var token = _tokens[_position - 1];
         
-        Logger.Logger.Log($"Token (Ln:{token.Line} Idx:{token.Index}): " + token.TokenType);
+        Logger.Logger.Log(token.TokenType.ToString(), $"Token (Ln:{token.Line} Idx:{token.Index})");
         return token;
     }
 

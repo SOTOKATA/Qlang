@@ -1,7 +1,8 @@
 ﻿namespace Qlang.AST;
 
-public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst) : ASTNode
+public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool isNew) : ASTNode
 {
+    public bool IsNew { get; set; } = false;
     public string VariableName { get; set; }
     
     public ASTNode? Value { get; set; }
@@ -14,7 +15,7 @@ public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst) : ASTNo
 
     public override ASTNode Clone()
     {
-        return new AssignmentNode(IsStatic, IsPrivate, IsConst)
+        return new AssignmentNode(IsStatic, IsPrivate, IsConst, IsNew)
         {
             VariableName = VariableName,
             Value = Value?.Clone() ?? null,
