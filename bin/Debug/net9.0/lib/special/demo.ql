@@ -46,14 +46,16 @@ class LanguageDemo: {
                 printException("You must to print anything!");
             }
         }
+
+        input = String.new(input);
         
-        Console.println("\nInput length: " + String.getLength(input));
-        Console.println("Input trim: '" + String.trim(input) + "'");
-        Console.println("Input trim start: '" + String.trimStart(input) + "'");
-        Console.println("Input trim end: '" + String.trimEnd(input) + "'");
+        Console.println("\nInput length: " + input.length());
+        Console.println("Input trim: '" + input.trim() + "'");
+        Console.println("Input trim start: '" + input.trimStart() + "'");
+        Console.println("Input trim end: '" + input.trimEnd() + "'");
         
-        if String.getLength(input) > 2: {
-            Console.println("Input first two characters: '" + String.subString(input, 0, 2) + "'");
+        if input.length() > 2: {
+            Console.println("Input first two characters: '" + input.subString(0, 2) + "'");
         }
     }
 
@@ -63,8 +65,8 @@ class LanguageDemo: {
         let num1 = getNumberFromConsole("Write first number: { ");
         let num2 = getNumberFromConsole("Write second number: { ");
 
-        Console.println("\nFirst number: { " + num1);
-        Console.println("Second number: { " + num2);
+        Console.println("\nFirst number: " + num1);
+        Console.println("Second number: " + num2);
 
         Console.println("\n<--- Math --->");
         Console.println("Sum: " + Math.sum(num1, num2));

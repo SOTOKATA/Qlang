@@ -24,6 +24,9 @@ public class FileLogger
 
     public void Log(string message)
     {
+        if (!QLang.Settings.Debug)
+            return;
+        
         using StreamWriter writer = new(_filePath, true);
         
         writer.WriteLine(message);

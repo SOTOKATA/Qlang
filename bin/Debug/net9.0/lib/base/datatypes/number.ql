@@ -16,7 +16,8 @@ class Number: {
 
     // check if 'var' is number
     function isNumber(let var): {
-        return _csharp(usings + "double.TryParse(" + _str(var) + ", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)");
+        return _native("try_parse_number", var);
+        // return _csharp(usings + "double.TryParse(" + _str(var) + ", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)");
     }
 
     // get random number with range 'min' to 'max'
@@ -33,7 +34,7 @@ class Number: {
             Throw.exception("Minimum can't be more than maximum");
         }
 
-        return _csharp(usings + "new Random().Next(" + min + "," + max + ")");
+        return _native("random", min, max);
     }
 
     // Get int styled number ('3.421' to '3')
@@ -43,6 +44,7 @@ class Number: {
 
     // Change numeric style (ex.: '3.214' to '3.2' with pattern '0.0')
     function toFixed(let number, let pattern): {
-        return _csharp(usings + "(" + number + ").ToString(" + _str(pattern) + ")");
+        return _native("to_string_number", number, _str(pattern));
+        // return _csharp(usings + "(" + number + ").ToString(" + _str(pattern) + ")");
     }
 }

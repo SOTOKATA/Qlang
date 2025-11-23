@@ -34,32 +34,32 @@ class String: {
 
     // Get length of string
     function length(): {
-        return _csharp(_str(_value) + ".Length");
+        return _native("str_length", _str(_value));
     }
 
     // Check if string is empty or null
     function isNullOrEmpty(let str): {
-        return _csharp("string.IsNullOrEmpty(" + _str(str) + ")");
+        return _native("str_null_or_empty", _str(str));
     }
-
+    
     // Check if string is white space or null
     function isNullOrWhiteSpace(let str): {
-        return _csharp("string.IsNullOrWhiteSpace(" + _str(str) + ")");
+        return _native("str_null_or_white_space", _str(str));
     }
 
     // Trim string
     function trim(): {
-        return _csharp(_str(str) + ".Trim()");
+        return _native("str_trim", _str(_value));
     }
 
     // Trim start string
     function trimStart(): {
-        return _csharp(_str(_value) + ".TrimStart()");
+        return _native("str_trim_start", _str(_value));
     }
 
     // Trim end string
     function trimEnd(): {
-        return _csharp(_str(_value) + ".TrimEnd()");
+        return _native("str_trim_end", _str(_value));
     }
 
     // Cut string by 'startPos' and 'length'
@@ -72,6 +72,6 @@ class String: {
             Throw.exception("subString error: length must be number");
         }
 
-        return _csharp(_str(_value) + ".Substring(" + startPos + "," + length + ")");
+        return _native("str_sub_string", _str(_value), startPos, length);
     }
 }

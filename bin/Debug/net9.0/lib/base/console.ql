@@ -6,7 +6,8 @@ class Console: {
 
     // Print text to console
     function print(let message): {
-        _csharp(usings + "Console.Write(" + _str(message) + ")");
+        _native("cmd_write", _str(message));
+        // _csharp(usings + "Console.Write(" + _str_csharp(message) + ")");
     }
 
     // Print text to console with new line
@@ -16,31 +17,39 @@ class Console: {
 
     // Read line from console
     function readln(): {
-        return _csharp(usings + "Console.ReadLine()");
+        return _native("cmd_read");
+    }
+
+    function readkey(let intercept): {
+        return _native("cmd_key", intercept);
+    }
+
+    function isKeyAvailable(): {
+        return _native("cmd_key_available");
+    }
+
+    function cursorVisible(let visible): {
+        _native("cmd_cursor_visible", visible);
     }
 
     // Clear console
     function clear(): {
-        _csharp(usings + "Console.Clear()");
+        _native("cmd_clear");
     }
 
     // Set cursor position in console
     function setCursorPosition(let x, let y): {
-        _csharp(usings + "Console.SetCursorPosition(" + x + "," + y + ")");
+        _native("cmd_cursor_position", x, y);
     }
 
     // Set foreground color for console
     function setForeColor(let color): {
-        let line1 = "if (Enum.TryParse(" + _str(color) + ".ToString(), true, out ConsoleColor color))";
-        let line2 = " Console.ForegroundColor = color;";
-        _csharp(usings + line1 + line2);
+        _native("cmd_fcolor", color);
     }
     
     // Set background color for console
     function setBackColor(let color): {
-        let line1 = "if (Enum.TryParse(" + _str(color) + ".ToString(), true, out ConsoleColor color))";
-        let line2 = " Console.BackgroundColor = color;";
-        _csharp(usings + line1 + line2);
+        _native("cmd_bcolor", color);
     }
     // Set default colors for console
     function resetColors(): {

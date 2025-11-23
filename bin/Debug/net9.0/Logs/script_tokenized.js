@@ -1,6 +1,6 @@
 Keyword(class) Identifier(Array) Colon 
 	LBrace 
-	Keyword(private) Keyword(let) Identifier(_value) Equals Identifier(_csharp) LParen Identifier(___STRING_0___) RParen Semicolon 
+	Keyword(private) Keyword(let) Identifier(_value) Equals Identifier(_native) LParen Identifier(___STRING_0___) RParen Semicolon 
 	Keyword(function) Identifier(new) LParen Keyword(let) Identifier(collection) RParen Colon 
 		LBrace 
 		Keyword(if) Identifier(Array) Dot Identifier(isArray) LParen Identifier(collection) RParen Equals Equals Keyword(false) Colon 
@@ -11,83 +11,92 @@ Keyword(class) Identifier(Array) Colon
 	RBrace 
 	Keyword(function) Identifier(isArray) LParen Keyword(let) Identifier(collection) RParen Colon 
 		LBrace 
-		Keyword(return) Identifier(_csharp) LParen Identifier(collection) Plus Identifier(___STRING_2___) RParen Semicolon 
+		Keyword(return) Identifier(_native) LParen Identifier(___STRING_2___) Comma Identifier(collection) RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(push) LParen Keyword(let) Identifier(item) RParen Colon 
 		LBrace 
-		Identifier(_value) Equals Identifier(_csharp) LParen Identifier(___STRING_3___) Plus Identifier(_value) Plus Identifier(___STRING_4___) Plus Identifier(___STRING_5___) Plus Identifier(_str) LParen Identifier(item) RParen Plus Identifier(___STRING_6___) Plus Identifier(___STRING_7___) RParen Semicolon 
+		Identifier(_native) LParen Identifier(___STRING_3___) Comma Identifier(_value) Comma Identifier(item) RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(clear) LParen RParen Colon 
 		LBrace 
-		Identifier(_value) Equals Identifier(_csharp) LParen Identifier(___STRING_8___) RParen Semicolon 
+		Identifier(_value) Equals Identifier(_native) LParen Identifier(___STRING_4___) Comma Identifier(_value) RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(at) LParen Keyword(let) Identifier(index) RParen Colon 
 		LBrace 
 		Identifier(index) Equals Identifier(Number) Dot Identifier(toInt) LParen Identifier(index) RParen Semicolon 
 		Keyword(if) Identifier(Number) Dot Identifier(isNumber) LParen Identifier(index) RParen Equals Equals Keyword(false) Colon 
 			LBrace 
-			Identifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_9___) RParen Semicolon 
+			Identifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_5___) RParen Semicolon 
 		RBrace 
-		Keyword(return) Identifier(_csharp) LParen Identifier(_value) Plus Identifier(___STRING_10___) Plus Identifier(index) Plus Identifier(___STRING_11___) RParen Semicolon 
+		Keyword(return) Identifier(_native) LParen Identifier(___STRING_6___) Comma Identifier(_value) Comma Identifier(index) RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(setAt) LParen Keyword(let) Identifier(index) Comma Keyword(let) Identifier(item) RParen Colon 
 		LBrace 
-		Identifier(index) Equals Identifier(Number) Dot Identifier(toInt) LParen Identifier(index) RParen Semicolon 
 		Keyword(if) Identifier(Number) Dot Identifier(isNumber) LParen Identifier(index) RParen Equals Equals Keyword(false) Colon 
 			LBrace 
-			Identifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_12___) RParen Semicolon 
+			Identifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_7___) RParen Semicolon 
 		RBrace 
-		Identifier(_value) Equals Identifier(_csharp) LParen Identifier(___STRING_13___) Plus Identifier(_value) Plus Identifier(___STRING_14___) Plus Identifier(___STRING_15___) Plus Identifier(index) Plus Identifier(___STRING_16___) Plus Identifier(_str) LParen Identifier(item) RParen Plus Identifier(___STRING_17___) RParen Semicolon 
+		Identifier(index) Equals Identifier(Number) Dot Identifier(toInt) LParen Identifier(index) RParen Semicolon 
+		Identifier(_native) LParen Identifier(___STRING_8___) Comma Identifier(_value) Comma Identifier(index) Comma Identifier(item) RParen Semicolon 
+	RBrace 
+	Keyword(function) Identifier(insert) LParen Keyword(let) Identifier(index) Comma Keyword(let) Identifier(item) RParen Colon 
+		LBrace 
+		Keyword(if) Identifier(Number) Dot Identifier(isNumber) LParen Identifier(index) RParen Equals Equals Keyword(false) Colon 
+			LBrace 
+			Identifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_9___) RParen Semicolon 
+		RBrace 
+		Identifier(index) Equals Identifier(Number) Dot Identifier(toInt) LParen Identifier(index) RParen Semicolon 
+		Identifier(_native) LParen Identifier(___STRING_10___) Comma Identifier(_value) Comma Identifier(index) Comma Identifier(item) RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(removeAt) LParen Keyword(let) Identifier(index) RParen Colon 
 		LBrace 
 		Identifier(index) Equals Identifier(Number) Dot Identifier(toInt) LParen Identifier(index) RParen Semicolon 
 		Keyword(if) Identifier(Number) Dot Identifier(isNumber) LParen Identifier(index) RParen Equals Equals Keyword(false) Colon 
 			LBrace 
-			Identifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_18___) RParen Semicolon 
+			Identifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_11___) RParen Semicolon 
 		RBrace 
-		Identifier(_value) Equals Identifier(_csharp) LParen Identifier(___STRING_19___) Plus Identifier(_value) Plus Identifier(___STRING_20___) Plus Identifier(index) Plus Identifier(___STRING_21___) Plus Identifier(___STRING_22___) RParen Semicolon 
+		Identifier(_native) LParen Identifier(___STRING_12___) Comma Identifier(_value) Comma Identifier(index) RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(length) LParen RParen Colon 
 		LBrace 
-		Keyword(return) Identifier(_csharp) LParen Identifier(___STRING_23___) Plus Identifier(_value) Plus Identifier(___STRING_24___) Plus Identifier(___STRING_25___) RParen Semicolon 
+		Keyword(return) Identifier(_native) LParen Identifier(___STRING_13___) Comma Identifier(_value) RParen Semicolon 
 	RBrace 
 RBrace 
 Keyword(class) Identifier(Number) Colon 
 	LBrace 
-	Keyword(private) Keyword(let) Identifier(usings) Equals Identifier(___STRING_26___) Semicolon 
-	Keyword(const) Keyword(let) Identifier(MIN_VALUE) Equals Identifier(___STRING_27___) Semicolon 
-	Keyword(const) Keyword(let) Identifier(MAX_VALUE) Equals Identifier(___STRING_28___) Semicolon 
+	Keyword(private) Keyword(let) Identifier(usings) Equals Identifier(___STRING_14___) Semicolon 
+	Keyword(const) Keyword(let) Identifier(MIN_VALUE) Equals Identifier(___STRING_15___) Semicolon 
+	Keyword(const) Keyword(let) Identifier(MAX_VALUE) Equals Identifier(___STRING_16___) Semicolon 
 	Keyword(function) Identifier(isNumber) LParen Keyword(let) Identifier(var) RParen Colon 
 		LBrace 
-		Keyword(return) Identifier(_csharp) LParen Identifier(usings) Plus Identifier(___STRING_29___) Plus Identifier(_str) LParen Identifier(var) RParen Plus Identifier(___STRING_30___) RParen Semicolon 
+		Keyword(return) Identifier(_native) LParen Identifier(___STRING_17___) Comma Identifier(var) RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(randInt) LParen Keyword(let) Identifier(min) Comma Keyword(let) Identifier(max) RParen Colon 
 		LBrace 
 		Keyword(if) LParen Identifier(isNumber) LParen Identifier(min) RParen Equals Equals Keyword(false) RParen Or Or LParen Identifier(isNumber) LParen Identifier(max) RParen Equals Equals Keyword(false) RParen Colon 
 			LBrace 
-			Identifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_31___) RParen Semicolon 
+			Identifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_18___) RParen Semicolon 
 		RBrace 
 		Identifier(min) Equals Identifier(toInt) LParen Identifier(min) RParen Semicolon 
 		Identifier(max) Equals Identifier(toInt) LParen Identifier(max) RParen Semicolon 
 		Keyword(if) Identifier(min) Greater Equals Identifier(max) Colon 
 			LBrace 
-			Identifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_32___) RParen Semicolon 
+			Identifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_19___) RParen Semicolon 
 		RBrace 
-		Keyword(return) Identifier(_csharp) LParen Identifier(usings) Plus Identifier(___STRING_33___) Plus Identifier(min) Plus Identifier(___STRING_34___) Plus Identifier(max) Plus Identifier(___STRING_35___) RParen Semicolon 
+		Keyword(return) Identifier(_native) LParen Identifier(___STRING_20___) Comma Identifier(min) Comma Identifier(max) RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(toInt) LParen Keyword(let) Identifier(float) RParen Colon 
 		LBrace 
-		Keyword(return) Identifier(toFixed) LParen Identifier(float) Comma Identifier(___STRING_36___) RParen Semicolon 
+		Keyword(return) Identifier(toFixed) LParen Identifier(float) Comma Identifier(___STRING_21___) RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(toFixed) LParen Keyword(let) Identifier(number) Comma Keyword(let) Identifier(pattern) RParen Colon 
 		LBrace 
-		Keyword(return) Identifier(_csharp) LParen Identifier(usings) Plus Identifier(___STRING_37___) Plus Identifier(number) Plus Identifier(___STRING_38___) Plus Identifier(_str) LParen Identifier(pattern) RParen Plus Identifier(___STRING_39___) RParen Semicolon 
+		Keyword(return) Identifier(_native) LParen Identifier(___STRING_22___) Comma Identifier(number) Comma Identifier(_str) LParen Identifier(pattern) RParen RParen Semicolon 
 	RBrace 
 RBrace 
 Keyword(class) Identifier(String) Colon 
 	LBrace 
-	Keyword(private) Keyword(let) Identifier(_value) Equals Identifier(___STRING_40___) Semicolon 
+	Keyword(private) Keyword(let) Identifier(_value) Equals Identifier(___STRING_23___) Semicolon 
 	Keyword(function) Identifier(new) LParen Keyword(let) Identifier(input) RParen Colon 
 		LBrace 
 		Identifier(_value) Equals Identifier(input) Semicolon 
@@ -96,17 +105,17 @@ Keyword(class) Identifier(String) Colon
 		LBrace 
 		Keyword(return) Identifier(_value) Semicolon 
 	RBrace 
-	Keyword(private) Keyword(function) Identifier(getStr) LParen Keyword(let) Identifier(str) RParen Colon 
+	Keyword(private) Keyword(function) Identifier(_str) LParen Keyword(let) Identifier(str) RParen Colon 
 		LBrace 
-		Keyword(return) Identifier(___STRING_41___) Plus Identifier(_str) LParen Identifier(str) RParen Plus Identifier(___STRING_42___) Semicolon 
+		Keyword(return) Identifier(___STRING_24___) Plus Identifier(_str) LParen Identifier(str) RParen Plus Identifier(___STRING_25___) Semicolon 
 	RBrace 
 	Keyword(function) Identifier(append) LParen Keyword(let) Identifier(collection) RParen Colon 
 		LBrace 
 		Keyword(if) Identifier(Array) Dot Identifier(isArray) LParen Identifier(collection) RParen Equals Equals Keyword(false) Colon 
 			LBrace 
-			Identifier(Throw) Dot Identifier(parceException) LParen Identifier(___STRING_43___) RParen Semicolon 
+			Identifier(Throw) Dot Identifier(parceException) LParen Identifier(___STRING_26___) RParen Semicolon 
 		RBrace 
-		Keyword(let) Identifier(result) Equals Identifier(___STRING_44___) Semicolon 
+		Keyword(let) Identifier(result) Equals Identifier(___STRING_27___) Semicolon 
 		Keyword(let) Identifier(arr) Equals Identifier(Array) Dot Identifier(new) LParen Identifier(collection) RParen Semicolon 
 		Keyword(for) Keyword(let) Identifier(i) Equals Identifier(___NUMBER_0___) Semicolon 
 		Identifier(i) Less Identifier(arr) Dot Identifier(length) LParen RParen Semicolon 
@@ -118,77 +127,97 @@ Keyword(class) Identifier(String) Colon
 	RBrace 
 	Keyword(function) Identifier(length) LParen RParen Colon 
 		LBrace 
-		Keyword(return) Identifier(_csharp) LParen Identifier(getStr) LParen Identifier(_value) RParen Plus Identifier(___STRING_45___) RParen Semicolon 
+		Keyword(return) Identifier(_native) LParen Identifier(___STRING_28___) Comma Identifier(_str) LParen Identifier(_value) RParen RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(isNullOrEmpty) LParen Keyword(let) Identifier(str) RParen Colon 
 		LBrace 
-		Keyword(return) Identifier(_csharp) LParen Identifier(___STRING_46___) Plus Identifier(_str) LParen Identifier(str) RParen Plus Identifier(___STRING_47___) RParen Semicolon 
+		Keyword(return) Identifier(_native) LParen Identifier(___STRING_29___) Comma Identifier(_str) LParen Identifier(str) RParen RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(isNullOrWhiteSpace) LParen Keyword(let) Identifier(str) RParen Colon 
 		LBrace 
-		Keyword(return) Identifier(_csharp) LParen Identifier(___STRING_48___) Plus Identifier(_str) LParen Identifier(str) RParen Plus Identifier(___STRING_49___) RParen Semicolon 
+		Keyword(return) Identifier(_native) LParen Identifier(___STRING_30___) Comma Identifier(_str) LParen Identifier(str) RParen RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(trim) LParen RParen Colon 
 		LBrace 
-		Keyword(return) Identifier(_csharp) LParen Identifier(getStr) LParen Identifier(str) RParen Plus Identifier(___STRING_50___) RParen Semicolon 
+		Keyword(return) Identifier(_native) LParen Identifier(___STRING_31___) Comma Identifier(_str) LParen Identifier(_value) RParen RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(trimStart) LParen RParen Colon 
 		LBrace 
-		Keyword(return) Identifier(_csharp) LParen Identifier(getStr) LParen Identifier(_value) RParen Plus Identifier(___STRING_51___) RParen Semicolon 
+		Keyword(return) Identifier(_native) LParen Identifier(___STRING_32___) Comma Identifier(_str) LParen Identifier(_value) RParen RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(trimEnd) LParen RParen Colon 
 		LBrace 
-		Keyword(return) Identifier(_csharp) LParen Identifier(getStr) LParen Identifier(_value) RParen Plus Identifier(___STRING_52___) RParen Semicolon 
+		Keyword(return) Identifier(_native) LParen Identifier(___STRING_33___) Comma Identifier(_str) LParen Identifier(_value) RParen RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(subString) LParen Keyword(let) Identifier(startPos) Comma Keyword(let) Identifier(length) RParen Colon 
 		LBrace 
 		Keyword(if) Identifier(Number) Dot Identifier(isNumber) LParen Identifier(startPos) RParen Equals Equals Keyword(false) Colon 
 			LBrace 
-			Identifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_53___) RParen Semicolon 
+			Identifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_34___) RParen Semicolon 
 		RBrace 
 		Keyword(if) Identifier(Number) Dot Identifier(isNumber) LParen Identifier(length) RParen Equals Equals Keyword(false) Colon 
 			LBrace 
-			Identifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_54___) RParen Semicolon 
+			Identifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_35___) RParen Semicolon 
 		RBrace 
-		Keyword(return) Identifier(_csharp) LParen Identifier(getStr) LParen Identifier(_value) RParen Plus Identifier(___STRING_55___) Plus Identifier(startPos) Plus Identifier(___STRING_56___) Plus Identifier(length) Plus Identifier(___STRING_57___) RParen Semicolon 
+		Keyword(return) Identifier(_native) LParen Identifier(___STRING_36___) Comma Identifier(_str) LParen Identifier(_value) RParen Comma Identifier(startPos) Comma Identifier(length) RParen Semicolon 
+	RBrace 
+RBrace 
+Keyword(class) Identifier(Time) Colon 
+	LBrace 
+	Keyword(function) Identifier(wait) LParen Keyword(let) Identifier(millisec) RParen Colon 
+		LBrace 
+		Keyword(if) Identifier(Number) Dot Identifier(isNumber) LParen Identifier(millisec) RParen Equals Equals Keyword(false) Colon 
+			LBrace 
+			Identifier(Throw) Dot Identifier(parseException) LParen Identifier(___STRING_37___) RParen Semicolon 
+		RBrace 
+		Identifier(millisec) Equals Identifier(Number) Dot Identifier(toInt) LParen Identifier(millisec) RParen Semicolon 
+		Identifier(_native) LParen Identifier(___STRING_38___) Comma Identifier(millisec) RParen Semicolon 
 	RBrace 
 RBrace 
 Keyword(class) Identifier(Console) Colon 
 	LBrace 
-	Keyword(private) Keyword(let) Identifier(usings) Equals Identifier(___STRING_58___) Semicolon 
-	Keyword(private) Keyword(let) Identifier(defFColor) Equals Identifier(___STRING_59___) Semicolon 
-	Keyword(private) Keyword(let) Identifier(defBColor) Equals Identifier(___STRING_60___) Semicolon 
+	Keyword(private) Keyword(let) Identifier(usings) Equals Identifier(___STRING_39___) Semicolon 
+	Keyword(private) Keyword(let) Identifier(defFColor) Equals Identifier(___STRING_40___) Semicolon 
+	Keyword(private) Keyword(let) Identifier(defBColor) Equals Identifier(___STRING_41___) Semicolon 
 	Keyword(function) Identifier(print) LParen Keyword(let) Identifier(message) RParen Colon 
 		LBrace 
-		Identifier(_csharp) LParen Identifier(usings) Plus Identifier(___STRING_61___) Plus Identifier(_str) LParen Identifier(message) RParen Plus Identifier(___STRING_62___) RParen Semicolon 
+		Identifier(_native) LParen Identifier(___STRING_42___) Comma Identifier(_str) LParen Identifier(message) RParen RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(println) LParen Keyword(let) Identifier(message) RParen Colon 
 		LBrace 
-		Identifier(print) LParen Identifier(message) Plus Identifier(___STRING_63___) RParen Semicolon 
+		Identifier(print) LParen Identifier(message) Plus Identifier(___STRING_43___) RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(readln) LParen RParen Colon 
 		LBrace 
-		Keyword(return) Identifier(_csharp) LParen Identifier(usings) Plus Identifier(___STRING_64___) RParen Semicolon 
+		Keyword(return) Identifier(_native) LParen Identifier(___STRING_44___) RParen Semicolon 
+	RBrace 
+	Keyword(function) Identifier(readkey) LParen Keyword(let) Identifier(intercept) RParen Colon 
+		LBrace 
+		Keyword(return) Identifier(_native) LParen Identifier(___STRING_45___) Comma Identifier(intercept) RParen Semicolon 
+	RBrace 
+	Keyword(function) Identifier(isKeyAvailable) LParen RParen Colon 
+		LBrace 
+		Keyword(return) Identifier(_native) LParen Identifier(___STRING_46___) RParen Semicolon 
+	RBrace 
+	Keyword(function) Identifier(cursorVisible) LParen Keyword(let) Identifier(visible) RParen Colon 
+		LBrace 
+		Identifier(_native) LParen Identifier(___STRING_47___) Comma Identifier(visible) RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(clear) LParen RParen Colon 
 		LBrace 
-		Identifier(_csharp) LParen Identifier(usings) Plus Identifier(___STRING_65___) RParen Semicolon 
+		Identifier(_native) LParen Identifier(___STRING_48___) RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(setCursorPosition) LParen Keyword(let) Identifier(x) Comma Keyword(let) Identifier(y) RParen Colon 
 		LBrace 
-		Identifier(_csharp) LParen Identifier(usings) Plus Identifier(___STRING_66___) Plus Identifier(x) Plus Identifier(___STRING_67___) Plus Identifier(y) Plus Identifier(___STRING_68___) RParen Semicolon 
+		Identifier(_native) LParen Identifier(___STRING_49___) Comma Identifier(x) Comma Identifier(y) RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(setForeColor) LParen Keyword(let) Identifier(color) RParen Colon 
 		LBrace 
-		Keyword(let) Identifier(line1) Equals Identifier(___STRING_69___) Plus Identifier(_str) LParen Identifier(color) RParen Plus Identifier(___STRING_70___) Semicolon 
-		Keyword(let) Identifier(line2) Equals Identifier(___STRING_71___) Semicolon 
-		Identifier(_csharp) LParen Identifier(usings) Plus Identifier(line1) Plus Identifier(line2) RParen Semicolon 
+		Identifier(_native) LParen Identifier(___STRING_50___) Comma Identifier(color) RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(setBackColor) LParen Keyword(let) Identifier(color) RParen Colon 
 		LBrace 
-		Keyword(let) Identifier(line1) Equals Identifier(___STRING_72___) Plus Identifier(_str) LParen Identifier(color) RParen Plus Identifier(___STRING_73___) Semicolon 
-		Keyword(let) Identifier(line2) Equals Identifier(___STRING_74___) Semicolon 
-		Identifier(_csharp) LParen Identifier(usings) Plus Identifier(line1) Plus Identifier(line2) RParen Semicolon 
+		Identifier(_native) LParen Identifier(___STRING_51___) Comma Identifier(color) RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(resetColors) LParen RParen Colon 
 		LBrace 
@@ -202,7 +231,7 @@ Keyword(class) Identifier(Math) Colon
 		LBrace 
 		Keyword(if) Identifier(Number) Dot Identifier(isNumber) LParen Identifier(num) RParen Equals Equals Keyword(false) Colon 
 			LBrace 
-			Identifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_75___) Plus Identifier(num) Plus Identifier(___STRING_76___) RParen Semicolon 
+			Identifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_52___) Plus Identifier(num) Plus Identifier(___STRING_53___) RParen Semicolon 
 		RBrace 
 	RBrace 
 	Keyword(const) Keyword(let) Identifier(PI) Equals Identifier(___NUMBER_2___) Semicolon 
@@ -235,7 +264,7 @@ Keyword(class) Identifier(Math) Colon
 		Identifier(throwException) LParen Identifier(num2) RParen Semicolon 
 		Keyword(if) Identifier(num2) Equals Equals Identifier(___NUMBER_4___) Colon 
 			LBrace 
-			Identifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_77___) RParen Semicolon 
+			Identifier(Throw) Dot Identifier(exception) LParen Identifier(___STRING_54___) RParen Semicolon 
 		RBrace 
 		Keyword(return) Identifier(num) Slash Identifier(num2) Semicolon 
 	RBrace 
@@ -244,186 +273,175 @@ Keyword(class) Identifier(Object) Colon
 	LBrace 
 	Keyword(function) Identifier(toString) LParen RParen Colon 
 		LBrace 
-		Keyword(return) Identifier(___STRING_78___) Semicolon 
+		Keyword(return) Identifier(___STRING_55___) Semicolon 
 	RBrace 
 RBrace 
 Keyword(class) Identifier(Throw) Colon 
 	LBrace 
 	Keyword(function) Identifier(exception) LParen Keyword(let) Identifier(message) RParen Colon 
 		LBrace 
-		Identifier(_csharp) LParen Identifier(___STRING_79___) Plus Identifier(_str) LParen Identifier(message) RParen Plus Identifier(___STRING_80___) RParen Semicolon 
+		Identifier(_native) LParen Identifier(___STRING_56___) Comma Identifier(_str) LParen Identifier(message) RParen RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(nonImplementException) LParen RParen Colon 
 		LBrace 
-		Identifier(exception) LParen Identifier(___STRING_81___) RParen Semicolon 
+		Identifier(exception) LParen Identifier(___STRING_57___) RParen Semicolon 
 	RBrace 
 	Keyword(function) Identifier(parseException) LParen Keyword(let) Identifier(error) RParen Colon 
 		LBrace 
-		Identifier(exception) LParen Identifier(___STRING_82___) Plus Identifier(error) RParen Semicolon 
+		Identifier(exception) LParen Identifier(___STRING_58___) Plus Identifier(error) RParen Semicolon 
 	RBrace 
 RBrace 
-Keyword(class) Identifier(LanguageDemo) Colon 
+Keyword(class) Identifier(SnakeGame) Colon 
 	LBrace 
+	Keyword(let) Identifier(X) Equals Identifier(___NUMBER_5___) Semicolon 
+	Keyword(let) Identifier(Y) Equals Identifier(___NUMBER_6___) Semicolon 
+	Keyword(let) Identifier(tailX) Equals Identifier(Array) Dot Identifier(new) LParen LSquareParen RSquareParen RParen Semicolon 
+	Keyword(let) Identifier(tailY) Equals Identifier(Array) Dot Identifier(new) LParen LSquareParen RSquareParen RParen Semicolon 
+	Keyword(let) Identifier(tailLength) Equals Identifier(___NUMBER_7___) Semicolon 
+	Keyword(let) Identifier(lastChar) Equals Identifier(___STRING_59___) Semicolon 
+	Keyword(let) Identifier(fruitX) Equals Identifier(___NUMBER_8___) Semicolon 
+	Keyword(let) Identifier(fruitY) Equals Identifier(___NUMBER_9___) Semicolon 
+	Keyword(let) Identifier(width) Equals Identifier(___NUMBER_10___) Semicolon 
+	Keyword(let) Identifier(height) Equals Identifier(___NUMBER_11___) Semicolon 
+	Keyword(let) Identifier(score) Equals Identifier(___NUMBER_12___) Semicolon 
+	Keyword(let) Identifier(gameOver) Equals Keyword(false) Semicolon 
+	Keyword(function) Identifier(setup) LParen RParen Colon 
+		LBrace 
+		Identifier(Console) Dot Identifier(clear) LParen RParen Semicolon 
+		Identifier(Console) Dot Identifier(cursorVisible) LParen Keyword(false) RParen Semicolon 
+		Identifier(fruitX) Equals Identifier(Number) Dot Identifier(randInt) LParen Identifier(___NUMBER_13___) Comma Identifier(width) RParen Semicolon 
+		Identifier(fruitY) Equals Identifier(Number) Dot Identifier(randInt) LParen Identifier(___NUMBER_14___) Comma Identifier(height) RParen Semicolon 
+	RBrace 
+	Keyword(function) Identifier(draw) LParen RParen Colon 
+		LBrace 
+		Identifier(Console) Dot Identifier(setCursorPosition) LParen Identifier(___NUMBER_15___) Comma Identifier(___NUMBER_16___) RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_60___) Plus Identifier(score) RParen Semicolon 
+		Keyword(for) Keyword(let) Identifier(j) Equals Identifier(___NUMBER_17___) Semicolon 
+		Identifier(j) Less LParen Identifier(height) Plus Identifier(___NUMBER_18___) RParen Semicolon 
+		Identifier(j) Equals Identifier(j) Plus Identifier(___NUMBER_19___) Colon 
+			LBrace 
+			Keyword(for) Keyword(let) Identifier(i) Equals Identifier(___NUMBER_20___) Semicolon 
+			Identifier(i) Less LParen Identifier(width) Plus Identifier(___NUMBER_21___) RParen Semicolon 
+			Identifier(i) Equals Identifier(i) Plus Identifier(___NUMBER_22___) Colon 
+				LBrace 
+				Keyword(let) Identifier(isTailPosition) Equals Keyword(false) Semicolon 
+				Keyword(for) Keyword(let) Identifier(tX) Equals Identifier(___NUMBER_23___) Semicolon 
+				Identifier(tX) Less Identifier(tailX) Dot Identifier(length) LParen RParen Semicolon 
+				Identifier(tX) Equals Identifier(tX) Plus Identifier(___NUMBER_24___) Colon 
+					LBrace 
+					Keyword(let) Identifier(x) Equals Identifier(tailX) Dot Identifier(at) LParen Identifier(tX) RParen Semicolon 
+					Keyword(for) Keyword(let) Identifier(tY) Equals Identifier(___NUMBER_25___) Semicolon 
+					Identifier(tY) Less Identifier(tailY) Dot Identifier(length) LParen RParen Semicolon 
+					Identifier(tY) Equals Identifier(tY) Plus Identifier(___NUMBER_26___) Colon 
+						LBrace 
+						Keyword(let) Identifier(y) Equals Identifier(tailY) Dot Identifier(at) LParen Identifier(tY) RParen Semicolon 
+						Keyword(if) LParen Identifier(x) Equals Equals Identifier(i) RParen And And LParen Identifier(y) Equals Equals Identifier(j) RParen Colon 
+							LBrace 
+							Identifier(isTailPosition) Equals Keyword(true) Semicolon 
+						RBrace 
+					RBrace 
+				RBrace 
+				Identifier(Console) Dot Identifier(setCursorPosition) LParen Identifier(i) Comma LParen Identifier(j) Plus Identifier(___NUMBER_27___) RParen RParen Semicolon 
+				Keyword(if) LParen Identifier(i) Equals Equals Identifier(X) RParen And And LParen Identifier(j) Equals Equals Identifier(Y) RParen Colon 
+					LBrace 
+					Identifier(Console) Dot Identifier(print) LParen Identifier(___STRING_61___) RParen Semicolon 
+				RBrace 
+				Keyword(else) Keyword(if) LParen Identifier(i) Equals Equals Identifier(fruitX) RParen And And LParen Identifier(j) Equals Equals Identifier(fruitY) RParen Colon 
+					LBrace 
+					Identifier(Console) Dot Identifier(print) LParen Identifier(___STRING_62___) RParen Semicolon 
+				RBrace 
+				Keyword(else) Keyword(if) LParen Identifier(i) Equals Equals Identifier(___NUMBER_28___) RParen Or Or LParen Identifier(j) Equals Equals Identifier(___NUMBER_29___) RParen Or Or LParen Identifier(i) Equals Equals Identifier(width) RParen Or Or LParen Identifier(j) Equals Equals Identifier(height) RParen Colon 
+					LBrace 
+					Identifier(Console) Dot Identifier(print) LParen Identifier(___STRING_63___) RParen Semicolon 
+				RBrace 
+				Keyword(else) Keyword(if) Identifier(isTailPosition) Equals Equals Keyword(true) Colon 
+					LBrace 
+					Identifier(Console) Dot Identifier(print) LParen Identifier(___STRING_64___) RParen Semicolon 
+				RBrace 
+				Keyword(else) Colon 
+					LBrace 
+					Identifier(Console) Dot Identifier(print) LParen Identifier(___STRING_65___) RParen Semicolon 
+				RBrace 
+			RBrace 
+		RBrace 
+	RBrace 
+	Keyword(function) Identifier(logic) LParen RParen Colon 
+		LBrace 
+		Keyword(if) LParen Identifier(X) Equals Equals Identifier(fruitX) RParen And And LParen Identifier(Y) Equals Equals Identifier(fruitY) RParen Colon 
+			LBrace 
+			Identifier(score) Equals Identifier(score) Plus Identifier(___NUMBER_30___) Semicolon 
+			Identifier(tailLength) Equals Identifier(tailLength) Plus Identifier(___NUMBER_31___) Semicolon 
+			Identifier(fruitX) Equals Identifier(Number) Dot Identifier(randInt) LParen Identifier(___NUMBER_32___) Comma Identifier(width) RParen Semicolon 
+			Identifier(fruitY) Equals Identifier(Number) Dot Identifier(randInt) LParen Identifier(___NUMBER_33___) Comma Identifier(height) RParen Semicolon 
+		RBrace 
+		Identifier(tailX) Dot Identifier(insert) LParen Identifier(___NUMBER_34___) Comma Identifier(X) RParen Semicolon 
+		Identifier(tailY) Dot Identifier(insert) LParen Identifier(___NUMBER_35___) Comma Identifier(Y) RParen Semicolon 
+		Keyword(if) Identifier(tailX) Dot Identifier(length) LParen RParen Greater Identifier(tailLength) Colon 
+			LBrace 
+			Identifier(tailX) Dot Identifier(removeAt) LParen Identifier(tailX) Dot Identifier(length) LParen RParen Minus Identifier(___NUMBER_36___) RParen Semicolon 
+			Identifier(tailY) Dot Identifier(removeAt) LParen Identifier(tailX) Dot Identifier(length) LParen RParen Minus Identifier(___NUMBER_37___) RParen Semicolon 
+		RBrace 
+		Identifier(input) LParen RParen Semicolon 
+		Keyword(if) Identifier(X) Less Identifier(___NUMBER_38___) Colon 
+			LBrace 
+			Identifier(X) Equals Identifier(width) Minus Identifier(___NUMBER_39___) Semicolon 
+		RBrace 
+		Keyword(else) Keyword(if) Identifier(X) Greater LParen Identifier(width) Minus Identifier(___NUMBER_40___) RParen Colon 
+			LBrace 
+			Identifier(X) Equals Identifier(___NUMBER_41___) Semicolon 
+		RBrace 
+		Keyword(if) Identifier(Y) Less Identifier(___NUMBER_42___) Colon 
+			LBrace 
+			Identifier(Y) Equals Identifier(height) Minus Identifier(___NUMBER_43___) Semicolon 
+		RBrace 
+		Keyword(else) Keyword(if) Identifier(Y) Greater LParen Identifier(height) Minus Identifier(___NUMBER_44___) RParen Colon 
+			LBrace 
+			Identifier(Y) Equals Identifier(___NUMBER_45___) Semicolon 
+		RBrace 
+	RBrace 
+	Keyword(function) Identifier(input) LParen RParen Colon 
+		LBrace 
+		Keyword(if) Identifier(Console) Dot Identifier(isKeyAvailable) LParen RParen Equals Equals Keyword(false) Colon 
+			LBrace 
+			Keyword(if) Identifier(lastChar) Not Equals Identifier(___STRING_66___) Colon 
+				LBrace 
+				Identifier(control) LParen Identifier(lastChar) RParen Semicolon 
+			RBrace 
+			Keyword(return) Identifier(___STRING_67___) Semicolon 
+		RBrace 
+		Identifier(lastChar) Equals Identifier(Console) Dot Identifier(readkey) LParen Keyword(true) RParen Semicolon 
+	RBrace 
+	Keyword(function) Identifier(control) LParen Keyword(let) Identifier(char) RParen Colon 
+		LBrace 
+		Keyword(if) Identifier(char) Equals Equals Identifier(___STRING_68___) Colon 
+			LBrace 
+			Identifier(X) Equals Identifier(X) Minus Identifier(___NUMBER_46___) Semicolon 
+		RBrace 
+		Keyword(else) Keyword(if) Identifier(char) Equals Equals Identifier(___STRING_69___) Colon 
+			LBrace 
+			Identifier(X) Equals Identifier(X) Plus Identifier(___NUMBER_47___) Semicolon 
+		RBrace 
+		Keyword(else) Keyword(if) Identifier(char) Equals Equals Identifier(___STRING_70___) Colon 
+			LBrace 
+			Identifier(Y) Equals Identifier(Y) Minus Identifier(___NUMBER_48___) Semicolon 
+		RBrace 
+		Keyword(else) Keyword(if) Identifier(char) Equals Equals Identifier(___STRING_71___) Colon 
+			LBrace 
+			Identifier(Y) Equals Identifier(Y) Plus Identifier(___NUMBER_49___) Semicolon 
+		RBrace 
+	RBrace 
 	Keyword(function) Identifier(run) LParen RParen Colon 
 		LBrace 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_83___) RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_84___) RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_85___) RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_86___) RParen Semicolon 
-		Keyword(do_while) LParen Identifier(String) Dot Identifier(isNullOrWhiteSpace) LParen Identifier(choice) RParen Equals Equals Keyword(true) RParen Or Or LParen Identifier(Number) Dot Identifier(isNumber) LParen Identifier(choice) RParen Equals Equals Keyword(false) RParen Colon 
+		Identifier(setup) LParen RParen Semicolon 
+		Keyword(while) Identifier(gameOver) Equals Equals Keyword(false) Colon 
 			LBrace 
-			Identifier(Console) Dot Identifier(print) LParen Identifier(___STRING_87___) RParen Semicolon 
-			Keyword(let) Identifier(choice) Equals Identifier(Console) Dot Identifier(readln) LParen RParen Semicolon 
-			Keyword(if) Identifier(String) Dot Identifier(isNullOrWhiteSpace) LParen Identifier(choice) RParen Equals Equals Keyword(true) Colon 
-				LBrace 
-				Identifier(printException) LParen Identifier(___STRING_88___) RParen Semicolon 
-			RBrace 
-			Keyword(if) Identifier(Number) Dot Identifier(isNumber) LParen Identifier(choice) RParen Equals Equals Keyword(false) Colon 
-				LBrace 
-				Identifier(printException) LParen Identifier(___STRING_89___) RParen Semicolon 
-			RBrace 
+			Identifier(logic) LParen RParen Semicolon 
+			Identifier(draw) LParen RParen Semicolon 
+			Identifier(Time) Dot Identifier(wait) LParen Identifier(___NUMBER_50___) RParen Semicolon 
 		RBrace 
-		Keyword(if) Identifier(choice) Equals Equals Identifier(___STRING_90___) Colon 
-			LBrace 
-			Identifier(numericDemo) LParen RParen Semicolon 
-		RBrace 
-		Keyword(else) Keyword(if) Identifier(choice) Equals Equals Identifier(___STRING_91___) Colon 
-			LBrace 
-			Identifier(stringDemo) LParen RParen Semicolon 
-		RBrace 
-		Keyword(else) Keyword(if) Identifier(choice) Equals Equals Identifier(___STRING_92___) Colon 
-			LBrace 
-			Identifier(circleDemo) LParen RParen Semicolon 
-		RBrace 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_93___) RParen Semicolon 
-	RBrace 
-	Keyword(function) Identifier(stringDemo) LParen RParen Colon 
-		LBrace 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_94___) RParen Semicolon 
-		Keyword(do_while) Identifier(String) Dot Identifier(isNullOrWhiteSpace) LParen Identifier(input) RParen Equals Equals Keyword(true) Colon 
-			LBrace 
-			Identifier(Console) Dot Identifier(print) LParen Identifier(___STRING_95___) RParen Semicolon 
-			Keyword(let) Identifier(input) Equals Identifier(Console) Dot Identifier(readln) LParen RParen Semicolon 
-			Keyword(if) Identifier(String) Dot Identifier(isNullOrWhiteSpace) LParen Identifier(input) RParen Equals Equals Keyword(true) Colon 
-				LBrace 
-				Identifier(printException) LParen Identifier(___STRING_96___) RParen Semicolon 
-			RBrace 
-		RBrace 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_97___) Plus Identifier(String) Dot Identifier(getLength) LParen Identifier(input) RParen RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_98___) Plus Identifier(String) Dot Identifier(trim) LParen Identifier(input) RParen Plus Identifier(___STRING_99___) RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_100___) Plus Identifier(String) Dot Identifier(trimStart) LParen Identifier(input) RParen Plus Identifier(___STRING_101___) RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_102___) Plus Identifier(String) Dot Identifier(trimEnd) LParen Identifier(input) RParen Plus Identifier(___STRING_103___) RParen Semicolon 
-		Keyword(if) Identifier(String) Dot Identifier(getLength) LParen Identifier(input) RParen Greater Identifier(___NUMBER_5___) Colon 
-			LBrace 
-			Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_104___) Plus Identifier(String) Dot Identifier(subString) LParen Identifier(input) Comma Identifier(___NUMBER_6___) Comma Identifier(___NUMBER_7___) RParen Plus Identifier(___STRING_105___) RParen Semicolon 
-		RBrace 
-	RBrace 
-	Keyword(function) Identifier(numericDemo) LParen RParen Colon 
-		LBrace 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_106___) RParen Semicolon 
-		Keyword(let) Identifier(num1) Equals Identifier(getNumberFromConsole) LParen Identifier(___STRING_107___) RParen Semicolon 
-		Keyword(let) Identifier(num2) Equals Identifier(getNumberFromConsole) LParen Identifier(___STRING_108___) RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_109___) Plus Identifier(num1) RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_110___) Plus Identifier(num2) RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_111___) RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_112___) Plus Identifier(Math) Dot Identifier(sum) LParen Identifier(num1) Comma Identifier(num2) RParen RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_113___) Plus Identifier(Math) Dot Identifier(sub) LParen Identifier(num1) Comma Identifier(num2) RParen RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_114___) Plus Identifier(Math) Dot Identifier(mult) LParen Identifier(num1) Comma Identifier(num2) RParen RParen Semicolon 
-		Keyword(if) Identifier(num2) Not Equals Identifier(___NUMBER_8___) Colon 
-			LBrace 
-			Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_115___) Plus Identifier(Number) Dot Identifier(toFixed) LParen Identifier(Math) Dot Identifier(div) LParen Identifier(num1) Comma Identifier(num2) RParen Comma Identifier(___STRING_116___) RParen RParen Semicolon 
-		RBrace 
-		Keyword(else) Colon 
-			LBrace 
-			Identifier(printException) LParen Identifier(___STRING_117___) RParen Semicolon 
-		RBrace 
-		Keyword(if) Identifier(num1) Less Identifier(num2) Colon 
-			LBrace 
-			Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_118___) Plus Identifier(num1) Plus Identifier(___STRING_119___) Plus Identifier(num2) Plus Identifier(___STRING_120___) Plus Identifier(Number) Dot Identifier(randInt) LParen Identifier(num1) Comma Identifier(num2) RParen RParen Semicolon 
-		RBrace 
-		Keyword(else) Colon 
-			LBrace 
-			Identifier(printException) LParen Identifier(___STRING_121___) RParen Semicolon 
-		RBrace 
-		Keyword(for) Keyword(let) Identifier(i) Equals Identifier(num1) Minus Identifier(___NUMBER_9___) Semicolon 
-		Identifier(i) Less Identifier(num1) Semicolon 
-		Identifier(i) Equals Identifier(i) Plus Identifier(___NUMBER_10___) Colon 
-			LBrace 
-			Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_122___) Plus Identifier(i) RParen Semicolon 
-		RBrace 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_123___) RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_124___) Plus Identifier(Number) Dot Identifier(toInt) LParen Identifier(num1) RParen RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_125___) Plus Identifier(Number) Dot Identifier(toInt) LParen Identifier(num2) RParen RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_126___) Plus Identifier(Number) Dot Identifier(toFixed) LParen Identifier(num1) Comma Identifier(___STRING_127___) RParen RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_128___) Plus Identifier(Number) Dot Identifier(toFixed) LParen Identifier(num2) Comma Identifier(___STRING_129___) RParen RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_130___) Plus Identifier(Math) Dot Identifier(PI) RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_131___) Plus Identifier(Number) Dot Identifier(MIN_VALUE) RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_132___) Plus Identifier(Number) Dot Identifier(MAX_VALUE) RParen Semicolon 
-	RBrace 
-	Keyword(function) Identifier(circleDemo) LParen RParen Colon 
-		LBrace 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_133___) RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_134___) RParen Semicolon 
-		Identifier(Console) Dot Identifier(print) LParen Identifier(___STRING_135___) RParen Semicolon 
-		Keyword(let) Identifier(randNum) Equals Identifier(___NUMBER_11___) Minus Identifier(___NUMBER_12___) Semicolon 
-		Keyword(while) Identifier(randNum) Not Equals Identifier(___NUMBER_13___) Colon 
-			LBrace 
-			Identifier(randNum) Equals Identifier(Number) Dot Identifier(randInt) LParen Identifier(___NUMBER_14___) Comma Identifier(___NUMBER_15___) RParen Semicolon 
-			Identifier(Console) Dot Identifier(print) LParen Identifier(randNum) Plus Identifier(___STRING_136___) RParen Semicolon 
-		RBrace 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_137___) RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_138___) RParen Semicolon 
-		Identifier(acceptContinue) LParen RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_139___) RParen Semicolon 
-		Keyword(do_while) Identifier(input) Not Equals Identifier(___STRING_140___) Colon 
-			LBrace 
-			Identifier(Console) Dot Identifier(print) LParen Identifier(___STRING_141___) RParen Semicolon 
-			Keyword(let) Identifier(input) Equals Identifier(Console) Dot Identifier(readln) LParen RParen Semicolon 
-		RBrace 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_142___) RParen Semicolon 
-		Identifier(acceptContinue) LParen RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_143___) RParen Semicolon 
-		Keyword(for) Keyword(let) Identifier(i) Equals Identifier(___NUMBER_16___) Semicolon 
-		Identifier(i) Less Identifier(___NUMBER_17___) Semicolon 
-		Identifier(i) Equals Identifier(i) Plus Identifier(___NUMBER_18___) Colon 
-			LBrace 
-			Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_144___) Plus Identifier(i) RParen Semicolon 
-		RBrace 
-	RBrace 
-	Keyword(function) Identifier(acceptContinue) LParen RParen Colon 
-		LBrace 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_145___) RParen Semicolon 
-		Identifier(Console) Dot Identifier(readln) LParen RParen Semicolon 
-	RBrace 
-	Keyword(function) Identifier(printException) LParen Keyword(let) Identifier(msg) RParen Colon 
-		LBrace 
-		Identifier(Console) Dot Identifier(setForeColor) LParen Identifier(___STRING_146___) RParen Semicolon 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(msg) RParen Semicolon 
-		Identifier(Console) Dot Identifier(resetColors) LParen RParen Semicolon 
-	RBrace 
-	Keyword(function) Identifier(getNumberFromConsole) LParen Keyword(let) Identifier(msg) RParen Colon 
-		LBrace 
-		Keyword(let) Identifier(num) Equals Identifier(___STRING_147___) Semicolon 
-		Keyword(do_while) Identifier(Number) Dot Identifier(isNumber) LParen Identifier(num) RParen Equals Equals Keyword(false) Colon 
-			LBrace 
-			Identifier(Console) Dot Identifier(print) LParen Identifier(msg) RParen Semicolon 
-			Identifier(num) Equals Identifier(Console) Dot Identifier(readln) LParen RParen Semicolon 
-			Keyword(if) Identifier(Number) Dot Identifier(isNumber) LParen Identifier(num) RParen Equals Equals Keyword(false) Colon 
-				LBrace 
-				Identifier(printException) LParen Identifier(___STRING_148___) RParen Semicolon 
-			RBrace 
-		RBrace 
-		Keyword(return) Identifier(num) Semicolon 
 	RBrace 
 RBrace 
 Keyword(function) Identifier(main) LParen RParen Colon 
 	LBrace 
-	Keyword(let) Identifier(arr) Equals Identifier(Array) Dot Identifier(new) LParen LSquareParen Identifier(___STRING_149___) Comma Identifier(___NUMBER_19___) RSquareParen RParen Semicolon 
-	Keyword(for) Keyword(let) Identifier(i) Equals Identifier(___NUMBER_20___) Semicolon 
-	Identifier(i) Less Identifier(___NUMBER_21___) Semicolon 
-	Identifier(i) Equals Identifier(i) Plus Identifier(___NUMBER_22___) Colon 
-		LBrace 
-		Identifier(Console) Dot Identifier(println) LParen Identifier(arr) Dot Identifier(at) LParen Identifier(i) RParen RParen Semicolon 
-	RBrace 
-	Identifier(Console) Dot Identifier(println) LParen Identifier(String) Dot Identifier(append) LParen LSquareParen Identifier(___STRING_150___) Comma Identifier(___STRING_151___) Comma Identifier(___STRING_152___) RSquareParen RParen RParen Semicolon 
+	Identifier(SnakeGame) Dot Identifier(run) LParen RParen Semicolon 
 RBrace 

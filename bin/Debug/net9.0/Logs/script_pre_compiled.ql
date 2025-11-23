@@ -1,6 +1,6 @@
 
 class Array: {
-    private let _value = _csharp(___STRING_0___);
+    private let _value = _native(___STRING_0___);
 
     
     function new(let collection): {
@@ -11,21 +11,22 @@ class Array: {
     }
 
     function isArray(let collection): {
-        return _csharp(collection + ___STRING_2___);
+        return _native(___STRING_2___, collection);
     }
 
     
     function push(let item): {
-        _value = _csharp(
-            ___STRING_3___ + _value +
-            ___STRING_4___ + ___STRING_5___ + _str(item) + ___STRING_6___ +
-            ___STRING_7___
-            );
+        _native(___STRING_3___, _value, item);
+        
+        
+        
+        
+        
     }
 
     
     function clear(): {
-        _value = _csharp(___STRING_8___);
+        _value = _native(___STRING_4___, _value);
     }
 
     
@@ -33,25 +34,38 @@ class Array: {
         index = Number.toInt(index);
 
         if Number.isNumber(index) == false: {
-            Throw.exception(___STRING_9___);
+            Throw.exception(___STRING_5___);
         }
 
-        return _csharp(_value + ___STRING_10___ + index + ___STRING_11___);
+        
+        return _native(___STRING_6___, _value, index);
+        
     }
 
     
     function setAt(let index, let item): {
-        index = Number.toInt(index);
-
         if Number.isNumber(index) == false: {
-            Throw.exception(___STRING_12___);
+            Throw.exception(___STRING_7___);
         }
 
-        _value = _csharp(
-            ___STRING_13___ + _value +
-            ___STRING_14___ + ___STRING_15___ + index + ___STRING_16___ + _str(item) +
-            ___STRING_17___
-            );
+        index = Number.toInt(index);
+
+        _native(___STRING_8___, _value, index, item);
+        
+        
+        
+        
+        
+    }
+
+    function insert(let index, let item): {
+        if Number.isNumber(index) == false: {
+            Throw.exception(___STRING_9___);
+        }
+
+        index = Number.toInt(index);
+
+        _native(___STRING_10___, _value, index, item);
     }
 
     
@@ -59,23 +73,25 @@ class Array: {
         index = Number.toInt(index);
 
         if Number.isNumber(index) == false: {
-            Throw.exception(___STRING_18___);
+            Throw.exception(___STRING_11___);
         }
 
-        _value = _csharp(
-            ___STRING_19___ + _value +
-            ___STRING_20___ + index + ___STRING_21___ +
-            ___STRING_22___
-            );
+        _native(___STRING_12___, _value, index);
+        
+        
+        
+        
+        
     }
 
     
     function length(): {
-        return _csharp(
-            ___STRING_23___ + _value +
-            ___STRING_24___ +
-            ___STRING_25___
-            );
+        return _native(___STRING_13___, _value);
+        
+        
+        
+        
+        
     }
 }
 
@@ -88,21 +104,22 @@ class Number: {
     
 
     
-    private let usings = ___STRING_26___;
+    private let usings = ___STRING_14___;
 
     
-    const let MIN_VALUE = ___STRING_27___;
-    const let MAX_VALUE = ___STRING_28___;
+    const let MIN_VALUE = ___STRING_15___;
+    const let MAX_VALUE = ___STRING_16___;
 
     
     function isNumber(let var): {
-        return _csharp(usings + ___STRING_29___ + _str(var) + ___STRING_30___);
+        return _native(___STRING_17___, var);
+        
     }
 
     
     function randInt(let min, let max): {
         if (isNumber(min) == false) || (isNumber(max) == false): {
-            Throw.exception(___STRING_31___);
+            Throw.exception(___STRING_18___);
         }
 
         
@@ -110,25 +127,26 @@ class Number: {
         max = toInt(max);
 
         if min >= max: {
-            Throw.exception(___STRING_32___);
+            Throw.exception(___STRING_19___);
         }
 
-        return _csharp(usings + ___STRING_33___ + min + ___STRING_34___ + max + ___STRING_35___);
+        return _native(___STRING_20___, min, max);
     }
 
     
     function toInt(let float): {
-        return toFixed(float, ___STRING_36___);
+        return toFixed(float, ___STRING_21___);
     }
 
     
     function toFixed(let number, let pattern): {
-        return _csharp(usings + ___STRING_37___ + number + ___STRING_38___ + _str(pattern) + ___STRING_39___);
+        return _native(___STRING_22___, number, _str(pattern));
+        
     }
 }
 
 class String: {
-    private let _value = ___STRING_40___;
+    private let _value = ___STRING_23___;
 
     function new(let input): {
         _value = input;
@@ -139,17 +157,17 @@ class String: {
     }
 
     
-    private function getStr(let str): {
-        return ___STRING_41___ + _str(str) + ___STRING_42___;
+    private function _str(let str): {
+        return ___STRING_24___ + _str(str) + ___STRING_25___;
     }
 
     
     function append(let collection): {
         if Array.isArray(collection) == false: {
-            Throw.parceException(___STRING_43___);
+            Throw.parceException(___STRING_26___);
         }
 
-        let result = ___STRING_44___;
+        let result = ___STRING_27___;
 
         let arr = Array.new(collection);
 
@@ -162,91 +180,112 @@ class String: {
 
     
     function length(): {
-        return _csharp(getStr(_value) + ___STRING_45___);
+        return _native(___STRING_28___, _str(_value));
     }
 
     
     function isNullOrEmpty(let str): {
-        return _csharp(___STRING_46___ + _str(str) + ___STRING_47___);
+        return _native(___STRING_29___, _str(str));
     }
-
+    
     
     function isNullOrWhiteSpace(let str): {
-        return _csharp(___STRING_48___ + _str(str) + ___STRING_49___);
+        return _native(___STRING_30___, _str(str));
     }
 
     
     function trim(): {
-        return _csharp(getStr(str) + ___STRING_50___);
+        return _native(___STRING_31___, _str(_value));
     }
 
     
     function trimStart(): {
-        return _csharp(getStr(_value) + ___STRING_51___);
+        return _native(___STRING_32___, _str(_value));
     }
 
     
     function trimEnd(): {
-        return _csharp(getStr(_value) + ___STRING_52___);
+        return _native(___STRING_33___, _str(_value));
     }
 
     
     function subString(let startPos, let length): {
         if Number.isNumber(startPos) == false: {
-            Throw.exception(___STRING_53___);
+            Throw.exception(___STRING_34___);
         }
 
         if Number.isNumber(length) == false: {
-            Throw.exception(___STRING_54___);
+            Throw.exception(___STRING_35___);
         }
 
-        return _csharp(getStr(_value) + ___STRING_55___ + startPos + ___STRING_56___ + length + ___STRING_57___);
+        return _native(___STRING_36___, _str(_value), startPos, length);
+    }
+}
+
+class Time: {
+    function wait(let millisec): {
+        if Number.isNumber(millisec) == false: {
+            Throw.parseException(___STRING_37___);
+        }
+
+        millisec = Number.toInt(millisec);
+
+        _native(___STRING_38___, millisec);
     }
 }
 
 
 class Console: {
-    private let usings = ___STRING_58___;
-    private let defFColor = ___STRING_59___;
-    private let defBColor = ___STRING_60___;
+    private let usings = ___STRING_39___;
+    private let defFColor = ___STRING_40___;
+    private let defBColor = ___STRING_41___;
 
     
     function print(let message): {
-        _csharp(usings + ___STRING_61___ + _str(message) + ___STRING_62___);
+        _native(___STRING_42___, _str(message));
+        
     }
 
     
     function println(let message): {
-        print(message + ___STRING_63___);
+        print(message + ___STRING_43___);
     }
 
     
     function readln(): {
-        return _csharp(usings + ___STRING_64___);
+        return _native(___STRING_44___);
+    }
+
+    function readkey(let intercept): {
+        return _native(___STRING_45___, intercept);
+    }
+
+    function isKeyAvailable(): {
+        return _native(___STRING_46___);
+    }
+
+    function cursorVisible(let visible): {
+        _native(___STRING_47___, visible);
     }
 
     
     function clear(): {
-        _csharp(usings + ___STRING_65___);
+        _native(___STRING_48___);
     }
 
     
     function setCursorPosition(let x, let y): {
-        _csharp(usings + ___STRING_66___ + x + ___STRING_67___ + y + ___STRING_68___);
+        _native(___STRING_49___, x, y);
     }
 
     
     function setForeColor(let color): {
-        let line1 = ___STRING_69___ + _str(color) + ___STRING_70___;
-        let line2 = ___STRING_71___;
-        _csharp(usings + line1 + line2);
+        _native(___STRING_50___, color);
     }
     
     
     function setBackColor(let color): {
-        let line1 = ___STRING_72___ + _str(color) + ___STRING_73___;
-        let line2 = ___STRING_74___;
-        _csharp(usings + line1 + line2);
+        _native(___STRING_51___, color);
     }
     
     function resetColors(): {
@@ -259,7 +298,7 @@ class Math: {
     
     private function throwException(let num): {
         if Number.isNumber(num) == false: {
-            Throw.exception(___STRING_75___ + num + ___STRING_76___);
+            Throw.exception(___STRING_52___ + num + ___STRING_53___);
         }
     }
 
@@ -302,203 +341,169 @@ class Math: {
         throwException(num2);
 
         if num2 == ___NUMBER_4___: {
-            Throw.exception(___STRING_77___);
+            Throw.exception(___STRING_54___);
         }
         return num / num2;
     }
 }
 class Object: {
     function toString(): {
-        return ___STRING_78___;
+        return ___STRING_55___;
     }
 }
 
 class Throw: {
     
     function exception(let message): {
-        _csharp(___STRING_79___ + _str(message) + ___STRING_80___);
+        _native(___STRING_56___, _str(message));
     }
 
     
     function nonImplementException(): {
-        exception(___STRING_81___);
+        exception(___STRING_57___);
     }
 
     
     function parseException(let error): {
-        exception(___STRING_82___ + error);
+        exception(___STRING_58___ + error);
     }
 }
 
 
-class LanguageDemo: {
+class SnakeGame: {
+    let X = ___NUMBER_5___;
+    let Y = ___NUMBER_6___;
+
+    let tailX = Array.new([]);
+    let tailY = Array.new([]);
+    let tailLength = ___NUMBER_7___;
+
+    let lastChar = ___STRING_59___;
+
+    let fruitX = ___NUMBER_8___;
+    let fruitY = ___NUMBER_9___;
+
+    let width = ___NUMBER_10___;
+    let height = ___NUMBER_11___;
+
+    let score = ___NUMBER_12___;
+
+    let gameOver = false;
+
+    function setup(): {
+        Console.clear();
+        Console.cursorVisible(false);
+
+        fruitX = Number.randInt(___NUMBER_13___, width);
+        fruitY = Number.randInt(___NUMBER_14___, height);
+    }
+
+    function draw(): {
+        Console.setCursorPosition(___NUMBER_15___, ___NUMBER_16___);
+        Console.println(___STRING_60___ + score);
+
+        for let j = ___NUMBER_17___; j < (height + ___NUMBER_18___); j = j + ___NUMBER_19___: {
+            for let i = ___NUMBER_20___; i < (width + ___NUMBER_21___); i = i + ___NUMBER_22___: {
+                
+                let isTailPosition = false;
+
+                for let tX = ___NUMBER_23___; tX < tailX.length(); tX = tX + ___NUMBER_24___: {
+                    let x = tailX.at(tX);
+
+                    for let tY = ___NUMBER_25___; tY < tailY.length(); tY = tY + ___NUMBER_26___: {
+                        let y = tailY.at(tY);
+
+                        if (x == i) && (y == j): {
+                            isTailPosition = true;
+                        }
+                    }
+                }
+
+                Console.setCursorPosition(i, (j + ___NUMBER_27___));
+
+                if (i == X) && (j == Y): {
+                    Console.print(___STRING_61___);
+                } else if (i == fruitX) && (j == fruitY): {
+                    Console.print(___STRING_62___);
+                } else if (i == ___NUMBER_28___) || (j == ___NUMBER_29___) || (i == width) || (j == height): {
+                    Console.print(___STRING_63___);
+                } else if isTailPosition == true: {
+                    Console.print(___STRING_64___);
+                } else: {
+                    Console.print(___STRING_65___);
+                }
+            }
+        }
+    }
+
+    function logic(): {
+        if (X == fruitX) && (Y == fruitY): {
+            score = score + ___NUMBER_30___;
+
+            tailLength = tailLength + ___NUMBER_31___;
+
+            fruitX = Number.randInt(___NUMBER_32___, width);
+            fruitY = Number.randInt(___NUMBER_33___, height);
+        }
+     
+        tailX.insert(___NUMBER_34___, X);
+        tailY.insert(___NUMBER_35___, Y);
+        if tailX.length() > tailLength: {
+            tailX.removeAt(tailX.length() - ___NUMBER_36___);
+            tailY.removeAt(tailX.length() - ___NUMBER_37___);
+        }
+
+        input();
+
+        if X < ___NUMBER_38___: {
+            X = width - ___NUMBER_39___;
+        } else if X > (width - ___NUMBER_40___): {
+            X = ___NUMBER_41___;
+        }
+
+        if Y < ___NUMBER_42___: {
+            Y = height - ___NUMBER_43___;
+        } else if Y > (height - ___NUMBER_44___): {
+            Y = ___NUMBER_45___;
+        }
+    }
+
+    function input(): {
+        if Console.isKeyAvailable() == false: {
+            if lastChar != ___STRING_66___: {
+                control(lastChar);
+            }  
+            return ___STRING_67___;
+        }
+
+        lastChar = Console.readkey(true);    
+    }
+
+    function control(let char): {
+        if char == ___STRING_68___: {
+            X = X - ___NUMBER_46___;
+        } else if char == ___STRING_69___: {
+            X = X + ___NUMBER_47___;
+        } else if char == ___STRING_70___: {
+            Y = Y - ___NUMBER_48___;
+        } else if char == ___STRING_71___: {
+            Y = Y + ___NUMBER_49___;
+        }
+    }
+
     function run(): {
+        setup();
 
-        Console.println(___STRING_83___);
-        Console.println(___STRING_84___);
-        Console.println(___STRING_85___);
-        Console.println(___STRING_86___);
-        
-        
-        do_while (String.isNullOrWhiteSpace(choice) == true) || (Number.isNumber(choice) == false): {
-            Console.print(___STRING_87___);
-            let choice = Console.readln();
+        while gameOver == false: {
+            logic();
+            draw();
 
-            if String.isNullOrWhiteSpace(choice) == true: {
-                printException(___STRING_88___);
-            }
-
-            if Number.isNumber(choice) == false: {
-                printException(___STRING_89___);
-            }
+            Time.wait(___NUMBER_50___);
         }
-
-        if choice == ___STRING_90___: {
-            numericDemo();
-        }
-        else if choice == ___STRING_91___: {
-            stringDemo();
-        }
-        else if choice == ___STRING_92___: {
-            circleDemo();
-        }
-
-        Console.println(___STRING_93___);
-    }
-
-    function stringDemo(): {
-        Console.println(___STRING_94___);
-
-        do_while String.isNullOrWhiteSpace(input) == true: { 
-            Console.print(___STRING_95___);
-            let input = Console.readln();
-
-            if String.isNullOrWhiteSpace(input) == true: {
-                printException(___STRING_96___);
-            }
-        }
-        
-        Console.println(___STRING_97___ + String.getLength(input));
-        Console.println(___STRING_98___ + String.trim(input) + ___STRING_99___);
-        Console.println(___STRING_100___ + String.trimStart(input) + ___STRING_101___);
-        Console.println(___STRING_102___ + String.trimEnd(input) + ___STRING_103___);
-        
-        if String.getLength(input) > ___NUMBER_5___: {
-            Console.println(___STRING_104___ + String.subString(input, ___NUMBER_6___, ___NUMBER_7___) + ___STRING_105___);
-        }
-    }
-
-    function numericDemo(): {
-        Console.println(___STRING_106___);
-
-        let num1 = getNumberFromConsole(___STRING_107___);
-        let num2 = getNumberFromConsole(___STRING_108___);
-
-        Console.println(___STRING_109___ + num1);
-        Console.println(___STRING_110___ + num2);
-
-        Console.println(___STRING_111___);
-        Console.println(___STRING_112___ + Math.sum(num1, num2));
-        Console.println(___STRING_113___ + Math.sub(num1, num2));
-        Console.println(___STRING_114___ + Math.mult(num1, num2));
-
-        if num2 != ___NUMBER_8___: {
-            Console.println(___STRING_115___ + Number.toFixed(Math.div(num1, num2), ___STRING_116___));
-        }
-        else: {
-            printException(___STRING_117___);
-        }
-
-        if num1 < num2: {
-            Console.println(___STRING_118___ + num1 + ___STRING_119___ + num2 + ___STRING_120___ + Number.randInt(num1, num2));
-        }
-        else: {
-            printException(___STRING_121___);
-        }
-
-        for let i = num1 - ___NUMBER_9___; i < num1; i = i + ___NUMBER_10___: {
-            Console.println(___STRING_122___ + i);
-        }
-
-        Console.println(___STRING_123___);
-        Console.println(___STRING_124___ + Number.toInt(num1));
-        Console.println(___STRING_125___ + Number.toInt(num2));
-
-        Console.println(___STRING_126___ + Number.toFixed(num1, ___STRING_127___));
-        Console.println(___STRING_128___ + Number.toFixed(num2, ___STRING_129___));
-
-        Console.println(___STRING_130___ + Math.PI);
-
-        Console.println(___STRING_131___ + Number.MIN_VALUE);
-        Console.println(___STRING_132___ + Number.MAX_VALUE);
-    }
-
-    function circleDemo(): {
-        Console.println(___STRING_133___);
-
-        Console.println(___STRING_134___);
-        Console.print(___STRING_135___);
-        
-        let randNum = ___NUMBER_11___-___NUMBER_12___;
-        
-        while randNum != ___NUMBER_13___: {
-            randNum = Number.randInt(___NUMBER_14___, ___NUMBER_15___);
-            Console.print(randNum + ___STRING_136___);
-        }
-
-        Console.println(___STRING_137___);
-        Console.println(___STRING_138___);
-
-        acceptContinue();
-
-        Console.println(___STRING_139___);
-        do_while input != ___STRING_140___: {
-            Console.print(___STRING_141___);
-            let input = Console.readln();
-        }
-        Console.println(___STRING_142___);
-
-        acceptContinue();
-
-        Console.println(___STRING_143___);
-        
-        for let i = ___NUMBER_16___; i < ___NUMBER_17___; i = i + ___NUMBER_18___: {
-            Console.println(___STRING_144___ + i);
-        }
-    }
-
-    function acceptContinue(): {
-        Console.println(___STRING_145___);
-        Console.readln();
-    }
-
-    function printException(let msg): {
-        Console.setForeColor(___STRING_146___);
-        Console.println(msg);
-        Console.resetColors();
-    }
-
-    function getNumberFromConsole(let msg): {
-        let num = ___STRING_147___;
-
-        do_while Number.isNumber(num) == false: {
-            Console.print(msg);
-            num = Console.readln();
-
-            if Number.isNumber(num) == false: {
-                printException(___STRING_148___);
-            }
-        }
-
-        return num;
     }
 }
 
 function main(): {
-    let arr = Array.new([___STRING_149___, ___NUMBER_19___]);
-    
-    for let i = ___NUMBER_20___; i < ___NUMBER_21___; i = i + ___NUMBER_22___: {
-        Console.println(arr.at(i));
-    }
-    Console.println(String.append([___STRING_150___, ___STRING_151___, ___STRING_152___]));
+    SnakeGame.run();
 }
+

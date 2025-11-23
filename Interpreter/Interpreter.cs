@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Scripting;
 using Qlang.AST;
 using Qlang.Dependencies;
@@ -15,11 +16,11 @@ public partial class Interpreter
         _numberDictionary = numberDictionary;
     }
 
+    private readonly NativeFunctionRegistry _nativeFunctions = new();
+    
     private readonly Dictionary<string, string> _stringDictionary;
     
     private readonly Dictionary<string, string> _numberDictionary;
-    
-    private readonly Dictionary<string, Variable> _variables = new();
     
     private readonly Dictionary<string, DynamicFunction> _functions = new();
     
@@ -294,6 +295,7 @@ public partial class Interpreter
     {
         var args = call.Arguments.ConvertAll(EvaluateExpression).ToArray();
         
+        Logger.Logger.Log($"Args count: " + args.Length);
         Logger.Logger.Log($"class = '{call.ObjectName}'; method = '{call.MethodName}'");
         Logger.Logger.Log($"CurrentContext: class = '{CurrentContext.Class?.Name}', method = '{CurrentContext.Function?.Name}'");
 
@@ -308,15 +310,28 @@ public partial class Interpreter
         {
             case { ObjectName: "", MethodName: "_str" }:
                 return ParseString(string.Join("", args.Select(a => a.ToString())));
-            // case { ObjectName: "", MethodName: "_list" } when args.Length > 0:
-            // {
-            //     return GetCollection(args[0] as List<object>);
-            // };
+            case { ObjectName: "", MethodName: "_str_csharp" }:
+                return ParseString(string.Join("", args.Select(a => a.ToString())), true);
             case { ObjectName: "", MethodName: "_csharp" }:
             {
                 var returnValue = CSharpCall($"{string.Join(",", args)}");
             
                 Logger.Logger.Warn("csharp.return_value: " + (returnValue == null ? "null" :
+                    returnValue.ToString()));
+            
+                return returnValue;
+            }
+            case { ObjectName: "", MethodName: "_native" } when args.Length > 0:
+            {
+                string name = args[0].ToString();
+                
+                args = args.Skip(1).ToArray();
+                
+                Logger.Logger.Log("_native: " + string.Join(", ", args));
+                
+                var returnValue = _nativeFunctions.Call(name, args);
+            
+                Logger.Logger.Warn("Native.ReturnValue: " + (returnValue == null ? "null" :
                     returnValue.ToString()));
             
                 return returnValue;
@@ -394,12 +409,12 @@ public partial class Interpreter
         }
     }
 
-    private string GetCollection(List<object>? arg)
+    private List<object> GetCollection(List<object>? arg)
     {
         if (arg is null)
             throw new QlangRuntimeException("collection is null", null, GetStackTrace());
-        
-        string result = "new List<object>([";
+        //new List<object>(
+        string result = "[";
                 
         foreach (var obj in arg)
         {
@@ -408,15 +423,15 @@ public partial class Interpreter
             else
                 result += $"\"{obj}\",";
         }
-        // Remove ','
-        result = (arg.Count > 0 ? result[..^1] : result) + "])";
+        // Remove ',' )
+        result = (arg.Count > 0 ? result[..^1] : result) + "]";
                 
         Logger.Logger.Log(result);
-        return result;
+        return arg;
     }
 
     // WARNING: is ChatGPT code
-    private static string ParseString(string input)
+    private static string ParseString(string input, bool csharpString = false)
     {
         var sb = new StringBuilder();
         for (var i = 0; i < input.Length; i++)
@@ -451,7 +466,8 @@ public partial class Interpreter
         processed = processed.Replace("\"", "\"\"");
 
         // 3) Возвращаем вербатим-строку, которую можно вставлять в C# код
-        return $"@\"{processed}\"";
+        return csharpString ? $"@\"{processed}\"" : processed;
+        // return $"@\"{processed}\"";
     }
 
     private object ExecuteMethodCallClass(DynamicClass classNode, MethodCallNode call)
@@ -583,9 +599,6 @@ public partial class Interpreter
                 return var.Value;
             }
 
-            if (_variables.TryGetValue(varNode.Name, out var))
-                return var.Value;
-
             if (CurrentContext?.Class != null)
             {
                 Logger.Logger.Log("Current var count: " + CurrentContext.Class.Variables.Count);
@@ -658,7 +671,7 @@ public partial class Interpreter
         Logger.Logger.Warn("Detected binary operation");
         Logger.Logger.Warn($"Params: {binOp.Left} {binOp.Operator} {binOp.Right}");
         var left = EvaluateExpression(binOp.Left);
-        var right = EvaluateExpression(binOp.Right);
+        object? right = EvaluateExpression(binOp.Right);
         bool leftBool;
         bool rightBool;
         
@@ -715,8 +728,11 @@ public partial class Interpreter
             }
         }
 
-        Logger.Logger.Log($"EvaluateBinaryOperation.IsNumeric: ({left.ToString()})=" + left.ToString().IsNumber());
-        Logger.Logger.Log($"EvaluateBinaryOperation.IsNumeric: ({right.ToString()})=" + right.ToString().IsNumber());
+        if (left is null || right is null)
+            return null;
+
+        Logger.Logger.Log($"EvaluateBinaryOperation.IsNumeric: ({left})=" + left.ToString()?.IsNumber());
+        Logger.Logger.Log($"EvaluateBinaryOperation.IsNumeric: ({right})=" + right.ToString()?.IsNumber());
 
         if (bool.TryParse(left.ToString(), out leftBool) && bool.TryParse(right.ToString(), out rightBool))
         {

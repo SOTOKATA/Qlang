@@ -2,7 +2,7 @@
 class Throw: {
     // Throw default exception
     function exception(let message): {
-        _csharp("throw new System.Exception(" + _str(message) + ");");
+        _native("exception", _str(message));
     }
 
     // Thow exception if function is not implement
