@@ -5,16 +5,16 @@ namespace Qlang.Logger;
 
 public static class Logger
 {
-    private static readonly FileLogger FileLogger = new("Logs\\debug.txt");
+    private static readonly FileLogger FileLogger = new("Logs\\debug.log");
 
     public static void SetLoggerPath(string path)
     {
         FileLogger.SetPath(path);
     }
     
-    public static void _Log(string message, ConsoleColor? color = null, bool isInternal = false, string msg = "")
+    public static void _Log(string message, ConsoleColor? color = null, bool isInternal = false, string msg = "", string type = "")
     {
-        message = GetStackPath(msg, isInternal ? 4 : 3) + ": " + message;
+        message = GetStackPath(msg, type, isInternal ? 4 : 3) + ": " + message;
         FileLogger.Log(message);
         
         if (!QLang.Settings.Debug)
@@ -27,29 +27,29 @@ public static class Logger
     
     public static void Log(string message, string msg = "", ConsoleColor? color = null)
     {
-        _Log("Log: " + message, color, false, msg);
+        _Log(message, color, false, msg, "LOG");
     }
 
     public static void Warn(string message, string msg = "")
     {
-        _Log("WARN: " + message, ConsoleColor.DarkYellow, true, msg);
+        _Log(message, ConsoleColor.DarkYellow, true, msg, "WARN");
     }
     
     public static void Succ(string message, string msg = "")
     {
-        _Log("SUCC: " + message, ConsoleColor.DarkGreen,  true, msg);
+        _Log(message, ConsoleColor.DarkGreen,  true, msg, "SUCC");
     }
     
     public static void Error(string message, string msg = "")
     {
-        _Log("ERROR: " + message, ConsoleColor.Red, true, msg);
+        _Log(message, ConsoleColor.Red, true, msg, "ERROR");
     }
 
-    private static string GetStackPath(string msg = "", int depth = 3)
+    private static string GetStackPath(string msg = "", string type = "", int depth = 3)
     {
         var frame = new StackTrace(true).GetFrame(depth);
         var method = frame.GetMethod();
 
-        return $"({frame.GetFileLineNumber()}) {method.DeclaringType?.Name}/{method.Name}{(msg != "" ? $".{msg}" : "")}";
+        return $"({frame.GetFileLineNumber()}) [{type}] {method.DeclaringType?.Name}/{method.Name}{(msg != "" ? $".{msg}" : "")}";
     }
 }

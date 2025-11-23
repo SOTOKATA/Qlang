@@ -19,47 +19,48 @@ public class Compiler
     {
         _originalScript = script;
 
-        FileLogger fl = new("Logs\\script.txt");
+        FileLogger fl = new("Logs\\script.ql");
         fl.Log(_originalScript);
-
-        _originalScript = """
-                           include "@lib/throw"
-                           
-                           """ + _originalScript;
         
+        Logger.Logger.SetLoggerPath(@"Logs\Debug\debug_pre_compile.log");
+        
+        Logger.Logger.Log("Include Files");
         _outputScript = PreCompile.PreCompile.IncludeFiles(_originalScript);
+        Logger.Logger.Succ("All includes processed successfully.");
+        
+        _outputScript = PreCompile.PreCompile.ClearComments(_outputScript);
         
         (_outputScript, StringDictionary) = PreCompile.PreCompile.ExtractStrings(_outputScript);
         
         (_outputScript, NumberDictionary) = PreCompile.PreCompile.ExtractNumbers(_outputScript);
-
-        _outputScript = PreCompile.PreCompile.ClearComments(_outputScript);
         
         fl.SetPath("Logs\\script_pre_compiled.ql");
         fl.Log(_outputScript);
         
         List<Token> tokens = _lexer.Lex(_outputScript);
 
-        fl.SetPath("Logs\\script_tokenized.txt");
+        fl.SetPath("Logs\\script_tokenized.js");
 
         var line = "";
+        int indent = 0;
         foreach (var token in tokens)
         {
             line += $"{token.TokenType}{(token.Value == "" ? "" : ($"({token.Value})"))} ";
-
+            
             switch (token.TokenType)
             {
-                case Tokens.Indent or Tokens.Dedent:
-                    fl.Log(line);
-                
-                    line = token.TokenType.ToString();
-                
-                    fl.Log(line);
+                case Tokens.LBrace:
+                    indent++;
                     break;
-                case Tokens.NewLine:
-                    fl.Log(line);
-                    line = "";
+                case Tokens.RBrace:
+                    indent--;
                     break;
+            }
+            
+            if (token.TokenType is Tokens.Semicolon or Tokens.Colon or Tokens.LBrace or Tokens.RBrace)
+            {
+                fl.Log(new string('\t', indent) + line);
+                line = "";
             }
         }
 

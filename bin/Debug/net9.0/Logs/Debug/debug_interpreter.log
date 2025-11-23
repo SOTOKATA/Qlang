@@ -1,0 +1,2164 @@
+(61) [WARN] QLang/Run: ----------- Interpreter -----------
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = '', method = ''
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: new List<object>()
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: System.Collections.Generic.List`1[System.Object]
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(114) [LOG] Interpreter/ExecuteFunction: 'main'()
+(150) [WARN] Interpreter/ExecuteFunction: Context: class='' function='main'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: CollectionNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(496) [LOG] Interpreter/EvaluateExpression: Is collection expression: System.Collections.Generic.List`1[System.Object]
+(414) [LOG] Interpreter/GetCollection: new List<object>(["Hello World!","1"])
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Array'; method = 'new'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = '', method = 'main'
+(304) [WARN] Interpreter/ExecuteMethodCall: Is new instance class
+(114) [LOG] Interpreter/ExecuteFunction: 'new'(new List<object>(["Hello World!","1"]))
+(176) [LOG] Interpreter/ExecuteStatement: IfNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode == Qlang.AST.BooleanNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Array'; method = 'isArray'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Array', method = 'new'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'isArray'(new List<object>(["Hello World!","1"]))
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello World!","1"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ( is List<object>)=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Array', method = 'isArray'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: new List<object>(["Hello World!","1"]) is List<object>
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: True
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Array' function='isArray'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BooleanNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (True)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (False)=False
+(506) [WARN] Interpreter/EvaluateExpression: IsBooleanOperation: True==False
+(150) [WARN] Interpreter/ExecuteFunction: Context: class='Array' function='new'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='_value' value='Qlang.AST.VariableNode' value(after evaluating)='new List<object>(["Hello World!","1"])'
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Array' function='new'
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='arr' value='Qlang.AST.MethodCallNode' value(after evaluating)='Qlang.Dynamic.DynamicClass'
+(205) [LOG] Interpreter/AssignmentNode.AssignmentNode: Change name old='Array' new='arr'
+(186) [LOG] Interpreter/ExecuteStatement: ForNode
+(63) [WARN] Interpreter/ExecuteFor: Context: class='' function='main'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='i' value='Qlang.AST.NumberRefNode' value(after evaluating)='0'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Less Qlang.AST.NumberRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (2)=True
+(506) [WARN] Interpreter/EvaluateExpression: Operation: 0Less2
+(67) [LOG] Interpreter/ExecuteFor.For.Condition: FirstCheck: 
+True
+(171) [LOG] Interpreter/ExecuteStatement: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'arr'; method = 'at'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = '', method = 'main'
+(351) [LOG] Interpreter/ExecuteMethodCall: Object detected as class pointer
+(507) [WARN] Interpreter/EvaluateExpression: VariableClass:Class: arr
+(114) [LOG] Interpreter/ExecuteFunction: 'at'(0)
+(150) [WARN] Interpreter/ExecuteFunction: Context: class='arr' function='at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'toInt'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'toInt'(0)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = 'toFixed'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toInt'
+(114) [LOG] Interpreter/ExecuteFunction: 'toFixed'(0, 0)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ())=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0).ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ((0).ToString(@"0"))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; (0).ToString(@"0")
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 0
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toFixed'
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toInt'
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='index' value='Qlang.AST.MethodCallNode' value(after evaluating)='0'
+(176) [LOG] Interpreter/ExecuteStatement: IfNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode == Qlang.AST.BooleanNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'isNumber'(0)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (, NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse(@"0", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; double.TryParse(@"0", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: True
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BooleanNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (True)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (False)=False
+(506) [WARN] Interpreter/EvaluateExpression: IsBooleanOperation: True==False
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello World!","1"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([0])=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: new List<object>(["Hello World!","1"])[0]
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: Hello World!
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='at'
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Console'; method = 'println'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'main'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'arr'; method = 'at'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'main'
+(351) [LOG] Interpreter/ExecuteMethodCall: Object detected as class pointer
+(507) [WARN] Interpreter/EvaluateExpression: VariableClass:Class: arr
+(114) [LOG] Interpreter/ExecuteFunction: 'at'(0)
+(150) [WARN] Interpreter/ExecuteFunction: Context: class='arr' function='at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'toInt'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'toInt'(0)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = 'toFixed'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toInt'
+(114) [LOG] Interpreter/ExecuteFunction: 'toFixed'(0, 0)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ())=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0).ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ((0).ToString(@"0"))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; (0).ToString(@"0")
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 0
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toFixed'
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toInt'
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='index' value='Qlang.AST.MethodCallNode' value(after evaluating)='0'
+(176) [LOG] Interpreter/ExecuteStatement: IfNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode == Qlang.AST.BooleanNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'isNumber'(0)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (, NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse(@"0", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; double.TryParse(@"0", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: True
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BooleanNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (True)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (False)=False
+(506) [WARN] Interpreter/EvaluateExpression: IsBooleanOperation: True==False
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello World!","1"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([0])=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: new List<object>(["Hello World!","1"])[0]
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: Hello World!
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='at'
+(114) [LOG] Interpreter/ExecuteFunction: 'println'(Hello World!)
+(171) [LOG] Interpreter/ExecuteStatement: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (Hello World!)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (\n)=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = 'print'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Console', method = 'println'
+(114) [LOG] Interpreter/ExecuteFunction: 'print'(Hello World!\n)
+(171) [LOG] Interpreter/ExecuteStatement: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Console', method = 'print'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"Hello World!
+")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ())=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (Console.Write()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"Hello World!
+"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (Console.Write(@"Hello World!
+"))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Console', method = 'print'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; Console.Write(@"Hello World!
+")
+(172) [WARN] Interpreter/ExecuteStatement: csharp.return_value: null
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Console' function='print'
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Console' function='println'
+(91) [WARN] Interpreter/ExecuteFor: Context: class='arr' function='main'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.NumberRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(506) [WARN] Interpreter/EvaluateExpression: Operation: 0Plus1
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='i' value='Qlang.AST.BinaryOperationNode' value(after evaluating)='1'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Less Qlang.AST.NumberRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (2)=True
+(506) [WARN] Interpreter/EvaluateExpression: Operation: 1Less2
+(93) [LOG] Interpreter/ExecuteFor.For.Condition: FirstCheck: 
+True
+(171) [LOG] Interpreter/ExecuteStatement: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'arr'; method = 'at'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'main'
+(351) [LOG] Interpreter/ExecuteMethodCall: Object detected as class pointer
+(507) [WARN] Interpreter/EvaluateExpression: VariableClass:Class: arr
+(114) [LOG] Interpreter/ExecuteFunction: 'at'(1)
+(150) [WARN] Interpreter/ExecuteFunction: Context: class='arr' function='at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'toInt'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'toInt'(1)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = 'toFixed'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toInt'
+(114) [LOG] Interpreter/ExecuteFunction: 'toFixed'(1, 0)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ())=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1).ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ((1).ToString(@"0"))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; (1).ToString(@"0")
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 1
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toFixed'
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toInt'
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='index' value='Qlang.AST.MethodCallNode' value(after evaluating)='1'
+(176) [LOG] Interpreter/ExecuteStatement: IfNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode == Qlang.AST.BooleanNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'isNumber'(1)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"1")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (, NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"1", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse(@"1", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; double.TryParse(@"1", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: True
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BooleanNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (True)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (False)=False
+(506) [WARN] Interpreter/EvaluateExpression: IsBooleanOperation: True==False
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello World!","1"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([1])=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: new List<object>(["Hello World!","1"])[1]
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 1
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='at'
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Console'; method = 'println'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'main'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'arr'; method = 'at'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'main'
+(351) [LOG] Interpreter/ExecuteMethodCall: Object detected as class pointer
+(507) [WARN] Interpreter/EvaluateExpression: VariableClass:Class: arr
+(114) [LOG] Interpreter/ExecuteFunction: 'at'(1)
+(150) [WARN] Interpreter/ExecuteFunction: Context: class='arr' function='at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'toInt'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'toInt'(1)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = 'toFixed'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toInt'
+(114) [LOG] Interpreter/ExecuteFunction: 'toFixed'(1, 0)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ())=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1).ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ((1).ToString(@"0"))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; (1).ToString(@"0")
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 1
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toFixed'
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toInt'
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='index' value='Qlang.AST.MethodCallNode' value(after evaluating)='1'
+(176) [LOG] Interpreter/ExecuteStatement: IfNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode == Qlang.AST.BooleanNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'isNumber'(1)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"1")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (, NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"1", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse(@"1", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; double.TryParse(@"1", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: True
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BooleanNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (True)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (False)=False
+(506) [WARN] Interpreter/EvaluateExpression: IsBooleanOperation: True==False
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello World!","1"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([1])=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: new List<object>(["Hello World!","1"])[1]
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 1
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='at'
+(114) [LOG] Interpreter/ExecuteFunction: 'println'(1)
+(171) [LOG] Interpreter/ExecuteStatement: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (\n)=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = 'print'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Console', method = 'println'
+(114) [LOG] Interpreter/ExecuteFunction: 'print'(1\n)
+(171) [LOG] Interpreter/ExecuteStatement: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Console', method = 'print'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"1
+")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ())=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (Console.Write()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"1
+"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (Console.Write(@"1
+"))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Console', method = 'print'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; Console.Write(@"1
+")
+(172) [WARN] Interpreter/ExecuteStatement: csharp.return_value: null
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Console' function='print'
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Console' function='println'
+(91) [WARN] Interpreter/ExecuteFor: Context: class='arr' function='main'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.NumberRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(506) [WARN] Interpreter/EvaluateExpression: Operation: 1Plus1
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='i' value='Qlang.AST.BinaryOperationNode' value(after evaluating)='2'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Less Qlang.AST.NumberRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (2)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (2)=True
+(506) [WARN] Interpreter/EvaluateExpression: Operation: 2Less2
+(93) [LOG] Interpreter/ExecuteFor.For.Condition: FirstCheck: 
+False
+(97) [LOG] Interpreter/ExecuteFor.For: Ended
+(171) [LOG] Interpreter/ExecuteStatement: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: CollectionNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(496) [LOG] Interpreter/EvaluateExpression: Is collection expression: System.Collections.Generic.List`1[System.Object]
+(414) [LOG] Interpreter/GetCollection: new List<object>(["Hello W","orld","!"])
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'String'; method = 'append'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'main'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: CollectionNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(496) [LOG] Interpreter/EvaluateExpression: Is collection expression: System.Collections.Generic.List`1[System.Object]
+(414) [LOG] Interpreter/GetCollection: new List<object>(["Hello W","orld","!"])
+(114) [LOG] Interpreter/ExecuteFunction: 'append'(new List<object>(["Hello W","orld","!"]))
+(176) [LOG] Interpreter/ExecuteStatement: IfNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode == Qlang.AST.BooleanNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Array'; method = 'isArray'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'String', method = 'append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'isArray'(new List<object>(["Hello W","orld","!"]))
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ( is List<object>)=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Array', method = 'isArray'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: new List<object>(["Hello W","orld","!"]) is List<object>
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: True
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Array' function='isArray'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BooleanNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (True)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (False)=False
+(506) [WARN] Interpreter/EvaluateExpression: IsBooleanOperation: True==False
+(150) [WARN] Interpreter/ExecuteFunction: Context: class='String' function='append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='result' value='Qlang.AST.StringRefNode' value(after evaluating)=''
+(150) [WARN] Interpreter/ExecuteFunction: Context: class='String' function='append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Array'; method = 'new'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'String', method = 'append'
+(304) [WARN] Interpreter/ExecuteMethodCall: Is new instance class
+(114) [LOG] Interpreter/ExecuteFunction: 'new'(new List<object>(["Hello W","orld","!"]))
+(176) [LOG] Interpreter/ExecuteStatement: IfNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode == Qlang.AST.BooleanNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Array'; method = 'isArray'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Array', method = 'new'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'isArray'(new List<object>(["Hello W","orld","!"]))
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ( is List<object>)=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Array', method = 'isArray'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: new List<object>(["Hello W","orld","!"]) is List<object>
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: True
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Array' function='isArray'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BooleanNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (True)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (False)=False
+(506) [WARN] Interpreter/EvaluateExpression: IsBooleanOperation: True==False
+(150) [WARN] Interpreter/ExecuteFunction: Context: class='Array' function='new'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='_value' value='Qlang.AST.VariableNode' value(after evaluating)='new List<object>(["Hello W","orld","!"])'
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Array' function='new'
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='arr' value='Qlang.AST.MethodCallNode' value(after evaluating)='Qlang.Dynamic.DynamicClass'
+(205) [LOG] Interpreter/AssignmentNode.AssignmentNode: Change name old='Array' new='arr'
+(186) [LOG] Interpreter/ExecuteStatement: ForNode
+(63) [WARN] Interpreter/ExecuteFor: Context: class='String' function='append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='i' value='Qlang.AST.NumberRefNode' value(after evaluating)='0'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Less Qlang.AST.MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'arr'; method = 'length'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'String', method = 'append'
+(351) [LOG] Interpreter/ExecuteMethodCall: Object detected as class pointer
+(507) [WARN] Interpreter/EvaluateExpression: VariableClass:Class: arr
+(114) [LOG] Interpreter/ExecuteFunction: 'length'()
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (;)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (return list.Count;)=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (;return list.Count;)=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (var list = )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]);return list.Count;)=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'length'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: var list = new List<object>(["Hello W","orld","!"]);return list.Count;
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 3
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='length'
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (3)=True
+(506) [WARN] Interpreter/EvaluateExpression: Operation: 0Less3
+(67) [LOG] Interpreter/ExecuteFor.For.Condition: FirstCheck: 
+True
+(88) [WARN] Interpreter/ExecuteFor: Context: class='arr' function='append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'arr'; method = 'at'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'append'
+(351) [LOG] Interpreter/ExecuteMethodCall: Object detected as class pointer
+(507) [WARN] Interpreter/EvaluateExpression: VariableClass:Class: arr
+(114) [LOG] Interpreter/ExecuteFunction: 'at'(0)
+(150) [WARN] Interpreter/ExecuteFunction: Context: class='arr' function='at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'toInt'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'toInt'(0)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = 'toFixed'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toInt'
+(114) [LOG] Interpreter/ExecuteFunction: 'toFixed'(0, 0)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ())=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0).ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ((0).ToString(@"0"))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; (0).ToString(@"0")
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 0
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toFixed'
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toInt'
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='index' value='Qlang.AST.MethodCallNode' value(after evaluating)='0'
+(176) [LOG] Interpreter/ExecuteStatement: IfNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode == Qlang.AST.BooleanNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'isNumber'(0)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (, NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse(@"0", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; double.TryParse(@"0", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: True
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BooleanNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (True)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (False)=False
+(506) [WARN] Interpreter/EvaluateExpression: IsBooleanOperation: True==False
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([0])=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: new List<object>(["Hello W","orld","!"])[0]
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: Hello W
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='at'
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (Hello W)=False
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='result' value='Qlang.AST.BinaryOperationNode' value(after evaluating)='Hello W'
+(91) [WARN] Interpreter/ExecuteFor: Context: class='arr' function='append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.NumberRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(506) [WARN] Interpreter/EvaluateExpression: Operation: 0Plus1
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='i' value='Qlang.AST.BinaryOperationNode' value(after evaluating)='1'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Less Qlang.AST.MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'arr'; method = 'length'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'append'
+(351) [LOG] Interpreter/ExecuteMethodCall: Object detected as class pointer
+(507) [WARN] Interpreter/EvaluateExpression: VariableClass:Class: arr
+(114) [LOG] Interpreter/ExecuteFunction: 'length'()
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (;)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (return list.Count;)=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (;return list.Count;)=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (var list = )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]);return list.Count;)=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'length'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: var list = new List<object>(["Hello W","orld","!"]);return list.Count;
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 3
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='length'
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (3)=True
+(506) [WARN] Interpreter/EvaluateExpression: Operation: 1Less3
+(93) [LOG] Interpreter/ExecuteFor.For.Condition: FirstCheck: 
+True
+(88) [WARN] Interpreter/ExecuteFor: Context: class='arr' function='append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'arr'; method = 'at'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'append'
+(351) [LOG] Interpreter/ExecuteMethodCall: Object detected as class pointer
+(507) [WARN] Interpreter/EvaluateExpression: VariableClass:Class: arr
+(114) [LOG] Interpreter/ExecuteFunction: 'at'(1)
+(150) [WARN] Interpreter/ExecuteFunction: Context: class='arr' function='at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'toInt'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'toInt'(1)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = 'toFixed'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toInt'
+(114) [LOG] Interpreter/ExecuteFunction: 'toFixed'(1, 0)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ())=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1).ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ((1).ToString(@"0"))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; (1).ToString(@"0")
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 1
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toFixed'
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toInt'
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='index' value='Qlang.AST.MethodCallNode' value(after evaluating)='1'
+(176) [LOG] Interpreter/ExecuteStatement: IfNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode == Qlang.AST.BooleanNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'isNumber'(1)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"1")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (, NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"1", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse(@"1", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; double.TryParse(@"1", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: True
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BooleanNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (True)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (False)=False
+(506) [WARN] Interpreter/EvaluateExpression: IsBooleanOperation: True==False
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([1])=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: new List<object>(["Hello W","orld","!"])[1]
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: orld
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='at'
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (Hello W)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (orld)=False
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='result' value='Qlang.AST.BinaryOperationNode' value(after evaluating)='Hello World'
+(91) [WARN] Interpreter/ExecuteFor: Context: class='arr' function='append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.NumberRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(506) [WARN] Interpreter/EvaluateExpression: Operation: 1Plus1
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='i' value='Qlang.AST.BinaryOperationNode' value(after evaluating)='2'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Less Qlang.AST.MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'arr'; method = 'length'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'append'
+(351) [LOG] Interpreter/ExecuteMethodCall: Object detected as class pointer
+(507) [WARN] Interpreter/EvaluateExpression: VariableClass:Class: arr
+(114) [LOG] Interpreter/ExecuteFunction: 'length'()
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (;)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (return list.Count;)=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (;return list.Count;)=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (var list = )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]);return list.Count;)=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'length'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: var list = new List<object>(["Hello W","orld","!"]);return list.Count;
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 3
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='length'
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (2)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (3)=True
+(506) [WARN] Interpreter/EvaluateExpression: Operation: 2Less3
+(93) [LOG] Interpreter/ExecuteFor.For.Condition: FirstCheck: 
+True
+(88) [WARN] Interpreter/ExecuteFor: Context: class='arr' function='append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'arr'; method = 'at'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'append'
+(351) [LOG] Interpreter/ExecuteMethodCall: Object detected as class pointer
+(507) [WARN] Interpreter/EvaluateExpression: VariableClass:Class: arr
+(114) [LOG] Interpreter/ExecuteFunction: 'at'(2)
+(150) [WARN] Interpreter/ExecuteFunction: Context: class='arr' function='at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'toInt'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'toInt'(2)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = 'toFixed'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toInt'
+(114) [LOG] Interpreter/ExecuteFunction: 'toFixed'(2, 0)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ())=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (2)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (2).ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ((2).ToString(@"0"))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; (2).ToString(@"0")
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 2
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toFixed'
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toInt'
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='index' value='Qlang.AST.MethodCallNode' value(after evaluating)='2'
+(176) [LOG] Interpreter/ExecuteStatement: IfNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode == Qlang.AST.BooleanNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'isNumber'(2)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"2")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (, NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"2", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse(@"2", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; double.TryParse(@"2", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: True
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BooleanNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (True)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (False)=False
+(506) [WARN] Interpreter/EvaluateExpression: IsBooleanOperation: True==False
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (2)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (2])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([2])=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: new List<object>(["Hello W","orld","!"])[2]
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: !
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='at'
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (Hello World)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (!)=False
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='result' value='Qlang.AST.BinaryOperationNode' value(after evaluating)='Hello World!'
+(91) [WARN] Interpreter/ExecuteFor: Context: class='arr' function='append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.NumberRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (2)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(506) [WARN] Interpreter/EvaluateExpression: Operation: 2Plus1
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='i' value='Qlang.AST.BinaryOperationNode' value(after evaluating)='3'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Less Qlang.AST.MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'arr'; method = 'length'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'append'
+(351) [LOG] Interpreter/ExecuteMethodCall: Object detected as class pointer
+(507) [WARN] Interpreter/EvaluateExpression: VariableClass:Class: arr
+(114) [LOG] Interpreter/ExecuteFunction: 'length'()
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (;)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (return list.Count;)=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (;return list.Count;)=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (var list = )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]);return list.Count;)=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'length'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: var list = new List<object>(["Hello W","orld","!"]);return list.Count;
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 3
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='length'
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (3)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (3)=True
+(506) [WARN] Interpreter/EvaluateExpression: Operation: 3Less3
+(93) [LOG] Interpreter/ExecuteFor.For.Condition: FirstCheck: 
+False
+(97) [LOG] Interpreter/ExecuteFor.For: Ended
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='append'
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Console'; method = 'println'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'main'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: CollectionNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(496) [LOG] Interpreter/EvaluateExpression: Is collection expression: System.Collections.Generic.List`1[System.Object]
+(414) [LOG] Interpreter/GetCollection: new List<object>(["Hello W","orld","!"])
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'String'; method = 'append'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'main'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: CollectionNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(496) [LOG] Interpreter/EvaluateExpression: Is collection expression: System.Collections.Generic.List`1[System.Object]
+(414) [LOG] Interpreter/GetCollection: new List<object>(["Hello W","orld","!"])
+(114) [LOG] Interpreter/ExecuteFunction: 'append'(new List<object>(["Hello W","orld","!"]))
+(176) [LOG] Interpreter/ExecuteStatement: IfNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode == Qlang.AST.BooleanNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Array'; method = 'isArray'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'String', method = 'append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'isArray'(new List<object>(["Hello W","orld","!"]))
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ( is List<object>)=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Array', method = 'isArray'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: new List<object>(["Hello W","orld","!"]) is List<object>
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: True
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Array' function='isArray'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BooleanNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (True)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (False)=False
+(506) [WARN] Interpreter/EvaluateExpression: IsBooleanOperation: True==False
+(150) [WARN] Interpreter/ExecuteFunction: Context: class='String' function='append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='result' value='Qlang.AST.StringRefNode' value(after evaluating)=''
+(150) [WARN] Interpreter/ExecuteFunction: Context: class='String' function='append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Array'; method = 'new'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'String', method = 'append'
+(304) [WARN] Interpreter/ExecuteMethodCall: Is new instance class
+(114) [LOG] Interpreter/ExecuteFunction: 'new'(new List<object>(["Hello W","orld","!"]))
+(176) [LOG] Interpreter/ExecuteStatement: IfNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode == Qlang.AST.BooleanNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Array'; method = 'isArray'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Array', method = 'new'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'isArray'(new List<object>(["Hello W","orld","!"]))
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ( is List<object>)=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Array', method = 'isArray'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: new List<object>(["Hello W","orld","!"]) is List<object>
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: True
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Array' function='isArray'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BooleanNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (True)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (False)=False
+(506) [WARN] Interpreter/EvaluateExpression: IsBooleanOperation: True==False
+(150) [WARN] Interpreter/ExecuteFunction: Context: class='Array' function='new'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='_value' value='Qlang.AST.VariableNode' value(after evaluating)='new List<object>(["Hello W","orld","!"])'
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Array' function='new'
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='arr' value='Qlang.AST.MethodCallNode' value(after evaluating)='Qlang.Dynamic.DynamicClass'
+(205) [LOG] Interpreter/AssignmentNode.AssignmentNode: Change name old='Array' new='arr'
+(186) [LOG] Interpreter/ExecuteStatement: ForNode
+(63) [WARN] Interpreter/ExecuteFor: Context: class='String' function='append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='i' value='Qlang.AST.NumberRefNode' value(after evaluating)='0'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Less Qlang.AST.MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'arr'; method = 'length'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'String', method = 'append'
+(351) [LOG] Interpreter/ExecuteMethodCall: Object detected as class pointer
+(507) [WARN] Interpreter/EvaluateExpression: VariableClass:Class: arr
+(114) [LOG] Interpreter/ExecuteFunction: 'length'()
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (;)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (return list.Count;)=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (;return list.Count;)=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (var list = )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]);return list.Count;)=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'length'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: var list = new List<object>(["Hello W","orld","!"]);return list.Count;
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 3
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='length'
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (3)=True
+(506) [WARN] Interpreter/EvaluateExpression: Operation: 0Less3
+(67) [LOG] Interpreter/ExecuteFor.For.Condition: FirstCheck: 
+True
+(88) [WARN] Interpreter/ExecuteFor: Context: class='arr' function='append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'arr'; method = 'at'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'append'
+(351) [LOG] Interpreter/ExecuteMethodCall: Object detected as class pointer
+(507) [WARN] Interpreter/EvaluateExpression: VariableClass:Class: arr
+(114) [LOG] Interpreter/ExecuteFunction: 'at'(0)
+(150) [WARN] Interpreter/ExecuteFunction: Context: class='arr' function='at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'toInt'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'toInt'(0)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = 'toFixed'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toInt'
+(114) [LOG] Interpreter/ExecuteFunction: 'toFixed'(0, 0)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ())=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0).ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ((0).ToString(@"0"))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; (0).ToString(@"0")
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 0
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toFixed'
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toInt'
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='index' value='Qlang.AST.MethodCallNode' value(after evaluating)='0'
+(176) [LOG] Interpreter/ExecuteStatement: IfNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode == Qlang.AST.BooleanNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'isNumber'(0)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (, NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse(@"0", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; double.TryParse(@"0", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: True
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BooleanNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (True)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (False)=False
+(506) [WARN] Interpreter/EvaluateExpression: IsBooleanOperation: True==False
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([0])=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: new List<object>(["Hello W","orld","!"])[0]
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: Hello W
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='at'
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (Hello W)=False
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='result' value='Qlang.AST.BinaryOperationNode' value(after evaluating)='Hello W'
+(91) [WARN] Interpreter/ExecuteFor: Context: class='arr' function='append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.NumberRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (0)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(506) [WARN] Interpreter/EvaluateExpression: Operation: 0Plus1
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='i' value='Qlang.AST.BinaryOperationNode' value(after evaluating)='1'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Less Qlang.AST.MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'arr'; method = 'length'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'append'
+(351) [LOG] Interpreter/ExecuteMethodCall: Object detected as class pointer
+(507) [WARN] Interpreter/EvaluateExpression: VariableClass:Class: arr
+(114) [LOG] Interpreter/ExecuteFunction: 'length'()
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (;)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (return list.Count;)=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (;return list.Count;)=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (var list = )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]);return list.Count;)=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'length'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: var list = new List<object>(["Hello W","orld","!"]);return list.Count;
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 3
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='length'
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (3)=True
+(506) [WARN] Interpreter/EvaluateExpression: Operation: 1Less3
+(93) [LOG] Interpreter/ExecuteFor.For.Condition: FirstCheck: 
+True
+(88) [WARN] Interpreter/ExecuteFor: Context: class='arr' function='append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'arr'; method = 'at'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'append'
+(351) [LOG] Interpreter/ExecuteMethodCall: Object detected as class pointer
+(507) [WARN] Interpreter/EvaluateExpression: VariableClass:Class: arr
+(114) [LOG] Interpreter/ExecuteFunction: 'at'(1)
+(150) [WARN] Interpreter/ExecuteFunction: Context: class='arr' function='at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'toInt'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'toInt'(1)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = 'toFixed'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toInt'
+(114) [LOG] Interpreter/ExecuteFunction: 'toFixed'(1, 0)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ())=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1).ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ((1).ToString(@"0"))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; (1).ToString(@"0")
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 1
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toFixed'
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toInt'
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='index' value='Qlang.AST.MethodCallNode' value(after evaluating)='1'
+(176) [LOG] Interpreter/ExecuteStatement: IfNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode == Qlang.AST.BooleanNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'isNumber'(1)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"1")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (, NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"1", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse(@"1", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; double.TryParse(@"1", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: True
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BooleanNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (True)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (False)=False
+(506) [WARN] Interpreter/EvaluateExpression: IsBooleanOperation: True==False
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([1])=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: new List<object>(["Hello W","orld","!"])[1]
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: orld
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='at'
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (Hello W)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (orld)=False
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='result' value='Qlang.AST.BinaryOperationNode' value(after evaluating)='Hello World'
+(91) [WARN] Interpreter/ExecuteFor: Context: class='arr' function='append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.NumberRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(506) [WARN] Interpreter/EvaluateExpression: Operation: 1Plus1
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='i' value='Qlang.AST.BinaryOperationNode' value(after evaluating)='2'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Less Qlang.AST.MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'arr'; method = 'length'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'append'
+(351) [LOG] Interpreter/ExecuteMethodCall: Object detected as class pointer
+(507) [WARN] Interpreter/EvaluateExpression: VariableClass:Class: arr
+(114) [LOG] Interpreter/ExecuteFunction: 'length'()
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (;)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (return list.Count;)=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (;return list.Count;)=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (var list = )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]);return list.Count;)=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'length'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: var list = new List<object>(["Hello W","orld","!"]);return list.Count;
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 3
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='length'
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (2)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (3)=True
+(506) [WARN] Interpreter/EvaluateExpression: Operation: 2Less3
+(93) [LOG] Interpreter/ExecuteFor.For.Condition: FirstCheck: 
+True
+(88) [WARN] Interpreter/ExecuteFor: Context: class='arr' function='append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'arr'; method = 'at'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'append'
+(351) [LOG] Interpreter/ExecuteMethodCall: Object detected as class pointer
+(507) [WARN] Interpreter/EvaluateExpression: VariableClass:Class: arr
+(114) [LOG] Interpreter/ExecuteFunction: 'at'(2)
+(150) [WARN] Interpreter/ExecuteFunction: Context: class='arr' function='at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'toInt'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'toInt'(2)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = 'toFixed'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toInt'
+(114) [LOG] Interpreter/ExecuteFunction: 'toFixed'(2, 0)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ())=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (2)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ().ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (2).ToString(@"0"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ((2).ToString(@"0"))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'toFixed'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; (2).ToString(@"0")
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 2
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toFixed'
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='toInt'
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='index' value='Qlang.AST.MethodCallNode' value(after evaluating)='2'
+(176) [LOG] Interpreter/ExecuteStatement: IfNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode == Qlang.AST.BooleanNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'Number'; method = 'isNumber'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(114) [LOG] Interpreter/ExecuteFunction: 'isNumber'(2)
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"2")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (, NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"2", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; using System.Globalization; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (double.TryParse(@"2", NumberStyles.Float, CultureInfo.InvariantCulture, out var _))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Number', method = 'isNumber'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; using System.Globalization; double.TryParse(@"2", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: True
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Number' function='isNumber'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BooleanNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (True)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (False)=False
+(506) [WARN] Interpreter/EvaluateExpression: IsBooleanOperation: True==False
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (2)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (2])=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ([2])=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'at'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: new List<object>(["Hello W","orld","!"])[2]
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: !
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='at'
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (Hello World)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (!)=False
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='result' value='Qlang.AST.BinaryOperationNode' value(after evaluating)='Hello World!'
+(91) [WARN] Interpreter/ExecuteFor: Context: class='arr' function='append'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.NumberRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (2)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (1)=True
+(506) [WARN] Interpreter/EvaluateExpression: Operation: 2Plus1
+(201) [LOG] Interpreter/AssignmentNode.AssignmentNode: name='i' value='Qlang.AST.BinaryOperationNode' value(after evaluating)='3'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Less Qlang.AST.MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = 'arr'; method = 'length'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'append'
+(351) [LOG] Interpreter/ExecuteMethodCall: Object detected as class pointer
+(507) [WARN] Interpreter/EvaluateExpression: VariableClass:Class: arr
+(114) [LOG] Interpreter/ExecuteFunction: 'length'()
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (;)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (return list.Count;)=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]))=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (;return list.Count;)=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (var list = )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (new List<object>(["Hello W","orld","!"]);return list.Count;)=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'arr', method = 'length'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: var list = new List<object>(["Hello W","orld","!"]);return list.Count;
+(507) [WARN] Interpreter/EvaluateExpression: csharp.return_value: 3
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='length'
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (3)=True
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (3)=True
+(506) [WARN] Interpreter/EvaluateExpression: Operation: 3Less3
+(93) [LOG] Interpreter/ExecuteFor.For.Condition: FirstCheck: 
+False
+(97) [LOG] Interpreter/ExecuteFor.For: Ended
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='append'
+(114) [LOG] Interpreter/ExecuteFunction: 'println'(Hello World!)
+(171) [LOG] Interpreter/ExecuteStatement: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (Hello World!)=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (\n)=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = 'print'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Console', method = 'println'
+(114) [LOG] Interpreter/ExecuteFunction: 'print'(Hello World!\n)
+(171) [LOG] Interpreter/ExecuteStatement: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(506) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(506) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.StringRefNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Console', method = 'print'
+(488) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"Hello World!
+")=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: ())=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (Console.Write()=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (@"Hello World!
+"))=False
+(718) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (using System; )=False
+(719) [LOG] Interpreter/EvaluateBinaryOperation: EvaluateBinaryOperation.IsNumeric: (Console.Write(@"Hello World!
+"))=False
+(297) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_csharp'
+(298) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Console', method = 'print'
+(317) [WARN] Interpreter/ExecuteMethodCall: C#_Script: using System; Console.Write(@"Hello World!
+")
+(172) [WARN] Interpreter/ExecuteStatement: csharp.return_value: null
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Console' function='print'
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Console' function='println'
+(110) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='arr' function='main'

@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using Qlang.Compiler;
 
 namespace Qlang.PreCompile;
 
@@ -11,20 +12,19 @@ public static class PreCompile
         var includeLines = script
             .Split('\n')
             .Select(x => x.Trim())
-            .Where(x => x.StartsWith("include "))
+            .Where(x => x.StartsWith(Keywords.IncludeKeyword + " "))
             .ToArray();
 
         if (includeLines.Length > 0)
-            Logger.Logger.Log("IncludeLines:\n" + string.Join("\n", includeLines));
+            Logger.Logger.Log("Include:\n" + string.Join("\n", includeLines));
 
         List<string> files = [];
 
         foreach (var includeLine in includeLines)
         {
-            Logger.Logger.Log("ForEach: " + includeLine);
 
             var line = includeLine.Replace("include ", "").Replace("\"", "");
-            Logger.Logger.Log("ForEach.Path: " + line);
+            // Logger.Logger.Log("Path: " + line);
 
             string fullPath;
 
@@ -33,7 +33,7 @@ public static class PreCompile
             fullPath = fullPath.Replace('\\', Path.DirectorySeparatorChar);
             fullPath = fullPath.Replace('/', Path.DirectorySeparatorChar);
 
-            Logger.Logger.Log("ForEach.FullPath: " + fullPath);
+            Logger.Logger.Log("Path: " + fullPath);
 
             if (!Directory.Exists(fullPath) && !File.Exists(fullPath + ".ql"))
                 throw new FileNotFoundException($"Include file or directory not found: {fullPath}");
@@ -59,6 +59,7 @@ public static class PreCompile
             {
                 foreach (string file in Directory.GetFiles(fullPath))
                 {
+                    Logger.Logger.Log("Path: " + file);
                     if (!Included.Add(file))
                     {
                         Logger.Logger.Warn($"Skipped (already included): {fullPath}");
@@ -78,13 +79,13 @@ public static class PreCompile
         if (files.Count <= 0) 
             return script;
         
-        Logger.Logger.Succ("All includes processed successfully.");
         return string.Join(Environment.NewLine, files) + Environment.NewLine + script;
 
     }
     
     public static (string outScript, Dictionary<string, string> dictionary) ExtractNumbers(string script)
     {
+        Logger.Logger.Warn($"Extract Numbers");
         Dictionary<string, string> numberDictionary = [];
         
         var numberCounter = 0;
@@ -102,14 +103,18 @@ public static class PreCompile
             
             numberCounter++;
             
+            Logger.Logger.Warn($"Key='{key}', Value='{numberValue}'");
+            
             return key;
         });
         
+        Logger.Logger.Warn("Numbers extracted successfully");
         return (result, numberDictionary);
     }
     
     public static (string outScript, Dictionary<string, string> dictionary) ExtractStrings(string script)
     {
+        Logger.Logger.Log($"Extract Strings");
         Dictionary<string, string> stringDictionary = [];
         
         var stringCounter = 0;
@@ -131,18 +136,31 @@ public static class PreCompile
             
             stringCounter++;
             
+            Logger.Logger.Log($"Key='{key}', Value='{value}'");
+            
             return key;
         });
         
+        Logger.Logger.Succ("Strings extracted successfully");
         return (result, stringDictionary);
     }
 
     public static string ClearComments(string script)
     {
+        Logger.Logger.Succ("Clear Comments");
         const string pattern = @"//[^\r\n]*|/\*[\s\S]*?\*/";
         
-        var result = Regex.Replace(script, pattern, "");
+        var result = Regex.Replace(script, pattern, match =>
+        {
+            string comment = match.Value;
         
+            Logger.Logger.Log($"Comment='{comment}'");
+        
+            return ""; // <- удаляем найденный комментарий
+        });
+        
+        Logger.Logger.Succ("Comments cleared successfully");
         return result;
     }
+
 }

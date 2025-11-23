@@ -12,7 +12,11 @@ public class Token(Tokens token, int line, int index, string value = "")
 
 public enum Tokens
 {
-    CommaColon,
+    LSquareParen,
+    RSquareParen,
+    LBrace,
+    RBrace,
+    Semicolon,
     Or,
     And,
     Keyword,
@@ -32,7 +36,4 @@ public enum Tokens
     Slash,
     StringRef,
     NumberRef,
-    Indent,
-    Dedent,
-    NewLine,
 }

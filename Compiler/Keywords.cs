@@ -1,6 +1,6 @@
 ﻿namespace Qlang.Compiler;
 
-public class Keywords
+public static class Keywords
 {
     public static string FunctionDeclaration => "function";
     public static string ClassDeclaration => "class";

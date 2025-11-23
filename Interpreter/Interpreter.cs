@@ -30,7 +30,7 @@ public partial class Interpreter
 
     public void Execute(ProgramNode program)
     {
-        Logger.Logger.SetLoggerPath("Logs\\debug.txt");
+        Logger.Logger.SetLoggerPath(Path.Combine("Logs", "Debug", "debug_interpreter.log"));
         Logger.Logger.Warn("----------- Interpreter -----------");
         
         try
@@ -304,19 +304,25 @@ public partial class Interpreter
             return GetNewClass(value, args.ToList());
         }
 
-        if (call is { ObjectName: "", MethodName: "_str" })
-            return ParseString(string.Join("", args.Select(a => a.ToString())));
-
-        if (call is { ObjectName: "", MethodName: "_csharp" })
+        switch (call)
         {
-            var returnValue = CSharpCall($"{string.Join(",", args)}");
+            case { ObjectName: "", MethodName: "_str" }:
+                return ParseString(string.Join("", args.Select(a => a.ToString())));
+            // case { ObjectName: "", MethodName: "_list" } when args.Length > 0:
+            // {
+            //     return GetCollection(args[0] as List<object>);
+            // };
+            case { ObjectName: "", MethodName: "_csharp" }:
+            {
+                var returnValue = CSharpCall($"{string.Join(",", args)}");
             
-            Logger.Logger.Warn("csharp.return_value: " + (returnValue == null ? "null" :
-                returnValue.ToString()));
+                Logger.Logger.Warn("csharp.return_value: " + (returnValue == null ? "null" :
+                    returnValue.ToString()));
             
-            return returnValue;
+                return returnValue;
+            }
         }
-        
+
         if (call.ObjectName is "this" or "")
         {
             if (CurrentContext.Class?.Body?
@@ -386,6 +392,27 @@ public partial class Interpreter
             var context = _contextStack.Pop();
             Logger.Logger.Warn($"class='{context.Class?.Name}' function='{context.Function?.Name}'", "RestoreContextStack");
         }
+    }
+
+    private string GetCollection(List<object>? arg)
+    {
+        if (arg is null)
+            throw new QlangRuntimeException("collection is null", null, GetStackTrace());
+        
+        string result = "new List<object>([";
+                
+        foreach (var obj in arg)
+        {
+            if (obj is not string)
+                result += obj + ",";
+            else
+                result += $"\"{obj}\",";
+        }
+        // Remove ','
+        result = (arg.Count > 0 ? result[..^1] : result) + "])";
+                
+        Logger.Logger.Log(result);
+        return result;
     }
 
     // WARNING: is ChatGPT code
@@ -462,6 +489,13 @@ public partial class Interpreter
     
         try
         {
+            List<object> args = [];
+            if (expr is CollectionNode collectionNode)
+            {
+                args = collectionNode.Collection.ConvertAll(EvaluateExpression);   
+                Logger.Logger.Log("Is collection expression: " + args);
+            }
+            
             return expr switch
             {
                 VariableNode varNode => GetVariable(varNode),
@@ -471,6 +505,7 @@ public partial class Interpreter
                 NumberNode num => num.Value,
                 BinaryOperationNode binOp => EvaluateBinaryOperation(binOp),
                 MethodCallNode methodCall => ExecuteMethodCall(methodCall),
+                CollectionNode => GetCollection(args),
                 _ => throw new QlangRuntimeException(
                     $"Unknown expression type: {expr.GetType().Name}", 
                     expr, 

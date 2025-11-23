@@ -16,11 +16,11 @@ public class Parser
 
         ProgramNode program = new();
 
-        Logger.Logger.SetLoggerPath("Logs\\debug_parser.txt");
+        Logger.Logger.SetLoggerPath(Path.Combine("Logs", "Debug", "debug_parser.log"));
         Logger.Logger.Warn("----------- Parser -----------");
         while (!IsAtEnd())
         {
-            if (Check(Tokens.NewLine))
+            if (Check(Tokens.Semicolon))
             {
                 Advance();
                 continue;
@@ -99,12 +99,12 @@ public class Parser
         if (Check(Tokens.Identifier))
         {
             var expr = ParseExpression();
-            Expect(Tokens.NewLine);
+            Expect(Tokens.Semicolon);
             Logger.Logger.Log("Ended parsing statement (identifier)", "CompilationProcess");
             return expr;
         }
 
-        throw new Exception($"Unexpected token: {Current().TokenType}");
+        throw new Exception($"Unexpected token: {Current().TokenType} '{Current().Value}'");
     }
 
     private AssignmentNode ParseVariableDeclaration(bool isStatic = false, bool isPrivate = false, bool isConst = false, bool isNew = false)
@@ -150,12 +150,12 @@ public class Parser
         
         Expect(Tokens.RParen);
         Expect(Tokens.Colon);
-        Expect(Tokens.NewLine);
-        Expect(Tokens.Indent);
+        // Expect(Tokens.Semicolon);
+        Expect(Tokens.LBrace);
 
         List<ASTNode> body = ParseBlock();
 
-        Expect(Tokens.Dedent);
+        Expect(Tokens.RBrace);
 
         Logger.Logger.Log("CompilationProcess.End: Parsing function");
         return new FunctionNode 
@@ -174,12 +174,12 @@ public class Parser
         var name = Expect(Tokens.Identifier).Value;
         
         Expect(Tokens.Colon);
-        Expect(Tokens.NewLine);
-        Expect(Tokens.Indent);
+        // Expect(Tokens.Semicolon);
+        Expect(Tokens.LBrace);
 
         List<ASTNode> body = ParseBlock();
 
-        Expect(Tokens.Dedent);
+        Expect(Tokens.RBrace);
 
         Logger.Logger.Log("CompilationProcess.End: Parsing class");
         return new ClassNode { Name = name, Body = body };
@@ -191,18 +191,18 @@ public class Parser
         Expect(Tokens.Keyword, Keywords.ForBlock);
         
         AssignmentNode assignment = ParseVariableDeclaration();
-        Expect(Tokens.CommaColon);
+        Expect(Tokens.Semicolon);
         var condition = ParseExpression();
-        Expect(Tokens.CommaColon);
+        Expect(Tokens.Semicolon);
         var statement = ParseExpression();
         
         Expect(Tokens.Colon);
-        Expect(Tokens.NewLine);
-        Expect(Tokens.Indent);
+        // Expect(Tokens.Semicolon);
+        Expect(Tokens.LBrace);
 
         List<ASTNode> forBlock = ParseBlock();
 
-        Expect(Tokens.Dedent);
+        Expect(Tokens.RBrace);
 
         Logger.Logger.Log("CompilationProcess.End: Parsing for");
         return new ForNode { Assignment = assignment, Statement = statement, Condition = condition, Body = forBlock };
@@ -214,12 +214,12 @@ public class Parser
         Expect(Tokens.Keyword, isDoWhile ? Keywords.DoWhileBlock : Keywords.WhileBlock);
         var condition = ParseExpression();
         Expect(Tokens.Colon);
-        Expect(Tokens.NewLine);
-        Expect(Tokens.Indent);
+        // Expect(Tokens.Semicolon);
+        Expect(Tokens.LBrace);
 
         List<ASTNode> whileBlock = ParseBlock();
 
-        Expect(Tokens.Dedent);
+        Expect(Tokens.RBrace);
 
         Logger.Logger.Log("CompilationProcess.End: Parsing while");
         return new WhileNode { Condition = condition, Body = whileBlock, IsDoWhile = isDoWhile };
@@ -231,15 +231,17 @@ public class Parser
         Expect(Tokens.Keyword, Keywords.IfBlock);
         var condition = ParseExpression();
         Expect(Tokens.Colon);
-        Expect(Tokens.NewLine);
-        Expect(Tokens.Indent);
+        // Expect(Tokens.Semicolon);
+        Expect(Tokens.LBrace);
 
         List<ASTNode> thenBlock = ParseBlock();
 
-        Expect(Tokens.Dedent);
+        Expect(Tokens.RBrace);
 
         List<ASTNode> elseBlock = [];
         
+        Logger.Logger.Warn(Current().TokenType.ToString());
+        Logger.Logger.Warn(Current().Value);
         if (Check(Tokens.Keyword) && Current().Value == Keywords.ElseBlock)
         {
             Advance();
@@ -249,10 +251,10 @@ public class Parser
             else
             {
                 Expect(Tokens.Colon);
-                Expect(Tokens.NewLine);
-                Expect(Tokens.Indent);
+                // Expect(Tokens.Semicolon);
+                Expect(Tokens.LBrace);
                 elseBlock = ParseBlock();
-                Expect(Tokens.Dedent);
+                Expect(Tokens.RBrace);
             }
         }
 
@@ -265,9 +267,10 @@ public class Parser
         List<ASTNode> statements = [];
         Logger.Logger.Log("CompilationProcess: Parsing block");
 
-        while (!Check(Tokens.Dedent) && !IsAtEnd())
+        while (!Check(Tokens.RBrace) && !IsAtEnd())
         {
-            if (Check(Tokens.NewLine))
+            Logger.Logger.Log("                                         CurerntToken,:" + Current().TokenType + " " + Current().Value);
+            if (Check(Tokens.Semicolon))
             {
                 Advance();
                 continue;
@@ -295,7 +298,7 @@ public class Parser
         
         var node = ParseExpression();
         
-        Expect(Tokens.NewLine);
+        Expect(Tokens.Semicolon);
         
         Logger.Logger.Log("CompilationProcess.End: Parsing return");
         return new ReturnNode { ReturnValue = node };
@@ -405,6 +408,26 @@ public class Parser
     private ASTNode ParsePrimary()
     {
         Logger.Logger.Log("CompilationProcess: Parsing primary");
+
+        // Array
+        if (Check(Tokens.LSquareParen))
+        {
+            Advance();
+            List<ASTNode> statements = [];
+            while (!Check(Tokens.RSquareParen) && !IsAtEnd())
+            {
+                if (Current().TokenType == Tokens.Comma)
+                {
+                    Advance();
+                    continue;
+                }
+                statements.Add(ParseExpression());
+            }
+            
+            Advance();
+
+            return new CollectionNode { Collection = statements };
+        }
         
         bool isMinus = false;
         if (Check(Tokens.Minus))
@@ -565,7 +588,7 @@ public class Parser
         if (!IsAtEnd()) _position++;
         var token = _tokens[_position - 1];
         
-        Logger.Logger.Log(token.TokenType.ToString(), $"Token (Ln:{token.Line} Idx:{token.Index})");
+        Logger.Logger.Log(token.TokenType.ToString() + " " + token.Value, $"Token (Ln:{token.Line} Idx:{token.Index})");
         return token;
     }
 

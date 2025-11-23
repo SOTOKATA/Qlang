@@ -13,6 +13,8 @@ public class FileLogger
     {
         _filePath = path;
         
+        if (!Directory.Exists(Path.GetDirectoryName(path)))
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
         if (!File.Exists(path))
             File.Create(_filePath).Close();
         

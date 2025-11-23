@@ -1,3 +1,5 @@
-class Object:
-    function toString():
-        return "object"
+class Object: {
+    function toString(): {
+        return "object";
+    }
+}
