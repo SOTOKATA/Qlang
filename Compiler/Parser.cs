@@ -8,6 +8,8 @@ public class Parser
 {
     private List<Token> _tokens = [];
     private int _position = 0;
+
+    private string _line = "";
     
     public ProgramNode Parse(List<Token> tokens)
     {
@@ -587,8 +589,12 @@ public class Parser
     {
         if (!IsAtEnd()) _position++;
         var token = _tokens[_position - 1];
+
+        if (token.TokenType == Tokens.Semicolon)
+            _line = "";
         
         Logger.Logger.Log(token.TokenType.ToString() + " " + token.Value, $"Token (Ln:{token.Line} Idx:{token.Index})");
+        _line += $"{Token.TokenToString(token.TokenType)}{token.Value}";
         return token;
     }
 
@@ -597,7 +603,11 @@ public class Parser
         if (!Check(type))
         {
             var current = Current();
-            throw new Exception($"Expected {type}, got {current.TokenType} (Value: {(current.Value == "" ? "Null" : current.Value)}) ");
+            throw new Exception($"""
+                                 Expected {type}, got {current.TokenType} (Value: {(current.Value == "" ? "Null" : current.Value)})
+                                    line ({current.Line + 1}): '{_line}'
+                                    
+                                 """);
         }
         
         if (value != null && Current().Value != value)
