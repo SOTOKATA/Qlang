@@ -2,6 +2,8 @@
 
 public class MethodCallNode : ASTNode
 {
+    // its: 'Term', 'read()', 'trim()'
+    public List<string> Objects = [];
     public string ObjectName { get; set; }  // "Term"
     public string MethodName { get; set; }  // "print"
     public List<ASTNode> Arguments { get; set; } = [];

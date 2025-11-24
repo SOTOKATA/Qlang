@@ -105,6 +105,11 @@ public partial class Interpreter
         return dynamicFunction;
     }
 
+    private void AddContext(ASTContext context)
+    {
+        _contextStack.Push(context);
+    }
+
     private bool _break;
     private ReturnNode _return;
     private object ExecuteFunction(DynamicFunction? function, List<object> arguments, DynamicClass? ownerClass)
@@ -116,7 +121,8 @@ public partial class Interpreter
         
         var contextClass = ownerClass ?? (_contextStack.Count > 0 ? CurrentContext.Class : null);
         ASTContext newContext = new() { Function = function, Class = contextClass };
-        _contextStack.Push(newContext);
+
+        AddContext(newContext);
 
         try
         {
@@ -368,9 +374,8 @@ public partial class Interpreter
             if (@class?.Body.FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) is FunctionNode
                 function)
             {
-                CurrentContext.Class = @class;
-                Logger.Logger.Warn("VariableClass:Class: " + CurrentContext.Class.Name);
-                return ExecuteFunction(ToDynamicFunction(function), args.ToList(), CurrentContext.Class);
+                Logger.Logger.Warn("VariableClass:Class: " + @class.Name);
+                return ExecuteFunction(ToDynamicFunction(function), args.ToList(), @class);
             }
 
             Logger.Logger.Error("VariableClass: function is not found");
@@ -478,14 +483,6 @@ public partial class Interpreter
         if (node.IsPrivate)
             throw new QlangRuntimeException("This function is private but called from external class", call,
                 GetStackTrace());
-        
-        // var previousClass = CurrentContext?.Class;
-    
-        // if (_contextStack.Count > 0)
-        // {
-        //     CurrentContext.Class = classNode;
-        //     Logger.Logger.Warn("ExecuteMethodClass:Class: " + CurrentContext.Class.Name);
-        // }
 
         var dynamicFunction = ToDynamicFunction(node);
         

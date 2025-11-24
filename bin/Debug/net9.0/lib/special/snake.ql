@@ -6,7 +6,7 @@ class SnakeGame: {
 
     let tailX = Array.new([]);
     let tailY = Array.new([]);
-    let tailLength = 0;
+    let tailLength = 1;
 
     let lastChar = "";
 
@@ -39,13 +39,10 @@ class SnakeGame: {
 
                 for let tX = 0; tX < tailX.length(); tX = tX + 1: {
                     let x = tailX.at(tX);
+                    let y = tailY.at(tX);
 
-                    for let tY = 0; tY < tailY.length(); tY = tY + 1: {
-                        let y = tailY.at(tY);
-
-                        if (x == i) && (y == j): {
-                            isTailPosition = true;
-                        }
+                    if (x == i) && (y == j): {
+                        isTailPosition = true;
                     }
                 }
 
@@ -62,6 +59,8 @@ class SnakeGame: {
                 } else: {
                     Console.print(".");
                 }
+
+                isTailPosition = false;
             }
         }
     }
@@ -128,7 +127,7 @@ class SnakeGame: {
             logic();
             draw();
 
-            Time.wait(200);
+            Time.wait(100);
         }
     }
 }

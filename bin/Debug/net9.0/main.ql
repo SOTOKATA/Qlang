@@ -1,5 +1,6 @@
 include "@lib/base"
+include "@lib/special/snake"
 
 function main(): {
-    Console.println("Hello World!")
+    SnakeGame.run();
 }
