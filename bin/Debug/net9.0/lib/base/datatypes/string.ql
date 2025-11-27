@@ -10,11 +10,6 @@ class String: {
         return _value;
     }
 
-    // Get new c# string (internal)
-    private function _str(let str): {
-        return "new string(" + _str(str) + ")";
-    }
-
     // Append two strings
     function append(let collection): {
         if Array.isArray(collection) == false: {
@@ -43,7 +38,7 @@ class String: {
     }
     
     // Check if string is white space or null
-    function isNullOrWhiteSpace(let str): {
+    function isNullOrWhitespace(let str): {
         return _native("str_null_or_white_space", _str(str));
     }
 

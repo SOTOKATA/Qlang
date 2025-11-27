@@ -1,5 +1,6 @@
-include "@lib/base"
+include "$lib/base"
+include "$lib/special/demo"
 
 function main(): {
-    Console.println(Parser.asFloat("3") + 9);
+    LanguageDemo.run();
 }

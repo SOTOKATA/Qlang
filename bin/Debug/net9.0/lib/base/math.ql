@@ -13,7 +13,7 @@ class Math: {
     function abs(let num): {
         throwException(num);
 
-        return 0 - num;
+        return 0 - Parser.asNumber(num);
     }
 
     // Get result of sum of two numbers
@@ -21,7 +21,7 @@ class Math: {
         throwException(num);
         throwException(num2);
 
-        return num + num2;
+        return Parser.asNumber(num) + Parser.asNumber(num2);
     }
 
     // Get result substration of two numbers
@@ -29,7 +29,7 @@ class Math: {
         throwException(num);
         throwException(num2);
 
-        return num - num2;
+        return Parser.asNumber(num) - Parser.asNumber(num2);
     }
         
     // Get result of multiplication of two numbers
@@ -37,7 +37,7 @@ class Math: {
         throwException(num);
         throwException(num2);
 
-        return num * num2;
+        return Parser.asNumber(num) * Parser.asNumber(num2);
     }
 
     // Get result of division of two numbers
@@ -48,6 +48,6 @@ class Math: {
         if num2 == 0: {
             Throw.exception("Can't divide by 0");
         }
-        return num / num2;
+        return Parser.asNumber(num) / Parser.asNumber(num2);
     }
 }

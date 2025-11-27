@@ -1,4 +1,4 @@
-include "@lib/base"
+include "$lib/base"
 
 class LanguageDemo: {
     function run(): {

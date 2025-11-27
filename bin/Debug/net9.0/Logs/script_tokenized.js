@@ -314,7 +314,162 @@ Keyword(class) Identifier(Throw) Colon
 		Identifier(exception) LParen Identifier(___STRING_62___) Plus Identifier(error) RParen Semicolon 
 	RBrace 
 RBrace 
+Keyword(class) Identifier(LanguageDemo) Colon 
+	LBrace 
+	Keyword(function) Identifier(run) LParen RParen Colon 
+		LBrace 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_63___) RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_64___) RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_65___) RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_66___) RParen Semicolon 
+		Keyword(do_while) LParen Identifier(String) Dot Identifier(isNullOrWhiteSpace) LParen Identifier(choice) RParen Equals Equals Keyword(true) RParen Or Or LParen Identifier(Number) Dot Identifier(isNumber) LParen Identifier(choice) RParen Equals Equals Keyword(false) RParen Colon 
+			LBrace 
+			Identifier(Console) Dot Identifier(print) LParen Identifier(___STRING_67___) RParen Semicolon 
+			Keyword(let) Identifier(choice) Equals Identifier(Console) Dot Identifier(readln) LParen RParen Semicolon 
+			Keyword(if) Identifier(String) Dot Identifier(isNullOrWhiteSpace) LParen Identifier(choice) RParen Equals Equals Keyword(true) Colon 
+				LBrace 
+				Identifier(printException) LParen Identifier(___STRING_68___) RParen Semicolon 
+			RBrace 
+			Keyword(if) Identifier(Number) Dot Identifier(isNumber) LParen Identifier(choice) RParen Equals Equals Keyword(false) Colon 
+				LBrace 
+				Identifier(printException) LParen Identifier(___STRING_69___) RParen Semicolon 
+			RBrace 
+		RBrace 
+		Keyword(if) Identifier(choice) Equals Equals Identifier(___STRING_70___) Colon 
+			LBrace 
+			Identifier(numericDemo) LParen RParen Semicolon 
+		RBrace 
+		Keyword(else) Keyword(if) Identifier(choice) Equals Equals Identifier(___STRING_71___) Colon 
+			LBrace 
+			Identifier(stringDemo) LParen RParen Semicolon 
+		RBrace 
+		Keyword(else) Keyword(if) Identifier(choice) Equals Equals Identifier(___STRING_72___) Colon 
+			LBrace 
+			Identifier(circleDemo) LParen RParen Semicolon 
+		RBrace 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_73___) RParen Semicolon 
+	RBrace 
+	Keyword(function) Identifier(stringDemo) LParen RParen Colon 
+		LBrace 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_74___) RParen Semicolon 
+		Keyword(do_while) Identifier(String) Dot Identifier(isNullOrWhiteSpace) LParen Identifier(input) RParen Equals Equals Keyword(true) Colon 
+			LBrace 
+			Identifier(Console) Dot Identifier(print) LParen Identifier(___STRING_75___) RParen Semicolon 
+			Keyword(let) Identifier(input) Equals Identifier(Console) Dot Identifier(readln) LParen RParen Semicolon 
+			Keyword(if) Identifier(String) Dot Identifier(isNullOrWhiteSpace) LParen Identifier(input) RParen Equals Equals Keyword(true) Colon 
+				LBrace 
+				Identifier(printException) LParen Identifier(___STRING_76___) RParen Semicolon 
+			RBrace 
+		RBrace 
+		Identifier(input) Equals Identifier(String) Dot Identifier(new) LParen Identifier(input) RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_77___) Plus Identifier(input) Dot Identifier(length) LParen RParen RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_78___) Plus Identifier(input) Dot Identifier(trim) LParen RParen Plus Identifier(___STRING_79___) RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_80___) Plus Identifier(input) Dot Identifier(trimStart) LParen RParen Plus Identifier(___STRING_81___) RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_82___) Plus Identifier(input) Dot Identifier(trimEnd) LParen RParen Plus Identifier(___STRING_83___) RParen Semicolon 
+		Keyword(if) Identifier(input) Dot Identifier(length) LParen RParen Greater Identifier(___NUMBER_5___) Colon 
+			LBrace 
+			Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_84___) Plus Identifier(input) Dot Identifier(subString) LParen Identifier(___NUMBER_6___) Comma Identifier(___NUMBER_7___) RParen Plus Identifier(___STRING_85___) RParen Semicolon 
+		RBrace 
+	RBrace 
+	Keyword(function) Identifier(numericDemo) LParen RParen Colon 
+		LBrace 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_86___) RParen Semicolon 
+		Keyword(let) Identifier(num1) Equals Identifier(getNumberFromConsole) LParen Identifier(___STRING_87___) RParen Semicolon 
+		Keyword(let) Identifier(num2) Equals Identifier(getNumberFromConsole) LParen Identifier(___STRING_88___) RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_89___) Plus Identifier(num1) RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_90___) Plus Identifier(num2) RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_91___) RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_92___) Plus Identifier(Math) Dot Identifier(sum) LParen Identifier(num1) Comma Identifier(num2) RParen RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_93___) Plus Identifier(Math) Dot Identifier(sub) LParen Identifier(num1) Comma Identifier(num2) RParen RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_94___) Plus Identifier(Math) Dot Identifier(mult) LParen Identifier(num1) Comma Identifier(num2) RParen RParen Semicolon 
+		Keyword(if) Identifier(num2) Not Equals Identifier(___NUMBER_8___) Colon 
+			LBrace 
+			Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_95___) Plus Identifier(Number) Dot Identifier(toFixed) LParen Identifier(Math) Dot Identifier(div) LParen Identifier(num1) Comma Identifier(num2) RParen Comma Identifier(___STRING_96___) RParen RParen Semicolon 
+		RBrace 
+		Keyword(else) Colon 
+			LBrace 
+			Identifier(printException) LParen Identifier(___STRING_97___) RParen Semicolon 
+		RBrace 
+		Keyword(if) Identifier(num1) Less Identifier(num2) Colon 
+			LBrace 
+			Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_98___) Plus Identifier(num1) Plus Identifier(___STRING_99___) Plus Identifier(num2) Plus Identifier(___STRING_100___) Plus Identifier(Number) Dot Identifier(randInt) LParen Identifier(num1) Comma Identifier(num2) RParen RParen Semicolon 
+		RBrace 
+		Keyword(else) Colon 
+			LBrace 
+			Identifier(printException) LParen Identifier(___STRING_101___) RParen Semicolon 
+		RBrace 
+		Keyword(for) Keyword(let) Identifier(i) Equals Identifier(num1) Minus Identifier(___NUMBER_9___) Semicolon 
+		Identifier(i) Less Identifier(num1) Semicolon 
+		Identifier(i) Equals Identifier(i) Plus Identifier(___NUMBER_10___) Colon 
+			LBrace 
+			Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_102___) Plus Identifier(i) RParen Semicolon 
+		RBrace 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_103___) RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_104___) Plus Identifier(Number) Dot Identifier(toInt) LParen Identifier(num1) RParen RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_105___) Plus Identifier(Number) Dot Identifier(toInt) LParen Identifier(num2) RParen RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_106___) Plus Identifier(Number) Dot Identifier(toFixed) LParen Identifier(num1) Comma Identifier(___STRING_107___) RParen RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_108___) Plus Identifier(Number) Dot Identifier(toFixed) LParen Identifier(num2) Comma Identifier(___STRING_109___) RParen RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_110___) Plus Identifier(Math) Dot Identifier(PI) RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_111___) Plus Identifier(Number) Dot Identifier(MIN_VALUE) RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_112___) Plus Identifier(Number) Dot Identifier(MAX_VALUE) RParen Semicolon 
+	RBrace 
+	Keyword(function) Identifier(circleDemo) LParen RParen Colon 
+		LBrace 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_113___) RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_114___) RParen Semicolon 
+		Identifier(Console) Dot Identifier(print) LParen Identifier(___STRING_115___) RParen Semicolon 
+		Keyword(let) Identifier(randNum) Equals Identifier(___NUMBER_11___) Minus Identifier(___NUMBER_12___) Semicolon 
+		Keyword(while) Identifier(randNum) Not Equals Identifier(___NUMBER_13___) Colon 
+			LBrace 
+			Identifier(randNum) Equals Identifier(Number) Dot Identifier(randInt) LParen Identifier(___NUMBER_14___) Comma Identifier(___NUMBER_15___) RParen Semicolon 
+			Identifier(Console) Dot Identifier(print) LParen Identifier(randNum) Plus Identifier(___STRING_116___) RParen Semicolon 
+		RBrace 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_117___) RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_118___) RParen Semicolon 
+		Identifier(acceptContinue) LParen RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_119___) RParen Semicolon 
+		Keyword(do_while) Identifier(input) Not Equals Identifier(___STRING_120___) Colon 
+			LBrace 
+			Identifier(Console) Dot Identifier(print) LParen Identifier(___STRING_121___) RParen Semicolon 
+			Keyword(let) Identifier(input) Equals Identifier(Console) Dot Identifier(readln) LParen RParen Semicolon 
+		RBrace 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_122___) RParen Semicolon 
+		Identifier(acceptContinue) LParen RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_123___) RParen Semicolon 
+		Keyword(for) Keyword(let) Identifier(i) Equals Identifier(___NUMBER_16___) Semicolon 
+		Identifier(i) Less Identifier(___NUMBER_17___) Semicolon 
+		Identifier(i) Equals Identifier(i) Plus Identifier(___NUMBER_18___) Colon 
+			LBrace 
+			Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_124___) Plus Identifier(i) RParen Semicolon 
+		RBrace 
+	RBrace 
+	Keyword(function) Identifier(acceptContinue) LParen RParen Colon 
+		LBrace 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_125___) RParen Semicolon 
+		Identifier(Console) Dot Identifier(readln) LParen RParen Semicolon 
+	RBrace 
+	Keyword(function) Identifier(printException) LParen Keyword(let) Identifier(msg) RParen Colon 
+		LBrace 
+		Identifier(Console) Dot Identifier(setForeColor) LParen Identifier(___STRING_126___) RParen Semicolon 
+		Identifier(Console) Dot Identifier(println) LParen Identifier(msg) RParen Semicolon 
+		Identifier(Console) Dot Identifier(resetColors) LParen RParen Semicolon 
+	RBrace 
+	Keyword(function) Identifier(getNumberFromConsole) LParen Keyword(let) Identifier(msg) RParen Colon 
+		LBrace 
+		Keyword(let) Identifier(num) Equals Identifier(___STRING_127___) Semicolon 
+		Keyword(do_while) Identifier(Number) Dot Identifier(isNumber) LParen Identifier(num) RParen Equals Equals Keyword(false) Colon 
+			LBrace 
+			Identifier(Console) Dot Identifier(print) LParen Identifier(msg) RParen Semicolon 
+			Identifier(num) Equals Identifier(Console) Dot Identifier(readln) LParen RParen Semicolon 
+			Keyword(if) Identifier(Number) Dot Identifier(isNumber) LParen Identifier(num) RParen Equals Equals Keyword(false) Colon 
+				LBrace 
+				Identifier(printException) LParen Identifier(___STRING_128___) RParen Semicolon 
+			RBrace 
+		RBrace 
+		Keyword(return) Identifier(num) Semicolon 
+	RBrace 
+RBrace 
 Keyword(function) Identifier(main) LParen RParen Colon 
 	LBrace 
-	Identifier(Console) Dot Identifier(println) LParen Identifier(Parser) Dot Identifier(asFloat) LParen Identifier(___STRING_63___) RParen Plus Identifier(___NUMBER_5___) RParen Semicolon 
+	Identifier(LanguageDemo) Dot Identifier(run) LParen RParen Semicolon 
 RBrace 

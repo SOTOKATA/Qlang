@@ -1,4 +1,4 @@
-include "@lib/console"
+include "$lib/console"
 function main():
     Console.clear()
     Console.println("Hello World!")
@@ -6,9 +6,9 @@ function main():
     Console.println(name)
 
 
-// include "@lib/console"
-// include "@lib/throw"
-// include "@lib/datatypes/number"
+// include "$lib/console"
+// include "$lib/throw"
+// include "$lib/datatypes/number"
 
 // function main():
 //     Console.print("Write your name: ")

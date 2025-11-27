@@ -1,4 +1,4 @@
-include "@lib/base"
+include "$lib/base"
 
 class SnakeGame: {
     let X = 0;

@@ -138,19 +138,19 @@ public partial class Interpreter
                 throw new QlangRuntimeException("The number of arguments must be equal to the number of params", 
                     null, GetStackTrace());
             
-            string returnValue = null;
+            object? returnValue = null;
             _break = false;
             foreach (var statement in function.Body)
             {
                 if (_break)
                 {
                     _break = false;
-                    return EvaluateExpression(_return.ReturnValue).ToString();
+                    return EvaluateExpression(_return.ReturnValue);
                 }
             
                 if (statement is ReturnNode returnNode)
                 {
-                    returnValue = EvaluateExpression(returnNode.ReturnValue).ToString();
+                    returnValue = EvaluateExpression(returnNode.ReturnValue);
                     break;
                 }
 

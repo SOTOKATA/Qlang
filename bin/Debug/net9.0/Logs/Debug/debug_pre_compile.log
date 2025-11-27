@@ -1,22 +1,28 @@
 (27) [LOG] Compiler/Compile: Include Files
 (20) [LOG] PreCompile/IncludeFiles: Include:
-include "@lib/base"
-(37) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base
-(63) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\console.ql
-(63) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\include.ql
-(63) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\math.ql
-(63) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\object.ql
-(63) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\parser.ql
-(63) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\throw.ql
+include "$lib/base"
+include "$lib/special/demo"
+(37) [LOG] PreCompile/IncludeFiles: Path: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base
+(63) [LOG] PreCompile/IncludeFiles: Path: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\console.ql
+(63) [LOG] PreCompile/IncludeFiles: Path: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\include.ql
+(63) [LOG] PreCompile/IncludeFiles: Path: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\math.ql
+(63) [LOG] PreCompile/IncludeFiles: Path: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\object.ql
+(63) [LOG] PreCompile/IncludeFiles: Path: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\parser.ql
+(63) [LOG] PreCompile/IncludeFiles: Path: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\throw.ql
 (20) [LOG] PreCompile/IncludeFiles: Include:
-include "@lib/base/datatypes"
-include "@lib/base/datetime"
-(37) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\datatypes
-(63) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\datatypes\array.ql
-(63) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\datatypes\number.ql
-(63) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\datatypes\string.ql
-(37) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\datetime
-(63) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\datetime\time.ql
+include "$lib/base/datatypes"
+include "$lib/base/datetime"
+(37) [LOG] PreCompile/IncludeFiles: Path: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\datatypes
+(63) [LOG] PreCompile/IncludeFiles: Path: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\datatypes\array.ql
+(63) [LOG] PreCompile/IncludeFiles: Path: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\datatypes\number.ql
+(63) [LOG] PreCompile/IncludeFiles: Path: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\datatypes\string.ql
+(37) [LOG] PreCompile/IncludeFiles: Path: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\datetime
+(63) [LOG] PreCompile/IncludeFiles: Path: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\datetime\time.ql
+(37) [LOG] PreCompile/IncludeFiles: Path: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\special\demo
+(20) [LOG] PreCompile/IncludeFiles: Include:
+include "$lib/base"
+(37) [LOG] PreCompile/IncludeFiles: Path: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base
+(75) [WARN] PreCompile/IncludeFiles: Skipped (already included): D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base
 (48) [SUCC] QLang/Compile: All includes processed successfully.
 (31) [SUCC] Compiler/Compile: Clear Comments
 (161) [LOG] <>c/<ClearComments>b__4_0: Comment='// Dynamic array'
@@ -96,6 +102,7 @@ include "@lib/base/datetime"
 (161) [LOG] <>c/<ClearComments>b__4_0: Comment='// Throw default exception'
 (161) [LOG] <>c/<ClearComments>b__4_0: Comment='// Thow exception if function is not implement'
 (161) [LOG] <>c/<ClearComments>b__4_0: Comment='// Thow exception when parse error'
+(161) [LOG] <>c/<ClearComments>b__4_0: Comment='// TODO: { bool re-write parsing (with || and &&)'
 (31) [SUCC] Compiler/Compile: Comments cleared successfully
 (121) [LOG] PreCompile/ExtractStrings: Extract Strings
 (143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_0___', Value='list_create'
@@ -161,7 +168,72 @@ include "@lib/base/datetime"
 (143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_60___', Value='exception'
 (143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_61___', Value='This function or object is not implement'
 (143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_62___', Value='Parse error: '
-(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_63___', Value='3'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_63___', Value='<--- Menu demo --->'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_64___', Value='1. Numeric'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_65___', Value='2. Strings'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_66___', Value='3. Circles'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_67___', Value='Print choice (1-3): '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_68___', Value='You print empty string!'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_69___', Value='You print not number!'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_70___', Value='1'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_71___', Value='2'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_72___', Value='3'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_73___', Value='\nCurrent presentation ended'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_74___', Value=''
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_75___', Value='Print anything: '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_76___', Value='You must to print anything!'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_77___', Value='\nInput length: '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_78___', Value='Input trim: ''
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_79___', Value='''
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_80___', Value='Input trim start: ''
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_81___', Value='''
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_82___', Value='Input trim end: ''
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_83___', Value='''
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_84___', Value='Input first two characters: ''
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_85___', Value='''
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_86___', Value='\nWelcome to numeric demo!'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_87___', Value='Write first number: { '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_88___', Value='Write second number: { '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_89___', Value='\nFirst number: '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_90___', Value='Second number: '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_91___', Value='\n<--- Math --->'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_92___', Value='Sum: '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_93___', Value='Substration: '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_94___', Value='Multiplication: '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_95___', Value='Division: '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_96___', Value='0.00'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_97___', Value='Division: Can't divide by 0!'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_98___', Value='Random number (range: '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_99___', Value='-'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_100___', Value='): { '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_101___', Value='Random number: Error, first number can't be more than or equal second'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_102___', Value='Index: '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_103___', Value='\n<--- Number class --->'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_104___', Value='First number as integer: '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_105___', Value='Second number as integer: '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_106___', Value='\nFirst number with pattern '0.00': '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_107___', Value='0.00'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_108___', Value='Second number with pattern '0.00': '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_109___', Value='0.00'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_110___', Value='\nPI: '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_111___', Value='\nMinimum number value: '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_112___', Value='Maximum number value: '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_113___', Value='\nWelcome to circles demo!'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_114___', Value='\nWhile example (while random number is not 0): {'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_115___', Value='Numbers: '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_116___', Value=', '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_117___', Value='Ocurre 0!'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_118___', Value='You exit from while.'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_119___', Value='\ndo-While example: '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_120___', Value='0'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_121___', Value='Type '0' to break do-While: '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_122___', Value='You exit from do_while.'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_123___', Value='For example (0-10): '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_124___', Value='Index: '
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_125___', Value='\nPress enter to continue'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_126___', Value='red'
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_127___', Value=''
+(143) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_128___', Value='Input is not number!'
 (33) [SUCC] Compiler/Compile: Strings extracted successfully
 (35) [WARN] Compiler/Compile: Extract Numbers
 (0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_0___', Value='0'
@@ -169,5 +241,18 @@ include "@lib/base/datetime"
 (0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_2___', Value='3.14159265359'
 (0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_3___', Value='0'
 (0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_4___', Value='0'
-(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_5___', Value='9'
+(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_5___', Value='2'
+(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_6___', Value='0'
+(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_7___', Value='2'
+(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_8___', Value='0'
+(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_9___', Value='10'
+(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_10___', Value='1'
+(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_11___', Value='0'
+(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_12___', Value='1'
+(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_13___', Value='0'
+(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_14___', Value='0'
+(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_15___', Value='3'
+(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_16___', Value='0'
+(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_17___', Value='10'
+(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_18___', Value='1'
 (35) [WARN] Compiler/Compile: Numbers extracted successfully

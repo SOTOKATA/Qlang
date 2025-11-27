@@ -1,15 +1,6 @@
 // Full static class
 // Class to make operations with numbers
 class Number: {
-    // Will return Number as object
-    // function new():
-    //     isUsr = true
-    //     Console.println(isUsr)
-    //     return Number
-
-    // Basic c# usings for this class
-    private let usings = "using System; using System.Globalization; ";
-
     // used string because of number structure with E+
     const let MIN_VALUE = "-1.7976931348623157E+308";
     const let MAX_VALUE = "1.7976931348623157E+308";
@@ -17,7 +8,6 @@ class Number: {
     // check if 'var' is number
     function isNumber(let var): {
         return _native("try_parse_number", var);
-        // return _csharp(usings + "double.TryParse(" + _str(var) + ", NumberStyles.Float, CultureInfo.InvariantCulture, out var _)");
     }
 
     // get random number with range 'min' to 'max'
@@ -45,6 +35,5 @@ class Number: {
     // Change numeric style (ex.: '3.214' to '3.2' with pattern '0.0')
     function toFixed(let number, let pattern): {
         return _native("to_string_number", number, _str(pattern));
-        // return _csharp(usings + "(" + number + ").ToString(" + _str(pattern) + ")");
     }
 }

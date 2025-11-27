@@ -391,6 +391,171 @@ class Throw: {
 }
 
 
+class LanguageDemo: {
+    function run(): {
+
+        Console.println(___STRING_63___);
+        Console.println(___STRING_64___);
+        Console.println(___STRING_65___);
+        Console.println(___STRING_66___);
+        
+        
+        do_while (String.isNullOrWhiteSpace(choice) == true) || (Number.isNumber(choice) == false): {
+            Console.print(___STRING_67___);
+            let choice = Console.readln();
+
+            if String.isNullOrWhiteSpace(choice) == true: {
+                printException(___STRING_68___);
+            }
+
+            if Number.isNumber(choice) == false: {
+                printException(___STRING_69___);
+            }
+        }
+
+        if choice == ___STRING_70___: {
+            numericDemo();
+        }
+        else if choice == ___STRING_71___: {
+            stringDemo();
+        }
+        else if choice == ___STRING_72___: {
+            circleDemo();
+        }
+
+        Console.println(___STRING_73___);
+    }
+
+    function stringDemo(): {
+        Console.println(___STRING_74___);
+
+        do_while String.isNullOrWhiteSpace(input) == true: { 
+            Console.print(___STRING_75___);
+            let input = Console.readln();
+
+            if String.isNullOrWhiteSpace(input) == true: {
+                printException(___STRING_76___);
+            }
+        }
+
+        input = String.new(input);
+        
+        Console.println(___STRING_77___ + input.length());
+        Console.println(___STRING_78___ + input.trim() + ___STRING_79___);
+        Console.println(___STRING_80___ + input.trimStart() + ___STRING_81___);
+        Console.println(___STRING_82___ + input.trimEnd() + ___STRING_83___);
+        
+        if input.length() > ___NUMBER_5___: {
+            Console.println(___STRING_84___ + input.subString(___NUMBER_6___, ___NUMBER_7___) + ___STRING_85___);
+        }
+    }
+
+    function numericDemo(): {
+        Console.println(___STRING_86___);
+
+        let num1 = getNumberFromConsole(___STRING_87___);
+        let num2 = getNumberFromConsole(___STRING_88___);
+
+        Console.println(___STRING_89___ + num1);
+        Console.println(___STRING_90___ + num2);
+
+        Console.println(___STRING_91___);
+        Console.println(___STRING_92___ + Math.sum(num1, num2));
+        Console.println(___STRING_93___ + Math.sub(num1, num2));
+        Console.println(___STRING_94___ + Math.mult(num1, num2));
+
+        if num2 != ___NUMBER_8___: {
+            Console.println(___STRING_95___ + Number.toFixed(Math.div(num1, num2), ___STRING_96___));
+        }
+        else: {
+            printException(___STRING_97___);
+        }
+
+        if num1 < num2: {
+            Console.println(___STRING_98___ + num1 + ___STRING_99___ + num2 + ___STRING_100___ + Number.randInt(num1, num2));
+        }
+        else: {
+            printException(___STRING_101___);
+        }
+
+        for let i = num1 - ___NUMBER_9___; i < num1; i = i + ___NUMBER_10___: {
+            Console.println(___STRING_102___ + i);
+        }
+
+        Console.println(___STRING_103___);
+        Console.println(___STRING_104___ + Number.toInt(num1));
+        Console.println(___STRING_105___ + Number.toInt(num2));
+
+        Console.println(___STRING_106___ + Number.toFixed(num1, ___STRING_107___));
+        Console.println(___STRING_108___ + Number.toFixed(num2, ___STRING_109___));
+
+        Console.println(___STRING_110___ + Math.PI);
+
+        Console.println(___STRING_111___ + Number.MIN_VALUE);
+        Console.println(___STRING_112___ + Number.MAX_VALUE);
+    }
+
+    function circleDemo(): {
+        Console.println(___STRING_113___);
+
+        Console.println(___STRING_114___);
+        Console.print(___STRING_115___);
+        
+        let randNum = ___NUMBER_11___-___NUMBER_12___;
+        
+        while randNum != ___NUMBER_13___: {
+            randNum = Number.randInt(___NUMBER_14___, ___NUMBER_15___);
+            Console.print(randNum + ___STRING_116___);
+        }
+
+        Console.println(___STRING_117___);
+        Console.println(___STRING_118___);
+
+        acceptContinue();
+
+        Console.println(___STRING_119___);
+        do_while input != ___STRING_120___: {
+            Console.print(___STRING_121___);
+            let input = Console.readln();
+        }
+        Console.println(___STRING_122___);
+
+        acceptContinue();
+
+        Console.println(___STRING_123___);
+        
+        for let i = ___NUMBER_16___; i < ___NUMBER_17___; i = i + ___NUMBER_18___: {
+            Console.println(___STRING_124___ + i);
+        }
+    }
+
+    function acceptContinue(): {
+        Console.println(___STRING_125___);
+        Console.readln();
+    }
+
+    function printException(let msg): {
+        Console.setForeColor(___STRING_126___);
+        Console.println(msg);
+        Console.resetColors();
+    }
+
+    function getNumberFromConsole(let msg): {
+        let num = ___STRING_127___;
+
+        do_while Number.isNumber(num) == false: {
+            Console.print(msg);
+            num = Console.readln();
+
+            if Number.isNumber(num) == false: {
+                printException(___STRING_128___);
+            }
+        }
+
+        return num;
+    }
+}
+
 function main(): {
-    Console.println(Parser.asFloat(___STRING_63___) + ___NUMBER_5___);
+    LanguageDemo.run();
 }

@@ -10,6 +10,7 @@ public static class PreCompile
     
     public static string IncludeFiles(string script)
     {
+        // Find all lines with 'include '
         var includeLines = script
             .Split('\n')
             .Select(x => x.Trim())
@@ -25,14 +26,12 @@ public static class PreCompile
         {
 
             var line = includeLine.Replace("include ", "").Replace("\"", "");
-            // Logger.Logger.Log("Path: " + line);
-
             string fullPath;
 
-            fullPath = Path.Combine(Directory.GetCurrentDirectory(), line.StartsWith('@') ? line[1..] : line);
+            fullPath = Path.Combine(Directory.GetCurrentDirectory(), line.StartsWith('$') ? line[1..] : line);
 
-            fullPath = fullPath.Replace('\\', Path.DirectorySeparatorChar);
-            fullPath = fullPath.Replace('/', Path.DirectorySeparatorChar);
+            fullPath = fullPath.Replace('\\', Path.DirectorySeparatorChar)
+                                .Replace('/', Path.DirectorySeparatorChar);
 
             Logger.Logger.Log("Path: " + fullPath);
 
