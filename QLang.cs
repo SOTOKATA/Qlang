@@ -6,7 +6,7 @@ public class QLang
 {
     private ProgramNode? _programNode;
     private Dictionary<string, string> _stringDictionary = [];
-    private Dictionary<string, string> _numberDictionary = [];
+    private Dictionary<string, object> _numberDictionary = [];
 
     public static Settings Settings;
 

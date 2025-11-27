@@ -30,7 +30,15 @@ class SnakeGame: {
 
     function draw(): {
         Console.setCursorPosition(0, 0);
-        Console.println("Score: " + score);
+
+        let arrow = "";
+
+        if lastChar == "a": { arrow = "<"; }
+        else if lastChar == "d": { arrow = ">"; }
+        else if lastChar == "s": { arrow = "v"; }
+        else if lastChar == "w": { arrow = "^"; }
+
+        Console.println("Score: " + Number.toFixed(score, "00") + " Dir: " + arrow);
 
         for let j = 0; j < (height + 1); j = j + 1: {
             for let i = 0; i < (width + 1); i = i + 1: {
@@ -77,9 +85,9 @@ class SnakeGame: {
      
         tailX.insert(0, X);
         tailY.insert(0, Y);
-        if tailX.length() > tailLength: {
+        if (tailX.length() > tailLength) || (tailY.length() > tailLength): {
             tailX.removeAt(tailX.length() - 1);
-            tailY.removeAt(tailX.length() - 1);
+            tailY.removeAt(tailY.length() - 1);
         }
 
         input();
@@ -95,6 +103,24 @@ class SnakeGame: {
         } else if Y > (height - 1): {
             Y = 1;
         }
+
+        Console.setCursorPosition(0, height + 2);
+        Console.println("                                    ");
+        Console.println("                                    ");
+        Console.setCursorPosition(0, height + 2);
+        Console.println("Collection (X): " + getRead(tailX));
+        Console.println("Collection (Y): " + getRead(tailY));
+    }
+
+    function getRead(let array): {
+        let col = "[";
+        for let i = 0; i < array.length(); i = i + 1: {
+            col = col + " " + array.at(i) + ",";
+        }
+
+        col = col + "]";
+
+        return col;
     }
 
     function input(): {

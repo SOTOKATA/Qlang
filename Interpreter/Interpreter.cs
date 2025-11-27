@@ -10,7 +10,7 @@ namespace Qlang.Interpreter;
 
 public partial class Interpreter
 {
-    public Interpreter(Dictionary<string, string> stringDictionary, Dictionary<string, string> numberDictionary)
+    public Interpreter(Dictionary<string, string> stringDictionary, Dictionary<string, object> numberDictionary)
     {
         _stringDictionary = stringDictionary;
         _numberDictionary = numberDictionary;
@@ -20,7 +20,7 @@ public partial class Interpreter
     
     private readonly Dictionary<string, string> _stringDictionary;
     
-    private readonly Dictionary<string, string> _numberDictionary;
+    private readonly Dictionary<string, object> _numberDictionary;
     
     private readonly Dictionary<string, DynamicFunction> _functions = new();
     
@@ -297,7 +297,7 @@ public partial class Interpreter
     /// <summary>
     /// Выполняет вызов метода или функции
     /// </summary>
-    private object ExecuteMethodCall(MethodCallNode call)
+    private object? ExecuteMethodCall(MethodCallNode call)
     {
         var args = call.Arguments.ConvertAll(EvaluateExpression).ToArray();
         
@@ -337,8 +337,7 @@ public partial class Interpreter
                 
                 var returnValue = _nativeFunctions.Call(name, args);
             
-                Logger.Logger.Warn("Native.ReturnValue: " + (returnValue == null ? "null" :
-                    returnValue.ToString()));
+                Logger.Logger.Warn($"Native call return: value='{returnValue}' type='{returnValue?.GetType().Name}'");
             
                 return returnValue;
             }
@@ -651,7 +650,7 @@ public partial class Interpreter
         return value;
     }
     
-    private string GetNumberRef(NumberRefNode numberRef)
+    private object GetNumberRef(NumberRefNode numberRef)
     {
         if (!_numberDictionary.TryGetValue($"___NUMBER_{numberRef.Index}___", out var value))
         {
@@ -669,6 +668,7 @@ public partial class Interpreter
         Logger.Logger.Warn($"Params: {binOp.Left} {binOp.Operator} {binOp.Right}");
         var left = EvaluateExpression(binOp.Left);
         object? right = EvaluateExpression(binOp.Right);
+        Logger.Logger.Warn($"ExpressionParams: {left}: {left.GetType().Name}; {right}: {right.GetType().Name}");
         bool leftBool;
         bool rightBool;
         
@@ -728,9 +728,7 @@ public partial class Interpreter
         if (left is null || right is null)
             return null;
 
-        Logger.Logger.Log($"EvaluateBinaryOperation.IsNumeric: ({left})=" + left.ToString()?.IsNumber());
-        Logger.Logger.Log($"EvaluateBinaryOperation.IsNumeric: ({right})=" + right.ToString()?.IsNumber());
-
+        // If it's bool condition
         if (bool.TryParse(left.ToString(), out leftBool) && bool.TryParse(right.ToString(), out rightBool))
         {
             Logger.Logger.Warn($"IsBooleanOperation: {left}{binOp.Operator}{right}");
@@ -744,20 +742,19 @@ public partial class Interpreter
                     GetStackTrace())
             };
         }
-
-        if (binOp.Operator == "Plus" && (left.ToString().IsNumber() == false || right.ToString().IsNumber() == false))
+        
+        if (binOp.Operator is "==" or "!=")
+            return binOp.Operator switch
+            {
+                "==" => Equals(left, right),
+                "!=" => !Equals(left, right),
+            };
+        
+        if (binOp.Operator == "Plus" && (left is string || right is string))
             return left.ToString() + right.ToString();
-
-
-        if (left.ToString().IsNumber() == false || right.ToString().IsNumber() == false)
+        
+        if (!left.ToString().IsNumber() || !right.ToString().IsNumber())
         {
-            if (binOp.Operator is "==" or "!=")
-                return binOp.Operator switch
-                {
-                    "==" => Equals(left.ToString(), right.ToString()),
-                    "!=" => !Equals(left.ToString(), right.ToString()),
-                };
-            
             throw new QlangRuntimeException(
                 $"Type error: Cannot apply operator '{binOp.Operator}' to " +
                 $"'{left?.ToString() ?? "null"}' (type={left?.GetType().Name}) and '{right?.ToString() ?? "null"}' (type={right?.GetType().Name})",

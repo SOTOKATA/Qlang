@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using Qlang.Compiler;
+using Qlang.Dependencies;
 
 namespace Qlang.PreCompile;
 
@@ -83,14 +84,13 @@ public static class PreCompile
 
     }
     
-    public static (string outScript, Dictionary<string, string> dictionary) ExtractNumbers(string script)
+    public static (string outScript, Dictionary<string, object> dictionary) ExtractNumbers(string script)
     {
         Logger.Logger.Warn($"Extract Numbers");
-        Dictionary<string, string> numberDictionary = [];
+        Dictionary<string, object> numberDictionary = [];
         
         var numberCounter = 0;
 
-        // const string pattern = @"(?<![\p{L}_])\d+(?:\.\d+)?(?:[eE][+-]?\d+)?(?![\p{L}_])";
         const string pattern =
             @"(?<!___[A-Z]+_)\b\d+(?:\.\d+)?(?:[eE][+-]?\d+)?\b(?!___)";
 
@@ -99,7 +99,11 @@ public static class PreCompile
             var numberValue = match.Value;
             var key = $"___NUMBER_{numberCounter}___";
             
-            numberDictionary[key] = numberValue;
+            if (int.TryParse(numberValue, out var @int))
+                numberDictionary[key] = @int;
+            else if (numberValue.TryParseNumber(out var @double))
+                numberDictionary[key] = @double;
+            else throw new Exception($"Undefined type of value '{numberValue}'");
             
             numberCounter++;
             

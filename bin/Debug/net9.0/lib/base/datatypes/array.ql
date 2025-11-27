@@ -14,6 +14,14 @@ class Array: {
         return _native("list_is", collection);
     }
 
+    function getCollection(): {
+        return _value;
+    }
+
+    function contains(let item): {
+        return _native("list_contains", _value, item);
+    }
+
     // Add element
     function push(let item): {
         _native("list_add", _value, item);

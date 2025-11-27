@@ -10,7 +10,7 @@ public class Compiler
     private string _outputScript = "";
     
     public Dictionary<string, string> StringDictionary = [];
-    public Dictionary<string, string> NumberDictionary = [];
+    public Dictionary<string, object> NumberDictionary = [];
 
     private readonly Parser _parser = new();
     private readonly Lexer _lexer = new();

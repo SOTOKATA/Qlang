@@ -1,0 +1,108 @@
+(61) [WARN] QLang/Run: ----------- Interpreter -----------
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(304) [LOG] Interpreter/ExecuteMethodCall: Args count: 1
+(305) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_native'
+(306) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = '', method = ''
+(336) [LOG] Interpreter/ExecuteMethodCall: _native: 
+(71) [LOG] NativeFunctionRegistry/Call: NativeCall: $name='list_create'
+(98) [LOG] NativeFunctionRegistry/Call: Call.Arguments: NativeCall: $args=
+
+
+(519) [WARN] Interpreter/EvaluateExpression: Native call return: value='System.Collections.Generic.List`1[System.Object]' type='List`1'
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(120) [LOG] Interpreter/ExecuteFunction: 'main'()
+(178) [LOG] Interpreter/ExecuteStatement: MethodCallNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(518) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(518) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.NumberRefNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(304) [LOG] Interpreter/ExecuteMethodCall: Args count: 1
+(305) [LOG] Interpreter/ExecuteMethodCall: class = 'Parser'; method = 'asFloat'
+(306) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = '', method = 'main'
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(120) [LOG] Interpreter/ExecuteFunction: 'asFloat'(3)
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(304) [LOG] Interpreter/ExecuteMethodCall: Args count: 2
+(305) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_native'
+(306) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Parser', method = 'asFloat'
+(336) [LOG] Interpreter/ExecuteMethodCall: _native: 3
+(71) [LOG] NativeFunctionRegistry/Call: NativeCall: $name='parse_float'
+(98) [LOG] NativeFunctionRegistry/Call: Call.Arguments: NativeCall: $args=
+$0: Type: System.Object 
+$0: '3' $type: 'String' 
+(519) [WARN] Interpreter/EvaluateExpression: Native call return: value='3' type='Double'
+(116) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Parser' function='asFloat'
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(518) [WARN] Interpreter/EvaluateExpression: ExpressionParams: 3: String; 9: Int32
+(304) [LOG] Interpreter/ExecuteMethodCall: Args count: 1
+(305) [LOG] Interpreter/ExecuteMethodCall: class = 'Console'; method = 'println'
+(306) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = '', method = 'main'
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(518) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(518) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.MethodCallNode Plus Qlang.AST.NumberRefNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(304) [LOG] Interpreter/ExecuteMethodCall: Args count: 1
+(305) [LOG] Interpreter/ExecuteMethodCall: class = 'Parser'; method = 'asFloat'
+(306) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = '', method = 'main'
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(120) [LOG] Interpreter/ExecuteFunction: 'asFloat'(3)
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(304) [LOG] Interpreter/ExecuteMethodCall: Args count: 2
+(305) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_native'
+(306) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Parser', method = 'asFloat'
+(336) [LOG] Interpreter/ExecuteMethodCall: _native: 3
+(71) [LOG] NativeFunctionRegistry/Call: NativeCall: $name='parse_float'
+(98) [LOG] NativeFunctionRegistry/Call: Call.Arguments: NativeCall: $args=
+$0: Type: System.Object 
+$0: '3' $type: 'String' 
+(519) [WARN] Interpreter/EvaluateExpression: Native call return: value='3' type='Double'
+(116) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Parser' function='asFloat'
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(518) [WARN] Interpreter/EvaluateExpression: ExpressionParams: 3: String; 9: Int32
+(120) [LOG] Interpreter/ExecuteFunction: 'println'(39)
+(178) [LOG] Interpreter/ExecuteStatement: MethodCallNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(518) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(518) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(518) [WARN] Interpreter/EvaluateExpression: ExpressionParams: 39: String; \n: String
+(304) [LOG] Interpreter/ExecuteMethodCall: Args count: 1
+(305) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = 'print'
+(306) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Console', method = 'println'
+(120) [LOG] Interpreter/ExecuteFunction: 'print'(39\n)
+(178) [LOG] Interpreter/ExecuteStatement: MethodCallNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: MethodCallNode
+(500) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(304) [LOG] Interpreter/ExecuteMethodCall: Args count: 1
+(305) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_str'
+(306) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Console', method = 'print'
+(304) [LOG] Interpreter/ExecuteMethodCall: Args count: 2
+(305) [LOG] Interpreter/ExecuteMethodCall: class = ''; method = '_native'
+(306) [LOG] Interpreter/ExecuteMethodCall: CurrentContext: class = 'Console', method = 'print'
+(336) [LOG] Interpreter/ExecuteMethodCall: _native: 39
+
+(71) [LOG] NativeFunctionRegistry/Call: NativeCall: $name='cmd_write'
+(98) [LOG] NativeFunctionRegistry/Call: Call.Arguments: NativeCall: $args=
+$0: Type: System.String 
+$0: '39
+' $type: 'String' 
+(179) [WARN] Interpreter/ExecuteStatement: Native call return: value='' type=''
+(116) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Console' function='print'
+(116) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Console' function='println'
+(116) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='' function='main'

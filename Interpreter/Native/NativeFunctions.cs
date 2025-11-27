@@ -1,4 +1,5 @@
 ﻿using Qlang.Dependencies;
+using Qlang.Interpreter.Native;
 
 namespace Qlang.Interpreter;
 
@@ -48,7 +49,13 @@ public class NativeFunctionRegistry
         Register("list_set", (Action<List<object>, int, object>)((list, idx, val) => list[idx] = val));
         Register("list_count", (Func<List<object>, int>)(list => list.Count));
         Register("list_clear", (Action<List<object>>)(list => list.Clear()));
+        Register("list_contains", (Func<List<object>, object, bool>)((list, item) => list.Contains(item)));
         Register("list_remove_at", (Action<List<object>, int>)((list, idx) => list.RemoveAt(idx)));
+        
+        // Parser
+        Register("parse_int", (Func<object, int>)(obj => (int)NativeParser.Parse(obj, "int")));
+        Register("parse_float", (Func<object, double>)(obj => (double)NativeParser.Parse(obj, "float")));
+        Register("parse_string", (Func<object, string>)(obj => (string)NativeParser.Parse(obj, "string")));
     }
 
     private void Register(string name, Delegate handler)
