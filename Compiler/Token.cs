@@ -20,7 +20,7 @@ public class Token(Tokens token, int line, int index, string value = "")
             Tokens.Semicolon => ";",
             Tokens.Or => "|",
             Tokens.And => "&",
-            Tokens.Identifier => " ",
+            Tokens.Identifier => "",
             Tokens.LParen => "(",
             Tokens.RParen => ")",
             Tokens.Colon => ": ",
@@ -34,8 +34,8 @@ public class Token(Tokens token, int line, int index, string value = "")
             Tokens.Minus => "-",
             Tokens.Star => "*",
             Tokens.Slash => "/",
-            Tokens.StringRef => " ",
-            Tokens.NumberRef => " ",
+            Tokens.StringRef => "",
+            Tokens.NumberRef => "",
             Tokens.Keyword => " ",
         };
     }

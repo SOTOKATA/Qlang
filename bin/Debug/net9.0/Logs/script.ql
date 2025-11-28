@@ -1,6 +1,15 @@
 include "$lib/base"
-include "$lib/special/demo"
+
+class Cmd: {
+    function pt(): {
+        Console.println("Hello World!");
+    }
+
+    function get(): {
+        return String.new("H");
+    }
+}
 
 function main(): {
-    LanguageDemo.run();
+    Console.println(Cmd.get().length());
 }

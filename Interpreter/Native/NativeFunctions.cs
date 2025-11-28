@@ -55,6 +55,7 @@ public class NativeFunctionRegistry
         // Parser
         Register("parse_int", (Func<object, int>)(obj => (int)NativeParser.Parse(obj, "int")));
         Register("parse_float", (Func<object, double>)(obj => (double)NativeParser.Parse(obj, "float")));
+        Register("parse_number", (Func<object, double>)(obj => (double)NativeParser.Parse(obj, "double")));
         Register("parse_string", (Func<object, string>)(obj => (string)NativeParser.Parse(obj, "string")));
     }
 

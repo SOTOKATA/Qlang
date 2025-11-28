@@ -1,16 +1,16 @@
 ﻿namespace Qlang.AST;
 
-public class MethodCallNode : ASTNode
+public class CallNode : ASTNode
 {
     // its: 'Term', 'read()', 'trim()'
-    public List<string> Objects = [];
+    public List<ASTNode> Objects = [];
     public string ObjectName { get; set; }  // "Term"
     public string MethodName { get; set; }  // "print"
     public List<ASTNode> Arguments { get; set; } = [];
 
     public override ASTNode Clone()
     {
-        return new MethodCallNode
+        return new CallNode
         {
             ObjectName = ObjectName,
             MethodName = MethodName,
@@ -20,6 +20,6 @@ public class MethodCallNode : ASTNode
 
     public override string GetTree(string indent = "")
     {
-        return ASTGetTreeBuilder.Build(nameof(MethodCallNode), [ObjectName, MethodName, Arguments], indent);
+        return ASTGetTreeBuilder.Build(nameof(CallNode), [ObjectName, MethodName, Arguments], indent);
     }
 }

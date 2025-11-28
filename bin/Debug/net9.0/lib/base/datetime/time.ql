@@ -4,7 +4,7 @@ class Time: {
             Throw.parseException("argument 'milliseconds' is not a number");
         }
 
-        millisec = Number.toInt(millisec);
+        millisec = Number.toFixedInt(millisec);
 
         _native("time_wait", millisec);
     }

@@ -25,11 +25,6 @@ class Array: {
     // Add element
     function push(let item): {
         _native("list_add", _value, item);
-        // _value = _csharp(
-        //     "var list = " + _value +
-        //     "; list" + ".Add(" + _str(item) + ");" +
-        //     "return list;"
-        //     );
     }
 
     // Clear array
@@ -39,15 +34,13 @@ class Array: {
 
     // Get at index
     function at(let index): {
-        index = Number.toInt(index);
+        index = Number.toFixedInt(index);
 
         if Number.isNumber(index) == false: {
             Throw.exception("index is not number");
         }
 
-        // Console.println("List: " + _value);
         return _native("list_get", _value, index);
-        // return _csharp(_value + "[" + index + "]");
     }
 
     // Set at index
@@ -56,14 +49,9 @@ class Array: {
             Throw.exception("index is not number");
         }
 
-        index = Number.toInt(index);
+        index = Number.toFixedInt(index);
 
         _native("list_set", _value, index, item);
-        // _value = _csharp(
-        //     "var list = " + _value +
-        //     "; list" + "[" + index + "] = " + _str(item) +
-        //     "; return list;"
-        //     );
     }
 
     function insert(let index, let item): {
@@ -71,34 +59,24 @@ class Array: {
             Throw.exception("index is not number");
         }
 
-        index = Number.toInt(index);
+        index = Number.toFixedInt(index);
 
         _native("list_insert", _value, index, item);
     }
 
     // Remove at index
     function removeAt(let index): {
-        index = Number.toInt(index);
+        index = Number.toFixedInt(index);
 
         if Number.isNumber(index) == false: {
             Throw.exception("index is not number");
         }
 
         _native("list_remove_at", _value, index);
-        // _value = _csharp(
-        //     "var list = " + _value +
-        //     ";  list.RemoveAt(" + index + "); " +
-        //     "return list;"
-        //     );
     }
 
     // Get length
     function length(): {
         return _native("list_count", _value);
-        // return _csharp(
-        //     "var list = " + _value +
-        //     ";" +
-        //     "return list.Count;"
-        //     );
     }
 }

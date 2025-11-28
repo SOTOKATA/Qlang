@@ -41,7 +41,9 @@ public partial class Interpreter
                 switch (statement)
                 {
                     case ClassNode classNode:
+                        Logger.Logger.Log("ToDynamicClass (until): " + classNode.Name);
                         _dynamicClasses[classNode.Name] = ToDynamicClass(classNode);
+                        Logger.Logger.Log("ToDynamicClass: " + _dynamicClasses[classNode.Name].Name);
                         break;
                     case FunctionNode func:
                         _functions[func.Name] = ToDynamicFunction(func);
@@ -174,9 +176,10 @@ public partial class Interpreter
                 AssignmentNode(assign);
                 break;
 
-            case MethodCallNode call:
-                Logger.Logger.Log("MethodCallNode");
-                ExecuteMethodCall(call);
+            case CallNode call:
+                Logger.Logger.Log("CallNode");
+                ExecuteObjectCalls(call);
+                // ExecuteMethodCall(call);
                 break;
 
             case IfNode ifNode:
@@ -297,99 +300,99 @@ public partial class Interpreter
     /// <summary>
     /// Выполняет вызов метода или функции
     /// </summary>
-    private object? ExecuteMethodCall(MethodCallNode call)
-    {
-        var args = call.Arguments.ConvertAll(EvaluateExpression).ToArray();
-        
-        Logger.Logger.Log($"Args count: " + args.Length);
-        Logger.Logger.Log($"class = '{call.ObjectName}'; method = '{call.MethodName}'");
-        Logger.Logger.Log($"CurrentContext: class = '{CurrentContext.Class?.Name}', method = '{CurrentContext.Function?.Name}'");
-
-        // Create new class instance (non-linked)
-        if (_dynamicClasses.TryGetValue(call.ObjectName, out var value) && call.MethodName == "new")
-        {
-            // CurrentContext.Class = value;
-            return GetNewClass(value, args.ToList());
-        }
-
-        switch (call)
-        {
-            case { ObjectName: "", MethodName: "_str" }:
-                return ParseString(string.Join("", args.Select(a => a.ToString())));
-            case { ObjectName: "", MethodName: "_str_csharp" }:
-                return ParseString(string.Join("", args.Select(a => a.ToString())), true);
-            case { ObjectName: "", MethodName: "_csharp" }:
-            {
-                var returnValue = CSharpCall($"{string.Join(",", args)}");
-            
-                Logger.Logger.Warn("csharp.return_value: " + (returnValue == null ? "null" :
-                    returnValue.ToString()));
-            
-                return returnValue;
-            }
-            case { ObjectName: "", MethodName: "_native" } when args.Length > 0:
-            {
-                string name = args[0].ToString();
-                
-                args = args.Skip(1).ToArray();
-                
-                Logger.Logger.Log("_native: " + string.Join(", ", args));
-                
-                var returnValue = _nativeFunctions.Call(name, args);
-            
-                Logger.Logger.Warn($"Native call return: value='{returnValue}' type='{returnValue?.GetType().Name}'");
-            
-                return returnValue;
-            }
-        }
-
-        if (call.ObjectName is "this" or "")
-        {
-            if (CurrentContext.Class?.Body?
-                    .FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) is FunctionNode classMethod)
-                return ExecuteFunction(ToDynamicFunction(classMethod), args.ToList(), CurrentContext.Class);
-
-            if (_functions.TryGetValue(call.MethodName, out var func))
-                return ExecuteFunction(func, args.ToList(), null);
-        }
-
-        if (_dynamicClasses.TryGetValue(call.ObjectName, out var classNode))
-            return ExecuteMethodCallClass(classNode, call);
-
-        object? variable = null;
-        try
-        {
-            variable = GetVariable(new VariableNode { Name = call.ObjectName });
-        }
-        catch (Exception e)
-        {
-            Logger.Logger.Error(e.ToString());
-        }
-
-        if (variable is DynamicClass @class)
-        {
-            Logger.Logger.Log("Object detected as class pointer");
-            
-            if (@class?.Body.FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) is FunctionNode
-                function)
-            {
-                Logger.Logger.Warn("VariableClass:Class: " + @class.Name);
-                return ExecuteFunction(ToDynamicFunction(function), args.ToList(), @class);
-            }
-
-            Logger.Logger.Error("VariableClass: function is not found");
-        }
-        
-        foreach (var item in _contextStack)
-            Logger.Logger.Log($"StackItem: class = '{item.Class?.Name}' method = '{item.Function?.Name}'");
-        Logger.Logger.Log($"CurrentContext (After call): class = '{CurrentContext.Class?.Name}' method = '{CurrentContext.Function?.Name}'");
-
-        foreach (var dictItem in _dynamicClasses)
-            Logger.Logger.Warn("DynamicClasses: " + dictItem.Key + " : " + dictItem.Value);
-        
-        throw new QlangRuntimeException($"Unknown object/function: {call.ObjectName}.{call.MethodName}({string.Join(",", call.Arguments)})", call, 
-            GetStackTrace());
-    }
+    // private object? ExecuteMethodCall(CallNode call)
+    // {
+    //     var args = call.Arguments.ConvertAll(EvaluateExpression).ToArray();
+    //     
+    //     Logger.Logger.Log($"Args count: " + args.Length);
+    //     Logger.Logger.Log($"class = '{call.ObjectName}'; method = '{call.MethodName}'");
+    //     Logger.Logger.Log($"CurrentContext: class = '{CurrentContext.Class?.Name}', method = '{CurrentContext.Function?.Name}'");
+    //
+    //     // Create new class instance (non-linked)
+    //     if (_dynamicClasses.TryGetValue(call.ObjectName, out var value) && call.MethodName == "new")
+    //     {
+    //         // CurrentContext.Class = value;
+    //         return GetNewClass(value, args.ToList());
+    //     }
+    //
+    //     switch (call)
+    //     {
+    //         case { ObjectName: "", MethodName: "_str" }:
+    //             return ParseString(string.Join("", args.Select(a => a.ToString())));
+    //         case { ObjectName: "", MethodName: "_str_csharp" }:
+    //             return ParseString(string.Join("", args.Select(a => a.ToString())), true);
+    //         case { ObjectName: "", MethodName: "_csharp" }:
+    //         {
+    //             var returnValue = CSharpCall($"{string.Join(",", args)}");
+    //         
+    //             Logger.Logger.Warn("csharp.return_value: " + (returnValue == null ? "null" :
+    //                 returnValue.ToString()));
+    //         
+    //             return returnValue;
+    //         }
+    //         case { ObjectName: "", MethodName: "_native" } when args.Length > 0:
+    //         {
+    //             string name = args[0].ToString();
+    //             
+    //             args = args.Skip(1).ToArray();
+    //             
+    //             Logger.Logger.Log("_native: " + string.Join(", ", args));
+    //             
+    //             var returnValue = _nativeFunctions.Call(name, args);
+    //         
+    //             Logger.Logger.Warn($"Native call return: value='{returnValue}' type='{returnValue?.GetType().Name}'");
+    //         
+    //             return returnValue;
+    //         }
+    //     }
+    //
+    //     if (call.ObjectName is "this" or "")
+    //     {
+    //         if (CurrentContext.Class?.Body?
+    //                 .FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) is FunctionNode classMethod)
+    //             return ExecuteFunction(ToDynamicFunction(classMethod), args.ToList(), CurrentContext.Class);
+    //
+    //         if (_functions.TryGetValue(call.MethodName, out var func))
+    //             return ExecuteFunction(func, args.ToList(), null);
+    //     }
+    //
+    //     if (_dynamicClasses.TryGetValue(call.ObjectName, out var classNode))
+    //         return ExecuteMethodCallClass(classNode, call);
+    //
+    //     object? variable = null;
+    //     try
+    //     {
+    //         variable = GetVariable(new VariableNode { Name = call.ObjectName });
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         Logger.Logger.Error(e.ToString());
+    //     }
+    //
+    //     if (variable is DynamicClass @class)
+    //     {
+    //         Logger.Logger.Log("Object detected as class pointer");
+    //         
+    //         if (@class?.Body.FirstOrDefault(node => node is FunctionNode fn && fn.Name == call.MethodName) is FunctionNode
+    //             function)
+    //         {
+    //             Logger.Logger.Warn("VariableClass:Class: " + @class.Name);
+    //             return ExecuteFunction(ToDynamicFunction(function), args.ToList(), @class);
+    //         }
+    //
+    //         Logger.Logger.Error("VariableClass: function is not found");
+    //     }
+    //     
+    //     foreach (var item in _contextStack)
+    //         Logger.Logger.Log($"StackItem: class = '{item.Class?.Name}' method = '{item.Function?.Name}'");
+    //     Logger.Logger.Log($"CurrentContext (After call): class = '{CurrentContext.Class?.Name}' method = '{CurrentContext.Function?.Name}'");
+    //
+    //     foreach (var dictItem in _dynamicClasses)
+    //         Logger.Logger.Warn("DynamicClasses: " + dictItem.Key + " : " + dictItem.Value);
+    //     
+    //     throw new QlangRuntimeException($"Unknown object/function: {call.ObjectName}.{call.MethodName}({string.Join(",", call.Arguments)})", call, 
+    //         GetStackTrace());
+    // }
 
     private DynamicClass GetNewClass(DynamicClass dynamicClass, List<object> args)
     {
@@ -474,7 +477,7 @@ public partial class Interpreter
         // return $"@\"{processed}\"";
     }
 
-    private object ExecuteMethodCallClass(DynamicClass classNode, MethodCallNode call)
+    private object ExecuteMethodCallClass(DynamicClass classNode, CallNode call)
     {
         if (classNode.Body.FirstOrDefault(astNode => astNode is FunctionNode fn && fn.Name == call.MethodName) is not FunctionNode node)
             throw new QlangRuntimeException($"User class detection error: Unknown object/function: {call.ObjectName}.{call.MethodName}", call, GetStackTrace());
@@ -516,7 +519,7 @@ public partial class Interpreter
                 BooleanNode booleanNode => booleanNode.Value,
                 NumberNode num => num.Value,
                 BinaryOperationNode binOp => EvaluateBinaryOperation(binOp),
-                MethodCallNode methodCall => ExecuteMethodCall(methodCall),
+                CallNode call => ExecuteObjectCalls(call),
                 CollectionNode => GetCollection(args),
                 _ => throw new QlangRuntimeException(
                     $"Unknown expression type: {expr.GetType().Name}", 
@@ -666,9 +669,9 @@ public partial class Interpreter
     {
         Logger.Logger.Warn("Detected binary operation");
         Logger.Logger.Warn($"Params: {binOp.Left} {binOp.Operator} {binOp.Right}");
-        var left = EvaluateExpression(binOp.Left);
+        object? left = EvaluateExpression(binOp.Left);
         object? right = EvaluateExpression(binOp.Right);
-        Logger.Logger.Warn($"ExpressionParams: {left}: {left.GetType().Name}; {right}: {right.GetType().Name}");
+        Logger.Logger.Warn($"ExpressionParams: {left}: {left?.GetType().Name}; {right}: {right?.GetType().Name}");
         bool leftBool;
         bool rightBool;
         

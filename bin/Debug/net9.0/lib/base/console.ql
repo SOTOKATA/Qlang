@@ -1,13 +1,11 @@
 // Class to make operations with console
 class Console: {
-    private let usings = "using System; ";
     private let defFColor = "gray";
     private let defBColor = "black";
 
     // Print text to console
     function print(let message): {
         _native("cmd_write", _str(message));
-        // _csharp(usings + "Console.Write(" + _str_csharp(message) + ")");
     }
 
     // Print text to console with new line

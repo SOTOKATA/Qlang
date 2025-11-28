@@ -24,11 +24,9 @@ public static class PreCompile
 
         foreach (var includeLine in includeLines)
         {
-
             var line = includeLine.Replace("include ", "").Replace("\"", "");
-            string fullPath;
 
-            fullPath = Path.Combine(Directory.GetCurrentDirectory(), line.StartsWith('$') ? line[1..] : line);
+            var fullPath = Path.Combine(Directory.GetCurrentDirectory(), line.StartsWith('$') ? line[1..] : line);
 
             fullPath = fullPath.Replace('\\', Path.DirectorySeparatorChar)
                                 .Replace('/', Path.DirectorySeparatorChar);

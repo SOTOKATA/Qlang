@@ -9,11 +9,11 @@ class LanguageDemo: {
         Console.println("3. Circles");
         
         // TODO: { bool re-write parsing (with || and &&)
-        do_while (String.isNullOrWhiteSpace(choice) == true) || (Number.isNumber(choice) == false): {
+        do_while (String.isNullOrWhitespace(choice) == true) || (Number.isNumber(choice) == false): {
             Console.print("Print choice (1-3): ");
             let choice = Console.readln();
 
-            if String.isNullOrWhiteSpace(choice) == true: {
+            if String.isNullOrWhitespace(choice) == true: {
                 printException("You print empty string!");
             }
 
@@ -38,11 +38,11 @@ class LanguageDemo: {
     function stringDemo(): {
         Console.println("");
 
-        do_while String.isNullOrWhiteSpace(input) == true: { 
+        do_while String.isNullOrWhitespace(input) == true: { 
             Console.print("Print anything: ");
             let input = Console.readln();
 
-            if String.isNullOrWhiteSpace(input) == true: {
+            if String.isNullOrWhitespace(input) == true: {
                 printException("You must to print anything!");
             }
         }
@@ -62,26 +62,26 @@ class LanguageDemo: {
     function numericDemo(): {
         Console.println("\nWelcome to numeric demo!");
 
-        let num1 = getNumberFromConsole("Write first number: { ");
-        let num2 = getNumberFromConsole("Write second number: { ");
+        let num1 = getNumberFromConsole("Write first number: ");
+        let num2 = getNumberFromConsole("Write second number: ");
 
         Console.println("\nFirst number: " + num1);
         Console.println("Second number: " + num2);
 
         Console.println("\n<--- Math --->");
-        Console.println("Sum: " + Math.sum(num1, num2));
-        Console.println("Substration: " + Math.sub(num1, num2));
-        Console.println("Multiplication: " + Math.mult(num1, num2));
+        Console.println("Sum: " + (num1 + num2));
+        Console.println("Substration: " + (num1 - num2));
+        Console.println("Multiplication: " + (num1 * num2));
 
         if num2 != 0: {
-            Console.println("Division: " + Number.toFixed(Math.div(num1, num2), "0.00"));
+            Console.println("Division: " + Number.toFixed((num1 / num2), "0.00"));
         }
         else: {
             printException("Division: Can't divide by 0!");
         }
 
         if num1 < num2: {
-            Console.println("Random number (range: " + num1 + "-" + num2 + "): { " + Number.randInt(num1, num2));
+            Console.println("Random number (range: " + num1 + "-" + num2 + "): " + Number.randInt(num1, num2));
         }
         else: {
             printException("Random number: Error, first number can't be more than or equal second");
@@ -92,13 +92,11 @@ class LanguageDemo: {
         }
 
         Console.println("\n<--- Number class --->");
-        Console.println("First number as integer: " + Number.toInt(num1));
-        Console.println("Second number as integer: " + Number.toInt(num2));
+        Console.println("First number as integer: " + Number.toFixedInt(num1));
+        Console.println("Second number as integer: " + Number.toFixedInt(num2));
 
         Console.println("\nFirst number with pattern '0.00': " + Number.toFixed(num1, "0.00"));
         Console.println("Second number with pattern '0.00': " + Number.toFixed(num2, "0.00"));
-
-        Console.println("\nPI: " + Math.PI);
 
         Console.println("\nMinimum number value: " + Number.MIN_VALUE);
         Console.println("Maximum number value: " + Number.MAX_VALUE);
@@ -107,7 +105,7 @@ class LanguageDemo: {
     function circleDemo(): {
         Console.println("\nWelcome to circles demo!");
 
-        Console.println("\nWhile example (while random number is not 0): {");
+        Console.println("\nWhile example (while random number is not 0): ");
         Console.print("Numbers: ");
         
         let randNum = 0-1;
@@ -140,7 +138,7 @@ class LanguageDemo: {
 
     function acceptContinue(): {
         Console.println("\nPress enter to continue");
-        Console.readln();
+        Console.readkey();
     }
 
     function printException(let msg): {
@@ -161,6 +159,6 @@ class LanguageDemo: {
             }
         }
 
-        return num;
+        return Parser.asNumber(num);
     }
 }

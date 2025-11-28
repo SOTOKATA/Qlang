@@ -17,8 +17,8 @@ class Number: {
         }
 
         // Convert '3.42...' to '3'
-        min = toInt(min);
-        max = toInt(max);
+        min = toFixedInt(Parser.asNumber(min));
+        max = toFixedInt(Parser.asNumber(max));
 
         if min >= max: {
             Throw.exception("Minimum can't be more than maximum");
@@ -28,7 +28,7 @@ class Number: {
     }
 
     // Get int styled number ('3.421' to '3')
-    function toInt(let float): {
+    function toFixedInt(let float): {
         return toFixed(float, "0");
     }
 

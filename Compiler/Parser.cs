@@ -65,9 +65,7 @@ public class Parser
         
         // function declaration
         if (Check(Tokens.Keyword) && Current().Value == Keywords.FunctionDeclaration)
-        {
             return ParseFunction(isStatic, isPrivate);
-        }
         
         // class declaration
         if (Check(Tokens.Keyword) && Current().Value == Keywords.ClassDeclaration)
@@ -106,14 +104,14 @@ public class Parser
             return expr;
         }
 
-        throw new Exception($"Unexpected token: {Current().TokenType} '{Current().Value}'");
+        throw new QlangCompileException($"Unexpected token: {Current().TokenType} '{Current().Value}'", Current().Line, "Parser");
     }
 
     private AssignmentNode ParseVariableDeclaration(bool isStatic = false, bool isPrivate = false, bool isConst = false, bool isNew = false)
     {
         Logger.Logger.Log("Parsing variable declaration", "CompilationProcess");
         if (!Check(Tokens.Keyword) || Current().Value != Keywords.VariableDeclaration)
-            throw new Exception($"(ParseVariableDeclaration) Unexpected token: {Current().TokenType}");
+            throw new QlangCompileException($"(ParseVariableDeclaration) Unexpected token: {Current().TokenType}", Current().Line, "Parser");
         
         Advance();
         
@@ -438,7 +436,7 @@ public class Parser
             Advance();
         }
         
-        // parse: ([expression])
+        // parse: '('expression')'
         if (Check(Tokens.LParen))
         {
             Logger.Logger.Warn("Parsing parents");
@@ -497,69 +495,152 @@ public class Parser
             if (firstIdentifier.TryParseNumber(out var result))
                 return new NumberNode { Value = result };
             
-            // Вызов метода: Object.method(...)
-            if (Check(Tokens.Dot))
+            // Вызов метода: Object.method(...)... or func().class.etc();
+            if (Check(Tokens.Dot) || Check(Tokens.LParen))
             {
-                Advance(); // consume '.'
-                
-                var name = Expect(Tokens.Identifier).Value;
-
-                // Call variable from class
-                // structure: objName.name <- without '('
-                if (Current().TokenType != Tokens.LParen)
-                {
-                    // TODO: variable assign
-                
-                    // get from class
-                    Logger.Logger.Log("CompilationProcess.End: Parsing primary (VariableNode)");
-                    return new VariableNode { ClassName = firstIdentifier, Name = name };
-                }
-                
-                Expect(Tokens.LParen);
-
+                List<ASTNode> objects = [];
                 List<ASTNode> arguments = [];
-                while (!Check(Tokens.RParen))
+                
+                // If current object is a function
+                if (Check(Tokens.LParen))
                 {
-                    arguments.Add(ParseExpression());
-                    if (Check(Tokens.Comma))
-                        Advance();
+                    Advance();
+
+                    arguments = [];
+                    while (!Check(Tokens.RParen))
+                    {
+                        arguments.Add(ParseExpression());
+                        if (Check(Tokens.Comma))
+                            Advance();
+                    }
+
+                    Expect(Tokens.RParen);  
+                    
+                    Logger.Logger.Log("Arguments: " + string.Join(", ", arguments));
+                        
+                    objects.Add(new FunctionPointerNode
+                    {
+                        Name = firstIdentifier,
+                        Arguments = arguments
+                    });
                 }
+                // Else will add as object
+                else
+                {
+                    objects.Add(new ObjectPointerNode
+                    {
+                        Name = firstIdentifier,
+                    });
+                }
+                
+                if (Current().TokenType != Tokens.Dot)
+                {
+                    Logger.Logger.Log($"CompilationProcess.End: Parsing primary (CallNode) {Current().TokenType}");
+                    return new CallNode { Objects = objects };
+                }
+                
 
-                Expect(Tokens.RParen);
+                // While next is dot
+                Logger.Logger.Log($":", "CallNodeWhile");
+                while (Check(Tokens.Dot))
+                {
+                    Advance();
+                    Logger.Logger.Log($"CallNodeWhile.current: " + Current().TokenType);
+                    string identifier = Expect(Tokens.Identifier).Value;
 
-                Logger.Logger.Log("CompilationProcess.End: Parsing primary");
-                return new MethodCallNode 
-                { 
-                    ObjectName = firstIdentifier, 
-                    MethodName = name, 
-                    Arguments = arguments 
-                };
+                    // Current object is function
+                    if (Current().TokenType == Tokens.LParen)
+                    {
+                        Advance();
+
+                        arguments = [];
+                        while (!Check(Tokens.RParen))
+                        {
+                            arguments.Add(ParseExpression());
+                            if (Check(Tokens.Comma))
+                                Advance();
+                        }
+
+                        Expect(Tokens.RParen);
+
+                        Logger.Logger.Log($"Detected function: {identifier}", "CallNodeWhile");
+                        Logger.Logger.Log("Arguments: [" + string.Join(", ", arguments) + "]");
+                        objects.Add(new FunctionPointerNode
+                        {
+                            Name = identifier,
+                            Arguments = arguments
+                        });
+                        continue;
+                    }
+
+                    Logger.Logger.Log($"Detected object: {identifier}", "CallNodeWhile");
+                    objects.Add(new ObjectPointerNode
+                    {
+                        Name = identifier
+                    });
+                } 
+                
+                Logger.Logger.Log("CompilationProcess.End: Parsing primary (CallNode, full)");
+                return new CallNode { Objects = objects };
+                
+                // var name = Expect(Tokens.Identifier).Value;
+                //
+                // // Call variable from class
+                // // structure: objName.name <- without '('
+                // if (Current().TokenType != Tokens.LParen)
+                // {
+                //     // TODO: variable assign
+                //
+                //     // get from class
+                //     Logger.Logger.Log("CompilationProcess.End: Parsing primary (VariableNode)");
+                //     return new VariableNode { ClassName = firstIdentifier, Name = name };
+                // }
+                
+                // Expect(Tokens.LParen);
+                //
+                // List<ASTNode> arguments = [];
+                // while (!Check(Tokens.RParen))
+                // {
+                //     arguments.Add(ParseExpression());
+                //     if (Check(Tokens.Comma))
+                //         Advance();
+                // }
+                //
+                // Expect(Tokens.RParen);
+
+                // Logger.Logger.Log("CompilationProcess.End: Parsing primary");
+                // return new CallNode 
+                // { 
+                //     ObjectName = firstIdentifier, 
+                //     MethodName = name, 
+                //     Arguments = arguments 
+                // };
             }
             
             // Вызов функции: functionName(...)
-            if (Check(Tokens.LParen))
-            {
-                Advance(); // consume '('
-                
-                List<ASTNode> arguments = [];
-                while (!Check(Tokens.RParen))
-                {
-                    arguments.Add(ParseExpression());
-                    if (Check(Tokens.Comma))
-                        Advance();
-                }
-
-                Expect(Tokens.RParen);
-
-                // Можно использовать MethodCallNode или создать отдельный FunctionCallNode
-                Logger.Logger.Log("CompilationProcess.End: Parsing primary");
-                return new MethodCallNode 
-                { 
-                    ObjectName = "", 
-                    MethodName = firstIdentifier, 
-                    Arguments = arguments 
-                };
-            }
+            // if (Check(Tokens.LParen))
+            // {
+            //     Advance(); // consume '('
+            //     
+            //     List<ASTNode> arguments = [];
+            //     while (!Check(Tokens.RParen))
+            //     {
+            //         arguments.Add(ParseExpression());
+            //         if (Check(Tokens.Comma))
+            //             Advance();
+            //     }
+            //
+            //     Expect(Tokens.RParen);
+            //
+            //     // Можно использовать MethodCallNode или создать отдельный FunctionCallNode
+            //     Logger.Logger.Log("CompilationProcess.End: Parsing primary");
+            //     return new CallNode 
+            //     { 
+            //         ObjectName = "", 
+            //         MethodName = firstIdentifier, 
+            //         Arguments = arguments 
+            //     };
+            // }
 
             if (Current().TokenType == Tokens.Equals && Peek()?.TokenType != Tokens.Equals)
             {
@@ -576,7 +657,7 @@ public class Parser
             return new VariableNode { Name = firstIdentifier };
         }
         
-        throw new Exception($"Unexpected token in expression: {Current().TokenType} ({(Current().Value == "" ? "Null" : Current().Value)})");
+        throw new QlangCompileException($"Unexpected token in expression: {Current().TokenType} ({(Current().Value == "" ? "Null" : Current().Value)})", Current().Line, "Parser");
     }
 
     // Вспомогательные методы
@@ -590,8 +671,11 @@ public class Parser
         if (!IsAtEnd()) _position++;
         var token = _tokens[_position - 1];
 
-        if (token.TokenType == Tokens.Semicolon)
+        if (token.TokenType is Tokens.Semicolon or Tokens.RBrace or Tokens.LBrace)
+        {
             _line = "";
+            return token;
+        }
         
         Logger.Logger.Log(token.TokenType.ToString() + " " + token.Value, $"Token (Ln:{token.Line} Idx:{token.Index})");
         _line += $"{Token.TokenToString(token.TokenType)}{token.Value}";
@@ -603,15 +687,14 @@ public class Parser
         if (!Check(type))
         {
             var current = Current();
-            throw new Exception($"""
+            throw new QlangCompileException($"""
                                  Expected {type}, got {current.TokenType} (Value: {(current.Value == "" ? "Null" : current.Value)})
-                                    line ({current.Line + 1}): '{_line}'
-                                    
-                                 """);
+                                        line: '{_line}'
+                                 """, Current().Line, "Parser");
         }
         
         if (value != null && Current().Value != value)
-            throw new Exception($"Expected '{value}', got '{Current().Value}'");
+            throw new QlangCompileException($"Expected '{value}', got '{Current().Value}'", Current().Line, "Parser");
 
         return Advance();
     }
