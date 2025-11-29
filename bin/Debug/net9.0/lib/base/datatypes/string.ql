@@ -29,7 +29,6 @@ class String: {
 
     // Get length of string
     function length(): {
-        Console.print(_value);
         return _native("str_length", _str(_value));
     }
 

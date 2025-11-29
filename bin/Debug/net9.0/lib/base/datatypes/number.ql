@@ -17,14 +17,14 @@ class Number: {
         }
 
         // Convert '3.42...' to '3'
-        min = toFixedInt(Parser.asNumber(min));
-        max = toFixedInt(Parser.asNumber(max));
+        min = Parser.asInt(min);
+        max = Parser.asInt(max);
 
         if min >= max: {
             Throw.exception("Minimum can't be more than maximum");
         }
 
-        return _native("random", min, max);
+        return Parser.asNumber(_native("random", min, max));
     }
 
     // Get int styled number ('3.421' to '3')

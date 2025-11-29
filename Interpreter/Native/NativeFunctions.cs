@@ -15,11 +15,12 @@ public class NativeFunctionRegistry
         Register("cmd_write", (Action<string>)Console.Write);
         Register("cmd_cursor_visible", (Action<bool>)(isVisible => Console.CursorVisible = isVisible));
         Register("cmd_read", Console.ReadLine);
-        Register("cmd_key", (Func<bool, object>)(intercept => Console.ReadKey(intercept).KeyChar));
+        Register("cmd_key", (Func<bool, string>)(intercept => Console.ReadKey(intercept).KeyChar.ToString()));
         Register("cmd_key_available", (Func<bool>)(() => Console.KeyAvailable));
         Register("cmd_clear", (Action)Console.Clear);
         Register("cmd_fcolor", (Action<string>)(color => NativeConsole.SetForegroundColor((color))));
         Register("cmd_bcolor", (Action<string>)(color => NativeConsole.SetBackgroundColor((color))));
+        Register("cmd_reset_colors", Console.ResetColor);
         Register("cmd_cursor_position", (Action<int, int>)(Console.SetCursorPosition));
         // Number
         Register("try_parse_number", (Func<object, bool>)(number => number.ToString().TryParseNumber(out _)));
@@ -51,6 +52,7 @@ public class NativeFunctionRegistry
         Register("list_clear", (Action<List<object>>)(list => list.Clear()));
         Register("list_contains", (Func<List<object>, object, bool>)((list, item) => list.Contains(item)));
         Register("list_remove_at", (Action<List<object>, int>)((list, idx) => list.RemoveAt(idx)));
+        Register("list_index_of", (Func<List<object>, object, int>)((list, item) => list.IndexOf(item)));
         
         // Parser
         Register("parse_int", (Func<object, int>)(obj => (int)NativeParser.Parse(obj, "int")));

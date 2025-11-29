@@ -37,6 +37,7 @@ public class Token(Tokens token, int line, int index, string value = "")
             Tokens.StringRef => "",
             Tokens.NumberRef => "",
             Tokens.Keyword => " ",
+            Tokens.Percent => "%",
         };
     }
 }
@@ -65,6 +66,7 @@ public enum Tokens
     Minus,
     Star,
     Slash,
+    Percent,
     StringRef,
     NumberRef,
 }

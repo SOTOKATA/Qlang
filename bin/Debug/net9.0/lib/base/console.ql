@@ -1,8 +1,5 @@
 // Class to make operations with console
 class Console: {
-    private let defFColor = "gray";
-    private let defBColor = "black";
-
     // Print text to console
     function print(let message): {
         _native("cmd_write", _str(message));
@@ -10,7 +7,7 @@ class Console: {
 
     // Print text to console with new line
     function println(let message): {
-        print(message + "\n");
+        _native("cmd_write", _str(message + "\n"));
     }
 
     // Read line from console
@@ -51,7 +48,6 @@ class Console: {
     }
     // Set default colors for console
     function resetColors(): {
-        setForeColor(defFColor);
-        setBackColor(defBColor);
+        _native("cmd_reset_colors");
     }
 }

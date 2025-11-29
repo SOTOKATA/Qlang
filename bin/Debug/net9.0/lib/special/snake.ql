@@ -1,31 +1,49 @@
 include "$lib/base"
 
 class SnakeGame: {
-    let X = 0;
-    let Y = 0;
+    let _position;
 
-    let tailX = Array.new([]);
-    let tailY = Array.new([]);
-    let tailLength = 1;
+    let _tail;
 
-    let lastChar = "";
+    let _tailLength;
 
-    let fruitX = 1;
-    let fruitY = 1;
+    let _lastChar;
 
-    let width = 16;
-    let height = 8;
+    let _fruitPos;
 
-    let score = 0;
+    let _width;
 
-    let gameOver = false;
+    let _height;
+
+    let _score;
+
+    let _gameOver;
+
+    let _toWait;
 
     function setup(): {
         Console.clear();
         Console.cursorVisible(false);
 
-        fruitX = Number.randInt(1, width);
-        fruitY = Number.randInt(1, height);
+        _tail = Array.new([]);
+
+        _tailLength = 0;
+
+        _score = 0;
+
+        _gameOver = false;
+
+        _lastChar = "";
+
+        _width = 16;
+
+        _height = 8;
+
+        _position = Vector2.new(_width / 2, _height / 2);
+
+        _fruitPos = Vector2.new(Number.randInt(1, _width), Number.randInt(1, _height));
+
+        _toWait = 100;
     }
 
     function draw(): {
@@ -33,127 +51,124 @@ class SnakeGame: {
 
         let arrow = "";
 
-        if lastChar == "a": { arrow = "<"; }
-        else if lastChar == "d": { arrow = ">"; }
-        else if lastChar == "s": { arrow = "v"; }
-        else if lastChar == "w": { arrow = "^"; }
+        if _lastChar == "a": { arrow = "<"; }
+        else if _lastChar == "d": { arrow = ">"; }
+        else if _lastChar == "s": { arrow = "V"; }
+        else if _lastChar == "w": { arrow = "^"; }
+        else: { arrow = "%"; }
 
-        Console.println("Score: " + Number.toFixed(score, "00") + " Dir: " + arrow);
+        Console.setForeColor("white");
+        Console.println("Score: " + Number.toFixed(_score, "00") + " Speed: " + _toWait);
 
-        for let j = 0; j < (height + 1); j = j + 1: {
-            for let i = 0; i < (width + 1); i = i + 1: {
-                
-                let isTailPosition = false;
+        for let j = 0; j < (_height + 1); j = j + 1: {
+            for let i = 0; i < (_width + 1); i = i + 1: {
+                Console.setCursorPosition(i, (j + 1));
 
-                for let tX = 0; tX < tailX.length(); tX = tX + 1: {
-                    let x = tailX.at(tX);
-                    let y = tailY.at(tX);
-
-                    if (x == i) && (y == j): {
-                        isTailPosition = true;
+                let isTail = false;
+                for let k = 0; k < _tail.length(); k = k + 1: {
+                    if _tail.at(k).equals(Vector2.new(i, j)): {
+                        isTail = true;
                     }
                 }
 
-                Console.setCursorPosition(i, (j + 1));
-
-                if (i == X) && (j == Y): {
-                    Console.print("%");
-                } else if (i == fruitX) && (j == fruitY): {
+                if (i == _position.X()) && (j == _position.Y()): {
+                    Console.setForeColor("yellow");
+                    Console.print(arrow);
+                } else if  _fruitPos.equals(Vector2.new(i, j)): {
+                    Console.setForeColor("green");
                     Console.print("F");
-                } else if (i == 0) || (j == 0) || (i == width) || (j == height): {
+                } else if (i == 0) || (j == 0) || (i == _width) || (j == _height): {
+                    Console.setForeColor("gray");
                     Console.print("#");
-                } else if isTailPosition == true: {
+                } else if isTail == true: {
+                    Console.setForeColor("green");
                     Console.print("0");
                 } else: {
+                    Console.setForeColor("DarkGray");
                     Console.print(".");
                 }
-
-                isTailPosition = false;
             }
         }
     }
 
     function logic(): {
-        if (X == fruitX) && (Y == fruitY): {
-            score = score + 1;
+        if _fruitPos.equals(_position): {
+            _score = _score + 1;
 
-            tailLength = tailLength + 1;
+            _tailLength = _tailLength + 1;
 
-            fruitX = Number.randInt(1, width);
-            fruitY = Number.randInt(1, height);
+            _fruitPos = Vector2.new(Number.randInt(1, _width), Number.randInt(1, _height));
+        }
+
+        for let i = 0; i < _tail.length(); i = i + 1: {
+            if _tail.at(i).equals(_position): {
+                _gameOver = true;
+            }
         }
      
-        tailX.insert(0, X);
-        tailY.insert(0, Y);
-        if (tailX.length() > tailLength) || (tailY.length() > tailLength): {
-            tailX.removeAt(tailX.length() - 1);
-            tailY.removeAt(tailY.length() - 1);
+        _tail.insert(0, _position);
+        if (_tail.length() > _tailLength): {
+            _tail.removeAt(_tail.length() - 1);
         }
 
         input();
 
-        if X < 1: {
-            X = width - 1;
-        } else if X > (width - 1): {
-            X = 1;
+        if _position.X() < 1: {
+            _position = Vector2.new(_width - 1, _position.Y());
+        } else if _position.X() > (_width - 1): {
+            _position = Vector2.new(1, _position.Y());
         }
 
-        if Y < 1: {
-            Y = height - 1;
-        } else if Y > (height - 1): {
-            Y = 1;
+        if _position.Y() < 1: {
+            _position = Vector2.new(_position.X(), _height - 1);
+        } else if _position.Y() > (_height - 1): {
+            _position = Vector2.new(_position.X(), 1);
         }
-
-        Console.setCursorPosition(0, height + 2);
-        Console.println("                                    ");
-        Console.println("                                    ");
-        Console.setCursorPosition(0, height + 2);
-        Console.println("Collection (X): " + getRead(tailX));
-        Console.println("Collection (Y): " + getRead(tailY));
-    }
-
-    function getRead(let array): {
-        let col = "[";
-        for let i = 0; i < array.length(); i = i + 1: {
-            col = col + " " + array.at(i) + ",";
-        }
-
-        col = col + "]";
-
-        return col;
     }
 
     function input(): {
         if Console.isKeyAvailable() == false: {
-            if lastChar != "": {
-                control(lastChar);
+            if _lastChar != "": {
+                control(_lastChar);
             }  
             return "";
         }
 
-        lastChar = Console.readkey(true);    
+        _lastChar = Console.readkey(true);    
+        control(_lastChar);
     }
 
     function control(let char): {
         if char == "a": {
-            X = X - 1;
+            _position = Vector2.new(_position.X() - 1, _position.Y());
         } else if char == "d": {
-            X = X + 1;
+            _position = Vector2.new(_position.X() + 1, _position.Y());
         } else if char == "w": {
-            Y = Y - 1;
+            _position = Vector2.new(_position.X(), _position.Y() - 1);
         } else if char == "s": {
-            Y = Y + 1;
+            _position = Vector2.new(_position.X(), _position.Y() + 1);
         }
     }
 
     function run(): {
         setup();
 
-        while gameOver == false: {
+        while _gameOver == false: {
             logic();
             draw();
 
-            Time.wait(100);
+            _toWait = 100 / (1 + (_score * 0.05));
+            Time.wait(_toWait);
+
         }
+
+        Console.setCursorPosition(0, _height + 3);
+        Console.setForeColor("red");
+        Console.println("Game Over! Your score: " + Number.toFixed(_score, "00"));
+        Console.resetColors();
+        Console.cursorVisible(true);
+
     }
 }
+
+

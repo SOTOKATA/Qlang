@@ -10,6 +10,10 @@ class Array: {
         _value = collection;
     }
 
+    function toString(): {
+        return _value;
+    }
+
     function isArray(let collection): {
         return _native("list_is", collection);
     }
@@ -73,6 +77,11 @@ class Array: {
         }
 
         _native("list_remove_at", _value, index);
+    }
+
+    // Get index of item
+    function indexOf(let item): {
+        return _native("list_index_of", _value, item);
     }
 
     // Get length

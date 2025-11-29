@@ -390,7 +390,7 @@ public class Parser
         }
 
         // Арифметические операторы: +, -, *, /
-        if (Check(Tokens.Plus) || Check(Tokens.Minus) || Check(Tokens.Star) || Check(Tokens.Slash))
+        if (Check(Tokens.Plus) || Check(Tokens.Minus) || Check(Tokens.Star) || Check(Tokens.Slash) || Check(Tokens.Percent))
         {
             var op = Current().TokenType.ToString();
             Advance();
@@ -498,6 +498,7 @@ public class Parser
             // Вызов метода: Object.method(...)... or func().class.etc();
             if (Check(Tokens.Dot) || Check(Tokens.LParen))
             {
+                Logger.Logger.Log("Detected object/function call");
                 List<ASTNode> objects = [];
                 List<ASTNode> arguments = [];
                 
@@ -541,7 +542,7 @@ public class Parser
                 
 
                 // While next is dot
-                Logger.Logger.Log($":", "CallNodeWhile");
+                Logger.Logger.Log($"Start Process", "CallNodeWhile");
                 while (Check(Tokens.Dot))
                 {
                     Advance();
@@ -582,65 +583,8 @@ public class Parser
                 
                 Logger.Logger.Log("CompilationProcess.End: Parsing primary (CallNode, full)");
                 return new CallNode { Objects = objects };
-                
-                // var name = Expect(Tokens.Identifier).Value;
-                //
-                // // Call variable from class
-                // // structure: objName.name <- without '('
-                // if (Current().TokenType != Tokens.LParen)
-                // {
-                //     // TODO: variable assign
-                //
-                //     // get from class
-                //     Logger.Logger.Log("CompilationProcess.End: Parsing primary (VariableNode)");
-                //     return new VariableNode { ClassName = firstIdentifier, Name = name };
-                // }
-                
-                // Expect(Tokens.LParen);
-                //
-                // List<ASTNode> arguments = [];
-                // while (!Check(Tokens.RParen))
-                // {
-                //     arguments.Add(ParseExpression());
-                //     if (Check(Tokens.Comma))
-                //         Advance();
-                // }
-                //
-                // Expect(Tokens.RParen);
-
-                // Logger.Logger.Log("CompilationProcess.End: Parsing primary");
-                // return new CallNode 
-                // { 
-                //     ObjectName = firstIdentifier, 
-                //     MethodName = name, 
-                //     Arguments = arguments 
-                // };
             }
             
-            // Вызов функции: functionName(...)
-            // if (Check(Tokens.LParen))
-            // {
-            //     Advance(); // consume '('
-            //     
-            //     List<ASTNode> arguments = [];
-            //     while (!Check(Tokens.RParen))
-            //     {
-            //         arguments.Add(ParseExpression());
-            //         if (Check(Tokens.Comma))
-            //             Advance();
-            //     }
-            //
-            //     Expect(Tokens.RParen);
-            //
-            //     // Можно использовать MethodCallNode или создать отдельный FunctionCallNode
-            //     Logger.Logger.Log("CompilationProcess.End: Parsing primary");
-            //     return new CallNode 
-            //     { 
-            //         ObjectName = "", 
-            //         MethodName = firstIdentifier, 
-            //         Arguments = arguments 
-            //     };
-            // }
 
             if (Current().TokenType == Tokens.Equals && Peek()?.TokenType != Tokens.Equals)
             {

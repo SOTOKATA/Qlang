@@ -1,24 +1,24 @@
-﻿using System.Reflection.Emit;
-using Qlang.AST;
+﻿using Qlang.AST;
 using Qlang.Dynamic;
 
 namespace Qlang.Interpreter;
 
 public partial class Interpreter
 {
-    public object? ExecuteObjectCalls(CallNode call)
+    private object? ExecuteObjectCalls(CallNode call)
     {
         Logger.Logger.Log($"Objects: " + string.Join(".", call.Objects));
-        Logger.Logger.Log($"CurrentContext: class = '{CurrentContext.Class?.Name}', function = '{CurrentContext.Function?.Name}'");
+        
+        Logger.Logger.Log($"CurrentContext: class = '{CurrentContext?.Class?.Name}', function = '{CurrentContext?.Function?.Name}'");
 
         // overriding system calls
         if (call.Objects.Count > 0 && call.Objects[0] is FunctionPointerNode fn)
         {
             var args = fn.Arguments.ConvertAll(EvaluateExpression).ToArray();
+            
             switch (fn.Name)
             {
                 case "_str":
-                    Console.WriteLine($"[{string.Join(" ", args)}]");
                     return ParseString(string.Join("", args.Select(a => a.ToString())));
                 case "_native":
                     string name = args[0].ToString();
@@ -50,6 +50,7 @@ public partial class Interpreter
         {
             case FunctionPointerNode fn:
             {
+                Logger.Logger.Log("Detected function pointer: " + fn.Name);
                 var args = fn.Arguments.ConvertAll(EvaluateExpression);
                 DynamicFunction? function;
                 
@@ -61,6 +62,8 @@ public partial class Interpreter
 
                     if (function is not null)
                     {
+                        Logger.Logger.Log("Detected as function from lastReturnValue");
+                        
                         // Create new instance or just call
                         return function.Name == "new" 
                             ? 
@@ -73,30 +76,40 @@ public partial class Interpreter
                 // Local function without class
                 // Ex.: func()
                 if (_functions.TryGetValue(fn.Name, out var func) && lastReturnValue is null)
+                {
+                    Logger.Logger.Log("Detected as global function without class");
                     ExecuteFunction(func, args, null);
+                }
                 
                 // Call from class context
                 // Ex.: func() with context ClassExample
                 function = TryGetFunctionFromClassContext(fn.Name);
                 if (function is not null && lastReturnValue is null)
-                    return ExecuteFunction(function, args, CurrentContext.Class);
-                break;
-            }
-            case ObjectPointerNode objCall:
-                foreach (var VARIABLE in _dynamicClasses)
                 {
-                    Logger.Logger.Warn($"VARIABLE: {VARIABLE.Key} responsible {VARIABLE.Value.Name}");
+                    Logger.Logger.Log("Detected as function from class context");
+                    return ExecuteFunction(function, args, CurrentContext.Class);
                 }
                 
+                throw new QlangRuntimeException("Unknown function: " + fn.Name, fn, GetStackTrace());
+            }
+            case ObjectPointerNode objCall:
+                Logger.Logger.Log($"Detected object pointer: {objCall.Name}");
+
                 if (_dynamicClasses.TryGetValue(objCall.Name, out var classNode))
+                {
+                    Logger.Logger.Log($"Detected as static class");
                     return classNode;
-                
+                }
+
                 if (lastReturnValue is DynamicClass dynamicClass &&
                     dynamicClass.Variables.TryGetValue(objCall.Name, out var var))
+                {
+                    Logger.Logger.Log($"Detected as class from temporary (lastReturnValue)");
                     return var?.Value;
-                
+                }
+
+                Logger.Logger.Log($"Detected as variable");
                 return GetVariable(new VariableNode { Name = objCall.Name });
-                        
         }
         
         foreach (var item in _contextStack)
@@ -111,21 +124,25 @@ public partial class Interpreter
 
     private DynamicFunction? TryGetFunctionFromClassContext(string functionName)
     {
-        if (_contextStack.Count == 0)
+        if (!HasContext)
             return null;
         
         var currentClass = CurrentContext.Class;
 
         if (currentClass is null)
             return null;
+
+        var func = currentClass.Body
+            .FirstOrDefault(node => node is FunctionNode func && func.Name == functionName) as FunctionNode;
         
-        return ToDynamicFunction(currentClass.Body
-            .FirstOrDefault(node => node is FunctionNode func && func.Name == functionName) as FunctionNode);
+        return func is null ? null : ToDynamicFunction(func);
     }
     
     private DynamicFunction? TryGetFunctionFromClass(string functionName, DynamicClass source)
     {
-        return ToDynamicFunction(source.Body
-            .FirstOrDefault(node => node is FunctionNode func && func.Name == functionName) as FunctionNode);
+        var func = source.Body
+            .FirstOrDefault(node => node is FunctionNode func && func.Name == functionName) as FunctionNode;
+        
+        return func is null ? null : ToDynamicFunction(func);
     }
 }

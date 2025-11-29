@@ -161,6 +161,7 @@ public class Lexer
             '-' => new Token(Tokens.Minus, -1, -1),
             '*' => new Token(Tokens.Star, -1, -1),
             '/' => new Token(Tokens.Slash, -1, -1),
+            '%' => new Token(Tokens.Percent, -1, -1),
             '(' => new Token(Tokens.LParen, -1, -1),
             ')' => new Token(Tokens.RParen, -1, -1),
             ':' => new Token(Tokens.Colon, -1, -1),
