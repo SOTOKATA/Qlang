@@ -30,14 +30,14 @@ public class Token(Tokens token, int line, int index, string value = "")
             Tokens.Equals => "=",
             Tokens.Less => "<",
             Tokens.Greater => ">",
-            Tokens.Plus => "+",
+            Tokens.Plus => " + ",
             Tokens.Minus => "-",
-            Tokens.Star => "*",
-            Tokens.Slash => "/",
+            Tokens.Star => " * ",
+            Tokens.Slash => " / ",
             Tokens.StringRef => "",
             Tokens.NumberRef => "",
             Tokens.Keyword => " ",
-            Tokens.Percent => "%",
+            Tokens.Percent => " % ",
         };
     }
 }

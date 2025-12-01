@@ -8,7 +8,6 @@ class LanguageDemo: {
         Console.println("2. Strings");
         Console.println("3. Circles");
         
-        // TODO: { bool re-write parsing (with || and &&)
         do_while (String.isNullOrWhitespace(choice) == true) || (Number.isNumber(choice) == false): {
             Console.print("Print choice (1-3): ");
             let choice = Console.readln();
