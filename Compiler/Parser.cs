@@ -20,15 +20,25 @@ public class Parser
 
         Logger.Logger.SetLoggerPath(Path.Combine("Logs", "Debug", "debug_parser.log"));
         Logger.Logger.Warn("----------- Parser -----------");
-        while (!IsAtEnd())
+
+        try
         {
-            if (Check(Tokens.Semicolon))
+            while (!IsAtEnd())
             {
-                Advance();
-                continue;
+                if (Check(Tokens.Semicolon))
+                {
+                    Advance();
+                    continue;
+                }
+
+                program.Statements.Add(ParseStatement());
             }
 
-            program.Statements.Add(ParseStatement());
+            Validator.CheckValidate(program);
+        }
+        catch
+        {
+            throw;
         }
 
         return program;
@@ -104,14 +114,14 @@ public class Parser
             return expr;
         }
 
-        throw new QlangCompileException($"Unexpected token: {Current().TokenType} '{Current().Value}'", Current().Line, "Parser");
+        throw new QlangCompileException($"Unexpected token: {Current().TokenType} '{Current().Value}'", (IsAtEnd() ? 0 : Current().Line + 1), "Parser");
     }
 
     private AssignmentNode ParseVariableDeclaration(bool isStatic = false, bool isPrivate = false, bool isConst = false, bool isNew = false)
     {
         Logger.Logger.Log("Parsing variable declaration", "CompilationProcess");
         if (!Check(Tokens.Keyword) || Current().Value != Keywords.VariableDeclaration)
-            throw new QlangCompileException($"(ParseVariableDeclaration) Unexpected token: {Current().TokenType}", Current().Line, "Parser");
+            throw new QlangCompileException($"(ParseVariableDeclaration) Unexpected token: {Current().TokenType}", (IsAtEnd() ? 0 : Current().Line + 1), "Parser");
         
         Advance();
         
@@ -127,7 +137,8 @@ public class Parser
         Logger.Logger.Log($"CompilationProcess.End: Parsing Variable declaration (Name: {name} Value: {value?.GetType().Name ?? "Null"})");
         return new AssignmentNode(isStatic, isPrivate, isConst, isNew) { 
             VariableName = name, 
-            Value = value
+            Value = value, 
+            Line = (IsAtEnd() ? 0 : Current().Line + 1)
         };
     }
 
@@ -159,11 +170,13 @@ public class Parser
 
         Logger.Logger.Log("CompilationProcess.End: Parsing function");
         return new FunctionNode 
-        { Name = name, 
+        { 
+            Name = name, 
             Parameters = parameters, 
             Body = body, 
             IsStatic = isStatic, 
-            IsPrivate = isPrivate 
+            IsPrivate = isPrivate,
+            Line = (IsAtEnd() ? 0 : Current().Line + 1),
         };
     }
 
@@ -182,7 +195,7 @@ public class Parser
         Expect(Tokens.RBrace);
 
         Logger.Logger.Log("CompilationProcess.End: Parsing class");
-        return new ClassNode { Name = name, Body = body };
+        return new ClassNode { Name = name, Body = body, Line = (IsAtEnd() ? 0 : Current().Line + 1) };
     }
     
     private ForNode ParseFor()
@@ -205,7 +218,7 @@ public class Parser
         Expect(Tokens.RBrace);
 
         Logger.Logger.Log("CompilationProcess.End: Parsing for");
-        return new ForNode { Assignment = assignment, Statement = statement, Condition = condition, Body = forBlock };
+        return new ForNode { Assignment = assignment, Statement = statement, Condition = condition, Body = forBlock, Line = (IsAtEnd() ? 0 : Current().Line + 1), };
     }
     
     private WhileNode ParseWhile(bool isDoWhile = false)
@@ -222,7 +235,7 @@ public class Parser
         Expect(Tokens.RBrace);
 
         Logger.Logger.Log("CompilationProcess.End: Parsing while");
-        return new WhileNode { Condition = condition, Body = whileBlock, IsDoWhile = isDoWhile };
+        return new WhileNode { Condition = condition, Body = whileBlock, IsDoWhile = isDoWhile,Line = (IsAtEnd() ? 0 : Current().Line + 1) };
     }
 
     private IfNode ParseIf()
@@ -259,7 +272,7 @@ public class Parser
         }
 
         Logger.Logger.Log("CompilationProcess.End: Parsing if");
-        return new IfNode { Condition = condition, ThenBlock = thenBlock, ElseBlock = elseBlock };
+        return new IfNode { Condition = condition, ThenBlock = thenBlock, ElseBlock = elseBlock,Line = (IsAtEnd() ? 0 : Current().Line + 1) };
     }
 
     private List<ASTNode> ParseBlock()
@@ -301,7 +314,7 @@ public class Parser
         Expect(Tokens.Semicolon);
         
         Logger.Logger.Log("CompilationProcess.End: Parsing return");
-        return new ReturnNode { ReturnValue = node };
+        return new ReturnNode { ReturnValue = node,Line = (IsAtEnd() ? 0 : Current().Line + 1) };
     }
 
     /// <summary>
@@ -318,7 +331,7 @@ public class Parser
             Advance(); // второй &
             var right = ParseExpression();
             Logger.Logger.Log("CompilationProcess.End: Parsing expression");
-            return new BinaryOperationNode { Left = left, Operator = "&&", Right = right };
+            return new BinaryOperationNode { Left = left, Operator = "&&", Right = right,Line = (IsAtEnd() ? 0 : Current().Line + 1) };
         }
     
         if (Check(Tokens.Or) && Peek()?.TokenType == Tokens.Or)
@@ -327,7 +340,7 @@ public class Parser
             Advance(); // второй |
             var right = ParseExpression();
             Logger.Logger.Log("CompilationProcess.End: Parsing expression");
-            return new BinaryOperationNode { Left = left, Operator = "||", Right = right };
+            return new BinaryOperationNode { Left = left, Operator = "||", Right = right,Line = (IsAtEnd() ? 0 : Current().Line + 1) };
         }
 
         // Операторы сравнения: ==
@@ -337,7 +350,7 @@ public class Parser
             Advance(); // второй =
             var right = ParseExpression();
             Logger.Logger.Log("CompilationProcess.End: Parsing expression");
-            return new BinaryOperationNode { Left = left, Operator = "==", Right = right };
+            return new BinaryOperationNode { Left = left, Operator = "==", Right = right,Line = (IsAtEnd() ? 0 : Current().Line + 1) };
         }
         
         if (Check(Tokens.Not) && Peek()?.TokenType == Tokens.Equals)
@@ -346,7 +359,7 @@ public class Parser
             Advance(); // второй =
             var right = ParseExpression();
             Logger.Logger.Log("CompilationProcess.End: Parsing expression");
-            return new BinaryOperationNode { Left = left, Operator = "!=", Right = right };
+            return new BinaryOperationNode { Left = left, Operator = "!=", Right = right,Line = (IsAtEnd() ? 0 : Current().Line + 1) };
         }
         
         if (Check(Tokens.Less))
@@ -366,7 +379,7 @@ public class Parser
             
             var right = ParseExpression();
             Logger.Logger.Log("CompilationProcess.End: Parsing expression");
-            return new BinaryOperationNode { Left = left, Operator = op, Right = right };
+            return new BinaryOperationNode { Left = left, Operator = op, Right = right,Line = (IsAtEnd() ? 0 : Current().Line + 1) };
         }
         
         if (Check(Tokens.Greater))
@@ -386,7 +399,7 @@ public class Parser
             
             var right = ParseExpression();
             Logger.Logger.Log("CompilationProcess.End: Parsing expression");
-            return new BinaryOperationNode { Left = left, Operator = op, Right = right };
+            return new BinaryOperationNode { Left = left, Operator = op, Right = right, Line = (IsAtEnd() ? 0 : Current().Line + 1) };
         }
 
         // Арифметические операторы: +, -, *, /
@@ -396,7 +409,7 @@ public class Parser
             Advance();
             var right = ParseExpression();
             Logger.Logger.Log("CompilationProcess.End: Parsing expression");
-            return new BinaryOperationNode { Left = left, Operator = op, Right = right };
+            return new BinaryOperationNode { Left = left, Operator = op, Right = right, Line = (IsAtEnd() ? 0 : Current().Line + 1) };
         }
 
         return left;
@@ -426,7 +439,7 @@ public class Parser
             
             Advance();
 
-            return new CollectionNode { Collection = statements };
+            return new CollectionNode { Collection = statements, Line = (IsAtEnd() ? 0 : Current().Line + 1) };
         }
         
         bool isMinus = false;
@@ -449,7 +462,7 @@ public class Parser
             Logger.Logger.Log("CompilationProcess.End: Parsing primary");
             return new BooleanNode
             {
-                Value = isMinus ? !bool.Parse(Advance().Value) : bool.Parse(Advance().Value)
+                Value = isMinus ? !bool.Parse(Advance().Value) : bool.Parse(Advance().Value), Line = (IsAtEnd() ? 0 : Current().Line + 1)
             };
         }
 
@@ -457,7 +470,7 @@ public class Parser
         if (Check(Tokens.StringRef))
         {
             Logger.Logger.Log("CompilationProcess.End: Parsing primary (StringRef)");
-            return new StringRefNode { Index = int.Parse(Advance().Value) };
+            return new StringRefNode { Index = int.Parse(Advance().Value), Line = (IsAtEnd() ? 0 : Current().Line + 1) };
         }
         
         if (Check(Tokens.NumberRef))
@@ -467,6 +480,7 @@ public class Parser
             {
                 IsNegative = isMinus,
                 Index = int.Parse(Advance().Value)
+                , Line = (IsAtEnd() ? 0 : Current().Line + 1)
             };
         }
 
@@ -479,7 +493,7 @@ public class Parser
             if (firstIdentifier.StartsWith("___STRING_"))
             {
                 var index = int.Parse(firstIdentifier.Replace("___STRING_", "").Replace("___", ""));
-                return new StringRefNode { Index = index };
+                return new StringRefNode { Index = index, Line = (IsAtEnd() ? 0 : Current().Line + 1) };
             }
             
             if (firstIdentifier.StartsWith("___NUMBER_"))
@@ -488,12 +502,13 @@ public class Parser
                 return new NumberRefNode
                 {
                     IsNegative = isMinus,
-                    Index = index
+                    Index = index,
+                    Line = (IsAtEnd() ? 0 : Current().Line + 1)
                 };
             }
             
             if (firstIdentifier.TryParseNumber(out var result))
-                return new NumberNode { Value = result };
+                return new NumberNode { Value = result, Line = (IsAtEnd() ? 0 : Current().Line + 1) };
             
             // Вызов метода: Object.method(...)... or func().class.etc();
             if (Check(Tokens.Dot) || Check(Tokens.LParen))
@@ -522,7 +537,8 @@ public class Parser
                     objects.Add(new FunctionPointerNode
                     {
                         Name = firstIdentifier,
-                        Arguments = arguments
+                        Arguments = arguments,
+                        Line = (IsAtEnd() ? 0 : Current().Line + 1)
                     });
                 }
                 // Else will add as object
@@ -531,13 +547,14 @@ public class Parser
                     objects.Add(new ObjectPointerNode
                     {
                         Name = firstIdentifier,
+                        Line = (IsAtEnd() ? 0 : Current().Line + 1)
                     });
                 }
                 
                 if (Current().TokenType != Tokens.Dot)
                 {
                     Logger.Logger.Log($"CompilationProcess.End: Parsing primary (CallNode) {Current().TokenType}");
-                    return new CallNode { Objects = objects };
+                    return new CallNode { Objects = objects, Line = (IsAtEnd() ? 0 : Current().Line + 1) };
                 }
                 
 
@@ -569,7 +586,8 @@ public class Parser
                         objects.Add(new FunctionPointerNode
                         {
                             Name = identifier,
-                            Arguments = arguments
+                            Arguments = arguments, 
+                            Line = (IsAtEnd() ? 0 : Current().Line + 1)
                         });
                         continue;
                     }
@@ -577,12 +595,13 @@ public class Parser
                     Logger.Logger.Log($"Detected object: {identifier}", "CallNodeWhile");
                     objects.Add(new ObjectPointerNode
                     {
-                        Name = identifier
+                        Name = identifier,
+                        Line = (IsAtEnd() ? 0 : Current().Line + 1)
                     });
                 } 
                 
                 Logger.Logger.Log("CompilationProcess.End: Parsing primary (CallNode, full)");
-                return new CallNode { Objects = objects };
+                return new CallNode { Objects = objects, Line = (IsAtEnd() ? 0 : Current().Line + 1) };
             }
             
 
@@ -594,14 +613,15 @@ public class Parser
                 {
                     VariableName = firstIdentifier,
                     Value = ParseExpression(),
+                    Line = (IsAtEnd() ? 0 : Current().Line + 1)
                 };
             }
             
             Logger.Logger.Log($"CompilationProcess.End: Parsing primary (VariableNode: {firstIdentifier})");
-            return new VariableNode { Name = firstIdentifier };
+            return new VariableNode { Name = firstIdentifier, Line = (IsAtEnd() ? 0 : Current().Line + 1) };
         }
         
-        throw new QlangCompileException($"Unexpected token in expression: {Current().TokenType} ({(Current().Value == "" ? "Null" : Current().Value)})", Current().Line, "Parser");
+        throw new QlangCompileException($"Unexpected token in expression: {Current().TokenType} ({(Current().Value == "" ? "Null" : Current().Value)})", (IsAtEnd() ? 0 : Current().Line + 1), "Parser");
     }
 
     // Вспомогательные методы
@@ -634,11 +654,11 @@ public class Parser
             throw new QlangCompileException($"""
                                  Expected {type}, got {current.TokenType} (Value: {(current.Value == "" ? "Null" : current.Value)})
                                         line: '{_line}'
-                                 """, Current().Line, "Parser");
+                                 """, (IsAtEnd() ? 0 : Current().Line + 1), "Parser");
         }
         
         if (value != null && Current().Value != value)
-            throw new QlangCompileException($"Expected '{value}', got '{Current().Value}'", Current().Line, "Parser");
+            throw new QlangCompileException($"Expected '{value}', got '{Current().Value}'", (IsAtEnd() ? 0 : Current().Line + 1), "Parser");
 
         return Advance();
     }

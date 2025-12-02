@@ -1,6 +1,8 @@
 ﻿using System.Text;
 using Qlang.AST;
 
+namespace Qlang;
+
 public class QlangRuntimeException : Exception
 {
     private int Line { get; }

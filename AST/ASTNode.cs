@@ -1,5 +1,8 @@
-﻿namespace Qlang.AST;
+﻿using Newtonsoft.Json;
 
+namespace Qlang.AST;
+
+[JsonObject(MemberSerialization.OptOut)]
 public abstract class ASTNode
 {
     public abstract string GetTree(string indent = "");

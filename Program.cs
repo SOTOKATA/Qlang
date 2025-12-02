@@ -23,6 +23,11 @@ public class Program
         }
 
         var filePath = args[0];
+
+        if (filePath == "new" && args.Length > 1)
+        {
+            
+        }
         
         string? code = null;
 
@@ -36,6 +41,11 @@ public class Program
                        
                        Term.println("Hello, ", $name, "!")
                    """;
+        }
+
+        if (filePath == "new")
+        {
+            
         }
         
         QLang lang = new();
@@ -57,9 +67,11 @@ public class Program
             Console.WriteLine("File not found: " + filePath);
             return;
         }
-        
-        lang.Compile(code);
-        lang.Run();
+
+        if (lang.Compile(code, filePath))
+        {
+            lang.Run();
+        }
     }
 }
 

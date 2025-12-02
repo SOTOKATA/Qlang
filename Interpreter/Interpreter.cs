@@ -1,6 +1,4 @@
 ﻿using System.Text;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Scripting;
 using Qlang.AST;
 using Qlang.Dependencies;
 using Qlang.Dynamic;
@@ -62,11 +60,12 @@ public partial class Interpreter
         
             ExecuteFunction(mainFunction, [], null);
         }
-        catch (QlangRuntimeException ex)
+        catch (Exception ex)
         {
             Logger.Logger.Error("Interpreter error:");
             Logger.Logger.Error(ex.ToString());
-            throw;
+
+            ExceptionManager.Throw(ex);
         }
     }
 

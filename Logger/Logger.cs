@@ -11,18 +11,14 @@ public static class Logger
     {
         FileLogger.SetPath(path);
     }
-    
-    public static void _Log(string message, ConsoleColor? color = null, bool isInternal = false, string msg = "", string type = "")
+
+    private static void _Log(string message, ConsoleColor? color = null, bool isInternal = false, string msg = "", string type = "")
     {
         if (!QLang.Settings.Debug)
             return;
         
         message = GetStackPath(msg, type, isInternal ? 4 : 3) + ": " + message;
         FileLogger.Log(message);
-        
-        // Console.ForegroundColor = color ?? ConsoleColor.DarkGray;
-        // Console.WriteLine(message);
-        // Console.ResetColor();
     }
     
     public static void Log(string message, string msg = "", ConsoleColor? color = null)

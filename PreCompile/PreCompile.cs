@@ -38,10 +38,8 @@ public static class PreCompile
 
             if (!Directory.Exists(fullPath))
                 fullPath += ".ql";
-                
-            script = script.Replace(includeLine + "\r\n", "")
-                .Replace(includeLine + "\n", "")
-                .Replace(includeLine, "");
+
+            script = script.Replace(includeLine, "");
 
             if (!Included.Add(fullPath))
             {
@@ -77,7 +75,7 @@ public static class PreCompile
         if (files.Count <= 0) 
             return script;
         
-        return string.Join(Environment.NewLine, files) + Environment.NewLine + script;
+        return script + Environment.NewLine + string.Join(Environment.NewLine, files);
 
     }
     
@@ -157,7 +155,7 @@ public static class PreCompile
         
             Logger.Logger.Log($"Comment='{comment}'");
         
-            return ""; // <- удаляем найденный комментарий
+            return "";
         });
         
         Logger.Logger.Succ("Comments cleared successfully");

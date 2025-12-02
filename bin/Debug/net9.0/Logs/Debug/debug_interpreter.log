@@ -1,0 +1,130 @@
+(97) [WARN] QLang/Run: ----------- Interpreter -----------
+(43) [LOG] Interpreter/Execute: ToDynamicClass (until): Console
+(45) [LOG] Interpreter/Execute: ToDynamicClass: Console
+(43) [LOG] Interpreter/Execute: ToDynamicClass (until): Parser
+(45) [LOG] Interpreter/Execute: ToDynamicClass: Parser
+(43) [LOG] Interpreter/Execute: ToDynamicClass (until): Throw
+(45) [LOG] Interpreter/Execute: ToDynamicClass: Throw
+(43) [LOG] Interpreter/Execute: ToDynamicClass (until): Array
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: CallNode
+(10) [LOG] Interpreter/ExecuteObjectCalls: Objects: Qlang.AST.FunctionPointerNode
+(12) [LOG] Interpreter/ExecuteObjectCalls: CurrentContext: class = '', function = ''
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(28) [LOG] Interpreter/ExecuteObjectCalls: _native: 
+(74) [LOG] NativeFunctionRegistry/Call: NativeCall: $name='list_create'
+(101) [LOG] NativeFunctionRegistry/Call: Call.Arguments: NativeCall: $args=
+
+
+(405) [WARN] Interpreter/EvaluateExpression: Native call return: value='System.Collections.Generic.List`1[System.Object]' type='List`1'
+(45) [LOG] Interpreter/Execute: ToDynamicClass: Array
+(43) [LOG] Interpreter/Execute: ToDynamicClass (until): Dictionary
+(45) [LOG] Interpreter/Execute: ToDynamicClass: Dictionary
+(43) [LOG] Interpreter/Execute: ToDynamicClass (until): Number
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(45) [LOG] Interpreter/Execute: ToDynamicClass: Number
+(43) [LOG] Interpreter/Execute: ToDynamicClass (until): String
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(45) [LOG] Interpreter/Execute: ToDynamicClass: String
+(43) [LOG] Interpreter/Execute: ToDynamicClass (until): Vector2
+(45) [LOG] Interpreter/Execute: ToDynamicClass: Vector2
+(43) [LOG] Interpreter/Execute: ToDynamicClass (until): Time
+(45) [LOG] Interpreter/Execute: ToDynamicClass: Time
+(122) [LOG] Interpreter/ExecuteFunction: 'main'()
+(180) [LOG] Interpreter/ExecuteStatement: CallNode
+(10) [LOG] Interpreter/ExecuteObjectCalls: Objects: Qlang.AST.ObjectPointerNode.Qlang.AST.FunctionPointerNode
+(12) [LOG] Interpreter/ExecuteObjectCalls: CurrentContext: class = '', function = 'main'
+(96) [LOG] Interpreter/ExecuteObjectCall: Detected object pointer: Console
+(100) [LOG] Interpreter/ExecuteObjectCall: Detected as static class
+(53) [LOG] Interpreter/ExecuteObjectCall: Detected function pointer: println
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(403) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(403) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(403) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(403) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.NumberRefNode Star Qlang.AST.BinaryOperationNode
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(403) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(403) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.NumberRefNode Plus Qlang.AST.NumberRefNode
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(403) [WARN] Interpreter/EvaluateExpression: ExpressionParams: 5: Int32; 5: Int32
+(403) [WARN] Interpreter/EvaluateExpression: Operation: 5Plus5
+(403) [WARN] Interpreter/EvaluateExpression: ExpressionParams: 5: Int32; 10: Double
+(403) [WARN] Interpreter/EvaluateExpression: Operation: 5Star10
+(403) [WARN] Interpreter/EvaluateExpression: ExpressionParams: Result of 5 * 5 + 5: : String; 50: Double
+(65) [LOG] Interpreter/ExecuteObjectCall: Detected as function from lastReturnValue
+(122) [LOG] Interpreter/ExecuteFunction: 'println'(Result of 5 * 5 + 5: 50)
+(180) [LOG] Interpreter/ExecuteStatement: CallNode
+(10) [LOG] Interpreter/ExecuteObjectCalls: Objects: Qlang.AST.FunctionPointerNode
+(12) [LOG] Interpreter/ExecuteObjectCalls: CurrentContext: class = 'Console', function = 'println'
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: CallNode
+(10) [LOG] Interpreter/ExecuteObjectCalls: Objects: Qlang.AST.FunctionPointerNode
+(12) [LOG] Interpreter/ExecuteObjectCalls: CurrentContext: class = 'Console', function = 'println'
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(403) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(403) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(403) [WARN] Interpreter/EvaluateExpression: ExpressionParams: Result of 5 * 5 + 5: 50: String; \n: String
+(28) [LOG] Interpreter/ExecuteObjectCalls: _native: Result of 5 * 5 + 5: 50
+
+(74) [LOG] NativeFunctionRegistry/Call: NativeCall: $name='cmd_write'
+(101) [LOG] NativeFunctionRegistry/Call: Call.Arguments: NativeCall: $args=
+$0: Type: System.String 
+$0: 'Result of 5 * 5 + 5: 50
+' $type: 'String' 
+(181) [WARN] Interpreter/ExecuteStatement: Native call return: value='' type=''
+(118) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Console' function='println'
+(180) [LOG] Interpreter/ExecuteStatement: CallNode
+(10) [LOG] Interpreter/ExecuteObjectCalls: Objects: Qlang.AST.ObjectPointerNode.Qlang.AST.FunctionPointerNode
+(12) [LOG] Interpreter/ExecuteObjectCalls: CurrentContext: class = '', function = 'main'
+(96) [LOG] Interpreter/ExecuteObjectCall: Detected object pointer: Console
+(100) [LOG] Interpreter/ExecuteObjectCall: Detected as static class
+(53) [LOG] Interpreter/ExecuteObjectCall: Detected function pointer: println
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(403) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(403) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.StringRefNode Plus Qlang.AST.BinaryOperationNode
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(403) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(403) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.NumberRefNode Star Qlang.AST.BinaryOperationNode
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(403) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(403) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.NumberRefNode Plus Qlang.AST.NumberRefNode
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: NumberRefNode
+(403) [WARN] Interpreter/EvaluateExpression: ExpressionParams: 5: Int32; 5: Int32
+(403) [WARN] Interpreter/EvaluateExpression: Operation: 5Plus5
+(403) [WARN] Interpreter/EvaluateExpression: ExpressionParams: 5: Int32; 10: Double
+(403) [WARN] Interpreter/EvaluateExpression: Operation: 5Star10
+(403) [WARN] Interpreter/EvaluateExpression: ExpressionParams: Result of 5 * (5 + 5): : String; 50: Double
+(65) [LOG] Interpreter/ExecuteObjectCall: Detected as function from lastReturnValue
+(122) [LOG] Interpreter/ExecuteFunction: 'println'(Result of 5 * (5 + 5): 50)
+(180) [LOG] Interpreter/ExecuteStatement: CallNode
+(10) [LOG] Interpreter/ExecuteObjectCalls: Objects: Qlang.AST.FunctionPointerNode
+(12) [LOG] Interpreter/ExecuteObjectCalls: CurrentContext: class = 'Console', function = 'println'
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: CallNode
+(10) [LOG] Interpreter/ExecuteObjectCalls: Objects: Qlang.AST.FunctionPointerNode
+(12) [LOG] Interpreter/ExecuteObjectCalls: CurrentContext: class = 'Console', function = 'println'
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: BinaryOperationNode
+(403) [WARN] Interpreter/EvaluateExpression: Detected binary operation
+(403) [WARN] Interpreter/EvaluateExpression: Params: Qlang.AST.VariableNode Plus Qlang.AST.StringRefNode
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: VariableNode
+(385) [LOG] Interpreter/EvaluateExpression: TypeofExpression: StringRefNode
+(403) [WARN] Interpreter/EvaluateExpression: ExpressionParams: Result of 5 * (5 + 5): 50: String; \n: String
+(28) [LOG] Interpreter/ExecuteObjectCalls: _native: Result of 5 * (5 + 5): 50
+
+(74) [LOG] NativeFunctionRegistry/Call: NativeCall: $name='cmd_write'
+(101) [LOG] NativeFunctionRegistry/Call: Call.Arguments: NativeCall: $args=
+$0: Type: System.String 
+$0: 'Result of 5 * (5 + 5): 50
+' $type: 'String' 
+(181) [WARN] Interpreter/ExecuteStatement: Native call return: value='' type=''
+(118) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='Console' function='println'
+(118) [WARN] Interpreter/ExecuteFunction.RestoreContextStack: class='' function='main'

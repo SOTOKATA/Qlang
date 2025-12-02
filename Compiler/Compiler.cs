@@ -36,8 +36,17 @@ public class Compiler
         
         fl.SetPath("Logs\\script_pre_compiled.ql");
         fl.Log(_outputScript);
+
+        List<Token> tokens;
         
-        List<Token> tokens = _lexer.Lex(_outputScript);
+        try
+        {
+            tokens = Lexer.Lex(_outputScript);
+        }
+        catch
+        {
+            throw;
+        }
 
         fl.SetPath("Logs\\script_tokenized.js");
 
@@ -59,13 +68,22 @@ public class Compiler
             
             if (token.TokenType is Tokens.Semicolon or Tokens.Colon or Tokens.LBrace or Tokens.RBrace)
             {
-                fl.Log(new string('\t', indent) + line);
+                fl.Log(new string('\t', (indent < 0 ? 0 : indent)) + line);
                 line = "";
             }
         }
 
-        var programNode = _parser.Parse(tokens);
-        
+        ProgramNode programNode;
+            
+        try
+        {
+            programNode = _parser.Parse(tokens);
+        }
+        catch
+        {
+            throw;
+        }
+
         fl.SetPath("Logs\\script_parsed.txt");
         
         fl.Log(programNode.GetTree());

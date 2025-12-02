@@ -1,4 +1,6 @@
-﻿using Qlang.AST;
+﻿using System.Text.Json;
+using Newtonsoft.Json;
+using Qlang.AST;
 
 namespace Qlang;
 
@@ -41,14 +43,65 @@ public class QLang
         }
     }
     
-    public void Compile(string code)
+    public bool Compile(string code, string filePath)
     {
         Compiler.Compiler c = new();
-        
-        _programNode = c.Compile(code);
+
+        try
+        {
+            _programNode = c.Compile(code);
+        }
+        catch (Exception ex)
+        {
+            ExceptionManager.Throw(ex);
+            
+            Logger.Logger.Error("Error");
+
+            return false;
+        }
 
         _stringDictionary = c.StringDictionary;
         _numberDictionary = c.NumberDictionary;
+        
+        SaveProgram(_programNode, filePath);
+
+        return true;
+    }
+
+    private static void SaveProgram(ProgramNode programNode, string filePath)
+    {
+        var settings = new JsonSerializerSettings
+        {
+            Formatting = Formatting.Indented,
+            TypeNameHandling = TypeNameHandling.Auto,
+            TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple
+        };
+
+        string json = JsonConvert.SerializeObject(programNode, settings);
+
+        string path = Path.Combine(Directory.GetCurrentDirectory(), filePath + ".json");
+
+        if (!File.Exists(path))
+            File.Create(path).Close();
+
+        File.WriteAllText(path, json);
+    }
+
+    private static ProgramNode? LoadFromFile(string path)
+    {
+        if (!File.Exists(path))
+            throw new FileNotFoundException("File is not found", path);
+
+        string json = File.ReadAllText(path);
+        
+        var settings = new JsonSerializerSettings
+        {
+            Formatting = Formatting.Indented,
+            TypeNameHandling = TypeNameHandling.Auto,
+            TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple
+        };
+
+        return JsonConvert.DeserializeObject<ProgramNode>(json, settings);
     }
 
     public void Run()
