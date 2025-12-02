@@ -11,4 +11,14 @@ public static class ExceptionManager
         if (@throw)
             throw ex;
     }
+    
+    public static void ThrowMessage(string message, bool @throw = false)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine(message);
+        Console.ResetColor();
+
+        if (@throw)
+            throw new Exception(message);
+    }
 }

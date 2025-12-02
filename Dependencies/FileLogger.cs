@@ -24,7 +24,8 @@ public class FileLogger
 
     public void Log(string message)
     {
-        if (!QLang.Settings.Debug)
+        object? value = Project.Project.GetCompileSetting("debug");
+        if (value is null || !(bool)value)
             return;
         
         using StreamWriter writer = new(_filePath, true);

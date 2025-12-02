@@ -1,0 +1,5829 @@
+{
+  "Statements": [
+    {
+      "$type": "Qlang.AST.FunctionNode, ql",
+      "Name": "main",
+      "IsStatic": false,
+      "IsPrivate": false,
+      "Parameters": [],
+      "Body": [
+        {
+          "$type": "Qlang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 4,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.AST.StringRefNode, ql",
+                  "Index": 0,
+                  "Line": 4,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Line": 4,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Arguments": [],
+          "Line": 4,
+          "LineIndex": 0,
+          "SourceFile": null
+        }
+      ],
+      "Line": 7,
+      "LineIndex": 0,
+      "SourceFile": null
+    },
+    {
+      "$type": "Qlang.AST.ClassNode, ql",
+      "Name": "Console",
+      "Body": [
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "print",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "message",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 9,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "_native",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.StringRefNode, ql",
+                      "Index": 1,
+                      "Line": 10,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.CallNode, ql",
+                      "Objects": [
+                        {
+                          "$type": "Qlang.AST.FunctionPointerNode, ql",
+                          "Name": "_str",
+                          "Arguments": [
+                            {
+                              "$type": "Qlang.AST.VariableNode, ql",
+                              "ClassName": "",
+                              "Name": "message",
+                              "Line": 10,
+                              "LineIndex": 0,
+                              "SourceFile": null
+                            }
+                          ],
+                          "Line": 10,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Arguments": [],
+                      "Line": 10,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 10,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 10,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 14,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "println",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "message",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 14,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "_native",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.StringRefNode, ql",
+                      "Index": 2,
+                      "Line": 15,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.CallNode, ql",
+                      "Objects": [
+                        {
+                          "$type": "Qlang.AST.FunctionPointerNode, ql",
+                          "Name": "_str",
+                          "Arguments": [
+                            {
+                              "$type": "Qlang.AST.BinaryOperationNode, ql",
+                              "Left": {
+                                "$type": "Qlang.AST.VariableNode, ql",
+                                "ClassName": "",
+                                "Name": "message",
+                                "Line": 15,
+                                "LineIndex": 0,
+                                "SourceFile": null
+                              },
+                              "Operator": "Plus",
+                              "Right": {
+                                "$type": "Qlang.AST.StringRefNode, ql",
+                                "Index": 3,
+                                "Line": 15,
+                                "LineIndex": 0,
+                                "SourceFile": null
+                              },
+                              "Line": 15,
+                              "LineIndex": 0,
+                              "SourceFile": null
+                            }
+                          ],
+                          "Line": 15,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Arguments": [],
+                      "Line": 15,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 15,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 15,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 19,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "readln",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 4,
+                        "Line": 20,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 20,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 20,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 21,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 23,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "readkey",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "intercept",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 23,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 5,
+                        "Line": 24,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "intercept",
+                        "Line": 24,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 24,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 24,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 25,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 27,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "isKeyAvailable",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 6,
+                        "Line": 28,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 28,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 28,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 29,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 31,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "cursorVisible",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "visible",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 31,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "_native",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.StringRefNode, ql",
+                      "Index": 7,
+                      "Line": 32,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "visible",
+                      "Line": 32,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 32,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 32,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 36,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "clear",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "_native",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.StringRefNode, ql",
+                      "Index": 8,
+                      "Line": 37,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 37,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 37,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 41,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "setCursorPosition",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "x",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 41,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "IsNew": false,
+              "VariableName": "y",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 41,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "_native",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.StringRefNode, ql",
+                      "Index": 9,
+                      "Line": 42,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "x",
+                      "Line": 42,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "y",
+                      "Line": 42,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 42,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 42,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 46,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "setForeColor",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "color",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 46,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "_native",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.StringRefNode, ql",
+                      "Index": 10,
+                      "Line": 47,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "color",
+                      "Line": 47,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 47,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 47,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 51,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "setBackColor",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "color",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 51,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "_native",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.StringRefNode, ql",
+                      "Index": 11,
+                      "Line": 52,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "color",
+                      "Line": 52,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 52,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 52,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 55,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "resetColors",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "_native",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.StringRefNode, ql",
+                      "Index": 12,
+                      "Line": 56,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 56,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 56,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 58,
+          "LineIndex": 0,
+          "SourceFile": null
+        }
+      ],
+      "Line": 61,
+      "LineIndex": 0,
+      "SourceFile": null
+    },
+    {
+      "$type": "Qlang.AST.ClassNode, ql",
+      "Name": "Parser",
+      "Body": [
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "asInt",
+          "IsStatic": true,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "object",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 62,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 13,
+                        "Line": 63,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "object",
+                        "Line": 63,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 63,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 63,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 64,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 66,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "asFloat",
+          "IsStatic": true,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "object",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 66,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 14,
+                        "Line": 67,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "object",
+                        "Line": 67,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 67,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 67,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 68,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 70,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "asString",
+          "IsStatic": true,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "object",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 70,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 15,
+                        "Line": 71,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "object",
+                        "Line": 71,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 71,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 71,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 72,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 74,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "asNumber",
+          "IsStatic": true,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "object",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 74,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 16,
+                        "Line": 75,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "object",
+                        "Line": 75,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 75,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 75,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 76,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 77,
+          "LineIndex": 0,
+          "SourceFile": null
+        }
+      ],
+      "Line": 79,
+      "LineIndex": 0,
+      "SourceFile": null
+    },
+    {
+      "$type": "Qlang.AST.ClassNode, ql",
+      "Name": "Throw",
+      "Body": [
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "exception",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "message",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 81,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "_native",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.StringRefNode, ql",
+                      "Index": 17,
+                      "Line": 82,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.CallNode, ql",
+                      "Objects": [
+                        {
+                          "$type": "Qlang.AST.FunctionPointerNode, ql",
+                          "Name": "_str",
+                          "Arguments": [
+                            {
+                              "$type": "Qlang.AST.VariableNode, ql",
+                              "ClassName": "",
+                              "Name": "message",
+                              "Line": 82,
+                              "LineIndex": 0,
+                              "SourceFile": null
+                            }
+                          ],
+                          "Line": 82,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Arguments": [],
+                      "Line": 82,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 82,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 82,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 86,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "nonImplementException",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "exception",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.StringRefNode, ql",
+                      "Index": 18,
+                      "Line": 87,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 87,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 87,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 91,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "parseException",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "error",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 91,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "exception",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.BinaryOperationNode, ql",
+                      "Left": {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 19,
+                        "Line": 92,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      "Operator": "Plus",
+                      "Right": {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "error",
+                        "Line": 92,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      "Line": 92,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 92,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 92,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 94,
+          "LineIndex": 0,
+          "SourceFile": null
+        }
+      ],
+      "Line": 97,
+      "LineIndex": 0,
+      "SourceFile": null
+    },
+    {
+      "$type": "Qlang.AST.ClassNode, ql",
+      "Name": "Array",
+      "Body": [
+        {
+          "$type": "Qlang.AST.AssignmentNode, ql",
+          "IsNew": false,
+          "VariableName": "_value",
+          "Value": {
+            "$type": "Qlang.AST.CallNode, ql",
+            "Objects": [
+              {
+                "$type": "Qlang.AST.FunctionPointerNode, ql",
+                "Name": "_native",
+                "Arguments": [
+                  {
+                    "$type": "Qlang.AST.StringRefNode, ql",
+                    "Index": 20,
+                    "Line": 98,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Line": 98,
+                "LineIndex": 0,
+                "SourceFile": null
+              }
+            ],
+            "Arguments": [],
+            "Line": 98,
+            "LineIndex": 0,
+            "SourceFile": null
+          },
+          "IsStatic": false,
+          "IsPrivate": true,
+          "IsConst": false,
+          "Line": 98,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "new",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "collection",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 101,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Array",
+                      "Line": 102,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "isArray",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.VariableNode, ql",
+                          "ClassName": "",
+                          "Name": "collection",
+                          "Line": 102,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 102,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 102,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Operator": "==",
+                "Right": {
+                  "$type": "Qlang.AST.BooleanNode, ql",
+                  "Value": false,
+                  "Line": 102,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Line": 102,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Throw",
+                      "Line": 103,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "parseException",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.StringRefNode, ql",
+                          "Index": 21,
+                          "Line": 103,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 103,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 103,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 105,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "_value",
+              "Value": {
+                "$type": "Qlang.AST.VariableNode, ql",
+                "ClassName": "",
+                "Name": "collection",
+                "Line": 105,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 105,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 108,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "toString",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.VariableNode, ql",
+                "ClassName": "",
+                "Name": "_value",
+                "Line": 109,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 110,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 112,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "isArray",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "collection",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 112,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 22,
+                        "Line": 113,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "collection",
+                        "Line": 113,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 113,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 113,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 114,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 116,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "getCollection",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.VariableNode, ql",
+                "ClassName": "",
+                "Name": "_value",
+                "Line": 117,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 118,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 120,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "contains",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "item",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 120,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 23,
+                        "Line": 121,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "_value",
+                        "Line": 121,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "item",
+                        "Line": 121,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 121,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 121,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 122,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 125,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "push",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "item",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 125,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "_native",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.StringRefNode, ql",
+                      "Index": 24,
+                      "Line": 126,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "_value",
+                      "Line": 126,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "item",
+                      "Line": 126,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 126,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 126,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 130,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "clear",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "_value",
+              "Value": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 25,
+                        "Line": 131,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "_value",
+                        "Line": 131,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 131,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 131,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 131,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 135,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "at",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "index",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 135,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "index",
+              "Value": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                    "Name": "Number",
+                    "Line": 136,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "toFixedInt",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "index",
+                        "Line": 136,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 136,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 136,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 136,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Number",
+                      "Line": 138,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "isNumber",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.VariableNode, ql",
+                          "ClassName": "",
+                          "Name": "index",
+                          "Line": 138,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 138,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 138,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Operator": "==",
+                "Right": {
+                  "$type": "Qlang.AST.BooleanNode, ql",
+                  "Value": false,
+                  "Line": 138,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Line": 138,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Throw",
+                      "Line": 139,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "exception",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.StringRefNode, ql",
+                          "Index": 26,
+                          "Line": 139,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 139,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 139,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 142,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 27,
+                        "Line": 142,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "_value",
+                        "Line": 142,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "index",
+                        "Line": 142,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 142,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 142,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 143,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 146,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "setAt",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "index",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 146,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "IsNew": false,
+              "VariableName": "item",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 146,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Number",
+                      "Line": 147,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "isNumber",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.VariableNode, ql",
+                          "ClassName": "",
+                          "Name": "index",
+                          "Line": 147,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 147,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 147,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Operator": "==",
+                "Right": {
+                  "$type": "Qlang.AST.BooleanNode, ql",
+                  "Value": false,
+                  "Line": 147,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Line": 147,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Throw",
+                      "Line": 148,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "exception",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.StringRefNode, ql",
+                          "Index": 28,
+                          "Line": 148,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 148,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 148,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 151,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "index",
+              "Value": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                    "Name": "Number",
+                    "Line": 151,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "toFixedInt",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "index",
+                        "Line": 151,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 151,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 151,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 151,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "_native",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.StringRefNode, ql",
+                      "Index": 29,
+                      "Line": 153,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "_value",
+                      "Line": 153,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "index",
+                      "Line": 153,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "item",
+                      "Line": 153,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 153,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 153,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 156,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "insert",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "index",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 156,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "IsNew": false,
+              "VariableName": "item",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 156,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Number",
+                      "Line": 157,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "isNumber",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.VariableNode, ql",
+                          "ClassName": "",
+                          "Name": "index",
+                          "Line": 157,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 157,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 157,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Operator": "==",
+                "Right": {
+                  "$type": "Qlang.AST.BooleanNode, ql",
+                  "Value": false,
+                  "Line": 157,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Line": 157,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Throw",
+                      "Line": 158,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "exception",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.StringRefNode, ql",
+                          "Index": 30,
+                          "Line": 158,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 158,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 158,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 161,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "index",
+              "Value": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                    "Name": "Number",
+                    "Line": 161,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "toFixedInt",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "index",
+                        "Line": 161,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 161,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 161,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 161,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "_native",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.StringRefNode, ql",
+                      "Index": 31,
+                      "Line": 163,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "_value",
+                      "Line": 163,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "index",
+                      "Line": 163,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "item",
+                      "Line": 163,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 163,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 163,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 167,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "removeAt",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "index",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 167,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "index",
+              "Value": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                    "Name": "Number",
+                    "Line": 168,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "toFixedInt",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "index",
+                        "Line": 168,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 168,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 168,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 168,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Number",
+                      "Line": 170,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "isNumber",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.VariableNode, ql",
+                          "ClassName": "",
+                          "Name": "index",
+                          "Line": 170,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 170,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 170,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Operator": "==",
+                "Right": {
+                  "$type": "Qlang.AST.BooleanNode, ql",
+                  "Value": false,
+                  "Line": 170,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Line": 170,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Throw",
+                      "Line": 171,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "exception",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.StringRefNode, ql",
+                          "Index": 32,
+                          "Line": 171,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 171,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 171,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 174,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "_native",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.StringRefNode, ql",
+                      "Index": 33,
+                      "Line": 174,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "_value",
+                      "Line": 174,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "index",
+                      "Line": 174,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 174,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 174,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 178,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "indexOf",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "item",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 178,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 34,
+                        "Line": 179,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "_value",
+                        "Line": 179,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "item",
+                        "Line": 179,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 179,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 179,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 180,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 183,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "length",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 35,
+                        "Line": 184,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "_value",
+                        "Line": 184,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 184,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 184,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 185,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 186,
+          "LineIndex": 0,
+          "SourceFile": null
+        }
+      ],
+      "Line": 189,
+      "LineIndex": 0,
+      "SourceFile": null
+    },
+    {
+      "$type": "Qlang.AST.ClassNode, ql",
+      "Name": "Dictionary",
+      "Body": [
+        {
+          "$type": "Qlang.AST.AssignmentNode, ql",
+          "IsNew": false,
+          "VariableName": "_keys",
+          "Value": null,
+          "IsStatic": false,
+          "IsPrivate": true,
+          "IsConst": false,
+          "Line": 190,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.AssignmentNode, ql",
+          "IsNew": false,
+          "VariableName": "_values",
+          "Value": null,
+          "IsStatic": false,
+          "IsPrivate": true,
+          "IsConst": false,
+          "Line": 191,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "new",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "_keys",
+              "Value": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                    "Name": "Array",
+                    "Line": 194,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "new",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.CollectionNode, ql",
+                        "Collection": [],
+                        "Line": 194,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 194,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 194,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 194,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "_values",
+              "Value": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                    "Name": "Array",
+                    "Line": 195,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "new",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.CollectionNode, ql",
+                        "Collection": [],
+                        "Line": 195,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 195,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 195,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 195,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 198,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "toString",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.StringRefNode, ql",
+                "Index": 36,
+                "Line": 199,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 200,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 202,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "set",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "key",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 202,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "IsNew": false,
+              "VariableName": "item",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 202,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "_keys",
+                      "Line": 203,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "contains",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.VariableNode, ql",
+                          "ClassName": "",
+                          "Name": "key",
+                          "Line": 203,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 203,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 203,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Operator": "==",
+                "Right": {
+                  "$type": "Qlang.AST.BooleanNode, ql",
+                  "Value": true,
+                  "Line": 203,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Line": 203,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "_values",
+                      "Line": 204,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "setAt",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.CallNode, ql",
+                          "Objects": [
+                            {
+                              "$type": "Qlang.AST.FunctionPointerNode, ql",
+                              "Name": "get",
+                              "Arguments": [
+                                {
+                                  "$type": "Qlang.AST.VariableNode, ql",
+                                  "ClassName": "",
+                                  "Name": "key",
+                                  "Line": 204,
+                                  "LineIndex": 0,
+                                  "SourceFile": null
+                                }
+                              ],
+                              "Line": 204,
+                              "LineIndex": 0,
+                              "SourceFile": null
+                            }
+                          ],
+                          "Arguments": [],
+                          "Line": 204,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        },
+                        {
+                          "$type": "Qlang.AST.VariableNode, ql",
+                          "ClassName": "",
+                          "Name": "item",
+                          "Line": 204,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 204,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 204,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "ElseBlock": [
+                {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "_keys",
+                      "Line": 207,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "push",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.VariableNode, ql",
+                          "ClassName": "",
+                          "Name": "key",
+                          "Line": 207,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 207,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 207,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "_values",
+                      "Line": 208,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "push",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.VariableNode, ql",
+                          "ClassName": "",
+                          "Name": "item",
+                          "Line": 208,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 208,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 208,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Variables": {},
+              "Line": 210,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 212,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "containsKey",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "key",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 212,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                    "Name": "_keys",
+                    "Line": 213,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "contains",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "key",
+                        "Line": 213,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 213,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 213,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 214,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 216,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "containsValue",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "item",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 216,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                    "Name": "_values",
+                    "Line": 217,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "contains",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "item",
+                        "Line": 217,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 217,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 217,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 218,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 220,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "getKeys",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.VariableNode, ql",
+                "ClassName": "",
+                "Name": "_keys",
+                "Line": 221,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 222,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 224,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "getValues",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.VariableNode, ql",
+                "ClassName": "",
+                "Name": "_values",
+                "Line": 225,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 226,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 228,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "get",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "key",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 228,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "_keys",
+                      "Line": 229,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "contains",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.VariableNode, ql",
+                          "ClassName": "",
+                          "Name": "key",
+                          "Line": 229,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 229,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 229,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Operator": "==",
+                "Right": {
+                  "$type": "Qlang.AST.BooleanNode, ql",
+                  "Value": false,
+                  "Line": 229,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Line": 229,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Throw",
+                      "Line": 230,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "exception",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.StringRefNode, ql",
+                          "Index": 37,
+                          "Line": 230,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 230,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 230,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 233,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "index",
+              "Value": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                    "Name": "_keys",
+                    "Line": 233,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "indexOf",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "key",
+                        "Line": 233,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 233,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 233,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 233,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                    "Name": "_values",
+                    "Line": 235,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "at",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "index",
+                        "Line": 235,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 235,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 235,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 236,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 237,
+          "LineIndex": 0,
+          "SourceFile": null
+        }
+      ],
+      "Line": 241,
+      "LineIndex": 0,
+      "SourceFile": null
+    },
+    {
+      "$type": "Qlang.AST.ClassNode, ql",
+      "Name": "Number",
+      "Body": [
+        {
+          "$type": "Qlang.AST.AssignmentNode, ql",
+          "IsNew": false,
+          "VariableName": "MIN_VALUE",
+          "Value": {
+            "$type": "Qlang.AST.StringRefNode, ql",
+            "Index": 38,
+            "Line": 243,
+            "LineIndex": 0,
+            "SourceFile": null
+          },
+          "IsStatic": false,
+          "IsPrivate": false,
+          "IsConst": true,
+          "Line": 243,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.AssignmentNode, ql",
+          "IsNew": false,
+          "VariableName": "MAX_VALUE",
+          "Value": {
+            "$type": "Qlang.AST.StringRefNode, ql",
+            "Index": 39,
+            "Line": 244,
+            "LineIndex": 0,
+            "SourceFile": null
+          },
+          "IsStatic": false,
+          "IsPrivate": false,
+          "IsConst": true,
+          "Line": 244,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "isNumber",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "var",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 247,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 40,
+                        "Line": 248,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "var",
+                        "Line": 248,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 248,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 248,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 249,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 252,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "randInt",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "min",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 252,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "IsNew": false,
+              "VariableName": "max",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 252,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.AST.CallNode, ql",
+                    "Objects": [
+                      {
+                        "$type": "Qlang.AST.FunctionPointerNode, ql",
+                        "Name": "isNumber",
+                        "Arguments": [
+                          {
+                            "$type": "Qlang.AST.VariableNode, ql",
+                            "ClassName": "",
+                            "Name": "min",
+                            "Line": 253,
+                            "LineIndex": 0,
+                            "SourceFile": null
+                          }
+                        ],
+                        "Line": 253,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Arguments": [],
+                    "Line": 253,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  "Operator": "==",
+                  "Right": {
+                    "$type": "Qlang.AST.BooleanNode, ql",
+                    "Value": false,
+                    "Line": 253,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  "Line": 253,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Operator": "||",
+                "Right": {
+                  "$type": "Qlang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.AST.CallNode, ql",
+                    "Objects": [
+                      {
+                        "$type": "Qlang.AST.FunctionPointerNode, ql",
+                        "Name": "isNumber",
+                        "Arguments": [
+                          {
+                            "$type": "Qlang.AST.VariableNode, ql",
+                            "ClassName": "",
+                            "Name": "max",
+                            "Line": 253,
+                            "LineIndex": 0,
+                            "SourceFile": null
+                          }
+                        ],
+                        "Line": 253,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Arguments": [],
+                    "Line": 253,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  "Operator": "==",
+                  "Right": {
+                    "$type": "Qlang.AST.BooleanNode, ql",
+                    "Value": false,
+                    "Line": 253,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  "Line": 253,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Line": 253,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Throw",
+                      "Line": 254,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "exception",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.StringRefNode, ql",
+                          "Index": 41,
+                          "Line": 254,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 254,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 254,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 258,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "min",
+              "Value": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                    "Name": "Parser",
+                    "Line": 258,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "asInt",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "min",
+                        "Line": 258,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 258,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 258,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 258,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "max",
+              "Value": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                    "Name": "Parser",
+                    "Line": 259,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "asInt",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "max",
+                        "Line": 259,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 259,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 259,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 259,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.AST.VariableNode, ql",
+                  "ClassName": "",
+                  "Name": "min",
+                  "Line": 261,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Operator": ">=",
+                "Right": {
+                  "$type": "Qlang.AST.VariableNode, ql",
+                  "ClassName": "",
+                  "Name": "max",
+                  "Line": 261,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Line": 261,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Throw",
+                      "Line": 262,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "exception",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.StringRefNode, ql",
+                          "Index": 42,
+                          "Line": 262,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 262,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 262,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 265,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                    "Name": "Parser",
+                    "Line": 265,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "asNumber",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.CallNode, ql",
+                        "Objects": [
+                          {
+                            "$type": "Qlang.AST.FunctionPointerNode, ql",
+                            "Name": "_native",
+                            "Arguments": [
+                              {
+                                "$type": "Qlang.AST.StringRefNode, ql",
+                                "Index": 43,
+                                "Line": 265,
+                                "LineIndex": 0,
+                                "SourceFile": null
+                              },
+                              {
+                                "$type": "Qlang.AST.VariableNode, ql",
+                                "ClassName": "",
+                                "Name": "min",
+                                "Line": 265,
+                                "LineIndex": 0,
+                                "SourceFile": null
+                              },
+                              {
+                                "$type": "Qlang.AST.VariableNode, ql",
+                                "ClassName": "",
+                                "Name": "max",
+                                "Line": 265,
+                                "LineIndex": 0,
+                                "SourceFile": null
+                              }
+                            ],
+                            "Line": 265,
+                            "LineIndex": 0,
+                            "SourceFile": null
+                          }
+                        ],
+                        "Arguments": [],
+                        "Line": 265,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 265,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 265,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 266,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 269,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "toFixedInt",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "float",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 269,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "toFixed",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "float",
+                        "Line": 270,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 44,
+                        "Line": 270,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 270,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 270,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 271,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 274,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "toFixed",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "number",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 274,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "IsNew": false,
+              "VariableName": "pattern",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 274,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 45,
+                        "Line": 275,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "number",
+                        "Line": 275,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.CallNode, ql",
+                        "Objects": [
+                          {
+                            "$type": "Qlang.AST.FunctionPointerNode, ql",
+                            "Name": "_str",
+                            "Arguments": [
+                              {
+                                "$type": "Qlang.AST.VariableNode, ql",
+                                "ClassName": "",
+                                "Name": "pattern",
+                                "Line": 275,
+                                "LineIndex": 0,
+                                "SourceFile": null
+                              }
+                            ],
+                            "Line": 275,
+                            "LineIndex": 0,
+                            "SourceFile": null
+                          }
+                        ],
+                        "Arguments": [],
+                        "Line": 275,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 275,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 275,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 276,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 277,
+          "LineIndex": 0,
+          "SourceFile": null
+        }
+      ],
+      "Line": 279,
+      "LineIndex": 0,
+      "SourceFile": null
+    },
+    {
+      "$type": "Qlang.AST.ClassNode, ql",
+      "Name": "String",
+      "Body": [
+        {
+          "$type": "Qlang.AST.AssignmentNode, ql",
+          "IsNew": false,
+          "VariableName": "_value",
+          "Value": {
+            "$type": "Qlang.AST.StringRefNode, ql",
+            "Index": 46,
+            "Line": 280,
+            "LineIndex": 0,
+            "SourceFile": null
+          },
+          "IsStatic": false,
+          "IsPrivate": true,
+          "IsConst": false,
+          "Line": 280,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "new",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "input",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 282,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "_value",
+              "Value": {
+                "$type": "Qlang.AST.VariableNode, ql",
+                "ClassName": "",
+                "Name": "input",
+                "Line": 283,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 283,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 286,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "toString",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.VariableNode, ql",
+                "ClassName": "",
+                "Name": "_value",
+                "Line": 287,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 288,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 291,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "append",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "collection",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 291,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Array",
+                      "Line": 292,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "isArray",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.VariableNode, ql",
+                          "ClassName": "",
+                          "Name": "collection",
+                          "Line": 292,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 292,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 292,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Operator": "==",
+                "Right": {
+                  "$type": "Qlang.AST.BooleanNode, ql",
+                  "Value": false,
+                  "Line": 292,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Line": 292,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Throw",
+                      "Line": 293,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "parceException",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.StringRefNode, ql",
+                          "Index": 47,
+                          "Line": 293,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 293,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 293,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 296,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "result",
+              "Value": {
+                "$type": "Qlang.AST.StringRefNode, ql",
+                "Index": 48,
+                "Line": 296,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 296,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "arr",
+              "Value": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                    "Name": "Array",
+                    "Line": 298,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "new",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "collection",
+                        "Line": 298,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 298,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 298,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 298,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.ForNode, ql",
+              "Assignment": {
+                "IsNew": false,
+                "VariableName": "i",
+                "Value": {
+                  "$type": "Qlang.AST.NumberRefNode, ql",
+                  "IsNegative": false,
+                  "Index": 0,
+                  "Line": 300,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "IsStatic": false,
+                "IsPrivate": false,
+                "IsConst": false,
+                "Line": 300,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Condition": {
+                "$type": "Qlang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.AST.VariableNode, ql",
+                  "ClassName": "",
+                  "Name": "i",
+                  "Line": 300,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Operator": "Less",
+                "Right": {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "arr",
+                      "Line": 300,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "length",
+                      "Arguments": [],
+                      "Line": 300,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 300,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Line": 300,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Statement": {
+                "$type": "Qlang.AST.AssignmentNode, ql",
+                "IsNew": false,
+                "VariableName": "i",
+                "Value": {
+                  "$type": "Qlang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.AST.VariableNode, ql",
+                    "ClassName": "",
+                    "Name": "i",
+                    "Line": 300,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  "Operator": "Plus",
+                  "Right": {
+                    "$type": "Qlang.AST.NumberRefNode, ql",
+                    "IsNegative": false,
+                    "Index": 1,
+                    "Line": 300,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  "Line": 300,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "IsStatic": false,
+                "IsPrivate": false,
+                "IsConst": false,
+                "Line": 300,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Body": [
+                {
+                  "$type": "Qlang.AST.AssignmentNode, ql",
+                  "IsNew": false,
+                  "VariableName": "result",
+                  "Value": {
+                    "$type": "Qlang.AST.BinaryOperationNode, ql",
+                    "Left": {
+                      "$type": "Qlang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "result",
+                      "Line": 301,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    "Operator": "Plus",
+                    "Right": {
+                      "$type": "Qlang.AST.CallNode, ql",
+                      "Objects": [
+                        {
+                          "$type": "Qlang.AST.ObjectPointerNode, ql",
+                          "Name": "arr",
+                          "Line": 301,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        },
+                        {
+                          "$type": "Qlang.AST.FunctionPointerNode, ql",
+                          "Name": "at",
+                          "Arguments": [
+                            {
+                              "$type": "Qlang.AST.VariableNode, ql",
+                              "ClassName": "",
+                              "Name": "i",
+                              "Line": 301,
+                              "LineIndex": 0,
+                              "SourceFile": null
+                            }
+                          ],
+                          "Line": 301,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Arguments": [],
+                      "Line": 301,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    "Line": 301,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  "IsStatic": false,
+                  "IsPrivate": false,
+                  "IsConst": false,
+                  "Line": 301,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Variables": {},
+              "Line": 304,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.VariableNode, ql",
+                "ClassName": "",
+                "Name": "result",
+                "Line": 304,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 305,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 308,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "length",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 49,
+                        "Line": 309,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.CallNode, ql",
+                        "Objects": [
+                          {
+                            "$type": "Qlang.AST.FunctionPointerNode, ql",
+                            "Name": "_str",
+                            "Arguments": [
+                              {
+                                "$type": "Qlang.AST.VariableNode, ql",
+                                "ClassName": "",
+                                "Name": "_value",
+                                "Line": 309,
+                                "LineIndex": 0,
+                                "SourceFile": null
+                              }
+                            ],
+                            "Line": 309,
+                            "LineIndex": 0,
+                            "SourceFile": null
+                          }
+                        ],
+                        "Arguments": [],
+                        "Line": 309,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 309,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 309,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 310,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 313,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "isNullOrEmpty",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "str",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 313,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 50,
+                        "Line": 314,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.CallNode, ql",
+                        "Objects": [
+                          {
+                            "$type": "Qlang.AST.FunctionPointerNode, ql",
+                            "Name": "_str",
+                            "Arguments": [
+                              {
+                                "$type": "Qlang.AST.VariableNode, ql",
+                                "ClassName": "",
+                                "Name": "str",
+                                "Line": 314,
+                                "LineIndex": 0,
+                                "SourceFile": null
+                              }
+                            ],
+                            "Line": 314,
+                            "LineIndex": 0,
+                            "SourceFile": null
+                          }
+                        ],
+                        "Arguments": [],
+                        "Line": 314,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 314,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 314,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 315,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 318,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "isNullOrWhitespace",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "str",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 318,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 51,
+                        "Line": 319,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.CallNode, ql",
+                        "Objects": [
+                          {
+                            "$type": "Qlang.AST.FunctionPointerNode, ql",
+                            "Name": "_str",
+                            "Arguments": [
+                              {
+                                "$type": "Qlang.AST.VariableNode, ql",
+                                "ClassName": "",
+                                "Name": "str",
+                                "Line": 319,
+                                "LineIndex": 0,
+                                "SourceFile": null
+                              }
+                            ],
+                            "Line": 319,
+                            "LineIndex": 0,
+                            "SourceFile": null
+                          }
+                        ],
+                        "Arguments": [],
+                        "Line": 319,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 319,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 319,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 320,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 323,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "trim",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 52,
+                        "Line": 324,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.CallNode, ql",
+                        "Objects": [
+                          {
+                            "$type": "Qlang.AST.FunctionPointerNode, ql",
+                            "Name": "_str",
+                            "Arguments": [
+                              {
+                                "$type": "Qlang.AST.VariableNode, ql",
+                                "ClassName": "",
+                                "Name": "_value",
+                                "Line": 324,
+                                "LineIndex": 0,
+                                "SourceFile": null
+                              }
+                            ],
+                            "Line": 324,
+                            "LineIndex": 0,
+                            "SourceFile": null
+                          }
+                        ],
+                        "Arguments": [],
+                        "Line": 324,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 324,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 324,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 325,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 328,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "trimStart",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 53,
+                        "Line": 329,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.CallNode, ql",
+                        "Objects": [
+                          {
+                            "$type": "Qlang.AST.FunctionPointerNode, ql",
+                            "Name": "_str",
+                            "Arguments": [
+                              {
+                                "$type": "Qlang.AST.VariableNode, ql",
+                                "ClassName": "",
+                                "Name": "_value",
+                                "Line": 329,
+                                "LineIndex": 0,
+                                "SourceFile": null
+                              }
+                            ],
+                            "Line": 329,
+                            "LineIndex": 0,
+                            "SourceFile": null
+                          }
+                        ],
+                        "Arguments": [],
+                        "Line": 329,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 329,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 329,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 330,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 333,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "trimEnd",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 54,
+                        "Line": 334,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.CallNode, ql",
+                        "Objects": [
+                          {
+                            "$type": "Qlang.AST.FunctionPointerNode, ql",
+                            "Name": "_str",
+                            "Arguments": [
+                              {
+                                "$type": "Qlang.AST.VariableNode, ql",
+                                "ClassName": "",
+                                "Name": "_value",
+                                "Line": 334,
+                                "LineIndex": 0,
+                                "SourceFile": null
+                              }
+                            ],
+                            "Line": 334,
+                            "LineIndex": 0,
+                            "SourceFile": null
+                          }
+                        ],
+                        "Arguments": [],
+                        "Line": 334,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 334,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 334,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 335,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 338,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "subString",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "startPos",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 338,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "IsNew": false,
+              "VariableName": "length",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 338,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Number",
+                      "Line": 339,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "isNumber",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.VariableNode, ql",
+                          "ClassName": "",
+                          "Name": "startPos",
+                          "Line": 339,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 339,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 339,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Operator": "==",
+                "Right": {
+                  "$type": "Qlang.AST.BooleanNode, ql",
+                  "Value": false,
+                  "Line": 339,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Line": 339,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Throw",
+                      "Line": 340,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "exception",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.StringRefNode, ql",
+                          "Index": 55,
+                          "Line": 340,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 340,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 340,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 343,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Number",
+                      "Line": 343,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "isNumber",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.VariableNode, ql",
+                          "ClassName": "",
+                          "Name": "length",
+                          "Line": 343,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 343,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 343,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Operator": "==",
+                "Right": {
+                  "$type": "Qlang.AST.BooleanNode, ql",
+                  "Value": false,
+                  "Line": 343,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Line": 343,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Throw",
+                      "Line": 344,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "exception",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.StringRefNode, ql",
+                          "Index": 56,
+                          "Line": 344,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 344,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 344,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 347,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 57,
+                        "Line": 347,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.CallNode, ql",
+                        "Objects": [
+                          {
+                            "$type": "Qlang.AST.FunctionPointerNode, ql",
+                            "Name": "_str",
+                            "Arguments": [
+                              {
+                                "$type": "Qlang.AST.VariableNode, ql",
+                                "ClassName": "",
+                                "Name": "_value",
+                                "Line": 347,
+                                "LineIndex": 0,
+                                "SourceFile": null
+                              }
+                            ],
+                            "Line": 347,
+                            "LineIndex": 0,
+                            "SourceFile": null
+                          }
+                        ],
+                        "Arguments": [],
+                        "Line": 347,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "startPos",
+                        "Line": 347,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "length",
+                        "Line": 347,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 347,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 347,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 348,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 349,
+          "LineIndex": 0,
+          "SourceFile": null
+        }
+      ],
+      "Line": 351,
+      "LineIndex": 0,
+      "SourceFile": null
+    },
+    {
+      "$type": "Qlang.AST.ClassNode, ql",
+      "Name": "Vector2",
+      "Body": [
+        {
+          "$type": "Qlang.AST.AssignmentNode, ql",
+          "IsNew": false,
+          "VariableName": "_x",
+          "Value": null,
+          "IsStatic": false,
+          "IsPrivate": true,
+          "IsConst": false,
+          "Line": 352,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.AssignmentNode, ql",
+          "IsNew": false,
+          "VariableName": "_y",
+          "Value": null,
+          "IsStatic": false,
+          "IsPrivate": true,
+          "IsConst": false,
+          "Line": 353,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "toString",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.AST.StringRefNode, ql",
+                  "Index": 58,
+                  "Line": 356,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Operator": "Plus",
+                "Right": {
+                  "$type": "Qlang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.AST.VariableNode, ql",
+                    "ClassName": "",
+                    "Name": "_x",
+                    "Line": 356,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  "Operator": "Plus",
+                  "Right": {
+                    "$type": "Qlang.AST.BinaryOperationNode, ql",
+                    "Left": {
+                      "$type": "Qlang.AST.StringRefNode, ql",
+                      "Index": 59,
+                      "Line": 356,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    "Operator": "Plus",
+                    "Right": {
+                      "$type": "Qlang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "_y",
+                      "Line": 356,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    "Line": 356,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  "Line": 356,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Line": 356,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 357,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 359,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "equals",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "other",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 359,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.AST.CallNode, ql",
+                    "Objects": [
+                      {
+                        "$type": "Qlang.AST.ObjectPointerNode, ql",
+                        "Name": "other",
+                        "Line": 360,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.FunctionPointerNode, ql",
+                        "Name": "X",
+                        "Arguments": [],
+                        "Line": 360,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Arguments": [],
+                    "Line": 360,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  "Operator": "==",
+                  "Right": {
+                    "$type": "Qlang.AST.VariableNode, ql",
+                    "ClassName": "",
+                    "Name": "_x",
+                    "Line": 360,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  "Line": 360,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Operator": "&&",
+                "Right": {
+                  "$type": "Qlang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.AST.CallNode, ql",
+                    "Objects": [
+                      {
+                        "$type": "Qlang.AST.ObjectPointerNode, ql",
+                        "Name": "other",
+                        "Line": 360,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      {
+                        "$type": "Qlang.AST.FunctionPointerNode, ql",
+                        "Name": "Y",
+                        "Arguments": [],
+                        "Line": 360,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Arguments": [],
+                    "Line": 360,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  "Operator": "==",
+                  "Right": {
+                    "$type": "Qlang.AST.VariableNode, ql",
+                    "ClassName": "",
+                    "Name": "_y",
+                    "Line": 360,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  "Line": 360,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Line": 360,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.AST.ReturnNode, ql",
+                  "ReturnValue": {
+                    "$type": "Qlang.AST.BooleanNode, ql",
+                    "Value": true,
+                    "Line": 361,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  "Line": 362,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 363,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.BooleanNode, ql",
+                "Value": false,
+                "Line": 363,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 364,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 366,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "new",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "x",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 366,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "IsNew": false,
+              "VariableName": "y",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 366,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "_x",
+              "Value": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                    "Name": "Parser",
+                    "Line": 367,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "asNumber",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "x",
+                        "Line": 367,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 367,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 367,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 367,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "_y",
+              "Value": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                    "Name": "Parser",
+                    "Line": 368,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "asNumber",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "y",
+                        "Line": 368,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 368,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 368,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 368,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 371,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "X",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                    "Name": "Parser",
+                    "Line": 372,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "asNumber",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "_x",
+                        "Line": 372,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 372,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 372,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 373,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 375,
+          "LineIndex": 0,
+          "SourceFile": null
+        },
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "Y",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                    "Name": "Parser",
+                    "Line": 376,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "asNumber",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "_y",
+                        "Line": 376,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 376,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 376,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "Line": 377,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 378,
+          "LineIndex": 0,
+          "SourceFile": null
+        }
+      ],
+      "Line": 380,
+      "LineIndex": 0,
+      "SourceFile": null
+    },
+    {
+      "$type": "Qlang.AST.ClassNode, ql",
+      "Name": "Time",
+      "Body": [
+        {
+          "$type": "Qlang.AST.FunctionNode, ql",
+          "Name": "wait",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "millisec",
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 381,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Number",
+                      "Line": 382,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "isNumber",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.VariableNode, ql",
+                          "ClassName": "",
+                          "Name": "millisec",
+                          "Line": 382,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 382,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 382,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Operator": "==",
+                "Right": {
+                  "$type": "Qlang.AST.BooleanNode, ql",
+                  "Value": false,
+                  "Line": 382,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                "Line": 382,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.AST.ObjectPointerNode, ql",
+                      "Name": "Throw",
+                      "Line": 383,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.FunctionPointerNode, ql",
+                      "Name": "parseException",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.AST.StringRefNode, ql",
+                          "Index": 60,
+                          "Line": 383,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Line": 383,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 383,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 386,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "millisec",
+              "Value": {
+                "$type": "Qlang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                    "Name": "Parser",
+                    "Line": 386,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  },
+                  {
+                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                    "Name": "asInt",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "millisec",
+                        "Line": 386,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      }
+                    ],
+                    "Line": 386,
+                    "LineIndex": 0,
+                    "SourceFile": null
+                  }
+                ],
+                "Arguments": [],
+                "Line": 386,
+                "LineIndex": 0,
+                "SourceFile": null
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "Line": 386,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "_native",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.StringRefNode, ql",
+                      "Index": 61,
+                      "Line": 388,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "millisec",
+                      "Line": 388,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 388,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 388,
+              "LineIndex": 0,
+              "SourceFile": null
+            }
+          ],
+          "Line": 390,
+          "LineIndex": 0,
+          "SourceFile": null
+        }
+      ],
+      "Line": 0,
+      "LineIndex": 0,
+      "SourceFile": null
+    }
+  ],
+  "Line": 0,
+  "LineIndex": 0,
+  "SourceFile": null
+}

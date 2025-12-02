@@ -1,56 +1,63 @@
 ﻿using Newtonsoft.Json;
+using Qlang.Project.Settings;
 
 namespace Qlang.Project;
 
-[JsonObject(MemberSerialization.OptOut)]
-public class Project
+public partial class Project
 {
-    public string Path { get; }
-    public string Name { get; }
-    public string SettingsPath { get; }
-
-    public string CompileFilePath { get; }
+    private static ProjectSettings _settings;
     
-    private static JsonSerializerSettings _jsonSettings = new()
-    {
-        Formatting = Formatting.Indented,
-        TypeNameHandling = TypeNameHandling.Auto,
-        TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple
-    };
+    private static CompileSettings _compileSettings;
+
+    private readonly QLang _qlang;
     
-    public Project(string projectName, string projectPath, string compileFilePath)
+    public Project(string projectName, string projectPath, string mainFilePath)
     {
-        Path = projectPath;
-        Name = projectName;
-        CompileFilePath = compileFilePath;
-        SettingsPath = System.IO.Path.Combine(projectPath, $"{Name}.settings.json");
-    }
-
-    public void CreateProject()
-    {
-        if (!Directory.Exists(Path))
-            Directory.CreateDirectory(Path);
+        _settings = new ProjectSettings(Path.Combine(projectPath, "project.settings.json"), null);
         
-        Save();
-    }
-
-    public void Save()
-    {
-        if (!File.Exists(SettingsPath))
-            File.Create(SettingsPath).Close();
+        _settings.Set("path", projectPath);
+        _settings.Set("name", projectName);
+        _settings.Set("main_file_path", mainFilePath);
         
-        string json = JsonConvert.SerializeObject(this, _jsonSettings);
+        // create main.ql
+        if (!File.Exists(mainFilePath))
+            File.Create($"{mainFilePath}").Close();
+        
+        SaveProject();
 
-        File.WriteAllText(SettingsPath, json);
+        string settingsPath = Path.Combine(projectPath, "compile.settings.json");
+        if (!File.Exists(settingsPath))
+            _compileSettings = new CompileSettings(settingsPath, null);
+        else
+        {
+            var dict =  JsonConvert.DeserializeObject<Dictionary<string, object?>>(File.ReadAllText(settingsPath));
+            _compileSettings = new CompileSettings(settingsPath, dict);
+        }
+        
+        _compileSettings.Save();
+        
+        _qlang = new QLang();
     }
 
-    public static Project? Load(string path)
+    public void SaveProject()
+    {
+        if (!File.Exists(_settings.GetPath()))
+            File.Create(_settings.GetPath()).Close();
+
+        _settings.Save();
+    }
+
+    // path to settings file
+    public static Project LoadProject(string path)
     {
         if (!File.Exists(path))
             throw new FileNotFoundException("File is not found", path);
 
-        string json = File.ReadAllText(path);
+        var settings = new ProjectSettings(path, Settings.Settings.LoadDictionary(path));
+        
+        if (settings is null)
+            throw new Exception($"Settings file '{path}' does not exist");
 
-        return JsonConvert.DeserializeObject<Project>(json, _jsonSettings);
+        return new Project(settings.GetString("name"), settings.GetString("path"), settings.GetString("main_file_path"));
     }
 }

@@ -9,42 +9,10 @@ public class QLang
     private ProgramNode? _programNode;
     private Dictionary<string, string> _stringDictionary = [];
     private Dictionary<string, object> _numberDictionary = [];
-
-    public static Settings Settings;
-
-    public QLang()
-    {
-        var settings = Settings.Load();
-        
-        Settings = settings ?? new Settings();
-        
-        Settings.Save();
-    }
-
-    public void SetSettings(string name, string? value)
-    {
-        // TODO: add settings change 
-        
-        switch (name)
-        {
-            case "debug":
-                if (value is null)
-                {
-                    Console.WriteLine($"Current value of \"{name}\" is: " + Settings.Debug);
-                    return;
-                }
-                
-                var @bool = bool.Parse(value);
-                Settings.Debug = @bool;
-                Settings.Save();
-                
-                Console.WriteLine($"Current value of \"{name}\" is: " + Settings.Debug);
-                break;
-        }
-    }
     
-    public bool Compile(string code, string filePath)
+    public bool Compile(string path)
     {
+        string code = File.ReadAllText(path);
         Compiler.Compiler c = new();
 
         try
@@ -55,31 +23,22 @@ public class QLang
         {
             ExceptionManager.Throw(ex);
             
-            Logger.Logger.Error("Error");
-
             return false;
         }
 
         _stringDictionary = c.StringDictionary;
         _numberDictionary = c.NumberDictionary;
         
-        SaveProgram(_programNode, filePath);
+        SaveProgram(_programNode, path);
 
         return true;
     }
 
     private static void SaveProgram(ProgramNode programNode, string filePath)
     {
-        var settings = new JsonSerializerSettings
-        {
-            Formatting = Formatting.Indented,
-            TypeNameHandling = TypeNameHandling.Auto,
-            TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple
-        };
+        string json = Json.Serialize(programNode);
 
-        string json = JsonConvert.SerializeObject(programNode, settings);
-
-        string path = Path.Combine(Directory.GetCurrentDirectory(), filePath + ".json");
+        string path = filePath + ".json";
 
         if (!File.Exists(path))
             File.Create(path).Close();
@@ -87,21 +46,9 @@ public class QLang
         File.WriteAllText(path, json);
     }
 
-    private static ProgramNode? LoadFromFile(string path)
+    public void SetProgramNode(ProgramNode programNode)
     {
-        if (!File.Exists(path))
-            throw new FileNotFoundException("File is not found", path);
-
-        string json = File.ReadAllText(path);
-        
-        var settings = new JsonSerializerSettings
-        {
-            Formatting = Formatting.Indented,
-            TypeNameHandling = TypeNameHandling.Auto,
-            TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple
-        };
-
-        return JsonConvert.DeserializeObject<ProgramNode>(json, settings);
+        _programNode = programNode;
     }
 
     public void Run()

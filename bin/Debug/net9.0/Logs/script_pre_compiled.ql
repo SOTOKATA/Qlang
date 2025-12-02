@@ -1,6 +1,5 @@
 
 
-
 function main(): {
     Console.println(___STRING_0___ + (___NUMBER_0___ * ___NUMBER_1___ + ___NUMBER_2___));
     Console.println(___STRING_1___ + (___NUMBER_3___ * (___NUMBER_4___ + ___NUMBER_5___)));

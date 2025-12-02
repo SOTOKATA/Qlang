@@ -1,146 +1,138 @@
-(27) [LOG] Compiler/Compile: Include Files
-(21) [LOG] PreCompile/IncludeFiles: Include:
-include "$lib/base"
-include "$lib/base"
-(34) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base
-(58) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\console.ql
-(58) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\include.ql
-(58) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\parser.ql
-(58) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\throw.ql
-(21) [LOG] PreCompile/IncludeFiles: Include:
-include "$lib/base/datatypes"
-include "$lib/base/datetime"
-(34) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\datatypes
-(58) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\datatypes\array.ql
-(58) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\datatypes\dictionary.ql
-(58) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\datatypes\include.ql
-(58) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\datatypes\number.ql
-(58) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\datatypes\string.ql
-(21) [LOG] PreCompile/IncludeFiles: Include:
-include "$lib/base"
-include "$lib/base/datatypes/advanced"
-(34) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base
-(70) [WARN] PreCompile/IncludeFiles: Skipped (already included): C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base
-(34) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\datatypes\advanced
-(58) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\datatypes\advanced\vector2.ql
-(34) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\datetime
-(58) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base\datetime\time.ql
-(34) [LOG] PreCompile/IncludeFiles: Path: C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base
-(28) [WARN] Compiler/Compile: Skipped (already included): C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\lib\base
-(52) [SUCC] QLang/Compile: All includes processed successfully.
-(31) [SUCC] Compiler/Compile: Clear Comments
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Class to make operations with console'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Print text to console'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Print text to console with new line'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Read line from console'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Clear console'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Set cursor position in console'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Set foreground color for console'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Set background color for console'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Set default colors for console'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Class to throw exceptions'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Throw default exception'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Thow exception if function is not implement'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Thow exception when parse error'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Dynamic array'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Create empty array'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Add element'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Clear array'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Get at index'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Set at index'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Remove at index'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Get index of item'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Get length'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Full static class'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Class to make operations with numbers'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// used string because of number structure with E+'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// check if 'var' is number'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// get random number with range 'min' to 'max''
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Convert '3.42...' to '3''
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Get int styled number ('3.421' to '3')'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Change numeric style (ex.: '3.214' to '3.2' with pattern '0.0')'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Class to make string operations'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Append two strings'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Get length of string'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Check if string is empty or null'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Check if string is white space or null'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Trim string'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Trim start string'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Trim end string'
-(156) [LOG] <>c/<ClearComments>b__4_0: Comment='// Cut string by 'startPos' and 'length''
-(31) [SUCC] Compiler/Compile: Comments cleared successfully
-(116) [LOG] PreCompile/ExtractStrings: Extract Strings
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_0___', Value='Result of 5 * 5 + 5: '
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_1___', Value='Result of 5 * (5 + 5): '
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_2___', Value='cmd_write'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_3___', Value='cmd_write'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_4___', Value='\n'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_5___', Value='cmd_read'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_6___', Value='cmd_key'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_7___', Value='cmd_key_available'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_8___', Value='cmd_cursor_visible'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_9___', Value='cmd_clear'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_10___', Value='cmd_cursor_position'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_11___', Value='cmd_fcolor'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_12___', Value='cmd_bcolor'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_13___', Value='cmd_reset_colors'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_14___', Value='parse_int'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_15___', Value='parse_float'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_16___', Value='parse_string'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_17___', Value='parse_number'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_18___', Value='exception'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_19___', Value='This function or object is not implement'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_20___', Value='Parse error: '
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_21___', Value='list_create'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_22___', Value='argument is not collection'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_23___', Value='list_is'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_24___', Value='list_contains'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_25___', Value='list_add'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_26___', Value='list_clear'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_27___', Value='index is not number'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_28___', Value='list_get'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_29___', Value='index is not number'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_30___', Value='list_set'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_31___', Value='index is not number'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_32___', Value='list_insert'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_33___', Value='index is not number'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_34___', Value='list_remove_at'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_35___', Value='list_index_of'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_36___', Value='list_count'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_37___', Value='Dictionary'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_38___', Value='Key is not existent in dictionary'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_39___', Value='-1.7976931348623157E+308'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_40___', Value='1.7976931348623157E+308'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_41___', Value='try_parse_number'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_42___', Value='One or two input is not a number'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_43___', Value='Minimum can't be more than maximum'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_44___', Value='random'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_45___', Value='0'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_46___', Value='to_string_number'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_47___', Value=''
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_48___', Value='argument is not collection'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_49___', Value=''
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_50___', Value='str_length'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_51___', Value='str_null_or_empty'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_52___', Value='str_null_or_white_space'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_53___', Value='str_trim'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_54___', Value='str_trim_start'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_55___', Value='str_trim_end'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_56___', Value='subString error: startPos must be number'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_57___', Value='subString error: length must be number'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_58___', Value='str_sub_string'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_59___', Value='X: '
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_60___', Value=', Y: '
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_61___', Value='argument 'milliseconds' is not a number'
-(138) [LOG] <>c__DisplayClass3_0/<ExtractStrings>b__0: Key='___STRING_62___', Value='time_wait'
-(33) [SUCC] Compiler/Compile: Strings extracted successfully
-(35) [WARN] Compiler/Compile: Extract Numbers
-(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_0___', Value='5'
-(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_1___', Value='5'
-(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_2___', Value='5'
-(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_3___', Value='5'
-(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_4___', Value='5'
-(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_5___', Value='5'
-(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_6___', Value='0'
-(0) [WARN] <>c/<Replace>b__99_0: Key='___NUMBER_7___', Value='1'
-(35) [WARN] Compiler/Compile: Numbers extracted successfully
+LOG [Compiler/Compile]: Include Files
+LOG [PreCompile/IncludeFiles Include]: include "$lib/base"
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\console.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\include.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\parser.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\throw.ql
+LOG [PreCompile/IncludeFiles Include]: include "$lib/base/datatypes", include "$lib/base/datetime"
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\datatypes
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\datatypes\array.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\datatypes\dictionary.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\datatypes\include.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\datatypes\number.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\datatypes\string.ql
+LOG [PreCompile/IncludeFiles Include]: include "$lib/base", include "$lib/base/datatypes/advanced"
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\datatypes\advanced
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\datatypes\advanced\vector2.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\datetime
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\bin\Debug\net9.0\lib\base\datetime\time.ql
+SUCC [QLang/Compile]: All includes processed successfully.
+SUCC [Compiler/Compile]: Clear Comments
+LOG [<>c/<ClearComments>b__4_0]: comment='// Class to make operations with console'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Print text to console'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Print text to console with new line'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Read line from console'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Clear console'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Set cursor position in console'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Set foreground color for console'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Set background color for console'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Set default colors for console'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Class to throw exceptions'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Throw default exception'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Thow exception if function is not implement'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Thow exception when parse error'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Dynamic array'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Create empty array'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Add element'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Clear array'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Get at index'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Set at index'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Remove at index'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Get index of item'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Get length'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Full static class'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Class to make operations with numbers'
+LOG [<>c/<ClearComments>b__4_0]: comment='// used string because of number structure with E+'
+LOG [<>c/<ClearComments>b__4_0]: comment='// check if 'var' is number'
+LOG [<>c/<ClearComments>b__4_0]: comment='// get random number with range 'min' to 'max''
+LOG [<>c/<ClearComments>b__4_0]: comment='// Convert '3.42...' to '3''
+LOG [<>c/<ClearComments>b__4_0]: comment='// Get int styled number ('3.421' to '3')'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Change numeric style (ex.: '3.214' to '3.2' with pattern '0.0')'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Class to make string operations'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Append two strings'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Get length of string'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Check if string is empty or null'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Check if string is white space or null'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Trim string'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Trim start string'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Trim end string'
+LOG [<>c/<ClearComments>b__4_0]: comment='// Cut string by 'startPos' and 'length''
+SUCC [Compiler/Compile]: Comments cleared successfully
+LOG [PreCompile/ExtractStrings]: Extract Strings
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_0___', value='Result of 5 * 5 + 5: '
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_1___', value='Result of 5 * (5 + 5): '
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_2___', value='cmd_write'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_3___', value='cmd_write'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_4___', value='\n'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_5___', value='cmd_read'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_6___', value='cmd_key'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_7___', value='cmd_key_available'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_8___', value='cmd_cursor_visible'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_9___', value='cmd_clear'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_10___', value='cmd_cursor_position'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_11___', value='cmd_fcolor'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_12___', value='cmd_bcolor'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_13___', value='cmd_reset_colors'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_14___', value='parse_int'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_15___', value='parse_float'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_16___', value='parse_string'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_17___', value='parse_number'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_18___', value='exception'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_19___', value='This function or object is not implement'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_20___', value='Parse error: '
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_21___', value='list_create'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_22___', value='argument is not collection'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_23___', value='list_is'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_24___', value='list_contains'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_25___', value='list_add'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_26___', value='list_clear'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_27___', value='index is not number'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_28___', value='list_get'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_29___', value='index is not number'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_30___', value='list_set'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_31___', value='index is not number'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_32___', value='list_insert'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_33___', value='index is not number'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_34___', value='list_remove_at'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_35___', value='list_index_of'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_36___', value='list_count'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_37___', value='Dictionary'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_38___', value='Key is not existent in dictionary'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_39___', value='-1.7976931348623157E+308'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_40___', value='1.7976931348623157E+308'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_41___', value='try_parse_number'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_42___', value='One or two input is not a number'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_43___', value='Minimum can't be more than maximum'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_44___', value='random'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_45___', value='0'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_46___', value='to_string_number'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_47___', value=''
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_48___', value='argument is not collection'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_49___', value=''
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_50___', value='str_length'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_51___', value='str_null_or_empty'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_52___', value='str_null_or_white_space'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_53___', value='str_trim'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_54___', value='str_trim_start'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_55___', value='str_trim_end'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_56___', value='subString error: startPos must be number'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_57___', value='subString error: length must be number'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_58___', value='str_sub_string'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_59___', value='X: '
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_60___', value=', Y: '
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_61___', value='argument 'milliseconds' is not a number'
+LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_62___', value='time_wait'
+SUCC [Compiler/Compile]: Strings extracted successfully
+WARN [Compiler/Compile]: Extract Numbers
+WARN [<>c/<Replace>b__99_0]: key='___NUMBER_0___', value='5'
+WARN [<>c/<Replace>b__99_0]: key='___NUMBER_1___', value='5'
+WARN [<>c/<Replace>b__99_0]: key='___NUMBER_2___', value='5'
+WARN [<>c/<Replace>b__99_0]: key='___NUMBER_3___', value='5'
+WARN [<>c/<Replace>b__99_0]: key='___NUMBER_4___', value='5'
+WARN [<>c/<Replace>b__99_0]: key='___NUMBER_5___', value='5'
+WARN [<>c/<Replace>b__99_0]: key='___NUMBER_6___', value='0'
+WARN [<>c/<Replace>b__99_0]: key='___NUMBER_7___', value='1'
+WARN [Compiler/Compile]: Numbers extracted successfully

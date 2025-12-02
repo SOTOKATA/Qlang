@@ -14,10 +14,11 @@ public static class Logger
 
     private static void _Log(string message, ConsoleColor? color = null, bool isInternal = false, string msg = "", string type = "")
     {
-        if (!QLang.Settings.Debug)
+        object? value = Project.Project.GetCompileSetting("debug");
+        if (value is null || !(bool)value)
             return;
         
-        message = GetStackPath(msg, type, isInternal ? 4 : 3) + ": " + message;
+        message = GetStackPath(msg, type, isInternal ? 4 : 3) + message;
         FileLogger.Log(message);
     }
     
@@ -46,6 +47,6 @@ public static class Logger
         var frame = new StackTrace(true).GetFrame(depth);
         var method = frame.GetMethod();
 
-        return $"({frame.GetFileLineNumber()}) [{type}] {method.DeclaringType?.Name}/{method.Name}{(msg != "" ? $".{msg}" : "")}";
+        return $"{type} [{method.DeclaringType?.Name}/{method.Name}{(msg != "" ? $" {msg}" : "")}]: ";
     }
 }

@@ -18,7 +18,7 @@ public static class PreCompile
             .ToArray();
 
         if (includeLines.Length > 0)
-            Logger.Logger.Log("Include:\n" + string.Join("\n", includeLines));
+            Logger.Logger.Log(string.Join(", ", includeLines), "Include");
 
         List<string> files = [];
 
@@ -26,12 +26,28 @@ public static class PreCompile
         {
             var line = includeLine.Replace("include ", "").Replace("\"", "");
 
-            var fullPath = Path.Combine(Directory.GetCurrentDirectory(), line.StartsWith('$') ? line[1..] : line);
+            string fullPath;
+
+            if (line.StartsWith('$'))
+            {
+                var exePath = Path.GetDirectoryName(Environment.ProcessPath);
+
+                if (exePath is null)
+                    throw new QlangCompileException($"Include '{line}' Error: Process path is not found", -1, "");
+                
+                fullPath = Path.Combine(exePath, line[1..]);
+            }
+            else
+            {
+                fullPath = Path.Combine(Directory.GetCurrentDirectory(), line.StartsWith('$') ? line[1..] : line);
+            }
+
+            
 
             fullPath = fullPath.Replace('\\', Path.DirectorySeparatorChar)
                                 .Replace('/', Path.DirectorySeparatorChar);
 
-            Logger.Logger.Log("Path: " + fullPath);
+            Logger.Logger.Log(fullPath, "Path");
 
             if (!Directory.Exists(fullPath) && !File.Exists(fullPath + ".ql"))
                 throw new FileNotFoundException($"Include file or directory not found: {fullPath}");
@@ -43,7 +59,7 @@ public static class PreCompile
 
             if (!Included.Add(fullPath))
             {
-                Logger.Logger.Warn($"Skipped (already included): {fullPath}");
+                Logger.Logger.Warn($"{fullPath}", "Skipped (already included)");
                 continue;
             }
             
@@ -55,10 +71,10 @@ public static class PreCompile
             {
                 foreach (string file in Directory.GetFiles(fullPath))
                 {
-                    Logger.Logger.Log("Path: " + file);
+                    Logger.Logger.Log(file, "Path");
                     if (!Included.Add(file))
                     {
-                        Logger.Logger.Warn($"Skipped (already included): {fullPath}");
+                        Logger.Logger.Warn($"{fullPath}", "Skipped (already included)");
                         continue;
                     }
                     
@@ -102,7 +118,7 @@ public static class PreCompile
             
             numberCounter++;
             
-            Logger.Logger.Warn($"Key='{key}', Value='{numberValue}'");
+            Logger.Logger.Warn($"key='{key}', value='{numberValue}'");
             
             return key;
         });
@@ -135,7 +151,7 @@ public static class PreCompile
             
             stringCounter++;
             
-            Logger.Logger.Log($"Key='{key}', Value='{value}'");
+            Logger.Logger.Log($"key='{key}', value='{value}'");
             
             return key;
         });
@@ -153,7 +169,7 @@ public static class PreCompile
         {
             string comment = match.Value;
         
-            Logger.Logger.Log($"Comment='{comment}'");
+            Logger.Logger.Log($"comment='{comment}'");
         
             return "";
         });

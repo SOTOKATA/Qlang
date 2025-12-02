@@ -50,12 +50,6 @@ public static class Validator
             .OfType<FunctionNode>()
             .ToList();
 
-        Console.WriteLine("CLASS: " + @class.Name);
-        foreach (var variable in functions)
-        {
-            Console.WriteLine(variable.Name + " : " + variable.Parameters.Count);
-        }
-
         var duplicateGroups = functions
             .GroupBy(f => new {
                 f.Name,

@@ -147,3 +147,4 @@ C:\Users\sotok\Desktop\Estagio\Qlang\obj\Debug\net9.0\refint\ql.dll
 C:\Users\sotok\Desktop\Estagio\Qlang\obj\Debug\net9.0\ql.pdb
 C:\Users\sotok\Desktop\Estagio\Qlang\obj\Debug\net9.0\ref\ql.dll
 C:\Users\sotok\Desktop\Estagio\Qlang\bin\Debug\net9.0\Newtonsoft.Json.dll
+D:\Projects\Console\Qlang\bin\Debug\net9.0\Newtonsoft.Json.dll

@@ -71,17 +71,17 @@ public class NativeFunctionRegistry
         if (!_functions.TryGetValue(name, out var func))
             throw new Exception($"Function '{name}' not found");
 
-        Logger.Logger.Log($"NativeCall: $name='{name}'");
+        Logger.Logger.Log($"name='{name}'", "NativeCall");
         if (args is not null)
         {
             var arguments = func.Method.GetParameters();
 
-            string debug = "NativeCall: $args=\n";
+            string debug = "args=\n";
             for (var index = 0; index < arguments.Length; index++)
             {
                 var type = arguments[index];
 
-                debug += $"${index}: Type: {type.ParameterType} ";
+                debug += $"{index}: type={type.ParameterType} ";
 
                 if (type.ParameterType == typeof(int))
                     args[index] = int.Parse(args[index].ToString());
@@ -94,14 +94,14 @@ public class NativeFunctionRegistry
             for (var index = 0; index < args.Length; index++)
             {
                 var arg = args[index];
-                debug += $"${index}: '{arg}' $type: '{(arg is null ? "NULL" : arg.GetType().Name)}' ";
+                debug += $"{index}: '{arg}' type='{(arg is null ? "NULL" : arg.GetType().Name)}' ";
             }
 
 
-            Logger.Logger.Log("Call.Arguments: " + debug);
+            Logger.Logger.Log(debug, "NativeCall::Arguments");
         }
         else
-            Logger.Logger.Log("NativeCall: $args=NULL");
+            Logger.Logger.Log("args='null' (null)", "NativeCall");
 
         return func.DynamicInvoke(args);
     }
