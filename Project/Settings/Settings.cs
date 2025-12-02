@@ -27,17 +27,12 @@ public abstract class Settings(string path, Dictionary<string, object?>? dict)
 
         if (dictValue?.GetType() != value?.GetType())
         {
-            if (value is string)
+            value = dictValue switch
             {
-                if (bool.TryParse(value.ToString(), out var boolValue))
-                    value = boolValue;
-                else if (value.ToString().TryParseNumber(out var num))
-                    value = num;
-            }
-            else
-            {
-                throw new Exception($"Type of key '{param}' is not equal to type of '{value}'");
-            }
+                bool when bool.TryParse(value?.ToString(), out var boolValue) => boolValue,
+                double when (value ?? "").ToString().TryParseNumber(out var num) => num,
+                _ => throw new Exception($"Type of key '{param}' ({(dictValue is null ? "Null" : dictValue.GetType())}) is not equal to type of '{value}' ({(value is null ? "Null" : value.GetType())})")
+            };
         }
         
         Dictionary[param] = value;

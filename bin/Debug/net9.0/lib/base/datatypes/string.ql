@@ -6,7 +6,7 @@ class String: {
         _value = input;
     }
 
-    function toString(): {
+    function str(): {
         return _value;
     }
 
@@ -24,7 +24,7 @@ class String: {
             result = result + arr.at(i);
         }
 
-        return result;
+        return String.new(result);
     }
 
     // Get length of string
@@ -44,17 +44,17 @@ class String: {
 
     // Trim string
     function trim(): {
-        return _native("str_trim", _str(_value));
+        return String.new(_native("str_trim", _str(_value)));
     }
 
     // Trim start string
     function trimStart(): {
-        return _native("str_trim_start", _str(_value));
+        return String.new(_native("str_trim_start", _str(_value)));
     }
 
     // Trim end string
     function trimEnd(): {
-        return _native("str_trim_end", _str(_value));
+        return String.new(_native("str_trim_end", _str(_value)));
     }
 
     // Cut string by 'startPos' and 'length'
@@ -67,6 +67,6 @@ class String: {
             Throw.exception("subString error: length must be number");
         }
 
-        return _native("str_sub_string", _str(_value), startPos, length);
+        return String.new(_native("str_sub_string", _str(_value), startPos, length));
     }
 }

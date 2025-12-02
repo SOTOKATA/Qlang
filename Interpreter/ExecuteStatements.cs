@@ -4,6 +4,8 @@ namespace Qlang.Interpreter;
 
 public partial class Interpreter
 {
+    private bool _isBreakKeyword = false;
+    private bool _isContinueKeyword = false;
     private void AddBlockToContext(ASTBlock block)
     {
         if (_contextStack.Count > 0 && 
@@ -42,6 +44,18 @@ public partial class Interpreter
                     _return = returnNode;
                     RemoveLastBlockFromContext();
                     return;
+                }
+
+                if (statement is ContinueNode || _isContinueKeyword)
+                {
+                    _isContinueKeyword = false;
+                    continue;
+                }
+
+                if (statement is BreakNode || _isBreakKeyword)
+                {
+                    _isBreakKeyword = false;
+                    break;
                 }
                 
                 ExecuteStatement(statement);
@@ -85,6 +99,18 @@ public partial class Interpreter
                     return;
                 }
                 
+                if (statement is ContinueNode || _isContinueKeyword)
+                {
+                    _isContinueKeyword = false;
+                    continue;
+                }
+
+                if (statement is BreakNode || _isBreakKeyword)
+                {
+                    _isBreakKeyword = false;
+                    break;
+                }
+                
                 ExecuteStatement(statement);
             }
 
@@ -123,6 +149,17 @@ public partial class Interpreter
                     RemoveLastBlockFromContext();
                     return;
                 }
+
+                if (statement is BreakNode)
+                {
+                    _isBreakKeyword = true;
+                    continue;
+                }
+                else if (statement is ContinueNode)
+                {
+                    _isContinueKeyword = true;
+                    continue;
+                }
                 
                 ExecuteStatement(statement);
             }
@@ -144,6 +181,11 @@ public partial class Interpreter
                     RemoveLastBlockFromContext();
                     return;
                 }
+                
+                if (statement is BreakNode)
+                    _isBreakKeyword = true;
+                else if (statement is ContinueNode)
+                    _isContinueKeyword = true;
                 
                 ExecuteStatement(statement);
             }

@@ -6,7 +6,16 @@ public partial class Project
 {
     public static void SetCompileSetting(string param, object value)
     {
-        _compileSettings.Set(param, value);
+        try
+        {
+            _compileSettings.Set(param, value);
+        }
+        catch (Exception ex)
+        {
+            ExceptionManager.ThrowMessage(ex.Message);
+            return;
+        }
+
         Console.WriteLine($"SET {param}: {value}");
         _compileSettings.Save();
     }

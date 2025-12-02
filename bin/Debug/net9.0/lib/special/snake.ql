@@ -62,37 +62,32 @@ class SnakeGame: {
 
         for let j = 0; j < (_height + 1); j = j + 1: {
             for let i = 0; i < (_width + 1); i = i + 1: {
-                Console.setCursorPosition(i, (j + 1));
-
-                let isTail = false;
-                for let k = 0; k < _tail.length(); k = k + 1: {
-                    if _tail.at(k).equals(Vector2.new(i, j)): {
-                        isTail = true;
-                    }
-                }
-
-                if (i == _position.X()) && (j == _position.Y()): {
-                    Console.setForeColor("yellow");
-                    Console.print(arrow);
-                } else if  _fruitPos.equals(Vector2.new(i, j)): {
-                    Console.setForeColor("green");
-                    Console.print("F");
-                } else if (i == 0) || (j == 0) || (i == _width) || (j == _height): {
+                if (i == 0) || (j == 0) || (i == _width) || (j == _height): {
+                    Console.setCursorPosition(i, (j + 1));
                     Console.setForeColor("gray");
-                    Console.print("#");
-                } else if isTail == true: {
-                    Console.setForeColor("green");
-                    Console.print("0");
-                } else: {
-                    Console.setForeColor("DarkGray");
-                    Console.print(".");
+                    Console.print("#"); 
                 }
             }
+        }
+
+        Console.setCursorPosition(_fruitPos.X(), _fruitPos.Y() + 1);
+        Console.setForeColor("green");
+        Console.print("F");
+
+        Console.setCursorPosition(_position.X(), _position.Y() + 1);
+        Console.setForeColor("yellow");
+        Console.print(arrow);
+
+        for let k = 0; k < _tail.length(); k = k + 1: {
+            let t = _tail.at(k);
+            Console.setCursorPosition(t.X(), t.Y() + 1);
+            Console.setForeColor("green");
+            Console.print("0");
         }
     }
 
     function logic(): {
-        if _fruitPos.equals(_position): {
+        if (_fruitPos.X() == _position.X()) && (_fruitPos.Y() == _position.Y()): {
             _score = _score + 1;
 
             _tailLength = _tailLength + 1;
@@ -101,12 +96,13 @@ class SnakeGame: {
         }
 
         for let i = 0; i < _tail.length(); i = i + 1: {
-            if _tail.at(i).equals(_position): {
+            let t = _tail.at(i);
+            if (t.X() == _position.X()) && (t.Y() == _position.Y()): {
                 _gameOver = true;
             }
         }
      
-        _tail.insert(0, _position);
+        _tail.insert(0, Vector2.new(_position.X(), _position.Y()));
         if (_tail.length() > _tailLength): {
             _tail.removeAt(_tail.length() - 1);
         }
@@ -154,12 +150,13 @@ class SnakeGame: {
         setup();
 
         while _gameOver == false: {
+            draw();
             logic();
+            Console.clear();
             draw();
 
             _toWait = 100 / (1 + (_score * 0.05));
             Time.wait(_toWait);
-
         }
 
         Console.setCursorPosition(0, _height + 3);

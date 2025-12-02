@@ -6,7 +6,10 @@ public class CompileSettings : Settings
     {
         Dictionary ??= new Dictionary<string, object?>
         {
-            { "debug", false }
+            { "debug", false },
+            { "name", "null" },
+            { "version", "0.0.1" },
+            { "author", "null" }
         };
     }
 }

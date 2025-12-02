@@ -21,7 +21,15 @@ public partial class Project
         
         // create main.ql
         if (!File.Exists(mainFilePath))
-            File.Create($"{mainFilePath}").Close();
+        {
+            File.WriteAllText(mainFilePath, """
+                                            include "$lib/base"
+                                            
+                                            function main(): {
+                                                Console.println("Hello World!");
+                                            }
+                                            """);
+        }
         
         SaveProject();
 

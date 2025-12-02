@@ -73,6 +73,17 @@ public class Parser
             Advance();
         }
         
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.BreakKeyword)
+        {
+            Advance();
+            return new BreakNode();
+        }
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.ContinueKeyword)
+        {
+            Advance();
+            return new ContinueNode();
+        }
+        
         // function declaration
         if (Check(Tokens.Keyword) && Current().Value == Keywords.FunctionDeclaration)
             return ParseFunction(isStatic, isPrivate);
@@ -421,6 +432,17 @@ public class Parser
     private ASTNode ParsePrimary()
     {
         Logger.Logger.Log("CompilationProcess: Parsing primary");
+
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.BreakKeyword)
+        {
+            Advance();
+            return new BreakNode();
+        }
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.ContinueKeyword)
+        {
+            Advance();
+            return new ContinueNode();
+        }
 
         // Array
         if (Check(Tokens.LSquareParen))

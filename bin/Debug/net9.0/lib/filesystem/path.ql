@@ -1,5 +1,4 @@
 class Path: {
-    private let usings = "using System.IO; ";
     function getExtension(let path): {
         return _csharp(usings + "Path.GetExtension(" + _str(path) + ")");
     }
