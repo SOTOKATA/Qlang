@@ -130,7 +130,7 @@ class TetrisGame: {
     function draw(): {
         Console.setCursorPosition(0, 0);
         Console.setForeColor("white");
-        Console.println("Score: " + Number.toFixed(_score, "0000"));
+        Console.println("Score: " + Number.toFixed(_score, "0000") + " Pos: " + _currentPos.X() + "," + _currentPos.Y());
 
         // Draw left border
         for let y = 0; y < _height; y = y + 1: {
@@ -161,6 +161,9 @@ class TetrisGame: {
             Console.setForeColor("gray");
             Console.print("#");
         }
+
+        Console.setCursorPosition(_currentPos.X(),  _currentPos.Y());
+        Console.print("%");
     }
 
     function isPieceAt(let x, let y): {

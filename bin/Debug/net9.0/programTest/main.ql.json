@@ -13201,41 +13201,131 @@
                       },
                       "Operator": "Plus",
                       "Right": {
-                        "$type": "Qlang.AST.CallNode, ql",
-                        "Objects": [
-                          {
-                            "$type": "Qlang.AST.ObjectPointerNode, ql",
-                            "Name": "Number",
+                        "$type": "Qlang.AST.BinaryOperationNode, ql",
+                        "Left": {
+                          "$type": "Qlang.AST.CallNode, ql",
+                          "Objects": [
+                            {
+                              "$type": "Qlang.AST.ObjectPointerNode, ql",
+                              "Name": "Number",
+                              "Line": 537,
+                              "LineIndex": 0,
+                              "SourceFile": null
+                            },
+                            {
+                              "$type": "Qlang.AST.FunctionPointerNode, ql",
+                              "Name": "toFixed",
+                              "Arguments": [
+                                {
+                                  "$type": "Qlang.AST.VariableNode, ql",
+                                  "ClassName": "",
+                                  "Name": "_score",
+                                  "Line": 537,
+                                  "LineIndex": 0,
+                                  "SourceFile": null
+                                },
+                                {
+                                  "$type": "Qlang.AST.StringRefNode, ql",
+                                  "Index": 63,
+                                  "Line": 537,
+                                  "LineIndex": 0,
+                                  "SourceFile": null
+                                }
+                              ],
+                              "Line": 537,
+                              "LineIndex": 0,
+                              "SourceFile": null
+                            }
+                          ],
+                          "Arguments": [],
+                          "Line": 537,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        },
+                        "Operator": "Plus",
+                        "Right": {
+                          "$type": "Qlang.AST.BinaryOperationNode, ql",
+                          "Left": {
+                            "$type": "Qlang.AST.StringRefNode, ql",
+                            "Index": 64,
                             "Line": 537,
                             "LineIndex": 0,
                             "SourceFile": null
                           },
-                          {
-                            "$type": "Qlang.AST.FunctionPointerNode, ql",
-                            "Name": "toFixed",
-                            "Arguments": [
-                              {
-                                "$type": "Qlang.AST.VariableNode, ql",
-                                "ClassName": "",
-                                "Name": "_score",
+                          "Operator": "Plus",
+                          "Right": {
+                            "$type": "Qlang.AST.BinaryOperationNode, ql",
+                            "Left": {
+                              "$type": "Qlang.AST.CallNode, ql",
+                              "Objects": [
+                                {
+                                  "$type": "Qlang.AST.ObjectPointerNode, ql",
+                                  "Name": "_currentPos",
+                                  "Line": 537,
+                                  "LineIndex": 0,
+                                  "SourceFile": null
+                                },
+                                {
+                                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                                  "Name": "X",
+                                  "Arguments": [],
+                                  "Line": 537,
+                                  "LineIndex": 0,
+                                  "SourceFile": null
+                                }
+                              ],
+                              "Arguments": [],
+                              "Line": 537,
+                              "LineIndex": 0,
+                              "SourceFile": null
+                            },
+                            "Operator": "Plus",
+                            "Right": {
+                              "$type": "Qlang.AST.BinaryOperationNode, ql",
+                              "Left": {
+                                "$type": "Qlang.AST.StringRefNode, ql",
+                                "Index": 65,
                                 "Line": 537,
                                 "LineIndex": 0,
                                 "SourceFile": null
                               },
-                              {
-                                "$type": "Qlang.AST.StringRefNode, ql",
-                                "Index": 63,
+                              "Operator": "Plus",
+                              "Right": {
+                                "$type": "Qlang.AST.CallNode, ql",
+                                "Objects": [
+                                  {
+                                    "$type": "Qlang.AST.ObjectPointerNode, ql",
+                                    "Name": "_currentPos",
+                                    "Line": 537,
+                                    "LineIndex": 0,
+                                    "SourceFile": null
+                                  },
+                                  {
+                                    "$type": "Qlang.AST.FunctionPointerNode, ql",
+                                    "Name": "Y",
+                                    "Arguments": [],
+                                    "Line": 537,
+                                    "LineIndex": 0,
+                                    "SourceFile": null
+                                  }
+                                ],
+                                "Arguments": [],
                                 "Line": 537,
                                 "LineIndex": 0,
                                 "SourceFile": null
-                              }
-                            ],
+                              },
+                              "Line": 537,
+                              "LineIndex": 0,
+                              "SourceFile": null
+                            },
                             "Line": 537,
                             "LineIndex": 0,
                             "SourceFile": null
-                          }
-                        ],
-                        "Arguments": [],
+                          },
+                          "Line": 537,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        },
                         "Line": 537,
                         "LineIndex": 0,
                         "SourceFile": null
@@ -13405,7 +13495,7 @@
                       "Arguments": [
                         {
                           "$type": "Qlang.AST.StringRefNode, ql",
-                          "Index": 64,
+                          "Index": 66,
                           "Line": 542,
                           "LineIndex": 0,
                           "SourceFile": null
@@ -13437,7 +13527,7 @@
                       "Arguments": [
                         {
                           "$type": "Qlang.AST.StringRefNode, ql",
-                          "Index": 65,
+                          "Index": 67,
                           "Line": 543,
                           "LineIndex": 0,
                           "SourceFile": null
@@ -13840,7 +13930,7 @@
                                   "Arguments": [
                                     {
                                       "$type": "Qlang.AST.StringRefNode, ql",
-                                      "Index": 66,
+                                      "Index": 68,
                                       "Line": 555,
                                       "LineIndex": 0,
                                       "SourceFile": null
@@ -13872,7 +13962,7 @@
                                   "Arguments": [
                                     {
                                       "$type": "Qlang.AST.StringRefNode, ql",
-                                      "Index": 67,
+                                      "Index": 69,
                                       "Line": 555,
                                       "LineIndex": 0,
                                       "SourceFile": null
@@ -13906,7 +13996,7 @@
                                   "Arguments": [
                                     {
                                       "$type": "Qlang.AST.StringRefNode, ql",
-                                      "Index": 68,
+                                      "Index": 70,
                                       "Line": 557,
                                       "LineIndex": 0,
                                       "SourceFile": null
@@ -13938,7 +14028,7 @@
                                   "Arguments": [
                                     {
                                       "$type": "Qlang.AST.StringRefNode, ql",
-                                      "Index": 69,
+                                      "Index": 71,
                                       "Line": 557,
                                       "LineIndex": 0,
                                       "SourceFile": null
@@ -13978,7 +14068,7 @@
                               "Arguments": [
                                 {
                                   "$type": "Qlang.AST.StringRefNode, ql",
-                                  "Index": 70,
+                                  "Index": 72,
                                   "Line": 560,
                                   "LineIndex": 0,
                                   "SourceFile": null
@@ -14010,7 +14100,7 @@
                               "Arguments": [
                                 {
                                   "$type": "Qlang.AST.StringRefNode, ql",
-                                  "Index": 71,
+                                  "Index": 73,
                                   "Line": 560,
                                   "LineIndex": 0,
                                   "SourceFile": null
@@ -14125,7 +14215,7 @@
                       "Arguments": [
                         {
                           "$type": "Qlang.AST.StringRefNode, ql",
-                          "Index": 72,
+                          "Index": 74,
                           "Line": 565,
                           "LineIndex": 0,
                           "SourceFile": null
@@ -14157,7 +14247,7 @@
                       "Arguments": [
                         {
                           "$type": "Qlang.AST.StringRefNode, ql",
-                          "Index": 73,
+                          "Index": 75,
                           "Line": 566,
                           "LineIndex": 0,
                           "SourceFile": null
@@ -14175,12 +14265,117 @@
                 }
               ],
               "Variables": {},
-              "Line": 568,
+              "Line": 569,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 569,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "setCursorPosition",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.CallNode, ql",
+                      "Objects": [
+                        {
+                          "$type": "Qlang.AST.ObjectPointerNode, ql",
+                          "Name": "_currentPos",
+                          "Line": 569,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        },
+                        {
+                          "$type": "Qlang.AST.FunctionPointerNode, ql",
+                          "Name": "X",
+                          "Arguments": [],
+                          "Line": 569,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Arguments": [],
+                      "Line": 569,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.CallNode, ql",
+                      "Objects": [
+                        {
+                          "$type": "Qlang.AST.ObjectPointerNode, ql",
+                          "Name": "_currentPos",
+                          "Line": 569,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        },
+                        {
+                          "$type": "Qlang.AST.FunctionPointerNode, ql",
+                          "Name": "Y",
+                          "Arguments": [],
+                          "Line": 569,
+                          "LineIndex": 0,
+                          "SourceFile": null
+                        }
+                      ],
+                      "Arguments": [],
+                      "Line": 569,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 569,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 569,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 570,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "print",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.StringRefNode, ql",
+                      "Index": 76,
+                      "Line": 570,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 570,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 570,
               "LineIndex": 0,
               "SourceFile": null
             }
           ],
-          "Line": 570,
+          "Line": 573,
           "LineIndex": 0,
           "SourceFile": null
         },
@@ -14197,7 +14392,7 @@
               "IsStatic": false,
               "IsPrivate": false,
               "IsConst": false,
-              "Line": 570,
+              "Line": 573,
               "LineIndex": 0,
               "SourceFile": null
             },
@@ -14208,7 +14403,7 @@
               "IsStatic": false,
               "IsPrivate": false,
               "IsConst": false,
-              "Line": 570,
+              "Line": 573,
               "LineIndex": 0,
               "SourceFile": null
             }
@@ -14224,7 +14419,7 @@
                   {
                     "$type": "Qlang.AST.ObjectPointerNode, ql",
                     "Name": "_pieces",
-                    "Line": 571,
+                    "Line": 574,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
@@ -14236,25 +14431,25 @@
                         "$type": "Qlang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "_currentIndex",
-                        "Line": 571,
+                        "Line": 574,
                         "LineIndex": 0,
                         "SourceFile": null
                       }
                     ],
-                    "Line": 571,
+                    "Line": 574,
                     "LineIndex": 0,
                     "SourceFile": null
                   }
                 ],
                 "Arguments": [],
-                "Line": 571,
+                "Line": 574,
                 "LineIndex": 0,
                 "SourceFile": null
               },
               "IsStatic": false,
               "IsPrivate": false,
               "IsConst": false,
-              "Line": 571,
+              "Line": 574,
               "LineIndex": 0,
               "SourceFile": null
             },
@@ -14268,7 +14463,7 @@
                   {
                     "$type": "Qlang.AST.ObjectPointerNode, ql",
                     "Name": "rotations",
-                    "Line": 572,
+                    "Line": 575,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
@@ -14282,7 +14477,7 @@
                           "$type": "Qlang.AST.VariableNode, ql",
                           "ClassName": "",
                           "Name": "_currentRotation",
-                          "Line": 572,
+                          "Line": 575,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
@@ -14293,7 +14488,7 @@
                             {
                               "$type": "Qlang.AST.ObjectPointerNode, ql",
                               "Name": "rotations",
-                              "Line": 572,
+                              "Line": 575,
                               "LineIndex": 0,
                               "SourceFile": null
                             },
@@ -14301,35 +14496,35 @@
                               "$type": "Qlang.AST.FunctionPointerNode, ql",
                               "Name": "length",
                               "Arguments": [],
-                              "Line": 572,
+                              "Line": 575,
                               "LineIndex": 0,
                               "SourceFile": null
                             }
                           ],
                           "Arguments": [],
-                          "Line": 572,
+                          "Line": 575,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
-                        "Line": 572,
+                        "Line": 575,
                         "LineIndex": 0,
                         "SourceFile": null
                       }
                     ],
-                    "Line": 572,
+                    "Line": 575,
                     "LineIndex": 0,
                     "SourceFile": null
                   }
                 ],
                 "Arguments": [],
-                "Line": 572,
+                "Line": 575,
                 "LineIndex": 0,
                 "SourceFile": null
               },
               "IsStatic": false,
               "IsPrivate": false,
               "IsConst": false,
-              "Line": 572,
+              "Line": 575,
               "LineIndex": 0,
               "SourceFile": null
             },
@@ -14342,14 +14537,14 @@
                   "$type": "Qlang.AST.NumberRefNode, ql",
                   "IsNegative": false,
                   "Index": 210,
-                  "Line": 573,
+                  "Line": 576,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
                 "IsStatic": false,
                 "IsPrivate": false,
                 "IsConst": false,
-                "Line": 573,
+                "Line": 576,
                 "LineIndex": 0,
                 "SourceFile": null
               },
@@ -14359,7 +14554,7 @@
                   "$type": "Qlang.AST.VariableNode, ql",
                   "ClassName": "",
                   "Name": "i",
-                  "Line": 573,
+                  "Line": 576,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
@@ -14370,7 +14565,7 @@
                     {
                       "$type": "Qlang.AST.ObjectPointerNode, ql",
                       "Name": "shape",
-                      "Line": 573,
+                      "Line": 576,
                       "LineIndex": 0,
                       "SourceFile": null
                     },
@@ -14378,17 +14573,17 @@
                       "$type": "Qlang.AST.FunctionPointerNode, ql",
                       "Name": "length",
                       "Arguments": [],
-                      "Line": 573,
+                      "Line": 576,
                       "LineIndex": 0,
                       "SourceFile": null
                     }
                   ],
                   "Arguments": [],
-                  "Line": 573,
+                  "Line": 576,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
-                "Line": 573,
+                "Line": 576,
                 "LineIndex": 0,
                 "SourceFile": null
               },
@@ -14402,7 +14597,7 @@
                     "$type": "Qlang.AST.VariableNode, ql",
                     "ClassName": "",
                     "Name": "i",
-                    "Line": 573,
+                    "Line": 576,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
@@ -14411,18 +14606,18 @@
                     "$type": "Qlang.AST.NumberRefNode, ql",
                     "IsNegative": false,
                     "Index": 211,
-                    "Line": 573,
+                    "Line": 576,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
-                  "Line": 573,
+                  "Line": 576,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
                 "IsStatic": false,
                 "IsPrivate": false,
                 "IsConst": false,
-                "Line": 573,
+                "Line": 576,
                 "LineIndex": 0,
                 "SourceFile": null
               },
@@ -14437,7 +14632,7 @@
                       {
                         "$type": "Qlang.AST.ObjectPointerNode, ql",
                         "Name": "shape",
-                        "Line": 574,
+                        "Line": 577,
                         "LineIndex": 0,
                         "SourceFile": null
                       },
@@ -14449,25 +14644,25 @@
                             "$type": "Qlang.AST.VariableNode, ql",
                             "ClassName": "",
                             "Name": "i",
-                            "Line": 574,
+                            "Line": 577,
                             "LineIndex": 0,
                             "SourceFile": null
                           }
                         ],
-                        "Line": 574,
+                        "Line": 577,
                         "LineIndex": 0,
                         "SourceFile": null
                       }
                     ],
                     "Arguments": [],
-                    "Line": 574,
+                    "Line": 577,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
                   "IsStatic": false,
                   "IsPrivate": false,
                   "IsConst": false,
-                  "Line": 574,
+                  "Line": 577,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
@@ -14483,7 +14678,7 @@
                         {
                           "$type": "Qlang.AST.ObjectPointerNode, ql",
                           "Name": "_currentPos",
-                          "Line": 575,
+                          "Line": 578,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
@@ -14491,13 +14686,13 @@
                           "$type": "Qlang.AST.FunctionPointerNode, ql",
                           "Name": "X",
                           "Arguments": [],
-                          "Line": 575,
+                          "Line": 578,
                           "LineIndex": 0,
                           "SourceFile": null
                         }
                       ],
                       "Arguments": [],
-                      "Line": 575,
+                      "Line": 578,
                       "LineIndex": 0,
                       "SourceFile": null
                     },
@@ -14508,7 +14703,7 @@
                         {
                           "$type": "Qlang.AST.ObjectPointerNode, ql",
                           "Name": "cell",
-                          "Line": 575,
+                          "Line": 578,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
@@ -14516,24 +14711,24 @@
                           "$type": "Qlang.AST.FunctionPointerNode, ql",
                           "Name": "X",
                           "Arguments": [],
-                          "Line": 575,
+                          "Line": 578,
                           "LineIndex": 0,
                           "SourceFile": null
                         }
                       ],
                       "Arguments": [],
-                      "Line": 575,
+                      "Line": 578,
                       "LineIndex": 0,
                       "SourceFile": null
                     },
-                    "Line": 575,
+                    "Line": 578,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
                   "IsStatic": false,
                   "IsPrivate": false,
                   "IsConst": false,
-                  "Line": 575,
+                  "Line": 578,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
@@ -14549,7 +14744,7 @@
                         {
                           "$type": "Qlang.AST.ObjectPointerNode, ql",
                           "Name": "_currentPos",
-                          "Line": 576,
+                          "Line": 579,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
@@ -14557,13 +14752,13 @@
                           "$type": "Qlang.AST.FunctionPointerNode, ql",
                           "Name": "Y",
                           "Arguments": [],
-                          "Line": 576,
+                          "Line": 579,
                           "LineIndex": 0,
                           "SourceFile": null
                         }
                       ],
                       "Arguments": [],
-                      "Line": 576,
+                      "Line": 579,
                       "LineIndex": 0,
                       "SourceFile": null
                     },
@@ -14574,7 +14769,7 @@
                         {
                           "$type": "Qlang.AST.ObjectPointerNode, ql",
                           "Name": "cell",
-                          "Line": 576,
+                          "Line": 579,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
@@ -14582,24 +14777,24 @@
                           "$type": "Qlang.AST.FunctionPointerNode, ql",
                           "Name": "Y",
                           "Arguments": [],
-                          "Line": 576,
+                          "Line": 579,
                           "LineIndex": 0,
                           "SourceFile": null
                         }
                       ],
                       "Arguments": [],
-                      "Line": 576,
+                      "Line": 579,
                       "LineIndex": 0,
                       "SourceFile": null
                     },
-                    "Line": 576,
+                    "Line": 579,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
                   "IsStatic": false,
                   "IsPrivate": false,
                   "IsConst": false,
-                  "Line": 576,
+                  "Line": 579,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
@@ -14613,7 +14808,7 @@
                         "$type": "Qlang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "cx",
-                        "Line": 577,
+                        "Line": 580,
                         "LineIndex": 0,
                         "SourceFile": null
                       },
@@ -14622,11 +14817,11 @@
                         "$type": "Qlang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "x",
-                        "Line": 577,
+                        "Line": 580,
                         "LineIndex": 0,
                         "SourceFile": null
                       },
-                      "Line": 577,
+                      "Line": 580,
                       "LineIndex": 0,
                       "SourceFile": null
                     },
@@ -14639,7 +14834,7 @@
                           "$type": "Qlang.AST.VariableNode, ql",
                           "ClassName": "",
                           "Name": "cy",
-                          "Line": 577,
+                          "Line": 580,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
@@ -14648,11 +14843,11 @@
                           "$type": "Qlang.AST.VariableNode, ql",
                           "ClassName": "",
                           "Name": "y",
-                          "Line": 577,
+                          "Line": 580,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
-                        "Line": 577,
+                        "Line": 580,
                         "LineIndex": 0,
                         "SourceFile": null
                       },
@@ -14665,7 +14860,7 @@
                             "$type": "Qlang.AST.VariableNode, ql",
                             "ClassName": "",
                             "Name": "cy",
-                            "Line": 577,
+                            "Line": 580,
                             "LineIndex": 0,
                             "SourceFile": null
                           },
@@ -14674,11 +14869,11 @@
                             "$type": "Qlang.AST.NumberRefNode, ql",
                             "IsNegative": false,
                             "Index": 212,
-                            "Line": 577,
+                            "Line": 580,
                             "LineIndex": 0,
                             "SourceFile": null
                           },
-                          "Line": 577,
+                          "Line": 580,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
@@ -14691,7 +14886,7 @@
                               "$type": "Qlang.AST.VariableNode, ql",
                               "ClassName": "",
                               "Name": "cy",
-                              "Line": 577,
+                              "Line": 580,
                               "LineIndex": 0,
                               "SourceFile": null
                             },
@@ -14700,11 +14895,11 @@
                               "$type": "Qlang.AST.VariableNode, ql",
                               "ClassName": "",
                               "Name": "_height",
-                              "Line": 577,
+                              "Line": 580,
                               "LineIndex": 0,
                               "SourceFile": null
                             },
-                            "Line": 577,
+                            "Line": 580,
                             "LineIndex": 0,
                             "SourceFile": null
                           },
@@ -14717,7 +14912,7 @@
                                 "$type": "Qlang.AST.VariableNode, ql",
                                 "ClassName": "",
                                 "Name": "cx",
-                                "Line": 577,
+                                "Line": 580,
                                 "LineIndex": 0,
                                 "SourceFile": null
                               },
@@ -14726,11 +14921,11 @@
                                 "$type": "Qlang.AST.NumberRefNode, ql",
                                 "IsNegative": false,
                                 "Index": 213,
-                                "Line": 577,
+                                "Line": 580,
                                 "LineIndex": 0,
                                 "SourceFile": null
                               },
-                              "Line": 577,
+                              "Line": 580,
                               "LineIndex": 0,
                               "SourceFile": null
                             },
@@ -14741,7 +14936,7 @@
                                 "$type": "Qlang.AST.VariableNode, ql",
                                 "ClassName": "",
                                 "Name": "cx",
-                                "Line": 577,
+                                "Line": 580,
                                 "LineIndex": 0,
                                 "SourceFile": null
                               },
@@ -14750,31 +14945,31 @@
                                 "$type": "Qlang.AST.VariableNode, ql",
                                 "ClassName": "",
                                 "Name": "_width",
-                                "Line": 577,
+                                "Line": 580,
                                 "LineIndex": 0,
                                 "SourceFile": null
                               },
-                              "Line": 577,
+                              "Line": 580,
                               "LineIndex": 0,
                               "SourceFile": null
                             },
-                            "Line": 577,
+                            "Line": 580,
                             "LineIndex": 0,
                             "SourceFile": null
                           },
-                          "Line": 577,
+                          "Line": 580,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
-                        "Line": 577,
+                        "Line": 580,
                         "LineIndex": 0,
                         "SourceFile": null
                       },
-                      "Line": 577,
+                      "Line": 580,
                       "LineIndex": 0,
                       "SourceFile": null
                     },
-                    "Line": 577,
+                    "Line": 580,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
@@ -14784,24 +14979,24 @@
                       "ReturnValue": {
                         "$type": "Qlang.AST.BooleanNode, ql",
                         "Value": true,
-                        "Line": 578,
+                        "Line": 581,
                         "LineIndex": 0,
                         "SourceFile": null
                       },
-                      "Line": 579,
+                      "Line": 582,
                       "LineIndex": 0,
                       "SourceFile": null
                     }
                   ],
                   "ElseBlock": [],
                   "Variables": {},
-                  "Line": 580,
+                  "Line": 583,
                   "LineIndex": 0,
                   "SourceFile": null
                 }
               ],
               "Variables": {},
-              "Line": 581,
+              "Line": 584,
               "LineIndex": 0,
               "SourceFile": null
             },
@@ -14810,16 +15005,16 @@
               "ReturnValue": {
                 "$type": "Qlang.AST.BooleanNode, ql",
                 "Value": false,
-                "Line": 581,
+                "Line": 584,
                 "LineIndex": 0,
                 "SourceFile": null
               },
-              "Line": 582,
+              "Line": 585,
               "LineIndex": 0,
               "SourceFile": null
             }
           ],
-          "Line": 584,
+          "Line": 587,
           "LineIndex": 0,
           "SourceFile": null
         },
@@ -14840,7 +15035,7 @@
                     {
                       "$type": "Qlang.AST.ObjectPointerNode, ql",
                       "Name": "Console",
-                      "Line": 585,
+                      "Line": 588,
                       "LineIndex": 0,
                       "SourceFile": null
                     },
@@ -14848,13 +15043,13 @@
                       "$type": "Qlang.AST.FunctionPointerNode, ql",
                       "Name": "isKeyAvailable",
                       "Arguments": [],
-                      "Line": 585,
+                      "Line": 588,
                       "LineIndex": 0,
                       "SourceFile": null
                     }
                   ],
                   "Arguments": [],
-                  "Line": 585,
+                  "Line": 588,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
@@ -14862,11 +15057,11 @@
                 "Right": {
                   "$type": "Qlang.AST.BooleanNode, ql",
                   "Value": false,
-                  "Line": 585,
+                  "Line": 588,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
-                "Line": 585,
+                "Line": 588,
                 "LineIndex": 0,
                 "SourceFile": null
               },
@@ -14875,19 +15070,19 @@
                   "$type": "Qlang.AST.ReturnNode, ql",
                   "ReturnValue": {
                     "$type": "Qlang.AST.StringRefNode, ql",
-                    "Index": 74,
-                    "Line": 586,
+                    "Index": 77,
+                    "Line": 589,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
-                  "Line": 587,
+                  "Line": 590,
                   "LineIndex": 0,
                   "SourceFile": null
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 588,
+              "Line": 591,
               "LineIndex": 0,
               "SourceFile": null
             },
@@ -14901,7 +15096,7 @@
                   {
                     "$type": "Qlang.AST.ObjectPointerNode, ql",
                     "Name": "Console",
-                    "Line": 588,
+                    "Line": 591,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
@@ -14912,25 +15107,25 @@
                       {
                         "$type": "Qlang.AST.BooleanNode, ql",
                         "Value": true,
-                        "Line": 588,
+                        "Line": 591,
                         "LineIndex": 0,
                         "SourceFile": null
                       }
                     ],
-                    "Line": 588,
+                    "Line": 591,
                     "LineIndex": 0,
                     "SourceFile": null
                   }
                 ],
                 "Arguments": [],
-                "Line": 588,
+                "Line": 591,
                 "LineIndex": 0,
                 "SourceFile": null
               },
               "IsStatic": false,
               "IsPrivate": false,
               "IsConst": false,
-              "Line": 588,
+              "Line": 591,
               "LineIndex": 0,
               "SourceFile": null
             },
@@ -14942,19 +15137,19 @@
                   "$type": "Qlang.AST.VariableNode, ql",
                   "ClassName": "",
                   "Name": "k",
-                  "Line": 589,
+                  "Line": 592,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
                 "Operator": "==",
                 "Right": {
                   "$type": "Qlang.AST.StringRefNode, ql",
-                  "Index": 75,
-                  "Line": 589,
+                  "Index": 78,
+                  "Line": 592,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
-                "Line": 589,
+                "Line": 592,
                 "LineIndex": 0,
                 "SourceFile": null
               },
@@ -14966,13 +15161,13 @@
                       "$type": "Qlang.AST.FunctionPointerNode, ql",
                       "Name": "moveLeft",
                       "Arguments": [],
-                      "Line": 589,
+                      "Line": 592,
                       "LineIndex": 0,
                       "SourceFile": null
                     }
                   ],
                   "Arguments": [],
-                  "Line": 589,
+                  "Line": 592,
                   "LineIndex": 0,
                   "SourceFile": null
                 }
@@ -14986,19 +15181,19 @@
                       "$type": "Qlang.AST.VariableNode, ql",
                       "ClassName": "",
                       "Name": "k",
-                      "Line": 590,
+                      "Line": 593,
                       "LineIndex": 0,
                       "SourceFile": null
                     },
                     "Operator": "==",
                     "Right": {
                       "$type": "Qlang.AST.StringRefNode, ql",
-                      "Index": 76,
-                      "Line": 590,
+                      "Index": 79,
+                      "Line": 593,
                       "LineIndex": 0,
                       "SourceFile": null
                     },
-                    "Line": 590,
+                    "Line": 593,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
@@ -15010,13 +15205,13 @@
                           "$type": "Qlang.AST.FunctionPointerNode, ql",
                           "Name": "moveRight",
                           "Arguments": [],
-                          "Line": 590,
+                          "Line": 593,
                           "LineIndex": 0,
                           "SourceFile": null
                         }
                       ],
                       "Arguments": [],
-                      "Line": 590,
+                      "Line": 593,
                       "LineIndex": 0,
                       "SourceFile": null
                     }
@@ -15030,19 +15225,19 @@
                           "$type": "Qlang.AST.VariableNode, ql",
                           "ClassName": "",
                           "Name": "k",
-                          "Line": 591,
+                          "Line": 594,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
                         "Operator": "==",
                         "Right": {
                           "$type": "Qlang.AST.StringRefNode, ql",
-                          "Index": 77,
-                          "Line": 591,
+                          "Index": 80,
+                          "Line": 594,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
-                        "Line": 591,
+                        "Line": 594,
                         "LineIndex": 0,
                         "SourceFile": null
                       },
@@ -15054,13 +15249,13 @@
                               "$type": "Qlang.AST.FunctionPointerNode, ql",
                               "Name": "softDrop",
                               "Arguments": [],
-                              "Line": 591,
+                              "Line": 594,
                               "LineIndex": 0,
                               "SourceFile": null
                             }
                           ],
                           "Arguments": [],
-                          "Line": 591,
+                          "Line": 594,
                           "LineIndex": 0,
                           "SourceFile": null
                         }
@@ -15074,19 +15269,19 @@
                               "$type": "Qlang.AST.VariableNode, ql",
                               "ClassName": "",
                               "Name": "k",
-                              "Line": 592,
+                              "Line": 595,
                               "LineIndex": 0,
                               "SourceFile": null
                             },
                             "Operator": "==",
                             "Right": {
                               "$type": "Qlang.AST.StringRefNode, ql",
-                              "Index": 78,
-                              "Line": 592,
+                              "Index": 81,
+                              "Line": 595,
                               "LineIndex": 0,
                               "SourceFile": null
                             },
-                            "Line": 592,
+                            "Line": 595,
                             "LineIndex": 0,
                             "SourceFile": null
                           },
@@ -15098,13 +15293,13 @@
                                   "$type": "Qlang.AST.FunctionPointerNode, ql",
                                   "Name": "rotate",
                                   "Arguments": [],
-                                  "Line": 592,
+                                  "Line": 595,
                                   "LineIndex": 0,
                                   "SourceFile": null
                                 }
                               ],
                               "Arguments": [],
-                              "Line": 592,
+                              "Line": 595,
                               "LineIndex": 0,
                               "SourceFile": null
                             }
@@ -15118,19 +15313,19 @@
                                   "$type": "Qlang.AST.VariableNode, ql",
                                   "ClassName": "",
                                   "Name": "k",
-                                  "Line": 593,
+                                  "Line": 596,
                                   "LineIndex": 0,
                                   "SourceFile": null
                                 },
                                 "Operator": "==",
                                 "Right": {
                                   "$type": "Qlang.AST.StringRefNode, ql",
-                                  "Index": 79,
-                                  "Line": 593,
+                                  "Index": 82,
+                                  "Line": 596,
                                   "LineIndex": 0,
                                   "SourceFile": null
                                 },
-                                "Line": 593,
+                                "Line": 596,
                                 "LineIndex": 0,
                                 "SourceFile": null
                               },
@@ -15142,50 +15337,50 @@
                                   "Value": {
                                     "$type": "Qlang.AST.BooleanNode, ql",
                                     "Value": true,
-                                    "Line": 593,
+                                    "Line": 596,
                                     "LineIndex": 0,
                                     "SourceFile": null
                                   },
                                   "IsStatic": false,
                                   "IsPrivate": false,
                                   "IsConst": false,
-                                  "Line": 593,
+                                  "Line": 596,
                                   "LineIndex": 0,
                                   "SourceFile": null
                                 }
                               ],
                               "ElseBlock": [],
                               "Variables": {},
-                              "Line": 594,
+                              "Line": 597,
                               "LineIndex": 0,
                               "SourceFile": null
                             }
                           ],
                           "Variables": {},
-                          "Line": 594,
+                          "Line": 597,
                           "LineIndex": 0,
                           "SourceFile": null
                         }
                       ],
                       "Variables": {},
-                      "Line": 594,
+                      "Line": 597,
                       "LineIndex": 0,
                       "SourceFile": null
                     }
                   ],
                   "Variables": {},
-                  "Line": 594,
+                  "Line": 597,
                   "LineIndex": 0,
                   "SourceFile": null
                 }
               ],
               "Variables": {},
-              "Line": 594,
+              "Line": 597,
               "LineIndex": 0,
               "SourceFile": null
             }
           ],
-          "Line": 596,
+          "Line": 599,
           "LineIndex": 0,
           "SourceFile": null
         },
@@ -15206,7 +15401,7 @@
                   {
                     "$type": "Qlang.AST.ObjectPointerNode, ql",
                     "Name": "Vector2",
-                    "Line": 597,
+                    "Line": 600,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
@@ -15222,7 +15417,7 @@
                             {
                               "$type": "Qlang.AST.ObjectPointerNode, ql",
                               "Name": "_currentPos",
-                              "Line": 597,
+                              "Line": 600,
                               "LineIndex": 0,
                               "SourceFile": null
                             },
@@ -15230,13 +15425,13 @@
                               "$type": "Qlang.AST.FunctionPointerNode, ql",
                               "Name": "X",
                               "Arguments": [],
-                              "Line": 597,
+                              "Line": 600,
                               "LineIndex": 0,
                               "SourceFile": null
                             }
                           ],
                           "Arguments": [],
-                          "Line": 597,
+                          "Line": 600,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
@@ -15245,11 +15440,11 @@
                           "$type": "Qlang.AST.NumberRefNode, ql",
                           "IsNegative": false,
                           "Index": 214,
-                          "Line": 597,
+                          "Line": 600,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
-                        "Line": 597,
+                        "Line": 600,
                         "LineIndex": 0,
                         "SourceFile": null
                       },
@@ -15259,7 +15454,7 @@
                           {
                             "$type": "Qlang.AST.ObjectPointerNode, ql",
                             "Name": "_currentPos",
-                            "Line": 597,
+                            "Line": 600,
                             "LineIndex": 0,
                             "SourceFile": null
                           },
@@ -15267,31 +15462,31 @@
                             "$type": "Qlang.AST.FunctionPointerNode, ql",
                             "Name": "Y",
                             "Arguments": [],
-                            "Line": 597,
+                            "Line": 600,
                             "LineIndex": 0,
                             "SourceFile": null
                           }
                         ],
                         "Arguments": [],
-                        "Line": 597,
+                        "Line": 600,
                         "LineIndex": 0,
                         "SourceFile": null
                       }
                     ],
-                    "Line": 597,
+                    "Line": 600,
                     "LineIndex": 0,
                     "SourceFile": null
                   }
                 ],
                 "Arguments": [],
-                "Line": 597,
+                "Line": 600,
                 "LineIndex": 0,
                 "SourceFile": null
               },
               "IsStatic": false,
               "IsPrivate": false,
               "IsConst": false,
-              "Line": 597,
+              "Line": 600,
               "LineIndex": 0,
               "SourceFile": null
             },
@@ -15312,7 +15507,7 @@
                             {
                               "$type": "Qlang.AST.ObjectPointerNode, ql",
                               "Name": "np",
-                              "Line": 598,
+                              "Line": 601,
                               "LineIndex": 0,
                               "SourceFile": null
                             },
@@ -15320,13 +15515,13 @@
                               "$type": "Qlang.AST.FunctionPointerNode, ql",
                               "Name": "X",
                               "Arguments": [],
-                              "Line": 598,
+                              "Line": 601,
                               "LineIndex": 0,
                               "SourceFile": null
                             }
                           ],
                           "Arguments": [],
-                          "Line": 598,
+                          "Line": 601,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
@@ -15336,7 +15531,7 @@
                             {
                               "$type": "Qlang.AST.ObjectPointerNode, ql",
                               "Name": "np",
-                              "Line": 598,
+                              "Line": 601,
                               "LineIndex": 0,
                               "SourceFile": null
                             },
@@ -15344,13 +15539,13 @@
                               "$type": "Qlang.AST.FunctionPointerNode, ql",
                               "Name": "Y",
                               "Arguments": [],
-                              "Line": 598,
+                              "Line": 601,
                               "LineIndex": 0,
                               "SourceFile": null
                             }
                           ],
                           "Arguments": [],
-                          "Line": 598,
+                          "Line": 601,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
@@ -15358,18 +15553,18 @@
                           "$type": "Qlang.AST.VariableNode, ql",
                           "ClassName": "",
                           "Name": "_currentRotation",
-                          "Line": 598,
+                          "Line": 601,
                           "LineIndex": 0,
                           "SourceFile": null
                         }
                       ],
-                      "Line": 598,
+                      "Line": 601,
                       "LineIndex": 0,
                       "SourceFile": null
                     }
                   ],
                   "Arguments": [],
-                  "Line": 598,
+                  "Line": 601,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
@@ -15377,11 +15572,11 @@
                 "Right": {
                   "$type": "Qlang.AST.BooleanNode, ql",
                   "Value": false,
-                  "Line": 598,
+                  "Line": 601,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
-                "Line": 598,
+                "Line": 601,
                 "LineIndex": 0,
                 "SourceFile": null
               },
@@ -15394,26 +15589,26 @@
                     "$type": "Qlang.AST.VariableNode, ql",
                     "ClassName": "",
                     "Name": "np",
-                    "Line": 598,
+                    "Line": 601,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
                   "IsStatic": false,
                   "IsPrivate": false,
                   "IsConst": false,
-                  "Line": 598,
+                  "Line": 601,
                   "LineIndex": 0,
                   "SourceFile": null
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 599,
+              "Line": 602,
               "LineIndex": 0,
               "SourceFile": null
             }
           ],
-          "Line": 601,
+          "Line": 604,
           "LineIndex": 0,
           "SourceFile": null
         },
@@ -15434,7 +15629,7 @@
                   {
                     "$type": "Qlang.AST.ObjectPointerNode, ql",
                     "Name": "Vector2",
-                    "Line": 602,
+                    "Line": 605,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
@@ -15450,7 +15645,7 @@
                             {
                               "$type": "Qlang.AST.ObjectPointerNode, ql",
                               "Name": "_currentPos",
-                              "Line": 602,
+                              "Line": 605,
                               "LineIndex": 0,
                               "SourceFile": null
                             },
@@ -15458,13 +15653,13 @@
                               "$type": "Qlang.AST.FunctionPointerNode, ql",
                               "Name": "X",
                               "Arguments": [],
-                              "Line": 602,
+                              "Line": 605,
                               "LineIndex": 0,
                               "SourceFile": null
                             }
                           ],
                           "Arguments": [],
-                          "Line": 602,
+                          "Line": 605,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
@@ -15473,11 +15668,11 @@
                           "$type": "Qlang.AST.NumberRefNode, ql",
                           "IsNegative": false,
                           "Index": 215,
-                          "Line": 602,
+                          "Line": 605,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
-                        "Line": 602,
+                        "Line": 605,
                         "LineIndex": 0,
                         "SourceFile": null
                       },
@@ -15487,7 +15682,7 @@
                           {
                             "$type": "Qlang.AST.ObjectPointerNode, ql",
                             "Name": "_currentPos",
-                            "Line": 602,
+                            "Line": 605,
                             "LineIndex": 0,
                             "SourceFile": null
                           },
@@ -15495,31 +15690,31 @@
                             "$type": "Qlang.AST.FunctionPointerNode, ql",
                             "Name": "Y",
                             "Arguments": [],
-                            "Line": 602,
+                            "Line": 605,
                             "LineIndex": 0,
                             "SourceFile": null
                           }
                         ],
                         "Arguments": [],
-                        "Line": 602,
+                        "Line": 605,
                         "LineIndex": 0,
                         "SourceFile": null
                       }
                     ],
-                    "Line": 602,
+                    "Line": 605,
                     "LineIndex": 0,
                     "SourceFile": null
                   }
                 ],
                 "Arguments": [],
-                "Line": 602,
+                "Line": 605,
                 "LineIndex": 0,
                 "SourceFile": null
               },
               "IsStatic": false,
               "IsPrivate": false,
               "IsConst": false,
-              "Line": 602,
+              "Line": 605,
               "LineIndex": 0,
               "SourceFile": null
             },
@@ -15540,7 +15735,7 @@
                             {
                               "$type": "Qlang.AST.ObjectPointerNode, ql",
                               "Name": "np",
-                              "Line": 603,
+                              "Line": 606,
                               "LineIndex": 0,
                               "SourceFile": null
                             },
@@ -15548,13 +15743,13 @@
                               "$type": "Qlang.AST.FunctionPointerNode, ql",
                               "Name": "X",
                               "Arguments": [],
-                              "Line": 603,
+                              "Line": 606,
                               "LineIndex": 0,
                               "SourceFile": null
                             }
                           ],
                           "Arguments": [],
-                          "Line": 603,
+                          "Line": 606,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
@@ -15564,7 +15759,7 @@
                             {
                               "$type": "Qlang.AST.ObjectPointerNode, ql",
                               "Name": "np",
-                              "Line": 603,
+                              "Line": 606,
                               "LineIndex": 0,
                               "SourceFile": null
                             },
@@ -15572,13 +15767,13 @@
                               "$type": "Qlang.AST.FunctionPointerNode, ql",
                               "Name": "Y",
                               "Arguments": [],
-                              "Line": 603,
+                              "Line": 606,
                               "LineIndex": 0,
                               "SourceFile": null
                             }
                           ],
                           "Arguments": [],
-                          "Line": 603,
+                          "Line": 606,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
@@ -15586,18 +15781,18 @@
                           "$type": "Qlang.AST.VariableNode, ql",
                           "ClassName": "",
                           "Name": "_currentRotation",
-                          "Line": 603,
+                          "Line": 606,
                           "LineIndex": 0,
                           "SourceFile": null
                         }
                       ],
-                      "Line": 603,
+                      "Line": 606,
                       "LineIndex": 0,
                       "SourceFile": null
                     }
                   ],
                   "Arguments": [],
-                  "Line": 603,
+                  "Line": 606,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
@@ -15605,11 +15800,11 @@
                 "Right": {
                   "$type": "Qlang.AST.BooleanNode, ql",
                   "Value": false,
-                  "Line": 603,
+                  "Line": 606,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
-                "Line": 603,
+                "Line": 606,
                 "LineIndex": 0,
                 "SourceFile": null
               },
@@ -15622,26 +15817,26 @@
                     "$type": "Qlang.AST.VariableNode, ql",
                     "ClassName": "",
                     "Name": "np",
-                    "Line": 603,
+                    "Line": 606,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
                   "IsStatic": false,
                   "IsPrivate": false,
                   "IsConst": false,
-                  "Line": 603,
+                  "Line": 606,
                   "LineIndex": 0,
                   "SourceFile": null
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 604,
+              "Line": 607,
               "LineIndex": 0,
               "SourceFile": null
             }
           ],
-          "Line": 606,
+          "Line": 609,
           "LineIndex": 0,
           "SourceFile": null
         },
@@ -15662,7 +15857,7 @@
                   {
                     "$type": "Qlang.AST.ObjectPointerNode, ql",
                     "Name": "Vector2",
-                    "Line": 607,
+                    "Line": 610,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
@@ -15676,7 +15871,7 @@
                           {
                             "$type": "Qlang.AST.ObjectPointerNode, ql",
                             "Name": "_currentPos",
-                            "Line": 607,
+                            "Line": 610,
                             "LineIndex": 0,
                             "SourceFile": null
                           },
@@ -15684,13 +15879,13 @@
                             "$type": "Qlang.AST.FunctionPointerNode, ql",
                             "Name": "X",
                             "Arguments": [],
-                            "Line": 607,
+                            "Line": 610,
                             "LineIndex": 0,
                             "SourceFile": null
                           }
                         ],
                         "Arguments": [],
-                        "Line": 607,
+                        "Line": 610,
                         "LineIndex": 0,
                         "SourceFile": null
                       },
@@ -15702,7 +15897,7 @@
                             {
                               "$type": "Qlang.AST.ObjectPointerNode, ql",
                               "Name": "_currentPos",
-                              "Line": 607,
+                              "Line": 610,
                               "LineIndex": 0,
                               "SourceFile": null
                             },
@@ -15710,13 +15905,13 @@
                               "$type": "Qlang.AST.FunctionPointerNode, ql",
                               "Name": "Y",
                               "Arguments": [],
-                              "Line": 607,
+                              "Line": 610,
                               "LineIndex": 0,
                               "SourceFile": null
                             }
                           ],
                           "Arguments": [],
-                          "Line": 607,
+                          "Line": 610,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
@@ -15725,29 +15920,29 @@
                           "$type": "Qlang.AST.NumberRefNode, ql",
                           "IsNegative": false,
                           "Index": 216,
-                          "Line": 607,
+                          "Line": 610,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
-                        "Line": 607,
+                        "Line": 610,
                         "LineIndex": 0,
                         "SourceFile": null
                       }
                     ],
-                    "Line": 607,
+                    "Line": 610,
                     "LineIndex": 0,
                     "SourceFile": null
                   }
                 ],
                 "Arguments": [],
-                "Line": 607,
+                "Line": 610,
                 "LineIndex": 0,
                 "SourceFile": null
               },
               "IsStatic": false,
               "IsPrivate": false,
               "IsConst": false,
-              "Line": 607,
+              "Line": 610,
               "LineIndex": 0,
               "SourceFile": null
             },
@@ -15768,7 +15963,7 @@
                             {
                               "$type": "Qlang.AST.ObjectPointerNode, ql",
                               "Name": "np",
-                              "Line": 608,
+                              "Line": 611,
                               "LineIndex": 0,
                               "SourceFile": null
                             },
@@ -15776,13 +15971,13 @@
                               "$type": "Qlang.AST.FunctionPointerNode, ql",
                               "Name": "X",
                               "Arguments": [],
-                              "Line": 608,
+                              "Line": 611,
                               "LineIndex": 0,
                               "SourceFile": null
                             }
                           ],
                           "Arguments": [],
-                          "Line": 608,
+                          "Line": 611,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
@@ -15792,7 +15987,7 @@
                             {
                               "$type": "Qlang.AST.ObjectPointerNode, ql",
                               "Name": "np",
-                              "Line": 608,
+                              "Line": 611,
                               "LineIndex": 0,
                               "SourceFile": null
                             },
@@ -15800,13 +15995,13 @@
                               "$type": "Qlang.AST.FunctionPointerNode, ql",
                               "Name": "Y",
                               "Arguments": [],
-                              "Line": 608,
+                              "Line": 611,
                               "LineIndex": 0,
                               "SourceFile": null
                             }
                           ],
                           "Arguments": [],
-                          "Line": 608,
+                          "Line": 611,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
@@ -15814,18 +16009,18 @@
                           "$type": "Qlang.AST.VariableNode, ql",
                           "ClassName": "",
                           "Name": "_currentRotation",
-                          "Line": 608,
+                          "Line": 611,
                           "LineIndex": 0,
                           "SourceFile": null
                         }
                       ],
-                      "Line": 608,
+                      "Line": 611,
                       "LineIndex": 0,
                       "SourceFile": null
                     }
                   ],
                   "Arguments": [],
-                  "Line": 608,
+                  "Line": 611,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
@@ -15833,11 +16028,11 @@
                 "Right": {
                   "$type": "Qlang.AST.BooleanNode, ql",
                   "Value": false,
-                  "Line": 608,
+                  "Line": 611,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
-                "Line": 608,
+                "Line": 611,
                 "LineIndex": 0,
                 "SourceFile": null
               },
@@ -15850,14 +16045,14 @@
                     "$type": "Qlang.AST.VariableNode, ql",
                     "ClassName": "",
                     "Name": "np",
-                    "Line": 608,
+                    "Line": 611,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
                   "IsStatic": false,
                   "IsPrivate": false,
                   "IsConst": false,
-                  "Line": 608,
+                  "Line": 611,
                   "LineIndex": 0,
                   "SourceFile": null
                 }
@@ -15870,24 +16065,24 @@
                       "$type": "Qlang.AST.FunctionPointerNode, ql",
                       "Name": "lockPiece",
                       "Arguments": [],
-                      "Line": 609,
+                      "Line": 612,
                       "LineIndex": 0,
                       "SourceFile": null
                     }
                   ],
                   "Arguments": [],
-                  "Line": 609,
+                  "Line": 612,
                   "LineIndex": 0,
                   "SourceFile": null
                 }
               ],
               "Variables": {},
-              "Line": 610,
+              "Line": 613,
               "LineIndex": 0,
               "SourceFile": null
             }
           ],
-          "Line": 612,
+          "Line": 615,
           "LineIndex": 0,
           "SourceFile": null
         },
@@ -15908,7 +16103,7 @@
                   "$type": "Qlang.AST.VariableNode, ql",
                   "ClassName": "",
                   "Name": "_currentRotation",
-                  "Line": 613,
+                  "Line": 616,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
@@ -15917,18 +16112,18 @@
                   "$type": "Qlang.AST.NumberRefNode, ql",
                   "IsNegative": false,
                   "Index": 217,
-                  "Line": 613,
+                  "Line": 616,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
-                "Line": 613,
+                "Line": 616,
                 "LineIndex": 0,
                 "SourceFile": null
               },
               "IsStatic": false,
               "IsPrivate": false,
               "IsConst": false,
-              "Line": 613,
+              "Line": 616,
               "LineIndex": 0,
               "SourceFile": null
             },
@@ -15949,7 +16144,7 @@
                             {
                               "$type": "Qlang.AST.ObjectPointerNode, ql",
                               "Name": "_currentPos",
-                              "Line": 614,
+                              "Line": 617,
                               "LineIndex": 0,
                               "SourceFile": null
                             },
@@ -15957,13 +16152,13 @@
                               "$type": "Qlang.AST.FunctionPointerNode, ql",
                               "Name": "X",
                               "Arguments": [],
-                              "Line": 614,
+                              "Line": 617,
                               "LineIndex": 0,
                               "SourceFile": null
                             }
                           ],
                           "Arguments": [],
-                          "Line": 614,
+                          "Line": 617,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
@@ -15973,7 +16168,7 @@
                             {
                               "$type": "Qlang.AST.ObjectPointerNode, ql",
                               "Name": "_currentPos",
-                              "Line": 614,
+                              "Line": 617,
                               "LineIndex": 0,
                               "SourceFile": null
                             },
@@ -15981,13 +16176,13 @@
                               "$type": "Qlang.AST.FunctionPointerNode, ql",
                               "Name": "Y",
                               "Arguments": [],
-                              "Line": 614,
+                              "Line": 617,
                               "LineIndex": 0,
                               "SourceFile": null
                             }
                           ],
                           "Arguments": [],
-                          "Line": 614,
+                          "Line": 617,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
@@ -15995,18 +16190,18 @@
                           "$type": "Qlang.AST.VariableNode, ql",
                           "ClassName": "",
                           "Name": "newRot",
-                          "Line": 614,
+                          "Line": 617,
                           "LineIndex": 0,
                           "SourceFile": null
                         }
                       ],
-                      "Line": 614,
+                      "Line": 617,
                       "LineIndex": 0,
                       "SourceFile": null
                     }
                   ],
                   "Arguments": [],
-                  "Line": 614,
+                  "Line": 617,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
@@ -16014,11 +16209,11 @@
                 "Right": {
                   "$type": "Qlang.AST.BooleanNode, ql",
                   "Value": false,
-                  "Line": 614,
+                  "Line": 617,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
-                "Line": 614,
+                "Line": 617,
                 "LineIndex": 0,
                 "SourceFile": null
               },
@@ -16031,26 +16226,26 @@
                     "$type": "Qlang.AST.VariableNode, ql",
                     "ClassName": "",
                     "Name": "newRot",
-                    "Line": 614,
+                    "Line": 617,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
                   "IsStatic": false,
                   "IsPrivate": false,
                   "IsConst": false,
-                  "Line": 614,
+                  "Line": 617,
                   "LineIndex": 0,
                   "SourceFile": null
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 615,
+              "Line": 618,
               "LineIndex": 0,
               "SourceFile": null
             }
           ],
-          "Line": 617,
+          "Line": 620,
           "LineIndex": 0,
           "SourceFile": null
         },
@@ -16068,13 +16263,13 @@
                   "$type": "Qlang.AST.FunctionPointerNode, ql",
                   "Name": "setup",
                   "Arguments": [],
-                  "Line": 618,
+                  "Line": 621,
                   "LineIndex": 0,
                   "SourceFile": null
                 }
               ],
               "Arguments": [],
-              "Line": 618,
+              "Line": 621,
               "LineIndex": 0,
               "SourceFile": null
             },
@@ -16086,14 +16281,14 @@
                 "$type": "Qlang.AST.NumberRefNode, ql",
                 "IsNegative": false,
                 "Index": 218,
-                "Line": 619,
+                "Line": 622,
                 "LineIndex": 0,
                 "SourceFile": null
               },
               "IsStatic": false,
               "IsPrivate": false,
               "IsConst": false,
-              "Line": 619,
+              "Line": 622,
               "LineIndex": 0,
               "SourceFile": null
             },
@@ -16105,7 +16300,7 @@
                   "$type": "Qlang.AST.VariableNode, ql",
                   "ClassName": "",
                   "Name": "_gameOver",
-                  "Line": 620,
+                  "Line": 623,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
@@ -16113,11 +16308,11 @@
                 "Right": {
                   "$type": "Qlang.AST.BooleanNode, ql",
                   "Value": false,
-                  "Line": 620,
+                  "Line": 623,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
-                "Line": 620,
+                "Line": 623,
                 "LineIndex": 0,
                 "SourceFile": null
               },
@@ -16129,13 +16324,13 @@
                       "$type": "Qlang.AST.FunctionPointerNode, ql",
                       "Name": "input",
                       "Arguments": [],
-                      "Line": 621,
+                      "Line": 624,
                       "LineIndex": 0,
                       "SourceFile": null
                     }
                   ],
                   "Arguments": [],
-                  "Line": 621,
+                  "Line": 624,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
@@ -16149,7 +16344,7 @@
                       "$type": "Qlang.AST.VariableNode, ql",
                       "ClassName": "",
                       "Name": "_dropCounter",
-                      "Line": 623,
+                      "Line": 626,
                       "LineIndex": 0,
                       "SourceFile": null
                     },
@@ -16158,18 +16353,18 @@
                       "$type": "Qlang.AST.NumberRefNode, ql",
                       "IsNegative": false,
                       "Index": 219,
-                      "Line": 623,
+                      "Line": 626,
                       "LineIndex": 0,
                       "SourceFile": null
                     },
-                    "Line": 623,
+                    "Line": 626,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
                   "IsStatic": false,
                   "IsPrivate": false,
                   "IsConst": false,
-                  "Line": 623,
+                  "Line": 626,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
@@ -16181,7 +16376,7 @@
                       "$type": "Qlang.AST.VariableNode, ql",
                       "ClassName": "",
                       "Name": "_dropCounter",
-                      "Line": 624,
+                      "Line": 627,
                       "LineIndex": 0,
                       "SourceFile": null
                     },
@@ -16190,11 +16385,11 @@
                       "$type": "Qlang.AST.VariableNode, ql",
                       "ClassName": "",
                       "Name": "_dropDelay",
-                      "Line": 624,
+                      "Line": 627,
                       "LineIndex": 0,
                       "SourceFile": null
                     },
-                    "Line": 624,
+                    "Line": 627,
                     "LineIndex": 0,
                     "SourceFile": null
                   },
@@ -16207,14 +16402,14 @@
                         "$type": "Qlang.AST.NumberRefNode, ql",
                         "IsNegative": false,
                         "Index": 220,
-                        "Line": 625,
+                        "Line": 628,
                         "LineIndex": 0,
                         "SourceFile": null
                       },
                       "IsStatic": false,
                       "IsPrivate": false,
                       "IsConst": false,
-                      "Line": 625,
+                      "Line": 628,
                       "LineIndex": 0,
                       "SourceFile": null
                     },
@@ -16228,7 +16423,7 @@
                           {
                             "$type": "Qlang.AST.ObjectPointerNode, ql",
                             "Name": "Vector2",
-                            "Line": 626,
+                            "Line": 629,
                             "LineIndex": 0,
                             "SourceFile": null
                           },
@@ -16242,7 +16437,7 @@
                                   {
                                     "$type": "Qlang.AST.ObjectPointerNode, ql",
                                     "Name": "_currentPos",
-                                    "Line": 626,
+                                    "Line": 629,
                                     "LineIndex": 0,
                                     "SourceFile": null
                                   },
@@ -16250,13 +16445,13 @@
                                     "$type": "Qlang.AST.FunctionPointerNode, ql",
                                     "Name": "X",
                                     "Arguments": [],
-                                    "Line": 626,
+                                    "Line": 629,
                                     "LineIndex": 0,
                                     "SourceFile": null
                                   }
                                 ],
                                 "Arguments": [],
-                                "Line": 626,
+                                "Line": 629,
                                 "LineIndex": 0,
                                 "SourceFile": null
                               },
@@ -16268,7 +16463,7 @@
                                     {
                                       "$type": "Qlang.AST.ObjectPointerNode, ql",
                                       "Name": "_currentPos",
-                                      "Line": 626,
+                                      "Line": 629,
                                       "LineIndex": 0,
                                       "SourceFile": null
                                     },
@@ -16276,13 +16471,13 @@
                                       "$type": "Qlang.AST.FunctionPointerNode, ql",
                                       "Name": "Y",
                                       "Arguments": [],
-                                      "Line": 626,
+                                      "Line": 629,
                                       "LineIndex": 0,
                                       "SourceFile": null
                                     }
                                   ],
                                   "Arguments": [],
-                                  "Line": 626,
+                                  "Line": 629,
                                   "LineIndex": 0,
                                   "SourceFile": null
                                 },
@@ -16291,29 +16486,29 @@
                                   "$type": "Qlang.AST.NumberRefNode, ql",
                                   "IsNegative": false,
                                   "Index": 221,
-                                  "Line": 626,
+                                  "Line": 629,
                                   "LineIndex": 0,
                                   "SourceFile": null
                                 },
-                                "Line": 626,
+                                "Line": 629,
                                 "LineIndex": 0,
                                 "SourceFile": null
                               }
                             ],
-                            "Line": 626,
+                            "Line": 629,
                             "LineIndex": 0,
                             "SourceFile": null
                           }
                         ],
                         "Arguments": [],
-                        "Line": 626,
+                        "Line": 629,
                         "LineIndex": 0,
                         "SourceFile": null
                       },
                       "IsStatic": false,
                       "IsPrivate": false,
                       "IsConst": false,
-                      "Line": 626,
+                      "Line": 629,
                       "LineIndex": 0,
                       "SourceFile": null
                     },
@@ -16334,7 +16529,7 @@
                                     {
                                       "$type": "Qlang.AST.ObjectPointerNode, ql",
                                       "Name": "np",
-                                      "Line": 627,
+                                      "Line": 630,
                                       "LineIndex": 0,
                                       "SourceFile": null
                                     },
@@ -16342,13 +16537,13 @@
                                       "$type": "Qlang.AST.FunctionPointerNode, ql",
                                       "Name": "X",
                                       "Arguments": [],
-                                      "Line": 627,
+                                      "Line": 630,
                                       "LineIndex": 0,
                                       "SourceFile": null
                                     }
                                   ],
                                   "Arguments": [],
-                                  "Line": 627,
+                                  "Line": 630,
                                   "LineIndex": 0,
                                   "SourceFile": null
                                 },
@@ -16358,7 +16553,7 @@
                                     {
                                       "$type": "Qlang.AST.ObjectPointerNode, ql",
                                       "Name": "np",
-                                      "Line": 627,
+                                      "Line": 630,
                                       "LineIndex": 0,
                                       "SourceFile": null
                                     },
@@ -16366,13 +16561,13 @@
                                       "$type": "Qlang.AST.FunctionPointerNode, ql",
                                       "Name": "Y",
                                       "Arguments": [],
-                                      "Line": 627,
+                                      "Line": 630,
                                       "LineIndex": 0,
                                       "SourceFile": null
                                     }
                                   ],
                                   "Arguments": [],
-                                  "Line": 627,
+                                  "Line": 630,
                                   "LineIndex": 0,
                                   "SourceFile": null
                                 },
@@ -16380,18 +16575,18 @@
                                   "$type": "Qlang.AST.VariableNode, ql",
                                   "ClassName": "",
                                   "Name": "_currentRotation",
-                                  "Line": 627,
+                                  "Line": 630,
                                   "LineIndex": 0,
                                   "SourceFile": null
                                 }
                               ],
-                              "Line": 627,
+                              "Line": 630,
                               "LineIndex": 0,
                               "SourceFile": null
                             }
                           ],
                           "Arguments": [],
-                          "Line": 627,
+                          "Line": 630,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
@@ -16399,11 +16594,11 @@
                         "Right": {
                           "$type": "Qlang.AST.BooleanNode, ql",
                           "Value": false,
-                          "Line": 627,
+                          "Line": 630,
                           "LineIndex": 0,
                           "SourceFile": null
                         },
-                        "Line": 627,
+                        "Line": 630,
                         "LineIndex": 0,
                         "SourceFile": null
                       },
@@ -16416,14 +16611,14 @@
                             "$type": "Qlang.AST.VariableNode, ql",
                             "ClassName": "",
                             "Name": "np",
-                            "Line": 627,
+                            "Line": 630,
                             "LineIndex": 0,
                             "SourceFile": null
                           },
                           "IsStatic": false,
                           "IsPrivate": false,
                           "IsConst": false,
-                          "Line": 627,
+                          "Line": 630,
                           "LineIndex": 0,
                           "SourceFile": null
                         }
@@ -16436,26 +16631,26 @@
                               "$type": "Qlang.AST.FunctionPointerNode, ql",
                               "Name": "lockPiece",
                               "Arguments": [],
-                              "Line": 628,
+                              "Line": 631,
                               "LineIndex": 0,
                               "SourceFile": null
                             }
                           ],
                           "Arguments": [],
-                          "Line": 628,
+                          "Line": 631,
                           "LineIndex": 0,
                           "SourceFile": null
                         }
                       ],
                       "Variables": {},
-                      "Line": 629,
+                      "Line": 632,
                       "LineIndex": 0,
                       "SourceFile": null
                     }
                   ],
                   "ElseBlock": [],
                   "Variables": {},
-                  "Line": 631,
+                  "Line": 634,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
@@ -16466,13 +16661,13 @@
                       "$type": "Qlang.AST.FunctionPointerNode, ql",
                       "Name": "draw",
                       "Arguments": [],
-                      "Line": 631,
+                      "Line": 634,
                       "LineIndex": 0,
                       "SourceFile": null
                     }
                   ],
                   "Arguments": [],
-                  "Line": 631,
+                  "Line": 634,
                   "LineIndex": 0,
                   "SourceFile": null
                 },
@@ -16482,7 +16677,7 @@
                     {
                       "$type": "Qlang.AST.ObjectPointerNode, ql",
                       "Name": "Time",
-                      "Line": 632,
+                      "Line": 635,
                       "LineIndex": 0,
                       "SourceFile": null
                     },
@@ -16494,192 +16689,25 @@
                           "$type": "Qlang.AST.NumberRefNode, ql",
                           "IsNegative": false,
                           "Index": 222,
-                          "Line": 632,
+                          "Line": 635,
                           "LineIndex": 0,
                           "SourceFile": null
                         }
                       ],
-                      "Line": 632,
+                      "Line": 635,
                       "LineIndex": 0,
                       "SourceFile": null
                     }
                   ],
                   "Arguments": [],
-                  "Line": 632,
+                  "Line": 635,
                   "LineIndex": 0,
                   "SourceFile": null
                 }
               ],
               "IsDoWhile": false,
               "Variables": {},
-              "Line": 635,
-              "LineIndex": 0,
-              "SourceFile": null
-            },
-            {
-              "$type": "Qlang.AST.CallNode, ql",
-              "Objects": [
-                {
-                  "$type": "Qlang.AST.ObjectPointerNode, ql",
-                  "Name": "Console",
-                  "Line": 635,
-                  "LineIndex": 0,
-                  "SourceFile": null
-                },
-                {
-                  "$type": "Qlang.AST.FunctionPointerNode, ql",
-                  "Name": "setCursorPosition",
-                  "Arguments": [
-                    {
-                      "$type": "Qlang.AST.NumberRefNode, ql",
-                      "IsNegative": false,
-                      "Index": 223,
-                      "Line": 635,
-                      "LineIndex": 0,
-                      "SourceFile": null
-                    },
-                    {
-                      "$type": "Qlang.AST.BinaryOperationNode, ql",
-                      "Left": {
-                        "$type": "Qlang.AST.VariableNode, ql",
-                        "ClassName": "",
-                        "Name": "_height",
-                        "Line": 635,
-                        "LineIndex": 0,
-                        "SourceFile": null
-                      },
-                      "Operator": "Plus",
-                      "Right": {
-                        "$type": "Qlang.AST.NumberRefNode, ql",
-                        "IsNegative": false,
-                        "Index": 224,
-                        "Line": 635,
-                        "LineIndex": 0,
-                        "SourceFile": null
-                      },
-                      "Line": 635,
-                      "LineIndex": 0,
-                      "SourceFile": null
-                    }
-                  ],
-                  "Line": 635,
-                  "LineIndex": 0,
-                  "SourceFile": null
-                }
-              ],
-              "Arguments": [],
-              "Line": 635,
-              "LineIndex": 0,
-              "SourceFile": null
-            },
-            {
-              "$type": "Qlang.AST.CallNode, ql",
-              "Objects": [
-                {
-                  "$type": "Qlang.AST.ObjectPointerNode, ql",
-                  "Name": "Console",
-                  "Line": 636,
-                  "LineIndex": 0,
-                  "SourceFile": null
-                },
-                {
-                  "$type": "Qlang.AST.FunctionPointerNode, ql",
-                  "Name": "setForeColor",
-                  "Arguments": [
-                    {
-                      "$type": "Qlang.AST.StringRefNode, ql",
-                      "Index": 80,
-                      "Line": 636,
-                      "LineIndex": 0,
-                      "SourceFile": null
-                    }
-                  ],
-                  "Line": 636,
-                  "LineIndex": 0,
-                  "SourceFile": null
-                }
-              ],
-              "Arguments": [],
-              "Line": 636,
-              "LineIndex": 0,
-              "SourceFile": null
-            },
-            {
-              "$type": "Qlang.AST.CallNode, ql",
-              "Objects": [
-                {
-                  "$type": "Qlang.AST.ObjectPointerNode, ql",
-                  "Name": "Console",
-                  "Line": 637,
-                  "LineIndex": 0,
-                  "SourceFile": null
-                },
-                {
-                  "$type": "Qlang.AST.FunctionPointerNode, ql",
-                  "Name": "println",
-                  "Arguments": [
-                    {
-                      "$type": "Qlang.AST.BinaryOperationNode, ql",
-                      "Left": {
-                        "$type": "Qlang.AST.StringRefNode, ql",
-                        "Index": 81,
-                        "Line": 637,
-                        "LineIndex": 0,
-                        "SourceFile": null
-                      },
-                      "Operator": "Plus",
-                      "Right": {
-                        "$type": "Qlang.AST.CallNode, ql",
-                        "Objects": [
-                          {
-                            "$type": "Qlang.AST.ObjectPointerNode, ql",
-                            "Name": "Number",
-                            "Line": 637,
-                            "LineIndex": 0,
-                            "SourceFile": null
-                          },
-                          {
-                            "$type": "Qlang.AST.FunctionPointerNode, ql",
-                            "Name": "toFixed",
-                            "Arguments": [
-                              {
-                                "$type": "Qlang.AST.VariableNode, ql",
-                                "ClassName": "",
-                                "Name": "_score",
-                                "Line": 637,
-                                "LineIndex": 0,
-                                "SourceFile": null
-                              },
-                              {
-                                "$type": "Qlang.AST.StringRefNode, ql",
-                                "Index": 82,
-                                "Line": 637,
-                                "LineIndex": 0,
-                                "SourceFile": null
-                              }
-                            ],
-                            "Line": 637,
-                            "LineIndex": 0,
-                            "SourceFile": null
-                          }
-                        ],
-                        "Arguments": [],
-                        "Line": 637,
-                        "LineIndex": 0,
-                        "SourceFile": null
-                      },
-                      "Line": 637,
-                      "LineIndex": 0,
-                      "SourceFile": null
-                    }
-                  ],
-                  "Line": 637,
-                  "LineIndex": 0,
-                  "SourceFile": null
-                }
-              ],
-              "Arguments": [],
-              "Line": 637,
+              "Line": 638,
               "LineIndex": 0,
               "SourceFile": null
             },
@@ -16695,8 +16723,40 @@
                 },
                 {
                   "$type": "Qlang.AST.FunctionPointerNode, ql",
-                  "Name": "resetColors",
-                  "Arguments": [],
+                  "Name": "setCursorPosition",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.NumberRefNode, ql",
+                      "IsNegative": false,
+                      "Index": 223,
+                      "Line": 638,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    },
+                    {
+                      "$type": "Qlang.AST.BinaryOperationNode, ql",
+                      "Left": {
+                        "$type": "Qlang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "_height",
+                        "Line": 638,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      "Operator": "Plus",
+                      "Right": {
+                        "$type": "Qlang.AST.NumberRefNode, ql",
+                        "IsNegative": false,
+                        "Index": 224,
+                        "Line": 638,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      "Line": 638,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
                   "Line": 638,
                   "LineIndex": 0,
                   "SourceFile": null
@@ -16719,11 +16779,11 @@
                 },
                 {
                   "$type": "Qlang.AST.FunctionPointerNode, ql",
-                  "Name": "cursorVisible",
+                  "Name": "setForeColor",
                   "Arguments": [
                     {
-                      "$type": "Qlang.AST.BooleanNode, ql",
-                      "Value": true,
+                      "$type": "Qlang.AST.StringRefNode, ql",
+                      "Index": 83,
                       "Line": 639,
                       "LineIndex": 0,
                       "SourceFile": null
@@ -16738,9 +16798,144 @@
               "Line": 639,
               "LineIndex": 0,
               "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 640,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "println",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.BinaryOperationNode, ql",
+                      "Left": {
+                        "$type": "Qlang.AST.StringRefNode, ql",
+                        "Index": 84,
+                        "Line": 640,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      "Operator": "Plus",
+                      "Right": {
+                        "$type": "Qlang.AST.CallNode, ql",
+                        "Objects": [
+                          {
+                            "$type": "Qlang.AST.ObjectPointerNode, ql",
+                            "Name": "Number",
+                            "Line": 640,
+                            "LineIndex": 0,
+                            "SourceFile": null
+                          },
+                          {
+                            "$type": "Qlang.AST.FunctionPointerNode, ql",
+                            "Name": "toFixed",
+                            "Arguments": [
+                              {
+                                "$type": "Qlang.AST.VariableNode, ql",
+                                "ClassName": "",
+                                "Name": "_score",
+                                "Line": 640,
+                                "LineIndex": 0,
+                                "SourceFile": null
+                              },
+                              {
+                                "$type": "Qlang.AST.StringRefNode, ql",
+                                "Index": 85,
+                                "Line": 640,
+                                "LineIndex": 0,
+                                "SourceFile": null
+                              }
+                            ],
+                            "Line": 640,
+                            "LineIndex": 0,
+                            "SourceFile": null
+                          }
+                        ],
+                        "Arguments": [],
+                        "Line": 640,
+                        "LineIndex": 0,
+                        "SourceFile": null
+                      },
+                      "Line": 640,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 640,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 640,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 641,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "resetColors",
+                  "Arguments": [],
+                  "Line": 641,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 641,
+              "LineIndex": 0,
+              "SourceFile": null
+            },
+            {
+              "$type": "Qlang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 642,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                },
+                {
+                  "$type": "Qlang.AST.FunctionPointerNode, ql",
+                  "Name": "cursorVisible",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.AST.BooleanNode, ql",
+                      "Value": true,
+                      "Line": 642,
+                      "LineIndex": 0,
+                      "SourceFile": null
+                    }
+                  ],
+                  "Line": 642,
+                  "LineIndex": 0,
+                  "SourceFile": null
+                }
+              ],
+              "Arguments": [],
+              "Line": 642,
+              "LineIndex": 0,
+              "SourceFile": null
             }
           ],
-          "Line": 641,
+          "Line": 644,
           "LineIndex": 0,
           "SourceFile": null
         }

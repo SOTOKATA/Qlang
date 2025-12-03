@@ -49,13 +49,13 @@ public partial class Interpreter
                 if (statement is ContinueNode || _isContinueKeyword)
                 {
                     _isContinueKeyword = false;
-                    continue;
+                    break;
                 }
 
                 if (statement is BreakNode || _isBreakKeyword)
                 {
                     _isBreakKeyword = false;
-                    break;
+                    return;
                 }
                 
                 ExecuteStatement(statement);
@@ -102,13 +102,13 @@ public partial class Interpreter
                 if (statement is ContinueNode || _isContinueKeyword)
                 {
                     _isContinueKeyword = false;
-                    continue;
+                    break;
                 }
 
                 if (statement is BreakNode || _isBreakKeyword)
                 {
                     _isBreakKeyword = false;
-                    break;
+                    return;
                 }
                 
                 ExecuteStatement(statement);
@@ -153,12 +153,12 @@ public partial class Interpreter
                 if (statement is BreakNode)
                 {
                     _isBreakKeyword = true;
-                    continue;
+                    return;
                 }
                 else if (statement is ContinueNode)
                 {
                     _isContinueKeyword = true;
-                    continue;
+                    return;
                 }
                 
                 ExecuteStatement(statement);
@@ -183,9 +183,15 @@ public partial class Interpreter
                 }
                 
                 if (statement is BreakNode)
+                {
                     _isBreakKeyword = true;
+                    return;
+                }
                 else if (statement is ContinueNode)
+                {
                     _isContinueKeyword = true;
+                    return;
+                }
                 
                 ExecuteStatement(statement);
             }
