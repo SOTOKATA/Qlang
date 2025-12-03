@@ -59,13 +59,10 @@ public partial class Project
     public static Project LoadProject(string path)
     {
         if (!File.Exists(path))
-            throw new FileNotFoundException("File is not found", path);
+            throw new FileNotFoundException($"File '{path}' is not found.\nThe project may be corrupted or not created.", path);
 
         var settings = new ProjectSettings(path, Settings.Settings.LoadDictionary(path));
         
-        if (settings is null)
-            throw new Exception($"Settings file '{path}' does not exist");
-
         return new Project(settings.GetString("name"), settings.GetString("path"), settings.GetString("main_file_path"));
     }
 }

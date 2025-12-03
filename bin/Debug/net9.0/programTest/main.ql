@@ -1,9 +1,8 @@
 include "$lib/base"
-include "$lib/special/tetris"
+include "$lib/special/snake"
 
 function main(): {
-    TetrisGame.run();
-    // SnakeGame.run();
+    SnakeGame.run();
     // let string = "Hello, World!";
     // let strClass = String.new(string);
 
