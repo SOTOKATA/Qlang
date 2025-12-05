@@ -2,9 +2,9 @@
 
 namespace Qlang.Dependencies;
 
-public class TableCreator
+public static class TableCreator
 {
-    public static string Create(List<List<string>>? items, List<string> separators = null)
+    public static string Create(List<List<string>>? items, List<string>? separators = null)
     {
         if (items == null || items.Count == 0)
             return "Table is empty";
@@ -24,7 +24,7 @@ public class TableCreator
 
         for (int index = 0; index < items.Count; index++)
         {
-            List<string>? line = items[index];
+            List<string> line = items[index];
             for (int i = 0; i < columnCount; i++)
             {
                 string cell = i < line.Count ? line[i] : "";
@@ -40,4 +40,53 @@ public class TableCreator
         return str.ToString();
     }
 
+    public static void WriteTable(ConsoleTable table)
+    {
+        if (table.Items.Count == 0)
+        {
+            Console.WriteLine("Table is empty");
+            return;
+        }
+        
+        int columnCount = table.Items.First().Count;
+
+        List<int> sizes = Enumerable.Repeat(0, columnCount).ToList();
+
+        foreach (var line in table.Items)
+            for (int i = 0; i < columnCount; i++)
+            {
+                string cell = i < line.Count ? line[i].Content : "";
+                sizes[i] = Math.Max(sizes[i], cell.Length);
+            }
+
+        foreach (var row in table.Items)
+        {
+            for (int index = 0; index < row.Count; index++)
+            {
+                TableCell? cell = row[index];
+                Console.ForegroundColor = cell.ForeColor;
+                Console.BackgroundColor = cell.BackColor;
+                Console.Write(cell.Content.PadRight(sizes[index] + 2));
+                Console.ResetColor();
+                
+                if (table.Separators != null && table.Separators.Count < (index - 1))
+                    Console.Write(table.Separators[(index - 1)]);
+            }
+
+            Console.WriteLine();
+        }
+    }
+}
+
+public class ConsoleTable(List<List<TableCell>>? items, List<string>? separators = null)
+{
+    public List<List<TableCell>> Items = items;
+    public List<string> Separators = separators;
+}
+
+public class TableCell(string content, ConsoleColor fcolor = default, ConsoleColor bcolor = default)
+{
+    public string Content { get; } = content;
+    public ConsoleColor ForeColor { get; } = fcolor == default ? Console.ForegroundColor : fcolor;
+    public ConsoleColor BackColor { get; } = bcolor == default ? Console.BackgroundColor : bcolor;
 }

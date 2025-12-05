@@ -19,8 +19,7 @@ public class Program
                 case ["new", _]:
                     string name = args[1].Trim();
 
-                    proj = new Project.Project(name, Directory.GetCurrentDirectory(),
-                        Path.Combine(Directory.GetCurrentDirectory(), "main.ql"));
+                    proj = Project.Project.CreateProject(name, Directory.GetCurrentDirectory(), "main.ql");
 
                     proj.SaveProject();
 
@@ -49,7 +48,7 @@ public class Program
 
                     if (proj is null)
                         throw new Exception("Project is not found");
-
+                    
                     Project.Project.SetCompileSetting(args[1].Trim(), args[2].Trim());
                     return;
                 case ["get", _]:
@@ -59,18 +58,23 @@ public class Program
                     if (proj is null)
                         throw new Exception("Project is not found");
 
-                    Console.WriteLine($"GET {args[1]}: {Project.Project.GetCompileSetting(args[1].Trim())}");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("GET");
+                    Console.ResetColor();
+                    Console.WriteLine($" {args[1]}: {Project.Project.GetCompileSetting(args[1].Trim())}");
                     return;
                 case ["help"]:
                     Console.WriteLine("List of all commands:");
-                    Console.WriteLine(TableCreator.Create([
-                        ["Commands", "Params", "Description"],
-                        ["new", "[project_name]", "Creates new project with name 'name'"],
-                        ["build", "", "Build's existing project"],
-                        ["run", "", "Build's and run's existing project"],
-                        ["set", "[param] [value]", "Set param by value (compiler options)"],
-                        ["get", "[param]", "Get value of param by name (compiler options)"],
-                    ]));
+                    TableCreator.WriteTable(new ConsoleTable(
+                        [
+                            [new TableCell("Commands"), new TableCell("Params"), new TableCell("Description")],
+                            [new TableCell("new", ConsoleColor.Yellow), new TableCell("[project_name]", ConsoleColor.DarkGray), new TableCell("Creates new project with name 'name'")],
+                            [new TableCell("build", ConsoleColor.Yellow), new TableCell(""), new TableCell("Build's existing project")],
+                            [new TableCell("run", ConsoleColor.Yellow), new TableCell(""), new TableCell("Build's and run's existing project")],
+                            [new TableCell("set", ConsoleColor.Yellow), new TableCell("[param] [value]", ConsoleColor.DarkGray), new TableCell("Set param by value (compiler options)")],
+                            [new TableCell("get", ConsoleColor.Yellow), new TableCell("[param]", ConsoleColor.DarkGray), new TableCell("Get value of param by name (compiler options)")],
+                        ]
+                        ));
                     return;
                 case []:
                     Console.WriteLine("Qlang information");
@@ -95,9 +99,17 @@ public class Program
                     return;
             }
         }
-        catch (Exception e)
+        catch (FileNotFoundException e)
         {
             ExceptionManager.ThrowMessage(e.Message);
+        }
+        catch (DirectoryNotFoundException e)
+        {
+            ExceptionManager.ThrowMessage(e.Message);
+        }
+        catch (Exception e)
+        {
+            ExceptionManager.Throw(e);
         }
     }
 }

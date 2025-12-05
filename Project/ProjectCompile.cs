@@ -8,7 +8,7 @@ public partial class Project
     {
         try
         {
-            _compileSettings.Set(param, value);
+            CompileSettings.Set(param, value);
         }
         catch (Exception ex)
         {
@@ -16,18 +16,21 @@ public partial class Project
             return;
         }
 
-        Console.WriteLine($"SET {param}: {value}");
-        _compileSettings.Save();
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.Write("SET");
+        Console.ResetColor();
+        Console.WriteLine($" {param}: {value}");
+        CompileSettings.Save();
     }
 
     public static object? GetCompileSetting(string param)
     {
-        return _compileSettings.Get(param);
+        return CompileSettings.Get(param);
     }
 
     public void Compile()
     {
-        _qlang.Compile(_settings.GetString("main_file_path"));
+        // _qlang.Compile(_settings.GetString("main_file_path"));
     }
 
     public void Run()
@@ -41,7 +44,11 @@ public partial class Project
         //     
         //     _qlang.SetProgramNode(compiled);
         // }
-        if (_qlang.Compile(_settings.GetString("main_file_path")))
+        
+        Console.WriteLine("IsNln@3: " + _qlang);
+        Console.WriteLine("IsNln@4: " + Settings);
+        
+        if (_qlang.Compile(Path.Combine(Settings.GetString("path"), Settings.GetString("main_file_path"))))
             _qlang.Run();
     }
 }
