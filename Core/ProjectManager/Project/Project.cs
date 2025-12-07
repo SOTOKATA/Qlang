@@ -9,6 +9,7 @@ public partial class Project
     public ProjectSettings Settings;
 
     public static CompileSettings? CompileSettings;
+    public static PluginsSettings? PluginsSettings;
 
     private readonly QLang _qlang = new();
 
@@ -55,6 +56,12 @@ public partial class Project
         Project.CompileSettings = new CompileSettings(settingsPath, null);
     
         Project.CompileSettings.Save();
+        
+        settingsPath = Path.Combine(projectPath, "plugins.settings.json");
+        File.Create(settingsPath).Close();
+        Project.PluginsSettings = new PluginsSettings(settingsPath, null);
+        
+        Project.PluginsSettings.Save();
 
         return proj;
     }
@@ -72,7 +79,8 @@ public partial class Project
                 
         if (
             !File.Exists(Path.Combine(projectPath, mainFilePath)) ||
-            !File.Exists(Path.Combine(projectPath, "compile.settings.json"))
+            !File.Exists(Path.Combine(projectPath, "compile.settings.json")) ||
+            !File.Exists(Path.Combine(projectPath, "plugins.settings.json"))
         )
             throw new FileNotFoundException($"Project is corrupted or not created.\nPath to project settings: '{path}'.", path);
         
@@ -83,6 +91,10 @@ public partial class Project
         string settingsPath = Path.Combine(projectPath, "compile.settings.json");
         var dict =  JsonConvert.DeserializeObject<Dictionary<string, object?>>(File.ReadAllText(settingsPath));
         Project.CompileSettings = new CompileSettings(settingsPath, dict);
+        
+        string pluginsPath = Path.Combine(projectPath, "plugins.settings.json");
+        dict =  JsonConvert.DeserializeObject<Dictionary<string, object?>>(File.ReadAllText(settingsPath));
+        Project.PluginsSettings = new PluginsSettings(pluginsPath, dict);
         
         return proj;
     }

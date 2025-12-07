@@ -98,7 +98,7 @@ public static class PreCompile
         if (files.Count <= 0) 
             return script;
         
-        return script + Environment.NewLine + string.Join(Environment.NewLine, files);
+        return string.Join(Environment.NewLine, files) + Environment.NewLine + script;
 
     }
     

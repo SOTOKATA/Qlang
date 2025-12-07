@@ -22,7 +22,7 @@ public class QlangCompileException : Exception
     public override string ToString()
     {
         StringBuilder sb = new();
-        sb.AppendLine($"Compile ({Source}) Error: {Message}");
+        sb.AppendLine($"{Source} Error: {Message}");
         sb.AppendLine($"\tat: {SourceFile}:{Line}");
 
         return sb.ToString();

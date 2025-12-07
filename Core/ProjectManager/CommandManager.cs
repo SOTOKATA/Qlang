@@ -24,10 +24,10 @@ public static class CommandManager
                     Build();
                     return;
                 case ["set", _, _]:
-                    Set(args[0].Trim(), args[1].Trim());
+                    Set(args[1].Trim(), args[2].Trim());
                     return;
                 case ["get", _]:
-                    Get(args[0].Trim());
+                    Get(args[1].Trim());
                     return;
                 case ["help"]:
                     Help();
@@ -42,12 +42,18 @@ public static class CommandManager
         }
         // catch (QlangCompileException e)
         // {
+        //     Console.ForegroundColor = ConsoleColor.Red;
+        //     Console.Write("Compile error: ");
+        //     Console.ResetColor();
         //     Console.WriteLine(e);
         // }
-        catch (QlangRuntimeException e)
-        {
-            Console.WriteLine(e);
-        }
+        // catch (QlangRuntimeException e)
+        // {
+        //     Console.ForegroundColor = ConsoleColor.Red;
+        //     Console.Write("Runtime error: ");
+        //     Console.ResetColor();
+        //     Console.WriteLine(e);
+        // }
         catch (ProjectException e)
         {
             ExceptionManager.ThrowMessage(e.Message);

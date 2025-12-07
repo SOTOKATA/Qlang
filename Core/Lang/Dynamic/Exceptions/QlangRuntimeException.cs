@@ -29,7 +29,7 @@ public class QlangRuntimeException : Exception
     public override string ToString()
     {
         StringBuilder sb = new();
-        sb.AppendLine($"Runtime Error: {Message}");
+        sb.AppendLine($"{Message}");
         sb.AppendLine($"  at {(SourceFile == "" ? "(undefined file)" : SourceFile)}:{Line}:{Column}");
 
         if (StackTrace.Count <= 0) 

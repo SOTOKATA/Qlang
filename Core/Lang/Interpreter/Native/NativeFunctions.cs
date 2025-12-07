@@ -1,22 +1,21 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Reflection;
+using System.Text.RegularExpressions;
 using Qlang.Core.Lang.AST;
 using Qlang.Core.Lang.Dynamic;
 using Qlang.Core.Lang.Dynamic.Exceptions;
 using Qlang.Core.LangDebug;
 using Qlang.Core.ProjectManager;
+using Qlang.Plugins;
 
 namespace Qlang.Core.Lang.Interpreter.Native;
 
 public class NativeFunctionRegistry
 {
     private readonly Dictionary<string, Delegate> _functions = new();
+    private readonly List<IQlangPlugin> _loadedPlugins = new();
     
-    private Interpreter _interpreter;
-    
-    public NativeFunctionRegistry(Interpreter interpreter)
+    public NativeFunctionRegistry()
     {
-        _interpreter = interpreter;
-        
         Register("to_string_number", (Func<double, string, string>)((o, pattern) => o.ToString(pattern)));
       
         // Console
@@ -101,6 +100,56 @@ public class NativeFunctionRegistry
         Register("directory_remove", (Action<string, bool>)(Directory.Delete));
     }
 
+    public void RegisterPublic(string name, Delegate handler)
+    {
+        Register(name, handler);
+    }
+    
+    public void LoadPlugin(string dllPath)
+    {
+        try
+        {
+            var assembly = Assembly.LoadFrom(dllPath);
+            var pluginTypes = assembly.GetTypes()
+                .Where(t => typeof(IQlangPlugin).IsAssignableFrom(t) && !t.IsInterface);
+            
+            foreach (var type in pluginTypes)
+            {
+                var plugin = (IQlangPlugin)Activator.CreateInstance(type)!;
+                plugin.Register(this);
+                _loadedPlugins.Add(plugin);
+                
+                Logger.Log($"Loaded plugin: {plugin.Name} v{plugin.Version}", "PluginLoader");
+            }
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Failed to load plugin from '{dllPath}': {ex.Message}", ex);
+        }
+    }
+    
+    public void LoadPluginsFromDirectory(string directory)
+    {
+        if (!Directory.Exists(directory))
+        {
+            Logger.Log($"Plugin directory not found: {directory}", "PluginLoader");
+            return;
+        }
+        
+        var dllFiles = Directory.GetFiles(directory, "*.dll");
+        foreach (var dll in dllFiles)
+        {
+            try
+            {
+                LoadPlugin(dll);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log($"Error loading {dll}: {ex.Message}", "PluginLoader");
+            }
+        }
+    }
+    
     private void Register(string name, Delegate handler)
     {
         _functions[name] = handler;

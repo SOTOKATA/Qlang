@@ -82,6 +82,9 @@ public partial class Interpreter
                             : 
                             ExecuteFunction(function, args, @class);
                     }
+
+                    if (fn.Name == "new")
+                        return GetNewClass(@class, args);
                 }
                 
                 // Local function without class
@@ -120,6 +123,7 @@ public partial class Interpreter
                 }
 
                 Logger.Log($"Detected as variable");
+                Logger.Log($"GetVariableParams: {objCall.Name}");
                 return GetVariable(new VariableNode { Name = objCall.Name });
         }
         

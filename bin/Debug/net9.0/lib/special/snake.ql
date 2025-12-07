@@ -70,10 +70,6 @@ class SnakeGame: {
             }
         }
 
-        Console.setCursorPosition(_fruitPos.X(), _fruitPos.Y() + 1);
-        Console.setForeColor("green");
-        Console.print("F");
-
         Console.setCursorPosition(_position.X(), _position.Y() + 1);
         Console.setForeColor("yellow");
         Console.print(arrow);
@@ -84,6 +80,10 @@ class SnakeGame: {
             Console.setForeColor("green");
             Console.print("0");
         }
+
+        Console.setCursorPosition(_fruitPos.X(), _fruitPos.Y() + 1);
+        Console.setForeColor("red");
+        Console.print("F");
     }
 
     function logic(): {
