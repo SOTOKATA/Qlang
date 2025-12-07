@@ -2,8 +2,8 @@
 // Class to make operations with numbers
 class Number: {
     // used string because of number structure with E+
-    const let MIN_VALUE = "-1.7976931348623157E+308";
-    const let MAX_VALUE = "1.7976931348623157E+308";
+    const MIN_VALUE = "-1.7976931348623157E+308";
+    const MAX_VALUE = "1.7976931348623157E+308";
 
     // check if 'var' is number
     function isNumber(let var): {

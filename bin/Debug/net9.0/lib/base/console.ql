@@ -10,6 +10,16 @@ class Console: {
         _native("cmd_write", _str(message + "\n"));
     }
 
+    // Print Verbatim text to console
+    function printVerbatim(let message): {
+        _native("cmd_write", message);
+    }
+
+    // Print Verbatim text to console with new line
+    function printlnVerbatim(let message): {
+        _native("cmd_write", message + _str("\n"));
+    }
+
     // Read line from console
     function readln(): {
         return _native("cmd_read");

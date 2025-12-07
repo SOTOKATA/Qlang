@@ -4,17 +4,39 @@ class Array: {
 
     // Create empty array
     function new(let collection): {
-        if Array.isArray(collection) == false: {
+        if Array.isCollection(collection) == false: {
             Throw.parseException("argument is not collection");
         }
         _value = collection;
     }
 
     function toString(): {
-        return _value;
+        let str = "[";
+
+        if length() > 0: {
+            for let i = 0; i < length(); i = i + 1: {
+                str = str + "'" + at(i) + "',";
+            }
+
+            str = String.new(str);
+
+            str = str.subString(0, str.length() - 1);
+
+            str = String.new(str.str() + "]");
+        } else: {
+            str = String.new("[]");
+        }
+
+        
+
+        return str;
     }
 
     function isArray(let collection): {
+        return _native("list_is_array", collection);
+    }
+
+    function isCollection(let collection): {
         return _native("list_is", collection);
     }
 
@@ -33,7 +55,7 @@ class Array: {
 
     // Clear array
     function clear(): {
-        _value = _native("list_clear", _value);
+        _value = _native("list_create");
     }
 
     // Get at index

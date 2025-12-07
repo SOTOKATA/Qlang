@@ -1,0 +1,54 @@
+WARN [QLang/Run]: ----------- Interpreter -----------
+LOG [Interpreter/Execute]: ToDynamicClass (until): Console
+LOG [Interpreter/Execute]: ToDynamicClass: Console
+LOG [Interpreter/Execute]: ToDynamicClass (until): Array
+LOG [Interpreter/EvaluateExpression]: TypeofExpression: CallNode
+LOG [Interpreter/ExecuteObjectCalls]: Objects: Qlang.Core.Lang.AST.FunctionPointerNode
+LOG [Interpreter/ExecuteObjectCalls]: CurrentContext: class = '', function = ''
+LOG [Interpreter/EvaluateExpression]: TypeofExpression: StringRefNode
+LOG [Interpreter/ExecuteObjectCalls]: _native: 
+LOG [NativeFunctionRegistry/Call NativeCall]: name='list_create'
+LOG [NativeFunctionRegistry/Call NativeCall::Arguments]: args=
+
+Sent:
+
+Args count: 0
+WARN [Interpreter/EvaluateExpression]: Native call return: value='System.Collections.Generic.List`1[System.Object]' type='List`1'
+LOG [Interpreter/Execute]: ToDynamicClass: Array
+LOG [Interpreter/Execute]: ToDynamicClass (until): Dictionary
+LOG [Interpreter/Execute]: ToDynamicClass: Dictionary
+LOG [Interpreter/Execute]: ToDynamicClass (until): Vector2
+LOG [Interpreter/Execute]: ToDynamicClass: Vector2
+LOG [Interpreter/Execute]: ToDynamicClass (until): Number
+LOG [Interpreter/EvaluateExpression]: TypeofExpression: StringRefNode
+LOG [Interpreter/EvaluateExpression]: TypeofExpression: StringRefNode
+LOG [Interpreter/Execute]: ToDynamicClass: Number
+LOG [Interpreter/Execute]: ToDynamicClass (until): Object
+LOG [Interpreter/Execute]: ToDynamicClass: Object
+LOG [Interpreter/Execute]: ToDynamicClass (until): String
+LOG [Interpreter/EvaluateExpression]: TypeofExpression: StringRefNode
+LOG [Interpreter/Execute]: ToDynamicClass: String
+LOG [Interpreter/Execute]: ToDynamicClass (until): Time
+LOG [Interpreter/Execute]: ToDynamicClass: Time
+LOG [Interpreter/Execute]: ToDynamicClass (until): Parser
+LOG [Interpreter/Execute]: ToDynamicClass: Parser
+LOG [Interpreter/Execute]: ToDynamicClass (until): Regex
+LOG [Interpreter/Execute]: ToDynamicClass: Regex
+LOG [Interpreter/Execute]: ToDynamicClass (until): Throw
+LOG [Interpreter/Execute]: ToDynamicClass: Throw
+LOG [Interpreter/Execute]: ToDynamicClass (until): Directory
+LOG [Interpreter/Execute]: ToDynamicClass: Directory
+LOG [Interpreter/Execute]: ToDynamicClass (until): File
+LOG [Interpreter/Execute]: ToDynamicClass: File
+LOG [Interpreter/Execute]: ToDynamicClass (until): Path
+LOG [Interpreter/Execute]: ToDynamicClass: Path
+LOG [Interpreter/Execute]: ToDynamicClass (until): BaseTest
+LOG [Interpreter/Execute]: ToDynamicClass: BaseTest
+LOG [Interpreter/ExecuteFunction]: 'main'()
+WARN [Interpreter/ExecuteFunction]: Context: class='' function='main'
+LOG [Interpreter/EvaluateExpression]: TypeofExpression: StringRefNode
+LOG [Interpreter/AssignmentNode AssignmentNode]: name='ex' value='Qlang.Core.Lang.AST.StringRefNode' value(after evaluating)=''
+WARN [Interpreter/ExecuteFunction]: Context: class='' function='main'
+LOG [Interpreter/EvaluateExpression]: TypeofExpression: StringRefNode
+LOG [Interpreter/AssignmentNode AssignmentNode]: name='ex' value='Qlang.Core.Lang.AST.StringRefNode' value(after evaluating)='dasd'
+WARN [Interpreter/ExecuteFunction RestoreContextStack]: class='' function='main'

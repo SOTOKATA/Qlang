@@ -1,0 +1,685 @@
+﻿using Qlang.Core.Lang.AST;
+using Qlang.Core.Lang.Dynamic.Exceptions;
+using Qlang.Core.LangDebug;
+
+namespace Qlang.Core.Lang.Compiler;
+
+public class Parser
+{
+    private List<Token> _tokens = [];
+    private int _position = 0;
+
+    private string _line = "";
+    
+    public ProgramNode Parse(List<Token> tokens)
+    {
+        _tokens = tokens;
+        _position = 0;
+
+        ProgramNode program = new();
+
+        Logger.SetLoggerPath(Path.Combine("Logs", "Debug", "debug_parser.log"));
+        Logger.Warn("----------- Parser -----------");
+
+        while (!IsAtEnd())
+        {
+            if (Check(Tokens.Semicolon))
+            {
+                Advance();
+                continue;
+            }
+
+            program.Statements.Add(ParseStatement());
+        }
+
+        Validator.CheckValidate(program);
+
+        return program;
+    }
+
+    private ASTNode ParseStatement()
+    {
+        Logger.Log($"Parsing statement ({Current().TokenType}, {Current().Value})", "CompilationProcess");
+
+        bool isStatic = false;
+        bool isPrivate = false;
+
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.StaticModificator)
+        {
+            Logger.Warn("IsStatic = true");
+            isStatic = true;
+            Advance();
+        }
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.PrivateModificator)
+        {
+            Logger.Warn("IsPrivate = true");
+            isPrivate = true;
+            Advance();
+        }
+        
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.BreakKeyword)
+        {
+            Advance();
+            return new BreakNode();
+        }
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.ContinueKeyword)
+        {
+            Advance();
+            return new ContinueNode();
+        }
+        
+        // function declaration
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.FunctionDeclaration)
+            return ParseFunction(isStatic, isPrivate);
+        
+        // class declaration
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.ClassDeclaration)
+            return ParseClass();
+
+        // for statement
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.ForBlock)
+            return ParseFor();
+        
+        // if statement
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.IfBlock)
+            return ParseIf();
+        
+        // while statement
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.WhileBlock)
+            return ParseWhile();
+        
+        // do-while statement
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.DoWhileBlock)
+            return ParseWhile(true);
+        
+        // return statement
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.ReturnKeyword)
+            return ParseReturn();
+
+        // assignment
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.VariableDeclaration)
+            return ParseVariableDeclaration(isStatic, isPrivate, false, true);
+        
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.ConstVariableDeclaration)
+            return ParseVariableDeclaration(isStatic, isPrivate, true, true);
+
+        // method call statement (Object.method(...)) || Call method from class pointer
+        if (Check(Tokens.Identifier))
+        {
+            var expr = ParseExpression();
+            Expect(Tokens.Semicolon);
+            Logger.Log("Ended parsing statement (identifier)", "CompilationProcess");
+            return expr;
+        }
+
+        throw new QlangCompileException($"Unexpected token: {Current().TokenType} '{Current().Value}'", (IsAtEnd() ? 0 : Current().Line + 1), "Parser", Current().SourceFile);
+    }
+
+    private AssignmentNode ParseVariableDeclaration(bool isStatic = false, bool isPrivate = false, bool isConst = false, bool isNew = false)
+    {
+        Logger.Log("Parsing variable declaration", "CompilationProcess");
+        if (!Check(Tokens.Keyword) || 
+            (Current().Value != Keywords.VariableDeclaration && 
+             Current().Value != Keywords.ConstVariableDeclaration))
+            throw new QlangCompileException($"(ParseVariableDeclaration) Unexpected token: {Current().TokenType}", (IsAtEnd() ? 0 : Current().Line + 1), "Parser", Current().SourceFile);
+        
+        Advance();
+        
+        var name = Expect(Tokens.Identifier).Value;
+
+        ASTNode value = null;
+        if (Current().TokenType == Tokens.Equals)
+        {
+            Advance();
+            value = ParseExpression();
+        }
+        
+        Logger.Log($"CompilationProcess.End: Parsing Variable declaration (Name: {name} Value: {value?.GetType().Name ?? "Null"})");
+        return new AssignmentNode(isStatic, isPrivate, isConst, isNew) { 
+            VariableName = name, 
+            Value = value, 
+            Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+        };
+    }
+
+    private FunctionNode ParseFunction(bool isStatic = false, bool isPrivate = false)
+    {
+        Logger.Log("CompilationProcess: Parsing function");
+        
+        Expect(Tokens.Keyword, Keywords.FunctionDeclaration);
+        var name = Expect(Tokens.Identifier).Value;
+        Expect(Tokens.LParen);
+        
+        List<AssignmentNode> parameters = [];
+        while (!Check(Tokens.RParen))
+        {
+            if (Check(Tokens.Keyword))
+                parameters.Add(ParseVariableDeclaration());
+            if (Check(Tokens.Comma))
+                Advance();
+        }
+        
+        Expect(Tokens.RParen);
+        Expect(Tokens.Colon);
+        // Expect(Tokens.Semicolon);
+        Expect(Tokens.LBrace);
+
+        List<ASTNode> body = ParseBlock();
+
+        Expect(Tokens.RBrace);
+
+        Logger.Log("CompilationProcess.End: Parsing function");
+        return new FunctionNode 
+        { 
+            Name = name, 
+            Parameters = parameters, 
+            Body = body, 
+            IsStatic = isStatic, 
+            IsPrivate = isPrivate,
+            Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile),
+        };
+    }
+
+    private ClassNode ParseClass()
+    {
+        Logger.Log("CompilationProcess: Parsing class");
+        Expect(Tokens.Keyword, Keywords.ClassDeclaration);
+        var name = Expect(Tokens.Identifier).Value;
+        
+        Expect(Tokens.Colon);
+        // Expect(Tokens.Semicolon);
+        Expect(Tokens.LBrace);
+
+        List<ASTNode> body = ParseBlock();
+
+        Expect(Tokens.RBrace);
+
+        Logger.Log("CompilationProcess.End: Parsing class");
+        return new ClassNode { Name = name, Body = body, Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+    }
+    
+    private ForNode ParseFor()
+    {
+        Logger.Log("CompilationProcess: Parsing for");
+        Expect(Tokens.Keyword, Keywords.ForBlock);
+        
+        AssignmentNode assignment = ParseVariableDeclaration();
+        Expect(Tokens.Semicolon);
+        var condition = ParseExpression();
+        Expect(Tokens.Semicolon);
+        var statement = ParseExpression();
+        
+        Expect(Tokens.Colon);
+        // Expect(Tokens.Semicolon);
+        Expect(Tokens.LBrace);
+
+        List<ASTNode> forBlock = ParseBlock();
+
+        Expect(Tokens.RBrace);
+
+        Logger.Log("CompilationProcess.End: Parsing for");
+        return new ForNode { Assignment = assignment, Statement = statement, Condition = condition, Body = forBlock, Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile), };
+    }
+    
+    private WhileNode ParseWhile(bool isDoWhile = false)
+    {
+        Logger.Log("CompilationProcess: Parsing while");
+        Expect(Tokens.Keyword, isDoWhile ? Keywords.DoWhileBlock : Keywords.WhileBlock);
+        var condition = ParseExpression();
+        Expect(Tokens.Colon);
+        // Expect(Tokens.Semicolon);
+        Expect(Tokens.LBrace);
+
+        List<ASTNode> whileBlock = ParseBlock();
+
+        Expect(Tokens.RBrace);
+
+        Logger.Log("CompilationProcess.End: Parsing while");
+        return new WhileNode { Condition = condition, Body = whileBlock, IsDoWhile = isDoWhile,Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+    }
+
+    private IfNode ParseIf()
+    {
+        Logger.Log("CompilationProcess: Parsing if");
+        Expect(Tokens.Keyword, Keywords.IfBlock);
+        var condition = ParseExpression();
+        Expect(Tokens.Colon);
+        // Expect(Tokens.Semicolon);
+        Expect(Tokens.LBrace);
+
+        List<ASTNode> thenBlock = ParseBlock();
+
+        Expect(Tokens.RBrace);
+
+        List<ASTNode> elseBlock = [];
+        
+        Logger.Warn(Current().TokenType.ToString());
+        Logger.Warn(Current().Value);
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.ElseBlock)
+        {
+            Advance();
+            
+            if (Check(Tokens.Keyword) && Current().Value == Keywords.IfBlock)
+                elseBlock.Add(ParseIf());
+            else
+            {
+                Expect(Tokens.Colon);
+                // Expect(Tokens.Semicolon);
+                Expect(Tokens.LBrace);
+                elseBlock = ParseBlock();
+                Expect(Tokens.RBrace);
+            }
+        }
+
+        Logger.Log("CompilationProcess.End: Parsing if");
+        return new IfNode { Condition = condition, ThenBlock = thenBlock, ElseBlock = elseBlock,Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+    }
+
+    private List<ASTNode> ParseBlock()
+    {
+        List<ASTNode> statements = [];
+        Logger.Log("CompilationProcess: Parsing block");
+
+        while (!Check(Tokens.RBrace) && !IsAtEnd())
+        {
+            if (Check(Tokens.Semicolon))
+            {
+                Advance();
+                continue;
+            }
+            statements.Add(ParseStatement());
+        }
+
+        Logger.Log("CompilationProcess.End: Parsing block");
+        return statements;
+    }
+
+    private ASTNode ParseParens()
+    {
+        Expect(Tokens.LParen);
+        var parsed = ParseExpression();
+        Expect(Tokens.RParen);
+
+        return parsed;
+    }
+
+    private ReturnNode ParseReturn()
+    {
+        Logger.Log("CompilationProcess: Parsing return");
+        Expect(Tokens.Keyword);
+
+        ASTNode? node = null;
+        if (!Check(Tokens.Semicolon))
+            node = ParseExpression();
+        
+        Expect(Tokens.Semicolon);
+        
+        Logger.Log("CompilationProcess.End: Parsing return");
+        return new ReturnNode { ReturnValue = node, Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+    }
+
+    /// <summary>
+    /// Парсит выражение с бинарными операторами (==, +, -, *, /)
+    /// </summary>
+    private ASTNode ParseExpression()
+    {
+        Logger.Log("CompilationProcess: Parsing expression");
+        var left = ParsePrimary();
+        
+        if (Check(Tokens.And) && Peek()?.TokenType == Tokens.And)
+        {
+            Advance(); // первый &
+            Advance(); // второй &
+            var right = ParseExpression();
+            Logger.Log("CompilationProcess.End: Parsing expression");
+            return new BinaryOperationNode { Left = left, Operator = "&&", Right = right,Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+        }
+    
+        if (Check(Tokens.Or) && Peek()?.TokenType == Tokens.Or)
+        {
+            Advance(); // первый |
+            Advance(); // второй |
+            var right = ParseExpression();
+            Logger.Log("CompilationProcess.End: Parsing expression");
+            return new BinaryOperationNode { Left = left, Operator = "||", Right = right,Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+        }
+
+        // Операторы сравнения: ==
+        if (Check(Tokens.Equals) && Peek()?.TokenType == Tokens.Equals)
+        {
+            Advance(); // первый =
+            Advance(); // второй =
+            var right = ParseExpression();
+            Logger.Log("CompilationProcess.End: Parsing expression");
+            return new BinaryOperationNode { Left = left, Operator = "==", Right = right,Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+        }
+        
+        if (Check(Tokens.Not) && Peek()?.TokenType == Tokens.Equals)
+        {
+            Advance(); // первый !
+            Advance(); // второй =
+            var right = ParseExpression();
+            Logger.Log("CompilationProcess.End: Parsing expression");
+            return new BinaryOperationNode { Left = left, Operator = "!=", Right = right,Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+        }
+        
+        if (Check(Tokens.Less))
+        {
+            string op;
+            if (Peek()?.TokenType == Tokens.Equals)
+            {
+                Advance(); // <
+                Advance(); // =
+                op = "<=";
+            }
+            else
+            {
+                Advance(); // <
+                op = "Less";
+            }
+            
+            var right = ParseExpression();
+            Logger.Log("CompilationProcess.End: Parsing expression");
+            return new BinaryOperationNode { Left = left, Operator = op, Right = right,Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+        }
+        
+        if (Check(Tokens.Greater))
+        {
+            string op;
+            if (Peek()?.TokenType == Tokens.Equals)
+            {
+                Advance(); // >
+                Advance(); // =
+                op = ">=";
+            }
+            else
+            {
+                Advance(); // >
+                op = "Greater";
+            }
+            
+            var right = ParseExpression();
+            Logger.Log("CompilationProcess.End: Parsing expression");
+            return new BinaryOperationNode { Left = left, Operator = op, Right = right, Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+        }
+
+        // Арифметические операторы: +, -, *, /
+        if (Check(Tokens.Plus) || Check(Tokens.Minus) || Check(Tokens.Star) || Check(Tokens.Slash) || Check(Tokens.Percent))
+        {
+            var op = Current().TokenType.ToString();
+            Advance();
+            var right = ParseExpression();
+            Logger.Log("CompilationProcess.End: Parsing expression");
+            return new BinaryOperationNode { Left = left, Operator = op, Right = right, Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+        }
+
+        return left;
+    }
+
+    /// <summary>
+    /// Парсит примитивные значения и вызовы функций/методов
+    /// </summary>
+    private ASTNode ParsePrimary()
+    {
+        Logger.Log("CompilationProcess: Parsing primary");
+        
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.NullKeyword)
+        {
+            Advance();
+            return new NullNode();
+        }
+
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.BreakKeyword)
+        {
+            Advance();
+            return new BreakNode();
+        }
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.ContinueKeyword)
+        {
+            Advance();
+            return new ContinueNode();
+        }
+
+        // Array
+        if (Check(Tokens.LSquareParen))
+        {
+            Advance();
+            List<ASTNode> statements = [];
+            while (!Check(Tokens.RSquareParen) && !IsAtEnd())
+            {
+                if (Current().TokenType == Tokens.Comma)
+                {
+                    Advance();
+                    continue;
+                }
+                statements.Add(ParseExpression());
+            }
+            
+            Advance();
+
+            return new CollectionNode { Collection = statements, Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+        }
+        
+        bool isMinus = false;
+        if (Check(Tokens.Minus))
+        {
+            isMinus = true;
+            Advance();
+        }
+        
+        // parse: '('expression')'
+        if (Check(Tokens.LParen))
+        {
+            Logger.Warn("Parsing parents");
+            return ParseParens();
+        }
+        
+        // bool return
+        if (Check(Tokens.Keyword) && (Current().Value == Keywords.FalseKeyword || Current().Value == Keywords.TrueKeyword))
+        {
+            Logger.Log("CompilationProcess.End: Parsing primary");
+            return new BooleanNode
+            {
+                Value = isMinus ? !bool.Parse(Advance().Value) : bool.Parse(Advance().Value), Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+            };
+        }
+
+        // String reference
+        if (Check(Tokens.StringRef))
+        {
+            Logger.Log("CompilationProcess.End: Parsing primary (StringRef)");
+            return new StringRefNode { Index = int.Parse(Advance().Value), Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+        }
+        
+        if (Check(Tokens.NumberRef))
+        {
+            Logger.Log("CompilationProcess.End: Parsing primary (NumberRef)");
+            return new NumberRefNode
+            {
+                IsNegative = isMinus,
+                Index = int.Parse(Advance().Value)
+                , Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+            };
+        }
+
+        // Identifier - может быть вызовом метода или функции
+        if (Check(Tokens.Identifier))
+        {
+            var firstIdentifier = Advance().Value;
+            
+            // Проверяем на специальные строковые константы
+            if (firstIdentifier.StartsWith("___STRING_"))
+            {
+                var index = int.Parse(firstIdentifier.Replace("___STRING_", "").Replace("___", ""));
+                return new StringRefNode { Index = index, Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+            }
+            
+            if (firstIdentifier.StartsWith("___NUMBER_"))
+            {
+                var index = int.Parse(firstIdentifier.Replace("___NUMBER_", "").Replace("___", ""));
+                return new NumberRefNode
+                {
+                    IsNegative = isMinus,
+                    Index = index,
+                    Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+                };
+            }
+            
+            if (firstIdentifier.TryParseNumber(out var result))
+                return new NumberNode { Value = result, Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+            
+            // Вызов метода: Object.method(...)... or func().class.etc();
+            if (Check(Tokens.Dot) || Check(Tokens.LParen))
+            {
+                Logger.Log("Detected object/function call");
+                List<ASTNode> objects = [];
+                List<ASTNode> arguments = [];
+                
+                // If current object is a function
+                if (Check(Tokens.LParen))
+                {
+                    Advance();
+
+                    arguments = [];
+                    while (!Check(Tokens.RParen))
+                    {
+                        arguments.Add(ParseExpression());
+                        if (Check(Tokens.Comma))
+                            Advance();
+                    }
+
+                    Expect(Tokens.RParen);  
+                    
+                    Logger.Log("Arguments: " + string.Join(", ", arguments));
+                        
+                    objects.Add(new FunctionPointerNode
+                    {
+                        Name = firstIdentifier,
+                        Arguments = arguments,
+                        Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+                    });
+                }
+                // Else will add as object
+                else
+                {
+                    objects.Add(new ObjectPointerNode
+                    {
+                        Name = firstIdentifier,
+                        Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+                    });
+                }
+                
+                if (Current().TokenType != Tokens.Dot)
+                {
+                    Logger.Log($"CompilationProcess.End: Parsing primary (CallNode) {Current().TokenType}");
+                    return new CallNode { Objects = objects, Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+                }
+                
+
+                // While next is dot
+                Logger.Log($"Start Process", "CallNodeWhile");
+                while (Check(Tokens.Dot))
+                {
+                    Advance();
+                    Logger.Log($"CallNodeWhile.current: " + Current().TokenType);
+                    string identifier = Expect(Tokens.Identifier).Value;
+
+                    // Current object is function
+                    if (Current().TokenType == Tokens.LParen)
+                    {
+                        Advance();
+
+                        arguments = [];
+                        while (!Check(Tokens.RParen))
+                        {
+                            arguments.Add(ParseExpression());
+                            if (Check(Tokens.Comma))
+                                Advance();
+                        }
+
+                        Expect(Tokens.RParen);
+
+                        Logger.Log($"Detected function: {identifier}", "CallNodeWhile");
+                        Logger.Log("Arguments: [" + string.Join(", ", arguments) + "]");
+                        objects.Add(new FunctionPointerNode
+                        {
+                            Name = identifier,
+                            Arguments = arguments, 
+                            Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+                        });
+                        continue;
+                    }
+
+                    Logger.Log($"Detected object: {identifier}", "CallNodeWhile");
+                    objects.Add(new ObjectPointerNode
+                    {
+                        Name = identifier,
+                        Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+                    });
+                } 
+                
+                Logger.Log("CompilationProcess.End: Parsing primary (CallNode, full)");
+                
+                return new CallNode { Objects = objects, Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+            }
+            
+
+            if (Current().TokenType == Tokens.Equals && Peek()?.TokenType != Tokens.Equals)
+            {
+                Logger.Log($"CompilationProcess.End: Parsing primary (AssignmentNode)");
+                Advance();
+                return new AssignmentNode(false, false, false, false)
+                {
+                    VariableName = firstIdentifier,
+                    Value = ParseExpression(),
+                    Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+                };
+            }
+            
+            Logger.Log($"CompilationProcess.End: Parsing primary (VariableNode: {firstIdentifier})");
+            return new VariableNode { Name = firstIdentifier, Line = (IsAtEnd() ? 0 : Current().Line + 1),  SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+        }
+        
+        throw new QlangCompileException($"Unexpected token in expression: {Current().TokenType} ({(Current().Value == "" ? "Null" : Current().Value)})", (IsAtEnd() ? 0 : Current().Line + 1), "Parser", Current().SourceFile);
+    }
+
+    // Вспомогательные методы
+    private Token Current() => _tokens[_position];
+    private Token? Peek() => _position + 1 < _tokens.Count ? _tokens[_position + 1] : null;
+    private bool IsAtEnd() => _position >= _tokens.Count;
+    private bool Check(Tokens type) => !IsAtEnd() && Current().TokenType == type;
+    
+    private Token Advance()
+    {
+        if (!IsAtEnd()) _position++;
+        var token = _tokens[_position - 1];
+
+        if (token.TokenType is Tokens.Semicolon or Tokens.RBrace or Tokens.LBrace)
+        {
+            _line = "";
+            return token;
+        }
+        
+        Logger.Log(token.TokenType.ToString() + " " + token.Value, $"Token (Ln:{token.Line} Idx:{token.Index})");
+        _line += $"{Token.TokenToString(token.TokenType)}{token.Value}";
+        return token;
+    }
+
+    private Token Expect(Tokens type, string? value = null)
+    {
+        if (!Check(type))
+        {
+            var current = Current();
+            throw new Exception(":");
+            throw new QlangCompileException($"""
+                                 Expected {type}, got {current.TokenType} (Value: {(current.Value == "" ? "Null" : current.Value)})
+                                        line: '{_line}'
+                                 """, (IsAtEnd() ? 0 : Current().Line + 1), "Parser", Current().SourceFile);
+        }
+        
+        if (value != null && Current().Value != value)
+            throw new QlangCompileException($"Expected '{value}', got '{Current().Value}'", (IsAtEnd() ? 0 : Current().Line + 1), "Parser", Current().SourceFile);
+
+        return Advance();
+    }
+}

@@ -8,9 +8,12 @@ class Dictionary: {
         _keys = Array.new([]);
         _values = Array.new([]);
     }
-
+    
     function toString(): {
-        return "Dictionary";
+        let str = _keys.toString().str();
+        str = str + _values.toString().str();
+
+        return String.new(str);
     }
 
     function set(let key, let item): {
@@ -37,6 +40,11 @@ class Dictionary: {
 
     function getValues(): {
         return _values;
+    }
+
+    function clear(): {
+        _keys.clear();
+        _values.clear();
     }
 
     function get(let key): {

@@ -3,7 +3,7 @@ class Vector2: {
     private let _y;
 
     function toString(): {
-        return "X: " + _x + ", Y: " + _y;
+        return String.new("X: " + _x + ", Y: " + _y);
     }
 
     function equals(let other): {
