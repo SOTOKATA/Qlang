@@ -1,6 +1,5 @@
-﻿using Qlang.Core.Lang.AST;
+using Qlang.Core.Lang.AST;
 using Qlang.Core.LangDebug;
-using Qlang.Core.ProjectManager;
 
 namespace Qlang.Core.Lang.Interpreter;
 
@@ -12,7 +11,7 @@ public partial class Interpreter
     private bool _isContinueKeyword;
     private void AddBlockToContext(ASTBlock block)
     {
-        if (_contextStack.Count > 0 && 
+        if (_contextStack.Count > 0 &&
             CurrentContext.Blocks.Count > 0)
             CurrentContext.Blocks.Add(block);
     }
@@ -22,14 +21,14 @@ public partial class Interpreter
         if (_contextStack.Count > 0 && CurrentContext.Blocks.Count > 0)
             CurrentContext.Blocks.RemoveAt(CurrentContext.Blocks.Count - 1);
     }
-    
+
     private void ExecuteWhile(WhileNode whileNode)
     {
         AddBlockToContext(whileNode);
-        
+
         var condition = whileNode.IsDoWhile || (bool)EvaluateExpression(whileNode.Condition);
         Logger.Log("FirstCheck (node)\n" + whileNode.Condition.GetTree("     "), "While.Condition", ConsoleColor.Magenta);
-        Logger.Log("FirstCheck: \n" +  condition, "While.Condition", ConsoleColor.Magenta);
+        Logger.Log("FirstCheck: \n" + condition, "While.Condition", ConsoleColor.Magenta);
 
         while (condition)
         {
@@ -38,11 +37,11 @@ public partial class Interpreter
                 RemoveLastBlockFromContext();
                 return;
             }
-            
+
             condition = (bool)EvaluateExpression(whileNode.Condition);
-            Logger.Log("FirstCheck: \n" +  condition, "While.Condition", ConsoleColor.Magenta);
+            Logger.Log("FirstCheck: \n" + condition, "While.Condition", ConsoleColor.Magenta);
         }
-        
+
         RemoveLastBlockFromContext();
         Logger.Log("Ended", "While", ConsoleColor.Magenta);
     }
@@ -52,15 +51,13 @@ public partial class Interpreter
         foreach (var statement in block)
         {
             if (_return)
-                return true; 
-            
+                return true;
+
             if (statement is ReturnNode returnNode)
             {
                 _return = true;
                 _returnValue = EvaluateExpression(returnNode.ReturnValue);
-                Console.SetCursorPosition(25, 9);
-                ConsoleLogger.Info("ReturnValue: " + _returnValue);
-                continue;
+                return true;
             }
 
             if (isLoop)
@@ -99,14 +96,14 @@ public partial class Interpreter
     private void ExecuteFor(ForNode forNode)
     {
         AddBlockToContext(forNode);
-        
+
         // Adding variable
         ExecuteStatement(forNode.Assignment);
-        
+
         // Add condition
         var condition = (bool)EvaluateExpression(forNode.Condition);
-        Logger.Log("FirstCheck: \n" +  condition, "For.Condition", ConsoleColor.Magenta);
-        
+        Logger.Log("FirstCheck: \n" + condition, "For.Condition", ConsoleColor.Magenta);
+
         while (condition)
         {
             if (ExecuteBlock(forNode.Body, true))
@@ -117,25 +114,25 @@ public partial class Interpreter
 
             ExecuteStatement(forNode.Statement);
             condition = (bool)EvaluateExpression(forNode.Condition);
-            Logger.Log("FirstCheck: \n" +  condition, "For.Condition", ConsoleColor.Magenta);
+            Logger.Log("FirstCheck: \n" + condition, "For.Condition", ConsoleColor.Magenta);
         }
-        
+
         RemoveLastBlockFromContext();
         Logger.Log("Ended", "For", ConsoleColor.Magenta);
 
     }
-    
+
     private void ExecuteIf(IfNode ifNode)
     {
         AddBlockToContext(ifNode);
-        
+
         var condition = (bool)EvaluateExpression(ifNode.Condition);
 
         if (condition)
             ExecuteBlock(ifNode.ThenBlock, false);
         else if (ifNode.ElseBlock.Count > 0)
             ExecuteBlock(ifNode.ElseBlock, false);
-        
+
         RemoveLastBlockFromContext();
     }
 }

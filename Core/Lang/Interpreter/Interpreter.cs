@@ -4,7 +4,6 @@ using Qlang.Core.Lang.Dynamic;
 using Qlang.Core.Lang.Dynamic.Exceptions;
 using Qlang.Core.Lang.Interpreter.Native;
 using Qlang.Core.LangDebug;
-using Qlang.Core.ProjectManager;
 using Math = System.Math;
 
 namespace Qlang.Core.Lang.Interpreter;
@@ -141,13 +140,13 @@ public partial class Interpreter
                 {
                     if (returnNode.ReturnValue is not null)
                         _returnValue = EvaluateExpression(returnNode.ReturnValue);
-                    
+
                     break;
                 }
 
                 ExecuteStatement(statement);
             }
-            
+
             _return = false;
             _isBreakKeyword = false;
             _isContinueKeyword = false;
@@ -198,7 +197,7 @@ public partial class Interpreter
     {
         if (_contextStack.Count == 0)
             return;
-        
+
         var value = EvaluateExpression(assign.Value);
 
         // Handle path-based assignments (e.g., object.property = value)
@@ -420,8 +419,8 @@ public partial class Interpreter
                         if (existingVar.IsConst)
                             throw new QlangRuntimeException($"Cannot re-assign const property '{objPtr.Name}'", assignNode, GetStackTrace());
                         if (existingVar.IsPrivate)
-                                throw new QlangRuntimeException("Cannot access to private variable from external source",
-                                    objPtr, GetStackTrace());
+                            throw new QlangRuntimeException("Cannot access to private variable from external source",
+                                objPtr, GetStackTrace());
 
                         targetClass.Variables[objPtr.Name] = new Variable(
                             objPtr.Name,

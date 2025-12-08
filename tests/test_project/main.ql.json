@@ -8918,9 +8918,2660 @@
           "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\throw.ql"
         }
       ],
-      "Line": 3,
+      "Line": 5,
       "LineIndex": 0,
-      "SourceFile": "D:\\Projects\\Console\\Qlang\\tetris_project\\main.ql"
+      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+    },
+    {
+      "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
+      "Name": "test_method_call_in_if",
+      "IsStatic": false,
+      "IsPrivate": false,
+      "Parameters": [],
+      "Body": [
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 6,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 100,
+                  "Line": 6,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 6,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 6,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+          "IsNew": true,
+          "VariableName": "testArray",
+          "Path": null,
+          "Value": {
+            "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+            "Objects": [
+              {
+                "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                "Name": "Array",
+                "Line": 8,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              {
+                "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                "Name": "new",
+                "Arguments": [
+                  {
+                    "$type": "Qlang.Core.Lang.AST.CollectionNode, ql",
+                    "Collection": [],
+                    "Line": 8,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  }
+                ],
+                "Line": 8,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              }
+            ],
+            "Arguments": [],
+            "Line": 8,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "IsStatic": false,
+          "IsPrivate": false,
+          "IsConst": false,
+          "IsPathAssignment": false,
+          "Line": 8,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "testArray",
+              "Line": 9,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "push",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "Array",
+                      "Line": 9,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "new",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.CollectionNode, ql",
+                          "Collection": [
+                            {
+                              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                              "IsNegative": false,
+                              "Index": 7,
+                              "Line": 9,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                            },
+                            {
+                              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                              "IsNegative": false,
+                              "Index": 8,
+                              "Line": 9,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                            },
+                            {
+                              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                              "IsNegative": false,
+                              "Index": 9,
+                              "Line": 9,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                            }
+                          ],
+                          "Line": 9,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                        }
+                      ],
+                      "Line": 9,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 9,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 9,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 9,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.ForNode, ql",
+          "Assignment": {
+            "IsNew": false,
+            "VariableName": "i",
+            "Path": null,
+            "Value": {
+              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+              "IsNegative": false,
+              "Index": 10,
+              "Line": 11,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "IsStatic": false,
+            "IsPrivate": false,
+            "IsConst": false,
+            "IsPathAssignment": false,
+            "Line": 11,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Condition": {
+            "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+            "Left": {
+              "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+              "ClassName": "",
+              "Name": "i",
+              "Line": 11,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "Operator": "Less",
+            "Right": {
+              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+              "IsNegative": false,
+              "Index": 11,
+              "Line": 11,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "Line": 11,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Statement": {
+            "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+            "IsNew": false,
+            "VariableName": "i",
+            "Path": null,
+            "Value": {
+              "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+              "Left": {
+                "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                "ClassName": "",
+                "Name": "i",
+                "Line": 11,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "Operator": "Plus",
+              "Right": {
+                "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                "IsNegative": false,
+                "Index": 12,
+                "Line": 11,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "Line": 11,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "IsStatic": false,
+            "IsPrivate": false,
+            "IsConst": false,
+            "IsPathAssignment": false,
+            "Line": 11,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Body": [
+            {
+              "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 12,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                  "Name": "println",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                      "Left": {
+                        "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                        "Index": 101,
+                        "Line": 12,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                      },
+                      "Operator": "Plus",
+                      "Right": {
+                        "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "i",
+                        "Line": 12,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                      },
+                      "Line": 12,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Line": 12,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Arguments": [],
+              "Line": 12,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+              "IsNew": true,
+              "VariableName": "row",
+              "Path": null,
+              "Value": {
+                "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                    "Name": "testArray",
+                    "Line": 14,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  {
+                    "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                    "Name": "at",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                        "IsNegative": false,
+                        "Index": 13,
+                        "Line": 14,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                      }
+                    ],
+                    "Line": 14,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  }
+                ],
+                "Arguments": [],
+                "Line": 14,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "IsPathAssignment": false,
+              "Line": 14,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+              "IsNew": true,
+              "VariableName": "value",
+              "Path": null,
+              "Value": {
+                "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                    "Name": "row",
+                    "Line": 15,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  {
+                    "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                    "Name": "at",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "i",
+                        "Line": 15,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                      }
+                    ],
+                    "Line": 15,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  }
+                ],
+                "Arguments": [],
+                "Line": 15,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "IsPathAssignment": false,
+              "Line": 15,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 16,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                  "Name": "println",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                      "Left": {
+                        "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                        "Index": 102,
+                        "Line": 16,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                      },
+                      "Operator": "Plus",
+                      "Right": {
+                        "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "value",
+                        "Line": 16,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                      },
+                      "Line": 16,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Line": 16,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Arguments": [],
+              "Line": 16,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "row",
+                      "Line": 19,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "at",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                          "ClassName": "",
+                          "Name": "i",
+                          "Line": 19,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                        }
+                      ],
+                      "Line": 19,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 19,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                "Operator": "==",
+                "Right": {
+                  "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                  "IsNegative": false,
+                  "Index": 14,
+                  "Line": 19,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                "Line": 19,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "Console",
+                      "Line": 20,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "println",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                          "Index": 103,
+                          "Line": 20,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                        }
+                      ],
+                      "Line": 20,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 20,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.ReturnNode, ql",
+                  "ReturnValue": {
+                    "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                    "Index": 104,
+                    "Line": 21,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  "Line": 22,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 24,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 24,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                  "Name": "println",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                      "Index": 105,
+                      "Line": 24,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Line": 24,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Arguments": [],
+              "Line": 24,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Variables": {},
+          "Line": 27,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 27,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 106,
+                  "Line": 27,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 27,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 27,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.ReturnNode, ql",
+          "ReturnValue": {
+            "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+            "Index": 107,
+            "Line": 28,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Line": 29,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        }
+      ],
+      "Line": 31,
+      "LineIndex": 0,
+      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+    },
+    {
+      "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
+      "Name": "test_method_call_stored",
+      "IsStatic": false,
+      "IsPrivate": false,
+      "Parameters": [],
+      "Body": [
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 32,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 108,
+                  "Line": 32,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 32,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 32,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+          "IsNew": true,
+          "VariableName": "testArray",
+          "Path": null,
+          "Value": {
+            "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+            "Objects": [
+              {
+                "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                "Name": "Array",
+                "Line": 34,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              {
+                "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                "Name": "new",
+                "Arguments": [
+                  {
+                    "$type": "Qlang.Core.Lang.AST.CollectionNode, ql",
+                    "Collection": [],
+                    "Line": 34,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  }
+                ],
+                "Line": 34,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              }
+            ],
+            "Arguments": [],
+            "Line": 34,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "IsStatic": false,
+          "IsPrivate": false,
+          "IsConst": false,
+          "IsPathAssignment": false,
+          "Line": 34,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "testArray",
+              "Line": 35,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "push",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "Array",
+                      "Line": 35,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "new",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.CollectionNode, ql",
+                          "Collection": [
+                            {
+                              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                              "IsNegative": false,
+                              "Index": 15,
+                              "Line": 35,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                            },
+                            {
+                              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                              "IsNegative": false,
+                              "Index": 16,
+                              "Line": 35,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                            },
+                            {
+                              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                              "IsNegative": false,
+                              "Index": 17,
+                              "Line": 35,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                            }
+                          ],
+                          "Line": 35,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                        }
+                      ],
+                      "Line": 35,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 35,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 35,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 35,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.ForNode, ql",
+          "Assignment": {
+            "IsNew": false,
+            "VariableName": "i",
+            "Path": null,
+            "Value": {
+              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+              "IsNegative": false,
+              "Index": 18,
+              "Line": 37,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "IsStatic": false,
+            "IsPrivate": false,
+            "IsConst": false,
+            "IsPathAssignment": false,
+            "Line": 37,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Condition": {
+            "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+            "Left": {
+              "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+              "ClassName": "",
+              "Name": "i",
+              "Line": 37,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "Operator": "Less",
+            "Right": {
+              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+              "IsNegative": false,
+              "Index": 19,
+              "Line": 37,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "Line": 37,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Statement": {
+            "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+            "IsNew": false,
+            "VariableName": "i",
+            "Path": null,
+            "Value": {
+              "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+              "Left": {
+                "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                "ClassName": "",
+                "Name": "i",
+                "Line": 37,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "Operator": "Plus",
+              "Right": {
+                "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                "IsNegative": false,
+                "Index": 20,
+                "Line": 37,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "Line": 37,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "IsStatic": false,
+            "IsPrivate": false,
+            "IsConst": false,
+            "IsPathAssignment": false,
+            "Line": 37,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Body": [
+            {
+              "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 38,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                  "Name": "println",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                      "Left": {
+                        "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                        "Index": 109,
+                        "Line": 38,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                      },
+                      "Operator": "Plus",
+                      "Right": {
+                        "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "i",
+                        "Line": 38,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                      },
+                      "Line": 38,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Line": 38,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Arguments": [],
+              "Line": 38,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+              "IsNew": true,
+              "VariableName": "row",
+              "Path": null,
+              "Value": {
+                "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                    "Name": "testArray",
+                    "Line": 40,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  {
+                    "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                    "Name": "at",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                        "IsNegative": false,
+                        "Index": 21,
+                        "Line": 40,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                      }
+                    ],
+                    "Line": 40,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  }
+                ],
+                "Arguments": [],
+                "Line": 40,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "IsPathAssignment": false,
+              "Line": 40,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+              "IsNew": true,
+              "VariableName": "value",
+              "Path": null,
+              "Value": {
+                "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                    "Name": "row",
+                    "Line": 41,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  {
+                    "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                    "Name": "at",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "i",
+                        "Line": 41,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                      }
+                    ],
+                    "Line": 41,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  }
+                ],
+                "Arguments": [],
+                "Line": 41,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "IsPathAssignment": false,
+              "Line": 41,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 42,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                  "Name": "println",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                      "Left": {
+                        "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                        "Index": 110,
+                        "Line": 42,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                      },
+                      "Operator": "Plus",
+                      "Right": {
+                        "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "value",
+                        "Line": 42,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                      },
+                      "Line": 42,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Line": 42,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Arguments": [],
+              "Line": 42,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                  "ClassName": "",
+                  "Name": "value",
+                  "Line": 45,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                "Operator": "==",
+                "Right": {
+                  "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                  "IsNegative": false,
+                  "Index": 22,
+                  "Line": 45,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                "Line": 45,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "Console",
+                      "Line": 46,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "println",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                          "Index": 111,
+                          "Line": 46,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                        }
+                      ],
+                      "Line": 46,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 46,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.ReturnNode, ql",
+                  "ReturnValue": {
+                    "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                    "Index": 112,
+                    "Line": 47,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  "Line": 48,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 50,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 50,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                  "Name": "println",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                      "Index": 113,
+                      "Line": 50,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Line": 50,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Arguments": [],
+              "Line": 50,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Variables": {},
+          "Line": 53,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 53,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 114,
+                  "Line": 53,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 53,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 53,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.ReturnNode, ql",
+          "ReturnValue": {
+            "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+            "Index": 115,
+            "Line": 54,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Line": 55,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        }
+      ],
+      "Line": 57,
+      "LineIndex": 0,
+      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+    },
+    {
+      "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
+      "Name": "test_nested_method_calls",
+      "IsStatic": false,
+      "IsPrivate": false,
+      "Parameters": [],
+      "Body": [
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 58,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 116,
+                  "Line": 58,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 58,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 58,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+          "IsNew": true,
+          "VariableName": "testArray",
+          "Path": null,
+          "Value": {
+            "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+            "Objects": [
+              {
+                "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                "Name": "Array",
+                "Line": 60,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              {
+                "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                "Name": "new",
+                "Arguments": [
+                  {
+                    "$type": "Qlang.Core.Lang.AST.CollectionNode, ql",
+                    "Collection": [],
+                    "Line": 60,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  }
+                ],
+                "Line": 60,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              }
+            ],
+            "Arguments": [],
+            "Line": 60,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "IsStatic": false,
+          "IsPrivate": false,
+          "IsConst": false,
+          "IsPathAssignment": false,
+          "Line": 60,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "testArray",
+              "Line": 61,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "push",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "Array",
+                      "Line": 61,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "new",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.CollectionNode, ql",
+                          "Collection": [
+                            {
+                              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                              "IsNegative": false,
+                              "Index": 23,
+                              "Line": 61,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                            },
+                            {
+                              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                              "IsNegative": false,
+                              "Index": 24,
+                              "Line": 61,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                            }
+                          ],
+                          "Line": 61,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                        }
+                      ],
+                      "Line": 61,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 61,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 61,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 61,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "testArray",
+              "Line": 62,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "push",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "Array",
+                      "Line": 62,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "new",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.CollectionNode, ql",
+                          "Collection": [
+                            {
+                              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                              "IsNegative": false,
+                              "Index": 25,
+                              "Line": 62,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                            },
+                            {
+                              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                              "IsNegative": false,
+                              "Index": 26,
+                              "Line": 62,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                            }
+                          ],
+                          "Line": 62,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                        }
+                      ],
+                      "Line": 62,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 62,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 62,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 62,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.ForNode, ql",
+          "Assignment": {
+            "IsNew": false,
+            "VariableName": "y",
+            "Path": null,
+            "Value": {
+              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+              "IsNegative": false,
+              "Index": 27,
+              "Line": 64,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "IsStatic": false,
+            "IsPrivate": false,
+            "IsConst": false,
+            "IsPathAssignment": false,
+            "Line": 64,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Condition": {
+            "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+            "Left": {
+              "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+              "ClassName": "",
+              "Name": "y",
+              "Line": 64,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "Operator": "Less",
+            "Right": {
+              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+              "IsNegative": false,
+              "Index": 28,
+              "Line": 64,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "Line": 64,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Statement": {
+            "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+            "IsNew": false,
+            "VariableName": "y",
+            "Path": null,
+            "Value": {
+              "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+              "Left": {
+                "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                "ClassName": "",
+                "Name": "y",
+                "Line": 64,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "Operator": "Plus",
+              "Right": {
+                "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                "IsNegative": false,
+                "Index": 29,
+                "Line": 64,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "Line": 64,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "IsStatic": false,
+            "IsPrivate": false,
+            "IsConst": false,
+            "IsPathAssignment": false,
+            "Line": 64,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Body": [
+            {
+              "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 65,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                  "Name": "println",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                      "Left": {
+                        "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                        "Index": 117,
+                        "Line": 65,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                      },
+                      "Operator": "Plus",
+                      "Right": {
+                        "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "y",
+                        "Line": 65,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                      },
+                      "Line": 65,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Line": 65,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Arguments": [],
+              "Line": 65,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.ForNode, ql",
+              "Assignment": {
+                "IsNew": false,
+                "VariableName": "x",
+                "Path": null,
+                "Value": {
+                  "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                  "IsNegative": false,
+                  "Index": 30,
+                  "Line": 67,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                "IsStatic": false,
+                "IsPrivate": false,
+                "IsConst": false,
+                "IsPathAssignment": false,
+                "Line": 67,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "Condition": {
+                "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                  "ClassName": "",
+                  "Name": "x",
+                  "Line": 67,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                "Operator": "Less",
+                "Right": {
+                  "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                  "IsNegative": false,
+                  "Index": 31,
+                  "Line": 67,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                "Line": 67,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "Statement": {
+                "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+                "IsNew": false,
+                "VariableName": "x",
+                "Path": null,
+                "Value": {
+                  "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                    "ClassName": "",
+                    "Name": "x",
+                    "Line": 67,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  "Operator": "Plus",
+                  "Right": {
+                    "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                    "IsNegative": false,
+                    "Index": 32,
+                    "Line": 67,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  "Line": 67,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                "IsStatic": false,
+                "IsPrivate": false,
+                "IsConst": false,
+                "IsPathAssignment": false,
+                "Line": 67,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "Body": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "Console",
+                      "Line": 68,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "println",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                          "Left": {
+                            "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                            "Index": 118,
+                            "Line": 68,
+                            "LineIndex": 0,
+                            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                          },
+                          "Operator": "Plus",
+                          "Right": {
+                            "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                            "ClassName": "",
+                            "Name": "x",
+                            "Line": 68,
+                            "LineIndex": 0,
+                            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                          },
+                          "Line": 68,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                        }
+                      ],
+                      "Line": 68,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 68,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.IfNode, ql",
+                  "Condition": {
+                    "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                    "Left": {
+                      "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                      "Objects": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                          "Name": "testArray",
+                          "Line": 71,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                        },
+                        {
+                          "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                          "Name": "at",
+                          "Arguments": [
+                            {
+                              "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                              "ClassName": "",
+                              "Name": "y",
+                              "Line": 71,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                            }
+                          ],
+                          "Line": 71,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                        },
+                        {
+                          "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                          "Name": "at",
+                          "Arguments": [
+                            {
+                              "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                              "ClassName": "",
+                              "Name": "x",
+                              "Line": 71,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                            }
+                          ],
+                          "Line": 71,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                        }
+                      ],
+                      "Arguments": [],
+                      "Line": 71,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    },
+                    "Operator": "==",
+                    "Right": {
+                      "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                      "IsNegative": false,
+                      "Index": 33,
+                      "Line": 71,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    },
+                    "Line": 71,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  "ThenBlock": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                      "Objects": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                          "Name": "Console",
+                          "Line": 72,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                        },
+                        {
+                          "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                          "Name": "println",
+                          "Arguments": [
+                            {
+                              "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                              "Index": 119,
+                              "Line": 72,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                            }
+                          ],
+                          "Line": 72,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                        }
+                      ],
+                      "Arguments": [],
+                      "Line": 72,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ReturnNode, ql",
+                      "ReturnValue": {
+                        "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
+                        "Value": false,
+                        "Line": 73,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                      },
+                      "Line": 74,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "ElseBlock": [],
+                  "Variables": {},
+                  "Line": 76,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "Console",
+                      "Line": 76,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "println",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                          "Index": 120,
+                          "Line": 76,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                        }
+                      ],
+                      "Line": 76,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 76,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Variables": {},
+              "Line": 79,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 79,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                  "Name": "println",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                      "Index": 121,
+                      "Line": 79,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Line": 79,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Arguments": [],
+              "Line": 79,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Variables": {},
+          "Line": 82,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 82,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 122,
+                  "Line": 82,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 82,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 82,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.ReturnNode, ql",
+          "ReturnValue": {
+            "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
+            "Value": true,
+            "Line": 83,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Line": 84,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        }
+      ],
+      "Line": 86,
+      "LineIndex": 0,
+      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+    },
+    {
+      "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
+      "Name": "test_simple_comparison",
+      "IsStatic": false,
+      "IsPrivate": false,
+      "Parameters": [],
+      "Body": [
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 87,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 123,
+                  "Line": 87,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 87,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 87,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.ForNode, ql",
+          "Assignment": {
+            "IsNew": false,
+            "VariableName": "i",
+            "Path": null,
+            "Value": {
+              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+              "IsNegative": false,
+              "Index": 34,
+              "Line": 89,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "IsStatic": false,
+            "IsPrivate": false,
+            "IsConst": false,
+            "IsPathAssignment": false,
+            "Line": 89,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Condition": {
+            "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+            "Left": {
+              "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+              "ClassName": "",
+              "Name": "i",
+              "Line": 89,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "Operator": "Less",
+            "Right": {
+              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+              "IsNegative": false,
+              "Index": 35,
+              "Line": 89,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "Line": 89,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Statement": {
+            "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+            "IsNew": false,
+            "VariableName": "i",
+            "Path": null,
+            "Value": {
+              "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+              "Left": {
+                "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                "ClassName": "",
+                "Name": "i",
+                "Line": 89,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "Operator": "Plus",
+              "Right": {
+                "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                "IsNegative": false,
+                "Index": 36,
+                "Line": 89,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "Line": 89,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "IsStatic": false,
+            "IsPrivate": false,
+            "IsConst": false,
+            "IsPathAssignment": false,
+            "Line": 89,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Body": [
+            {
+              "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 90,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                  "Name": "println",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                      "Left": {
+                        "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                        "Index": 124,
+                        "Line": 90,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                      },
+                      "Operator": "Plus",
+                      "Right": {
+                        "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "i",
+                        "Line": 90,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                      },
+                      "Line": 90,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Line": 90,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Arguments": [],
+              "Line": 90,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                  "ClassName": "",
+                  "Name": "i",
+                  "Line": 92,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                "Operator": "==",
+                "Right": {
+                  "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                  "IsNegative": false,
+                  "Index": 37,
+                  "Line": 92,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                "Line": 92,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "Console",
+                      "Line": 93,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "println",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                          "Index": 125,
+                          "Line": 93,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                        }
+                      ],
+                      "Line": 93,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 93,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.ReturnNode, ql",
+                  "ReturnValue": {
+                    "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                    "Index": 126,
+                    "Line": 94,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  "Line": 95,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 96,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Variables": {},
+          "Line": 98,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 98,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 127,
+                  "Line": 98,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 98,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 98,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.ReturnNode, ql",
+          "ReturnValue": {
+            "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+            "Index": 128,
+            "Line": 99,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Line": 100,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        }
+      ],
+      "Line": 102,
+      "LineIndex": 0,
+      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+    },
+    {
+      "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
+      "Name": "check",
+      "IsStatic": false,
+      "IsPrivate": false,
+      "Parameters": [],
+      "Body": [
+        {
+          "$type": "Qlang.Core.Lang.AST.ForNode, ql",
+          "Assignment": {
+            "IsNew": false,
+            "VariableName": "i",
+            "Path": null,
+            "Value": {
+              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+              "IsNegative": false,
+              "Index": 38,
+              "Line": 103,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "IsStatic": false,
+            "IsPrivate": false,
+            "IsConst": false,
+            "IsPathAssignment": false,
+            "Line": 103,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Condition": {
+            "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+            "Left": {
+              "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+              "ClassName": "",
+              "Name": "i",
+              "Line": 103,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "Operator": "Less",
+            "Right": {
+              "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+              "IsNegative": false,
+              "Index": 39,
+              "Line": 103,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "Line": 103,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Statement": {
+            "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+            "IsNew": false,
+            "VariableName": "i",
+            "Path": null,
+            "Value": {
+              "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+              "Left": {
+                "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                "ClassName": "",
+                "Name": "i",
+                "Line": 103,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "Operator": "Plus",
+              "Right": {
+                "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                "IsNegative": false,
+                "Index": 40,
+                "Line": 103,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "Line": 103,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "IsStatic": false,
+            "IsPrivate": false,
+            "IsConst": false,
+            "IsPathAssignment": false,
+            "Line": 103,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Body": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ForNode, ql",
+              "Assignment": {
+                "IsNew": false,
+                "VariableName": "j",
+                "Path": null,
+                "Value": {
+                  "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                  "IsNegative": false,
+                  "Index": 41,
+                  "Line": 104,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                "IsStatic": false,
+                "IsPrivate": false,
+                "IsConst": false,
+                "IsPathAssignment": false,
+                "Line": 104,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "Condition": {
+                "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                  "ClassName": "",
+                  "Name": "j",
+                  "Line": 104,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                "Operator": "Less",
+                "Right": {
+                  "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                  "IsNegative": false,
+                  "Index": 42,
+                  "Line": 104,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                "Line": 104,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "Statement": {
+                "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+                "IsNew": false,
+                "VariableName": "j",
+                "Path": null,
+                "Value": {
+                  "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                    "ClassName": "",
+                    "Name": "j",
+                    "Line": 104,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  "Operator": "Plus",
+                  "Right": {
+                    "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                    "IsNegative": false,
+                    "Index": 43,
+                    "Line": 104,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  "Line": 104,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                "IsStatic": false,
+                "IsPrivate": false,
+                "IsConst": false,
+                "IsPathAssignment": false,
+                "Line": 104,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "Body": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.IfNode, ql",
+                  "Condition": {
+                    "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                    "Left": {
+                      "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "i",
+                      "Line": 105,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    },
+                    "Operator": "==",
+                    "Right": {
+                      "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                      "IsNegative": false,
+                      "Index": 44,
+                      "Line": 105,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    },
+                    "Line": 105,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  "ThenBlock": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ReturnNode, ql",
+                      "ReturnValue": {
+                        "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
+                        "Value": false,
+                        "Line": 106,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                      },
+                      "Line": 107,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "ElseBlock": [],
+                  "Variables": {},
+                  "Line": 108,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Variables": {},
+              "Line": 109,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Variables": {},
+          "Line": 110,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.ReturnNode, ql",
+          "ReturnValue": {
+            "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
+            "Value": true,
+            "Line": 110,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Line": 111,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        }
+      ],
+      "Line": 113,
+      "LineIndex": 0,
+      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+    },
+    {
+      "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
+      "Name": "call",
+      "IsStatic": false,
+      "IsPrivate": false,
+      "Parameters": [],
+      "Body": [
+        {
+          "$type": "Qlang.Core.Lang.AST.WhileNode, ql",
+          "Condition": {
+            "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
+            "Value": true,
+            "Line": 114,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "Body": [
+            {
+              "$type": "Qlang.Core.Lang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "check",
+                      "Arguments": [],
+                      "Line": 115,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 115,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                "Operator": "==",
+                "Right": {
+                  "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
+                  "Value": false,
+                  "Line": 115,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                "Line": 115,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "Console",
+                      "Line": 116,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "println",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                          "Index": 129,
+                          "Line": 116,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                        }
+                      ],
+                      "Line": 116,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 116,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.ReturnNode, ql",
+                  "ReturnValue": null,
+                  "Line": 118,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 119,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "IsDoWhile": false,
+          "Variables": {},
+          "Line": 120,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 120,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 130,
+                  "Line": 120,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 120,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 120,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        }
+      ],
+      "Line": 124,
+      "LineIndex": 0,
+      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
     },
     {
       "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
@@ -8933,11 +11584,40 @@
           "$type": "Qlang.Core.Lang.AST.CallNode, ql",
           "Objects": [
             {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "call",
+              "Arguments": [],
+              "Line": 125,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 125,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        }
+      ],
+      "Line": 128,
+      "LineIndex": 0,
+      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+    },
+    {
+      "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
+      "Name": "mainf",
+      "IsStatic": false,
+      "IsPrivate": false,
+      "Parameters": [],
+      "Body": [
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
               "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
               "Name": "Console",
-              "Line": 4,
+              "Line": 129,
               "LineIndex": 0,
-              "SourceFile": "D:\\Projects\\Console\\Qlang\\tetris_project\\main.ql"
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
             },
             {
               "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
@@ -8945,21 +11625,1101 @@
               "Arguments": [
                 {
                   "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                  "Index": 100,
-                  "Line": 4,
+                  "Index": 131,
+                  "Line": 129,
                   "LineIndex": 0,
-                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tetris_project\\main.ql"
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
                 }
               ],
-              "Line": 4,
+              "Line": 129,
               "LineIndex": 0,
-              "SourceFile": "D:\\Projects\\Console\\Qlang\\tetris_project\\main.ql"
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
             }
           ],
           "Arguments": [],
-          "Line": 4,
+          "Line": 129,
           "LineIndex": 0,
-          "SourceFile": "D:\\Projects\\Console\\Qlang\\tetris_project\\main.ql"
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 130,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 132,
+                  "Line": 130,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 130,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 130,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 131,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 133,
+                  "Line": 131,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 131,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 131,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+          "IsNew": true,
+          "VariableName": "result1",
+          "Path": null,
+          "Value": {
+            "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+            "Objects": [
+              {
+                "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                "Name": "test_simple_comparison",
+                "Arguments": [],
+                "Line": 134,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              }
+            ],
+            "Arguments": [],
+            "Line": 134,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "IsStatic": false,
+          "IsPrivate": false,
+          "IsConst": false,
+          "IsPathAssignment": false,
+          "Line": 134,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 135,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                    "Index": 134,
+                    "Line": 135,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  "Operator": "Plus",
+                  "Right": {
+                    "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                    "ClassName": "",
+                    "Name": "result1",
+                    "Line": 135,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  "Line": 135,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 135,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 135,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 136,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 135,
+                  "Line": 136,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 136,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 136,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+          "IsNew": true,
+          "VariableName": "result2",
+          "Path": null,
+          "Value": {
+            "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+            "Objects": [
+              {
+                "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                "Name": "test_method_call_in_if",
+                "Arguments": [],
+                "Line": 139,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              }
+            ],
+            "Arguments": [],
+            "Line": 139,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "IsStatic": false,
+          "IsPrivate": false,
+          "IsConst": false,
+          "IsPathAssignment": false,
+          "Line": 139,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 140,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                    "Index": 136,
+                    "Line": 140,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  "Operator": "Plus",
+                  "Right": {
+                    "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                    "ClassName": "",
+                    "Name": "result2",
+                    "Line": 140,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  "Line": 140,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 140,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 140,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 141,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 137,
+                  "Line": 141,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 141,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 141,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+          "IsNew": true,
+          "VariableName": "result3",
+          "Path": null,
+          "Value": {
+            "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+            "Objects": [
+              {
+                "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                "Name": "test_method_call_stored",
+                "Arguments": [],
+                "Line": 144,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              }
+            ],
+            "Arguments": [],
+            "Line": 144,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "IsStatic": false,
+          "IsPrivate": false,
+          "IsConst": false,
+          "IsPathAssignment": false,
+          "Line": 144,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 145,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                    "Index": 138,
+                    "Line": 145,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  "Operator": "Plus",
+                  "Right": {
+                    "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                    "ClassName": "",
+                    "Name": "result3",
+                    "Line": 145,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  "Line": 145,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 145,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 145,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 146,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 139,
+                  "Line": 146,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 146,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 146,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+          "IsNew": true,
+          "VariableName": "result4",
+          "Path": null,
+          "Value": {
+            "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+            "Objects": [
+              {
+                "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                "Name": "test_nested_method_calls",
+                "Arguments": [],
+                "Line": 149,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+              }
+            ],
+            "Arguments": [],
+            "Line": 149,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "IsStatic": false,
+          "IsPrivate": false,
+          "IsConst": false,
+          "IsPathAssignment": false,
+          "Line": 149,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 150,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                    "Index": 140,
+                    "Line": 150,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  "Operator": "Plus",
+                  "Right": {
+                    "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                    "ClassName": "",
+                    "Name": "result4",
+                    "Line": 150,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                  },
+                  "Line": 150,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 150,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 150,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 151,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 141,
+                  "Line": 151,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 151,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 151,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 153,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 142,
+                  "Line": 153,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 153,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 153,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 154,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 143,
+                  "Line": 154,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 154,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 154,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 155,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 144,
+                  "Line": 155,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 155,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 155,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.IfNode, ql",
+          "Condition": {
+            "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+            "Left": {
+              "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+              "ClassName": "",
+              "Name": "result1",
+              "Line": 157,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "Operator": "==",
+            "Right": {
+              "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+              "Index": 145,
+              "Line": 157,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "Line": 157,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "ThenBlock": [
+            {
+              "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 158,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                  "Name": "println",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                      "Index": 146,
+                      "Line": 158,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Line": 158,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Arguments": [],
+              "Line": 158,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "ElseBlock": [
+            {
+              "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 160,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                  "Name": "println",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                      "Index": 147,
+                      "Line": 160,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Line": 160,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Arguments": [],
+              "Line": 160,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Variables": {},
+          "Line": 163,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.IfNode, ql",
+          "Condition": {
+            "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+            "Left": {
+              "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+              "ClassName": "",
+              "Name": "result2",
+              "Line": 163,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "Operator": "==",
+            "Right": {
+              "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+              "Index": 148,
+              "Line": 163,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "Line": 163,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "ThenBlock": [
+            {
+              "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 164,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                  "Name": "println",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                      "Index": 149,
+                      "Line": 164,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Line": 164,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Arguments": [],
+              "Line": 164,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "ElseBlock": [
+            {
+              "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 166,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                  "Name": "println",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                      "Index": 150,
+                      "Line": 166,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Line": 166,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Arguments": [],
+              "Line": 166,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Variables": {},
+          "Line": 169,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.IfNode, ql",
+          "Condition": {
+            "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+            "Left": {
+              "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+              "ClassName": "",
+              "Name": "result3",
+              "Line": 169,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "Operator": "==",
+            "Right": {
+              "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+              "Index": 151,
+              "Line": 169,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "Line": 169,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "ThenBlock": [
+            {
+              "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 170,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                  "Name": "println",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                      "Index": 152,
+                      "Line": 170,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Line": 170,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Arguments": [],
+              "Line": 170,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "ElseBlock": [
+            {
+              "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 172,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                  "Name": "println",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                      "Index": 153,
+                      "Line": 172,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Line": 172,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Arguments": [],
+              "Line": 172,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Variables": {},
+          "Line": 175,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.IfNode, ql",
+          "Condition": {
+            "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+            "Left": {
+              "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+              "ClassName": "",
+              "Name": "result4",
+              "Line": 175,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "Operator": "==",
+            "Right": {
+              "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
+              "Value": false,
+              "Line": 175,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            "Line": 175,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+          },
+          "ThenBlock": [
+            {
+              "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 176,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                  "Name": "println",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                      "Index": 154,
+                      "Line": 176,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Line": 176,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Arguments": [],
+              "Line": 176,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "ElseBlock": [
+            {
+              "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 178,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                  "Name": "println",
+                  "Arguments": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                      "Index": 155,
+                      "Line": 178,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                    }
+                  ],
+                  "Line": 178,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Arguments": [],
+              "Line": 178,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Variables": {},
+          "Line": 181,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 181,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 156,
+                  "Line": 181,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 181,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 181,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 182,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 157,
+                  "Line": 182,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 182,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 182,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "Console",
+              "Line": 183,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "println",
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                  "Index": 158,
+                  "Line": 183,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+                }
+              ],
+              "Line": 183,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 183,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\tests\\test_project\\main.ql"
         }
       ],
       "Line": 0,

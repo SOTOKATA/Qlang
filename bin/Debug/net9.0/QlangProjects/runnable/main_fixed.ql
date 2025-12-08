@@ -75,7 +75,8 @@ function spawnNewPiece(): {
         currentPiece.push(newRow);
     }
 
-    posX = FIELD_WIDTH / 2 - 1;
+    // FIXED: Use proper integer division
+    posX = Number.toFixedInt(FIELD_WIDTH / 2) - 1;
     posY = 0;
 
     if canPlace() == false: {
@@ -83,13 +84,8 @@ function spawnNewPiece(): {
     }
 }
 
-function rotate(): {
-     
-}
-
-let _call = 0;
+// FIXED: Cleaned up canPlace function - return now works correctly
 function canPlace(): {
-    let b = true;
     for let y = 0; y < currentPiece.length(); y = y + 1: {
         let row = currentPiece.at(y);
         for let x = 0; x < row.length(); x = x + 1: {
@@ -97,24 +93,16 @@ function canPlace(): {
                 let fieldX = posX + x;
                 let fieldY = posY + y;
 
-                if (fieldY >= FIELD_HEIGHT): {
-                    Console.setCursorPosition(FIELD_WIDTH + 2, 10);
-                    Console.println("Yes_IS_FILEDY>=FIELD_HEIGHT");
-                }
-                
+                // Check boundaries (including top boundary fieldY < 0)
                 if (fieldX < 0) || (fieldX >= FIELD_WIDTH) || (fieldY >= FIELD_HEIGHT): {
-                    Console.setCursorPosition(FIELD_WIDTH + 2, 9);
-                    Console.println("SET BOOL TRUE");
-                    b = false;
-                    _call = _call + 1;
-
                     return false;
                 }
-                
+
+                // Check collision with existing pieces
+                // Allow pieces to be partially above the field (fieldY < 0)
                 if (fieldY >= 0) && (fieldY < FIELD_HEIGHT): {
                     let fieldRow = field.at(fieldY);
                     if fieldRow.at(fieldX) == 1: {
-                        b = false;
                         return false;
                     }
                 }
@@ -122,14 +110,6 @@ function canPlace(): {
         }
     }
 
-    if (b == false): {
-        return false;
-    }
-
-    if b == false: {
-        Console.setCursorPosition(FIELD_WIDTH + 2, 8);
-        Console.println("Function canPlace return True (b == false)");
-    }
     return true;
 }
 
@@ -191,13 +171,11 @@ function moveRight(): {
     }
 }
 
-private let l = 0;
+// FIXED: Cleaned up moveDown function - removed debug output
 function moveDown(): {
     posY = posY + 1;
-    let canPlaceBool = canPlace();
-    if canPlaceBool == false: {
-        Console.setCursorPosition(FIELD_WIDTH + 2, 4);
-        Console.print("MoveDown_CanPlace=true");
+
+    if canPlace() == false: {
         posY = posY - 1;
         lockPiece();
     } else: {
@@ -231,7 +209,7 @@ function handleInput(): {
 }
 
 function draw(): {
-    // Console.clear();
+    Console.clear();  // FIXED: Uncommented clear() for proper rendering
 
     // Top border
     Console.setCursorPosition(0, 0);
@@ -279,35 +257,14 @@ function draw(): {
     }
     Console.println("+");
 
-    // UI
+    // UI - clean interface without debug info
     Console.println("");
     Console.println("TETRIS - Score: " + score);
     Console.println("Controls: A/D=Move, S=Drop, Q=Quit");
 
-    Console.setCursorPosition(FIELD_WIDTH + 2, 1);
-    Console.println("POS: " + posX + ", " + posY + "         ");
-    Console.setCursorPosition(FIELD_WIDTH + 2, 2);
-
-    Console.println("POS_CURRENT: " + getarrrec(currentPiece) + "         ");
-    Console.setCursorPosition(FIELD_WIDTH + 2, 3);
-    Console.println("FIELD: " + FIELD_WIDTH + ", " + FIELD_HEIGHT + "         ");
-
     if gameOver: {
         Console.println("GAME OVER! Press R to restart");
     }
-}
-function getarrrec(let array): {
-    let str = "";
-    for let index = 0; index < array.length(); index = index + 1: {
-        if Array.isArray(array.at(index)): {
-            str = str + getarrrec(array.at(index));
-            continue;
-        }
-
-        str = str + array.at(index);
-    }
-
-    return str + " ";
 }
 
 function run(): {
@@ -339,9 +296,7 @@ function run(): {
 }
 }
 
-let curretnPiece = Array.new([1, 0, 1, 1]);
-
-function  main(): {
+function main(): {
     Console.clear();
     T.run();
 }
