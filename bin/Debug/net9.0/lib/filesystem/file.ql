@@ -10,10 +10,10 @@ class File: {
     // Override file content
     function setContent(let path, let content): {
         if exists(path) == false: {
-            Throw.exception("file path '" + path + "' is not found");
+            File.create(path);
         }
 
-        _native("file_set_content", path, content);
+        _native("file_set_content", path, _str(content));
     }
 
     // Append content to end file
@@ -22,7 +22,7 @@ class File: {
             Throw.exception("file path '" + path + "' is not found");
         }
 
-        _native("file_append_content", path, content);
+        _native("file_append_content", path, _str(content));
     }
 
     // Return type: string

@@ -21,7 +21,7 @@ class SnakeGame: {
 
     let _toWait;
 
-    function setup(): {
+    function setup(let width, let height): {
         Console.clear();
         Console.cursorVisible(false);
 
@@ -35,9 +35,9 @@ class SnakeGame: {
 
         _lastChar = "";
 
-        _width = 16;
+        _width = width;
 
-        _height = 8;
+        _height = height;
 
         _position = Vector2.new(_width / 2, _height / 2);
 
@@ -146,8 +146,8 @@ class SnakeGame: {
         }
     }
 
-    function run(): {
-        setup();
+    function run(let width, let height): {
+        setup(width, height);
 
         while _gameOver == false: {
             draw();

@@ -1,14 +1,15 @@
 ﻿using Qlang.Core.Lang.AST;
 using Qlang.Core.LangDebug;
+using Qlang.Core.ProjectManager;
 
 namespace Qlang.Core.Lang.Interpreter;
 
 public partial class Interpreter
 {
-    private bool _return = false;
-    private object? _returnValue = null;
-    private bool _isBreakKeyword = false;
-    private bool _isContinueKeyword = false;
+    private bool _return;
+    private object? _returnValue;
+    private bool _isBreakKeyword;
+    private bool _isContinueKeyword;
     private void AddBlockToContext(ASTBlock block)
     {
         if (_contextStack.Count > 0 && 
@@ -33,7 +34,10 @@ public partial class Interpreter
         while (condition)
         {
             if (ExecuteBlock(whileNode.Body, true))
+            {
+                RemoveLastBlockFromContext();
                 return;
+            }
             
             condition = (bool)EvaluateExpression(whileNode.Condition);
             Logger.Log("FirstCheck: \n" +  condition, "While.Condition", ConsoleColor.Magenta);
@@ -48,17 +52,15 @@ public partial class Interpreter
         foreach (var statement in block)
         {
             if (_return)
-            {
-                RemoveLastBlockFromContext();
-                return true;
-            }
-
+                return true; 
+            
             if (statement is ReturnNode returnNode)
             {
                 _return = true;
                 _returnValue = EvaluateExpression(returnNode.ReturnValue);
-                RemoveLastBlockFromContext();
-                return true;
+                Console.SetCursorPosition(25, 9);
+                ConsoleLogger.Info("ReturnValue: " + _returnValue);
+                continue;
             }
 
             if (isLoop)
@@ -66,7 +68,7 @@ public partial class Interpreter
                 if (statement is ContinueNode || _isContinueKeyword)
                 {
                     _isContinueKeyword = false;
-                    break;
+                    return false;
                 }
 
                 if (statement is BreakNode || _isBreakKeyword)
@@ -108,7 +110,10 @@ public partial class Interpreter
         while (condition)
         {
             if (ExecuteBlock(forNode.Body, true))
+            {
+                RemoveLastBlockFromContext();
                 return;
+            }
 
             ExecuteStatement(forNode.Statement);
             condition = (bool)EvaluateExpression(forNode.Condition);
@@ -124,20 +129,12 @@ public partial class Interpreter
     {
         AddBlockToContext(ifNode);
         
-        // 1. Вычисляем условие (expression -> bool)
         var condition = (bool)EvaluateExpression(ifNode.Condition);
 
-        // 2. Выполняем нужный блок
         if (condition)
-        {
-            if (ExecuteBlock(ifNode.ThenBlock, false))
-                return;
-        }
+            ExecuteBlock(ifNode.ThenBlock, false);
         else if (ifNode.ElseBlock.Count > 0)
-        {
-            if (ExecuteBlock(ifNode.ElseBlock, false))
-                return;
-        }
+            ExecuteBlock(ifNode.ElseBlock, false);
         
         RemoveLastBlockFromContext();
     }

@@ -322,105 +322,233 @@ public class Parser
     }
 
     /// <summary>
-    /// Парсит выражение с бинарными операторами (==, +, -, *, /)
+    /// Parsing expression (ex.: 5 + 5)
+    /// Приоритет (от низкого к высокому): ||, &&, ==, !=, <, >, <=, >=, +, -, *, /, %
     /// </summary>
     private ASTNode ParseExpression()
     {
         Logger.Log("CompilationProcess: Parsing expression");
-        var left = ParsePrimary();
+        var result = ParseLogicalOr();
+        Logger.Log("CompilationProcess.End: Parsing expression");
+        return result;
+    }
 
-        if (Check(Tokens.And) && Peek()?.TokenType == Tokens.And)
-        {
-            Advance(); // первый &
-            Advance(); // второй &
-            var right = ParseExpression();
-            Logger.Log("CompilationProcess.End: Parsing expression");
-            return new BinaryOperationNode { Left = left, Operator = "&&", Right = right, Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
-        }
+    /// <summary>
+    /// Parsing logical '||'
+    /// </summary>
+    private ASTNode ParseLogicalOr()
+    {
+        var left = ParseLogicalAnd();
 
-        if (Check(Tokens.Or) && Peek()?.TokenType == Tokens.Or)
+        while (Check(Tokens.Or) && Peek()?.TokenType == Tokens.Or)
         {
             Advance(); // первый |
             Advance(); // второй |
-            var right = ParseExpression();
-            Logger.Log("CompilationProcess.End: Parsing expression");
-            return new BinaryOperationNode { Left = left, Operator = "||", Right = right, Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
-        }
-
-        // Операторы сравнения: ==
-        if (Check(Tokens.Equals) && Peek()?.TokenType == Tokens.Equals)
-        {
-            Advance(); // первый =
-            Advance(); // второй =
-            var right = ParseExpression();
-            Logger.Log("CompilationProcess.End: Parsing expression");
-            return new BinaryOperationNode { Left = left, Operator = "==", Right = right, Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
-        }
-
-        if (Check(Tokens.Not) && Peek()?.TokenType == Tokens.Equals)
-        {
-            Advance(); // первый !
-            Advance(); // второй =
-            var right = ParseExpression();
-            Logger.Log("CompilationProcess.End: Parsing expression");
-            return new BinaryOperationNode { Left = left, Operator = "!=", Right = right, Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
-        }
-
-        if (Check(Tokens.Less))
-        {
-            string op;
-            if (Peek()?.TokenType == Tokens.Equals)
+            var right = ParseLogicalAnd();
+            left = new BinaryOperationNode
             {
-                Advance(); // <
-                Advance(); // =
-                op = "<=";
-            }
-            else
-            {
-                Advance(); // <
-                op = "Less";
-            }
-
-            var right = ParseExpression();
-            Logger.Log("CompilationProcess.End: Parsing expression");
-            return new BinaryOperationNode { Left = left, Operator = op, Right = right, Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
-        }
-
-        if (Check(Tokens.Greater))
-        {
-            string op;
-            if (Peek()?.TokenType == Tokens.Equals)
-            {
-                Advance(); // >
-                Advance(); // =
-                op = ">=";
-            }
-            else
-            {
-                Advance(); // >
-                op = "Greater";
-            }
-
-            var right = ParseExpression();
-            Logger.Log("CompilationProcess.End: Parsing expression");
-            return new BinaryOperationNode { Left = left, Operator = op, Right = right, Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
-        }
-
-        // Арифметические операторы: +, -, *, /
-        if (Check(Tokens.Plus) || Check(Tokens.Minus) || Check(Tokens.Star) || Check(Tokens.Slash) || Check(Tokens.Percent))
-        {
-            var op = Current().TokenType.ToString();
-            Advance();
-            var right = ParseExpression();
-            Logger.Log("CompilationProcess.End: Parsing expression");
-            return new BinaryOperationNode { Left = left, Operator = op, Right = right, Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+                Left = left,
+                Operator = "||",
+                Right = right,
+                Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+            };
         }
 
         return left;
     }
 
     /// <summary>
-    /// Парсит примитивные значения и вызовы функций/методов
+    /// Parsing logical '&&'
+    /// </summary>
+    private ASTNode ParseLogicalAnd()
+    {
+        var left = ParseEquality();
+
+        while (Check(Tokens.And) && Peek()?.TokenType == Tokens.And)
+        {
+            Advance(); // первый &
+            Advance(); // второй &
+            var right = ParseEquality();
+            left = new BinaryOperationNode
+            {
+                Left = left,
+                Operator = "&&",
+                Right = right,
+                Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+            };
+        }
+
+        return left;
+    }
+
+    /// <summary>
+    /// Parsing equality ('==', '!=')
+    /// </summary>
+    private ASTNode ParseEquality()
+    {
+        var left = ParseComparison();
+
+        while (true)
+        {
+            if (Check(Tokens.Equals) && Peek()?.TokenType == Tokens.Equals)
+            {
+                Advance(); // первый =
+                Advance(); // второй =
+                var right = ParseComparison();
+                left = new BinaryOperationNode
+                {
+                    Left = left,
+                    Operator = "==",
+                    Right = right,
+                    Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                    SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+                };
+            }
+            else if (Check(Tokens.Not) && Peek()?.TokenType == Tokens.Equals)
+            {
+                Advance(); // !
+                Advance(); // =
+                var right = ParseComparison();
+                left = new BinaryOperationNode
+                {
+                    Left = left,
+                    Operator = "!=",
+                    Right = right,
+                    Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                    SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+                };
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return left;
+    }
+
+    /// <summary>
+    /// Parsing comparison ('<', '>', '<=', '>=')
+    /// </summary>
+    private ASTNode ParseComparison()
+    {
+        var left = ParseAddition();
+
+        while (true)
+        {
+            if (Check(Tokens.Less))
+            {
+                string op;
+                if (Peek()?.TokenType == Tokens.Equals)
+                {
+                    Advance(); // <
+                    Advance(); // =
+                    op = "<=";
+                }
+                else
+                {
+                    Advance(); // <
+                    op = "Less";
+                }
+
+                var right = ParseAddition();
+                left = new BinaryOperationNode
+                {
+                    Left = left,
+                    Operator = op,
+                    Right = right,
+                    Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                    SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+                };
+            }
+            else if (Check(Tokens.Greater))
+            {
+                string op;
+                if (Peek()?.TokenType == Tokens.Equals)
+                {
+                    Advance(); // >
+                    Advance(); // =
+                    op = ">=";
+                }
+                else
+                {
+                    Advance(); // >
+                    op = "Greater";
+                }
+
+                var right = ParseAddition();
+                left = new BinaryOperationNode
+                {
+                    Left = left,
+                    Operator = op,
+                    Right = right,
+                    Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                    SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+                };
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return left;
+    }
+
+    /// <summary>
+    /// Parsing addition and subtraction ('+', '-')
+    /// </summary>
+    private ASTNode ParseAddition()
+    {
+        var left = ParseMultiplication();
+
+        while (Check(Tokens.Plus) || Check(Tokens.Minus))
+        {
+            var op = Current().TokenType.ToString();
+            Advance();
+            var right = ParseMultiplication();
+            left = new BinaryOperationNode
+            {
+                Left = left,
+                Operator = op,
+                Right = right,
+                Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+            };
+        }
+
+        return left;
+    }
+
+    /// <summary>
+    /// Parsing division, multiplication, percent ('*', '/', '%')
+    /// </summary>
+    private ASTNode ParseMultiplication()
+    {
+        var left = ParsePrimary();
+
+        while (Check(Tokens.Star) || Check(Tokens.Slash) || Check(Tokens.Percent))
+        {
+            var op = Current().TokenType.ToString();
+            Advance();
+            var right = ParsePrimary();
+            left = new BinaryOperationNode
+            {
+                Left = left,
+                Operator = op,
+                Right = right,
+                Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+            };
+        }
+
+        return left;
+    }
+
+    /// <summary>
+    /// Parsing primitive calls and function calls
     /// </summary>
     private ASTNode ParsePrimary()
     {
@@ -685,7 +813,7 @@ public class Parser
         throw new QlangCompileException($"Unexpected token in expression: {Current().TokenType} ({(Current().Value == "" ? "Null" : Current().Value)})", (IsAtEnd() ? 0 : Current().Line + 1), "Parser", Current().SourceFile);
     }
 
-    // Вспомогательные методы
+    // Support methods
     private Token Current() => _tokens[_position];
     private Token? Peek() => _position + 1 < _tokens.Count ? _tokens[_position + 1] : null;
     private bool IsAtEnd() => _position >= _tokens.Count;

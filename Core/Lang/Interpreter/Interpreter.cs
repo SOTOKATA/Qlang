@@ -105,7 +105,7 @@ public partial class Interpreter
         _contextStack.Push(context);
     }
 
-    private object ExecuteFunction(DynamicFunction? function, List<object> arguments, DynamicClass? ownerClass)
+    private object? ExecuteFunction(DynamicFunction? function, List<object> arguments, DynamicClass? ownerClass)
     {
         if (function is null)
             return null;
@@ -132,25 +132,25 @@ public partial class Interpreter
                     null, GetStackTrace());
 
             _return = false;
+            _isBreakKeyword = false;
+            _isContinueKeyword = false;
             _returnValue = null;
-            foreach (var statement in function.Body)
+            foreach (var statement in function.Body.TakeWhile(_ => !_return))
             {
-                if (_return)
-                {
-                    _return = false;
-                    return _returnValue;
-                }
-
                 if (statement is ReturnNode returnNode)
                 {
                     if (returnNode.ReturnValue is not null)
                         _returnValue = EvaluateExpression(returnNode.ReturnValue);
+                    
                     break;
                 }
 
                 ExecuteStatement(statement);
             }
-
+            
+            _return = false;
+            _isBreakKeyword = false;
+            _isContinueKeyword = false;
             return _returnValue;
         }
         finally

@@ -66,7 +66,6 @@ public static class PreCompile
 
             if (File.Exists(fullPath) && fullPath.EndsWith(".ql"))
             {
-                fileName = fullPath;
                 content = $"#FILE \"{fullPath}\"\n" +  IncludeFiles(File.ReadAllText(fullPath), fileName);
             }
             else if (Directory.Exists(fullPath))
@@ -82,8 +81,7 @@ public static class PreCompile
 
                     if (Path.GetExtension(file) == ".ql")
                     {
-                        fileName = file;
-                        content += $"#FILE \"{file}\"\n" + (IncludeFiles(File.ReadAllText(file), fileName) + "\n");
+                        content += $"#FILE \"{file}\"\n" + (IncludeFiles(File.ReadAllText(file), file) + "\n");
                     }
                 }
             }
@@ -98,7 +96,7 @@ public static class PreCompile
         if (files.Count <= 0) 
             return script;
         
-        return string.Join(Environment.NewLine, files) + Environment.NewLine + script;
+        return string.Join(Environment.NewLine, files) + Environment.NewLine + $"#FILE \"{fileName}\"" + Environment.NewLine + script;
 
     }
     
