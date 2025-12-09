@@ -5,9 +5,9 @@ namespace Qlang.Core.Lang.Dynamic.Exceptions;
 public class QlangCompileException : Exception
 {
     private int Line { get; }
-    
-    private string Source { get; }
-    
+
+    public override string? Source { get; set; }
+
     private string SourceFile { get; }
     
     public QlangCompileException(

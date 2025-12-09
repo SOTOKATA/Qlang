@@ -1,5 +1,6 @@
 using System.Text;
 using Qlang.Core.Lang.AST;
+using Qlang.Core.Lang.Compiler;
 using Qlang.Core.Lang.Dynamic;
 using Qlang.Core.Lang.Dynamic.Exceptions;
 using Qlang.Core.Lang.Interpreter.Native;
@@ -76,7 +77,7 @@ public partial class Interpreter
         return dynamicClass;
     }
 
-    private DynamicFunction ToDynamicFunction(FunctionNode functionNode)
+    private DynamicFunction ToDynamicFunction(FunctionNode? functionNode)
     {
         DynamicFunction dynamicFunction = new(functionNode.Name);
 
@@ -475,7 +476,7 @@ public partial class Interpreter
         }
     }
 
-    private List<object> GetCollection(List<object>? arg)
+    private List<object> GetCollection(List<object?> arg)
     {
         if (arg is null)
             throw new QlangRuntimeException("collection is null", null, GetStackTrace());
@@ -501,7 +502,6 @@ public partial class Interpreter
         return arg;
     }
 
-    // WARNING: is ChatGPT code
     private static string ParseString(ReadOnlySpan<char> input, bool csharpString = false)
     {
         var sb = new StringBuilder(input.Length);
@@ -543,12 +543,26 @@ public partial class Interpreter
 
         try
         {
-            List<object> args = [];
-            if (expr is CollectionNode collectionNode)
-            {
-                args = collectionNode.Collection.ConvertAll(EvaluateExpression);
-                Logger.Log("Is collection expression: " + args);
-            }
+            List<object?> args = [];
+            if (expr is not CollectionNode collectionNode)
+                return expr switch
+                {
+                    VariableNode varNode => GetVariable(varNode),
+                    StringRefNode strRef => GetStringRef(strRef),
+                    NumberRefNode numberRef => GetNumberRef(numberRef),
+                    BooleanNode booleanNode => booleanNode.Value,
+                    NumberNode num => num.Value,
+                    BinaryOperationNode binOp => EvaluateBinaryOperation(binOp),
+                    CollectionNode collection => GetCollection(collection.Collection.ConvertAll(EvaluateExpression)),
+                    NullNode => null,
+                    CallNode call => ExecuteObjectCalls(call),
+                    _ => throw new QlangRuntimeException(
+                        $"Unknown expression type: {expr.GetType().Name}",
+                        expr,
+                        GetStackTrace())
+                };
+            args = collectionNode.Collection.ConvertAll(EvaluateExpression);
+            Logger.Log("Is collection expression: " + args);
 
             return expr switch
             {
@@ -606,16 +620,17 @@ public partial class Interpreter
         try
         {
             Variable? var;
+            
+            if (varNode.Name == Keywords.ThisKeyword && HasContext)
+                return CurrentContext?.Class;
 
-            if (HasContext && CurrentContext.Blocks.Count > 0)
+            if (HasContext && CurrentContext != null && CurrentContext.Blocks.Count > 0)
                 for (var i = CurrentContext.Blocks.Count; i > 0; i--)
                     if (CurrentContext.Blocks[i].Variables.TryGetValue(varNode.Name, out var))
                         return var.Value;
 
-            if (HasContext && CurrentContext.Function?.Variables.TryGetValue(varNode.Name, out var) == true)
-                return var.Value;
-
-            if (HasContext && CurrentContext.Class?.Variables.TryGetValue(varNode.Name, out var) == true)
+            if (HasContext && (CurrentContext?.Function?.Variables.TryGetValue(varNode.Name, out var) == true || 
+                CurrentContext?.Class?.Variables.TryGetValue(varNode.Name, out var) == true))
                 return var.Value;
 
 
@@ -638,8 +653,8 @@ public partial class Interpreter
                 Logger.Log("Current class name: " + CurrentContext.Class.Name);
                 foreach (var var2 in CurrentContext.Class.Variables)
                 {
-                    object val = var2.Value.Value;
-                    string name = var2.Value.Name;
+                    var val = var2.Value.Value;
+                    var name = var2.Value.Name;
                     Logger.Log($"\tVariable: '{name}' = '{val}'");
                 }
             }
@@ -651,8 +666,8 @@ public partial class Interpreter
                 Logger.Log("Current function name: " + CurrentContext.Function.Name);
                 foreach (var var2 in CurrentContext.Function.Variables)
                 {
-                    object val = var2.Value.Value;
-                    string name = var2.Value.Name;
+                    var val = var2.Value.Value;
+                    var name = var2.Value.Name;
                     Logger.Log($"\tVariable: '{name}' = '{val}'");
                 }
             }
@@ -750,7 +765,7 @@ public partial class Interpreter
                     // Short-circuit: если левая часть true, правую не вычисляем
                     if (leftBool)
                     {
-                        Logger.Warn("LeftRight: " + binOp.Left.GetTree() + " and " + binOp.Right.GetTree());
+                        Logger.Warn("LeftRight: " + binOp.Left?.GetTree() + " and " + binOp.Right?.GetTree());
                         Logger.Warn($"Short-circuit ||: left is true, returning true");
                         return true;
                     }
@@ -792,6 +807,7 @@ public partial class Interpreter
                 {
                     "==" => Equals(left, right),
                     "!=" => !Equals(left, right),
+                    _ => throw new ArgumentOutOfRangeException()
                 };
 
             throw new QlangRuntimeException(

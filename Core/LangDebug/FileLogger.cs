@@ -5,7 +5,10 @@ namespace Qlang.Core.LangDebug;
 public class FileLogger
 {
     private string _filePath;
-
+    
+    // Disabled because of using function SetPath what set's path
+    #pragma warning restore CS8618 
+    #pragma warning disable CS8618
     public FileLogger(string filePath, bool append = false)
     {
         SetPath(filePath, append);

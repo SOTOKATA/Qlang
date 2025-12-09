@@ -80,13 +80,13 @@ public static class TableCreator
 
 public class ConsoleTable(List<List<TableCell>>? items, List<string>? separators = null)
 {
-    public List<List<TableCell>> Items = items;
-    public List<string> Separators = separators;
+    public readonly List<List<TableCell>>? Items = items;
+    public readonly List<string>? Separators = separators;
 }
 
-public class TableCell(string content, ConsoleColor fcolor = default, ConsoleColor bcolor = default)
+public class TableCell(string content, ConsoleColor fColor = default, ConsoleColor bColor = default)
 {
     public string Content { get; } = content;
-    public ConsoleColor ForeColor { get; } = fcolor == default ? Console.ForegroundColor : fcolor;
-    public ConsoleColor BackColor { get; } = bcolor == default ? Console.BackgroundColor : bcolor;
+    public ConsoleColor ForeColor { get; } = fColor == default ? Console.ForegroundColor : fColor;
+    public ConsoleColor BackColor { get; } = bColor == default ? Console.BackgroundColor : bColor;
 }

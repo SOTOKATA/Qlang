@@ -2,7 +2,7 @@
 
 public class WhileNode : ASTBlock
 {
-    public ASTNode Condition { get; set; }
+    public ASTNode? Condition { get; set; }
 
     public List<ASTNode> Body { get; set; } = [];
     
@@ -12,7 +12,7 @@ public class WhileNode : ASTBlock
     {
         return new WhileNode
         {
-            Condition = Condition.Clone(), 
+            Condition = Condition?.Clone(), 
             Body = Body.Select(node => node.Clone()).ToList(),
             IsDoWhile = IsDoWhile
         };

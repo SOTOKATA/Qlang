@@ -14,4 +14,9 @@ class Throw: {
     function parseException(let error): {
         exception("Parse error: " + error);
     }
+
+    // Thow exception when object is null
+    function nullException(): {
+        exception("Object is null");
+    }
 }

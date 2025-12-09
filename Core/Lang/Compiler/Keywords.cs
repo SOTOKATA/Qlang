@@ -6,6 +6,8 @@ public static class Keywords
     public static string ClassDeclaration => "class";
     public static string VariableDeclaration => "let";
     
+    public static string ThisKeyword => "this";
+    
     public static string NullKeyword => "null";
     
     public static string IfBlock => "if";
@@ -31,6 +33,6 @@ public static class Keywords
     [
         FunctionDeclaration, ClassDeclaration, VariableDeclaration, IfBlock, ElseBlock, WhileBlock, DoWhileBlock, 
         ForBlock, ReturnKeyword, TrueKeyword, FalseKeyword, IncludeKeyword, PrivateModificator, 
-        StaticModificator, ConstVariableDeclaration, ContinueKeyword, BreakKeyword, NullKeyword
+        StaticModificator, ConstVariableDeclaration, ContinueKeyword, BreakKeyword, NullKeyword, ThisKeyword
     ];
 }

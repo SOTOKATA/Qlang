@@ -1,4 +1,5 @@
 ﻿using Qlang.Core.Lang.AST;
+using Qlang.Core.Lang.Compiler;
 using Qlang.Core.Lang.Dynamic;
 using Qlang.Core.Lang.Dynamic.Exceptions;
 using Qlang.Core.LangDebug;
@@ -109,6 +110,9 @@ public partial class Interpreter
             case ObjectPointerNode objCall:
                 Logger.Log($"Detected object pointer: {objCall.Name}");
 
+                if (objCall.Name == Keywords.ThisKeyword && HasContext)
+                    return CurrentContext?.Class;
+                
                 if (_dynamicClasses.TryGetValue(objCall.Name, out var classNode))
                 {
                     Logger.Log($"Detected as static class");
@@ -121,7 +125,7 @@ public partial class Interpreter
                     Logger.Log($"Detected as class from temporary (lastReturnValue)");
                     return var?.Value;
                 }
-
+                
                 Logger.Log($"Detected as variable");
                 Logger.Log($"GetVariableParams: {objCall.Name}");
                 return GetVariable(new VariableNode { Name = objCall.Name });

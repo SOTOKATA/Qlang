@@ -7,7 +7,7 @@ public class QlangRuntimeException : Exception
 {
     private int Line { get; }
     private int Column { get; }
-    private string SourceFile { get; }
+    private string? SourceFile { get; }
     private new List<string> StackTrace { get; }
 
     public QlangRuntimeException(

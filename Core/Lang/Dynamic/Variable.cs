@@ -4,7 +4,7 @@ namespace Qlang.Core.Lang.Dynamic;
 
 public class Variable(string name, object? value, bool isStatic, bool isPrivate, bool isConst)
 {
-    public override string ToString()
+    public override string? ToString()
     {
         return Value?.ToString();       
     }

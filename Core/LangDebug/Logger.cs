@@ -45,7 +45,14 @@ public static class Logger
     private static string GetStackPath(string msg = "", string type = "", int depth = 3)
     {
         var frame = new StackTrace(true).GetFrame(depth);
+
+        if (frame == null)
+            return $"{type} [null/null{(msg != "" ? $" {msg}" : "")}]: ";
+        
         var method = frame.GetMethod();
+        
+        if (method == null)
+            return $"{type} [null/null{(msg != "" ? $" {msg}" : "")}]: ";
 
         return $"{type} [{method.DeclaringType?.Name}/{method.Name}{(msg != "" ? $" {msg}" : "")}]: ";
     }

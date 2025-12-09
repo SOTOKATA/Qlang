@@ -1,8 +1,9 @@
 ﻿namespace Qlang.Core.Lang.AST;
 
-public class ASTGetTreeBuilder
+// ReSharper disable once InconsistentNaming
+public static class ASTGetTreeBuilder
 {
-    public static string Build(string astName, List<object> nodes, string indent = "")
+    public static string Build(string astName, List<object?> nodes, string indent = "")
     {
         var result = $"{indent}@{astName}:";
 
@@ -10,7 +11,7 @@ public class ASTGetTreeBuilder
         {
             var toWrite = ""; //$"{indent}" + "|---"
             
-            var subIndent = "[--]";
+            const string subIndent = "[--]";
             
             toWrite += node switch
             {
@@ -26,7 +27,6 @@ public class ASTGetTreeBuilder
 
             result += "\n" + toWrite;
         }
-//nodes.Aggregate(result, (current, node) => current)
         return result;
     }
 

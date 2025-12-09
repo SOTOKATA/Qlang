@@ -1,10 +1,13 @@
 include "$lib/base"
+include "$lib/filesystem"
 
 class BaseTest: {
     function runTest(): {
         _stringTest();
 
         _numberTest();
+
+        _mathTest();
 
         _arrayTest();
 
@@ -15,6 +18,77 @@ class BaseTest: {
         _regexTest();
 
         _vectorTest();
+
+        _pathTest();
+
+        _fileTest();
+    }
+
+    function _mathTest(): {
+        let a = 5.5;
+        let b = 1.2;
+
+        printHeader("math");
+    
+        Console.println("Work with numbers: a = " + a + ", b = " + b);
+        Console.println("\nMax: " + Math.max(a, b));
+        Console.println("Min: " + Math.min(a, b));
+        Console.println("Abs of a (" + a + "): " + Math.abs(a));
+    }
+
+    function _pathTest(): {
+        let path = ".\\file.com";
+
+        if File.exists(path) == false: {
+            File.create(path);
+        }
+
+        printHeader("path");
+
+        Console.println("Work with path: '" + path + "'");
+        Console.println("\nExists: " + Path.exists(path));
+
+        Console.println("\nExtension: " + Path.getExtension(path));
+        Console.println("Has extension: " + Path.hasExtension(path));
+        Console.println("Change extension (to '.ql'): " + Path.changeExtension(path, ".ql"));
+        
+        Console.println("\nFile name (without extension): " + Path.getFileName(path));
+        Console.println("Full file name: " + Path.getFullFileName(path));
+
+        File.remove(path);
+    }
+
+    function _fileTest(): {
+        let path = ".\\file.com";
+
+        printHeader("file");
+
+
+        if File.exists(path) == false: {
+            File.create(path);
+            Console.println("File created.");
+        } else: {
+            Console.println("File already created.");
+
+        }
+
+        File.setContent(path, "EXAMPLE_OF_FILE");
+
+        Console.println("\nWork with path: '" + path + "'");
+
+        Console.println("\nExists: " + File.exists(path));
+
+        Console.println("\nContent: '" + File.getContent(path).str() + "'");
+
+        File.setContent(path, "Hello ");
+        Console.println("Set content 'Hello ': '" + File.getContent(path).str() + "'");
+
+        File.appendContent(path, "World!");
+        Console.println("Append content 'World!': '" + File.getContent(path).str() + "'");
+
+        File.remove(path);
+        Console.println("\nFile removed.");
+
     }
 
     private function printHeader(let str): {

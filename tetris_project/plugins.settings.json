@@ -1,6 +1,0 @@
-{
-  "plugins": {
-    "$type": "System.Collections.Generic.List`1[[Qlang.Core.ProjectManager.Settings.PluginSettings, ql]], System.Private.CoreLib",
-    "$values": []
-  }
-}

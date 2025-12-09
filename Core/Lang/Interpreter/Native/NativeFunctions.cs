@@ -93,7 +93,13 @@ public class NativeFunctionRegistry
         
         // Path
         Register("path_combine", (Func<List<object>, string>)((arr) => Path.Combine(arr.Cast<string>().ToArray())));
-        
+        Register("path_extension", (Func<string, string?>)Path.GetExtension);
+        Register("path_has_extension", (Func<string, bool>)Path.HasExtension);
+        Register("path_change_extension", (Func<string?, string?, string?>)Path.ChangeExtension);
+        Register("path_file_name_without_extension", (Func<string, string?>)Path.GetFileNameWithoutExtension);
+        Register("path_file_name", (Func<string, string?>)Path.GetFileName);
+        Register("path_exists", (Func<string, bool>)Path.Exists);
+
         // Directory
         Register("directory_exists", (Func<string, bool>)Directory.Exists);
         Register("directory_create", (Action<string>)((path) => Directory.CreateDirectory(path)));

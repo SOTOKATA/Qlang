@@ -104,7 +104,7 @@ public class Parser
             return ParseVariableDeclaration(isStatic, isPrivate, true, true);
 
         // method call statement (Object.method(...)) || Call method from class pointer
-        if (Check(Tokens.Identifier))
+        if (Check(Tokens.Identifier) || (Check(Tokens.Keyword) && Current().Value == Keywords.ThisKeyword))
         {
             var expr = ParseExpression();
             Expect(Tokens.Semicolon);
@@ -638,7 +638,7 @@ public class Parser
         }
 
         // Identifier - может быть вызовом метода или функции
-        if (Check(Tokens.Identifier))
+        if (Check(Tokens.Identifier) || (Check(Tokens.Keyword) && Current().Value == Keywords.ThisKeyword))
         {
             var firstIdentifier = Advance().Value;
 

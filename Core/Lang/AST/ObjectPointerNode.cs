@@ -2,7 +2,7 @@
 
 public class ObjectPointerNode : ASTNode
 {
-    public string Name;
+    public string? Name;
     
     public override string GetTree(string indent = "")
     {

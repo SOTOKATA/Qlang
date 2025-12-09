@@ -8,7 +8,7 @@ public partial class Project
     {
         try
         {
-            CompileSettings.Set(param, value);
+            _compileSettings.Set(param, value);
         }
         catch (Exception ex)
         {
@@ -17,12 +17,12 @@ public partial class Project
         }
 
         ConsoleLogger.Set($"{param}: {value}");
-        CompileSettings.Save();
+        _compileSettings.Save();
     }
 
     public static object? GetCompileSetting(string param)
     {
-        return CompileSettings.Get(param);
+        return _compileSettings?.Get(param);
     }
 
     public void Compile()

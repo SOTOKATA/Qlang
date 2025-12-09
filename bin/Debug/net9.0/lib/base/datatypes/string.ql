@@ -4,8 +4,28 @@ include "$lib/base"
 class String: {
     private let _value = "";
 
+    function toString(): {
+        return _value;
+    }
+
     function new(let input): {
         _value = input;
+    }
+
+    function getPrimitive(let strOrPrimite): {
+        if (Object.isNull(strOrPrimite)): {
+            Throw.exception("Object is null");
+        }
+
+        if (String.isString(strOrPrimite)): {
+            return strOrPrimite.str();
+        }
+
+        if (String.isPrimitive(strOrPrimite)): {
+            return strOrPrimite;
+        }
+
+        Throw.exception("Object is not string or primitive");
     }
 
     function str(): {

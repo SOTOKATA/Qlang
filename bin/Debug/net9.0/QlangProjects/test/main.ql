@@ -1,6 +1,5 @@
-include "$lib/base"
-include "$lib/special/tetris"
+include "$lib/special/basetest"
 
 function main(): {
-    TetrisGame.run();
+    BaseTest.runTest();
 }

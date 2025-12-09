@@ -8,8 +8,8 @@ public partial class Project
 {
     public ProjectSettings Settings;
 
-    public static CompileSettings? CompileSettings;
-    public static PluginsSettings? PluginsSettings;
+    private static CompileSettings? _compileSettings;
+    private static PluginsSettings? _pluginsSettings;
 
     private readonly QLang _qlang = new();
 
@@ -53,15 +53,15 @@ public partial class Project
 
         string settingsPath = Path.Combine(projectPath, "compile.settings.json");
         File.Create(settingsPath).Close();
-        Project.CompileSettings = new CompileSettings(settingsPath, null);
+        Project._compileSettings = new CompileSettings(settingsPath, null);
     
-        Project.CompileSettings.Save();
+        Project._compileSettings.Save();
         
         settingsPath = Path.Combine(projectPath, "plugins.settings.json");
         File.Create(settingsPath).Close();
-        Project.PluginsSettings = new PluginsSettings(settingsPath, null);
+        Project._pluginsSettings = new PluginsSettings(settingsPath, null);
         
-        Project.PluginsSettings.Save();
+        Project._pluginsSettings.Save();
 
         return proj;
     }
@@ -90,11 +90,11 @@ public partial class Project
         
         string settingsPath = Path.Combine(projectPath, "compile.settings.json");
         var dict =  JsonConvert.DeserializeObject<Dictionary<string, object?>>(File.ReadAllText(settingsPath));
-        Project.CompileSettings = new CompileSettings(settingsPath, dict);
+        Project._compileSettings = new CompileSettings(settingsPath, dict);
         
         string pluginsPath = Path.Combine(projectPath, "plugins.settings.json");
         dict =  JsonConvert.DeserializeObject<Dictionary<string, object?>>(File.ReadAllText(settingsPath));
-        Project.PluginsSettings = new PluginsSettings(pluginsPath, dict);
+        Project._pluginsSettings = new PluginsSettings(pluginsPath, dict);
         
         return proj;
     }

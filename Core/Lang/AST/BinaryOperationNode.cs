@@ -2,17 +2,17 @@
 
 public class BinaryOperationNode : ASTNode
 {
-    public ASTNode Left { get; set; }
-    public string Operator { get; set; }  // "==", "+", "-", etc.
-    public ASTNode Right { get; set; }
+    public ASTNode? Left { get; set; }
+    public string? Operator { get; set; }  // "==", "+", "-", etc.
+    public ASTNode? Right { get; set; }
 
     public override ASTNode Clone()
     {
         return new BinaryOperationNode
         {
-            Left = Left.Clone(),
+            Left = Left?.Clone(),
             Operator = Operator,
-            Right = Right.Clone(),
+            Right = Right?.Clone(),
         };
     }
 

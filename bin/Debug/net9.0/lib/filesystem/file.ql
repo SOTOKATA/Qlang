@@ -4,11 +4,15 @@ class File: {
     // Return type: bool
     // Returns true if file found
     function exists(let path): {
+        path = String.getPrimitive(path);
+
         return _native("file_exists", path);
     }
 
     // Override file content
-    function setContent(let path, let content): {
+    function setContent(let path, const content): {
+        path = String.getPrimitive(path);
+
         if exists(path) == false: {
             File.create(path);
         }
@@ -17,7 +21,9 @@ class File: {
     }
 
     // Append content to end file
-    function appendContent(let path, let content): {
+    function appendContent(let path, const content): {
+        path = String.getPrimitive(path);
+
         if exists(path) == false: {
             Throw.exception("file path '" + path + "' is not found");
         }
@@ -28,6 +34,8 @@ class File: {
     // Return type: string
     // Get file content
     function getContent(let path): {
+        path = String.getPrimitive(path);
+
         if exists(path) == false: {
             Throw.exception("file path '" + path + "' is not found");
         }
@@ -37,11 +45,15 @@ class File: {
 
     // Create file
     function create(let path): {
+        path = String.getPrimitive(path);
+
         _native("file_create", path);
     }
 
     // Remove file
     function remove(let path): {
+        path = String.getPrimitive(path);
+        
         if exists(path) == false: {
             Throw.exception("file path '" + path + "' is not found");
         }
