@@ -65,24 +65,24 @@ class String: {
     }
 
     function toLower(): {
-        return String.new(_native("str_to_lower", _str(_value)));
+        return String.new(_native("lib.str_to_lower", _str(_value)));
     }
 
     function toUpper(): {
-        return String.new(_native("str_to_upper", _str(_value)));
+        return String.new(_native("lib.str_to_upper", _str(_value)));
     }
 
     function isString(let value): {
-        value =  _native("str_is_str", value);
+        value =  _native("lib.str_is_str", value);
         return value;
     }
 
     function isPrimitive(let value): {
-        return _native("str_is_primitive", value);
+        return _native("lib.str_is_primitive", value);
     }
 
     function split(let pattern): {
-        return Array.new(_native("str_split", _str(_value), pattern));
+        return Array.new(_native("lib.str_split", _str(_value), pattern));
     }
 
     function join(let strArr, let pattern): {
@@ -95,12 +95,12 @@ class String: {
             strArr = strArr.getCollection();
         }
 
-        return String.new(_native("str_join", strArr, pattern));
+        return String.new(_native("lib.str_join", strArr, pattern));
     }
 
     // Get length of string
     function length(): {
-        return _native("str_length", _str(_value));
+        return _native("lib.str_length", _str(_value));
     }
 
     // Check if string is empty or null
@@ -113,7 +113,7 @@ class String: {
             str = str.str();
         }
 
-        return _native("str_null_or_empty", _str(str));
+        return _native("lib.str_null_or_empty", _str(str));
     }
     
     // Check if string is white space or null
@@ -126,22 +126,22 @@ class String: {
             str = str.str();
         }
 
-        return _native("str_null_or_white_space", _str(str));
+        return _native("lib.str_null_or_white_space", _str(str));
     }
 
     // Trim string
     function trim(): {
-        return String.new(_native("str_trim", _str(_value)));
+        return String.new(_native("lib.str_trim", _str(_value)));
     }
 
     // Trim start string
     function trimStart(): {
-        return String.new(_native("str_trim_start", _str(_value)));
+        return String.new(_native("lib.str_trim_start", _str(_value)));
     }
 
     // Trim end string
     function trimEnd(): {
-        return String.new(_native("str_trim_end", _str(_value)));
+        return String.new(_native("lib.str_trim_end", _str(_value)));
     }
 
     // Cut string by 'startPos' and 'length'
@@ -158,6 +158,6 @@ class String: {
             Throw.exception("Value 'length' can't be more than string length");
         }
 
-        return String.new(_native("str_sub_string", _str(_value), startPos, length));
+        return String.new(_native("lib.str_sub_string", _str(_value), startPos, length));
     }
 }

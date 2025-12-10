@@ -2,7 +2,7 @@
 class Throw: {
     // Throw default exception
     function exception(let message): {
-        _native("exception", _str(message));
+        _native("lib.exception", _str(message));
     }
 
     // Thow exception if function is not implement

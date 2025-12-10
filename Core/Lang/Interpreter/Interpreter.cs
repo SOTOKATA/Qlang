@@ -11,13 +11,14 @@ namespace Qlang.Core.Lang.Interpreter;
 
 public partial class Interpreter
 {
-    public Interpreter(Dictionary<string, string> stringDictionary, Dictionary<string, object> numberDictionary)
+    public Interpreter(Dictionary<string, string> stringDictionary, Dictionary<string, object> numberDictionary, NativeFunctionRegistry nativeFunctions)
     {
         _stringDictionary = stringDictionary;
         _numberDictionary = numberDictionary;
+        _nativeFunctions = nativeFunctions;
     }
 
-    private readonly NativeFunctionRegistry _nativeFunctions = new();
+    private readonly NativeFunctionRegistry _nativeFunctions;
 
     private readonly Dictionary<string, string> _stringDictionary;
 

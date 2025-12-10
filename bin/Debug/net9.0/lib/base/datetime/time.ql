@@ -1,3 +1,5 @@
+include "$lib/base"
+
 class Time: {
     function wait(let millisec): {
         if Number.isNumber(millisec) == false: {
@@ -6,6 +8,6 @@ class Time: {
 
         millisec = Parser.asInt(millisec);
 
-        _native("time_wait", millisec);
+        _native("lib.time_wait", millisec);
     }
 }

@@ -1,3 +1,5 @@
+include "$lib/base"
+
 // Full static class
 // Class to make operations with numbers
 class Number: {
@@ -7,7 +9,7 @@ class Number: {
 
     // check if 'var' is number
     function isNumber(let var): {
-        return _native("try_parse_number", var);
+        return _native("lib.try_parse_number", var);
     }
 
     // get random number with range 'min' to 'max'
@@ -24,7 +26,7 @@ class Number: {
             Throw.exception("Minimum can't be more than maximum");
         }
 
-        return Parser.asNumber(_native("random", min, max));
+        return Parser.asNumber(_native("lib.random", min, max));
     }
 
     // Get int styled number ('3.421' to '3')
@@ -34,6 +36,6 @@ class Number: {
 
     // Change numeric style (ex.: '3.214' to '3.2' with pattern '0.0')
     function toFixed(let number, let pattern): {
-        return _native("to_string_number", number, _str(pattern));
+        return _native("lib.to_string_number", number, _str(pattern));
     }
 }

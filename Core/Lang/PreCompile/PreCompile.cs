@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using Qlang.Core.Lang.Compiler;
 using Qlang.Core.Lang.Dynamic.Exceptions;
+using Qlang.Core.Lang.Interpreter.Native;
 using Qlang.Core.LangDebug;
 
 namespace Qlang.Core.Lang.PreCompile;
@@ -25,7 +26,7 @@ public static class PreCompile
 
         List<string> includedContents = [];
 
-        foreach ((string source, int index) in includeLines)
+        foreach ((var source, var index) in includeLines)
         {
             var line = source.Replace($"{Keywords.IncludeKeyword} ", "").Replace("\"", "");
 
@@ -48,8 +49,8 @@ public static class PreCompile
 
             Logger.Log(fullPath, "Path");
 
-            bool isDirectory = Directory.Exists(fullPath);
-            bool isFile = File.Exists(fullPath) || File.Exists(fullPath + ".ql");
+            var isDirectory = Directory.Exists(fullPath);
+            var isFile = File.Exists(fullPath) || File.Exists(fullPath + ".ql");
 
             if (!isDirectory && !isFile)
                 throw new QlangCompileException($"{Keywords.IncludeKeyword} file or directory not found: {fullPath}", index, "PreCompile/IncludeFiles", fileName);
@@ -58,7 +59,7 @@ public static class PreCompile
 
             if (isDirectory)
             {
-                foreach (string file in Directory.GetFiles(fullPath, "*.ql", SearchOption.TopDirectoryOnly))
+                foreach (var file in Directory.GetFiles(fullPath, "*.ql", SearchOption.TopDirectoryOnly))
                 {
                     Logger.Log(file, "Path");
                     
@@ -68,8 +69,8 @@ public static class PreCompile
                         continue;
                     }
 
-                    string fileContent = File.ReadAllText(file);
-                    string processedContent = IncludeFiles(fileContent, file);
+                    var fileContent = File.ReadAllText(file);
+                    var processedContent = IncludeFiles(fileContent, file);
                     includedContents.Add(processedContent);
                 }
             }
@@ -87,8 +88,8 @@ public static class PreCompile
                     continue;
                 }
 
-                string fileContent = File.ReadAllText(fullPath);
-                string processedContent = IncludeFiles(fileContent, fullPath);
+                var fileContent = File.ReadAllText(fullPath);
+                var processedContent = IncludeFiles(fileContent, fullPath);
                 includedContents.Add(processedContent);
             }
         }
@@ -102,6 +103,92 @@ public static class PreCompile
         result.Append(script);
         
         return result.ToString();
+    }
+    
+    private static readonly HashSet<string> IncludedNative = new(StringComparer.OrdinalIgnoreCase);
+
+    public static (NativeFunctionRegistry register, string newScript) IncludeNativeFiles(string script, string fileName, NativeFunctionRegistry nativeFunctions)
+    {
+        Logger.Log($"File: " + fileName, "IncludeNativeFiles");
+
+        var includeLines = script
+            .Split('\n')
+            .Select((line, index) => (Line: line.Trim(), LineNumber: index + 1))
+            .Where(x => x.Line.StartsWith(Keywords.IncludeNativeKeyword + " "))
+            .ToArray();
+
+        if (includeLines.Length > 0)
+            Logger.Log(string.Join(", ", includeLines), Keywords.IncludeNativeKeyword);
+
+        foreach ((var source, var index) in includeLines)
+        {
+            var line = source.Replace($"{Keywords.IncludeNativeKeyword} ", "").Replace("\"", "");
+
+            string fullPath;
+
+            if (line.StartsWith('$'))
+            {
+                var exePath = Path.GetDirectoryName(Environment.ProcessPath);
+
+                if (exePath is null)
+                    throw new QlangCompileException(
+                        $"{Keywords.IncludeNativeKeyword} '{line}' Error: Process path is not found", index,
+                        "PreCompile/IncludeNativeFiles", fileName);
+
+                fullPath = Path.Combine(exePath, line[1..]);
+            }
+            else
+                fullPath = Path.Combine(Directory.GetCurrentDirectory(), line);
+
+            fullPath = fullPath.Replace('\\', Path.DirectorySeparatorChar)
+                .Replace('/', Path.DirectorySeparatorChar);
+
+            Logger.Log(fullPath, "Path");
+
+            var isDirectory = Directory.Exists(fullPath);
+            var isFile = File.Exists(fullPath) || File.Exists(fullPath + ".dll");
+
+            if (!isDirectory && !isFile)
+                throw new QlangCompileException($"{Keywords.IncludeNativeKeyword} file or directory not found: {fullPath}",
+                    index, "PreCompile/IncludeNativeFiles", fileName);
+
+            script = script.Replace(source, "");
+
+            if (isDirectory)
+            {
+                foreach (var file in Directory.GetFiles(fullPath, "*.dll", SearchOption.TopDirectoryOnly))
+                {
+                    Logger.Log(file, "Path");
+
+                    if (!IncludedNative.Add(file))
+                    {
+                        Logger.Warn($"{file}", "Skipped (already included)");
+                        continue;
+                    }
+
+                    nativeFunctions.LoadPlugin(file);
+                }
+            }
+            else
+            {
+                if (!fullPath.EndsWith(".dll"))
+                    fullPath += ".dll";
+
+                if (!fullPath.EndsWith(".dll"))
+                    throw new QlangCompileException($"File '{fullPath}' is not Native file type (.dll)", index,
+                        "PreCompile/IncludeNativeFiles", fileName);
+
+                if (!IncludedNative.Add(fullPath))
+                {
+                    Logger.Warn($"{fullPath}", "Skipped (already included)");
+                    continue;
+                }
+
+                nativeFunctions.LoadPlugin(fullPath);
+            }
+        }
+
+        return (nativeFunctions, script);
     }
     
     public static (string outScript, Dictionary<string, object> dictionary) ExtractNumbers(string script)
@@ -193,7 +280,7 @@ public static class PreCompile
         
         var result = Regex.Replace(script, pattern, match =>
         {
-            string comment = match.Value;
+            var comment = match.Value;
         
             Logger.Log($"comment='{comment}'");
         

@@ -1,4 +1,5 @@
 include "$lib/base"
+include "$lib/filesystem"
 
 class File: {
     // Return type: bool
@@ -6,7 +7,7 @@ class File: {
     function exists(let path): {
         path = String.getPrimitive(path);
 
-        return _native("file_exists", path);
+        return _native("lib.file_exists", path);
     }
 
     // Override file content
@@ -17,7 +18,7 @@ class File: {
             File.create(path);
         }
 
-        _native("file_set_content", path, _str(content));
+        _native("lib.file_set_content", path, _str(content));
     }
 
     // Append content to end file
@@ -28,7 +29,7 @@ class File: {
             Throw.exception("file path '" + path + "' is not found");
         }
 
-        _native("file_append_content", path, _str(content));
+        _native("lib.file_append_content", path, _str(content));
     }
 
     // Return type: string
@@ -40,14 +41,14 @@ class File: {
             Throw.exception("file path '" + path + "' is not found");
         }
 
-        return String.new(_native("file_get_content", path));
+        return String.new(_native("lib.file_get_content", path));
     }
 
     // Create file
     function create(let path): {
         path = String.getPrimitive(path);
 
-        _native("file_create", path);
+        _native("lib.file_create", path);
     }
 
     // Remove file
@@ -58,6 +59,6 @@ class File: {
             Throw.exception("file path '" + path + "' is not found");
         }
 
-        _native("file_remove", path);
+        _native("lib.file_remove", path);
     }
 }

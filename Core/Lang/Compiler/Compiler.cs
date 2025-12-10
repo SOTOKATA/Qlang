@@ -1,4 +1,5 @@
 ﻿using Qlang.Core.Lang.AST;
+using Qlang.Core.Lang.Interpreter.Native;
 using Qlang.Core.LangDebug;
 
 namespace Qlang.Core.Lang.Compiler;
@@ -11,10 +12,10 @@ public class Compiler
     
     public Dictionary<string, string> StringDictionary = [];
     public Dictionary<string, object> NumberDictionary = [];
+    public NativeFunctionRegistry NativeFunctions = new();
 
     private readonly Parser _parser = new();
-    private readonly Lexer _lexer = new();
-  
+
     public ProgramNode Compile(string fileName, string script)
     {
         _originalScript = script;
@@ -28,6 +29,10 @@ public class Compiler
         _outputScript = PreCompile.PreCompile.IncludeFiles(_originalScript, fileName);
         Logger.Succ("All includes processed successfully.");
         
+        Logger.Log("Include Native Files");
+        (NativeFunctions, _outputScript) = PreCompile.PreCompile.IncludeNativeFiles(_outputScript, fileName, NativeFunctions);
+        Logger.Succ("All native includes processed successfully.");
+        
         _outputScript = PreCompile.PreCompile.ClearComments(_outputScript);
         
         (_outputScript, StringDictionary) = PreCompile.PreCompile.ExtractStrings(_outputScript);
@@ -40,15 +45,8 @@ public class Compiler
         fl.Log(_outputScript);
 
         List<Token> tokens;
-        
-        try
-        {
-            tokens = Lexer.Lex(fileName, _outputScript);
-        }
-        catch
-        {
-            throw;
-        }
+
+        tokens = Lexer.Lex(fileName, _outputScript);
 
         fl.SetPath("Logs\\script_tokenized.js");
 

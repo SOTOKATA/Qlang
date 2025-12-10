@@ -1,5 +1,6 @@
 ﻿using Qlang.Core.Lang.AST;
 using Qlang.Core.Lang.Dynamic.Exceptions;
+using Qlang.Core.Lang.Interpreter.Native;
 
 namespace Qlang.Core.Lang;
 
@@ -8,6 +9,7 @@ public class QLang
     private ProgramNode? _programNode;
     private Dictionary<string, string> _stringDictionary = [];
     private Dictionary<string, object> _numberDictionary = [];
+    private NativeFunctionRegistry _nativeFunctions;
     
     public bool Compile(string path)
     {
@@ -27,6 +29,7 @@ public class QLang
 
         _stringDictionary = c.StringDictionary;
         _numberDictionary = c.NumberDictionary;
+        _nativeFunctions = c.NativeFunctions;
         
         SaveProgram(_programNode, path);
 
@@ -50,7 +53,7 @@ public class QLang
         if (_programNode == null)
             throw new Exception("Program Node is null (program is not compiled)");
         
-        Interpreter.Interpreter interpreter = new(_stringDictionary, _numberDictionary);
+        Interpreter.Interpreter interpreter = new(_stringDictionary, _numberDictionary, _nativeFunctions);
         
         interpreter.Execute(_programNode, args);
     }

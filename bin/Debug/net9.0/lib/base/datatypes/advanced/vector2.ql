@@ -1,3 +1,5 @@
+include "$lib/base"
+
 class Vector2: {
     private let _x;
     private let _y;

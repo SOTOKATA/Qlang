@@ -1,4 +1,5 @@
 include "$lib/base"
+include "$lib/filesystem"
 
 class Path: {
     function combine(let arr): {
@@ -10,42 +11,42 @@ class Path: {
             arr = arr.getCollection();
         }
 
-        return String.new(_native("path_combine", arr));
+        return String.new(_native("lib.path_combine", arr));
     }
 
     function exists(let path): {
         path = String.getPrimitive(path);
 
-        return _native("path_exists", path);
+        return _native("lib.path_exists", path);
     }
 
     function getExtension(let path): {
         path = String.getPrimitive(path);
 
-        return _native("path_extension", path);
+        return _native("lib.path_extension", path);
     }
 
     function hasExtension(let path): {
         path = String.getPrimitive(path);
 
-        return _native("path_has_extension", path);
+        return _native("lib.path_has_extension", path);
     }
 
     function changeExtension(let path, const extension): {
         path = String.getPrimitive(path);
 
-        return _native("path_change_extension", path, extension);
+        return _native("lib.path_change_extension", path, extension);
     }
 
     function getFileName(let path): {
         path = String.getPrimitive(path);
 
-        return _native("path_file_name_without_extension", path);
+        return _native("lib.path_file_name_without_extension", path);
     }
 
     function getFullFileName(let path): {
         path = String.getPrimitive(path);
         
-        return _native("path_file_name", path);
+        return _native("lib.path_file_name", path);
     }
 }

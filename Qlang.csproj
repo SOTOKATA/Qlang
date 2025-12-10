@@ -13,6 +13,7 @@
       <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.14.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 
+      <Compile Remove="UISupport\**\*.cs" />
     </ItemGroup>
 
 </Project>

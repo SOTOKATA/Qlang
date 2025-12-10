@@ -1,6 +1,7 @@
 using Qlang.Core.Lang.AST;
 using Qlang.Core.Lang.Dynamic.Exceptions;
 using Qlang.Core.LangDebug;
+using Qlang.Core.ProjectManager;
 
 namespace Qlang.Core.Lang.Compiler;
 
@@ -164,11 +165,11 @@ public class Parser
         Expect(Tokens.RParen);
         Expect(Tokens.Colon);
         // Expect(Tokens.Semicolon);
-        Expect(Tokens.LBrace);
 
+        // if (!Check(Tokens.LBrace))
+        //     throw new QlangCompileException("Function's body cannot be one-line", Current().Line, "Parser", Current().SourceFile);
+        
         List<ASTNode> body = ParseBlock();
-
-        Expect(Tokens.RBrace);
 
         Logger.Log("CompilationProcess.End: Parsing function");
         return new FunctionNode
@@ -191,11 +192,11 @@ public class Parser
 
         Expect(Tokens.Colon);
         // Expect(Tokens.Semicolon);
-        Expect(Tokens.LBrace);
+        
+        if (!Check(Tokens.LBrace))
+            throw new QlangCompileException("Class's body cannot be one-line", Current().Line, "Parser", Current().SourceFile);
 
         List<ASTNode> body = ParseBlock();
-
-        Expect(Tokens.RBrace);
 
         Logger.Log("CompilationProcess.End: Parsing class");
         return new ClassNode { Name = name, Body = body, Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
@@ -214,11 +215,9 @@ public class Parser
 
         Expect(Tokens.Colon);
         // Expect(Tokens.Semicolon);
-        Expect(Tokens.LBrace);
 
         List<ASTNode> forBlock = ParseBlock();
 
-        Expect(Tokens.RBrace);
 
         Logger.Log("CompilationProcess.End: Parsing for");
         return new ForNode { Assignment = assignment, Statement = statement, Condition = condition, Body = forBlock, Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile), };
@@ -231,11 +230,8 @@ public class Parser
         var condition = ParseExpression();
         Expect(Tokens.Colon);
         // Expect(Tokens.Semicolon);
-        Expect(Tokens.LBrace);
 
         List<ASTNode> whileBlock = ParseBlock();
-
-        Expect(Tokens.RBrace);
 
         Logger.Log("CompilationProcess.End: Parsing while");
         return new WhileNode { Condition = condition, Body = whileBlock, IsDoWhile = isDoWhile, Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
@@ -248,11 +244,9 @@ public class Parser
         var condition = ParseExpression();
         Expect(Tokens.Colon);
         // Expect(Tokens.Semicolon);
-        Expect(Tokens.LBrace);
 
         List<ASTNode> thenBlock = ParseBlock();
 
-        Expect(Tokens.RBrace);
 
         List<ASTNode> elseBlock = [];
 
@@ -268,9 +262,7 @@ public class Parser
             {
                 Expect(Tokens.Colon);
                 // Expect(Tokens.Semicolon);
-                Expect(Tokens.LBrace);
                 elseBlock = ParseBlock();
-                Expect(Tokens.RBrace);
             }
         }
 
@@ -283,10 +275,20 @@ public class Parser
         List<ASTNode> statements = [];
         Logger.Log("CompilationProcess: Parsing block");
         
+        if (Check(Tokens.LBrace) && Peek()?.TokenType == Tokens.RBrace)
+        {
+            Expect(Tokens.LBrace);
+            Expect(Tokens.RBrace);
+            return [];
+        }
+        
         // One line block
-        if (Check(Tokens.RBrace))
+        // {
+        if (!Check(Tokens.LBrace))
             statements.Add(ParseStatement());
         else
+        {
+            Expect(Tokens.LBrace);
             while (!Check(Tokens.RBrace) && !IsAtEnd())
             {
                 if (Check(Tokens.Semicolon))
@@ -294,8 +296,11 @@ public class Parser
                     Advance();
                     continue;
                 }
+
                 statements.Add(ParseStatement());
             }
+            Expect(Tokens.RBrace);
+        }
 
         Logger.Log("CompilationProcess.End: Parsing block");
         return statements;

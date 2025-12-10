@@ -24,6 +24,7 @@ public static class Keywords
     public static string FalseKeyword => "false";
 
     public static string IncludeKeyword => "include";
+    public static string IncludeNativeKeyword => "native";
   
     public static string PrivateModificator => "private";
     public static string StaticModificator => "static";
