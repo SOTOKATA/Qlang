@@ -8,7 +8,7 @@ class Console: {
     }
 
     // Print text to console with new line
-    function println(let message): {
+    function println(let message = ""): {
         message = String.getPrimitive(message);
 
         _native("cmd_write", _str(message + "\n"));
@@ -22,7 +22,7 @@ class Console: {
     }
 
     // Print Verbatim text to console with new line
-    function printlnVerbatim(let message): {
+    function printlnVerbatim(let message = ""): {
         message = String.getPrimitive(message);
 
         _native("cmd_write", message + _str("\n"));
@@ -33,7 +33,7 @@ class Console: {
         return String.new(_native("cmd_read"));
     }
 
-    function readkey(let intercept): {
+    function readkey(let intercept = false): {
         return String.new(_native("cmd_key", intercept));
     }
 

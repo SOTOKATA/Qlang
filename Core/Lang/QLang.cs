@@ -45,13 +45,13 @@ public class QLang
         File.WriteAllText(path, json);
     }
 
-    public void Run()
+    public void Run(List<string?>? args)
     {
         if (_programNode == null)
             throw new Exception("Program Node is null (program is not compiled)");
         
         Interpreter.Interpreter interpreter = new(_stringDictionary, _numberDictionary);
         
-        interpreter.Execute(_programNode);
+        interpreter.Execute(_programNode, args);
     }
 }

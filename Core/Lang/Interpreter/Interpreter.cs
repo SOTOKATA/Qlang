@@ -23,7 +23,7 @@ public partial class Interpreter
 
     private readonly Dictionary<string, object> _numberDictionary;
 
-    private readonly Dictionary<string, DynamicFunction> _functions = new();
+    private readonly List<FunctionNode> _functions = [];
 
     private readonly Dictionary<string, DynamicClass> _dynamicClasses = new();
 
@@ -31,7 +31,7 @@ public partial class Interpreter
     private bool HasContext => _contextStack.Count > 0;
     private ASTContext CurrentContext => HasContext ? _contextStack.Peek() : null;
 
-    public void Execute(ProgramNode program)
+    public void Execute(ProgramNode program, List<string?>? args = null)
     {
         Logger.SetLoggerPath(Path.Combine("Logs", "Debug", "debug_interpreter.log"));
         Logger.Warn("----------- Interpreter -----------");
@@ -46,20 +46,24 @@ public partial class Interpreter
                     Logger.Log("ToDynamicClass: " + _dynamicClasses[classNode.Name].Name);
                     break;
                 case FunctionNode func:
-                    _functions[func.Name] = ToDynamicFunction(func);
+                    _functions.Add(func);
                     break;
             }
         }
 
-        if (!_functions.TryGetValue("main", out var mainFunction))
+        var function = _functions.FirstOrDefault(f => f.Name == "main");
+        if (function is null)
         {
             throw new QlangRuntimeException(
                 "No 'main' function found in program",
                 program.Statements.FirstOrDefault() ?? new ProgramNode(),
                 []);
         }
-
-        ExecuteFunction(mainFunction, [], null);
+        
+        if (function.Parameters.Count == 0)
+            ExecuteFunction(ToDynamicFunction(function), [], null);
+        else 
+            ExecuteFunction(ToDynamicFunction(function), [args?.Cast<object?>().ToList()], null);
     }
 
     private DynamicClass ToDynamicClass(ClassNode classNode)
@@ -319,11 +323,11 @@ public partial class Interpreter
                     {
                         for (var i = CurrentContext.Blocks.Count - 1; i >= 0; i--)
                         {
-                            if (CurrentContext.Blocks[i].Variables.TryGetValue(objPtr.Name, out var blockVar))
-                            {
-                                currentObject = blockVar.Value;
-                                break;
-                            }
+                            if (!CurrentContext.Blocks[i].Variables.TryGetValue(objPtr.Name, out var blockVar))
+                                continue;
+                            
+                            currentObject = blockVar.Value;
+                            break;
                         }
                     }
 
@@ -346,9 +350,11 @@ public partial class Interpreter
 
             case FunctionPointerNode funcPtr:
                 // Execute function to get the object
+                var args = funcPtr.Arguments.ConvertAll(EvaluateExpression);
+                var fromList = GetFunctionFromFunctionList(funcPtr.Name, args);
                 currentObject = ExecuteFunction(
-                    _functions.GetValueOrDefault(funcPtr.Name),
-                    funcPtr.Arguments.ConvertAll(EvaluateExpression),
+                    ToDynamicFunction(fromList.function),
+                    fromList.args,
                     null);
                 break;
 
@@ -384,15 +390,18 @@ public partial class Interpreter
                     // Execute method on current object
                     if (currentObject is DynamicClass objClass)
                     {
-                        var method = objClass.Body.OfType<FunctionNode>().FirstOrDefault(f => f.Name == funcPtr.Name);
-                        if (method != null)
+                        var args = funcPtr.Arguments.ConvertAll(EvaluateExpression);
+                        var fromClass = GetFunctionFromClass(objClass, funcPtr.Name, args);
+                        
+                        if (fromClass.function != null)
                         {
-                            if (method.IsPrivate)
+                            if (fromClass.function.IsPrivate)
                                 throw new QlangRuntimeException("Cannot access to private variable from external source",
                                     funcPtr, GetStackTrace());
+
                             currentObject = ExecuteFunction(
-                                ToDynamicFunction(method),
-                                funcPtr.Arguments.ConvertAll(EvaluateExpression),
+                                ToDynamicFunction(fromClass.function),
+                                fromClass.Args,
                                 objClass);
                         }
                         else
@@ -441,9 +450,7 @@ public partial class Interpreter
                     }
                 }
                 else
-                {
                     throw new QlangRuntimeException($"Cannot assign property '{objPtr.Name}' to non-object type {currentObject?.GetType().Name ?? "null"}", assignNode, GetStackTrace());
-                }
                 break;
 
             default:
@@ -453,26 +460,26 @@ public partial class Interpreter
         Logger.Log($"Successfully assigned value to path: {string.Join(".", path.Select(p => p switch { ObjectPointerNode op => op.Name, FunctionPointerNode fp => $"{fp.Name}()", _ => "?" }))}", "PathAssignment");
     }
 
-    private DynamicClass GetNewClass(DynamicClass dynamicClass, List<object> args)
+    private DynamicClass GetNewClass(DynamicClass dynamicClass, List<object?> args)
     {
         Logger.Warn("Is new instance class");
-        var functionNode = dynamicClass.Body.FirstOrDefault(node => node is FunctionNode { Name: "new" });
-
         var dClass = dynamicClass.Clone();
-
-        if (functionNode != null)
-            ExecuteFunction(ToDynamicFunction(functionNode as FunctionNode), args, dClass);
+        
+        var fromClass = GetFunctionFromClass(dClass, "new", args);
+        
+        if (fromClass.function != null)
+            ExecuteFunction(ToDynamicFunction(fromClass.function), fromClass.Args, dClass);
 
         return dClass;
     }
 
     private void RestoreContextStack()
     {
-        if (HasContext)
-        {
-            var context = _contextStack.Pop();
-            Logger.Warn($"class='{context.Class?.Name}' function='{context.Function?.Name}'", "RestoreContextStack");
-        }
+        if (!HasContext) 
+            return;
+        
+        var context = _contextStack.Pop();
+        Logger.Warn($"class='{context.Class?.Name}' function='{context.Function?.Name}'", "RestoreContextStack");
     }
 
     private List<object?> GetCollection(List<object?> arg)
@@ -623,7 +630,7 @@ public partial class Interpreter
             if (varNode.Name == Keywords.ThisKeyword && HasContext)
                 return CurrentContext?.Class;
 
-            if (HasContext && CurrentContext != null && CurrentContext.Blocks.Count > 0)
+            if (HasContext && CurrentContext.Blocks.Count > 0)
                 for (var i = CurrentContext.Blocks.Count; i > 0; i--)
                     if (CurrentContext.Blocks[i].Variables.TryGetValue(varNode.Name, out var))
                         return var.Value;
@@ -852,4 +859,126 @@ public partial class Interpreter
                 GetStackTrace());
         }
     }
+
+    // private FunctionNode? GetFunctionFromClass(DynamicClass @class, string name, List<object?>? args = null)
+    // {
+    //     FunctionNode? node = null;
+    //
+    //     List<object> resultArgs = [];
+    //     
+    //     foreach (var function in @class.Body
+    //                  .OfType<FunctionNode>()
+    //                  .Where(f => f.Name == name))
+    //     {
+    //         bool argsSuccess = false;
+    //         int succ = 0;
+    //         for (int i = 0; i < function.Parameters.Count; i++)
+    //         {
+    //             AssignmentNode? assignmentNode = function.Parameters[i];
+    //             // Если значение преопределено
+    //             if (assignmentNode.Value != null)
+    //             {
+    //                 // Если каки-ето другие значения будуть не преопределены, будет ошибка
+    //                 if (function.Parameters.Skip(i).Any(n => n.Value == null))
+    //                     throw new QlangRuntimeException("Values after a predefined cannot be undefined.", function, GetStackTrace());
+    //
+    //                 
+    //                 argsSuccess = true;
+    //                 break;
+    //             }
+    //             
+    //             if (args != null && i < args.Count)
+    //                 succ++;
+    //         }
+    //
+    //
+    //         if (argsSuccess || (args != null && succ == args.Count))
+    //         {
+    //             node = function;
+    //             break;
+    //         }
+    //     }
+    //
+    //     return node;
+    // }
+    
+    private (FunctionNode? function, List<object?> args) GetFunctionFromFunctionList
+        (string name, List<object?>? args = null)
+    {
+        args ??= [];
+        
+        foreach (var function in _functions.Where(f => f.Name == name))
+            if (TryMatchFunction(function, args, out var finalArgs))
+                return (function, finalArgs);
+
+        throw new QlangRuntimeException($"Function '{name}' with params '{string.Join(", ", args)}' is not found", null,
+            GetStackTrace());
+    }
+    
+    private (FunctionNode? function, List<object?> Args) GetFunctionFromClass
+        (DynamicClass @class, string name, List<object?>? args = null)
+    {
+        args ??= [];
+        
+        foreach (var function in @class.Body
+                     .OfType<FunctionNode>()
+                     .Where(f => f.Name == name))
+        {
+            // Проверяем, можно ли вызвать эту функцию с данными аргументами
+            if (TryMatchFunction(function, args, out var finalArgs))
+                return (function, finalArgs);
+        }
+
+        throw new QlangRuntimeException($"Function '{name}' with params '{string.Join(", ", args)}' is not found in class '{@class.Name}'", null,
+            GetStackTrace());
+    }
+
+    private bool TryMatchFunction(FunctionNode function, List<object?> args, out List<object?> finalArgs)
+    {
+        finalArgs = [];
+        
+        int requiredParamsCount = 0;
+        int totalParamsCount = function.Parameters.Count;
+        
+        // Подсчитываем обязательные параметры (без значений по умолчанию)
+        foreach (AssignmentNode t in function.Parameters)
+        {
+            if (t.Value == null)
+                requiredParamsCount++;
+            else
+                break; // Все параметры после первого с default должны иметь default
+        }
+        
+        // Проверяем: количество переданных аргументов должно быть между 
+        // requiredParamsCount и totalParamsCount
+        if (args.Count < requiredParamsCount || args.Count > totalParamsCount)
+            return false;
+        
+        // Заполняем finalArgs
+        for (int i = 0; i < totalParamsCount; i++)
+        {
+            if (i < args.Count)
+            {
+                // Используем переданный аргумент
+                finalArgs.Add(args[i]);
+            }
+            else
+            {
+                // Используем значение по умолчанию
+                var param = function.Parameters[i];
+                if (param.Value != null)
+                {
+                    // Вычисляем значение по умолчанию
+                    var defaultValue = EvaluateExpression(param.Value);
+                    finalArgs.Add(defaultValue);
+                }
+                else
+                    // Это не должно происходить, если логика верна
+                    return false;
+            }
+        }
+        
+        return true;
+    }
+        
 }

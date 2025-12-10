@@ -38,7 +38,11 @@ public class NativeFunctionRegistry
         // String
         Register("str_length", (Func<string, int>)(NativeString.GetLength));
         Register("str_is_primitive", (Func<object?, bool>)(str => str is string));
-        Register("str_is_str", (Func<object?, bool>)(str => str is DynamicClass { ClassName: "String" }));
+        Register("str_is_str", (Func<object?, bool>)(str =>
+        {
+            Console.WriteLine("DynamicClass::ClassName: " + (str as DynamicClass)?.ClassName);
+            return str is DynamicClass { ClassName: "String" };
+        }));
         Register("str_null_or_empty", (Func<string, bool>)(string.IsNullOrEmpty));
         Register("str_null_or_white_space", (Func<string, bool>)(string.IsNullOrWhiteSpace));
         Register("str_trim", (Func<string, string>)(msg => msg.Trim()));

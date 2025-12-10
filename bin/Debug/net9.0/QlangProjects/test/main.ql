@@ -1,11 +1,9 @@
-include "$lib/special/basetest"
+include "$lib/base"
 
 function main(): {
-    BaseTest.runTest();
-    
-    Throw.exception();
+    p();
 }
 
-async function atest(): {
-    return String.new("Hello World!");
+function p(const a = String.new("")): {
+    Console.println(String.new("dsa"));
 }

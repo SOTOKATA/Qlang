@@ -12,7 +12,7 @@ class String: {
         _value = input;
     }
 
-    function getPrimitive(let strOrPrimite): {
+    function getPrimitive(const strOrPrimite): {
         if (Object.isNull(strOrPrimite)): {
             Throw.exception("Object is null");
         }

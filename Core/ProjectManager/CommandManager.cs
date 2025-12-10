@@ -11,11 +11,11 @@ public static class CommandManager
         {
             switch (args)
             {
-                case ["new", _]:
-                    New(args[1].Trim());
+                case ["new", var name]:
+                    New(name.Trim());
                     return;
-                case ["run"]:
-                    Run();
+                case ["run", ..]:
+                    Run(args.Skip(1).ToList()!);
                     return;
                 case ["update"]:
                     ConsoleLogger.Info("Qlang has the latest version");
@@ -23,11 +23,11 @@ public static class CommandManager
                 case ["build"]:
                     Build();
                     return;
-                case ["set", _, _]:
-                    Set(args[1].Trim(), args[2].Trim());
+                case ["set", var param, var value]:
+                    Set(param.Trim(), value.Trim());
                     return;
-                case ["get", _]:
-                    Get(args[1].Trim());
+                case ["get", var param]:
+                    Get(param.Trim());
                     return;
                 case ["help"]:
                     Help();
@@ -40,20 +40,20 @@ public static class CommandManager
                     return;
             }
         }
-        // catch (QlangCompileException e)
-        // {
-        //     Console.ForegroundColor = ConsoleColor.Red;
-        //     Console.Write("Compile error: ");
-        //     Console.ResetColor();
-        //     Console.WriteLine(e);
-        // }
-        // catch (QlangRuntimeException e)
-        // {
-        //     Console.ForegroundColor = ConsoleColor.Red;
-        //     Console.Write("Runtime error: ");
-        //     Console.ResetColor();
-        //     Console.WriteLine(e);
-        // }
+        catch (QlangCompileException e)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("Compile error: ");
+            Console.ResetColor();
+            Console.WriteLine(e);
+        }
+        catch (QlangRuntimeException e)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("Runtime error: ");
+            Console.ResetColor();
+            Console.WriteLine(e);
+        }
         catch (ProjectException e)
         {
             ExceptionManager.ThrowMessage(e.Message);
@@ -90,9 +90,9 @@ public static class CommandManager
         ConsoleLogger.Info($"The project was created in the folder: '{proj.Settings.GetString("path")}'");
     }
 
-    private static void Run()
+    private static void Run(List<string?>? args)
     {
-        LoadProject().Run();
+        LoadProject().Run(args);
     }
 
     private static void Build()

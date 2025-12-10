@@ -30,9 +30,9 @@ public partial class Project
         // _qlang.Compile(_settings.GetString("main_file_path"));
     }
 
-    public void Run()
+    public void Run(List<string?>? args)
     {
         if (_qlang.Compile(Path.Combine(Settings.GetString("path"), Settings.GetString("main_file_path"))))
-            _qlang.Run();
+            _qlang.Run(args);
     }
 }

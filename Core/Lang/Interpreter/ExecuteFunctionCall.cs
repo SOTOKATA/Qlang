@@ -59,29 +59,28 @@ public partial class Interpreter
             {
                 Logger.Log("Detected function pointer: " + fn.Name);
                 var args = fn.Arguments.ConvertAll(EvaluateExpression);
-                DynamicFunction? function;
                 
                 // If previous object is DynamicClass
                 // Ex.: Console.clear()
                 if (lastReturnValue is DynamicClass @class)
                 {
-                    function = TryGetFunctionFromClass(fn.Name, @class);
+                    var fromClass = TryGetFunctionFromClass(@class, fn.Name, args);
 
-                    if (function is not null)
+                    if (fromClass.function is not null)
                     {
-                        if (function.IsPrivate)
+                        if (fromClass.function.IsPrivate)
                             throw new QlangRuntimeException(
-                                $"Can't call private function '{function.Name}' from '{@class.ClassName}'", fn,
+                                $"Cannot call private function '{fromClass.function.Name}' from class '{@class.ClassName}'", fn,
                                 GetStackTrace());
                         
                         Logger.Log("Detected as function from lastReturnValue");
                         
                         // Create new instance or just call
-                        return function.Name == "new" 
+                        return fromClass.function.Name == "new" 
                             ? 
-                            GetNewClass(@class, args) 
+                            GetNewClass(@class, fromClass.args) 
                             : 
-                            ExecuteFunction(function, args, @class);
+                            ExecuteFunction(fromClass.function, fromClass.args, @class);
                     }
 
                     if (fn.Name == "new")
@@ -90,19 +89,20 @@ public partial class Interpreter
                 
                 // Local function without class
                 // Ex.: func()
-                if (_functions.TryGetValue(fn.Name, out var func) && lastReturnValue is null)
+                var fromList = GetFunctionFromFunctionList(fn.Name, args);
+                if (fromList.function is not null && lastReturnValue is null)
                 {
                     Logger.Log("Detected as global function without class");
-                    return ExecuteFunction(func, args, null);
+                    return ExecuteFunction(ToDynamicFunction(fromList.function), fromList.args, null);
                 }
                 
                 // Call from class context
                 // Ex.: func() with context ClassExample
-                function = TryGetFunctionFromClassContext(fn.Name);
-                if (function is not null && lastReturnValue is null)
+                var fromClassFn = TryGetFunctionFromClassContext(fn.Name, args);
+                if (fromClassFn.function is not null && lastReturnValue is null)
                 {
                     Logger.Log("Detected as function from class context");
-                    return ExecuteFunction(function, args, CurrentContext.Class);
+                    return ExecuteFunction(fromClassFn.function, fromClassFn.args, CurrentContext.Class);
                 }
                 
                 throw new QlangRuntimeException("Unknown function: " + fn.Name, fn, GetStackTrace());
@@ -141,27 +141,25 @@ public partial class Interpreter
         throw new QlangRuntimeException($"Unknown type of object/function: {obj.GetType().Name}", obj, GetStackTrace());
     }
 
-    private DynamicFunction? TryGetFunctionFromClassContext(string functionName)
+    private (DynamicFunction? function, List<object?>? args) TryGetFunctionFromClassContext(string functionName, List<object?>? args)
     {
         if (!HasContext)
-            return null;
+            return (null, null);
         
         var currentClass = CurrentContext.Class;
 
         if (currentClass is null)
-            return null;
+            return (null, null);
 
-        var func = currentClass.Body
-            .FirstOrDefault(node => node is FunctionNode func && func.Name == functionName) as FunctionNode;
+        var func = GetFunctionFromClass(currentClass, functionName, args);
         
-        return func is null ? null : ToDynamicFunction(func);
+        return func.function is null ? (null, null) : (ToDynamicFunction(func.function), finalArgs: func.Args);
     }
     
-    private DynamicFunction? TryGetFunctionFromClass(string functionName, DynamicClass source)
+    private (DynamicFunction? function, List<object?>? args) TryGetFunctionFromClass(DynamicClass source, string functionName, List<object?>? args)
     {
-        var func = source.Body
-            .FirstOrDefault(node => node is FunctionNode func && func.Name == functionName) as FunctionNode;
+        var func = GetFunctionFromClass(source, functionName, args);
         
-        return func is null ? null : ToDynamicFunction(func);
+        return func.function is null ? (null, null) : (ToDynamicFunction(func.function), finalArgs: func.Args);
     }
 }
