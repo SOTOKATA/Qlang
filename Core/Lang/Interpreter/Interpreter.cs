@@ -29,7 +29,7 @@ public partial class Interpreter
 
     private readonly Stack<ASTContext> _contextStack = new();
     private bool HasContext => _contextStack.Count > 0;
-    private ASTContext? CurrentContext => HasContext ? _contextStack.Peek() : null;
+    private ASTContext CurrentContext => HasContext ? _contextStack.Peek() : null;
 
     public void Execute(ProgramNode program)
     {
@@ -105,7 +105,7 @@ public partial class Interpreter
         _contextStack.Push(context);
     }
 
-    private object? ExecuteFunction(DynamicFunction? function, List<object> arguments, DynamicClass? ownerClass)
+    private object? ExecuteFunction(DynamicFunction? function, List<object?> arguments, DynamicClass? ownerClass)
     {
         if (function is null)
             return null;
@@ -171,7 +171,6 @@ public partial class Interpreter
             case CallNode call:
                 Logger.Log("CallNode");
                 ExecuteObjectCalls(call);
-                // ExecuteMethodCall(call);
                 break;
 
             case IfNode ifNode:
@@ -476,7 +475,7 @@ public partial class Interpreter
         }
     }
 
-    private List<object> GetCollection(List<object?> arg)
+    private List<object?> GetCollection(List<object?> arg)
     {
         if (arg is null)
             throw new QlangRuntimeException("collection is null", null, GetStackTrace());

@@ -53,15 +53,15 @@ public partial class Project
 
         string settingsPath = Path.Combine(projectPath, "compile.settings.json");
         File.Create(settingsPath).Close();
-        Project._compileSettings = new CompileSettings(settingsPath, null);
+        _compileSettings = new CompileSettings(settingsPath, null);
     
-        Project._compileSettings.Save();
+        _compileSettings.Save();
         
         settingsPath = Path.Combine(projectPath, "plugins.settings.json");
         File.Create(settingsPath).Close();
-        Project._pluginsSettings = new PluginsSettings(settingsPath, null);
+        _pluginsSettings = new PluginsSettings(settingsPath, null);
         
-        Project._pluginsSettings.Save();
+        _pluginsSettings.Save();
 
         return proj;
     }
@@ -74,7 +74,8 @@ public partial class Project
 
         var settings = new ProjectSettings(path, ProjectManager.Settings.Settings.LoadDictionary(path));
         
-        string projectPath = settings.GetString("path");
+        settings.Set("path", Directory.GetCurrentDirectory());
+        string projectPath = Directory.GetCurrentDirectory();
         string mainFilePath = settings.GetString("main_file_path");
                 
         if (
@@ -84,10 +85,11 @@ public partial class Project
         )
             throw new FileNotFoundException($"Project is corrupted or not created.\nPath to project settings: '{path}'.", path);
         
-        var proj = new Project();
-        
-        proj.Settings = settings;
-        
+        var proj = new Project
+        {
+            Settings = settings
+        };
+
         string settingsPath = Path.Combine(projectPath, "compile.settings.json");
         var dict =  JsonConvert.DeserializeObject<Dictionary<string, object?>>(File.ReadAllText(settingsPath));
         Project._compileSettings = new CompileSettings(settingsPath, dict);
