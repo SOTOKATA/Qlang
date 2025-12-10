@@ -27,8 +27,6 @@ class Array: {
             str = String.new("[]");
         }
 
-        
-
         return str;
     }
 

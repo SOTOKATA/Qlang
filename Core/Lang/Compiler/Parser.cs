@@ -282,16 +282,20 @@ public class Parser
     {
         List<ASTNode> statements = [];
         Logger.Log("CompilationProcess: Parsing block");
-
-        while (!Check(Tokens.RBrace) && !IsAtEnd())
-        {
-            if (Check(Tokens.Semicolon))
-            {
-                Advance();
-                continue;
-            }
+        
+        // One line block
+        if (Check(Tokens.RBrace))
             statements.Add(ParseStatement());
-        }
+        else
+            while (!Check(Tokens.RBrace) && !IsAtEnd())
+            {
+                if (Check(Tokens.Semicolon))
+                {
+                    Advance();
+                    continue;
+                }
+                statements.Add(ParseStatement());
+            }
 
         Logger.Log("CompilationProcess.End: Parsing block");
         return statements;

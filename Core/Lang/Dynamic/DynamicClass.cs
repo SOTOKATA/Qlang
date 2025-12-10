@@ -15,7 +15,7 @@ public class DynamicClass(string name)
     public override string ToString()
     {
         
-        return $"Class.{ClassName}";
+        return $"{ClassName}";
     }
 
     public DynamicClass Clone()

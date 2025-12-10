@@ -911,8 +911,7 @@ public partial class Interpreter
             if (TryMatchFunction(function, args, out var finalArgs))
                 return (function, finalArgs);
 
-        throw new QlangRuntimeException($"Function '{name}' with params '{string.Join(", ", args)}' is not found", null,
-            GetStackTrace());
+        return (null, null);
     }
     
     private (FunctionNode? function, List<object?> Args) GetFunctionFromClass
@@ -929,8 +928,7 @@ public partial class Interpreter
                 return (function, finalArgs);
         }
 
-        throw new QlangRuntimeException($"Function '{name}' with params '{string.Join(", ", args)}' is not found in class '{@class.Name}'", null,
-            GetStackTrace());
+        return (null, null);
     }
 
     private bool TryMatchFunction(FunctionNode function, List<object?> args, out List<object?> finalArgs)

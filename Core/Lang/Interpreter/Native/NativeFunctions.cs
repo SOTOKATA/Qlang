@@ -38,11 +38,7 @@ public class NativeFunctionRegistry
         // String
         Register("str_length", (Func<string, int>)(NativeString.GetLength));
         Register("str_is_primitive", (Func<object?, bool>)(str => str is string));
-        Register("str_is_str", (Func<object?, bool>)(str =>
-        {
-            Console.WriteLine("DynamicClass::ClassName: " + (str as DynamicClass)?.ClassName);
-            return str is DynamicClass { ClassName: "String" };
-        }));
+        Register("str_is_str", (Func<object?, bool>)(str => str is DynamicClass { ClassName: "String" }));
         Register("str_null_or_empty", (Func<string, bool>)(string.IsNullOrEmpty));
         Register("str_null_or_white_space", (Func<string, bool>)(string.IsNullOrWhiteSpace));
         Register("str_trim", (Func<string, string>)(msg => msg.Trim()));
@@ -170,14 +166,6 @@ public class NativeFunctionRegistry
         if (!_functions.TryGetValue(name, out var func))
             throw new Exception($"Function '{name}' not found");
 
-        // foreach (var var in args)
-        // {
-        //     if (var is DynamicClass d)
-        //     {
-        //         ConsoleLogger.Info($"ClassInfo: name='{d.Name}', className='{d.ClassName}'");
-        //     } else ConsoleLogger.Info($"ArgInfo: '{var}' with type '{var?.GetType()?.Name}'");
-        // }
-
         Logger.Log($"name='{name}'", "NativeCall");
         if (args is not null)
         {
@@ -194,14 +182,13 @@ public class NativeFunctionRegistry
                     args[index] = int.Parse(args[index].ToString());
                 else if (type.ParameterType == typeof(double))
                     args[index] = args[index].ToString().ParseNumber();
-                else if (type.ParameterType == typeof(string) && args[index] is DynamicClass { ClassName: "String" })
-                {
-                    ConsoleLogger.Info("Is Class.String");
-                    var value = args[index] as DynamicClass;
-                    
-                    if (value?.Body.FirstOrDefault(x => x is AssignmentNode { IsPrivate: true, VariableName: "_value" }) is AssignmentNode var)
-                        args[index] = var.Value;
-                }
+                // else if (type.ParameterType == typeof(string) && args[index] is DynamicClass { ClassName: "String" })
+                // {
+                //     var value = args[index] as DynamicClass;
+                //     
+                //     if (value?.Body.FirstOrDefault(x => x is AssignmentNode { IsPrivate: true, VariableName: "_value" }) is AssignmentNode var)
+                //         args[index] = var.Value;
+                // }
             }
 
             debug += "\nSent:\n";

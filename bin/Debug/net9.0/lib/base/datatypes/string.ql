@@ -12,16 +12,21 @@ class String: {
         _value = input;
     }
 
-    function getPrimitive(const strOrPrimite): {
+    function getPrimitive(const strOrPrimite, let allowOther = false): {
         if (Object.isNull(strOrPrimite)): {
             Throw.exception("Object is null");
         }
 
         if (String.isString(strOrPrimite)): {
-            return strOrPrimite.str();
+            
+            return strOrPrimite.toString();
         }
 
         if (String.isPrimitive(strOrPrimite)): {
+            return strOrPrimite;
+        }
+
+        if allowOther: {
             return strOrPrimite;
         }
 
@@ -68,7 +73,8 @@ class String: {
     }
 
     function isString(let value): {
-        return _native("str_is_str", value);
+        value =  _native("str_is_str", value);
+        return value;
     }
 
     function isPrimitive(let value): {

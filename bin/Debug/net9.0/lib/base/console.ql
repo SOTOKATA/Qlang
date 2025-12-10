@@ -8,8 +8,8 @@ class Console: {
     }
 
     // Print text to console with new line
-    function println(let message = ""): {
-        message = String.getPrimitive(message);
+    function println(let message = "", const allowOther = false): {
+        message = String.getPrimitive(message, allowOther);
 
         _native("cmd_write", _str(message + "\n"));
     }

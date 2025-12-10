@@ -55,8 +55,8 @@ public partial class Interpreter
 
             if (statement is ReturnNode returnNode)
             {
-                _return = true;
                 _returnValue = EvaluateExpression(returnNode.ReturnValue);
+                _return = true;
                 return true;
             }
 

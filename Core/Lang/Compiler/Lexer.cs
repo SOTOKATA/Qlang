@@ -134,6 +134,7 @@ public class Lexer
             '<' => new Token(Tokens.Less, -1, -1),
             '|' => new Token(Tokens.Or, -1, -1),
             '&' => new Token(Tokens.And, -1, -1),
+            '?' => new  Token(Tokens.Question, -1, -1),
             var _ => null
         };
         

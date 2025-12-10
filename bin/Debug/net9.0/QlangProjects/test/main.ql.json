@@ -151,6 +151,25 @@
               "Line": 11,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
+            },
+            {
+              "IsNew": false,
+              "VariableName": "allowOther",
+              "Path": null,
+              "Value": {
+                "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
+                "Value": false,
+                "Line": 11,
+                "LineIndex": 0,
+                "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "IsPathAssignment": false,
+              "Line": 11,
+              "LineIndex": 0,
+              "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
             }
           ],
           "Body": [
@@ -177,6 +196,14 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "message",
+                        "Line": 12,
+                        "LineIndex": 0,
+                        "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
+                      },
+                      {
+                        "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "allowOther",
                         "Line": 12,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -2006,7 +2033,7 @@
                 }
               ],
               "Variables": {},
-              "Line": 32,
+              "Line": 30,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             },
@@ -2016,16 +2043,16 @@
                 "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                 "ClassName": "",
                 "Name": "str",
-                "Line": 32,
+                "Line": 30,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
               },
-              "Line": 33,
+              "Line": 31,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
           ],
-          "Line": 35,
+          "Line": 33,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
         },
@@ -2044,7 +2071,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 35,
+              "Line": 33,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
@@ -2062,7 +2089,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                         "Index": 28,
-                        "Line": 36,
+                        "Line": 34,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       },
@@ -2070,27 +2097,27 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "collection",
-                        "Line": 36,
+                        "Line": 34,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       }
                     ],
-                    "Line": 36,
+                    "Line": 34,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 36,
+                "Line": 34,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
               },
-              "Line": 37,
+              "Line": 35,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
           ],
-          "Line": 39,
+          "Line": 37,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
         },
@@ -2109,7 +2136,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 39,
+              "Line": 37,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
@@ -2127,7 +2154,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                         "Index": 29,
-                        "Line": 40,
+                        "Line": 38,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       },
@@ -2135,27 +2162,27 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "collection",
-                        "Line": 40,
+                        "Line": 38,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       }
                     ],
-                    "Line": 40,
+                    "Line": 38,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 40,
+                "Line": 38,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
               },
-              "Line": 41,
+              "Line": 39,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
           ],
-          "Line": 43,
+          "Line": 41,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
         },
@@ -2172,16 +2199,16 @@
                 "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                 "ClassName": "",
                 "Name": "_value",
-                "Line": 44,
+                "Line": 42,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
               },
-              "Line": 45,
+              "Line": 43,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
           ],
-          "Line": 47,
+          "Line": 45,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
         },
@@ -2200,7 +2227,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 47,
+              "Line": 45,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
@@ -2218,7 +2245,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                         "Index": 30,
-                        "Line": 48,
+                        "Line": 46,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       },
@@ -2226,7 +2253,7 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "_value",
-                        "Line": 48,
+                        "Line": 46,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       },
@@ -2234,27 +2261,27 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "item",
-                        "Line": 48,
+                        "Line": 46,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       }
                     ],
-                    "Line": 48,
+                    "Line": 46,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 48,
+                "Line": 46,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
               },
-              "Line": 49,
+              "Line": 47,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
           ],
-          "Line": 52,
+          "Line": 50,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
         },
@@ -2273,7 +2300,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 52,
+              "Line": 50,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
@@ -2289,7 +2316,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                       "Index": 31,
-                      "Line": 53,
+                      "Line": 51,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     },
@@ -2297,7 +2324,7 @@
                       "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                       "ClassName": "",
                       "Name": "_value",
-                      "Line": 53,
+                      "Line": 51,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     },
@@ -2305,23 +2332,23 @@
                       "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                       "ClassName": "",
                       "Name": "item",
-                      "Line": 53,
+                      "Line": 51,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     }
                   ],
-                  "Line": 53,
+                  "Line": 51,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                 }
               ],
               "Arguments": [],
-              "Line": 53,
+              "Line": 51,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
           ],
-          "Line": 57,
+          "Line": 55,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
         },
@@ -2347,18 +2374,18 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                         "Index": 32,
-                        "Line": 58,
+                        "Line": 56,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       }
                     ],
-                    "Line": 58,
+                    "Line": 56,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 58,
+                "Line": 56,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
               },
@@ -2366,12 +2393,12 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 58,
+              "Line": 56,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
           ],
-          "Line": 62,
+          "Line": 60,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
         },
@@ -2390,7 +2417,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 62,
+              "Line": 60,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
@@ -2407,7 +2434,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "Number",
-                    "Line": 63,
+                    "Line": 61,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                   },
@@ -2419,18 +2446,18 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "index",
-                        "Line": 63,
+                        "Line": 61,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       }
                     ],
-                    "Line": 63,
+                    "Line": 61,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 63,
+                "Line": 61,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
               },
@@ -2438,7 +2465,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 63,
+              "Line": 61,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             },
@@ -2452,7 +2479,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Number",
-                      "Line": 65,
+                      "Line": 63,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     },
@@ -2464,18 +2491,18 @@
                           "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                           "ClassName": "",
                           "Name": "index",
-                          "Line": 65,
+                          "Line": 63,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                         }
                       ],
-                      "Line": 65,
+                      "Line": 63,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 65,
+                  "Line": 63,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                 },
@@ -2483,11 +2510,11 @@
                 "Right": {
                   "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
                   "Value": false,
-                  "Line": 65,
+                  "Line": 63,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                 },
-                "Line": 65,
+                "Line": 63,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
               },
@@ -2498,7 +2525,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Throw",
-                      "Line": 66,
+                      "Line": 64,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     },
@@ -2509,25 +2536,25 @@
                         {
                           "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                           "Index": 33,
-                          "Line": 66,
+                          "Line": 64,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                         }
                       ],
-                      "Line": 66,
+                      "Line": 64,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 66,
+                  "Line": 64,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 69,
+              "Line": 67,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             },
@@ -2543,7 +2570,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                         "Index": 34,
-                        "Line": 69,
+                        "Line": 67,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       },
@@ -2551,7 +2578,7 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "_value",
-                        "Line": 69,
+                        "Line": 67,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       },
@@ -2559,27 +2586,27 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "index",
-                        "Line": 69,
+                        "Line": 67,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       }
                     ],
-                    "Line": 69,
+                    "Line": 67,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 69,
+                "Line": 67,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
               },
-              "Line": 70,
+              "Line": 68,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
           ],
-          "Line": 73,
+          "Line": 71,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
         },
@@ -2598,7 +2625,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 73,
+              "Line": 71,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             },
@@ -2611,7 +2638,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 73,
+              "Line": 71,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
@@ -2627,7 +2654,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Number",
-                      "Line": 74,
+                      "Line": 72,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     },
@@ -2639,18 +2666,18 @@
                           "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                           "ClassName": "",
                           "Name": "index",
-                          "Line": 74,
+                          "Line": 72,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                         }
                       ],
-                      "Line": 74,
+                      "Line": 72,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 74,
+                  "Line": 72,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                 },
@@ -2658,11 +2685,11 @@
                 "Right": {
                   "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
                   "Value": false,
-                  "Line": 74,
+                  "Line": 72,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                 },
-                "Line": 74,
+                "Line": 72,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
               },
@@ -2673,7 +2700,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Throw",
-                      "Line": 75,
+                      "Line": 73,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     },
@@ -2684,25 +2711,25 @@
                         {
                           "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                           "Index": 35,
-                          "Line": 75,
+                          "Line": 73,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                         }
                       ],
-                      "Line": 75,
+                      "Line": 73,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 75,
+                  "Line": 73,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 78,
+              "Line": 76,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             },
@@ -2717,7 +2744,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "Number",
-                    "Line": 78,
+                    "Line": 76,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                   },
@@ -2729,18 +2756,18 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "index",
-                        "Line": 78,
+                        "Line": 76,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       }
                     ],
-                    "Line": 78,
+                    "Line": 76,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 78,
+                "Line": 76,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
               },
@@ -2748,7 +2775,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 78,
+              "Line": 76,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             },
@@ -2762,7 +2789,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                       "Index": 36,
-                      "Line": 80,
+                      "Line": 78,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     },
@@ -2770,7 +2797,7 @@
                       "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                       "ClassName": "",
                       "Name": "_value",
-                      "Line": 80,
+                      "Line": 78,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     },
@@ -2778,7 +2805,7 @@
                       "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                       "ClassName": "",
                       "Name": "index",
-                      "Line": 80,
+                      "Line": 78,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     },
@@ -2786,23 +2813,23 @@
                       "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                       "ClassName": "",
                       "Name": "item",
-                      "Line": 80,
+                      "Line": 78,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     }
                   ],
-                  "Line": 80,
+                  "Line": 78,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                 }
               ],
               "Arguments": [],
-              "Line": 80,
+              "Line": 78,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
           ],
-          "Line": 83,
+          "Line": 81,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
         },
@@ -2821,7 +2848,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 83,
+              "Line": 81,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             },
@@ -2834,7 +2861,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 83,
+              "Line": 81,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
@@ -2850,7 +2877,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Number",
-                      "Line": 84,
+                      "Line": 82,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     },
@@ -2862,18 +2889,18 @@
                           "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                           "ClassName": "",
                           "Name": "index",
-                          "Line": 84,
+                          "Line": 82,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                         }
                       ],
-                      "Line": 84,
+                      "Line": 82,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 84,
+                  "Line": 82,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                 },
@@ -2881,11 +2908,11 @@
                 "Right": {
                   "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
                   "Value": false,
-                  "Line": 84,
+                  "Line": 82,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                 },
-                "Line": 84,
+                "Line": 82,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
               },
@@ -2896,7 +2923,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Throw",
-                      "Line": 85,
+                      "Line": 83,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     },
@@ -2907,25 +2934,25 @@
                         {
                           "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                           "Index": 37,
-                          "Line": 85,
+                          "Line": 83,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                         }
                       ],
-                      "Line": 85,
+                      "Line": 83,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 85,
+                  "Line": 83,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 88,
+              "Line": 86,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             },
@@ -2940,7 +2967,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "Number",
-                    "Line": 88,
+                    "Line": 86,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                   },
@@ -2952,18 +2979,18 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "index",
-                        "Line": 88,
+                        "Line": 86,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       }
                     ],
-                    "Line": 88,
+                    "Line": 86,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 88,
+                "Line": 86,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
               },
@@ -2971,7 +2998,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 88,
+              "Line": 86,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             },
@@ -2985,7 +3012,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                       "Index": 38,
-                      "Line": 90,
+                      "Line": 88,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     },
@@ -2993,7 +3020,7 @@
                       "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                       "ClassName": "",
                       "Name": "_value",
-                      "Line": 90,
+                      "Line": 88,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     },
@@ -3001,7 +3028,7 @@
                       "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                       "ClassName": "",
                       "Name": "index",
-                      "Line": 90,
+                      "Line": 88,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     },
@@ -3009,23 +3036,23 @@
                       "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                       "ClassName": "",
                       "Name": "item",
-                      "Line": 90,
+                      "Line": 88,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     }
                   ],
-                  "Line": 90,
+                  "Line": 88,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                 }
               ],
               "Arguments": [],
-              "Line": 90,
+              "Line": 88,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
           ],
-          "Line": 94,
+          "Line": 92,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
         },
@@ -3044,7 +3071,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 94,
+              "Line": 92,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
@@ -3061,7 +3088,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "Number",
-                    "Line": 95,
+                    "Line": 93,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                   },
@@ -3073,18 +3100,18 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "index",
-                        "Line": 95,
+                        "Line": 93,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       }
                     ],
-                    "Line": 95,
+                    "Line": 93,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 95,
+                "Line": 93,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
               },
@@ -3092,7 +3119,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 95,
+              "Line": 93,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             },
@@ -3106,7 +3133,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Number",
-                      "Line": 97,
+                      "Line": 95,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     },
@@ -3118,18 +3145,18 @@
                           "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                           "ClassName": "",
                           "Name": "index",
-                          "Line": 97,
+                          "Line": 95,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                         }
                       ],
-                      "Line": 97,
+                      "Line": 95,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 97,
+                  "Line": 95,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                 },
@@ -3137,11 +3164,11 @@
                 "Right": {
                   "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
                   "Value": false,
-                  "Line": 97,
+                  "Line": 95,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                 },
-                "Line": 97,
+                "Line": 95,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
               },
@@ -3152,7 +3179,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Throw",
-                      "Line": 98,
+                      "Line": 96,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     },
@@ -3163,25 +3190,25 @@
                         {
                           "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                           "Index": 39,
-                          "Line": 98,
+                          "Line": 96,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                         }
                       ],
-                      "Line": 98,
+                      "Line": 96,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 98,
+                  "Line": 96,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 101,
+              "Line": 99,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             },
@@ -3195,7 +3222,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                       "Index": 40,
-                      "Line": 101,
+                      "Line": 99,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     },
@@ -3203,7 +3230,7 @@
                       "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                       "ClassName": "",
                       "Name": "_value",
-                      "Line": 101,
+                      "Line": 99,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     },
@@ -3211,23 +3238,23 @@
                       "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                       "ClassName": "",
                       "Name": "index",
-                      "Line": 101,
+                      "Line": 99,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                     }
                   ],
-                  "Line": 101,
+                  "Line": 99,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                 }
               ],
               "Arguments": [],
-              "Line": 101,
+              "Line": 99,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
           ],
-          "Line": 105,
+          "Line": 103,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
         },
@@ -3246,7 +3273,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 105,
+              "Line": 103,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
@@ -3264,7 +3291,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                         "Index": 41,
-                        "Line": 106,
+                        "Line": 104,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       },
@@ -3272,7 +3299,7 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "_value",
-                        "Line": 106,
+                        "Line": 104,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       },
@@ -3280,27 +3307,27 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "item",
-                        "Line": 106,
+                        "Line": 104,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       }
                     ],
-                    "Line": 106,
+                    "Line": 104,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 106,
+                "Line": 104,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
               },
-              "Line": 107,
+              "Line": 105,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
           ],
-          "Line": 110,
+          "Line": 108,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
         },
@@ -3323,7 +3350,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                         "Index": 42,
-                        "Line": 111,
+                        "Line": 109,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       },
@@ -3331,27 +3358,27 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "_value",
-                        "Line": 111,
+                        "Line": 109,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                       }
                     ],
-                    "Line": 111,
+                    "Line": 109,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 111,
+                "Line": 109,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
               },
-              "Line": 112,
+              "Line": 110,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
             }
           ],
-          "Line": 113,
+          "Line": 111,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\array.ql"
         }
@@ -7137,6 +7164,25 @@
               "Line": 15,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+            },
+            {
+              "IsNew": false,
+              "VariableName": "allowOther",
+              "Path": null,
+              "Value": {
+                "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
+                "Value": false,
+                "Line": 15,
+                "LineIndex": 0,
+                "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "IsPathAssignment": false,
+              "Line": 15,
+              "LineIndex": 0,
+              "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
           "Body": [
@@ -7259,32 +7305,32 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                         "Name": "strOrPrimite",
-                        "Line": 21,
+                        "Line": 22,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
                       {
                         "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
-                        "Name": "str",
+                        "Name": "toString",
                         "Arguments": [],
-                        "Line": 21,
+                        "Line": 22,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 21,
+                    "Line": 22,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
-                  "Line": 22,
+                  "Line": 23,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 24,
+              "Line": 25,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -7296,7 +7342,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "String",
-                    "Line": 24,
+                    "Line": 25,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -7308,18 +7354,18 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "strOrPrimite",
-                        "Line": 24,
+                        "Line": 25,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 24,
+                    "Line": 25,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 24,
+                "Line": 25,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -7330,18 +7376,50 @@
                     "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                     "ClassName": "",
                     "Name": "strOrPrimite",
-                    "Line": 25,
+                    "Line": 26,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
-                  "Line": 26,
+                  "Line": 27,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 28,
+              "Line": 29,
+              "LineIndex": 0,
+              "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                "ClassName": "",
+                "Name": "allowOther",
+                "Line": 29,
+                "LineIndex": 0,
+                "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.ReturnNode, ql",
+                  "ReturnValue": {
+                    "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                    "ClassName": "",
+                    "Name": "strOrPrimite",
+                    "Line": 30,
+                    "LineIndex": 0,
+                    "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                  },
+                  "Line": 31,
+                  "LineIndex": 0,
+                  "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 33,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -7351,7 +7429,7 @@
                 {
                   "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                   "Name": "Throw",
-                  "Line": 28,
+                  "Line": 33,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
@@ -7362,23 +7440,23 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                       "Index": 83,
-                      "Line": 28,
+                      "Line": 33,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
-                  "Line": 28,
+                  "Line": 33,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "Arguments": [],
-              "Line": 28,
+              "Line": 33,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 31,
+          "Line": 36,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -7395,16 +7473,16 @@
                 "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                 "ClassName": "",
                 "Name": "_value",
-                "Line": 32,
+                "Line": 37,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
-              "Line": 33,
+              "Line": 38,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 35,
+          "Line": 40,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -7423,7 +7501,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 35,
+              "Line": 40,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
@@ -7439,7 +7517,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Array",
-                      "Line": 36,
+                      "Line": 41,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     },
@@ -7451,18 +7529,18 @@
                           "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                           "ClassName": "",
                           "Name": "value",
-                          "Line": 36,
+                          "Line": 41,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                         }
                       ],
-                      "Line": 36,
+                      "Line": 41,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 36,
+                  "Line": 41,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
@@ -7470,11 +7548,11 @@
                 "Right": {
                   "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
                   "Value": false,
-                  "Line": 36,
+                  "Line": 41,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
-                "Line": 36,
+                "Line": 41,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -7485,7 +7563,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Throw",
-                      "Line": 37,
+                      "Line": 42,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     },
@@ -7496,30 +7574,30 @@
                         {
                           "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                           "Index": 84,
-                          "Line": 37,
+                          "Line": 42,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                         }
                       ],
-                      "Line": 37,
+                      "Line": 42,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 37,
+                  "Line": 42,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 39,
+              "Line": 44,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 41,
+          "Line": 46,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -7538,7 +7616,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 41,
+              "Line": 46,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
@@ -7554,7 +7632,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Array",
-                      "Line": 42,
+                      "Line": 47,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     },
@@ -7566,18 +7644,18 @@
                           "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                           "ClassName": "",
                           "Name": "value",
-                          "Line": 42,
+                          "Line": 47,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                         }
                       ],
-                      "Line": 42,
+                      "Line": 47,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 42,
+                  "Line": 47,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
@@ -7585,11 +7663,11 @@
                 "Right": {
                   "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
                   "Value": false,
-                  "Line": 42,
+                  "Line": 47,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
-                "Line": 42,
+                "Line": 47,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -7600,7 +7678,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Throw",
-                      "Line": 43,
+                      "Line": 48,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     },
@@ -7611,30 +7689,30 @@
                         {
                           "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                           "Index": 85,
-                          "Line": 43,
+                          "Line": 48,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                         }
                       ],
-                      "Line": 43,
+                      "Line": 48,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 43,
+                  "Line": 48,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 45,
+              "Line": 50,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 48,
+          "Line": 53,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -7653,7 +7731,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 48,
+              "Line": 53,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
@@ -7670,18 +7748,18 @@
                       "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                       "ClassName": "",
                       "Name": "collection",
-                      "Line": 49,
+                      "Line": 54,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
-                  "Line": 49,
+                  "Line": 54,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "Arguments": [],
-              "Line": 49,
+              "Line": 54,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -7693,7 +7771,7 @@
               "Value": {
                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                 "Index": 86,
-                "Line": 51,
+                "Line": 56,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -7701,7 +7779,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 51,
+              "Line": 56,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -7716,7 +7794,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "Array",
-                    "Line": 53,
+                    "Line": 58,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -7728,18 +7806,18 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "collection",
-                        "Line": 53,
+                        "Line": 58,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 53,
+                    "Line": 58,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 53,
+                "Line": 58,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -7747,7 +7825,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 53,
+              "Line": 58,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -7761,7 +7839,7 @@
                   "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
                   "IsNegative": false,
                   "Index": 6,
-                  "Line": 55,
+                  "Line": 60,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
@@ -7769,7 +7847,7 @@
                 "IsPrivate": false,
                 "IsConst": false,
                 "IsPathAssignment": false,
-                "Line": 55,
+                "Line": 60,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -7779,7 +7857,7 @@
                   "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                   "ClassName": "",
                   "Name": "i",
-                  "Line": 55,
+                  "Line": 60,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
@@ -7790,7 +7868,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "arr",
-                      "Line": 55,
+                      "Line": 60,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     },
@@ -7798,17 +7876,17 @@
                       "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
                       "Name": "length",
                       "Arguments": [],
-                      "Line": 55,
+                      "Line": 60,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 55,
+                  "Line": 60,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
-                "Line": 55,
+                "Line": 60,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -7823,7 +7901,7 @@
                     "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                     "ClassName": "",
                     "Name": "i",
-                    "Line": 55,
+                    "Line": 60,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -7832,11 +7910,11 @@
                     "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
                     "IsNegative": false,
                     "Index": 7,
-                    "Line": 55,
+                    "Line": 60,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
-                  "Line": 55,
+                  "Line": 60,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
@@ -7844,7 +7922,7 @@
                 "IsPrivate": false,
                 "IsConst": false,
                 "IsPathAssignment": false,
-                "Line": 55,
+                "Line": 60,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -7860,7 +7938,7 @@
                       "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                       "ClassName": "",
                       "Name": "result",
-                      "Line": 56,
+                      "Line": 61,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     },
@@ -7871,7 +7949,7 @@
                         {
                           "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                           "Name": "arr",
-                          "Line": 56,
+                          "Line": 61,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                         },
@@ -7883,22 +7961,22 @@
                               "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                               "ClassName": "",
                               "Name": "i",
-                              "Line": 56,
+                              "Line": 61,
                               "LineIndex": 0,
                               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                             }
                           ],
-                          "Line": 56,
+                          "Line": 61,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                         }
                       ],
                       "Arguments": [],
-                      "Line": 56,
+                      "Line": 61,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     },
-                    "Line": 56,
+                    "Line": 61,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -7906,13 +7984,13 @@
                   "IsPrivate": false,
                   "IsConst": false,
                   "IsPathAssignment": false,
-                  "Line": 56,
+                  "Line": 61,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "Variables": {},
-              "Line": 59,
+              "Line": 64,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -7924,7 +8002,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "String",
-                    "Line": 59,
+                    "Line": 64,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -7936,27 +8014,27 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "result",
-                        "Line": 59,
+                        "Line": 64,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 59,
+                    "Line": 64,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 59,
+                "Line": 64,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
-              "Line": 60,
+              "Line": 65,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 62,
+          "Line": 67,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -7975,7 +8053,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "String",
-                    "Line": 63,
+                    "Line": 68,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -7993,7 +8071,7 @@
                               {
                                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                                 "Index": 87,
-                                "Line": 63,
+                                "Line": 68,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               },
@@ -8008,49 +8086,49 @@
                                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                         "ClassName": "",
                                         "Name": "_value",
-                                        "Line": 63,
+                                        "Line": 68,
                                         "LineIndex": 0,
                                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                       }
                                     ],
-                                    "Line": 63,
+                                    "Line": 68,
                                     "LineIndex": 0,
                                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                   }
                                 ],
                                 "Arguments": [],
-                                "Line": 63,
+                                "Line": 68,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               }
                             ],
-                            "Line": 63,
+                            "Line": 68,
                             "LineIndex": 0,
                             "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 63,
+                        "Line": 68,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 63,
+                    "Line": 68,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 63,
+                "Line": 68,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
-              "Line": 64,
+              "Line": 69,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 66,
+          "Line": 71,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -8069,7 +8147,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "String",
-                    "Line": 67,
+                    "Line": 72,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -8087,7 +8165,7 @@
                               {
                                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                                 "Index": 88,
-                                "Line": 67,
+                                "Line": 72,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               },
@@ -8102,49 +8180,49 @@
                                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                         "ClassName": "",
                                         "Name": "_value",
-                                        "Line": 67,
+                                        "Line": 72,
                                         "LineIndex": 0,
                                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                       }
                                     ],
-                                    "Line": 67,
+                                    "Line": 72,
                                     "LineIndex": 0,
                                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                   }
                                 ],
                                 "Arguments": [],
-                                "Line": 67,
+                                "Line": 72,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               }
                             ],
-                            "Line": 67,
+                            "Line": 72,
                             "LineIndex": 0,
                             "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 67,
+                        "Line": 72,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 67,
+                    "Line": 72,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 67,
+                "Line": 72,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
-              "Line": 68,
+              "Line": 73,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 70,
+          "Line": 75,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -8163,15 +8241,18 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 70,
+              "Line": 75,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
           "Body": [
             {
-              "$type": "Qlang.Core.Lang.AST.ReturnNode, ql",
-              "ReturnValue": {
+              "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "value",
+              "Path": null,
+              "Value": {
                 "$type": "Qlang.Core.Lang.AST.CallNode, ql",
                 "Objects": [
                   {
@@ -8181,7 +8262,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                         "Index": 89,
-                        "Line": 71,
+                        "Line": 76,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -8189,27 +8270,45 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "value",
-                        "Line": 71,
+                        "Line": 76,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 71,
+                    "Line": 76,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 71,
+                "Line": 76,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
-              "Line": 72,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "IsPathAssignment": false,
+              "Line": 76,
+              "LineIndex": 0,
+              "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                "ClassName": "",
+                "Name": "value",
+                "Line": 77,
+                "LineIndex": 0,
+                "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+              },
+              "Line": 78,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 74,
+          "Line": 80,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -8228,7 +8327,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 74,
+              "Line": 80,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
@@ -8246,7 +8345,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                         "Index": 90,
-                        "Line": 75,
+                        "Line": 81,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -8254,27 +8353,27 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "value",
-                        "Line": 75,
+                        "Line": 81,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 75,
+                    "Line": 81,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 75,
+                "Line": 81,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
-              "Line": 76,
+              "Line": 82,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 78,
+          "Line": 84,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -8293,7 +8392,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 78,
+              "Line": 84,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
@@ -8307,7 +8406,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "Array",
-                    "Line": 79,
+                    "Line": 85,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -8325,7 +8424,7 @@
                               {
                                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                                 "Index": 91,
-                                "Line": 79,
+                                "Line": 85,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               },
@@ -8340,18 +8439,18 @@
                                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                         "ClassName": "",
                                         "Name": "_value",
-                                        "Line": 79,
+                                        "Line": 85,
                                         "LineIndex": 0,
                                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                       }
                                     ],
-                                    "Line": 79,
+                                    "Line": 85,
                                     "LineIndex": 0,
                                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                   }
                                 ],
                                 "Arguments": [],
-                                "Line": 79,
+                                "Line": 85,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               },
@@ -8359,38 +8458,38 @@
                                 "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                 "ClassName": "",
                                 "Name": "pattern",
-                                "Line": 79,
+                                "Line": 85,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               }
                             ],
-                            "Line": 79,
+                            "Line": 85,
                             "LineIndex": 0,
                             "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 79,
+                        "Line": 85,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 79,
+                    "Line": 85,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 79,
+                "Line": 85,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
-              "Line": 80,
+              "Line": 86,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 82,
+          "Line": 88,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -8409,7 +8508,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 82,
+              "Line": 88,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -8422,7 +8521,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 82,
+              "Line": 88,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
@@ -8440,7 +8539,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                         "Name": "Array",
-                        "Line": 83,
+                        "Line": 89,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -8452,18 +8551,18 @@
                             "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                             "ClassName": "",
                             "Name": "strArr",
-                            "Line": 83,
+                            "Line": 89,
                             "LineIndex": 0,
                             "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
-                        "Line": 83,
+                        "Line": 89,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 83,
+                    "Line": 89,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -8471,11 +8570,11 @@
                   "Right": {
                     "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
                     "Value": false,
-                    "Line": 83,
+                    "Line": 89,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
-                  "Line": 83,
+                  "Line": 89,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
@@ -8488,7 +8587,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                         "Name": "Array",
-                        "Line": 83,
+                        "Line": 89,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -8500,18 +8599,18 @@
                             "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                             "ClassName": "",
                             "Name": "strArr",
-                            "Line": 83,
+                            "Line": 89,
                             "LineIndex": 0,
                             "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
-                        "Line": 83,
+                        "Line": 89,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 83,
+                    "Line": 89,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -8519,15 +8618,15 @@
                   "Right": {
                     "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
                     "Value": false,
-                    "Line": 83,
+                    "Line": 89,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
-                  "Line": 83,
+                  "Line": 89,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
-                "Line": 83,
+                "Line": 89,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -8538,7 +8637,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Throw",
-                      "Line": 84,
+                      "Line": 90,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     },
@@ -8549,25 +8648,25 @@
                         {
                           "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                           "Index": 92,
-                          "Line": 84,
+                          "Line": 90,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                         }
                       ],
-                      "Line": 84,
+                      "Line": 90,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 84,
+                  "Line": 90,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 88,
+              "Line": 94,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -8581,7 +8680,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Array",
-                      "Line": 88,
+                      "Line": 94,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     },
@@ -8593,18 +8692,18 @@
                           "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                           "ClassName": "",
                           "Name": "strArr",
-                          "Line": 88,
+                          "Line": 94,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                         }
                       ],
-                      "Line": 88,
+                      "Line": 94,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 88,
+                  "Line": 94,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
@@ -8612,11 +8711,11 @@
                 "Right": {
                   "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
                   "Value": true,
-                  "Line": 88,
+                  "Line": 94,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
-                "Line": 88,
+                "Line": 94,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -8632,7 +8731,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                         "Name": "strArr",
-                        "Line": 89,
+                        "Line": 95,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -8640,13 +8739,13 @@
                         "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
                         "Name": "getCollection",
                         "Arguments": [],
-                        "Line": 89,
+                        "Line": 95,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 89,
+                    "Line": 95,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -8654,14 +8753,14 @@
                   "IsPrivate": false,
                   "IsConst": false,
                   "IsPathAssignment": false,
-                  "Line": 89,
+                  "Line": 95,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 92,
+              "Line": 98,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -8673,7 +8772,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "String",
-                    "Line": 92,
+                    "Line": 98,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -8691,7 +8790,7 @@
                               {
                                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                                 "Index": 93,
-                                "Line": 92,
+                                "Line": 98,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               },
@@ -8699,7 +8798,7 @@
                                 "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                 "ClassName": "",
                                 "Name": "strArr",
-                                "Line": 92,
+                                "Line": 98,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               },
@@ -8707,38 +8806,38 @@
                                 "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                 "ClassName": "",
                                 "Name": "pattern",
-                                "Line": 92,
+                                "Line": 98,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               }
                             ],
-                            "Line": 92,
+                            "Line": 98,
                             "LineIndex": 0,
                             "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 92,
+                        "Line": 98,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 92,
+                    "Line": 98,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 92,
+                "Line": 98,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
-              "Line": 93,
+              "Line": 99,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 96,
+          "Line": 102,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -8761,7 +8860,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                         "Index": 94,
-                        "Line": 97,
+                        "Line": 103,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -8776,38 +8875,38 @@
                                 "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                 "ClassName": "",
                                 "Name": "_value",
-                                "Line": 97,
+                                "Line": 103,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               }
                             ],
-                            "Line": 97,
+                            "Line": 103,
                             "LineIndex": 0,
                             "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 97,
+                        "Line": 103,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 97,
+                    "Line": 103,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 97,
+                "Line": 103,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
-              "Line": 98,
+              "Line": 104,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 101,
+          "Line": 107,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -8826,7 +8925,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 101,
+              "Line": 107,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
@@ -8844,7 +8943,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                         "Name": "String",
-                        "Line": 102,
+                        "Line": 108,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -8856,18 +8955,18 @@
                             "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                             "ClassName": "",
                             "Name": "str",
-                            "Line": 102,
+                            "Line": 108,
                             "LineIndex": 0,
                             "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
-                        "Line": 102,
+                        "Line": 108,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 102,
+                    "Line": 108,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -8875,11 +8974,11 @@
                   "Right": {
                     "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
                     "Value": false,
-                    "Line": 102,
+                    "Line": 108,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
-                  "Line": 102,
+                  "Line": 108,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
@@ -8892,7 +8991,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                         "Name": "String",
-                        "Line": 102,
+                        "Line": 108,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -8904,18 +9003,18 @@
                             "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                             "ClassName": "",
                             "Name": "str",
-                            "Line": 102,
+                            "Line": 108,
                             "LineIndex": 0,
                             "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
-                        "Line": 102,
+                        "Line": 108,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 102,
+                    "Line": 108,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -8923,15 +9022,15 @@
                   "Right": {
                     "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
                     "Value": false,
-                    "Line": 102,
+                    "Line": 108,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
-                  "Line": 102,
+                  "Line": 108,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
-                "Line": 102,
+                "Line": 108,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -8942,7 +9041,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Throw",
-                      "Line": 103,
+                      "Line": 109,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     },
@@ -8953,25 +9052,25 @@
                         {
                           "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                           "Index": 95,
-                          "Line": 103,
+                          "Line": 109,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                         }
                       ],
-                      "Line": 103,
+                      "Line": 109,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 103,
+                  "Line": 109,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 106,
+              "Line": 112,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -8983,7 +9082,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "String",
-                    "Line": 106,
+                    "Line": 112,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -8995,18 +9094,18 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "str",
-                        "Line": 106,
+                        "Line": 112,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 106,
+                    "Line": 112,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 106,
+                "Line": 112,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -9022,7 +9121,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                         "Name": "str",
-                        "Line": 107,
+                        "Line": 113,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -9030,13 +9129,13 @@
                         "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
                         "Name": "str",
                         "Arguments": [],
-                        "Line": 107,
+                        "Line": 113,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 107,
+                    "Line": 113,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -9044,14 +9143,14 @@
                   "IsPrivate": false,
                   "IsConst": false,
                   "IsPathAssignment": false,
-                  "Line": 107,
+                  "Line": 113,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 110,
+              "Line": 116,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -9067,7 +9166,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                         "Index": 96,
-                        "Line": 110,
+                        "Line": 116,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -9082,38 +9181,38 @@
                                 "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                 "ClassName": "",
                                 "Name": "str",
-                                "Line": 110,
+                                "Line": 116,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               }
                             ],
-                            "Line": 110,
+                            "Line": 116,
                             "LineIndex": 0,
                             "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 110,
+                        "Line": 116,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 110,
+                    "Line": 116,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 110,
+                "Line": 116,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
-              "Line": 111,
+              "Line": 117,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 114,
+          "Line": 120,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -9132,7 +9231,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 114,
+              "Line": 120,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
@@ -9150,7 +9249,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                         "Name": "String",
-                        "Line": 115,
+                        "Line": 121,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -9162,18 +9261,18 @@
                             "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                             "ClassName": "",
                             "Name": "str",
-                            "Line": 115,
+                            "Line": 121,
                             "LineIndex": 0,
                             "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
-                        "Line": 115,
+                        "Line": 121,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 115,
+                    "Line": 121,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -9181,11 +9280,11 @@
                   "Right": {
                     "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
                     "Value": false,
-                    "Line": 115,
+                    "Line": 121,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
-                  "Line": 115,
+                  "Line": 121,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
@@ -9198,7 +9297,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                         "Name": "String",
-                        "Line": 115,
+                        "Line": 121,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -9210,18 +9309,18 @@
                             "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                             "ClassName": "",
                             "Name": "str",
-                            "Line": 115,
+                            "Line": 121,
                             "LineIndex": 0,
                             "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
-                        "Line": 115,
+                        "Line": 121,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 115,
+                    "Line": 121,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -9229,15 +9328,15 @@
                   "Right": {
                     "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
                     "Value": false,
-                    "Line": 115,
+                    "Line": 121,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
-                  "Line": 115,
+                  "Line": 121,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
-                "Line": 115,
+                "Line": 121,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -9248,7 +9347,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Throw",
-                      "Line": 116,
+                      "Line": 122,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     },
@@ -9259,25 +9358,25 @@
                         {
                           "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                           "Index": 97,
-                          "Line": 116,
+                          "Line": 122,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                         }
                       ],
-                      "Line": 116,
+                      "Line": 122,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 116,
+                  "Line": 122,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 119,
+              "Line": 125,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -9289,7 +9388,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "String",
-                    "Line": 119,
+                    "Line": 125,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -9301,18 +9400,18 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "str",
-                        "Line": 119,
+                        "Line": 125,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 119,
+                    "Line": 125,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 119,
+                "Line": 125,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -9328,7 +9427,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                         "Name": "str",
-                        "Line": 120,
+                        "Line": 126,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -9336,13 +9435,13 @@
                         "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
                         "Name": "str",
                         "Arguments": [],
-                        "Line": 120,
+                        "Line": 126,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 120,
+                    "Line": 126,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -9350,14 +9449,14 @@
                   "IsPrivate": false,
                   "IsConst": false,
                   "IsPathAssignment": false,
-                  "Line": 120,
+                  "Line": 126,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 123,
+              "Line": 129,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -9373,7 +9472,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                         "Index": 98,
-                        "Line": 123,
+                        "Line": 129,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -9388,38 +9487,38 @@
                                 "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                 "ClassName": "",
                                 "Name": "str",
-                                "Line": 123,
+                                "Line": 129,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               }
                             ],
-                            "Line": 123,
+                            "Line": 129,
                             "LineIndex": 0,
                             "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 123,
+                        "Line": 129,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 123,
+                    "Line": 129,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 123,
+                "Line": 129,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
-              "Line": 124,
+              "Line": 130,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 127,
+          "Line": 133,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -9438,7 +9537,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "String",
-                    "Line": 128,
+                    "Line": 134,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -9456,7 +9555,7 @@
                               {
                                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                                 "Index": 99,
-                                "Line": 128,
+                                "Line": 134,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               },
@@ -9471,49 +9570,49 @@
                                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                         "ClassName": "",
                                         "Name": "_value",
-                                        "Line": 128,
+                                        "Line": 134,
                                         "LineIndex": 0,
                                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                       }
                                     ],
-                                    "Line": 128,
+                                    "Line": 134,
                                     "LineIndex": 0,
                                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                   }
                                 ],
                                 "Arguments": [],
-                                "Line": 128,
+                                "Line": 134,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               }
                             ],
-                            "Line": 128,
+                            "Line": 134,
                             "LineIndex": 0,
                             "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 128,
+                        "Line": 134,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 128,
+                    "Line": 134,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 128,
+                "Line": 134,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
-              "Line": 129,
+              "Line": 135,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 132,
+          "Line": 138,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -9532,7 +9631,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "String",
-                    "Line": 133,
+                    "Line": 139,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -9550,7 +9649,7 @@
                               {
                                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                                 "Index": 100,
-                                "Line": 133,
+                                "Line": 139,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               },
@@ -9565,49 +9664,49 @@
                                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                         "ClassName": "",
                                         "Name": "_value",
-                                        "Line": 133,
+                                        "Line": 139,
                                         "LineIndex": 0,
                                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                       }
                                     ],
-                                    "Line": 133,
+                                    "Line": 139,
                                     "LineIndex": 0,
                                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                   }
                                 ],
                                 "Arguments": [],
-                                "Line": 133,
+                                "Line": 139,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               }
                             ],
-                            "Line": 133,
+                            "Line": 139,
                             "LineIndex": 0,
                             "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 133,
+                        "Line": 139,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 133,
+                    "Line": 139,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 133,
+                "Line": 139,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
-              "Line": 134,
+              "Line": 140,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 137,
+          "Line": 143,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -9626,7 +9725,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "String",
-                    "Line": 138,
+                    "Line": 144,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -9644,7 +9743,7 @@
                               {
                                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                                 "Index": 101,
-                                "Line": 138,
+                                "Line": 144,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               },
@@ -9659,49 +9758,49 @@
                                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                         "ClassName": "",
                                         "Name": "_value",
-                                        "Line": 138,
+                                        "Line": 144,
                                         "LineIndex": 0,
                                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                       }
                                     ],
-                                    "Line": 138,
+                                    "Line": 144,
                                     "LineIndex": 0,
                                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                   }
                                 ],
                                 "Arguments": [],
-                                "Line": 138,
+                                "Line": 144,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               }
                             ],
-                            "Line": 138,
+                            "Line": 144,
                             "LineIndex": 0,
                             "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 138,
+                        "Line": 144,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 138,
+                    "Line": 144,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 138,
+                "Line": 144,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
-              "Line": 139,
+              "Line": 145,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 142,
+          "Line": 148,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -9720,7 +9819,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 142,
+              "Line": 148,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -9733,7 +9832,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 142,
+              "Line": 148,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
@@ -9749,7 +9848,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Number",
-                      "Line": 143,
+                      "Line": 149,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     },
@@ -9761,18 +9860,18 @@
                           "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                           "ClassName": "",
                           "Name": "startPos",
-                          "Line": 143,
+                          "Line": 149,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                         }
                       ],
-                      "Line": 143,
+                      "Line": 149,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 143,
+                  "Line": 149,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
@@ -9780,11 +9879,11 @@
                 "Right": {
                   "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
                   "Value": false,
-                  "Line": 143,
+                  "Line": 149,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
-                "Line": 143,
+                "Line": 149,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -9795,7 +9894,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Throw",
-                      "Line": 144,
+                      "Line": 150,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     },
@@ -9806,25 +9905,25 @@
                         {
                           "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                           "Index": 102,
-                          "Line": 144,
+                          "Line": 150,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                         }
                       ],
-                      "Line": 144,
+                      "Line": 150,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 144,
+                  "Line": 150,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 147,
+              "Line": 153,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -9838,7 +9937,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Number",
-                      "Line": 147,
+                      "Line": 153,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     },
@@ -9850,18 +9949,18 @@
                           "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                           "ClassName": "",
                           "Name": "length",
-                          "Line": 147,
+                          "Line": 153,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                         }
                       ],
-                      "Line": 147,
+                      "Line": 153,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 147,
+                  "Line": 153,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
@@ -9869,11 +9968,11 @@
                 "Right": {
                   "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
                   "Value": false,
-                  "Line": 147,
+                  "Line": 153,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
-                "Line": 147,
+                "Line": 153,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -9884,7 +9983,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Throw",
-                      "Line": 148,
+                      "Line": 154,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     },
@@ -9895,25 +9994,25 @@
                         {
                           "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                           "Index": 103,
-                          "Line": 148,
+                          "Line": 154,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                         }
                       ],
-                      "Line": 148,
+                      "Line": 154,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 148,
+                  "Line": 154,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 151,
+              "Line": 157,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -9928,13 +10027,13 @@
                       "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
                       "Name": "length",
                       "Arguments": [],
-                      "Line": 151,
+                      "Line": 157,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 151,
+                  "Line": 157,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
@@ -9943,11 +10042,11 @@
                   "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                   "ClassName": "",
                   "Name": "length",
-                  "Line": 151,
+                  "Line": 157,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
-                "Line": 151,
+                "Line": 157,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -9958,7 +10057,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Throw",
-                      "Line": 152,
+                      "Line": 158,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     },
@@ -9969,25 +10068,25 @@
                         {
                           "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                           "Index": 104,
-                          "Line": 152,
+                          "Line": 158,
                           "LineIndex": 0,
                           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                         }
                       ],
-                      "Line": 152,
+                      "Line": 158,
                       "LineIndex": 0,
                       "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 152,
+                  "Line": 158,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 155,
+              "Line": 161,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -9999,7 +10098,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "String",
-                    "Line": 155,
+                    "Line": 161,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -10017,7 +10116,7 @@
                               {
                                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
                                 "Index": 105,
-                                "Line": 155,
+                                "Line": 161,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               },
@@ -10032,18 +10131,18 @@
                                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                         "ClassName": "",
                                         "Name": "_value",
-                                        "Line": 155,
+                                        "Line": 161,
                                         "LineIndex": 0,
                                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                       }
                                     ],
-                                    "Line": 155,
+                                    "Line": 161,
                                     "LineIndex": 0,
                                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                   }
                                 ],
                                 "Arguments": [],
-                                "Line": 155,
+                                "Line": 161,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               },
@@ -10051,7 +10150,7 @@
                                 "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                 "ClassName": "",
                                 "Name": "startPos",
-                                "Line": 155,
+                                "Line": 161,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               },
@@ -10059,38 +10158,38 @@
                                 "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                 "ClassName": "",
                                 "Name": "length",
-                                "Line": 155,
+                                "Line": 161,
                                 "LineIndex": 0,
                                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               }
                             ],
-                            "Line": 155,
+                            "Line": 161,
                             "LineIndex": 0,
                             "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 155,
+                        "Line": 161,
                         "LineIndex": 0,
                         "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 155,
+                    "Line": 161,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 155,
+                "Line": 161,
                 "LineIndex": 0,
                 "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
-              "Line": 156,
+              "Line": 162,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 157,
+          "Line": 163,
           "LineIndex": 0,
           "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         }
@@ -10315,7 +10414,48 @@
             {
               "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
               "Name": "p",
-              "Arguments": [],
+              "Arguments": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "Array",
+                      "Line": 4,
+                      "LineIndex": 0,
+                      "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "new",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.CollectionNode, ql",
+                          "Collection": [
+                            {
+                              "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                              "Index": 111,
+                              "Line": 4,
+                              "LineIndex": 0,
+                              "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                            }
+                          ],
+                          "Line": 4,
+                          "LineIndex": 0,
+                          "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                        }
+                      ],
+                      "Line": 4,
+                      "LineIndex": 0,
+                      "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 4,
+                  "LineIndex": 0,
+                  "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                }
+              ],
               "Line": 4,
               "LineIndex": 0,
               "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
@@ -10357,7 +10497,7 @@
                 "Arguments": [
                   {
                     "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                    "Index": 111,
+                    "Index": 112,
                     "Line": 7,
                     "LineIndex": 0,
                     "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
@@ -10398,33 +10538,16 @@
               "Name": "println",
               "Arguments": [
                 {
-                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
-                  "Objects": [
-                    {
-                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
-                      "Name": "String",
-                      "Line": 8,
-                      "LineIndex": 0,
-                      "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
-                    },
-                    {
-                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
-                      "Name": "new",
-                      "Arguments": [
-                        {
-                          "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                          "Index": 112,
-                          "Line": 8,
-                          "LineIndex": 0,
-                          "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
-                        }
-                      ],
-                      "Line": 8,
-                      "LineIndex": 0,
-                      "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
-                    }
-                  ],
-                  "Arguments": [],
+                  "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                  "ClassName": "",
+                  "Name": "a",
+                  "Line": 8,
+                  "LineIndex": 0,
+                  "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
+                  "Value": true,
                   "Line": 8,
                   "LineIndex": 0,
                   "SourceFile": "C:\\Users\\sotok\\Desktop\\Estagio\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"

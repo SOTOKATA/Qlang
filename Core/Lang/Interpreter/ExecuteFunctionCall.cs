@@ -45,6 +45,14 @@ public partial class Interpreter
                     Logger.Warn($"Native call return: value='{returnValue}' type='{returnValue?.GetType().Name}'");
             
                     return returnValue;
+                case "typeof":
+                    var arg = args[0];
+                    if (arg is DynamicClass @class)
+                        return @class.ClassName;
+                    
+                    return arg?.GetType().Name;
+                case "nameof":
+                    return args[0]?.ToString();
             }
         }
 

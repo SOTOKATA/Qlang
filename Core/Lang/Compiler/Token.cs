@@ -39,6 +39,7 @@ public class Token(Tokens token, int line, int index, string value = "")
             Tokens.NumberRef => "",
             Tokens.Keyword => " ",
             Tokens.Percent => " % ",
+            Tokens.Question => " ? ",
         };
     }
 }
@@ -70,4 +71,5 @@ public enum Tokens
     Percent,
     StringRef,
     NumberRef,
+    Question
 }
