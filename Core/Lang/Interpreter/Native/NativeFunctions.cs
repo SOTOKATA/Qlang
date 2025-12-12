@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 using Qlang.Core.Lang.Dynamic;
 using Qlang.Core.Lang.Dynamic.Exceptions;
 using Qlang.Core.LangDebug;
-using Qlang.Plugins;
+using Qlang.NativeLib;
 
 namespace Qlang.Core.Lang.Interpreter.Native;
 
@@ -18,6 +18,8 @@ public class NativeFunctionRegistry
       
         // Console
         Register("lib.cmd_write", (Action<string?>)Console.Write);
+        Register("lib.cmd_width", (Func<double>)(() => Console.WindowWidth));
+        Register("lib.cmd_height", (Func<double>)(() => Console.WindowHeight));
         Register("lib.cmd_cursor_visible", (Action<bool>)(isVisible => Console.CursorVisible = isVisible));
         Register("lib.cmd_read", Console.ReadLine);
         Register("lib.cmd_key", (Func<bool, string>)(intercept => Console.ReadKey(intercept).KeyChar.ToString()));
@@ -34,6 +36,7 @@ public class NativeFunctionRegistry
         Register("lib.exception", (Action<string>)(msg => throw new QlangRuntimeException(msg, null)));
         
         // String
+        Register("lib.str_at", (Func<string, int, string>)((str, index) => str[index].ToString()));
         Register("lib.str_length", (Func<string, int>)(NativeString.GetLength));
         Register("lib.str_is_primitive", (Func<object?, bool>)(str => str is string));
         Register("lib.str_is_str", (Func<object?, bool>)(str => str is DynamicClass { ClassName: "String" }));
@@ -109,26 +112,75 @@ public class NativeFunctionRegistry
         Register(nativeName + "." + name, handler);
     }
 
-    public void LoadPlugin(string dllPath)
+    // public void LoadPlugin(string dllPath)
+    // {
+    //     try
+    //     {
+    //         var assembly = Assembly.LoadFrom(dllPath);
+    //         var pluginTypes = assembly.GetTypes()
+    //             .Where(t => typeof(IQlangLib).IsAssignableFrom(t) && !t.IsInterface);
+    //         
+    //         foreach (var type in pluginTypes)
+    //         {
+    //             var plugin = (IQlangLib)Activator.CreateInstance(type)!;
+    //             plugin.Register(this);
+    //             _loadedPlugins.Add(plugin);
+    //             
+    //             Logger.Log($"Loaded plugin: {plugin.Name} v{plugin.Version}", "PluginLoader");
+    //         }
+    //     }
+    //     catch (Exception ex)
+    //     {
+    //         throw new Exception($"Failed to load plugin from '{dllPath}': {ex.Message}", ex);
+    //     }
+    // }
+    
+    public void LoadNativeLib(string dllPath)
     {
         try
         {
             var assembly = Assembly.LoadFrom(dllPath);
-            var pluginTypes = assembly.GetTypes()
-                .Where(t => typeof(IQlangLib).IsAssignableFrom(t) && !t.IsInterface);
-            
-            foreach (var type in pluginTypes)
+        
+            // Безопасная загрузка типов - игнорируем те, которые не загружаются
+            Type[] types;
+            try
             {
-                var plugin = (IQlangLib)Activator.CreateInstance(type)!;
-                plugin.Register(this);
-                _loadedPlugins.Add(plugin);
-                
-                Logger.Log($"Loaded plugin: {plugin.Name} v{plugin.Version}", "PluginLoader");
+                types = assembly.GetTypes();
+            }
+            catch (ReflectionTypeLoadException ex)
+            {
+                // Берём только типы, которые успешно загрузились
+                types = ex.Types.Where(t => t != null).ToArray()!;
+            
+                // Логируем предупреждения о пропущенных типах
+                foreach (var loaderException in ex.LoaderExceptions.Where(e => e != null).Distinct())
+                {
+                    Logger.Warn($"Could not load some types from {Path.GetFileName(dllPath)}: {loaderException!.Message}", "PluginLoader");
+                }
+            }
+        
+            var libTypes = types
+                .Where(t => typeof(IQlangLib).IsAssignableFrom(t) && t is { IsInterface: false, IsAbstract: false });
+        
+            var foundPlugin = false;
+            foreach (var type in libTypes)
+            {
+                var nativeLib = (IQlangLib)Activator.CreateInstance(type)!;
+                nativeLib.Register(this);
+                _loadedPlugins.Add(nativeLib);
+                foundPlugin = true;
+            
+                Logger.Log($"Loaded native lib: {nativeLib.Name} v{nativeLib.Version}", "NativeLibLoader");
+            }
+        
+            if (!foundPlugin)
+            {
+                Logger.Warn($"No IQlangLib implementations found in {Path.GetFileName(dllPath)}", "NativeLibLoader");
             }
         }
         catch (Exception ex)
         {
-            throw new Exception($"Failed to load plugin from '{dllPath}': {ex.Message}", ex);
+            throw new Exception($"Failed to load native lib from '{dllPath}': {ex.Message}", ex);
         }
     }
     

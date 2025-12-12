@@ -156,7 +156,7 @@ public static class PreCompile
 
             if (isDirectory)
             {
-                foreach (var file in Directory.GetFiles(fullPath, "*.dll", SearchOption.TopDirectoryOnly))
+                foreach (var file in Directory.GetFiles(fullPath, "*.dll", SearchOption.AllDirectories))
                 {
                     Logger.Log(file, "Path");
 
@@ -166,7 +166,7 @@ public static class PreCompile
                         continue;
                     }
 
-                    nativeFunctions.LoadPlugin(file);
+                    nativeFunctions.LoadNativeLib(file);
                 }
             }
             else
@@ -184,7 +184,7 @@ public static class PreCompile
                     continue;
                 }
 
-                nativeFunctions.LoadPlugin(fullPath);
+                nativeFunctions.LoadNativeLib(fullPath);
             }
         }
 

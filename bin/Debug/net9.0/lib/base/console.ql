@@ -82,4 +82,10 @@ class Console: {
     function resetColors(): {
         _native("lib.cmd_reset_colors");
     }
+
+    function width(): 
+        return _native("lib.cmd_width");
+
+    function height(): 
+        return _native("lib.cmd_height");
 }

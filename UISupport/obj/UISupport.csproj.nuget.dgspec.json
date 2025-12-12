@@ -135,6 +135,18 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Avalonia": {
+              "target": "Package",
+              "version": "[11.3.9, )"
+            },
+            "Avalonia.Desktop": {
+              "target": "Package",
+              "version": "[11.3.9, )"
+            },
+            "Avalonia.Themes.Fluent": {
+              "target": "Package",
+              "version": "[11.3.9, )"
+            },
             "System.Drawing.Common": {
               "target": "Package",
               "version": "[10.0.1, )"

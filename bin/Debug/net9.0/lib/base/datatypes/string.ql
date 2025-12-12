@@ -85,78 +85,72 @@ class String: {
         return Array.new(_native("lib.str_split", _str(_value), pattern));
     }
 
+    function charAt(const index): {
+        if length() <= index:
+            Throw.exception("The index must be less than the length of the string.");
+
+        return _native("lib.str_at", _str(_value), index);
+    }
+
     function join(let strArr, let pattern): {
-        if (Array.isCollection(strArr) == false) && (Array.isArray(strArr) == false): {
+        if (Array.isCollection(strArr) == false) && (Array.isArray(strArr) == false):
             Throw.exception("argument is not collection or array");
-        }   
 
 
-        if Array.isArray(strArr) == true: {
+        if Array.isArray(strArr):
             strArr = strArr.getCollection();
-        }
 
         return String.new(_native("lib.str_join", strArr, pattern));
     }
 
     // Get length of string
-    function length(): {
+    function length():
         return _native("lib.str_length", _str(_value));
-    }
 
     // Check if string is empty or null
     function isNullOrEmpty(let str): {
-        if (String.isPrimitive(str) == false) && (String.isString(str) == false): {
+        if (String.isPrimitive(str) == false) && (String.isString(str) == false):
             Throw.exception("Param must be string class or primitive");
-        }
 
-        if String.isString(str): {
+        if String.isString(str):
             str = str.str();
-        }
 
         return _native("lib.str_null_or_empty", _str(str));
     }
     
     // Check if string is white space or null
     function isNullOrWhitespace(let str): {
-        if (String.isPrimitive(str) == false) && (String.isString(str) == false): {
+        if (String.isPrimitive(str) == false) && (String.isString(str) == false):
             Throw.exception("Param must be string class or primitive");
-        }
 
-        if String.isString(str): {
+        if String.isString(str): 
             str = str.str();
-        }
 
         return _native("lib.str_null_or_white_space", _str(str));
     }
 
     // Trim string
-    function trim(): {
+    function trim():
         return String.new(_native("lib.str_trim", _str(_value)));
-    }
 
     // Trim start string
-    function trimStart(): {
+    function trimStart():
         return String.new(_native("lib.str_trim_start", _str(_value)));
-    }
 
     // Trim end string
-    function trimEnd(): {
+    function trimEnd():
         return String.new(_native("lib.str_trim_end", _str(_value)));
-    }
 
     // Cut string by 'startPos' and 'length'
     function subString(let startPos, let length): {
-        if Number.isNumber(startPos) == false: {
+        if Number.isNumber(startPos) == false:
             Throw.exception("subString error: startPos must be number");
-        }
 
-        if Number.isNumber(length) == false: {
+        if Number.isNumber(length) == false:
             Throw.exception("subString error: length must be number");
-        }
 
-        if length() <= length: {
+        if length() <= length:
             Throw.exception("Value 'length' can't be more than string length");
-        }
 
         return String.new(_native("lib.str_sub_string", _str(_value), startPos, length));
     }

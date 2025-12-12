@@ -7137,26 +7137,13 @@
         },
         {
           "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
-          "Name": "join",
+          "Name": "charAt",
           "IsStatic": false,
           "IsPrivate": false,
           "Parameters": [
             {
               "IsNew": false,
-              "VariableName": "strArr",
-              "Path": null,
-              "Value": null,
-              "IsStatic": false,
-              "IsPrivate": false,
-              "IsConst": false,
-              "IsPathAssignment": false,
-              "Line": 88,
-              "LineIndex": 0,
-              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-            },
-            {
-              "IsNew": false,
-              "VariableName": "pattern",
+              "VariableName": "index",
               "Path": null,
               "Value": null,
               "IsStatic": false,
@@ -7174,96 +7161,27 @@
               "Condition": {
                 "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
                 "Left": {
-                  "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
-                  "Left": {
-                    "$type": "Qlang.Core.Lang.AST.CallNode, ql",
-                    "Objects": [
-                      {
-                        "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
-                        "Name": "Array",
-                        "Line": 89,
-                        "LineIndex": 0,
-                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                      },
-                      {
-                        "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
-                        "Name": "isCollection",
-                        "Arguments": [
-                          {
-                            "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
-                            "ClassName": "",
-                            "Name": "strArr",
-                            "Line": 89,
-                            "LineIndex": 0,
-                            "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                          }
-                        ],
-                        "Line": 89,
-                        "LineIndex": 0,
-                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                      }
-                    ],
-                    "Arguments": [],
-                    "Line": 89,
-                    "LineIndex": 0,
-                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                  },
-                  "Operator": "==",
-                  "Right": {
-                    "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
-                    "Value": false,
-                    "Line": 89,
-                    "LineIndex": 0,
-                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                  },
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "length",
+                      "Arguments": [],
+                      "Line": 89,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                    }
+                  ],
+                  "Arguments": [],
                   "Line": 89,
                   "LineIndex": 0,
                   "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
-                "Operator": "&&",
+                "Operator": "<=",
                 "Right": {
-                  "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
-                  "Left": {
-                    "$type": "Qlang.Core.Lang.AST.CallNode, ql",
-                    "Objects": [
-                      {
-                        "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
-                        "Name": "Array",
-                        "Line": 89,
-                        "LineIndex": 0,
-                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                      },
-                      {
-                        "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
-                        "Name": "isArray",
-                        "Arguments": [
-                          {
-                            "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
-                            "ClassName": "",
-                            "Name": "strArr",
-                            "Line": 89,
-                            "LineIndex": 0,
-                            "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                          }
-                        ],
-                        "Line": 89,
-                        "LineIndex": 0,
-                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                      }
-                    ],
-                    "Arguments": [],
-                    "Line": 89,
-                    "LineIndex": 0,
-                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                  },
-                  "Operator": "==",
-                  "Right": {
-                    "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
-                    "Value": false,
-                    "Line": 89,
-                    "LineIndex": 0,
-                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                  },
+                  "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                  "ClassName": "",
+                  "Name": "index",
                   "Line": 89,
                   "LineIndex": 0,
                   "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
@@ -7308,56 +7226,289 @@
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 94,
+              "Line": 92,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                        "Index": 73,
+                        "Line": 92,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                      },
+                      {
+                        "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                        "Objects": [
+                          {
+                            "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                            "Name": "_str",
+                            "Arguments": [
+                              {
+                                "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                                "ClassName": "",
+                                "Name": "_value",
+                                "Line": 92,
+                                "LineIndex": 0,
+                                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                              }
+                            ],
+                            "Line": 92,
+                            "LineIndex": 0,
+                            "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                          }
+                        ],
+                        "Arguments": [],
+                        "Line": 92,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                      },
+                      {
+                        "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "index",
+                        "Line": 92,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                      }
+                    ],
+                    "Line": 92,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                  }
+                ],
+                "Arguments": [],
+                "Line": 92,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+              },
+              "Line": 93,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+            }
+          ],
+          "Line": 95,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
+          "Name": "join",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "strArr",
+              "Path": null,
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "IsPathAssignment": false,
+              "Line": 95,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+            },
+            {
+              "IsNew": false,
+              "VariableName": "pattern",
+              "Path": null,
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "IsPathAssignment": false,
+              "Line": 95,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.Core.Lang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                    "Objects": [
+                      {
+                        "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                        "Name": "Array",
+                        "Line": 96,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                      },
+                      {
+                        "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                        "Name": "isCollection",
+                        "Arguments": [
+                          {
+                            "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                            "ClassName": "",
+                            "Name": "strArr",
+                            "Line": 96,
+                            "LineIndex": 0,
+                            "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                          }
+                        ],
+                        "Line": 96,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                      }
+                    ],
+                    "Arguments": [],
+                    "Line": 96,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                  },
+                  "Operator": "==",
+                  "Right": {
+                    "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
+                    "Value": false,
+                    "Line": 96,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                  },
+                  "Line": 96,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                },
+                "Operator": "&&",
+                "Right": {
+                  "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                    "Objects": [
+                      {
+                        "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                        "Name": "Array",
+                        "Line": 96,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                      },
+                      {
+                        "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                        "Name": "isArray",
+                        "Arguments": [
+                          {
+                            "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                            "ClassName": "",
+                            "Name": "strArr",
+                            "Line": 96,
+                            "LineIndex": 0,
+                            "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                          }
+                        ],
+                        "Line": 96,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                      }
+                    ],
+                    "Arguments": [],
+                    "Line": 96,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                  },
+                  "Operator": "==",
+                  "Right": {
+                    "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
+                    "Value": false,
+                    "Line": 96,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                  },
+                  "Line": 96,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                },
+                "Line": 96,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "Throw",
+                      "Line": 97,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "exception",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                          "Index": 74,
+                          "Line": 97,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                        }
+                      ],
+                      "Line": 97,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 97,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 100,
               "LineIndex": 0,
               "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
             {
               "$type": "Qlang.Core.Lang.AST.IfNode, ql",
               "Condition": {
-                "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
-                "Left": {
-                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
-                  "Objects": [
-                    {
-                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
-                      "Name": "Array",
-                      "Line": 94,
-                      "LineIndex": 0,
-                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                    },
-                    {
-                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
-                      "Name": "isArray",
-                      "Arguments": [
-                        {
-                          "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
-                          "ClassName": "",
-                          "Name": "strArr",
-                          "Line": 94,
-                          "LineIndex": 0,
-                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                        }
-                      ],
-                      "Line": 94,
-                      "LineIndex": 0,
-                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                    }
-                  ],
-                  "Arguments": [],
-                  "Line": 94,
-                  "LineIndex": 0,
-                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                },
-                "Operator": "==",
-                "Right": {
-                  "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
-                  "Value": true,
-                  "Line": 94,
-                  "LineIndex": 0,
-                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                },
-                "Line": 94,
+                "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                    "Name": "Array",
+                    "Line": 100,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                  },
+                  {
+                    "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                    "Name": "isArray",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "strArr",
+                        "Line": 100,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                      }
+                    ],
+                    "Line": 100,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                  }
+                ],
+                "Arguments": [],
+                "Line": 100,
                 "LineIndex": 0,
                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -7373,7 +7524,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                         "Name": "strArr",
-                        "Line": 95,
+                        "Line": 101,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -7381,13 +7532,13 @@
                         "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
                         "Name": "getCollection",
                         "Arguments": [],
-                        "Line": 95,
+                        "Line": 101,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 95,
+                    "Line": 101,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -7395,14 +7546,14 @@
                   "IsPrivate": false,
                   "IsConst": false,
                   "IsPathAssignment": false,
-                  "Line": 95,
+                  "Line": 101,
                   "LineIndex": 0,
                   "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 98,
+              "Line": 103,
               "LineIndex": 0,
               "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -7414,7 +7565,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "String",
-                    "Line": 98,
+                    "Line": 103,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -7431,8 +7582,8 @@
                             "Arguments": [
                               {
                                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                                "Index": 73,
-                                "Line": 98,
+                                "Index": 75,
+                                "Line": 103,
                                 "LineIndex": 0,
                                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               },
@@ -7440,7 +7591,7 @@
                                 "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                 "ClassName": "",
                                 "Name": "strArr",
-                                "Line": 98,
+                                "Line": 103,
                                 "LineIndex": 0,
                                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               },
@@ -7448,75 +7599,6 @@
                                 "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                 "ClassName": "",
                                 "Name": "pattern",
-                                "Line": 98,
-                                "LineIndex": 0,
-                                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                              }
-                            ],
-                            "Line": 98,
-                            "LineIndex": 0,
-                            "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                          }
-                        ],
-                        "Arguments": [],
-                        "Line": 98,
-                        "LineIndex": 0,
-                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                      }
-                    ],
-                    "Line": 98,
-                    "LineIndex": 0,
-                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                  }
-                ],
-                "Arguments": [],
-                "Line": 98,
-                "LineIndex": 0,
-                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-              },
-              "Line": 99,
-              "LineIndex": 0,
-              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-            }
-          ],
-          "Line": 102,
-          "LineIndex": 0,
-          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-        },
-        {
-          "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
-          "Name": "length",
-          "IsStatic": false,
-          "IsPrivate": false,
-          "Parameters": [],
-          "Body": [
-            {
-              "$type": "Qlang.Core.Lang.AST.ReturnNode, ql",
-              "ReturnValue": {
-                "$type": "Qlang.Core.Lang.AST.CallNode, ql",
-                "Objects": [
-                  {
-                    "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
-                    "Name": "_native",
-                    "Arguments": [
-                      {
-                        "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                        "Index": 74,
-                        "Line": 103,
-                        "LineIndex": 0,
-                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                      },
-                      {
-                        "$type": "Qlang.Core.Lang.AST.CallNode, ql",
-                        "Objects": [
-                          {
-                            "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
-                            "Name": "_str",
-                            "Arguments": [
-                              {
-                                "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
-                                "ClassName": "",
-                                "Name": "_value",
                                 "Line": 103,
                                 "LineIndex": 0,
                                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
@@ -7554,6 +7636,75 @@
         },
         {
           "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
+          "Name": "length",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                        "Index": 76,
+                        "Line": 108,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                      },
+                      {
+                        "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                        "Objects": [
+                          {
+                            "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                            "Name": "_str",
+                            "Arguments": [
+                              {
+                                "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                                "ClassName": "",
+                                "Name": "_value",
+                                "Line": 108,
+                                "LineIndex": 0,
+                                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                              }
+                            ],
+                            "Line": 108,
+                            "LineIndex": 0,
+                            "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                          }
+                        ],
+                        "Arguments": [],
+                        "Line": 108,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                      }
+                    ],
+                    "Line": 108,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                  }
+                ],
+                "Arguments": [],
+                "Line": 108,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+              },
+              "Line": 111,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+            }
+          ],
+          "Line": 111,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
           "Name": "isNullOrEmpty",
           "IsStatic": false,
           "IsPrivate": false,
@@ -7567,7 +7718,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 107,
+              "Line": 111,
               "LineIndex": 0,
               "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
@@ -7585,7 +7736,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                         "Name": "String",
-                        "Line": 108,
+                        "Line": 112,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -7597,18 +7748,18 @@
                             "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                             "ClassName": "",
                             "Name": "str",
-                            "Line": 108,
+                            "Line": 112,
                             "LineIndex": 0,
                             "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
-                        "Line": 108,
+                        "Line": 112,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 108,
+                    "Line": 112,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -7616,11 +7767,11 @@
                   "Right": {
                     "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
                     "Value": false,
-                    "Line": 108,
+                    "Line": 112,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
-                  "Line": 108,
+                  "Line": 112,
                   "LineIndex": 0,
                   "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
@@ -7633,7 +7784,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                         "Name": "String",
-                        "Line": 108,
+                        "Line": 112,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -7645,18 +7796,18 @@
                             "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                             "ClassName": "",
                             "Name": "str",
-                            "Line": 108,
+                            "Line": 112,
                             "LineIndex": 0,
                             "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
-                        "Line": 108,
+                        "Line": 112,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 108,
+                    "Line": 112,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -7664,15 +7815,15 @@
                   "Right": {
                     "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
                     "Value": false,
-                    "Line": 108,
+                    "Line": 112,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
-                  "Line": 108,
+                  "Line": 112,
                   "LineIndex": 0,
                   "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
-                "Line": 108,
+                "Line": 112,
                 "LineIndex": 0,
                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -7683,7 +7834,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Throw",
-                      "Line": 109,
+                      "Line": 113,
                       "LineIndex": 0,
                       "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     },
@@ -7693,26 +7844,26 @@
                       "Arguments": [
                         {
                           "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                          "Index": 75,
-                          "Line": 109,
+                          "Index": 77,
+                          "Line": 113,
                           "LineIndex": 0,
                           "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                         }
                       ],
-                      "Line": 109,
+                      "Line": 113,
                       "LineIndex": 0,
                       "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 109,
+                  "Line": 113,
                   "LineIndex": 0,
                   "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 112,
+              "Line": 115,
               "LineIndex": 0,
               "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -7724,7 +7875,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "String",
-                    "Line": 112,
+                    "Line": 115,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -7736,18 +7887,18 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "str",
-                        "Line": 112,
+                        "Line": 115,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 112,
+                    "Line": 115,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 112,
+                "Line": 115,
                 "LineIndex": 0,
                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -7763,7 +7914,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                         "Name": "str",
-                        "Line": 113,
+                        "Line": 116,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -7771,13 +7922,13 @@
                         "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
                         "Name": "str",
                         "Arguments": [],
-                        "Line": 113,
+                        "Line": 116,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 113,
+                    "Line": 116,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -7785,14 +7936,14 @@
                   "IsPrivate": false,
                   "IsConst": false,
                   "IsPathAssignment": false,
-                  "Line": 113,
+                  "Line": 116,
                   "LineIndex": 0,
                   "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 116,
+              "Line": 118,
               "LineIndex": 0,
               "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -7807,8 +7958,8 @@
                     "Arguments": [
                       {
                         "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                        "Index": 76,
-                        "Line": 116,
+                        "Index": 78,
+                        "Line": 118,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -7823,38 +7974,38 @@
                                 "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                 "ClassName": "",
                                 "Name": "str",
-                                "Line": 116,
+                                "Line": 118,
                                 "LineIndex": 0,
                                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               }
                             ],
-                            "Line": 116,
+                            "Line": 118,
                             "LineIndex": 0,
                             "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 116,
+                        "Line": 118,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 116,
+                    "Line": 118,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 116,
+                "Line": 118,
                 "LineIndex": 0,
                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
-              "Line": 117,
+              "Line": 119,
               "LineIndex": 0,
               "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 120,
+          "Line": 122,
           "LineIndex": 0,
           "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -7873,7 +8024,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 120,
+              "Line": 122,
               "LineIndex": 0,
               "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
@@ -7891,7 +8042,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                         "Name": "String",
-                        "Line": 121,
+                        "Line": 123,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -7903,18 +8054,18 @@
                             "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                             "ClassName": "",
                             "Name": "str",
-                            "Line": 121,
+                            "Line": 123,
                             "LineIndex": 0,
                             "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
-                        "Line": 121,
+                        "Line": 123,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 121,
+                    "Line": 123,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -7922,11 +8073,11 @@
                   "Right": {
                     "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
                     "Value": false,
-                    "Line": 121,
+                    "Line": 123,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
-                  "Line": 121,
+                  "Line": 123,
                   "LineIndex": 0,
                   "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
@@ -7939,7 +8090,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                         "Name": "String",
-                        "Line": 121,
+                        "Line": 123,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -7951,18 +8102,18 @@
                             "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                             "ClassName": "",
                             "Name": "str",
-                            "Line": 121,
+                            "Line": 123,
                             "LineIndex": 0,
                             "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
-                        "Line": 121,
+                        "Line": 123,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 121,
+                    "Line": 123,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -7970,15 +8121,15 @@
                   "Right": {
                     "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
                     "Value": false,
-                    "Line": 121,
+                    "Line": 123,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
-                  "Line": 121,
+                  "Line": 123,
                   "LineIndex": 0,
                   "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
-                "Line": 121,
+                "Line": 123,
                 "LineIndex": 0,
                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -7989,7 +8140,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Throw",
-                      "Line": 122,
+                      "Line": 124,
                       "LineIndex": 0,
                       "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     },
@@ -7999,26 +8150,26 @@
                       "Arguments": [
                         {
                           "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                          "Index": 77,
-                          "Line": 122,
+                          "Index": 79,
+                          "Line": 124,
                           "LineIndex": 0,
                           "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                         }
                       ],
-                      "Line": 122,
+                      "Line": 124,
                       "LineIndex": 0,
                       "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 122,
+                  "Line": 124,
                   "LineIndex": 0,
                   "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 125,
+              "Line": 126,
               "LineIndex": 0,
               "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -8030,7 +8181,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "String",
-                    "Line": 125,
+                    "Line": 126,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -8042,18 +8193,18 @@
                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                         "ClassName": "",
                         "Name": "str",
-                        "Line": 125,
+                        "Line": 126,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 125,
+                    "Line": 126,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 125,
+                "Line": 126,
                 "LineIndex": 0,
                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -8069,7 +8220,7 @@
                       {
                         "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                         "Name": "str",
-                        "Line": 126,
+                        "Line": 127,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       },
@@ -8077,13 +8228,13 @@
                         "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
                         "Name": "str",
                         "Arguments": [],
-                        "Line": 126,
+                        "Line": 127,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 126,
+                    "Line": 127,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -8091,7 +8242,7 @@
                   "IsPrivate": false,
                   "IsConst": false,
                   "IsPathAssignment": false,
-                  "Line": 126,
+                  "Line": 127,
                   "LineIndex": 0,
                   "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
@@ -8113,7 +8264,7 @@
                     "Arguments": [
                       {
                         "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                        "Index": 78,
+                        "Index": 80,
                         "Line": 129,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
@@ -8196,7 +8347,7 @@
                             "Arguments": [
                               {
                                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                                "Index": 79,
+                                "Index": 81,
                                 "Line": 134,
                                 "LineIndex": 0,
                                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
@@ -8249,12 +8400,12 @@
                 "LineIndex": 0,
                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
-              "Line": 135,
+              "Line": 137,
               "LineIndex": 0,
               "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 138,
+          "Line": 137,
           "LineIndex": 0,
           "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -8273,7 +8424,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "String",
-                    "Line": 139,
+                    "Line": 138,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -8290,8 +8441,8 @@
                             "Arguments": [
                               {
                                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                                "Index": 80,
-                                "Line": 139,
+                                "Index": 82,
+                                "Line": 138,
                                 "LineIndex": 0,
                                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               },
@@ -8306,49 +8457,49 @@
                                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                         "ClassName": "",
                                         "Name": "_value",
-                                        "Line": 139,
+                                        "Line": 138,
                                         "LineIndex": 0,
                                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                       }
                                     ],
-                                    "Line": 139,
+                                    "Line": 138,
                                     "LineIndex": 0,
                                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                   }
                                 ],
                                 "Arguments": [],
-                                "Line": 139,
+                                "Line": 138,
                                 "LineIndex": 0,
                                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               }
                             ],
-                            "Line": 139,
+                            "Line": 138,
                             "LineIndex": 0,
                             "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 139,
+                        "Line": 138,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 139,
+                    "Line": 138,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 139,
+                "Line": 138,
                 "LineIndex": 0,
                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
-              "Line": 140,
+              "Line": 141,
               "LineIndex": 0,
               "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 143,
+          "Line": 141,
           "LineIndex": 0,
           "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -8367,7 +8518,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "String",
-                    "Line": 144,
+                    "Line": 142,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -8384,8 +8535,8 @@
                             "Arguments": [
                               {
                                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                                "Index": 81,
-                                "Line": 144,
+                                "Index": 83,
+                                "Line": 142,
                                 "LineIndex": 0,
                                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               },
@@ -8400,40 +8551,40 @@
                                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                         "ClassName": "",
                                         "Name": "_value",
-                                        "Line": 144,
+                                        "Line": 142,
                                         "LineIndex": 0,
                                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                       }
                                     ],
-                                    "Line": 144,
+                                    "Line": 142,
                                     "LineIndex": 0,
                                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                   }
                                 ],
                                 "Arguments": [],
-                                "Line": 144,
+                                "Line": 142,
                                 "LineIndex": 0,
                                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               }
                             ],
-                            "Line": 144,
+                            "Line": 142,
                             "LineIndex": 0,
                             "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 144,
+                        "Line": 142,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 144,
+                    "Line": 142,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 144,
+                "Line": 142,
                 "LineIndex": 0,
                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -8442,7 +8593,7 @@
               "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 148,
+          "Line": 145,
           "LineIndex": 0,
           "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         },
@@ -8461,7 +8612,7 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 148,
+              "Line": 145,
               "LineIndex": 0,
               "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -8474,12 +8625,101 @@
               "IsPrivate": false,
               "IsConst": false,
               "IsPathAssignment": false,
-              "Line": 148,
+              "Line": 145,
               "LineIndex": 0,
               "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
           "Body": [
+            {
+              "$type": "Qlang.Core.Lang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "Number",
+                      "Line": 146,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "isNumber",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                          "ClassName": "",
+                          "Name": "startPos",
+                          "Line": 146,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                        }
+                      ],
+                      "Line": 146,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 146,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                },
+                "Operator": "==",
+                "Right": {
+                  "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
+                  "Value": false,
+                  "Line": 146,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                },
+                "Line": 146,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "Throw",
+                      "Line": 147,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "exception",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                          "Index": 84,
+                          "Line": 147,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                        }
+                      ],
+                      "Line": 147,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 147,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 149,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
+            },
             {
               "$type": "Qlang.Core.Lang.AST.IfNode, ql",
               "Condition": {
@@ -8501,7 +8741,7 @@
                         {
                           "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                           "ClassName": "",
-                          "Name": "startPos",
+                          "Name": "length",
                           "Line": 149,
                           "LineIndex": 0,
                           "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
@@ -8546,7 +8786,7 @@
                       "Arguments": [
                         {
                           "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                          "Index": 82,
+                          "Index": 85,
                           "Line": 150,
                           "LineIndex": 0,
                           "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
@@ -8565,96 +8805,7 @@
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 153,
-              "LineIndex": 0,
-              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-            },
-            {
-              "$type": "Qlang.Core.Lang.AST.IfNode, ql",
-              "Condition": {
-                "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
-                "Left": {
-                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
-                  "Objects": [
-                    {
-                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
-                      "Name": "Number",
-                      "Line": 153,
-                      "LineIndex": 0,
-                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                    },
-                    {
-                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
-                      "Name": "isNumber",
-                      "Arguments": [
-                        {
-                          "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
-                          "ClassName": "",
-                          "Name": "length",
-                          "Line": 153,
-                          "LineIndex": 0,
-                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                        }
-                      ],
-                      "Line": 153,
-                      "LineIndex": 0,
-                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                    }
-                  ],
-                  "Arguments": [],
-                  "Line": 153,
-                  "LineIndex": 0,
-                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                },
-                "Operator": "==",
-                "Right": {
-                  "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
-                  "Value": false,
-                  "Line": 153,
-                  "LineIndex": 0,
-                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                },
-                "Line": 153,
-                "LineIndex": 0,
-                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-              },
-              "ThenBlock": [
-                {
-                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
-                  "Objects": [
-                    {
-                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
-                      "Name": "Throw",
-                      "Line": 154,
-                      "LineIndex": 0,
-                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                    },
-                    {
-                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
-                      "Name": "exception",
-                      "Arguments": [
-                        {
-                          "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                          "Index": 83,
-                          "Line": 154,
-                          "LineIndex": 0,
-                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                        }
-                      ],
-                      "Line": 154,
-                      "LineIndex": 0,
-                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                    }
-                  ],
-                  "Arguments": [],
-                  "Line": 154,
-                  "LineIndex": 0,
-                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
-                }
-              ],
-              "ElseBlock": [],
-              "Variables": {},
-              "Line": 157,
+              "Line": 152,
               "LineIndex": 0,
               "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -8669,13 +8820,13 @@
                       "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
                       "Name": "length",
                       "Arguments": [],
-                      "Line": 157,
+                      "Line": 152,
                       "LineIndex": 0,
                       "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 157,
+                  "Line": 152,
                   "LineIndex": 0,
                   "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
@@ -8684,11 +8835,11 @@
                   "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                   "ClassName": "",
                   "Name": "length",
-                  "Line": 157,
+                  "Line": 152,
                   "LineIndex": 0,
                   "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 },
-                "Line": 157,
+                "Line": 152,
                 "LineIndex": 0,
                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
@@ -8699,7 +8850,7 @@
                     {
                       "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                       "Name": "Throw",
-                      "Line": 158,
+                      "Line": 153,
                       "LineIndex": 0,
                       "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     },
@@ -8709,26 +8860,26 @@
                       "Arguments": [
                         {
                           "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                          "Index": 84,
-                          "Line": 158,
+                          "Index": 86,
+                          "Line": 153,
                           "LineIndex": 0,
                           "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                         }
                       ],
-                      "Line": 158,
+                      "Line": 153,
                       "LineIndex": 0,
                       "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                     }
                   ],
                   "Arguments": [],
-                  "Line": 158,
+                  "Line": 153,
                   "LineIndex": 0,
                   "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                 }
               ],
               "ElseBlock": [],
               "Variables": {},
-              "Line": 161,
+              "Line": 155,
               "LineIndex": 0,
               "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             },
@@ -8740,7 +8891,7 @@
                   {
                     "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
                     "Name": "String",
-                    "Line": 161,
+                    "Line": 155,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   },
@@ -8757,8 +8908,8 @@
                             "Arguments": [
                               {
                                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                                "Index": 85,
-                                "Line": 161,
+                                "Index": 87,
+                                "Line": 155,
                                 "LineIndex": 0,
                                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               },
@@ -8773,18 +8924,18 @@
                                         "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                         "ClassName": "",
                                         "Name": "_value",
-                                        "Line": 161,
+                                        "Line": 155,
                                         "LineIndex": 0,
                                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                       }
                                     ],
-                                    "Line": 161,
+                                    "Line": 155,
                                     "LineIndex": 0,
                                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                                   }
                                 ],
                                 "Arguments": [],
-                                "Line": 161,
+                                "Line": 155,
                                 "LineIndex": 0,
                                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               },
@@ -8792,7 +8943,7 @@
                                 "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                 "ClassName": "",
                                 "Name": "startPos",
-                                "Line": 161,
+                                "Line": 155,
                                 "LineIndex": 0,
                                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               },
@@ -8800,38 +8951,38 @@
                                 "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
                                 "ClassName": "",
                                 "Name": "length",
-                                "Line": 161,
+                                "Line": 155,
                                 "LineIndex": 0,
                                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                               }
                             ],
-                            "Line": 161,
+                            "Line": 155,
                             "LineIndex": 0,
                             "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 161,
+                        "Line": 155,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                       }
                     ],
-                    "Line": 161,
+                    "Line": 155,
                     "LineIndex": 0,
                     "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
                   }
                 ],
                 "Arguments": [],
-                "Line": 161,
+                "Line": 155,
                 "LineIndex": 0,
                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
               },
-              "Line": 162,
+              "Line": 156,
               "LineIndex": 0,
               "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
             }
           ],
-          "Line": 163,
+          "Line": 157,
           "LineIndex": 0,
           "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datatypes\\string.ql"
         }
@@ -8931,7 +9082,7 @@
                       "Arguments": [
                         {
                           "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                          "Index": 87,
+                          "Index": 89,
                           "Line": 6,
                           "LineIndex": 0,
                           "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datetime\\time.ql"
@@ -9009,7 +9160,7 @@
                   "Arguments": [
                     {
                       "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                      "Index": 88,
+                      "Index": 90,
                       "Line": 11,
                       "LineIndex": 0,
                       "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\datetime\\time.ql"
@@ -9130,7 +9281,7 @@
                   "Arguments": [
                     {
                       "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                      "Index": 91,
+                      "Index": 93,
                       "Line": 9,
                       "LineIndex": 0,
                       "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -9189,7 +9340,7 @@
               "Path": null,
               "Value": {
                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                "Index": 92,
+                "Index": 94,
                 "Line": 13,
                 "LineIndex": 0,
                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -9266,7 +9417,7 @@
                   "Arguments": [
                     {
                       "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                      "Index": 93,
+                      "Index": 95,
                       "Line": 16,
                       "LineIndex": 0,
                       "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -9291,7 +9442,7 @@
                               "Operator": "Plus",
                               "Right": {
                                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                                "Index": 94,
+                                "Index": 96,
                                 "Line": 16,
                                 "LineIndex": 0,
                                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -9410,7 +9561,7 @@
                   "Arguments": [
                     {
                       "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                      "Index": 95,
+                      "Index": 97,
                       "Line": 23,
                       "LineIndex": 0,
                       "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -9451,7 +9602,7 @@
               "Path": null,
               "Value": {
                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                "Index": 96,
+                "Index": 98,
                 "Line": 27,
                 "LineIndex": 0,
                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -9528,7 +9679,7 @@
                   "Arguments": [
                     {
                       "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                      "Index": 97,
+                      "Index": 99,
                       "Line": 30,
                       "LineIndex": 0,
                       "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -9553,7 +9704,7 @@
                             "Arguments": [
                               {
                                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                                "Index": 98,
+                                "Index": 100,
                                 "Line": 30,
                                 "LineIndex": 0,
                                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -9621,7 +9772,7 @@
                             "Arguments": [
                               {
                                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                                "Index": 99,
+                                "Index": 101,
                                 "Line": 35,
                                 "LineIndex": 0,
                                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -9709,7 +9860,7 @@
                             "Arguments": [
                               {
                                 "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                                "Index": 100,
+                                "Index": 102,
                                 "Line": 39,
                                 "LineIndex": 0,
                                 "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -9771,7 +9922,7 @@
                     "Arguments": [
                       {
                         "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                        "Index": 101,
+                        "Index": 103,
                         "Line": 43,
                         "LineIndex": 0,
                         "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -9826,7 +9977,7 @@
                   "Arguments": [
                     {
                       "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                      "Index": 102,
+                      "Index": 104,
                       "Line": 47,
                       "LineIndex": 0,
                       "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -9871,7 +10022,7 @@
                   "Arguments": [
                     {
                       "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                      "Index": 103,
+                      "Index": 105,
                       "Line": 52,
                       "LineIndex": 0,
                       "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -9992,7 +10143,7 @@
                       "Arguments": [
                         {
                           "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                          "Index": 104,
+                          "Index": 106,
                           "Line": 58,
                           "LineIndex": 0,
                           "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -10081,7 +10232,7 @@
                       "Arguments": [
                         {
                           "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                          "Index": 105,
+                          "Index": 107,
                           "Line": 62,
                           "LineIndex": 0,
                           "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -10113,7 +10264,7 @@
                   "Arguments": [
                     {
                       "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                      "Index": 106,
+                      "Index": 108,
                       "Line": 65,
                       "LineIndex": 0,
                       "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -10226,7 +10377,7 @@
                   "Arguments": [
                     {
                       "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                      "Index": 107,
+                      "Index": 109,
                       "Line": 72,
                       "LineIndex": 0,
                       "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -10331,7 +10482,7 @@
                   "Arguments": [
                     {
                       "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                      "Index": 108,
+                      "Index": 110,
                       "Line": 79,
                       "LineIndex": 0,
                       "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -10376,7 +10527,7 @@
                   "Arguments": [
                     {
                       "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                      "Index": 109,
+                      "Index": 111,
                       "Line": 83,
                       "LineIndex": 0,
                       "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
@@ -10393,12 +10544,98 @@
               "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
             }
           ],
-          "Line": 85,
+          "Line": 86,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
+          "Name": "width",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                        "Index": 112,
+                        "Line": 87,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
+                      }
+                    ],
+                    "Line": 87,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
+                  }
+                ],
+                "Arguments": [],
+                "Line": 87,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
+              },
+              "Line": 89,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
+            }
+          ],
+          "Line": 89,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
+          "Name": "height",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ReturnNode, ql",
+              "ReturnValue": {
+                "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                        "Index": 113,
+                        "Line": 90,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
+                      }
+                    ],
+                    "Line": 90,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
+                  }
+                ],
+                "Arguments": [],
+                "Line": 90,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
+              },
+              "Line": 91,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
+            }
+          ],
+          "Line": 91,
           "LineIndex": 0,
           "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\lib\\base\\console.ql"
         }
       ],
-      "Line": 3,
+      "Line": 4,
       "LineIndex": 0,
       "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
     },
@@ -10410,34 +10647,1539 @@
       "Parameters": [],
       "Body": [
         {
+          "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+          "IsNew": true,
+          "VariableName": "screen",
+          "Path": null,
+          "Value": {
+            "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+            "Objects": [
+              {
+                "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                "Name": "PDCurses",
+                "Line": 5,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              },
+              {
+                "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                "Name": "new",
+                "Arguments": [],
+                "Line": 5,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              }
+            ],
+            "Arguments": [],
+            "Line": 5,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+          },
+          "IsStatic": false,
+          "IsPrivate": false,
+          "IsConst": true,
+          "IsPathAssignment": false,
+          "Line": 5,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+        },
+        {
           "$type": "Qlang.Core.Lang.AST.CallNode, ql",
           "Objects": [
             {
               "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
-              "Name": "Console",
-              "Line": 4,
+              "Name": "screen",
+              "Line": 7,
               "LineIndex": 0,
               "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
             },
             {
               "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
-              "Name": "println",
+              "Name": "addstr",
               "Arguments": [
                 {
+                  "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                  "IsNegative": false,
+                  "Index": 8,
+                  "Line": 7,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                  "IsNegative": false,
+                  "Index": 9,
+                  "Line": 7,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                {
                   "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
-                  "Index": 111,
-                  "Line": 4,
+                  "Index": 115,
+                  "Line": 7,
                   "LineIndex": 0,
                   "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
                 }
               ],
-              "Line": 4,
+              "Line": 7,
               "LineIndex": 0,
               "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
             }
           ],
           "Arguments": [],
-          "Line": 4,
+          "Line": 7,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+          "Objects": [
+            {
+              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+              "Name": "screen",
+              "Line": 9,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+              "Name": "refresh",
+              "Arguments": [],
+              "Line": 9,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+            }
+          ],
+          "Arguments": [],
+          "Line": 9,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+        }
+      ],
+      "Line": 12,
+      "LineIndex": 0,
+      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+    },
+    {
+      "$type": "Qlang.Core.Lang.AST.ClassNode, ql",
+      "Name": "PDCurses",
+      "Body": [
+        {
+          "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+          "IsNew": true,
+          "VariableName": "_width",
+          "Path": null,
+          "Value": {
+            "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+            "Objects": [
+              {
+                "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                "Name": "Console",
+                "Line": 13,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              },
+              {
+                "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                "Name": "width",
+                "Arguments": [],
+                "Line": 13,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              }
+            ],
+            "Arguments": [],
+            "Line": 13,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+          },
+          "IsStatic": false,
+          "IsPrivate": true,
+          "IsConst": true,
+          "IsPathAssignment": false,
+          "Line": 13,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+          "IsNew": true,
+          "VariableName": "_height",
+          "Path": null,
+          "Value": {
+            "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+            "Objects": [
+              {
+                "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                "Name": "Console",
+                "Line": 14,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              },
+              {
+                "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                "Name": "height",
+                "Arguments": [],
+                "Line": 14,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              }
+            ],
+            "Arguments": [],
+            "Line": 14,
+            "LineIndex": 0,
+            "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+          },
+          "IsStatic": false,
+          "IsPrivate": true,
+          "IsConst": true,
+          "IsPathAssignment": false,
+          "Line": 14,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+          "IsNew": true,
+          "VariableName": "_screen",
+          "Path": null,
+          "Value": null,
+          "IsStatic": false,
+          "IsPrivate": true,
+          "IsConst": false,
+          "IsPathAssignment": false,
+          "Line": 15,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
+          "Name": "new",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "_screen",
+              "Path": null,
+              "Value": {
+                "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                    "Name": "Array",
+                    "Line": 18,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  {
+                    "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                    "Name": "new",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.Core.Lang.AST.CollectionNode, ql",
+                        "Collection": [],
+                        "Line": 18,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                      }
+                    ],
+                    "Line": 18,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  }
+                ],
+                "Arguments": [],
+                "Line": 18,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "IsPathAssignment": false,
+              "Line": 18,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.ForNode, ql",
+              "Assignment": {
+                "IsNew": false,
+                "VariableName": "y",
+                "Path": null,
+                "Value": {
+                  "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                  "IsNegative": false,
+                  "Index": 10,
+                  "Line": 19,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                "IsStatic": false,
+                "IsPrivate": false,
+                "IsConst": false,
+                "IsPathAssignment": false,
+                "Line": 19,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              },
+              "Condition": {
+                "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                  "ClassName": "",
+                  "Name": "y",
+                  "Line": 19,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                "Operator": "Less",
+                "Right": {
+                  "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                  "ClassName": "",
+                  "Name": "_width",
+                  "Line": 19,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                "Line": 19,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              },
+              "Statement": {
+                "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+                "IsNew": false,
+                "VariableName": "y",
+                "Path": null,
+                "Value": {
+                  "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                    "ClassName": "",
+                    "Name": "y",
+                    "Line": 19,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  "Operator": "Plus",
+                  "Right": {
+                    "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                    "IsNegative": false,
+                    "Index": 11,
+                    "Line": 19,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  "Line": 19,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                "IsStatic": false,
+                "IsPrivate": false,
+                "IsConst": false,
+                "IsPathAssignment": false,
+                "Line": 19,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              },
+              "Body": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "_screen",
+                      "Line": 20,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "push",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                          "Objects": [
+                            {
+                              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                              "Name": "Array",
+                              "Line": 20,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                            },
+                            {
+                              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                              "Name": "new",
+                              "Arguments": [
+                                {
+                                  "$type": "Qlang.Core.Lang.AST.CollectionNode, ql",
+                                  "Collection": [],
+                                  "Line": 20,
+                                  "LineIndex": 0,
+                                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                                }
+                              ],
+                              "Line": 20,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                            }
+                          ],
+                          "Arguments": [],
+                          "Line": 20,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                        }
+                      ],
+                      "Line": 20,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 20,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.ForNode, ql",
+                  "Assignment": {
+                    "IsNew": false,
+                    "VariableName": "x",
+                    "Path": null,
+                    "Value": {
+                      "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                      "IsNegative": false,
+                      "Index": 12,
+                      "Line": 22,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    },
+                    "IsStatic": false,
+                    "IsPrivate": false,
+                    "IsConst": false,
+                    "IsPathAssignment": false,
+                    "Line": 22,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  "Condition": {
+                    "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                    "Left": {
+                      "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "x",
+                      "Line": 22,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    },
+                    "Operator": "Less",
+                    "Right": {
+                      "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "_height",
+                      "Line": 22,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    },
+                    "Line": 22,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  "Statement": {
+                    "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+                    "IsNew": false,
+                    "VariableName": "x",
+                    "Path": null,
+                    "Value": {
+                      "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                      "Left": {
+                        "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                        "ClassName": "",
+                        "Name": "x",
+                        "Line": 22,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                      },
+                      "Operator": "Plus",
+                      "Right": {
+                        "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                        "IsNegative": false,
+                        "Index": 13,
+                        "Line": 22,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                      },
+                      "Line": 22,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    },
+                    "IsStatic": false,
+                    "IsPrivate": false,
+                    "IsConst": false,
+                    "IsPathAssignment": false,
+                    "Line": 22,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  "Body": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                      "Objects": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                          "Name": "_screen",
+                          "Line": 23,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                        },
+                        {
+                          "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                          "Name": "at",
+                          "Arguments": [
+                            {
+                              "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                              "ClassName": "",
+                              "Name": "y",
+                              "Line": 23,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                            }
+                          ],
+                          "Line": 23,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                        },
+                        {
+                          "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                          "Name": "push",
+                          "Arguments": [
+                            {
+                              "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                              "Index": 116,
+                              "Line": 23,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                            }
+                          ],
+                          "Line": 23,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                        }
+                      ],
+                      "Arguments": [],
+                      "Line": 23,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    }
+                  ],
+                  "Variables": {},
+                  "Line": 24,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                }
+              ],
+              "Variables": {},
+              "Line": 25,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+            }
+          ],
+          "Line": 27,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
+          "Name": "addstr",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "x",
+              "Path": null,
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "IsPathAssignment": false,
+              "Line": 27,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+            },
+            {
+              "IsNew": false,
+              "VariableName": "y",
+              "Path": null,
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "IsPathAssignment": false,
+              "Line": 27,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+            },
+            {
+              "IsNew": false,
+              "VariableName": "str",
+              "Path": null,
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "IsPathAssignment": false,
+              "Line": 27,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+            }
+          ],
+          "Body": [
+            {
+              "$type": "Qlang.Core.Lang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "String",
+                      "Line": 28,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "isString",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                          "ClassName": "",
+                          "Name": "str",
+                          "Line": 28,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                        }
+                      ],
+                      "Line": 28,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 28,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                "Operator": "==",
+                "Right": {
+                  "$type": "Qlang.Core.Lang.AST.BooleanNode, ql",
+                  "Value": false,
+                  "Line": 28,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                "Line": 28,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+                  "IsNew": false,
+                  "VariableName": "str",
+                  "Path": null,
+                  "Value": {
+                    "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                    "Objects": [
+                      {
+                        "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                        "Name": "String",
+                        "Line": 29,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                      },
+                      {
+                        "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                        "Name": "new",
+                        "Arguments": [
+                          {
+                            "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                            "ClassName": "",
+                            "Name": "str",
+                            "Line": 29,
+                            "LineIndex": 0,
+                            "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                          }
+                        ],
+                        "Line": 29,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                      }
+                    ],
+                    "Arguments": [],
+                    "Line": 29,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  "IsStatic": false,
+                  "IsPrivate": false,
+                  "IsConst": false,
+                  "IsPathAssignment": false,
+                  "Line": 29,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 31,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                    "ClassName": "",
+                    "Name": "x",
+                    "Line": 31,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  "Operator": "Less",
+                  "Right": {
+                    "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                    "IsNegative": false,
+                    "Index": 14,
+                    "Line": 31,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  "Line": 31,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                "Operator": "||",
+                "Right": {
+                  "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                    "Left": {
+                      "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                      "ClassName": "",
+                      "Name": "x",
+                      "Line": 31,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    },
+                    "Operator": "Plus",
+                    "Right": {
+                      "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                      "Objects": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                          "Name": "str",
+                          "Line": 31,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                        },
+                        {
+                          "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                          "Name": "length",
+                          "Arguments": [],
+                          "Line": 31,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                        }
+                      ],
+                      "Arguments": [],
+                      "Line": 31,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    },
+                    "Line": 31,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  "Operator": "Greater",
+                  "Right": {
+                    "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                    "ClassName": "",
+                    "Name": "_width",
+                    "Line": 31,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  "Line": 31,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                "Line": 31,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "Throw",
+                      "Line": 32,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "exception",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                          "Left": {
+                            "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                            "Left": {
+                              "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                              "Index": 117,
+                              "Line": 32,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                            },
+                            "Operator": "Plus",
+                            "Right": {
+                              "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                              "ClassName": "",
+                              "Name": "_width",
+                              "Line": 32,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                            },
+                            "Line": 32,
+                            "LineIndex": 0,
+                            "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                          },
+                          "Operator": "Plus",
+                          "Right": {
+                            "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                            "Index": 118,
+                            "Line": 32,
+                            "LineIndex": 0,
+                            "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                          },
+                          "Line": 32,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                        }
+                      ],
+                      "Line": 32,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 32,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 34,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.IfNode, ql",
+              "Condition": {
+                "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                    "ClassName": "",
+                    "Name": "y",
+                    "Line": 34,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  "Operator": "Less",
+                  "Right": {
+                    "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                    "IsNegative": false,
+                    "Index": 15,
+                    "Line": 34,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  "Line": 34,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                "Operator": "||",
+                "Right": {
+                  "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                    "ClassName": "",
+                    "Name": "y",
+                    "Line": 34,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  "Operator": "Greater",
+                  "Right": {
+                    "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                    "ClassName": "",
+                    "Name": "_height",
+                    "Line": 34,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  "Line": 34,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                "Line": 34,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              },
+              "ThenBlock": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "Throw",
+                      "Line": 35,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "exception",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                          "Left": {
+                            "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                            "Left": {
+                              "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                              "Index": 119,
+                              "Line": 35,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                            },
+                            "Operator": "Plus",
+                            "Right": {
+                              "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                              "ClassName": "",
+                              "Name": "_height",
+                              "Line": 35,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                            },
+                            "Line": 35,
+                            "LineIndex": 0,
+                            "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                          },
+                          "Operator": "Plus",
+                          "Right": {
+                            "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                            "Index": 120,
+                            "Line": 35,
+                            "LineIndex": 0,
+                            "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                          },
+                          "Line": 35,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                        }
+                      ],
+                      "Line": 35,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 35,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                }
+              ],
+              "ElseBlock": [],
+              "Variables": {},
+              "Line": 37,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.ForNode, ql",
+              "Assignment": {
+                "IsNew": false,
+                "VariableName": "l",
+                "Path": null,
+                "Value": {
+                  "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                  "IsNegative": false,
+                  "Index": 16,
+                  "Line": 37,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                "IsStatic": false,
+                "IsPrivate": false,
+                "IsConst": false,
+                "IsPathAssignment": false,
+                "Line": 37,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              },
+              "Condition": {
+                "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                  "ClassName": "",
+                  "Name": "l",
+                  "Line": 37,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                "Operator": "Less",
+                "Right": {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "str",
+                      "Line": 37,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "length",
+                      "Arguments": [],
+                      "Line": 37,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 37,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                "Line": 37,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              },
+              "Statement": {
+                "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+                "IsNew": false,
+                "VariableName": "l",
+                "Path": null,
+                "Value": {
+                  "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                    "ClassName": "",
+                    "Name": "l",
+                    "Line": 37,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  "Operator": "Plus",
+                  "Right": {
+                    "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                    "IsNegative": false,
+                    "Index": 17,
+                    "Line": 37,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  "Line": 37,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                "IsStatic": false,
+                "IsPrivate": false,
+                "IsConst": false,
+                "IsPathAssignment": false,
+                "Line": 37,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              },
+              "Body": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "_screen",
+                      "Line": 38,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "at",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                          "Left": {
+                            "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                            "ClassName": "",
+                            "Name": "x",
+                            "Line": 38,
+                            "LineIndex": 0,
+                            "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                          },
+                          "Operator": "Plus",
+                          "Right": {
+                            "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                            "ClassName": "",
+                            "Name": "l",
+                            "Line": 38,
+                            "LineIndex": 0,
+                            "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                          },
+                          "Line": 38,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                        }
+                      ],
+                      "Line": 38,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "setAt",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                          "ClassName": "",
+                          "Name": "y",
+                          "Line": 38,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                        },
+                        {
+                          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                          "Objects": [
+                            {
+                              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                              "Name": "str",
+                              "Line": 38,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                            },
+                            {
+                              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                              "Name": "charAt",
+                              "Arguments": [
+                                {
+                                  "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                                  "ClassName": "",
+                                  "Name": "l",
+                                  "Line": 38,
+                                  "LineIndex": 0,
+                                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                                }
+                              ],
+                              "Line": 38,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                            }
+                          ],
+                          "Arguments": [],
+                          "Line": 38,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                        }
+                      ],
+                      "Line": 38,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 38,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                }
+              ],
+              "Variables": {},
+              "Line": 42,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+            }
+          ],
+          "Line": 44,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
+          "Name": "refresh",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+              "Objects": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                  "Name": "Console",
+                  "Line": 45,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                {
+                  "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                  "Name": "clear",
+                  "Arguments": [],
+                  "Line": 45,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                }
+              ],
+              "Arguments": [],
+              "Line": 45,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+            },
+            {
+              "$type": "Qlang.Core.Lang.AST.ForNode, ql",
+              "Assignment": {
+                "IsNew": false,
+                "VariableName": "x",
+                "Path": null,
+                "Value": {
+                  "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                  "IsNegative": false,
+                  "Index": 18,
+                  "Line": 46,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                "IsStatic": false,
+                "IsPrivate": false,
+                "IsConst": false,
+                "IsPathAssignment": false,
+                "Line": 46,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              },
+              "Condition": {
+                "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                "Left": {
+                  "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                  "ClassName": "",
+                  "Name": "x",
+                  "Line": 46,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                "Operator": "Less",
+                "Right": {
+                  "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                  "ClassName": "",
+                  "Name": "_width",
+                  "Line": 46,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                "Line": 46,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              },
+              "Statement": {
+                "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+                "IsNew": false,
+                "VariableName": "x",
+                "Path": null,
+                "Value": {
+                  "$type": "Qlang.Core.Lang.AST.BinaryOperationNode, ql",
+                  "Left": {
+                    "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                    "ClassName": "",
+                    "Name": "x",
+                    "Line": 46,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  "Operator": "Plus",
+                  "Right": {
+                    "$type": "Qlang.Core.Lang.AST.NumberRefNode, ql",
+                    "IsNegative": false,
+                    "Index": 19,
+                    "Line": 46,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  "Line": 46,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                },
+                "IsStatic": false,
+                "IsPrivate": false,
+                "IsConst": false,
+                "IsPathAssignment": false,
+                "Line": 46,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              },
+              "Body": [
+                {
+                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                  "Objects": [
+                    {
+                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                      "Name": "Console",
+                      "Line": 47,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    },
+                    {
+                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                      "Name": "print",
+                      "Arguments": [
+                        {
+                          "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                          "Objects": [
+                            {
+                              "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                              "Name": "String",
+                              "Line": 47,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                            },
+                            {
+                              "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                              "Name": "join",
+                              "Arguments": [
+                                {
+                                  "$type": "Qlang.Core.Lang.AST.StringRefNode, ql",
+                                  "Index": 121,
+                                  "Line": 47,
+                                  "LineIndex": 0,
+                                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                                },
+                                {
+                                  "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                                  "Objects": [
+                                    {
+                                      "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                                      "Name": "_screen",
+                                      "Line": 47,
+                                      "LineIndex": 0,
+                                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                                    },
+                                    {
+                                      "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                                      "Name": "at",
+                                      "Arguments": [
+                                        {
+                                          "$type": "Qlang.Core.Lang.AST.VariableNode, ql",
+                                          "ClassName": "",
+                                          "Name": "x",
+                                          "Line": 47,
+                                          "LineIndex": 0,
+                                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                                        }
+                                      ],
+                                      "Line": 47,
+                                      "LineIndex": 0,
+                                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                                    }
+                                  ],
+                                  "Arguments": [],
+                                  "Line": 47,
+                                  "LineIndex": 0,
+                                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                                }
+                              ],
+                              "Line": 47,
+                              "LineIndex": 0,
+                              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                            }
+                          ],
+                          "Arguments": [],
+                          "Line": 47,
+                          "LineIndex": 0,
+                          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                        }
+                      ],
+                      "Line": 47,
+                      "LineIndex": 0,
+                      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                    }
+                  ],
+                  "Arguments": [],
+                  "Line": 47,
+                  "LineIndex": 0,
+                  "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                }
+              ],
+              "Variables": {},
+              "Line": 49,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+            }
+          ],
+          "Line": 50,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+        }
+      ],
+      "Line": 52,
+      "LineIndex": 0,
+      "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+    },
+    {
+      "$type": "Qlang.Core.Lang.AST.ClassNode, ql",
+      "Name": "Window",
+      "Body": [
+        {
+          "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+          "IsNew": true,
+          "VariableName": "_items",
+          "Path": null,
+          "Value": null,
+          "IsStatic": false,
+          "IsPrivate": true,
+          "IsConst": false,
+          "IsPathAssignment": false,
+          "Line": 53,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
+          "Name": "new",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [
+            {
+              "$type": "Qlang.Core.Lang.AST.AssignmentNode, ql",
+              "IsNew": false,
+              "VariableName": "_items",
+              "Path": null,
+              "Value": {
+                "$type": "Qlang.Core.Lang.AST.CallNode, ql",
+                "Objects": [
+                  {
+                    "$type": "Qlang.Core.Lang.AST.ObjectPointerNode, ql",
+                    "Name": "Array",
+                    "Line": 56,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  },
+                  {
+                    "$type": "Qlang.Core.Lang.AST.FunctionPointerNode, ql",
+                    "Name": "new",
+                    "Arguments": [
+                      {
+                        "$type": "Qlang.Core.Lang.AST.CollectionNode, ql",
+                        "Collection": [],
+                        "Line": 56,
+                        "LineIndex": 0,
+                        "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                      }
+                    ],
+                    "Line": 56,
+                    "LineIndex": 0,
+                    "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+                  }
+                ],
+                "Arguments": [],
+                "Line": 56,
+                "LineIndex": 0,
+                "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+              },
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "IsPathAssignment": false,
+              "Line": 56,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+            }
+          ],
+          "Line": 59,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
+          "Name": "addstr",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [
+            {
+              "IsNew": false,
+              "VariableName": "x",
+              "Path": null,
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "IsPathAssignment": false,
+              "Line": 59,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+            },
+            {
+              "IsNew": false,
+              "VariableName": "y",
+              "Path": null,
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "IsPathAssignment": false,
+              "Line": 59,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+            },
+            {
+              "IsNew": false,
+              "VariableName": "str",
+              "Path": null,
+              "Value": null,
+              "IsStatic": false,
+              "IsPrivate": false,
+              "IsConst": false,
+              "IsPathAssignment": false,
+              "Line": 59,
+              "LineIndex": 0,
+              "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+            }
+          ],
+          "Body": [],
+          "Line": 63,
+          "LineIndex": 0,
+          "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
+        },
+        {
+          "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
+          "Name": "draw",
+          "IsStatic": false,
+          "IsPrivate": false,
+          "Parameters": [],
+          "Body": [],
+          "Line": 66,
           "LineIndex": 0,
           "SourceFile": "D:\\Projects\\Console\\Qlang\\bin\\Debug\\net9.0\\QlangProjects\\test\\main.ql"
         }
