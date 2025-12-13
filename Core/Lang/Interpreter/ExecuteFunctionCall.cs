@@ -136,7 +136,7 @@ public partial class Interpreter
                 
                 Logger.Log($"Detected as variable");
                 Logger.Log($"GetVariableParams: {objCall.Name}");
-                return GetVariable(new VariableNode { Name = objCall.Name });
+                return GetVariableValue(new VariableNode { Name = objCall.Name });
         }
         
         foreach (var item in _contextStack)

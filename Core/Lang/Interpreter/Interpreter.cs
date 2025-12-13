@@ -5,6 +5,7 @@ using Qlang.Core.Lang.Dynamic;
 using Qlang.Core.Lang.Dynamic.Exceptions;
 using Qlang.Core.Lang.Interpreter.Native;
 using Qlang.Core.LangDebug;
+using Qlang.Core.ProjectManager;
 using Math = System.Math;
 
 namespace Qlang.Core.Lang.Interpreter;
@@ -24,7 +25,8 @@ public partial class Interpreter
 
     private readonly Dictionary<string, object> _numberDictionary;
 
-    private readonly List<FunctionNode> _functions = [];
+    private readonly List<FunctionNode> _globalFunctions = [];
+    private readonly List<Variable> _globalVariables = [];
 
     private readonly Dictionary<string, DynamicClass> _dynamicClasses = new();
 
@@ -47,12 +49,15 @@ public partial class Interpreter
                     Logger.Log("ToDynamicClass: " + _dynamicClasses[classNode.Name].Name);
                     break;
                 case FunctionNode func:
-                    _functions.Add(func);
+                    _globalFunctions.Add(func);
+                    break;
+                case AssignmentNode assignmentNode:
+                    _globalVariables.Add(new Variable(assignmentNode.VariableName, EvaluateExpression(assignmentNode.Value), assignmentNode.IsStatic, assignmentNode.IsPrivate, assignmentNode.IsConst));
                     break;
             }
         }
 
-        var function = _functions.FirstOrDefault(f => f.Name == "main");
+        var function = _globalFunctions.FirstOrDefault(f => f.Name == "main");
         if (function is null)
         {
             throw new QlangRuntimeException(
@@ -166,6 +171,9 @@ public partial class Interpreter
 
     private void ExecuteStatement(ASTNode statement)
     {
+        if (HasContext)
+            CurrentContext.CurrentNode = statement;
+        
         switch (statement)
         {
             case AssignmentNode assign:
@@ -261,7 +269,7 @@ public partial class Interpreter
                 return;
             }
 
-            if (CurrentContext.Blocks.Count > 0)
+            if (CurrentContext.Blocks.Count > 0 && assign.IsNew)
             {
                 CurrentContext.Blocks[^1].Variables[assign.VariableName] = new Variable(
                     assign.VariableName,
@@ -291,16 +299,31 @@ public partial class Interpreter
                 return;
             }
 
-            CurrentContext.Function.Variables[assign.VariableName] = new Variable(
-                assign.VariableName,
-                value,
-                assign.IsStatic,
-                assign.IsPrivate,
-                assign.IsConst);
+            if (assign.IsNew)
+            {
+                CurrentContext.Function.Variables[assign.VariableName] = new Variable(
+                    assign.VariableName,
+                    value,
+                    assign.IsStatic,
+                    assign.IsPrivate,
+                    assign.IsConst);
+                return;
+            }
+        }
+        
+        var globalVar = _globalVariables.FirstOrDefault(v => v.Name == assign.VariableName);
+        if (globalVar != null && !assign.IsNew)
+        {
+            if (globalVar.IsConst)
+                throw new QlangRuntimeException($"Cannot re-assign const variable '{assign.VariableName}'",
+                    assign, GetStackTrace());
+            
+            globalVar.Value = value;
+            _globalVariables[_globalVariables.IndexOf(globalVar)] = globalVar;
             return;
         }
-
-        throw new QlangRuntimeException("Place to assign is not detected", assign, GetStackTrace());
+            
+        throw new QlangRuntimeException($"The variable definition is incorrect or the variable has not been created (Variable: '{assign.VariableName}')", assign, GetStackTrace());
     }
 
     private void AssignToPath(List<ASTNode> path, object value, AssignmentNode assignNode)
@@ -554,7 +577,7 @@ public partial class Interpreter
             if (expr is not CollectionNode collectionNode)
                 return expr switch
                 {
-                    VariableNode varNode => GetVariable(varNode),
+                    VariableNode varNode => GetVariableValue(varNode),
                     StringRefNode strRef => GetStringRef(strRef),
                     NumberRefNode numberRef => GetNumberRef(numberRef),
                     BooleanNode booleanNode => booleanNode.Value,
@@ -573,7 +596,7 @@ public partial class Interpreter
 
             return expr switch
             {
-                VariableNode varNode => GetVariable(varNode),
+                VariableNode varNode => GetVariableValue(varNode),
                 StringRefNode strRef => GetStringRef(strRef),
                 NumberRefNode numberRef => GetNumberRef(numberRef),
                 BooleanNode booleanNode => booleanNode.Value,
@@ -622,7 +645,7 @@ public partial class Interpreter
         return left.ToString().ParseNumber() / divisor;
     }
 
-    private object? GetVariable(VariableNode varNode)
+    private object? GetVariableValue(VariableNode varNode)
     {
         try
         {
@@ -653,6 +676,11 @@ public partial class Interpreter
 
                 return var.Value;
             }
+            
+            // Global variables
+            var node = _globalVariables.FirstOrDefault(x => x.Name == varNode.Name);
+            if (node != null)
+                return node.Value;
 
             if (CurrentContext?.Class != null)
             {
@@ -860,55 +888,13 @@ public partial class Interpreter
                 GetStackTrace());
         }
     }
-
-    // private FunctionNode? GetFunctionFromClass(DynamicClass @class, string name, List<object?>? args = null)
-    // {
-    //     FunctionNode? node = null;
-    //
-    //     List<object> resultArgs = [];
-    //     
-    //     foreach (var function in @class.Body
-    //                  .OfType<FunctionNode>()
-    //                  .Where(f => f.Name == name))
-    //     {
-    //         bool argsSuccess = false;
-    //         int succ = 0;
-    //         for (int i = 0; i < function.Parameters.Count; i++)
-    //         {
-    //             AssignmentNode? assignmentNode = function.Parameters[i];
-    //             // Если значение преопределено
-    //             if (assignmentNode.Value != null)
-    //             {
-    //                 // Если каки-ето другие значения будуть не преопределены, будет ошибка
-    //                 if (function.Parameters.Skip(i).Any(n => n.Value == null))
-    //                     throw new QlangRuntimeException("Values after a predefined cannot be undefined.", function, GetStackTrace());
-    //
-    //                 
-    //                 argsSuccess = true;
-    //                 break;
-    //             }
-    //             
-    //             if (args != null && i < args.Count)
-    //                 succ++;
-    //         }
-    //
-    //
-    //         if (argsSuccess || (args != null && succ == args.Count))
-    //         {
-    //             node = function;
-    //             break;
-    //         }
-    //     }
-    //
-    //     return node;
-    // }
     
     private (FunctionNode? function, List<object?> args) GetFunctionFromFunctionList
         (string name, List<object?>? args = null)
     {
         args ??= [];
         
-        foreach (var function in _functions.Where(f => f.Name == name))
+        foreach (var function in _globalFunctions.Where(f => f.Name == name))
             if (TryMatchFunction(function, args, out var finalArgs))
                 return (function, finalArgs);
 
@@ -936,11 +922,10 @@ public partial class Interpreter
     {
         finalArgs = [];
         
-        int requiredParamsCount = 0;
-        int totalParamsCount = function.Parameters.Count;
+        var requiredParamsCount = 0;
+        var totalParamsCount = function.Parameters.Count;
         
-        // Подсчитываем обязательные параметры (без значений по умолчанию)
-        foreach (AssignmentNode t in function.Parameters)
+        foreach (var t in function.Parameters)
         {
             if (t.Value == null)
                 requiredParamsCount++;
@@ -948,31 +933,22 @@ public partial class Interpreter
                 break; // Все параметры после первого с default должны иметь default
         }
         
-        // Проверяем: количество переданных аргументов должно быть между 
-        // requiredParamsCount и totalParamsCount
         if (args.Count < requiredParamsCount || args.Count > totalParamsCount)
             return false;
         
-        // Заполняем finalArgs
-        for (int i = 0; i < totalParamsCount; i++)
+        for (var i = 0; i < totalParamsCount; i++)
         {
             if (i < args.Count)
-            {
-                // Используем переданный аргумент
                 finalArgs.Add(args[i]);
-            }
             else
             {
-                // Используем значение по умолчанию
                 var param = function.Parameters[i];
                 if (param.Value != null)
                 {
-                    // Вычисляем значение по умолчанию
                     var defaultValue = EvaluateExpression(param.Value);
                     finalArgs.Add(defaultValue);
                 }
                 else
-                    // Это не должно происходить, если логика верна
                     return false;
             }
         }

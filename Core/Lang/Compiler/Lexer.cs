@@ -10,11 +10,8 @@ public class Lexer
         var scriptLines = script.Split('\n').ToList();
 
         int lineIndex = 0;
-        for (var index = 0; index < scriptLines.Count; index++)
+        foreach (var line in scriptLines.Select(rawLine => rawLine.Trim()))
         {
-            var rawLine = scriptLines[index];
-            var line = rawLine.Trim();
-
             if (string.IsNullOrWhiteSpace(line))
             {
                 lineIndex++;

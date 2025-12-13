@@ -1,10 +1,21 @@
 include "$lib/base"
 include "$lib/special/basetest"
 
+const marcoh = "Hello World!";
+
 function main(): {
+    const screen = PDCurses.new();
+    const window = PDWindow.new();
+    window.addStr(1, 1, "Hello World!:");
+
+    screen.add(window);
+
+    screen.refresh();
+
+    window.readln(String.new("Hello World!").length() + 3, 1);
 }
 
-class PDCurses: {
+class PDWindow: {
     private let _width;
     private let _height;
     private let _x = 0;
@@ -72,6 +83,18 @@ class PDCurses: {
             line.setAt(x + l, str.charAt(l));
     }
 
+    private function isValid(const x, const y): {
+        return (x >= 0 && x < _width) && (y >= 0 && y < _height);
+    }
+
+    function readln(const x, const y): {
+        if isValid(x, y) == false:
+            Throw.exception("Position is not valid");
+
+        Console.setCursorPosition(getRelativeX(x), getRelativeY(y));
+        return Console.readln();
+    }
+
     function refresh(): {
         Console.cursorVisible(true);    
 
@@ -105,5 +128,22 @@ class PDCurses: {
 
         Console.setCursorPosition(getRelativeX(2), getRelativeY(0));
         Console.print(_name);
+    }
+}
+
+class PDCurses: {
+    private let _items;
+
+    function new(const items = Array.new([])): {
+        _items = items;
+    }
+
+    function add(const item): {
+        _items.push(item);
+    }
+
+    function refresh(): {
+        for let i = 0; i < _items.length(); i = i + 1:
+            _items.at(i).refresh();
     }
 }

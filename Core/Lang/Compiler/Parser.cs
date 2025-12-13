@@ -61,12 +61,20 @@ public class Parser
         if (Check(Tokens.Keyword) && Current().Value == Keywords.BreakKeyword)
         {
             Advance();
-            return new BreakNode();
+            return new BreakNode
+            {
+                Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+            };
         }
         if (Check(Tokens.Keyword) && Current().Value == Keywords.ContinueKeyword)
         {
             Advance();
-            return new ContinueNode();
+            return new ContinueNode
+            {
+                Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+            };
         }
 
         // function declaration
@@ -164,10 +172,6 @@ public class Parser
 
         Expect(Tokens.RParen);
         Expect(Tokens.Colon);
-        // Expect(Tokens.Semicolon);
-
-        // if (!Check(Tokens.LBrace))
-        //     throw new QlangCompileException("Function's body cannot be one-line", Current().Line, "Parser", Current().SourceFile);
         
         List<ASTNode> body = ParseBlock();
 
@@ -206,8 +210,10 @@ public class Parser
     {
         Logger.Log("CompilationProcess: Parsing for");
         Expect(Tokens.Keyword, Keywords.ForBlock);
-
-        AssignmentNode assignment = ParseVariableDeclaration();
+        
+        AssignmentNode assignment = ParseVariableDeclaration(false, false, 
+            (Check(Tokens.Keyword) && Current().Value == Keywords.ConstVariableDeclaration), 
+            true);
         Expect(Tokens.Semicolon);
         var condition = ParseExpression();
         Expect(Tokens.Semicolon);
@@ -566,18 +572,30 @@ public class Parser
         if (Check(Tokens.Keyword) && Current().Value == Keywords.NullKeyword)
         {
             Advance();
-            return new NullNode();
+            return new NullNode
+            {
+                Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+            };
         }
 
         if (Check(Tokens.Keyword) && Current().Value == Keywords.BreakKeyword)
         {
             Advance();
-            return new BreakNode();
+            return new BreakNode
+            {
+                Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+            };
         }
         if (Check(Tokens.Keyword) && Current().Value == Keywords.ContinueKeyword)
         {
             Advance();
-            return new ContinueNode();
+            return new ContinueNode
+            {
+                Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+            };
         }
 
         // Array
