@@ -2,7 +2,7 @@ include "$lib/base"
 
 // Dynamic array
 class Array: {
-    private let _value = _native("lib.list_create");
+    private let _value = _native("lib.array.create");
 
     // Create empty array
     function new(let collection): {
@@ -32,12 +32,12 @@ class Array: {
         return str;
     }
 
-    function isArray(let collection): {
-        return _native("lib.list_is_array", collection);
+    function isArray(const var): {
+        return _native("lib.array.is_array", var);
     }
 
     function isCollection(let collection): {
-        return _native("lib.list_is", collection);
+        return _native("lib.array.is", collection);
     }
 
     function getCollection(): {
@@ -45,17 +45,17 @@ class Array: {
     }
 
     function contains(let item): {
-        return _native("lib.list_contains", _value, item);
+        return _native("lib.array.contains", _value, item);
     }
 
     // Add element
     function push(let item): {
-        _native("lib.list_add", _value, item);
+        _native("lib.array.add", _value, item);
     }
 
     // Clear array
     function clear(): {
-        _value = _native("lib.list_create");
+        _value = _native("lib.array.create");
     }
 
     // Get at index
@@ -66,7 +66,7 @@ class Array: {
             Throw.exception("index is not number");
         }
 
-        return _native("lib.list_get", _value, index);
+        return _native("lib.array.get", _value, index);
     }
 
     // Set at index
@@ -77,7 +77,7 @@ class Array: {
 
         index = Number.toFixedInt(index);
 
-        _native("lib.list_set", _value, index, item);
+        _native("lib.array.set", _value, index, item);
     }
 
     function insert(let index, let item): {
@@ -87,7 +87,7 @@ class Array: {
 
         index = Number.toFixedInt(index);
 
-        _native("lib.list_insert", _value, index, item);
+        _native("lib.array.insert", _value, index, item);
     }
 
     // Remove at index
@@ -98,16 +98,16 @@ class Array: {
             Throw.exception("index is not number");
         }
 
-        _native("lib.list_remove_at", _value, index);
+        _native("lib.array.remove_at", _value, index);
     }
 
     // Get index of item
     function indexOf(let item): {
-        return _native("lib.list_index_of", _value, item);
+        return _native("lib.array.index_of", _value, item);
     }
 
     // Get length
     function length(): {
-        return _native("lib.list_count", _value);
+        return _native("lib.array.count", _value);
     }
 }

@@ -4,7 +4,11 @@ namespace Qlang.NativeLib;
 
 public interface IQlangLib
 {
-    string Name { get; }
-    string Version { get; }
-    void Register(NativeFunctionRegistry registry);
+    public string Name { get; }
+    public string Version { get; }
+    public string Author { get; }
+    public string Class { get; }
+    public string Namespace { get; }
+
+    public List<(string name, Delegate body)> GetFunctions();
 }

@@ -3,6 +3,8 @@ include "$lib/filesystem"
 
 class BaseTest: {
     function runTest(): {
+        Console.println("Test start\n\n");
+        
         _stringTest();
 
         _numberTest();
@@ -22,6 +24,8 @@ class BaseTest: {
         _pathTest();
 
         _fileTest();
+
+        Console.println("\n\nTest passed successfully");
     }
 
     function _mathTest(): {

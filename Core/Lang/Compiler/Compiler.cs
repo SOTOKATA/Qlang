@@ -1,6 +1,8 @@
 ﻿using Qlang.Core.Lang.AST;
 using Qlang.Core.Lang.Interpreter.Native;
 using Qlang.Core.LangDebug;
+using Qlang.NativeLib;
+using Qlang.NativeLib.SystemLib;
 
 namespace Qlang.Core.Lang.Compiler;
 
@@ -31,6 +33,7 @@ public class Compiler
         
         Logger.Log("Include Native Files");
         (NativeFunctions, _outputScript) = PreCompile.PreCompile.IncludeNativeFiles(_outputScript, fileName, NativeFunctions);
+        NativeFunctions.RegisterLib(new ConsoleLib());
         Logger.Succ("All native includes processed successfully.");
         
         _outputScript = PreCompile.PreCompile.ClearComments(_outputScript);

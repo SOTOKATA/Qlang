@@ -6,6 +6,8 @@ namespace Qlang.Core.ProjectManager.Project;
 
 public partial class Project
 {
+    public static string Version = "0.0.5";
+    
     public ProjectSettings Settings;
 
     private static CompileSettings? _compileSettings;

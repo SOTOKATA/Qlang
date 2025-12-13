@@ -8,7 +8,7 @@ class Directory: {
     function exists(let path): {
         path = String.getPrimitive(path);
 
-        return _native("lib.directory_exists", path);
+        return _native("lib.filesystem.directory_exists", path);
     }
 
     // Create if not exists directory
@@ -19,7 +19,7 @@ class Directory: {
             Throw.exception("Directory already created.");
         }
 
-        _native("lib.directory_create", path);
+        _native("lib.filesystem.directory_create", path);
     }
 
     // Remove if exists directory (recursive)
@@ -30,6 +30,6 @@ class Directory: {
             Throw.exception("Directory is not exists.");
         }
         
-        _native("lib.directory_remove", path, true);
+        _native("lib.filesystem.directory_remove", path, true);
     }
 }

@@ -7,9 +7,9 @@ class Number: {
     const MIN_VALUE = "-1.7976931348623157E+308";
     const MAX_VALUE = "1.7976931348623157E+308";
 
-    // check if 'var' is number
+    // check if 'var' is numbers
     function isNumber(let var): {
-        return _native("lib.try_parse_number", var);
+        return _native("lib.number.try_parse", var);
     }
 
     // get random number with range 'min' to 'max'
@@ -26,7 +26,7 @@ class Number: {
             Throw.exception("Minimum can't be more than maximum");
         }
 
-        return Parser.asNumber(_native("lib.random", min, max));
+        return Parser.asNumber(_native("lib.number.random", min, max));
     }
 
     // Get int styled number ('3.421' to '3')
@@ -36,6 +36,6 @@ class Number: {
 
     // Change numeric style (ex.: '3.214' to '3.2' with pattern '0.0')
     function toFixed(let number, let pattern): {
-        return _native("lib.to_string_number", number, _str(pattern));
+        return _native("lib.number.to_string", number, _str(pattern));
     }
 }

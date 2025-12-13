@@ -8,6 +8,6 @@ class Time: {
 
         millisec = Parser.asInt(millisec);
 
-        _native("lib.time_wait", millisec);
+        _native("lib.datetime.wait", millisec);
     }
 }

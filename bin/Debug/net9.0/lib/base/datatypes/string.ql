@@ -8,8 +8,21 @@ class String: {
         return _value;
     }
 
-    function new(let input): {
-        _value = input;
+    function new(const input): {
+        if String.isString(input):
+            _value = input.toString();
+        else:
+            _value = input;
+    }
+
+    function new(const char, const count): {
+        if count < 0: 
+            Throw.exception("Param 'count' must be more than 0");
+
+        if String.new(char).length() < 0:
+            Throw.exception("Length of string must be more than 0");
+
+        _value = _native("lib.string.create", char, count);
     }
 
     function getPrimitive(const strOrPrimite, let allowOther = false): {
@@ -65,47 +78,53 @@ class String: {
     }
 
     function toLower(): {
-        return String.new(_native("lib.str_to_lower", _str(_value)));
+        return String.new(_native("lib.string.to_lower", _str(_value)));
     }
 
     function toUpper(): {
-        return String.new(_native("lib.str_to_upper", _str(_value)));
+        return String.new(_native("lib.string.to_upper", _str(_value)));
     }
 
     function isString(let value): {
-        value =  _native("lib.str_is_str", value);
+        value =  _native("lib.string.is_str", value);
         return value;
     }
 
     function isPrimitive(let value): {
-        return _native("lib.str_is_primitive", value);
+        return _native("lib.string.is_primitive", value);
     }
 
     function split(let pattern): {
-        return Array.new(_native("lib.str_split", _str(_value), pattern));
+        return Array.new(_native("lib.string.split", _str(_value), _str(pattern)));
     }
 
     function charAt(const index): {
         if length() <= index:
             Throw.exception("The index must be less than the length of the string.");
 
-        return _native("lib.str_at", _str(_value), index);
+        return _native("lib.string.at", _str(_value), index);
+    }
+
+    function setAt(const index, const replaceValue): {
+        if length() <= index:
+            Throw.exception("The index must be less than the length of the string.");
+
+        _value = _native("lib.string.set_at", _str(_value), _str(replaceValue), index);
     }
 
     function join(let strArr, let pattern): {
         if (Array.isCollection(strArr) == false) && (Array.isArray(strArr) == false):
             Throw.exception("argument is not collection or array");
 
-
         if Array.isArray(strArr):
             strArr = strArr.getCollection();
 
-        return String.new(_native("lib.str_join", strArr, pattern));
+        return String.new(_native("lib.string.join", strArr, pattern));
     }
 
     // Get length of string
     function length():
-        return _native("lib.str_length", _str(_value));
+        return _native("lib.string.length", _str(_value));
 
     // Check if string is empty or null
     function isNullOrEmpty(let str): {
@@ -115,7 +134,7 @@ class String: {
         if String.isString(str):
             str = str.str();
 
-        return _native("lib.str_null_or_empty", _str(str));
+        return _native("lib.string.is_null_or_empty", _str(str));
     }
     
     // Check if string is white space or null
@@ -126,20 +145,20 @@ class String: {
         if String.isString(str): 
             str = str.str();
 
-        return _native("lib.str_null_or_white_space", _str(str));
+        return _native("lib.string.is_null_or_whitespace", _str(str));
     }
 
     // Trim string
     function trim():
-        return String.new(_native("lib.str_trim", _str(_value)));
+        return String.new(_native("lib.string.trim", _str(_value)));
 
     // Trim start string
     function trimStart():
-        return String.new(_native("lib.str_trim_start", _str(_value)));
+        return String.new(_native("lib.string.trim_start", _str(_value)));
 
     // Trim end string
     function trimEnd():
-        return String.new(_native("lib.str_trim_end", _str(_value)));
+        return String.new(_native("lib.string.trim_end", _str(_value)));
 
     // Cut string by 'startPos' and 'length'
     function subString(let startPos, let length): {
@@ -152,6 +171,6 @@ class String: {
         if length() <= length:
             Throw.exception("Value 'length' can't be more than string length");
 
-        return String.new(_native("lib.str_sub_string", _str(_value), startPos, length));
+        return String.new(_native("lib.string.substring", _str(_value), startPos, length));
     }
 }
