@@ -2,51 +2,6 @@ include "$lib/base"
 include "$lib/special/basetest"
 
 function main(): {
-    Console.clear();
-
-    let screen = PDCurses.new(30, Console.height(), "Message log:", ".");
-
-    screen.addStr(1, 1, "> Alexa: Hello World!");
-    screen.addStr(1, 2, "> You: Hello World!");
-    screen.addStr(1, 3, "> Alexa: Hello World!");
-    screen.addStr(1, 4, "> You: Hello World!");
-
-    screen.refresh();
-
-    /// ACTOR
-    screen = PDCurses.new(70, Console.height() / 1.5, "Actor:", " ");
-    screen.setPosition(29, 0);
-
-    const arr = File.getContent("image.txt").split("\n");
-
-    for let i = 0; i < arr.length(); i = i + 1:
-        screen.addStr(0, i, String.new(arr.at(i)).trim());
-
-    screen.refresh();
-
-    /// HELP/OTHER
-    screen = PDCurses.new(37, Console.height(), "FUCK AND TREAT v.1.53.2", ".");
-    screen.setPosition(98, 0);
-
-    screen.addStr(1, 1, "CTRL+");
-    screen.addStr(1, 2, "1. Save");
-    screen.addStr(1, 3, "2. Load");
-    screen.addStr(1, 4, "2. Cheat");
-    screen.addStr(1, 5, "3. Exit");
-
-    screen.refresh();
-
-    screen = PDCurses.new(70, Console.height()  + 1 - Parser.asInt(Console.height() / 1.5), "Actions:", ".");
-    screen.setPosition(29, Parser.asInt(Console.height() / 1.5) - 1);
-
-    screen.addStr(2, 1, "1. [SHOP] And need to buy something.");
-    screen.addStr(2, 2, "2. [ATTACK] I will kill you!");
-    screen.addStr(2, 3, "3. [SEX] I will fuck you!");
-    screen.addStr(2, 4, "4. [EXIT] Good bye.");
-
-    screen.refresh();
-
-    Console.readkey();
 }
 
 class PDCurses: {
@@ -97,14 +52,6 @@ class PDCurses: {
         _x = x;
         _y = y;
     }
-
-    // function setBackgroundChar(let str): {
-    //     str = String.new(str);
-    //     if str.length() == 0:
-    //         Throw.exception("String must be more than 0");
-
-    //     _backgroundChar = str.charAt(0);
-    // }
 
     function setName(const name):
         _name = name;
@@ -160,51 +107,3 @@ class PDCurses: {
         Console.print(_name);
     }
 }
-
-class Window: {
-    private let _items;
-
-    function new(): {
-        _items = Array.new([]);
-    }
-
-    function addstr(const x, const y, const str): {
-        
-    }
-
-    function draw(): {
-
-    }
-}
-
-// class Window: {
-//     private let _width;
-//     private let _height;
-
-//     private let _name;
-
-//     function new(const width, const height, const name): {
-//         _width = width;
-//         _height = height;
-//         _name = name;
-//     }
-
-//     function create(const width, const height, const name): {
-//         if width <= 0 || height <= 0 || String.isNullOrWhitespace(name) == true:
-//             Throw.exception("Window params is not valid");    
-
-//         _native("ui.window.create", name);
-
-//         return Window.new(width, height, name);
-//     }
-
-//     function destroy(const window): {
-//         if isWindow(window) == false:
-//             Throw.exception("Param is not a Window class");
-
-//         _native("ui.window.destroy", window);
-//     }
-
-//     function isWindow(const window = this): 
-//         _native("ui.window.is_window", window);
-// }
