@@ -164,6 +164,7 @@ public partial class Interpreter
             _return = false;
             _isBreakKeyword = false;
             _isContinueKeyword = false;
+            Logger.Warn("Return value: " + _returnValue);
             return _returnValue;
         }
         finally
@@ -573,6 +574,7 @@ public partial class Interpreter
             CurrentContext.CurrentNode = expr;
 
         Logger.Log("TypeofExpression: " + expr.GetType().Name);
+        Logger.Log("Expression: " + expr);
 
         try
         {
@@ -741,11 +743,14 @@ public partial class Interpreter
         var right = EvaluateExpression(binOp.Right);
         Logger.Warn($"ExpressionParams: {left}: {left?.GetType().Name}; {right}: {right?.GetType().Name}");
 
-        if (left is null)
-            throw new QlangRuntimeException("Left part of binary operation is null", binOp, GetStackTrace());
-        if (right is null)
-            throw new QlangRuntimeException("Right part of binary operation is null", binOp, GetStackTrace());
+        // if (left is null)
+        //     throw new QlangRuntimeException("Left part of binary operation is null", binOp, GetStackTrace());
+        // if (right is null)
+        //     throw new QlangRuntimeException("Right part of binary operation is null", binOp, GetStackTrace());
 
+        if (left is null || right is null)
+            return null;
+        
         bool leftBool;
         bool rightBool;
         switch (binOp.Operator)

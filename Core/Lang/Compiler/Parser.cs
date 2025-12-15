@@ -1,8 +1,6 @@
 using Qlang.Core.Lang.AST;
-using Qlang.Core.Lang.Dynamic;
 using Qlang.Core.Lang.Dynamic.Exceptions;
 using Qlang.Core.LangDebug;
-using Qlang.Core.ProjectManager;
 
 namespace Qlang.Core.Lang.Compiler;
 

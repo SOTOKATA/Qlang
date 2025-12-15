@@ -25,6 +25,7 @@ public class NativeFunctionRegistry
         RegisterLib(new ParserLib());
         RegisterLib(new RegexLib());
         RegisterLib(new StringLib());
+        RegisterLib(new ConsoleCommandLib());
     }
 
     public void RegisterLib(IQlangLib lib)

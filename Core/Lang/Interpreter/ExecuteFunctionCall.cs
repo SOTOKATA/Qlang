@@ -113,6 +113,23 @@ public partial class Interpreter
                     return ExecuteFunction(fromClassFn.function, fromClassFn.args, CurrentContext.Class);
                 }
                 
+                if (lastReturnValue is DynamicClass dynamicClass &&
+                    dynamicClass.Variables.TryGetValue(fn.Name, out var variable))
+                {
+                    Logger.Log($"Detected as class from temporary (lastReturnValue)");
+                    if (variable?.Value is FunctionNode fnNode)
+                    {
+                        args = fn.Arguments.ConvertAll(EvaluateExpression);
+                        return ExecuteFunction(ToDynamicFunction(fnNode), args, null);
+                    }
+                }
+
+                if (GetVariableValue(new VariableNode { Name = fn.Name }) is FunctionNode varFnNode)
+                {
+                    args = fn.Arguments.ConvertAll(EvaluateExpression);
+                    return ExecuteFunction(ToDynamicFunction(varFnNode), args, null); 
+                }
+                
                 throw new QlangRuntimeException("Unknown function: " + fn.Name, fn, GetStackTrace());
             }
             case ObjectPointerNode objCall:
@@ -127,8 +144,8 @@ public partial class Interpreter
                     return classNode;
                 }
 
-                if (lastReturnValue is DynamicClass dynamicClass &&
-                    dynamicClass.Variables.TryGetValue(objCall.Name, out var var))
+                if (lastReturnValue is DynamicClass dClass &&
+                    dClass.Variables.TryGetValue(objCall.Name, out var var))
                 {
                     Logger.Log($"Detected as class from temporary (lastReturnValue)");
                     return var?.Value;
