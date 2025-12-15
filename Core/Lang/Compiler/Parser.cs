@@ -1,4 +1,5 @@
 using Qlang.Core.Lang.AST;
+using Qlang.Core.Lang.Dynamic;
 using Qlang.Core.Lang.Dynamic.Exceptions;
 using Qlang.Core.LangDebug;
 using Qlang.Core.ProjectManager;
@@ -568,6 +569,65 @@ public class Parser
     private ASTNode ParsePrimary()
     {
         Logger.Log("CompilationProcess: Parsing primary");
+    
+        // Function pointer
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.FunctionDeclaration && 
+            Peek()?.TokenType == Tokens.LParen)
+        {
+            Advance();
+            Advance();
+            var func = new FunctionNode
+            {
+                Name = "___function_pointer___",
+                Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                SourceFile = (IsAtEnd() ? "" : Current().SourceFile),
+            };
+        
+            List<AssignmentNode> parameters = [];
+            while (!Check(Tokens.RParen))
+            {
+                if (Check(Tokens.Keyword))
+                    parameters.Add(ParseVariableDeclaration());
+                if (Check(Tokens.Comma))
+                    Advance();
+            }
+            Advance();
+            
+            func.Parameters = parameters;
+
+            Expect(Tokens.Equals);
+            Expect(Tokens.Greater);
+
+            func.Body = ParseBlock();
+
+            return func;
+        }
+        
+        // Object {}
+        if (Check(Tokens.LBrace))
+        {
+            Advance();
+            var @class = new ClassNode
+            {
+                Name = "___object___",
+                Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                SourceFile = (IsAtEnd() ? "" : Current().SourceFile),
+                Body = []
+            };
+            
+            while (!Check(Tokens.RBrace))
+            {
+                if (Check(Tokens.Keyword))
+                    @class.Body.Add(ParseVariableDeclaration());
+                if (Check(Tokens.Comma))
+                    Advance();
+            }
+
+            Expect(Tokens.RBrace);
+            Expect(Tokens.Semicolon);
+
+            return @class;
+        }
 
         if (Check(Tokens.Keyword) && Current().Value == Keywords.NullKeyword)
         {

@@ -12,6 +12,8 @@ public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool is
 
     public ASTNode? Value { get; set; }
 
+    public string Type { get; set; } = "";
+
     public bool IsStatic { get; set; } = isStatic;
 
     public bool IsPrivate { get; set; } = isPrivate;

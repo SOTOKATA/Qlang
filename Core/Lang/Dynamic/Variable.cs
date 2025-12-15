@@ -11,6 +11,8 @@ public class Variable(string name, object? value, bool isStatic, bool isPrivate,
 
     public string Name { get; set; } = name;
     public object? Value { get; set; } = value;
+
+    public string Type { get; set; } = "";
     
     public bool IsStatic { get; set; } = isStatic;
     

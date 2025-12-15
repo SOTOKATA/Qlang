@@ -131,12 +131,15 @@ public partial class Interpreter
         {
             if (arguments.Count == function.Parameters.Count)
                 for (var i = 0; i < function.Parameters.Count; i++)
+                {
+                    var var = function.Variables[function.Parameters[i]];
                     function.Variables[function.Parameters[i]] = new Variable(
                         function.Parameters[i],
                         arguments[i],
                         function.IsStatic,
                         false,
-                        false);
+                        var.IsConst);
+                }
             else
                 throw new QlangRuntimeException("The number of arguments must be equal to the number of params",
                     null, GetStackTrace());
@@ -573,38 +576,19 @@ public partial class Interpreter
 
         try
         {
-            List<object?> args = [];
-            if (expr is not CollectionNode collectionNode)
-                return expr switch
-                {
-                    VariableNode varNode => GetVariableValue(varNode),
-                    StringRefNode strRef => GetStringRef(strRef),
-                    NumberRefNode numberRef => GetNumberRef(numberRef),
-                    BooleanNode booleanNode => booleanNode.Value,
-                    NumberNode num => num.Value,
-                    BinaryOperationNode binOp => EvaluateBinaryOperation(binOp),
-                    CollectionNode collection => GetCollection(collection.Collection.ConvertAll(EvaluateExpression)),
-                    NullNode => null,
-                    CallNode call => ExecuteObjectCalls(call),
-                    _ => throw new QlangRuntimeException(
-                        $"Unknown expression type: {expr.GetType().Name}",
-                        expr,
-                        GetStackTrace())
-                };
-            args = collectionNode.Collection.ConvertAll(EvaluateExpression);
-            Logger.Log("Is collection expression: " + args);
-
             return expr switch
             {
                 VariableNode varNode => GetVariableValue(varNode),
                 StringRefNode strRef => GetStringRef(strRef),
                 NumberRefNode numberRef => GetNumberRef(numberRef),
+                ClassNode classNode => ToDynamicClass(classNode),
                 BooleanNode booleanNode => booleanNode.Value,
                 NumberNode num => num.Value,
                 BinaryOperationNode binOp => EvaluateBinaryOperation(binOp),
                 CollectionNode collection => GetCollection(collection.Collection.ConvertAll(EvaluateExpression)),
                 NullNode => null,
                 CallNode call => ExecuteObjectCalls(call),
+                FunctionNode => expr,
                 _ => throw new QlangRuntimeException(
                     $"Unknown expression type: {expr.GetType().Name}",
                     expr,
@@ -906,9 +890,12 @@ public partial class Interpreter
     {
         args ??= [];
         
-        foreach (var function in @class.Body
-                     .OfType<FunctionNode>()
-                     .Where(f => f.Name == name))
+        var functions = @class.Body.OfType<FunctionNode>().Where(f => f.Name == name).ToList();
+        var values = @class.Variables.Where(f => f.Key == name).Select(var => var.Value.Value);
+        
+        functions.AddRange(values.OfType<FunctionNode>());
+        
+        foreach (var function in functions)
         {
             // Проверяем, можно ли вызвать эту функцию с данными аргументами
             if (TryMatchFunction(function, args, out var finalArgs))
@@ -955,5 +942,4 @@ public partial class Interpreter
         
         return true;
     }
-        
 }

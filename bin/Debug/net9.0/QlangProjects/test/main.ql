@@ -1,18 +1,22 @@
 include "$lib/base"
 include "$lib/special/basetest"
 
-const marcoh = "Hello World!";
-
 function main(): {
-    const screen = PDCurses.new();
-    const window = PDWindow.new();
-    window.addStr(1, 1, "Hello World!:");
+    const object = {
+        const name = "Alex",
+        let age = 20,
 
-    screen.add(window);
+        const increaseAge = function () => { 
+            age = age + 1; return age; 
+        }
+    };
 
-    screen.refresh();
 
-    window.readln(String.new("Hello World!").length() + 3, 1);
+    Console.println(object.increaseAge());
+}
+
+function onlyNumber(const var): {
+    Console.println("Number: " + var);
 }
 
 class PDWindow: {
@@ -140,6 +144,14 @@ class PDCurses: {
 
     function add(const item): {
         _items.push(item);
+    }
+
+    function removeAt(const index): {
+        _items.removeAt(index);
+    }
+
+    function at(const index): {
+        _items.at(index);
     }
 
     function refresh(): {
