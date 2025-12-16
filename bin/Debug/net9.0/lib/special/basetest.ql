@@ -132,7 +132,7 @@ class BaseTest: {
         printHeader("array");
 
         Console.println("Collection: '" + Array.new(collection).toString().toString() + "', isCollection: " + Array.isCollection(collection));
-        Console.println("Array: '" + array + "', '" + array.toString().toString() + "', isArray: " + Array.isArray(array));
+        Console.println("Array: '" + array.toString() + "', '" + array.toString().toString() + "', isArray: " + Array.isArray(array));
 
         Console.println("\nWork with array: " + array.toString().toString());
         Console.println("Contains 'Hello': " + array.contains("Hello"));
@@ -185,18 +185,20 @@ class BaseTest: {
 
         Console.println("\nHello + World = " + String.append(["Hello", "World"]).toString());
 
-        Console.println("\nWork with string class: '" + str.toString() + "'");
+        Console.println("\nWork with string class: '" + str + "'");
         Console.println("length: '" + str.length() + "'");
-        Console.println("trim: '" + str.trim().toString() + "'");
-        Console.println("trimStart: '" + str.trimStart().toString() + "'");
-        Console.println("trimEnd: '" + str.trimEnd().toString() + "'");
-        Console.println("toLower: '" + str.toLower().toString() + "'");
-        Console.println("toUpper: '" + str.toUpper().toString() + "'");
+        Console.println("trim: '" + str.trim() + "'");
+        Console.println("trimStart: '" + str.trimStart() + "'");
+        Console.println("trimEnd: '" + str.trimEnd() + "'");
+        Console.println("toLower: '" + str.toLower() + "'");
+        Console.println("toUpper: '" + str.toUpper() + "'");
         Console.println("isNullOrEmpty: '" + str.isNullOrEmpty(str) + "'");
         Console.println("isNullOrWhitespace: '" + str.isNullOrWhitespace(str) + "'");
-        Console.println("subString: '" + str.subString(0, 5).toString() + "'");
-        Console.println("\nsplit: '" + str.split(" ").toString().toString() + "'");
-        Console.println("join: '" + String.join(str.split(" "), " ").toString() + "'");
+        Console.println("substring: '" + str.subString(0, 5) + "'");
+        Console.println("\nsplit: '" + str.split(" ").toString() + "'");
+        Console.println("join: '" + String.join(str.split(" "), " ") + "'");
+        Console.println("\nmultiplication by 2: " + (str * 2));
+        Console.println("division by 2: " + (str / 2));
     }
     // Types test end
 

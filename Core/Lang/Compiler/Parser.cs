@@ -322,15 +322,6 @@ public class Parser
         return statements;
     }
 
-    private ASTNode ParseParens()
-    {
-        Expect(Tokens.LParen);
-        var parsed = ParseExpression();
-        Expect(Tokens.RParen);
-
-        return parsed;
-    }
-
     private ReturnNode ParseReturn()
     {
         Logger.Log("CompilationProcess: Parsing return");
@@ -572,13 +563,73 @@ public class Parser
         return left;
     }
 
-    /// <summary>
-    /// Parsing primitive calls and function calls
-    /// </summary>
-    private ASTNode ParsePrimary()
+    private ASTNode? ParsePrimaryKeywords(bool isMinus)
     {
-        Logger.Log("CompilationProcess: Parsing primary");
-    
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.NullKeyword)
+        {
+            Advance();
+            return new NullNode
+            {
+                Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+            };
+        }
+
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.BreakKeyword)
+        {
+            Advance();
+            return new BreakNode
+            {
+                Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+            };
+        }
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.ContinueKeyword)
+        {
+            Advance();
+            return new ContinueNode
+            {
+                Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+            };
+        }
+        
+        // bool return
+        if (Check(Tokens.Keyword) && (Current().Value == Keywords.FalseKeyword || Current().Value == Keywords.TrueKeyword))
+        {
+            Logger.Log("CompilationProcess.End: Parsing primary");
+            return new BooleanNode
+            {
+                Value = isMinus ? !bool.Parse(Advance().Value) : bool.Parse(Advance().Value),
+                Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+            };
+        }
+
+        // String reference
+        if (Check(Tokens.StringRef))
+        {
+            Logger.Log("CompilationProcess.End: Parsing primary (StringRef)");
+            return new StringRefNode { Index = int.Parse(Advance().Value), Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+        }
+
+        if (Check(Tokens.NumberRef))
+        {
+            Logger.Log("CompilationProcess.End: Parsing primary (NumberRef)");
+            return new NumberRefNode
+            {
+                IsNegative = isMinus,
+                Index = int.Parse(Advance().Value),
+                Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+            };
+        }
+
+        return null;
+    }
+
+    private ASTNode? ParsePrimaryPointers()
+    {
         // Function pointer
         if (Check(Tokens.Keyword) && Current().Value == Keywords.FunctionDeclaration && 
             Peek()?.TokenType == Tokens.LParen)
@@ -638,35 +689,11 @@ public class Parser
             return @class;
         }
 
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.NullKeyword)
-        {
-            Advance();
-            return new NullNode
-            {
-                Line = (IsAtEnd() ? 0 : Current().Line + 1),
-                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
-            };
-        }
+        return null;
+    }
 
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.BreakKeyword)
-        {
-            Advance();
-            return new BreakNode
-            {
-                Line = (IsAtEnd() ? 0 : Current().Line + 1),
-                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
-            };
-        }
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.ContinueKeyword)
-        {
-            Advance();
-            return new ContinueNode
-            {
-                Line = (IsAtEnd() ? 0 : Current().Line + 1),
-                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
-            };
-        }
-
+    private ASTNode? ParsePrimaryParens()
+    {
         // Array
         if (Check(Tokens.LSquareParen))
         {
@@ -687,6 +714,27 @@ public class Parser
             return new CollectionNode { Collection = statements, Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
         }
 
+        // parse: '('expression')'
+        if (Check(Tokens.LParen))
+        {
+            Logger.Warn("Parsing parents");
+            Expect(Tokens.LParen);
+            var parsed = ParseExpression();
+            Expect(Tokens.RParen);
+
+            return parsed;
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Parsing primitive calls and function calls
+    /// </summary>
+    private ASTNode ParsePrimary()
+    {
+        Logger.Log("CompilationProcess: Parsing primary");
+        
         bool isMinus = false;
         if (Check(Tokens.Minus))
         {
@@ -694,44 +742,21 @@ public class Parser
             Advance();
         }
 
-        // parse: '('expression')'
-        if (Check(Tokens.LParen))
-        {
-            Logger.Warn("Parsing parents");
-            return ParseParens();
-        }
+        var result = ParsePrimaryPointers();
+        
+        // Send only if this is not null or is not a class call like: '(...).call()'
+        if (result is not null && Peek()?.TokenType != Tokens.Dot)
+            return result;
+        
+        result = ParsePrimaryKeywords(isMinus);
 
-        // bool return
-        if (Check(Tokens.Keyword) && (Current().Value == Keywords.FalseKeyword || Current().Value == Keywords.TrueKeyword))
-        {
-            Logger.Log("CompilationProcess.End: Parsing primary");
-            return new BooleanNode
-            {
-                Value = isMinus ? !bool.Parse(Advance().Value) : bool.Parse(Advance().Value),
-                Line = (IsAtEnd() ? 0 : Current().Line + 1),
-                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
-            };
-        }
+        if (result is not null)
+            return result;
+        
+        result = ParsePrimaryParens();
 
-        // String reference
-        if (Check(Tokens.StringRef))
-        {
-            Logger.Log("CompilationProcess.End: Parsing primary (StringRef)");
-            return new StringRefNode { Index = int.Parse(Advance().Value), Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
-        }
-
-        if (Check(Tokens.NumberRef))
-        {
-            Logger.Log("CompilationProcess.End: Parsing primary (NumberRef)");
-            return new NumberRefNode
-            {
-                IsNegative = isMinus,
-                Index = int.Parse(Advance().Value)
-                ,
-                Line = (IsAtEnd() ? 0 : Current().Line + 1),
-                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
-            };
-        }
+        if (result is not null)
+            return result;
 
         // Identifier - может быть вызовом метода или функции
         if (Check(Tokens.Identifier) || (Check(Tokens.Keyword) && Current().Value == Keywords.ThisKeyword))
@@ -757,8 +782,8 @@ public class Parser
                 };
             }
 
-            if (firstIdentifier.TryParseNumber(out var result))
-                return new NumberNode { Value = result, Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+            if (firstIdentifier.TryParseNumber(out var res))
+                return new NumberNode { Value = res, Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
 
             // Вызов метода: Object.method(...)... or func().class.etc();
             if (Check(Tokens.Dot) || Check(Tokens.LParen))

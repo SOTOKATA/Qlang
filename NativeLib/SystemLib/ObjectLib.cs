@@ -13,7 +13,7 @@ public class ObjectLib : IQlangLib
     {
         return [
             ("is_null",  (Func<object?, bool>)(obj => obj is null)),
-            ("is_simplify",  (Func<object?, bool>)(obj => obj is double or int or float or string))
+            ("is_simplify",  (Func<object?, bool>)(obj => obj is double or int or float or string or bool or List<object>))
         ];
     }
 }

@@ -1,6 +1,13 @@
 include "$lib/base"
 
 class SnakeGame: {
+    const dir = {
+        const left = "a",
+        const right = "d",
+        const up = "w",
+        const down = "s"
+    };
+
     let _position;
 
     let _tail;
@@ -47,14 +54,16 @@ class SnakeGame: {
     }
 
     function draw(): {
+        Console.setCursorPosition(_width + 2, 1);
+        Console.println("Last char: " + _lastChar);
         Console.setCursorPosition(0, 0);
 
         let arrow = "";
 
-        if _lastChar == "a": { arrow = "<"; }
-        else if _lastChar == "d": { arrow = ">"; }
-        else if _lastChar == "s": { arrow = "V"; }
-        else if _lastChar == "w": { arrow = "^"; }
+        if _lastChar == dir.left: { arrow = "<"; }
+        else if _lastChar == dir.right: { arrow = ">"; }
+        else if _lastChar == dir.down: { arrow = "V"; }
+        else if _lastChar == dir.up: { arrow = "^"; }
         else: { arrow = "%"; }
 
         Console.setForeColor("white");
@@ -97,36 +106,31 @@ class SnakeGame: {
 
         for let i = 0; i < _tail.length(); i = i + 1: {
             let t = _tail.at(i);
-            if (t.X() == _position.X()) && (t.Y() == _position.Y()): {
+            if (t.X() == _position.X()) && (t.Y() == _position.Y()):
                 _gameOver = true;
-            }
         }
      
         _tail.insert(0, Vector2.new(_position.X(), _position.Y()));
-        if (_tail.length() > _tailLength): {
+        if (_tail.length() > _tailLength):
             _tail.removeAt(_tail.length() - 1);
-        }
 
         input();
 
-        if _position.X() < 1: {
+        if _position.X() < 1:
             _position = Vector2.new(_width - 1, _position.Y());
-        } else if _position.X() > (_width - 1): {
+        else if _position.X() > (_width - 1):
             _position = Vector2.new(1, _position.Y());
-        }
 
-        if _position.Y() < 1: {
+        if _position.Y() < 1:
             _position = Vector2.new(_position.X(), _height - 1);
-        } else if _position.Y() > (_height - 1): {
+        else if _position.Y() > (_height - 1):
             _position = Vector2.new(_position.X(), 1);
-        }
     }
 
     function input(): {
         if Console.isKeyAvailable() == false: {
-            if _lastChar != "": {
+            if _lastChar != "":
                 control(_lastChar);
-            }  
             return "";
         }
 
@@ -135,18 +139,17 @@ class SnakeGame: {
     }
 
     function control(let char): {
-        if char == "a": {
+        if char == dir.left:
             _position = Vector2.new(_position.X() - 1, _position.Y());
-        } else if char == "d": {
+        else if char == dir.right:
             _position = Vector2.new(_position.X() + 1, _position.Y());
-        } else if char == "w": {
+        else if char == dir.up:
             _position = Vector2.new(_position.X(), _position.Y() - 1);
-        } else if char == "s": {
+        else if char == dir.down:
             _position = Vector2.new(_position.X(), _position.Y() + 1);
-        }
     }
 
-    function run(let width, let height): {
+    function run(let width = 16, let height = 8): {
         setup(width, height);
 
         while _gameOver == false: {

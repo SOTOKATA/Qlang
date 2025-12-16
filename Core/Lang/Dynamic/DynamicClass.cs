@@ -14,7 +14,6 @@ public class DynamicClass(string name)
 
     public override string ToString()
     {
-        
         return $"{ClassName}";
     }
 

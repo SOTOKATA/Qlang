@@ -675,7 +675,8 @@
         },
         "runtime": {
           "ql.dll": {
-            "fileVersion": "0.0.0.0"
+            "assemblyVersion": "1.0.0",
+            "fileVersion": ""
           }
         }
       },

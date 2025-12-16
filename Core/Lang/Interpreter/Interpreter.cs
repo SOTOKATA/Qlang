@@ -44,9 +44,7 @@ public partial class Interpreter
             switch (statement)
             {
                 case ClassNode classNode:
-                    Logger.Log("ToDynamicClass (until): " + classNode.Name);
                     _dynamicClasses[classNode.Name] = ToDynamicClass(classNode);
-                    Logger.Log("ToDynamicClass: " + _dynamicClasses[classNode.Name].Name);
                     break;
                 case FunctionNode func:
                     _globalFunctions.Add(func);
@@ -645,12 +643,11 @@ public partial class Interpreter
                     if (CurrentContext.Blocks[i].Variables.TryGetValue(varNode.Name, out var))
                         return var.Value;
 
-            if (HasContext && (CurrentContext?.Function?.Variables.TryGetValue(varNode.Name, out var) == true || 
-                CurrentContext?.Class?.Variables.TryGetValue(varNode.Name, out var) == true))
+            if (HasContext && (CurrentContext?.Function?.Variables.TryGetValue(varNode.Name, out var) == true ||
+                               CurrentContext?.Class?.Variables.TryGetValue(varNode.Name, out var) == true))
                 return var.Value;
 
-
-            // static classes
+            // static classes var
             if (_dynamicClasses.TryGetValue(varNode.ClassName, out var dynamicClass) &&
                 dynamicClass.Variables.TryGetValue(varNode.Name, out var))
             {
@@ -662,6 +659,10 @@ public partial class Interpreter
 
                 return var.Value;
             }
+            
+            // static classes
+            if (_dynamicClasses.TryGetValue(varNode.Name, out dynamicClass))
+                return dynamicClass;
             
             // Global variables
             var node = _globalVariables.FirstOrDefault(x => x.Name == varNode.Name);
@@ -735,6 +736,97 @@ public partial class Interpreter
         return numberRef.IsNegative ? $"-{value}" : value;
     }
 
+    private DynamicClass? CreateClassFrom(object? obj, DynamicClass copy, ASTNode? context = null)
+    {
+        var createFunction = copy.Body
+            .OfType<FunctionNode>()
+            .FirstOrDefault(f => f.Name == "___create_from___");
+
+        if (createFunction is null)
+            throw new QlangRuntimeException(
+                "Second value is incompatible",
+                context,
+                GetStackTrace());
+
+        var created = ExecuteFunction(
+            ToDynamicFunction(createFunction),
+            [obj],
+            copy);
+
+        if (created is not DynamicClass dClass ||
+            dClass.ClassName != copy.ClassName)
+            throw new QlangRuntimeException(
+                "Second value is null or incompatible",
+                context,
+                GetStackTrace());
+
+        return dClass;
+    }
+
+    private object? EvaluateClassBinaryOperation(object left, object right, BinaryOperationNode binOp)
+    {
+        DynamicClass? rightClass = null;
+        DynamicClass? leftClass = null;
+
+        if (left is DynamicClass lc)
+            leftClass = lc;
+        else
+            rightClass = (DynamicClass)right;
+
+        leftClass ??= CreateClassFrom(left, rightClass, binOp);
+        rightClass ??= CreateClassFrom(right, leftClass, binOp);
+
+        if (binOp.Operator.Any(c => c is '=' or '>' or '<' or '!'))
+        {
+            string @operator = "";
+            for (int i = 0; i < binOp.Operator.Length; i++)
+            {
+                @operator += binOp.Operator[i] switch
+                {
+                    '=' => "equal",
+                    '>' => "greater",
+                    '<' => "less",
+                    '!' => "not"
+                };
+            
+                if (i !=  binOp.Operator.Length - 1)
+                    @operator += "_";
+            }
+            binOp.Operator = @operator;
+        }
+        
+        var opFunction = leftClass.Body
+            .OfType<FunctionNode>()
+            .FirstOrDefault(f =>
+                f.Name == $"___operator_{binOp.Operator.ToLower()}___");
+
+        if (opFunction is null)
+            throw new QlangRuntimeException(
+                $"Class '{leftClass.ClassName}' is incompatible for operator '{binOp.Operator}'",
+                binOp,
+                GetStackTrace());
+
+        var result = ExecuteFunction(
+            ToDynamicFunction(opFunction),
+            [leftClass, rightClass],
+            leftClass);
+
+        if ((result is not DynamicClass dynamicClass || dynamicClass.ClassName != leftClass.ClassName) &&
+            binOp.Operator.All(c => c is '+' or '-' or '*' or '/'))
+            throw new QlangRuntimeException(
+                $"Return value of '___operator_{binOp.Operator.ToLower()}___' must be equal to type '{leftClass.ClassName}'", binOp,
+                GetStackTrace()); 
+        
+        if (result is not bool && 
+            (binOp.Operator.Contains("equal") ||  binOp.Operator.Contains("greater") || 
+             binOp.Operator.Contains("less")))
+            throw new QlangRuntimeException(
+                $"Return value of '___operator_{binOp.Operator.ToLower()}___' must be equal to type 'bool'", binOp,
+                GetStackTrace()); 
+        
+        return result;
+    }
+
     private object? EvaluateBinaryOperation(BinaryOperationNode binOp)
     {
         Logger.Warn("Detected binary operation");
@@ -746,77 +838,8 @@ public partial class Interpreter
         if (left is null || right is null)
             return null;
 
-        if ((left is DynamicClass || right is DynamicClass) &&
-            binOp.Operator is "Plus" or "Minus" or "Star" or "Slash")
-        {
-            DynamicClass leftClass;
-            object rightValue;
-
-            if (left is DynamicClass lc)
-            {
-                leftClass = lc;
-                rightValue = right;
-            }
-            else
-            {
-                leftClass = (DynamicClass)right;
-                rightValue = left;
-            }
-
-            DynamicClass rightClass;
-
-            if (rightValue is DynamicClass rc)
-                rightClass = rc;
-            else
-            {
-                var createFunction = leftClass.Body
-                    .OfType<FunctionNode>()
-                    .FirstOrDefault(f => f.Name == "___create_from___");
-
-                if (createFunction is null)
-                    throw new QlangRuntimeException(
-                        "Second value is incompatible",
-                        binOp,
-                        GetStackTrace());
-
-                var created = ExecuteFunction(
-                    ToDynamicFunction(createFunction),
-                    [rightValue],
-                    leftClass);
-
-                if (created is not DynamicClass dClass ||
-                    dClass.ClassName != leftClass.ClassName)
-                    throw new QlangRuntimeException(
-                        "Second value is null or incompatible",
-                        binOp,
-                        GetStackTrace());
-
-                rightClass = dClass;
-            }
-
-            var opFunction = leftClass.Body
-                .OfType<FunctionNode>()
-                .FirstOrDefault(f =>
-                    f.Name == $"___operator_{binOp.Operator.ToLower()}___");
-
-            if (opFunction is null)
-                throw new QlangRuntimeException(
-                    $"Class '{leftClass.ClassName}' is incompatible for operator '{binOp.Operator}'",
-                    binOp,
-                    GetStackTrace());
-
-            var result = ExecuteFunction(
-                ToDynamicFunction(opFunction),
-                [leftClass, rightClass],
-                leftClass);
-
-            if (result is not DynamicClass dynamicClass || dynamicClass.ClassName != leftClass.ClassName)
-                throw new QlangRuntimeException(
-                    $"Return value of '___operator_{binOp.Operator.ToLower()}___' must be equal to type '{leftClass.ClassName}'", binOp,
-                    GetStackTrace()); 
-            
-            return result;
-        }
+        if ((left is DynamicClass || right is DynamicClass))
+            return EvaluateClassBinaryOperation(left, right, binOp);
 
         
         bool leftBool;

@@ -65,6 +65,13 @@ public partial class Interpreter
         {
             case FunctionPointerNode fn:
             {
+                if (lastReturnValue is string)
+                {
+                    var str = lastReturnValue;
+                    lastReturnValue = _dynamicClasses["String"];
+                    (lastReturnValue as DynamicClass).Variables["_value"].Value = str;
+                }
+                
                 Logger.Log("Detected function pointer: " + fn.Name);
                 var args = fn.Arguments.ConvertAll(EvaluateExpression);
                 

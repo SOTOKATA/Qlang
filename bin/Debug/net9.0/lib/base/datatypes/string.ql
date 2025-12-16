@@ -8,12 +8,50 @@ class String: {
     function toString(): {
         return _value;
     }
-
+    
     function ___create_from___(const obj):
         return String.new(obj);
 
     function ___operator_plus___(const obj1, const obj2):
         return String.new(obj1._value + obj2._value);
+
+    function ___operator_star___(const obj1, const obj2): {
+        let val = "";
+
+        for let i = 0; i < obj2._value; i = i + 1:
+            val = val + obj1;
+
+        return String.new(val);
+    }
+
+    function ___operator_equal_equal___(const obj1, const obj2):
+        return obj1._value == obj2._value;
+
+    function ___operator_not_equal___(const obj1, const obj2):
+        return obj1._value == obj2._value;
+
+    function ___operator_greater_equal___(const obj1, const obj2): 
+        return obj1.length() >= obj2.length();
+
+    function ___operator_less_equal___(const obj1, const obj2): 
+        return obj1.length() <= obj2.length();
+
+    function ___operator_greater___(const obj1, const obj2): 
+        return obj1.length() > obj2.length();
+
+    function ___operator_less___(const obj1, const obj2): 
+        return obj1.length() < obj2.length();
+
+    function ___operator_slash___(const obj1, const obj2): {
+        let val = "";
+
+        const index = obj1.length() / obj2._value;
+
+        for let i = 0; i < index; i = i + 1:
+            val = val + obj1.charAt(i);
+
+        return String.new(val);
+    }
 
     function new(const input): {
         if String.isString(input):
@@ -23,6 +61,9 @@ class String: {
     }
 
     function new(const char, const count): {
+        if (Number.isNumber(count) == false):
+            Throw.exception("Param 'count' must be number");
+
         if count < 0: 
             Throw.exception("Param 'count' must be more than 0");
 
