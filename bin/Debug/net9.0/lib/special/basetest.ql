@@ -82,13 +82,13 @@ class BaseTest: {
 
         Console.println("\nExists: " + File.exists(path));
 
-        Console.println("\nContent: '" + File.getContent(path).str() + "'");
+        Console.println("\nContent: '" + File.getContent(path).toString() + "'");
 
         File.setContent(path, "Hello ");
-        Console.println("Set content 'Hello ': '" + File.getContent(path).str() + "'");
+        Console.println("Set content 'Hello ': '" + File.getContent(path).toString() + "'");
 
         File.appendContent(path, "World!");
-        Console.println("Append content 'World!': '" + File.getContent(path).str() + "'");
+        Console.println("Append content 'World!': '" + File.getContent(path).toString() + "'");
 
         File.remove(path);
         Console.println("\nFile removed.");
@@ -131,24 +131,24 @@ class BaseTest: {
 
         printHeader("array");
 
-        Console.println("Collection: '" + Array.new(collection).toString().str() + "', isCollection: " + Array.isCollection(collection));
-        Console.println("Array: '" + array + "', '" + array.toString().str() + "', isArray: " + Array.isArray(array));
+        Console.println("Collection: '" + Array.new(collection).toString().toString() + "', isCollection: " + Array.isCollection(collection));
+        Console.println("Array: '" + array + "', '" + array.toString().toString() + "', isArray: " + Array.isArray(array));
 
-        Console.println("\nWork with array: " + array.toString().str());
+        Console.println("\nWork with array: " + array.toString().toString());
         Console.println("Contains 'Hello': " + array.contains("Hello"));
         array.push("Amigo");
-        Console.println("Push 'Amigo': " + array.toString().str());
+        Console.println("Push 'Amigo': " + array.toString().toString());
         array.setAt(0, "Folder");
-        Console.println("SetAt '0, Folder': " + array.toString().str());
+        Console.println("SetAt '0, Folder': " + array.toString().toString());
         Console.println("At '0': " + array.at(0));
         array.insert(0, "first");
-        Console.println("Insert '0, first': " + array.toString().str());
+        Console.println("Insert '0, first': " + array.toString().toString());
         Console.println("IndexOf 'first': " + array.indexOf("first"));
         array.removeAt(0);
-        Console.println("RemoveAt '0': " + array.toString().str());
+        Console.println("RemoveAt '0': " + array.toString().toString());
         Console.println("Length: " + array.length());
         array.clear();
-        Console.println("Cleared: " + array.toString().str());
+        Console.println("Cleared: " + array.toString().toString());
 
 
     }
@@ -159,12 +159,12 @@ class BaseTest: {
         printHeader("dictionary");
 
         dict.set("KeyItem", "FirstItem");
-        Console.println("set 'KeyItem, FirstItem': " + dict.toString().str());
+        Console.println("set 'KeyItem, FirstItem': " + dict.toString().toString());
         Console.println("containsKey 'KeyItem': " + dict.containsKey("KeyItem"));
         Console.println("containsValue 'FirstItem': " + dict.containsValue("FirstItem"));
         Console.println("get 'KeyItem': " + dict.get("KeyItem"));
         dict.clear();
-        Console.println("Cleared: " + dict.toString().str());
+        Console.println("Cleared: " + dict.toString().toString());
     }
 
     private function _objectTest(): {
@@ -181,22 +181,22 @@ class BaseTest: {
         printHeader("string");
 
         Console.println("Primitive string: '" + primitive + "', is primitive: " + String.isPrimitive(primitive));
-        Console.println("String class: '" + str + "', '" + str.str() + "', is string: " + String.isString(str));
+        Console.println("String class: '" + str + "', '" + str.toString() + "', is string: " + String.isString(str));
 
-        Console.println("\nHello + World = " + String.append(["Hello", "World"]).str());
+        Console.println("\nHello + World = " + String.append(["Hello", "World"]).toString());
 
-        Console.println("\nWork with string class: '" + str.str() + "'");
+        Console.println("\nWork with string class: '" + str.toString() + "'");
         Console.println("length: '" + str.length() + "'");
-        Console.println("trim: '" + str.trim().str() + "'");
-        Console.println("trimStart: '" + str.trimStart().str() + "'");
-        Console.println("trimEnd: '" + str.trimEnd().str() + "'");
-        Console.println("toLower: '" + str.toLower().str() + "'");
-        Console.println("toUpper: '" + str.toUpper().str() + "'");
+        Console.println("trim: '" + str.trim().toString() + "'");
+        Console.println("trimStart: '" + str.trimStart().toString() + "'");
+        Console.println("trimEnd: '" + str.trimEnd().toString() + "'");
+        Console.println("toLower: '" + str.toLower().toString() + "'");
+        Console.println("toUpper: '" + str.toUpper().toString() + "'");
         Console.println("isNullOrEmpty: '" + str.isNullOrEmpty(str) + "'");
         Console.println("isNullOrWhitespace: '" + str.isNullOrWhitespace(str) + "'");
-        Console.println("subString: '" + str.subString(0, 5).str() + "'");
-        Console.println("\nsplit: '" + str.split(" ").toString().str() + "'");
-        Console.println("join: '" + String.join(str.split(" "), " ").str() + "'");
+        Console.println("subString: '" + str.subString(0, 5).toString() + "'");
+        Console.println("\nsplit: '" + str.split(" ").toString().toString() + "'");
+        Console.println("join: '" + String.join(str.split(" "), " ").toString() + "'");
     }
     // Types test end
 
@@ -206,7 +206,7 @@ class BaseTest: {
 
         printHeader("vector");
 
-        Console.println("Vector: " + vect.toString().str());
+        Console.println("Vector: " + vect.toString().toString());
         Console.println("X: " + vect.X());
         Console.println("Y: " + vect.Y());
         Console.println("equals '5, 10.5': " + vect.equals(Vector2.new(5, 10.5)));

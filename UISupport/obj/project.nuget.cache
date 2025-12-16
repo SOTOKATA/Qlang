@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hwqFh7Jsowg=",
+  "dgSpecHash": "e42zi60j0dE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\UISupport\\UISupport.csproj",
+  "projectFilePath": "D:\\Projects\\Console\\Qlang\\UISupport\\UISupport.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sotok\\.nuget\\packages\\avalonia\\11.3.9\\avalonia.11.3.9.nupkg.sha512",
     "C:\\Users\\sotok\\.nuget\\packages\\avalonia.angle.windows.natives\\2.1.25547.20250602\\avalonia.angle.windows.natives.2.1.25547.20250602.nupkg.sha512",
@@ -46,9 +46,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "Package 'CS-Script.lib 3.30.5.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0'. This package may not be fully compatible with your project.",
-      "projectPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\UISupport\\UISupport.csproj",
+      "projectPath": "D:\\Projects\\Console\\Qlang\\UISupport\\UISupport.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\UISupport\\UISupport.csproj",
+      "filePath": "D:\\Projects\\Console\\Qlang\\UISupport\\UISupport.csproj",
       "libraryId": "CS-Script.lib",
       "targetGraphs": [
         "net9.0"

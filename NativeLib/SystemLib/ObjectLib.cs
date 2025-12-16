@@ -12,7 +12,8 @@ public class ObjectLib : IQlangLib
     public List<(string name, Delegate body)> GetFunctions()
     {
         return [
-            ("is_null",  (Func<object?, bool>)(obj => obj is null))
+            ("is_null",  (Func<object?, bool>)(obj => obj is null)),
+            ("is_simplify",  (Func<object?, bool>)(obj => obj is double or int or float or string))
         ];
     }
 }

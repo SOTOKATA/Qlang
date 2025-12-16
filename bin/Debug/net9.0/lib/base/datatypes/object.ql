@@ -6,7 +6,9 @@ class Object: {
         return _native("lib.object.is_null", obj);
     }
 
+    function isSimplify(const val): return _native("lib.object.is_simplify", val);
+
     function toString(): {
-        return this;
+        return nameof(this);
     }
 }

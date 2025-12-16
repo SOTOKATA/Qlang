@@ -31,6 +31,8 @@ public class Parser
 
             program.Statements.Add(ParseStatement());
         }
+        
+        program = PostParser.IncludeExtends(program);
 
         Validator.CheckValidate(program);
 
@@ -193,6 +195,15 @@ public class Parser
         Expect(Tokens.Keyword, Keywords.ClassDeclaration);
         var name = Expect(Tokens.Identifier).Value;
 
+        string extends = "";
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.ExtendsKeyword &&
+            Peek()?.TokenType == Tokens.Identifier)
+        {
+            Advance();
+            extends = Current().Value;
+            Advance();
+        }
+
         Expect(Tokens.Colon);
         // Expect(Tokens.Semicolon);
         
@@ -202,7 +213,7 @@ public class Parser
         List<ASTNode> body = ParseBlock();
 
         Logger.Log("CompilationProcess.End: Parsing class");
-        return new ClassNode { Name = name, Body = body, Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+        return new ClassNode { Name = name, Body = body, Extends = extends, Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
     }
 
     private ForNode ParseFor()

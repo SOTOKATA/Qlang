@@ -24,7 +24,7 @@ class Array: {
 
             str = str.subString(0, str.length() - 1);
 
-            str = String.new(str.str() + "]");
+            str = String.new(str.toString() + "]");
         } else: {
             str = String.new("[]");
         }

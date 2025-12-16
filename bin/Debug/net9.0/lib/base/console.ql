@@ -4,28 +4,32 @@ include "$lib/base"
 class Console: {
     // Print text to console
     function print(let message): {
-        message = String.getPrimitive(message, true);
+        if (Object.isSimplify(message) == false):
+            message = message.toString();
 
         _native("lib.console.write", _str(message));
     }
 
     // Print text to console with new line
     function println(let message = ""): {
-        message = String.getPrimitive(message, true);
+        if (Object.isSimplify(message) == false):
+            message = message.toString();
 
         _native("lib.console.write", _str(message + "\n"));
     }
 
     // Print Verbatim text to console
     function printVerbatim(let message): {
-        message = String.getPrimitive(message, true);
+        if (Object.isSimplify(message) == false):
+            message = message.toString();
 
         _native("lib.console.write", message);
     }
 
     // Print Verbatim text to console with new line
     function printlnVerbatim(let message = ""): {
-        message = String.getPrimitive(message, true);
+        if (Object.isSimplify(message) == false):
+            message = message.toString();
 
         _native("lib.console.write", message + _str("\n"));
     }

@@ -10,8 +10,8 @@ class Dictionary: {
     }
     
     function toString(): {
-        let str = _keys.toString().str();
-        str = str + _values.toString().str();
+        let str = _keys.toString().toString();
+        str = str + _values.toString().toString();
 
         return String.new(str);
     }

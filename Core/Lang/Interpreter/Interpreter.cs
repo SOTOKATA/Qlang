@@ -743,13 +743,81 @@ public partial class Interpreter
         var right = EvaluateExpression(binOp.Right);
         Logger.Warn($"ExpressionParams: {left}: {left?.GetType().Name}; {right}: {right?.GetType().Name}");
 
-        // if (left is null)
-        //     throw new QlangRuntimeException("Left part of binary operation is null", binOp, GetStackTrace());
-        // if (right is null)
-        //     throw new QlangRuntimeException("Right part of binary operation is null", binOp, GetStackTrace());
-
         if (left is null || right is null)
             return null;
+
+        if ((left is DynamicClass || right is DynamicClass) &&
+            binOp.Operator is "Plus" or "Minus" or "Star" or "Slash")
+        {
+            DynamicClass leftClass;
+            object rightValue;
+
+            if (left is DynamicClass lc)
+            {
+                leftClass = lc;
+                rightValue = right;
+            }
+            else
+            {
+                leftClass = (DynamicClass)right;
+                rightValue = left;
+            }
+
+            DynamicClass rightClass;
+
+            if (rightValue is DynamicClass rc)
+                rightClass = rc;
+            else
+            {
+                var createFunction = leftClass.Body
+                    .OfType<FunctionNode>()
+                    .FirstOrDefault(f => f.Name == "___create_from___");
+
+                if (createFunction is null)
+                    throw new QlangRuntimeException(
+                        "Second value is incompatible",
+                        binOp,
+                        GetStackTrace());
+
+                var created = ExecuteFunction(
+                    ToDynamicFunction(createFunction),
+                    [rightValue],
+                    leftClass);
+
+                if (created is not DynamicClass dClass ||
+                    dClass.ClassName != leftClass.ClassName)
+                    throw new QlangRuntimeException(
+                        "Second value is null or incompatible",
+                        binOp,
+                        GetStackTrace());
+
+                rightClass = dClass;
+            }
+
+            var opFunction = leftClass.Body
+                .OfType<FunctionNode>()
+                .FirstOrDefault(f =>
+                    f.Name == $"___operator_{binOp.Operator.ToLower()}___");
+
+            if (opFunction is null)
+                throw new QlangRuntimeException(
+                    $"Class '{leftClass.ClassName}' is incompatible for operator '{binOp.Operator}'",
+                    binOp,
+                    GetStackTrace());
+
+            var result = ExecuteFunction(
+                ToDynamicFunction(opFunction),
+                [leftClass, rightClass],
+                leftClass);
+
+            if (result is not DynamicClass dynamicClass || dynamicClass.ClassName != leftClass.ClassName)
+                throw new QlangRuntimeException(
+                    $"Return value of '___operator_{binOp.Operator.ToLower()}___' must be equal to type '{leftClass.ClassName}'", binOp,
+                    GetStackTrace()); 
+            
+            return result;
+        }
+
         
         bool leftBool;
         bool rightBool;
@@ -822,7 +890,25 @@ public partial class Interpreter
         }
 
         if (binOp.Operator == "Plus" && (left is string || right is string))
+        {
+            if (left is DynamicClass leftClassStr)
+            {
+                var leftToString = leftClassStr.Body.OfType<FunctionNode>().FirstOrDefault(f => f.Name == "toString");
+
+                if (leftToString is not null)
+                    left = ExecuteFunction(ToDynamicFunction(leftToString), [left], leftClassStr);
+            }
+            
+            if (right is DynamicClass rightClassStr)
+            {
+                var rightToString = rightClassStr.Body.OfType<FunctionNode>().FirstOrDefault(f => f.Name == "toString");
+
+                if (rightToString is not null)
+                    right = ExecuteFunction(ToDynamicFunction(rightToString), [right], rightClassStr);
+            }
+            
             return left.ToString() + right.ToString();
+        }
 
         if (!left.ToString().IsNumber() || !right.ToString().IsNumber())
         {

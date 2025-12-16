@@ -37,15 +37,17 @@ public static class PreCompile
                 var exePath = Path.GetDirectoryName(Environment.ProcessPath);
 
                 if (exePath is null)
-                    throw new QlangCompileException($"{Keywords.IncludeKeyword} '{line}' Error: Process path is not found", index, "PreCompile/IncludeFiles", fileName);
-                
+                    throw new QlangCompileException(
+                        $"{Keywords.IncludeKeyword} '{line}' Error: Process path is not found", index,
+                        "PreCompile/IncludeFiles", fileName);
+
                 fullPath = Path.Combine(exePath, line[1..]);
             }
             else
                 fullPath = Path.Combine(Directory.GetCurrentDirectory(), line);
 
             fullPath = fullPath.Replace('\\', Path.DirectorySeparatorChar)
-                                .Replace('/', Path.DirectorySeparatorChar);
+                .Replace('/', Path.DirectorySeparatorChar);
 
             Logger.Log(fullPath, "Path");
 
@@ -53,7 +55,8 @@ public static class PreCompile
             var isFile = File.Exists(fullPath) || File.Exists(fullPath + ".ql");
 
             if (!isDirectory && !isFile)
-                throw new QlangCompileException($"{Keywords.IncludeKeyword} file or directory not found: {fullPath}", index, "PreCompile/IncludeFiles", fileName);
+                throw new QlangCompileException($"{Keywords.IncludeKeyword} file or directory not found: {fullPath}",
+                    index, "PreCompile/IncludeFiles", fileName);
 
             script = script.Replace(source, "");
 
@@ -62,7 +65,7 @@ public static class PreCompile
                 foreach (var file in Directory.GetFiles(fullPath, "*.ql", SearchOption.TopDirectoryOnly))
                 {
                     Logger.Log(file, "Path");
-                    
+
                     if (!Included.Add(file))
                     {
                         Logger.Warn($"{file}", "Skipped (already included)");
@@ -80,7 +83,8 @@ public static class PreCompile
                     fullPath += ".ql";
 
                 if (!fullPath.EndsWith(".ql"))
-                    throw new QlangCompileException($"File '{fullPath}' is not Qlang file type (.ql)", index, "PreCompile/IncludeFiles", fileName);
+                    throw new QlangCompileException($"File '{fullPath}' is not Qlang file type (.ql)", index,
+                        "PreCompile/IncludeFiles", fileName);
 
                 if (!Included.Add(fullPath))
                 {
@@ -93,18 +97,18 @@ public static class PreCompile
                 includedContents.Add(processedContent);
             }
         }
-        
+
         StringBuilder result = new();
-        
+
         foreach (var content in includedContents)
             result.AppendLine(content);
-        
+
         result.AppendLine($"#FILE \"{fileName}\"");
         result.Append(script);
-        
+
         return result.ToString();
     }
-    
+
     private static readonly HashSet<string> IncludedNative = new(StringComparer.OrdinalIgnoreCase);
 
     public static (NativeFunctionRegistry register, string newScript) IncludeNativeFiles(string script, string fileName, NativeFunctionRegistry nativeFunctions)

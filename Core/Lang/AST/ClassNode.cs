@@ -3,6 +3,7 @@
 public class ClassNode : ASTNode
 {
     public string Name { get; set; }
+    public string Extends { get; set; }
     public List<ASTNode> Body { get; set; }
 
     public override ASTNode Clone()

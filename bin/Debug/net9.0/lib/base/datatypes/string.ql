@@ -4,9 +4,16 @@ include "$lib/base"
 class String: {
     private let _value = "";
 
+    // overriding functions 
     function toString(): {
         return _value;
     }
+
+    function ___create_from___(const obj):
+        return String.new(obj);
+
+    function ___operator_plus___(const obj1, const obj2):
+        return String.new(obj1._value + obj2._value);
 
     function new(const input): {
         if String.isString(input):
@@ -44,10 +51,6 @@ class String: {
         }
 
         Throw.exception("Object is not string or primitive");
-    }
-
-    function str(): {
-        return _value;
     }
 
     private function _checkIsCollection(let value): {
@@ -132,7 +135,7 @@ class String: {
             Throw.exception("Param must be string class or primitive");
 
         if String.isString(str):
-            str = str.str();
+            str = str.toString();
 
         return _native("lib.string.is_null_or_empty", _str(str));
     }
@@ -143,7 +146,7 @@ class String: {
             Throw.exception("Param must be string class or primitive");
 
         if String.isString(str): 
-            str = str.str();
+            str = str.toString();
 
         return _native("lib.string.is_null_or_whitespace", _str(str));
     }
