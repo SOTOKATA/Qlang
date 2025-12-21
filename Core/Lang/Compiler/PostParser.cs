@@ -75,11 +75,9 @@ public class PostParser
     {
         var map = new Dictionary<string, ASTNode>();
 
-        // Сначала родитель
         foreach (var node in parentBody)
             map[GetNodeKey(node)] = node;
 
-        // Потом ребёнок (override)
         foreach (var node in childBody)
             map[GetNodeKey(node)] = node;
 

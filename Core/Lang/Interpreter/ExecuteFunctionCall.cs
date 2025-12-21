@@ -161,6 +161,10 @@ public partial class Interpreter
                 Logger.Log($"Detected as variable");
                 Logger.Log($"GetVariableParams: {objCall.Name}");
                 return GetVariableValue(new VariableNode { Name = objCall.Name });
+            default:
+                var evaluated = EvaluateExpression(obj);
+
+                return evaluated;
         }
         
         foreach (var item in _contextStack)

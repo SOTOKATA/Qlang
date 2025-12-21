@@ -40,13 +40,13 @@ public static class CommandManager
                     return;
             }
         }
-        catch (QlangCompileException e)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("Compile error: ");
-            Console.ResetColor();
-            Console.WriteLine(e);
-        }
+        // catch (QlangCompileException e)
+        // {
+        //     Console.ForegroundColor = ConsoleColor.Red;
+        //     Console.Write("Compile error: ");
+        //     Console.ResetColor();
+        //     Console.WriteLine(e);
+        // }
         catch (QlangRuntimeException e)
         {
             Console.ForegroundColor = ConsoleColor.Red;

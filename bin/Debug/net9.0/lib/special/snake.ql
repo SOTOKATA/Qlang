@@ -5,7 +5,10 @@ class SnakeGame: {
         const left = "a",
         const right = "d",
         const up = "w",
-        const down = "s"
+        const down = "s",
+        const isAnyDir = function (const char) => {
+            return char == this.left || char == this.right || char == this.down || char == this.up;   
+        }
     };
 
     let _position;
@@ -129,7 +132,7 @@ class SnakeGame: {
 
     function input(): {
         if Console.isKeyAvailable() == false: {
-            if _lastChar != "":
+            if dir.isAnyDir(_lastChar):
                 control(_lastChar);
             return "";
         }

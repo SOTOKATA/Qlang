@@ -10,7 +10,7 @@ class Array: {
             Throw.parseException("argument is not collection");
         }
         _value = collection;
-    }
+    } 
 
     function toString(): {
         let str = "[";

@@ -9,12 +9,15 @@ class String: {
         return _value;
     }
     
+    // Parse object to String
     function ___create_from___(const obj):
         return String.new(obj);
 
+    // Parse additional operations
     function ___operator_plus___(const obj1, const obj2):
         return String.new(obj1._value + obj2._value);
 
+    // Parse multiplication operations
     function ___operator_star___(const obj1, const obj2): {
         let val = "";
 
@@ -24,24 +27,7 @@ class String: {
         return String.new(val);
     }
 
-    function ___operator_equal_equal___(const obj1, const obj2):
-        return obj1._value == obj2._value;
-
-    function ___operator_not_equal___(const obj1, const obj2):
-        return obj1._value == obj2._value;
-
-    function ___operator_greater_equal___(const obj1, const obj2): 
-        return obj1.length() >= obj2.length();
-
-    function ___operator_less_equal___(const obj1, const obj2): 
-        return obj1.length() <= obj2.length();
-
-    function ___operator_greater___(const obj1, const obj2): 
-        return obj1.length() > obj2.length();
-
-    function ___operator_less___(const obj1, const obj2): 
-        return obj1.length() < obj2.length();
-
+    // Parse division operations
     function ___operator_slash___(const obj1, const obj2): {
         let val = "";
 
@@ -52,6 +38,30 @@ class String: {
 
         return String.new(val);
     }
+
+    // Parse '==' operations
+    function ___operator_equal_equal___(const obj1, const obj2):
+        return obj1._value == obj2._value;
+
+    // Parse '!=' operations
+    function ___operator_not_equal___(const obj1, const obj2):
+        return obj1._value == obj2._value;
+
+    // Parse '>=' operations
+    function ___operator_greater_equal___(const obj1, const obj2): 
+        return obj1.length() >= obj2.length();
+
+    // Parse '<=' operations
+    function ___operator_less_equal___(const obj1, const obj2): 
+        return obj1.length() <= obj2.length();
+
+    // Parse '>' operations
+    function ___operator_greater___(const obj1, const obj2): 
+        return obj1.length() > obj2.length();
+
+    // Parse '<' operations
+    function ___operator_less___(const obj1, const obj2): 
+        return obj1.length() < obj2.length();
 
     function new(const input): {
         if String.isString(input):
