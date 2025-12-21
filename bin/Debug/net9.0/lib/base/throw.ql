@@ -1,7 +1,7 @@
 // Class to throw exceptions
 class Throw: {
     // Throw default exception
-    function exception(let message): {
+    function exception(const<String> message): {
         _native("lib.exception.throw", _str(message));
     }
 
@@ -11,7 +11,7 @@ class Throw: {
     }
 
     // Thow exception when parse error
-    function parseException(let error): {
+    function parseException(const<String> error): {
         exception("Parse error: " + error);
     }
 

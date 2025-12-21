@@ -1,5 +1,6 @@
 using Qlang.Core.Lang.AST;
 using Qlang.Core.LangDebug;
+using Qlang.Core.ProjectManager;
 
 namespace Qlang.Core.Lang.Interpreter;
 
@@ -132,6 +133,33 @@ public partial class Interpreter
             ExecuteBlock(ifNode.ThenBlock, false);
         else if (ifNode.ElseBlock.Count > 0)
             ExecuteBlock(ifNode.ElseBlock, false);
+
+        RemoveLastBlockFromContext();
+    }
+    
+    private void ExecuteSwitch(SwitchNode switchNode)
+    {
+        AddBlockToContext(switchNode);
+
+        var block = switchNode.DefaultBlock;
+        foreach (var pair in from pair in switchNode.CaseBlocks let binOp = new BinaryOperationNode
+                 {
+                     Left = pair.Key,
+                     Right = switchNode.Condition,
+                     Operator = "=="
+                 } let obj = (bool)EvaluateBinaryOperation(binOp) where obj select pair)
+        {
+            block = pair.Value;
+            break;
+        }
+
+        if (block is null)
+        {
+            RemoveLastBlockFromContext();
+            return;
+        }
+
+        ExecuteBlock(block, false);
 
         RemoveLastBlockFromContext();
     }

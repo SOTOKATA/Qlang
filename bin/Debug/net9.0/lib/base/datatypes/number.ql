@@ -12,6 +12,7 @@ class Number: {
         return _native("lib.number.try_parse", var);
     }
 
+
     // get random number with range 'min' to 'max'
     function randInt(let min, let max): {
         if (isNumber(min) == false) || (isNumber(max) == false): {

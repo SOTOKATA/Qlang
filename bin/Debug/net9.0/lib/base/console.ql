@@ -39,7 +39,7 @@ class Console: {
         return String.new(_native("lib.console.read"));
     }
 
-    function readkey(let intercept = false): {
+    function readkey(const<Boolean> intercept = false): {
         return String.new(_native("lib.console.key", intercept));
     }
 
@@ -47,7 +47,7 @@ class Console: {
         return _native("lib.console.key_available");
     }
 
-    function cursorVisible(const visible): {
+    function cursorVisible(const<Boolean> visible): {
         _native("lib.console.cursor_visible", visible);
     }
 
@@ -57,39 +57,24 @@ class Console: {
     }
 
     // Set cursor position in console
-    function setCursorPosition(let x, let y): {
-        if Number.isNumber(x) == false: {
-            Throw.exception("Object is not a number");
-        }
-
-        if Number.isNumber(y) == false: {
-            Throw.exception("Object is not a number");
-        }
-
+    function setCursorPosition(let<Number> x, let<Number> y): {
         x = Parser.asInt(x);
         y = Parser.asInt(y);
-
 
         _native("lib.console.cursor_position", x, y);
     }
 
     // Set foreground color for console
-    function setForeColor(let color): {
-        color = String.getPrimitive(color);
-
+    function setForeColor(let<String> color):
         _native("lib.console.foreground", color);
-    }
     
     // Set background color for console
-    function setBackColor(let color): {
-        color = String.getPrimitive(color);
-
+    function setBackColor(let<String> color):
         _native("lib.console.background", color);
-    }
+
     // Set default colors for console
-    function resetColors(): {
+    function resetColors():
         _native("lib.console.reset_color");
-    }
 
     function width(): 
         return _native("lib.console.width");

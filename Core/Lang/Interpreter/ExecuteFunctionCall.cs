@@ -8,6 +8,21 @@ namespace Qlang.Core.Lang.Interpreter;
 
 public partial class Interpreter
 {
+    private static string? Typeof(object? arg)
+    {
+        if (arg is DynamicClass @class)
+            return @class.ClassName;
+        
+        if (arg is List<object?>)
+            return "Collection";
+
+        if (arg is float or double or int or long or decimal)
+            return "Number";
+        
+        var type = arg?.GetType().Name;
+        
+        return type;
+    }
     private object? ExecuteObjectCalls(CallNode call)
     {
         Logger.Log($"Objects: " + string.Join(".", call.Objects));
@@ -46,11 +61,7 @@ public partial class Interpreter
             
                     return returnValue;
                 case "typeof":
-                    var arg = args[0];
-                    if (arg is DynamicClass @class)
-                        return @class.ClassName;
-                    
-                    return arg?.GetType().Name;
+                    return Typeof(args[0]);
                 case "nameof":
                     return args[0]?.ToString();
             }

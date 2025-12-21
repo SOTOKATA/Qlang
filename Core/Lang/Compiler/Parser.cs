@@ -1,7 +1,6 @@
 using Qlang.Core.Lang.AST;
 using Qlang.Core.Lang.Dynamic.Exceptions;
 using Qlang.Core.LangDebug;
-using Qlang.Core.ProjectManager;
 
 namespace Qlang.Core.Lang.Compiler;
 
@@ -94,6 +93,10 @@ public class Parser
         // if statement
         if (Check(Tokens.Keyword) && Current().Value == Keywords.IfBlock)
             return ParseIf();
+        
+        // switch statement
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.SwitchBlock)
+            return ParseSwitch();
 
         // while statement
         if (Check(Tokens.Keyword) && Current().Value == Keywords.WhileBlock)
@@ -109,10 +112,10 @@ public class Parser
 
         // assignment
         if (Check(Tokens.Keyword) && Current().Value == Keywords.VariableDeclaration)
-            return ParseVariableDeclaration(isStatic, isPrivate, false, true);
+            return ParseVariableDeclaration(false, isStatic, isPrivate, false, true);
 
         if (Check(Tokens.Keyword) && Current().Value == Keywords.ConstVariableDeclaration)
-            return ParseVariableDeclaration(isStatic, isPrivate, true, true);
+            return ParseVariableDeclaration(false, isStatic, isPrivate, true, true);
 
         // method call statement (Object.method(...)) || Call method from class pointer
         if (Check(Tokens.Identifier) || (Check(Tokens.Keyword) && Current().Value == Keywords.ThisKeyword))
@@ -142,16 +145,29 @@ public class Parser
         throw new QlangCompileException($"Unexpected token: {Current().TokenType} '{Current().Value}'", (IsAtEnd() ? 0 : Current().Line + 1), "Parser", Current().SourceFile);
     }
 
-    private AssignmentNode ParseVariableDeclaration(bool isStatic = false, bool isPrivate = false, bool isConst = false, bool isNew = false)
+    private AssignmentNode ParseVariableDeclaration(bool canUseType, bool isStatic = false, bool isPrivate = false, bool isConst = false, bool isNew = false)
     {
         Logger.Log("Parsing variable declaration", "CompilationProcess");
         if (!Check(Tokens.Keyword) ||
             (Current().Value != Keywords.VariableDeclaration &&
              Current().Value != Keywords.ConstVariableDeclaration))
-            throw new Exception("");
-        // throw new QlangCompileException($"(ParseVariableDeclaration) Unexpected token: {Current().TokenType}", (IsAtEnd() ? 0 : Current().Line + 1), "Parser", Current().SourceFile);
+            throw new QlangCompileException($"(ParseVariableDeclaration) Unexpected token: {Current().TokenType}", (IsAtEnd() ? 0 : Current().Line + 1), "Parser", Current().SourceFile);
 
         Advance();
+
+        string type = "";
+        if (Check(Tokens.Less))
+        {
+            if (!canUseType)
+            {
+                var token = Current();
+                throw new QlangCompileException(
+                    "Using variables with types is only possible with function arguments", (token.Line + 1), "Parser", token.SourceFile);
+            }
+            Advance();
+            type = Expect(Tokens.Identifier).Value;
+            Expect(Tokens.Greater);
+        }
 
         var name = Expect(Tokens.Identifier).Value;
 
@@ -167,6 +183,7 @@ public class Parser
         {
             VariableName = name,
             Value = value,
+            Type = type,
             Line = (IsAtEnd() ? 0 : Current().Line + 1),
             SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
         };
@@ -184,7 +201,7 @@ public class Parser
         while (!Check(Tokens.RParen))
         {
             if (Check(Tokens.Keyword))
-                parameters.Add(ParseVariableDeclaration());
+                parameters.Add(ParseVariableDeclaration(true));
             if (Check(Tokens.Comma))
                 Advance();
         }
@@ -239,7 +256,7 @@ public class Parser
         Logger.Log("CompilationProcess: Parsing for");
         Expect(Tokens.Keyword, Keywords.ForBlock);
 
-        AssignmentNode assignment = ParseVariableDeclaration(false, false,
+        AssignmentNode assignment = ParseVariableDeclaration(false, false, false,
             (Check(Tokens.Keyword) && Current().Value == Keywords.ConstVariableDeclaration),
             true);
         Expect(Tokens.Semicolon);
@@ -269,6 +286,37 @@ public class Parser
 
         Logger.Log("CompilationProcess.End: Parsing while");
         return new WhileNode { Condition = condition, Body = whileBlock, IsDoWhile = isDoWhile, Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
+    }
+
+    private SwitchNode ParseSwitch()
+    {
+        Logger.Log("CompilationProcess: Parsing switch");
+        Expect(Tokens.Keyword, Keywords.SwitchBlock);
+        var condition = ParseExpression();
+        Expect(Tokens.Colon);
+        Expect(Tokens.LBrace);
+
+        var @switch = new SwitchNode { Condition = condition };
+        
+        while (Check(Tokens.Keyword) && Current().Value == Keywords.CaseKeyword)
+        {
+            Expect(Tokens.Keyword);
+            condition = ParseExpression();
+            Expect(Tokens.Colon);
+            var block = ParseBlock();
+
+            @switch.CaseBlocks[condition] = block;
+        }
+
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.DefaultKeyword)
+        {
+            Expect(Tokens.Keyword);
+            Expect(Tokens.Colon);
+            @switch.DefaultBlock = ParseBlock();
+        }
+        Expect(Tokens.RBrace);
+        
+        return @switch;
     }
 
     private IfNode ParseIf()
@@ -673,7 +721,7 @@ public class Parser
             while (!Check(Tokens.RParen))
             {
                 if (Check(Tokens.Keyword))
-                    parameters.Add(ParseVariableDeclaration());
+                    parameters.Add(ParseVariableDeclaration(false));
                 if (Check(Tokens.Comma))
                     Advance();
             }
@@ -707,7 +755,7 @@ public class Parser
             while (!Check(Tokens.RBrace))
             {
                 if (Check(Tokens.Keyword))
-                    @class.Body.Add(ParseVariableDeclaration());
+                    @class.Body.Add(ParseVariableDeclaration(false));
                 if (Check(Tokens.Comma))
                     Advance();
             }
@@ -857,7 +905,7 @@ public class Parser
             };
 
         // Parse single path 
-        if (Current().TokenType == Tokens.Equals && Peek()?.TokenType != Tokens.Equals)
+        if (Check(Tokens.Equals) && Peek()?.TokenType != Tokens.Equals)
         {
             Logger.Log($"CompilationProcess.End: Parsing primary (PathAssignmentNode - single)");
             // Advance '='
@@ -1015,7 +1063,6 @@ public class Parser
         if (!Check(type))
         {
             var current = Current();
-            throw new Exception(":");
             throw new QlangCompileException($"""
                                  Expected {type}, got {current.TokenType} (Value: {(current.Value == "" ? "Null" : current.Value)})
                                         line: '{_line}' ({current.Index})

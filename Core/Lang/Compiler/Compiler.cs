@@ -1,7 +1,6 @@
 ﻿using Qlang.Core.Lang.AST;
 using Qlang.Core.Lang.Interpreter.Native;
 using Qlang.Core.LangDebug;
-using Qlang.NativeLib;
 using Qlang.NativeLib.SystemLib;
 
 namespace Qlang.Core.Lang.Compiler;
@@ -20,13 +19,13 @@ public class Compiler
 
     public ProgramNode Compile(string fileName, string script)
     {
-        _originalScript = script;
+        _originalScript = script; //"include \"$lib/base/datatypes\"" + Environment.NewLine + 
 
         FileLogger fl = new("Logs\\script.ql");
         fl.Log(_originalScript);
         
         Logger.SetLoggerPath(@"Logs\Debug\debug_pre_compile.log");
-        
+
         Logger.Log("Include Files");
         _outputScript = PreCompile.PreCompile.IncludeFiles(_originalScript, fileName);
         Logger.Succ("All includes processed successfully.");

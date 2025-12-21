@@ -5,7 +5,6 @@ using Qlang.Core.Lang.Dynamic;
 using Qlang.Core.Lang.Dynamic.Exceptions;
 using Qlang.Core.Lang.Interpreter.Native;
 using Qlang.Core.LangDebug;
-using Qlang.Core.ProjectManager;
 using Math = System.Math;
 
 namespace Qlang.Core.Lang.Interpreter;
@@ -96,7 +95,8 @@ public partial class Interpreter
                 EvaluateExpression(node.Value),
                 node.IsStatic,
                 node.IsPrivate,
-                node.IsConst);
+                node.IsConst,
+                node.Type);
 
             dynamicFunction.Parameters.Add(node.VariableName);
         }
@@ -131,6 +131,10 @@ public partial class Interpreter
                 for (var i = 0; i < function.Parameters.Count; i++)
                 {
                     var var = function.Variables[function.Parameters[i]];
+
+                    if (!string.IsNullOrWhiteSpace(var.Type) && var.Type != Typeof(arguments[i]))
+                        throw new QlangRuntimeException($"The type of param is '{Typeof(arguments[i])}' but must be '{var.Type}'", null, GetStackTrace());
+                    
                     function.Variables[function.Parameters[i]] = new Variable(
                         function.Parameters[i],
                         arguments[i],
@@ -191,6 +195,11 @@ public partial class Interpreter
             case IfNode ifNode:
                 Logger.Log("IfNode");
                 ExecuteIf(ifNode);
+                break;
+            
+            case SwitchNode switchNode:
+                Logger.Log("SwitchNode");
+                ExecuteSwitch(switchNode);
                 break;
 
             case WhileNode whileNode:
@@ -1010,11 +1019,9 @@ public partial class Interpreter
         functions.AddRange(values.OfType<FunctionNode>());
         
         foreach (var function in functions)
-        {
             // Проверяем, можно ли вызвать эту функцию с данными аргументами
             if (TryMatchFunction(function, args, out var finalArgs))
                 return (function, finalArgs);
-        }
 
         return (null, null);
     }

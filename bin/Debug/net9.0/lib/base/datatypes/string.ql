@@ -6,7 +6,7 @@ class String: {
 
     // overriding functions 
     function toString(): {
-        return _value;
+        return Object.toString(_value);
     }
     
     // Parse object to String
@@ -63,14 +63,14 @@ class String: {
     function ___operator_less___(const obj1, const obj2): 
         return obj1.length() < obj2.length();
 
-    function new(const input): {
+    function new(const<String> input): {
         if String.isString(input):
             _value = input.toString();
         else:
             _value = input;
     }
 
-    function new(const char, const count): {
+    function new(const<String> char, const<Number> count): {
         if (Number.isNumber(count) == false):
             Throw.exception("Param 'count' must be number");
 
@@ -148,25 +148,25 @@ class String: {
         return _native("lib.string.is_primitive", value);
     }
 
-    function split(let pattern): {
+    function split(let<String> pattern): {
         return Array.new(_native("lib.string.split", _str(_value), _str(pattern)));
     }
 
-    function charAt(const index): {
+    function charAt(const<Number> index): {
         if length() <= index:
             Throw.exception("The index must be less than the length of the string.");
 
         return _native("lib.string.at", _str(_value), index);
     }
 
-    function setAt(const index, const replaceValue): {
+    function setAt(const<Number> index, const<String> replaceValue): {
         if length() <= index:
             Throw.exception("The index must be less than the length of the string.");
 
         _value = _native("lib.string.set_at", _str(_value), _str(replaceValue), index);
     }
 
-    function join(let strArr, let pattern): {
+    function join(let strArr, let<String> pattern): {
         if (Array.isCollection(strArr) == false) && (Array.isArray(strArr) == false):
             Throw.exception("argument is not collection or array");
 
@@ -181,7 +181,7 @@ class String: {
         return _native("lib.string.length", _str(_value));
 
     // Check if string is empty or null
-    function isNullOrEmpty(let str): {
+    function isNullOrEmpty(let<String> str): {
         if (String.isPrimitive(str) == false) && (String.isString(str) == false):
             Throw.exception("Param must be string class or primitive");
 
@@ -192,7 +192,7 @@ class String: {
     }
     
     // Check if string is white space or null
-    function isNullOrWhitespace(let str): {
+    function isNullOrWhitespace(let<String> str): {
         if (String.isPrimitive(str) == false) && (String.isString(str) == false):
             Throw.exception("Param must be string class or primitive");
 
@@ -215,7 +215,7 @@ class String: {
         return String.new(_native("lib.string.trim_end", _str(_value)));
 
     // Cut string by 'startPos' and 'length'
-    function subString(let startPos, let length): {
+    function subString(let<Number> startPos, let<Number> length): {
         if Number.isNumber(startPos) == false:
             Throw.exception("subString error: startPos must be number");
 

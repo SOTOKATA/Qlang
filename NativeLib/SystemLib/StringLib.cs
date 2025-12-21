@@ -13,6 +13,7 @@ public class StringLib : IQlangLib
     public List<(string name, Delegate body)> GetFunctions()
     {
         return [
+            ("to_string", (Func<object?, string?>)(str => str?.ToString())),
             ("create", (Func<string, int, string>)((str, index) => new string(str[0], index))),
             ("at", (Func<string, int, string>)((str, index) => str[index].ToString())),
             ("set_at", (Func<string, string, int, string>)((str, toAdd, index) =>

@@ -287,7 +287,7 @@ public static class PreCompile
             var comment = match.Value;
         
             Logger.Log($"comment='{comment}'");
-        
+
             return "";
         });
         

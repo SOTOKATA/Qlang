@@ -1,7 +1,7 @@
 include "$lib/base"
 
 class Time: {
-    function wait(let millisec): {
+    function wait(let<Number> millisec): {
         if Number.isNumber(millisec) == false: {
             Throw.parseException("argument 'milliseconds' is not a number");
         }

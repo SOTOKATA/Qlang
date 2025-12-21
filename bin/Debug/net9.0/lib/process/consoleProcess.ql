@@ -1,7 +1,6 @@
 include "$lib/base"
 
 class ConsoleProcess: {
-    function run(const command): {
+    function run(const<String> command):
         return _native("lib.console_command.run", command);
-    }
 }

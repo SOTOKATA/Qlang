@@ -1,5 +1,4 @@
-﻿using Qlang.Core.Lang.Interpreter.Native;
-using Project = Qlang.Core.ProjectManager.Project.Project;
+﻿using Project = Qlang.Core.ProjectManager.Project.Project;
 
 namespace Qlang.NativeLib.SystemLib;
 

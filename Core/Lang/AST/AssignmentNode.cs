@@ -11,6 +11,8 @@ public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool is
     public List<ASTNode>? Path { get; set; }
 
     public ASTNode? Value { get; set; }
+    
+    public string Type { get; set; }
 
     public bool IsStatic { get; set; } = isStatic;
 
@@ -43,6 +45,11 @@ public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool is
             VariableName = VariableName,
             Path = Path?.Select(node => node.Clone()).ToList(),
             Value = Value?.Clone(),
+            Type = Type,
+            IsStatic = IsStatic,
+            IsPrivate = IsPrivate,
+            IsConst = IsConst,
+            IsNew = IsNew
         };
     }
 

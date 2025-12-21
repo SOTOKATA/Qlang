@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using Qlang.Core.Lang.Interpreter.Native;
 using Qlang.Core.LangDebug;
 using Qlang.Core.ProjectManager.Project;
 

@@ -10,6 +10,10 @@ public static class Keywords
     
     public static string NullKeyword => "null";
     
+    public static string SwitchBlock => "switch";
+    public static string CaseKeyword => "case";
+    public static string DefaultKeyword => "default";
+    
     public static string IfBlock => "if";
     public static string ElseBlock => "else";
     public static string WhileBlock => "while";
@@ -36,6 +40,6 @@ public static class Keywords
     [
         FunctionDeclaration, ClassDeclaration, VariableDeclaration, IfBlock, ElseBlock, WhileBlock, DoWhileBlock, 
         ForBlock, ReturnKeyword, TrueKeyword, FalseKeyword, IncludeKeyword, PrivateModificator, 
-        StaticModificator, ConstVariableDeclaration, ContinueKeyword, BreakKeyword, NullKeyword, ThisKeyword, ExtendsKeyword
+        StaticModificator, ConstVariableDeclaration, ContinueKeyword, BreakKeyword, NullKeyword, ThisKeyword, ExtendsKeyword, SwitchBlock, CaseKeyword, DefaultKeyword
     ];
 }

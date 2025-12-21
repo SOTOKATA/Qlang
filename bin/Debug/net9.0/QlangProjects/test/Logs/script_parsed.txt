@@ -1,0 +1,12 @@
+@ProgramNode:
+
+[--]@FunctionNode:
+[--]main
+[--]False
+[--]System.Collections.Generic.List`1[Qlang.Core.Lang.AST.AssignmentNode]
+
+[--]@CallNode:
+
+[--]@ObjectPointerNode:
+[--]das
+

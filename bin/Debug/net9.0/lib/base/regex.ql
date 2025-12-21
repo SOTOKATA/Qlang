@@ -1,7 +1,7 @@
 include "$lib/base"
 
 class Regex: {
-    function replace(let input, let pattern, let replacement = ""): {
+    function replace(const<String> input, const<String> pattern, const<String> replacement = ""): {
         return _native("lib.regex.replace", input, pattern, replacement);
     }
 

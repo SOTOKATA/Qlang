@@ -1,6 +1,4 @@
-﻿using Qlang.Core.Lang.Interpreter.Native;
-
-namespace Qlang.NativeLib;
+﻿namespace Qlang.NativeLib;
 
 public interface IQlangLib
 {

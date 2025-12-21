@@ -1,8 +1,4 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Threading;
-using Qlang.Core.Lang.Interpreter.Native;
-using Qlang.NativeLib;
+﻿using Qlang.NativeLib;
 
 public class UISupportLib : IQlangLib
 {
