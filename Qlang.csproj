@@ -13,7 +13,9 @@
       <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.14.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 
-      <Compile Remove="UISupport\**\*.cs" />
+      <Compile Remove="GUI\**\*.cs" />
+
+      <PackageReference Include="Raylib-cs" Version="7.0.2" />
     </ItemGroup>
 
 </Project>

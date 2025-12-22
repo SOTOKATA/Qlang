@@ -377,6 +377,9 @@ public partial class Interpreter
                     // Check static classes
                     if (currentObject == null && _dynamicClasses.TryGetValue(objPtr.Name, out var staticClass))
                         currentObject = staticClass;
+
+                    if (objPtr.Name == Keywords.ThisKeyword && HasContext)
+                        currentObject = CurrentContext.Class;
                 }
 
                 if (currentObject == null)
