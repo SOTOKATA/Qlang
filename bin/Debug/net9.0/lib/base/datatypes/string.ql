@@ -4,6 +4,8 @@ include "$lib/base"
 class String: {
     private let _value = "";
 
+    const zeroChar = "\0";
+
     // overriding functions 
     function toString(): {
         return Object.toString(_value);

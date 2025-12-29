@@ -342,120 +342,19 @@ public partial class Interpreter
         if (path.Count == 0)
             throw new QlangRuntimeException("Assignment path cannot be empty", assignNode, GetStackTrace());
 
-        // Start with the first object in the path
-        object? currentObject = null;
-        var firstNode = path[0];
-
-        // Get the root object
-        switch (firstNode)
-        {
-            case ObjectPointerNode objPtr:
-                // Look up the variable in the current context
-                if (HasContext)
-                {
-                    // Check blocks first
-                    if (CurrentContext.Blocks.Count > 0)
-                    {
-                        for (var i = CurrentContext.Blocks.Count - 1; i >= 0; i--)
-                        {
-                            if (!CurrentContext.Blocks[i].Variables.TryGetValue(objPtr.Name, out var blockVar))
-                                continue;
-                            
-                            currentObject = blockVar.Value;
-                            break;
-                        }
-                    }
-
-                    // Check function variables
-                    if (currentObject == null && CurrentContext.Function?.Variables.TryGetValue(objPtr.Name, out var funcVar) == true)
-                        currentObject = funcVar.Value;
-
-                    // Check class variables
-                    if (currentObject == null && CurrentContext.Class?.Variables.TryGetValue(objPtr.Name, out var classVar) == true)
-                        currentObject = classVar.Value;
-
-                    // Check static classes
-                    if (currentObject == null && _dynamicClasses.TryGetValue(objPtr.Name, out var staticClass))
-                        currentObject = staticClass;
-
-                    if (objPtr.Name == Keywords.ThisKeyword && HasContext)
-                        currentObject = CurrentContext.Class;
-                }
-
-                if (currentObject == null)
-                    throw new QlangRuntimeException($"Undefined variable in assignment path: '{objPtr.Name}'", assignNode, GetStackTrace());
-                break;
-
-            case FunctionPointerNode funcPtr:
-                // Execute function to get the object
-                var args = funcPtr.Arguments.ConvertAll(EvaluateExpression);
-                var fromList = GetFunctionFromFunctionList(funcPtr.Name, args);
-                currentObject = ExecuteFunction(
-                    ToDynamicFunction(fromList.function),
-                    fromList.args,
-                    null);
-                break;
-
-            default:
-                throw new QlangRuntimeException($"Invalid path start: {firstNode.GetType().Name}", assignNode, GetStackTrace());
-        }
-
-        // Navigate through the rest of the path (except the last element)
-        for (int i = 1; i < path.Count - 1; i++)
-        {
-            var pathNode = path[i];
-
-            switch (pathNode)
-            {
-                case ObjectPointerNode objPtr:
-                    if (currentObject is DynamicClass dynamicClass)
-                    {
-                        if (dynamicClass.Variables.TryGetValue(objPtr.Name, out var variable))
-                        {
-                            if (variable.IsPrivate)
-                                throw new QlangRuntimeException("Cannot access to private variable from external source",
-                                    objPtr, GetStackTrace());
-                            currentObject = variable.Value;
-                        }
-                        else
-                            throw new QlangRuntimeException($"Property '{objPtr.Name}' not found on object", assignNode, GetStackTrace());
-                    }
-                    else
-                        throw new QlangRuntimeException($"Cannot access property '{objPtr.Name}' on non-object type {currentObject?.GetType().Name ?? "null"}", assignNode, GetStackTrace());
-                    break;
-
-                case FunctionPointerNode funcPtr:
-                    // Execute method on current object
-                    if (currentObject is DynamicClass objClass)
-                    {
-                        var args = funcPtr.Arguments.ConvertAll(EvaluateExpression);
-                        var fromClass = GetFunctionFromClass(objClass, funcPtr.Name, args);
-                        
-                        if (fromClass.function != null)
-                        {
-                            if (fromClass.function.IsPrivate)
-                                throw new QlangRuntimeException("Cannot access to private variable from external source",
-                                    funcPtr, GetStackTrace());
-
-                            currentObject = ExecuteFunction(
-                                ToDynamicFunction(fromClass.function),
-                                fromClass.Args,
-                                objClass);
-                        }
-                        else
-                            throw new QlangRuntimeException($"Method '{funcPtr.Name}' not found on object", assignNode, GetStackTrace());
-                    }
-                    else
-                        throw new QlangRuntimeException($"Cannot call method '{funcPtr.Name}' on non-object type {currentObject?.GetType().Name ?? "null"}", assignNode, GetStackTrace());
-                    break;
-
-                default:
-                    throw new QlangRuntimeException($"Invalid path element: {pathNode.GetType().Name}", assignNode, GetStackTrace());
-            }
-        }
-
-        // Handle the final assignment
         var lastNode = path[^1];
+
+        var callNode = new CallNode
+        {
+            Objects = path.SkipLast(1).ToList(), 
+            Arguments = path.SkipLast(1).ElementAt(^1) is FunctionPointerNode ptr ? ptr.Arguments : default,
+            Line =  lastNode.Line,
+            LineIndex = lastNode.LineIndex,
+            SourceFile = lastNode.SourceFile,
+        };
+
+        var currentObject = ExecuteObjectCalls(callNode);
+
         switch (lastNode)
         {
             case ObjectPointerNode objPtr:

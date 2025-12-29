@@ -15,15 +15,13 @@ class Array: {
             for let i = 0; i < length(); i = i + 1:
                 str = str + "'" + at(i) + "',";
 
-            str = String.new(str);
-
             str = str.subString(0, str.length() - 1);
 
-            str = String.new(str.toString() + "]");
+            str = str + "]";
         } else:
-            str = String.new("[]");
+            str = "[]";
 
-        return str;
+        return str.toString();
     }
 
     function isArray(const var):

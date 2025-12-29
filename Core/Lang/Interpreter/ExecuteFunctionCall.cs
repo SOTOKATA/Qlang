@@ -23,6 +23,7 @@ public partial class Interpreter
         
         return type;
     }
+    
     private object? ExecuteObjectCalls(CallNode call)
     {
         Logger.Log($"Objects: " + string.Join(".", call.Objects));
@@ -67,20 +68,29 @@ public partial class Interpreter
             }
         }
 
-        return call.Objects.Aggregate<ASTNode?, object?>(null, (current, obj) => ExecuteObjectCall(obj, current));
+        object? returnVal = null;
+        for (var i = 0; i < call.Objects.Count; i++)
+            returnVal = ExecuteObjectCall(call.Objects[i], returnVal, i == 0);
+        return returnVal;
     }
 
-    private object? ExecuteObjectCall(ASTNode obj, object? lastReturnValue)
+    private object? ExecuteObjectCall(ASTNode obj, object? lastReturnValue, bool isFirstCall = false)
     {
         switch (obj)
         {
             case FunctionPointerNode fn:
             {
-                if (lastReturnValue is string)
+                if (lastReturnValue is string && !isFirstCall)
                 {
                     var str = lastReturnValue;
                     lastReturnValue = _dynamicClasses["String"];
                     (lastReturnValue as DynamicClass).Variables["_value"].Value = str;
+                }
+                else if (lastReturnValue is List<object?> && !isFirstCall)
+                {
+                    var arr = lastReturnValue;
+                    lastReturnValue = _dynamicClasses["Array"];
+                    (lastReturnValue as DynamicClass).Variables["_value"].Value = arr;
                 }
                 
                 Logger.Log("Detected function pointer: " + fn.Name);
@@ -88,7 +98,7 @@ public partial class Interpreter
                 
                 // If previous object is DynamicClass
                 // Ex.: Console.clear()
-                if (lastReturnValue is DynamicClass @class)
+                if (lastReturnValue is DynamicClass @class && !isFirstCall)
                 {
                     var fromClass = TryGetFunctionFromClass(@class, fn.Name, args);
 
@@ -131,7 +141,7 @@ public partial class Interpreter
                     return ExecuteFunction(fromClassFn.function, fromClassFn.args, CurrentContext.Class);
                 }
                 
-                if (lastReturnValue is DynamicClass dynamicClass &&
+                if (lastReturnValue is DynamicClass dynamicClass && !isFirstCall &&
                     dynamicClass.Variables.TryGetValue(fn.Name, out var variable))
                 {
                     Logger.Log($"Detected as class from temporary (lastReturnValue)");
@@ -151,6 +161,19 @@ public partial class Interpreter
                 throw new QlangRuntimeException("Unknown function: " + fn.Name, fn, GetStackTrace());
             }
             case ObjectPointerNode objCall:
+                if (lastReturnValue is string && !isFirstCall)
+                {
+                    var str = lastReturnValue;
+                    lastReturnValue = _dynamicClasses["String"];
+                    (lastReturnValue as DynamicClass).Variables["_value"].Value = str;
+                }
+                else if (lastReturnValue is List<object?> && !isFirstCall)
+                {
+                    var arr = lastReturnValue;
+                    lastReturnValue = _dynamicClasses["Array"];
+                    (lastReturnValue as DynamicClass).Variables["_value"].Value = arr;
+                }
+                
                 Logger.Log($"Detected object pointer: {objCall.Name}");
 
                 if (objCall.Name == Keywords.ThisKeyword && HasContext)
@@ -162,7 +185,7 @@ public partial class Interpreter
                     return classNode;
                 }
 
-                if (lastReturnValue is DynamicClass dClass &&
+                if (lastReturnValue is DynamicClass dClass && !isFirstCall &&
                     dClass.Variables.TryGetValue(objCall.Name, out var var))
                 {
                     Logger.Log($"Detected as class from temporary (lastReturnValue)");

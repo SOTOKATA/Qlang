@@ -18,7 +18,7 @@ public static class Validator
 
         var @class = new ClassNode
         {
-            Name = "Program",
+            Name = "0",
             Body = program.Statements.OfType<FunctionNode>().Cast<ASTNode>().ToList()
         };
         
