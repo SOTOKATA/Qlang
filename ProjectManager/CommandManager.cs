@@ -21,8 +21,8 @@ public static class CommandManager
                 case ["update"]:
                     ConsoleLogger.Info("Qlang has the latest version");
                     return;
-                case ["build", ..]:
-                    Build(args.Skip(1).FirstOrDefault());
+                case ["build"]:
+                    Build();
                     return;
                 case ["set", var param, var value]:
                     Set(param.Trim(), value.Trim());
@@ -101,9 +101,9 @@ public static class CommandManager
         LoadProject().Run(args);
     }
 
-    private static void Build(string? filename)
+    private static void Build()
     {
-        LoadProject().Compile(filename);
+        LoadProject().Compile();
         
         ConsoleLogger.Info("Project built successfully.");
     }
@@ -161,7 +161,7 @@ public static class CommandManager
             ["Update date", "03.12.2025"],
             ["Author", "SOTOKATA (https://github.com/SOTOKATA)"],
             ["Github", "https://github.com/SOTOKATA/Qlang"],
-            ["Guide book", "https://github.com/SOTOKATA/Qlang-guide-book"]
+            ["Guide book", "https://sotokata.github.io/Qlang-guide-book/"]
         ]));
 
         Console.WriteLine("Program information");

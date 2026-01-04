@@ -17,6 +17,4 @@ public class Variable(string name, object? value, bool isStatic, bool isPrivate,
     public bool IsConst { get; set; } = isConst;
     
     public bool IsPrivate { get; set; } = isPrivate;
-    
-    // public bool IsConstant { get; set; }
 }

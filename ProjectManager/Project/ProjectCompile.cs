@@ -23,14 +23,14 @@ public partial class Project
         return _compileSettings?.Get(param);
     }
 
-    public void Compile(string? filename = null)
+    public void Compile()
     {
-        _qlang.Compile(Path.Combine(Settings.GetString("path"), Settings.GetString("main_file_path")), filename);
+        _qlang.Compile(Path.Combine(Settings.GetString("path"), Settings.GetString("main_file_path")), _compileSettings.GetString("filename"));
     }
 
     public void Run(List<string?>? args)
     {
-        if (_qlang.Compile(Path.Combine(Settings.GetString("path"), Settings.GetString("main_file_path"))))
+        if (_qlang.Compile(Path.Combine(Settings.GetString("path"), Settings.GetString("main_file_path")), _compileSettings.GetString("filename")))
             _qlang.Run(args);
     }
 }

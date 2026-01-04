@@ -5,7 +5,7 @@ namespace GUI;
 
 public class GuiLib : IQlangLib
 {
-    public string Name { get; } = "UISupport";
+    public string Name { get; } = "GUISupport";
     public string Version { get; } = "0.0.1";
     public string Author { get; } = "SOTOKATA";
     public string Class { get; } = "window";

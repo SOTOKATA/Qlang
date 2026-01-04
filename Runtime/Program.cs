@@ -8,16 +8,10 @@ public class Program
     public static void Main(string[] args)
     {
         Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-        
-        var programPath = $"{Path.GetFileNameWithoutExtension(Environment.ProcessPath)}.resource.qli";
+
+        var programPath = Path.Combine(Directory.GetCurrentDirectory(), $"{Path.GetFileNameWithoutExtension(Environment.ProcessPath)}.resource.qli");
         
         var programArgs = args.Skip(1).ToList();
-
-        if (Path.GetExtension(programPath) != ".qli")
-        {
-            Console.WriteLine($"File '{programPath}' has incorrect extension (must be '.qli').");
-            return;
-        }
 
         if (!File.Exists(programPath))
         {
@@ -34,9 +28,16 @@ public class Program
             Console.WriteLine("Program is corrupted or not valid");
             return;
         }
+        
+        LoadDependencies(qliProgram.Dependencies);
 
-        new Interpreter.Interpreter.Interpreter(qliProgram.StringDictionary, 
+        new Interpreter.Interpreter(qliProgram.StringDictionary, 
             qliProgram.NumberDictionary, 
             qliProgram.NativeFunctions).Execute(qliProgram.ProgramNode, programArgs);
+    }
+
+    private static void LoadDependencies(List<string> paths)
+    {
+        
     }
 }

@@ -1,4 +1,5 @@
 include "$lib/base"
+include "$lib/core"
 
 class Regex: {
     function replace(const<String> input, const<String> pattern, const<String> replacement = ""): {

@@ -1,4 +1,4 @@
-native "D:/Projects/Console/Qlang/GUI/bin/Debug/net9.0/GUI.dll"
+native "D:/Projects/Console/Qlang/GUI/bin/Debug/net9.0/GUI"
 
 class Window: {
     private let _name;

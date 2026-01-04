@@ -7,7 +7,7 @@ using Core.Exceptions;
 using Core.Native;
 using Math = System.Math;
 
-namespace Interpreter.Interpreter;
+namespace Interpreter;
 
 public partial class Interpreter
 {
@@ -940,7 +940,7 @@ public partial class Interpreter
             if (t.Value == null)
                 requiredParamsCount++;
             else
-                break; // Все параметры после первого с default должны иметь default
+                break;
         }
         
         if (args.Count < requiredParamsCount || args.Count > totalParamsCount)

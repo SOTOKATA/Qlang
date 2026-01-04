@@ -1,4 +1,4 @@
-include "$lib/base"
+include "$lib/core"
 
 class Time: {
     function wait(let<Number> millisec): {

@@ -1,16 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using Core.Debug;
+using Newtonsoft.Json;
 using ProjectManager.Settings;
 
 namespace ProjectManager.Project;
 
 public partial class Project
 {
-    public static string Version = "0.0.5";
-    
     public ProjectSettings Settings;
 
     private static CompileSettings? _compileSettings;
-    private static PluginsSettings? _pluginsSettings;
 
     private readonly QLang _qlang = new();
 
@@ -58,12 +56,6 @@ public partial class Project
     
         _compileSettings.Save();
         
-        settingsPath = Path.Combine(projectPath, "plugins.settings.json");
-        File.Create(settingsPath).Close();
-        _pluginsSettings = new PluginsSettings(settingsPath, null);
-        
-        _pluginsSettings.Save();
-
         return proj;
     }
 
@@ -81,8 +73,7 @@ public partial class Project
                 
         if (
             !File.Exists(Path.Combine(projectPath, mainFilePath)) ||
-            !File.Exists(Path.Combine(projectPath, "compile.settings.json")) ||
-            !File.Exists(Path.Combine(projectPath, "plugins.settings.json"))
+            !File.Exists(Path.Combine(projectPath, "compile.settings.json"))
         )
             throw new FileNotFoundException($"Project is corrupted or not created.\nPath to project settings: '{path}'.", path);
         
@@ -93,11 +84,11 @@ public partial class Project
 
         string settingsPath = Path.Combine(projectPath, "compile.settings.json");
         var dict =  JsonConvert.DeserializeObject<Dictionary<string, object?>>(File.ReadAllText(settingsPath));
-        Project._compileSettings = new CompileSettings(settingsPath, dict);
-        
-        string pluginsPath = Path.Combine(projectPath, "plugins.settings.json");
-        dict =  JsonConvert.DeserializeObject<Dictionary<string, object?>>(File.ReadAllText(settingsPath));
-        Project._pluginsSettings = new PluginsSettings(pluginsPath, dict);
+        _compileSettings = new CompileSettings(settingsPath, dict);
+
+        var isDebug = (bool)_compileSettings.Get("debug");
+        Logger.Debug = isDebug;
+        FileLogger.Debug = isDebug;
         
         return proj;
     }

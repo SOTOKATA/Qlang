@@ -1,4 +1,4 @@
-include "$lib/base"
+include "$lib/core"
 
 // Dynamic array
 class Array: {

@@ -4,7 +4,7 @@ public class FileLogger
 {
     private string _filePath;
 
-    public bool Debug = false;
+    public static bool Debug;
     
     // Disabled because of using function SetPath what set's path
     #pragma warning restore CS8618 

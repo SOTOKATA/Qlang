@@ -1,4 +1,5 @@
 include "$lib/base"
+include "$lib/core"
 
 class Parser: {
     static function asInt(const object): {

@@ -1,4 +1,5 @@
 include "$lib/base"
+include "$lib/core"
 
 // Class to make operations with console
 class Console: {

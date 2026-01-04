@@ -111,9 +111,9 @@ public static class PreCompile
 
     private static readonly HashSet<string> IncludedNative = new(StringComparer.OrdinalIgnoreCase);
 
-    public static (NativeFunctionRegistry register, string newScript) IncludeNativeFiles(string script, string fileName, NativeFunctionRegistry nativeFunctions)
+    public static (List<string> dependencies, NativeFunctionRegistry register, string newScript) IncludeNativeFolders(string script, string fileName, NativeFunctionRegistry nativeFunctions, List<string> dependencies)
     {
-        Logger.Log($"File: " + fileName, "IncludeNativeFiles");
+        Logger.Log($"Folder: " + fileName, "IncludeNativeFolders");
 
         var includeLines = script
             .Split('\n')
@@ -137,7 +137,7 @@ public static class PreCompile
                 if (exePath is null)
                     throw new QlangCompileException(
                         $"{Keywords.IncludeNativeKeyword} '{line}' Error: Process path is not found", index,
-                        "PreCompile/IncludeNativeFiles", fileName);
+                        "PreCompile/IncludeNativeFolders", fileName);
 
                 fullPath = Path.Combine(exePath, line[1..]);
             }
@@ -150,17 +150,34 @@ public static class PreCompile
             Logger.Log(fullPath, "Path");
 
             var isDirectory = Directory.Exists(fullPath);
-            var isFile = File.Exists(fullPath) || File.Exists(fullPath + ".dll");
+            var isFile = File.Exists(fullPath);
 
-            if (!isDirectory && !isFile)
-                throw new QlangCompileException($"{Keywords.IncludeNativeKeyword} file or directory not found: {fullPath}",
+            if (isFile)
+            {
+                throw new QlangCompileException($"Unable to add an external file. ({fullPath})", index, "PreCompile/IncludeNativeFolders", fileName);
+            }
+
+            if (!isDirectory)
+                throw new QlangCompileException($"Directory not found: {fullPath}",
                     index, "PreCompile/IncludeNativeFiles", fileName);
 
             script = script.Replace(source, "");
 
             if (isDirectory)
             {
-                foreach (var file in Directory.GetFiles(fullPath, "*.dll", SearchOption.AllDirectories))
+                var dependentsPath = Path.Combine(fullPath, "dependents");
+                
+                if (!Directory.Exists(dependentsPath))
+                    throw new QlangCompileException($"Directory '{dependentsPath}' is not found.",  index, "PreCompile/IncludeNativeFolders", fileName);
+
+                var folders = Directory.GetFiles(dependentsPath, "*.dll", SearchOption.AllDirectories).ToList();
+
+                foreach (var folder in folders.Where(folder => !dependencies.Contains(folder)))
+                    dependencies.Add(folder);
+
+                folders.AddRange(Directory.GetFiles(fullPath, "*.dll", SearchOption.TopDirectoryOnly));
+                
+                foreach (var file in folders)
                 {
                     Logger.Log(file, "Path");
 
@@ -169,30 +186,13 @@ public static class PreCompile
                         Logger.Warn($"{file}", "Skipped (already included)");
                         continue;
                     }
-
+                    
                     nativeFunctions.LoadNativeLib(file);
                 }
             }
-            else
-            {
-                if (!fullPath.EndsWith(".dll"))
-                    fullPath += ".dll";
-
-                if (!fullPath.EndsWith(".dll"))
-                    throw new QlangCompileException($"File '{fullPath}' is not Native file type (.dll)", index,
-                        "PreCompile/IncludeNativeFiles", fileName);
-
-                if (!IncludedNative.Add(fullPath))
-                {
-                    Logger.Warn($"{fullPath}", "Skipped (already included)");
-                    continue;
-                }
-
-                nativeFunctions.LoadNativeLib(fullPath);
-            }
         }
 
-        return (nativeFunctions, script);
+        return (dependencies, nativeFunctions, script);
     }
     
     public static (string outScript, Dictionary<string, object> dictionary) ExtractNumbers(string script)

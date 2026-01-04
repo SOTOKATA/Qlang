@@ -13,7 +13,7 @@ public class QLang
 
     public bool Compile(string path, string? filename = null)
     {
-        string code = File.ReadAllText(path);
+        var code = File.ReadAllText(path);
         Compiler.Compiler c = new();
 
         try
@@ -35,12 +35,15 @@ public class QLang
         if (filename != null)
             path = dirName is null ? filename : Path.Combine(dirName, filename);
         
+        
+        
         SaveProgram(new QLIProgram()
         {
             ProgramNode = _programNode,
             StringDictionary = _stringDictionary,
             NumberDictionary = _numberDictionary,
             NativeFunctions = _nativeFunctions,
+            Dependencies = c.DllDependencies,
         }, path);
 
         return true;
@@ -54,6 +57,16 @@ public class QLang
         
         if (!Directory.Exists(Path.Combine(pathToFile ?? "", "build")))
             Directory.CreateDirectory(Path.Combine(pathToFile ?? "", "build"));
+
+        var newDependencies = new List<string>();
+        foreach (var toCopy in qliProgram.Dependencies)
+        {
+            var newPath = Path.Combine(pathToFile ?? "", "build", Path.GetFileName(toCopy));
+            
+            File.Copy(toCopy, newPath, true);
+            newDependencies.Add(newPath);
+        }
+        qliProgram.Dependencies = newDependencies;
         
         var path = Path.Combine(pathToFile ?? "", "build", Path.GetFileNameWithoutExtension(filePath) + ".resource.qli");
         
@@ -70,7 +83,7 @@ public class QLang
         if (_programNode == null)
             throw new Exception("Program Node is null (program is not compiled)");
         
-        global::Interpreter.Interpreter.Interpreter interpreter = new(_stringDictionary, _numberDictionary, _nativeFunctions);
+        global::Interpreter.Interpreter interpreter = new(_stringDictionary, _numberDictionary, _nativeFunctions);
         
         interpreter.Execute(_programNode, args);
     }

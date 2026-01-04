@@ -88,7 +88,7 @@ public class NativeFunctionRegistry
         }
         catch (Exception ex)
         {
-            throw new QlangCompileException($"Failed to load native lib from '{dllPath}': {ex.Message}", -1,  "PluginLoader", dllPath);
+            throw new QlangCompileException($"Failed to load native lib from '{dllPath}': {ex}", -1,  "NativeLibLoader", dllPath);
         }
     }
     

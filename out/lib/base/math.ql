@@ -1,4 +1,5 @@
 include "$lib/base"
+include "$lib/core"
 
 class Math: {
     function max(const<Number> a, const<Number> b): {

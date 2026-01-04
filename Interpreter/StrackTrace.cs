@@ -1,4 +1,4 @@
-﻿namespace Interpreter.Interpreter;
+﻿namespace Interpreter;
 
 public partial class Interpreter
 {

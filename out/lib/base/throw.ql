@@ -1,3 +1,6 @@
+include "$lib/base"
+include "$lib/core"
+
 // Class to throw exceptions
 class Throw: {
     // Throw default exception

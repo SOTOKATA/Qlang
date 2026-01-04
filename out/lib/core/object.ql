@@ -1,5 +1,4 @@
-
-include "$lib/base"
+include "$lib/core"
 
 class Object: {
     function isNull(let obj):

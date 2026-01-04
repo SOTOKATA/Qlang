@@ -13,6 +13,7 @@ public class Compiler
     
     public Dictionary<string, string> StringDictionary = [];
     public Dictionary<string, object> NumberDictionary = [];
+    public List<string> DllDependencies = [];
     public NativeFunctionRegistry NativeFunctions = new();
 
     private readonly Parser _parser = new();
@@ -31,8 +32,7 @@ public class Compiler
         Logger.Succ("All includes processed successfully.");
         
         Logger.Log("Include Native Files");
-        (NativeFunctions, _outputScript) = PreCompile.IncludeNativeFiles(_outputScript, fileName, NativeFunctions);
-        NativeFunctions.RegisterLib(new ConsoleLib());
+        (DllDependencies, NativeFunctions, _outputScript) = PreCompile.IncludeNativeFolders(_outputScript, fileName, NativeFunctions, []);
         Logger.Succ("All native includes processed successfully.");
         
         _outputScript = PreCompile.ClearComments(_outputScript);

@@ -4,7 +4,7 @@ using Core.Debug;
 using Core.Dynamic;
 using Core.Exceptions;
 
-namespace Interpreter.Interpreter;
+namespace Interpreter;
 
 public partial class Interpreter
 {
@@ -33,7 +33,7 @@ public partial class Interpreter
         // overriding system calls
         if (call.Objects.Count > 0 && call.Objects[0] is FunctionPointerNode fn)
         {
-            var args = fn.Arguments.ConvertAll<object?>(EvaluateExpression).ToArray();
+            var args = fn.Arguments.ConvertAll(EvaluateExpression).ToArray();
             
             switch (fn.Name)
             {
@@ -196,19 +196,16 @@ public partial class Interpreter
                 Logger.Log($"GetVariableParams: {objCall.Name}");
                 return GetVariableValue(new VariableNode { Name = objCall.Name });
             default:
-                var evaluated = EvaluateExpression(obj);
-
-                return evaluated;
+                return EvaluateExpression(obj);
         }
-        
-        foreach (var item in _contextStack)
-            Logger.Log($"StackItem: class = '{item.Class?.Name}' method = '{item.Function?.Name}'");
-        Logger.Log($"CurrentContext (After call): class = '{CurrentContext.Class?.Name}' method = '{CurrentContext.Function?.Name}'");
-
-        foreach (var dictItem in _dynamicClasses)
-            Logger.Warn("DynamicClasses: " + dictItem.Key + " : " + dictItem.Value);
-        
-        throw new QlangRuntimeException($"Unknown type of object/function: {obj.GetType().Name}", obj, GetStackTrace());
+        // foreach (var item in _contextStack)
+        //     Logger.Log($"StackItem: class = '{item.Class?.Name}' method = '{item.Function?.Name}'");
+        // Logger.Log($"CurrentContext (After call): class = '{CurrentContext.Class?.Name}' method = '{CurrentContext.Function?.Name}'");
+        //
+        // foreach (var dictItem in _dynamicClasses)
+        //     Logger.Warn("DynamicClasses: " + dictItem.Key + " : " + dictItem.Value);
+        //
+        // throw new QlangRuntimeException($"Unknown type of object/function: {obj.GetType().Name}", obj, GetStackTrace());
     }
 
     private (DynamicFunction? function, List<object?>? args) TryGetFunctionFromClassContext(string functionName, List<object?>? args)

@@ -1,7 +1,7 @@
 using Core.AST;
 using Core.Debug;
 
-namespace Interpreter.Interpreter;
+namespace Interpreter;
 
 public partial class Interpreter
 {
