@@ -1,0 +1,16 @@
+D:\Projects\Console\Qlang\Interpreter\bin\Release\net9.0\Interpreter.deps.json
+D:\Projects\Console\Qlang\Interpreter\bin\Release\net9.0\Interpreter.dll
+D:\Projects\Console\Qlang\Interpreter\bin\Release\net9.0\Interpreter.pdb
+D:\Projects\Console\Qlang\Interpreter\bin\Release\net9.0\Core.dll
+D:\Projects\Console\Qlang\Interpreter\bin\Release\net9.0\Core.pdb
+D:\Projects\Console\Qlang\Interpreter\obj\Release\net9.0\Interpreter.csproj.AssemblyReference.cache
+D:\Projects\Console\Qlang\Interpreter\obj\Release\net9.0\Interpreter.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Console\Qlang\Interpreter\obj\Release\net9.0\Interpreter.AssemblyInfoInputs.cache
+D:\Projects\Console\Qlang\Interpreter\obj\Release\net9.0\Interpreter.AssemblyInfo.cs
+D:\Projects\Console\Qlang\Interpreter\obj\Release\net9.0\Interpreter.csproj.CoreCompileInputs.cache
+D:\Projects\Console\Qlang\Interpreter\obj\Release\net9.0\Interpreter.sourcelink.json
+D:\Projects\Console\Qlang\Interpreter\obj\Release\net9.0\Interpre.3FB56443.Up2Date
+D:\Projects\Console\Qlang\Interpreter\obj\Release\net9.0\Interpreter.dll
+D:\Projects\Console\Qlang\Interpreter\obj\Release\net9.0\refint\Interpreter.dll
+D:\Projects\Console\Qlang\Interpreter\obj\Release\net9.0\Interpreter.pdb
+D:\Projects\Console\Qlang\Interpreter\obj\Release\net9.0\ref\Interpreter.dll

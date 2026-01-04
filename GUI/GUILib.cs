@@ -1,4 +1,4 @@
-﻿using Qlang.NativeLib;
+﻿using Core.NativeLib;
 using Raylib_cs;
 
 namespace GUI;

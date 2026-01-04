@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Qlang.Core;
+namespace Core;
 
 public static class Json
 {

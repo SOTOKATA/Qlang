@@ -1,0 +1,6 @@
+{
+  "plugins": {
+    "$type": "System.Collections.Generic.List`1[[ProjectManager.Settings.PluginSettings, ql]], System.Private.CoreLib",
+    "$values": []
+  }
+}

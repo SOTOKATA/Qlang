@@ -1,0 +1,4 @@
+D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\publish\qli.pdb
+D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\publish\Interpreter.pdb
+D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\publish\Core.pdb
+D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\publish\qli.exe

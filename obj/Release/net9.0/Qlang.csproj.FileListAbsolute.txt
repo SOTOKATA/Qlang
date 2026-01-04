@@ -1,6 +1,0 @@
-D:\Projects\Console\Qlang\obj\Release\net9.0\Qlang.csproj.AssemblyReference.cache
-D:\Projects\Console\Qlang\obj\Release\net9.0\Qlang.GeneratedMSBuildEditorConfig.editorconfig
-D:\Projects\Console\Qlang\obj\Release\net9.0\Qlang.AssemblyInfoInputs.cache
-D:\Projects\Console\Qlang\obj\Release\net9.0\Qlang.AssemblyInfo.cs
-D:\Projects\Console\Qlang\obj\Release\net9.0\Qlang.csproj.CoreCompileInputs.cache
-D:\Projects\Console\Qlang\obj\Release\net9.0\Qlang.sourcelink.json
