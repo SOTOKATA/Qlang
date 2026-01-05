@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("qli")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4e58e4c5594035e43a6257e0cb805da729e4081e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ea06af2e9d7012be4419cf8919e5ec7ff389a9bb")]
 [assembly: System.Reflection.AssemblyProductAttribute("qli")]
 [assembly: System.Reflection.AssemblyTitleAttribute("qli")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

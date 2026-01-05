@@ -6,7 +6,7 @@ public partial class Project
     {
         try
         {
-            _compileSettings.Set(param, value);
+            CompileSettings.Set(param, value);
         }
         catch (Exception ex)
         {
@@ -15,22 +15,22 @@ public partial class Project
         }
 
         ConsoleLogger.Set($"{param}: {value}");
-        _compileSettings.Save();
+        CompileSettings.Save();
     }
 
     public static object? GetCompileSetting(string param)
     {
-        return _compileSettings?.Get(param);
+        return CompileSettings?.Get(param);
     }
 
     public void Compile()
     {
-        _qlang.Compile(Path.Combine(Settings.GetString("path"), Settings.GetString("main_file_path")), _compileSettings.GetString("filename"));
+        _qlang.Compile(Path.Combine(Settings.GetString("path"), Settings.GetString("main_file_path")), CompileSettings.GetString("filename"));
     }
 
     public void Run(List<string?>? args)
     {
-        if (_qlang.Compile(Path.Combine(Settings.GetString("path"), Settings.GetString("main_file_path")), _compileSettings.GetString("filename")))
+        if (_qlang.Compile(Path.Combine(Settings.GetString("path"), Settings.GetString("main_file_path")), CompileSettings.GetString("filename")))
             _qlang.Run(args);
     }
 }

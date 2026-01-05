@@ -42,56 +42,6 @@ public class NativeFunctionRegistry
             Register(new NativeFunctionRegister(lib.Namespace, lib.Class, func.name, func.body));
     }
     
-    
-    public void LoadNativeLib(string dllPath)
-    {
-        try
-        {
-            var assembly = Assembly.LoadFrom(dllPath);
-        
-            // Безопасная загрузка типов - игнорируем те, которые не загружаются
-            Type[] types;
-            try
-            {
-                types = assembly.GetTypes();
-            }
-            catch (ReflectionTypeLoadException ex)
-            {
-                // Берём только типы, которые успешно загрузились
-                types = ex.Types.Where(t => t != null).ToArray()!;
-            
-                // Логируем предупреждения о пропущенных типах
-                foreach (var loaderException in ex.LoaderExceptions.Where(e => e != null).Distinct())
-                {
-                    Logger.Warn($"Could not load some types from {Path.GetFileName(dllPath)}: {loaderException!.Message}", "PluginLoader");
-                }
-            }
-        
-            var libTypes = types
-                .Where(t => typeof(IQlangLib).IsAssignableFrom(t) && t is { IsInterface: false, IsAbstract: false });
-        
-            var foundPlugin = false;
-            foreach (var type in libTypes)
-            {
-                var nativeLib = (IQlangLib)Activator.CreateInstance(type)!;
-                RegisterLib(nativeLib);
-                LoadedPlugins.Add(nativeLib);
-                foundPlugin = true;
-            
-                Logger.Log($"Loaded native lib: {nativeLib.Name} v{nativeLib.Version}", "NativeLibLoader");
-            }
-        
-            if (!foundPlugin)
-            {
-                Logger.Warn($"No IQlangLib implementations found in {Path.GetFileName(dllPath)}", "NativeLibLoader");
-            }
-        }
-        catch (Exception ex)
-        {
-            throw new QlangCompileException($"Failed to load native lib from '{dllPath}': {ex}", -1,  "NativeLibLoader", dllPath);
-        }
-    }
-    
     private void Register(NativeFunctionRegister nativeRegister)
     {
         if (!_functions.Add(nativeRegister))

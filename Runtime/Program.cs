@@ -1,6 +1,8 @@
 ﻿using System.Globalization;
+using System.Reflection;
 using Core;
 using Core.Native;
+using Core.NativeLib;
 
 namespace Runtime;
 
@@ -30,30 +32,51 @@ public class Program
 
         new Interpreter.Interpreter(qliProgram.StringDictionary, 
             qliProgram.NumberDictionary, 
-            LoadDependencies(qliProgram.ExternalLibraries)).Execute(qliProgram.ProgramNode, args.ToList());
+            LoadDependencies()).Execute(qliProgram.ProgramNode, args.ToList());
     }
 
-    private static NativeFunctionRegistry LoadDependencies(List<QLIProgramLib> deps)
+    private static NativeFunctionRegistry LoadDependencies()
     {
+        string dirPath = $"{Path.GetFileNameWithoutExtension(Environment.ProcessPath)}.external.qli";
+        
+        // Console.WriteLine("Path to load dependencies: " + dirPath);
+        
+        // Case if native libs is not exists
+        if (!Directory.Exists(dirPath))
+            return new  NativeFunctionRegistry();
+        
+        string dirDepsPath = Path.Combine(dirPath, "dependents");
+        
+        bool dirDepsExists = Directory.Exists(dirDepsPath);
+
+        var filesToAdd = new List<string>();
+        
+        // Add dependencies
+        if (dirDepsExists)
+            filesToAdd.AddRange(Directory.GetFiles(dirDepsPath, "*.dll", SearchOption.AllDirectories));
+        
+        // Add lib (main) files
+        filesToAdd.AddRange(Directory.GetFiles(dirPath, "*.dll", SearchOption.TopDirectoryOnly));
+
         var nativeLibRegister = new NativeFunctionRegistry();
         
-        foreach (var dep in deps)
+        foreach (var file in filesToAdd)
         {
-            foreach (var depPath in dep.DependenciesFilePaths)
+            var assembly = Assembly.LoadFrom(file);
+
+            var types = assembly.GetTypes();
+
+            var libTypes = types
+                .Where(t => typeof(IQlangLib).IsAssignableFrom(t) && t is { IsInterface: false, IsAbstract: false });
+
+            foreach (var type in libTypes)
             {
-                if (!File.Exists(depPath))
-                    throw new FileNotFoundException(depPath);
-                
-                nativeLibRegister.LoadNativeLib(depPath);
+                var nativeLib = Activator.CreateInstance(type) as IQlangLib;
+                // If lib exists and is not corrupted: add
+                nativeLibRegister.RegisterLib(nativeLib);
             }
             
-            foreach (var depPath in dep.MainFilePaths)
-            {
-                if (!File.Exists(depPath))
-                    throw new FileNotFoundException(depPath);
-                
-                nativeLibRegister.LoadNativeLib(depPath);
-            }
+            // Console.WriteLine("Loaded dependence: " + file);
         }
         
         return nativeLibRegister;

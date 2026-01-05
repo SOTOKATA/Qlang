@@ -5,6 +5,7 @@ namespace ProjectManager.Settings;
 
 public abstract class Settings(string path, Dictionary<string, object?>? dict)
 {
+    public Dictionary<string, object?>? GetDictionary() => Dictionary;
     public string GetPath() => path;
 
     public void Save()

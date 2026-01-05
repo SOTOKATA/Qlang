@@ -8,7 +8,7 @@ public partial class Project
 {
     public ProjectSettings Settings;
 
-    private static CompileSettings? _compileSettings;
+    public static CompileSettings? CompileSettings;
 
     private readonly QLang _qlang = new();
 
@@ -52,9 +52,9 @@ public partial class Project
 
         string settingsPath = Path.Combine(projectPath, "compile.settings.json");
         File.Create(settingsPath).Close();
-        _compileSettings = new CompileSettings(settingsPath, null);
+        CompileSettings = new CompileSettings(settingsPath, null);
     
-        _compileSettings.Save();
+        CompileSettings.Save();
         
         return proj;
     }
@@ -84,9 +84,9 @@ public partial class Project
 
         string settingsPath = Path.Combine(projectPath, "compile.settings.json");
         var dict =  JsonConvert.DeserializeObject<Dictionary<string, object?>>(File.ReadAllText(settingsPath));
-        _compileSettings = new CompileSettings(settingsPath, dict);
+        CompileSettings = new CompileSettings(settingsPath, dict);
 
-        var isDebug = (bool)_compileSettings.Get("debug");
+        var isDebug = (bool)CompileSettings.Get("debug");
         Logger.Debug = isDebug;
         FileLogger.Debug = isDebug;
         

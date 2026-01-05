@@ -20390,125 +20390,6 @@
             "Line": 6,
             "LineIndex": 0,
             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
-          },
-          {
-            "$type": "Core.AST.CallNode, Core",
-            "Objects": [
-              {
-                "$type": "Core.AST.ObjectPointerNode, Core",
-                "Name": "Window",
-                "Line": 8,
-                "LineIndex": 0,
-                "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
-              },
-              {
-                "$type": "Core.AST.FunctionPointerNode, Core",
-                "Name": "create",
-                "Arguments": [
-                  {
-                    "$type": "Core.AST.NumberRefNode, Core",
-                    "IsNegative": false,
-                    "Index": 14,
-                    "Line": 8,
-                    "LineIndex": 0,
-                    "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
-                  },
-                  {
-                    "$type": "Core.AST.NumberRefNode, Core",
-                    "IsNegative": false,
-                    "Index": 15,
-                    "Line": 8,
-                    "LineIndex": 0,
-                    "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
-                  },
-                  {
-                    "$type": "Core.AST.StringRefNode, Core",
-                    "Index": 123,
-                    "Line": 8,
-                    "LineIndex": 0,
-                    "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
-                  }
-                ],
-                "Line": 8,
-                "LineIndex": 0,
-                "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
-              }
-            ],
-            "Arguments": [
-              {
-                "$type": "Core.AST.NumberRefNode, Core",
-                "IsNegative": false,
-                "Index": 14,
-                "Line": 8,
-                "LineIndex": 0,
-                "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
-              },
-              {
-                "$type": "Core.AST.NumberRefNode, Core",
-                "IsNegative": false,
-                "Index": 15,
-                "Line": 8,
-                "LineIndex": 0,
-                "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
-              },
-              {
-                "$type": "Core.AST.StringRefNode, Core",
-                "Index": 123,
-                "Line": 8,
-                "LineIndex": 0,
-                "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
-              }
-            ],
-            "Line": 8,
-            "LineIndex": 0,
-            "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
-          },
-          {
-            "$type": "Core.AST.WhileNode, Core",
-            "Condition": {
-              "$type": "Core.AST.BinaryOperationNode, Core",
-              "Left": {
-                "$type": "Core.AST.CallNode, Core",
-                "Objects": [
-                  {
-                    "$type": "Core.AST.ObjectPointerNode, Core",
-                    "Name": "Window",
-                    "Line": 10,
-                    "LineIndex": 0,
-                    "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
-                  },
-                  {
-                    "$type": "Core.AST.FunctionPointerNode, Core",
-                    "Name": "shouldClose",
-                    "Arguments": [],
-                    "Line": 10,
-                    "LineIndex": 0,
-                    "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
-                  }
-                ],
-                "Arguments": [],
-                "Line": 10,
-                "LineIndex": 0,
-                "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
-              },
-              "Operator": "==",
-              "Right": {
-                "$type": "Core.AST.BooleanNode, Core",
-                "Value": false,
-                "Line": 10,
-                "LineIndex": 0,
-                "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
-              },
-              "Line": 10,
-              "LineIndex": 0,
-              "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
-            },
-            "Body": [],
-            "IsDoWhile": false,
-            "Variables": {},
-            "Line": 12,
-            "LineIndex": 0,
-            "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
           }
         ],
         "Line": 0,
@@ -20643,8 +20524,7 @@
     "___STRING_119___": "gui.window.close",
     "___STRING_120___": "gui.window.should_close",
     "___STRING_121___": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql",
-    "___STRING_122___": "Hello, World!",
-    "___STRING_123___": "ews"
+    "___STRING_122___": "Hello, World!"
   },
   "NumberDictionary": {
     "___NUMBER_0___": 0,
@@ -20660,9 +20540,7 @@
     "___NUMBER_10___": 1,
     "___NUMBER_11___": 0,
     "___NUMBER_12___": 1,
-    "___NUMBER_13___": 0,
-    "___NUMBER_14___": 100,
-    "___NUMBER_15___": 100
+    "___NUMBER_13___": 0
   },
   "ExternalLibraries": [
     {

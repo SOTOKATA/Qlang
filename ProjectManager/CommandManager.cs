@@ -33,6 +33,9 @@ public static class CommandManager
                 case ["help"]:
                     Help();
                     return;
+                case ["proj-info"]:
+                    WriteProjectInfo();
+                    return;
                 case []:
                     Qlang();
                     return;
@@ -88,6 +91,50 @@ public static class CommandManager
             "project.settings.json"));
 
         return proj ?? throw new Exception("Project is not found");
+    }
+
+    private static void WriteProjectInfo()
+    {
+        var project = LoadProject();
+        var props = project.Settings.GetDictionary();
+        var compileProps = Project.Project.CompileSettings.GetDictionary();
+
+        var names = new List<string>();
+        var values = new List<string>();
+
+        if (props is not null)
+        {
+            values.AddRange(props.Values.Select(var => var is null ? "<null>" : var.ToString()).ToList());
+            names.AddRange(props.Keys.ToList());
+        }
+
+        if (compileProps is not null)
+        {
+            names.AddRange(compileProps.Keys.ToList());
+            values.AddRange(compileProps.Values.Select(var => var is null ? "<null>" : var.ToString()).ToList());
+        }
+
+        if (names.Count != values.Count)
+        {
+            WriteErrorMessageWithDelay("Internal error: names count is not equal to values count in function 'proj-info'");
+            return;
+        }
+        
+        var output = new List<string>();
+        for (var index = 0; index < names.Count; index++)
+        {
+            output.Add(names[index]);
+            output.Add(values[index]);
+        }
+
+        
+        Console.WriteLine($"""
+                           Information about project: 
+                           {TableCreator.Create([
+                               ["Name", "Value"],
+                               output
+                           ])}
+                           """);
     }
 
     private static void New(string name)

@@ -44,6 +44,29 @@ public class QLang
         return true;
     }
 
+    private static void SaveDependencies(QLIProgram qliProgram, string path, string filename)
+    {
+        string dirPath =  Path.Combine(path ?? "", filename + ".external.qli");
+        string dirDepsPath = Path.Combine(dirPath, "dependents");
+        
+        if (Directory.Exists(dirPath))
+            Directory.Delete(dirPath, true);
+        
+        Directory.CreateDirectory(dirPath);
+        Directory.CreateDirectory(dirDepsPath);
+
+        var externalLibs = qliProgram.ExternalLibraries;
+        qliProgram.ExternalLibraries = [];
+
+        foreach (var lib in externalLibs)
+        {
+            foreach (var depsFile in lib.DependenciesFilePaths)
+                File.Copy(depsFile, Path.Combine(dirDepsPath, Path.GetFileName(depsFile)), true);
+            foreach (var mainFile in lib.MainFilePaths)
+                File.Copy(mainFile, Path.Combine(dirPath, Path.GetFileName(mainFile)), true);  
+        }
+    }
+
     private static void SaveProgram(QLIProgram qliProgram, string filePath)
     {
         var json = Json.Serialize(qliProgram);
@@ -53,41 +76,7 @@ public class QLang
         if (!Directory.Exists(Path.Combine(pathToFile ?? "", "build")))
             Directory.CreateDirectory(Path.Combine(pathToFile ?? "", "build"));
 
-        var newExternal = qliProgram.ExternalLibraries;
-        for (int index = 0; index < qliProgram.ExternalLibraries.Count; index++)
-        {
-            QLIProgramLib? toCopy = qliProgram.ExternalLibraries[index];
-            var newPath = Path.Combine(pathToFile ?? "", "build", "external");
-            
-            if (!Directory.Exists(newPath))
-                Directory.CreateDirectory(newPath);
-
-            for (var mainIndex = 0; mainIndex < toCopy.MainFilePaths.Count; mainIndex++)
-            {
-                var mainFile = toCopy.MainFilePaths[mainIndex];
-                var mainPath = Path.Combine(newPath, Path.GetFileName(mainFile));
-
-                File.Copy(mainFile, mainPath, true);
-
-                newExternal[index].MainFilePaths[mainIndex] = mainPath;
-            }
-
-            for (var depIndex = 0; depIndex < toCopy.DependenciesFilePaths.Count; depIndex++)
-            {
-                var depFile = toCopy.DependenciesFilePaths[depIndex];
-                var depPath = Path.Combine(newPath, "dependents", Path.GetFileName(depFile));
-
-                if (!Directory.Exists(Path.Combine(newPath, "dependents")))
-                    Directory.CreateDirectory(Path.Combine(newPath, "dependents"));
-
-                File.Copy(depFile, depPath, true);
-
-                newExternal[index].DependenciesFilePaths[depIndex] = depPath;
-            }
-        }
-
-        Console.WriteLine("ExternalLib::Main\n" + string.Join("\n", qliProgram.ExternalLibraries));
-        qliProgram.ExternalLibraries = newExternal;
+        SaveDependencies(qliProgram, Path.Combine(pathToFile ?? "", "build"), Path.GetFileNameWithoutExtension(filePath));
         
         var path = Path.Combine(pathToFile ?? "", "build", Path.GetFileNameWithoutExtension(filePath) + ".resource.qli");
         
