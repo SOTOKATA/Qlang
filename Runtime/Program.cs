@@ -11,8 +11,6 @@ public class Program
 
         var programPath = Path.Combine(Directory.GetCurrentDirectory(), $"{Path.GetFileNameWithoutExtension(Environment.ProcessPath)}.resource.qli");
         
-        var programArgs = args.Skip(1).ToList();
-
         if (!File.Exists(programPath))
         {
             Console.WriteLine($"File '{programPath}' does not exist.");
@@ -33,11 +31,12 @@ public class Program
 
         new Interpreter.Interpreter(qliProgram.StringDictionary, 
             qliProgram.NumberDictionary, 
-            qliProgram.NativeFunctions).Execute(qliProgram.ProgramNode, programArgs);
+            qliProgram.NativeFunctions).Execute(qliProgram.ProgramNode, args.ToList());
     }
 
     private static void LoadDependencies(List<string> paths)
     {
-        
+        // TODO: Create adding NativeLib .dll libs
+        // LIKE: gui.dll and folder 'dep' with dependencies
     }
 }
