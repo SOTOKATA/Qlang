@@ -1,20 +1,12 @@
 include "$lib/core"
+include "$lib/base"
+include "$lib/gui"
 
 function main(): {
     Console.println("Hello, World!");
+    
+    Window.create(100, 100, "ews");
 
-    const runtime = Runtime.new();
-
-    runtime.includeLib("$lib/core");
-    runtime.includeLib("$lib/base");
-
-    runtime.functionOverlayExecute("
-Console.println(\"Hello from runtime!\");
-");
-
-    runtime.execute(@"
-function main(): {
-    Console.println("Hello from executed code!");
-}
-");
+    while (Window.shouldClose() == false):
+    {}
 }

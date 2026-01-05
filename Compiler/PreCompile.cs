@@ -111,7 +111,7 @@ public static class PreCompile
 
     private static readonly HashSet<string> IncludedNative = new(StringComparer.OrdinalIgnoreCase);
 
-    public static (List<string> dependencies, NativeFunctionRegistry register, string newScript) IncludeNativeFolders(string script, string fileName, NativeFunctionRegistry nativeFunctions, List<string> dependencies)
+    public static (List<QLIProgramLib> dependencies, string newScript) IncludeNativeFolders(string script, string fileName, List<QLIProgramLib> dependencies)
     {
         Logger.Log($"Folder: " + fileName, "IncludeNativeFolders");
 
@@ -124,6 +124,8 @@ public static class PreCompile
         if (includeLines.Length > 0)
             Logger.Log(string.Join(", ", includeLines), Keywords.IncludeNativeKeyword);
 
+        var qliLib = new QLIProgramLib();
+        
         foreach ((var source, var index) in includeLines)
         {
             var line = source.Replace($"{Keywords.IncludeNativeKeyword} ", "").Replace("\"", "");
@@ -150,12 +152,9 @@ public static class PreCompile
             Logger.Log(fullPath, "Path");
 
             var isDirectory = Directory.Exists(fullPath);
-            var isFile = File.Exists(fullPath);
 
-            if (isFile)
-            {
+            if (File.Exists(fullPath))
                 throw new QlangCompileException($"Unable to add an external file. ({fullPath})", index, "PreCompile/IncludeNativeFolders", fileName);
-            }
 
             if (!isDirectory)
                 throw new QlangCompileException($"Directory not found: {fullPath}",
@@ -163,36 +162,38 @@ public static class PreCompile
 
             script = script.Replace(source, "");
 
-            if (isDirectory)
+            var dependentsPath = Path.Combine(fullPath, "dependents");
+            
+            if (!Directory.Exists(dependentsPath))
+                throw new QlangCompileException($"Directory '{dependentsPath}' is not found.",  index, "PreCompile/IncludeNativeFolders", fileName);
+
+            var folders = Directory.GetFiles(dependentsPath, "*.dll", SearchOption.AllDirectories).ToList();
+
+            foreach (var folder in folders.Where(folder => !qliLib.DependenciesFilePaths.Contains(folder)))
+                qliLib.DependenciesFilePaths.Add(folder);
+
+            folders.AddRange(Directory.GetFiles(fullPath, "*.dll", SearchOption.TopDirectoryOnly));
+            
+            foreach (var file in folders)
             {
-                var dependentsPath = Path.Combine(fullPath, "dependents");
-                
-                if (!Directory.Exists(dependentsPath))
-                    throw new QlangCompileException($"Directory '{dependentsPath}' is not found.",  index, "PreCompile/IncludeNativeFolders", fileName);
+                Logger.Log(file, "Path");
 
-                var folders = Directory.GetFiles(dependentsPath, "*.dll", SearchOption.AllDirectories).ToList();
-
-                foreach (var folder in folders.Where(folder => !dependencies.Contains(folder)))
-                    dependencies.Add(folder);
-
-                folders.AddRange(Directory.GetFiles(fullPath, "*.dll", SearchOption.TopDirectoryOnly));
-                
-                foreach (var file in folders)
+                if (!IncludedNative.Add(file))
                 {
-                    Logger.Log(file, "Path");
-
-                    if (!IncludedNative.Add(file))
-                    {
-                        Logger.Warn($"{file}", "Skipped (already included)");
-                        continue;
-                    }
-                    
-                    nativeFunctions.LoadNativeLib(file);
+                    Logger.Warn($"{file}", "Skipped (already included)");
+                    continue;
                 }
+                
+                qliLib.MainFilePaths.Add(file);
             }
         }
+        
+        dependencies.Add(qliLib);
 
-        return (dependencies, nativeFunctions, script);
+        for (int index = 0; index < dependencies.Count; index++)
+            Console.WriteLine($"{index}:\n" + string.Join(", ", dependencies[index].MainFilePaths) + "\n" + string.Join(", ", dependencies[index].DependenciesFilePaths));
+
+        return (dependencies, script);
     }
     
     public static (string outScript, Dictionary<string, object> dictionary) ExtractNumbers(string script)

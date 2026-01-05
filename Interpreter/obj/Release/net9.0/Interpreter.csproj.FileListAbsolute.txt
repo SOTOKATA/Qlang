@@ -14,3 +14,19 @@ D:\Projects\Console\Qlang\Interpreter\obj\Release\net9.0\Interpreter.dll
 D:\Projects\Console\Qlang\Interpreter\obj\Release\net9.0\refint\Interpreter.dll
 D:\Projects\Console\Qlang\Interpreter\obj\Release\net9.0\Interpreter.pdb
 D:\Projects\Console\Qlang\Interpreter\obj\Release\net9.0\ref\Interpreter.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Interpreter\bin\Release\net9.0\Interpreter.deps.json
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Interpreter\bin\Release\net9.0\Interpreter.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Interpreter\bin\Release\net9.0\Interpreter.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Interpreter\bin\Release\net9.0\Core.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Interpreter\bin\Release\net9.0\Core.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Interpreter\obj\Release\net9.0\Interpreter.csproj.AssemblyReference.cache
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Interpreter\obj\Release\net9.0\Interpreter.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Interpreter\obj\Release\net9.0\Interpreter.AssemblyInfoInputs.cache
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Interpreter\obj\Release\net9.0\Interpreter.AssemblyInfo.cs
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Interpreter\obj\Release\net9.0\Interpreter.csproj.CoreCompileInputs.cache
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Interpreter\obj\Release\net9.0\Interpreter.sourcelink.json
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Interpreter\obj\Release\net9.0\Interpre.3FB56443.Up2Date
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Interpreter\obj\Release\net9.0\Interpreter.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Interpreter\obj\Release\net9.0\refint\Interpreter.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Interpreter\obj\Release\net9.0\Interpreter.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Interpreter\obj\Release\net9.0\ref\Interpreter.dll

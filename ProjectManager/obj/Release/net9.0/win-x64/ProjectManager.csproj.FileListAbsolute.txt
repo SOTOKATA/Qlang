@@ -22,3 +22,27 @@ D:\Projects\Console\Qlang\ProjectManager\obj\Release\net9.0\win-x64\refint\ql.dl
 D:\Projects\Console\Qlang\ProjectManager\obj\Release\net9.0\win-x64\ql.pdb
 D:\Projects\Console\Qlang\ProjectManager\obj\Release\net9.0\win-x64\ProjectManager.genruntimeconfig.cache
 D:\Projects\Console\Qlang\ProjectManager\obj\Release\net9.0\win-x64\ref\ql.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\bin\Release\net9.0\win-x64\ql.exe
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\bin\Release\net9.0\win-x64\ql.deps.json
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\bin\Release\net9.0\win-x64\ql.runtimeconfig.json
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\bin\Release\net9.0\win-x64\ql.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\bin\Release\net9.0\win-x64\ql.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\bin\Release\net9.0\win-x64\Newtonsoft.Json.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\bin\Release\net9.0\win-x64\Compiler.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\bin\Release\net9.0\win-x64\Core.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\bin\Release\net9.0\win-x64\Interpreter.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\bin\Release\net9.0\win-x64\Compiler.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\bin\Release\net9.0\win-x64\Interpreter.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\bin\Release\net9.0\win-x64\Core.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\obj\Release\net9.0\win-x64\ProjectManager.csproj.AssemblyReference.cache
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\obj\Release\net9.0\win-x64\ProjectManager.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\obj\Release\net9.0\win-x64\ProjectManager.AssemblyInfoInputs.cache
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\obj\Release\net9.0\win-x64\ProjectManager.AssemblyInfo.cs
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\obj\Release\net9.0\win-x64\ProjectManager.csproj.CoreCompileInputs.cache
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\obj\Release\net9.0\win-x64\ProjectManager.sourcelink.json
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\obj\Release\net9.0\win-x64\ProjectM.8307BD89.Up2Date
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\obj\Release\net9.0\win-x64\ql.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\obj\Release\net9.0\win-x64\refint\ql.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\obj\Release\net9.0\win-x64\ql.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\obj\Release\net9.0\win-x64\ProjectManager.genruntimeconfig.cache
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\obj\Release\net9.0\win-x64\ref\ql.dll

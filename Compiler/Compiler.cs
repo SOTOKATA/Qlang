@@ -1,4 +1,5 @@
-﻿using Core.AST;
+﻿using Core;
+using Core.AST;
 using Core.Debug;
 using Core.Native;
 using Core.NativeLib.SystemLib;
@@ -13,8 +14,7 @@ public class Compiler
     
     public Dictionary<string, string> StringDictionary = [];
     public Dictionary<string, object> NumberDictionary = [];
-    public List<string> DllDependencies = [];
-    public NativeFunctionRegistry NativeFunctions = new();
+    public List<QLIProgramLib> DllDependencies = [];
 
     private readonly Parser _parser = new();
 
@@ -32,7 +32,7 @@ public class Compiler
         Logger.Succ("All includes processed successfully.");
         
         Logger.Log("Include Native Files");
-        (DllDependencies, NativeFunctions, _outputScript) = PreCompile.IncludeNativeFolders(_outputScript, fileName, NativeFunctions, []);
+        (DllDependencies, _outputScript) = PreCompile.IncludeNativeFolders(_outputScript, fileName, []);
         Logger.Succ("All native includes processed successfully.");
         
         _outputScript = PreCompile.ClearComments(_outputScript);

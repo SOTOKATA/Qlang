@@ -11,3 +11,16 @@ D:\Projects\Console\Qlang\Core\obj\Release\net9.0\Core.dll
 D:\Projects\Console\Qlang\Core\obj\Release\net9.0\refint\Core.dll
 D:\Projects\Console\Qlang\Core\obj\Release\net9.0\Core.pdb
 D:\Projects\Console\Qlang\Core\obj\Release\net9.0\ref\Core.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Core\bin\Release\net9.0\Core.deps.json
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Core\bin\Release\net9.0\Core.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Core\bin\Release\net9.0\Core.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Core\obj\Release\net9.0\Core.csproj.AssemblyReference.cache
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Core\obj\Release\net9.0\Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Core\obj\Release\net9.0\Core.AssemblyInfoInputs.cache
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Core\obj\Release\net9.0\Core.AssemblyInfo.cs
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Core\obj\Release\net9.0\Core.csproj.CoreCompileInputs.cache
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Core\obj\Release\net9.0\Core.sourcelink.json
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Core\obj\Release\net9.0\Core.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Core\obj\Release\net9.0\refint\Core.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Core\obj\Release\net9.0\Core.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Core\obj\Release\net9.0\ref\Core.dll

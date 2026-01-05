@@ -1,4 +1,3 @@
-native "D:/Projects/Console/Qlang/GUI/bin/Debug/net9.0/GUI"
 
 class Draw: {
     function begin(const<Color> color): {

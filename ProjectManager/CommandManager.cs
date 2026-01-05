@@ -58,25 +58,28 @@ public static class CommandManager
         }
         catch (ProjectException e)
         {
-            ExceptionManager.ThrowMessage(e.Message);
-            Thread.Sleep(2000);
+            WriteErrorMessageWithDelay(e.Message);
         }
         catch (FileNotFoundException e)
         {
-            ExceptionManager.ThrowMessage(e.Message);
-            Thread.Sleep(2000);
+            WriteErrorMessageWithDelay(e.Message);
         }
         catch (DirectoryNotFoundException e)
         {
-            ExceptionManager.ThrowMessage(e.Message);
-            Thread.Sleep(2000);
+            WriteErrorMessageWithDelay(e.Message);
         }
         catch (Exception e)
         {
-            ConsoleLogger.Info("Throw");
+            ConsoleLogger.Info("UNHANDLED ERROR:");
             ExceptionManager.Throw(e, true);
             Thread.Sleep(2000);
         }
+    }
+
+    private static void WriteErrorMessageWithDelay(string message)
+    {
+        ExceptionManager.ThrowMessage(message);
+        Thread.Sleep(2000);
     }
 
     private static Project.Project LoadProject()

@@ -20,3 +20,25 @@ D:\Projects\Console\Qlang\Runtime\obj\Release\net9.0\win-x64\refint\qli.dll
 D:\Projects\Console\Qlang\Runtime\obj\Release\net9.0\win-x64\qli.pdb
 D:\Projects\Console\Qlang\Runtime\obj\Release\net9.0\win-x64\Runtime.genruntimeconfig.cache
 D:\Projects\Console\Qlang\Runtime\obj\Release\net9.0\win-x64\ref\qli.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Release\net9.0\win-x64\qli.exe
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Release\net9.0\win-x64\qli.deps.json
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Release\net9.0\win-x64\qli.runtimeconfig.json
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Release\net9.0\win-x64\qli.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Release\net9.0\win-x64\qli.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Release\net9.0\win-x64\Newtonsoft.Json.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Release\net9.0\win-x64\Core.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Release\net9.0\win-x64\Interpreter.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Release\net9.0\win-x64\Interpreter.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Release\net9.0\win-x64\Core.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Release\net9.0\win-x64\Runtime.csproj.AssemblyReference.cache
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Release\net9.0\win-x64\Runtime.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Release\net9.0\win-x64\Runtime.AssemblyInfoInputs.cache
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Release\net9.0\win-x64\Runtime.AssemblyInfo.cs
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Release\net9.0\win-x64\Runtime.csproj.CoreCompileInputs.cache
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Release\net9.0\win-x64\Runtime.sourcelink.json
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Release\net9.0\win-x64\Runtime.csproj.Up2Date
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Release\net9.0\win-x64\qli.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Release\net9.0\win-x64\refint\qli.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Release\net9.0\win-x64\qli.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Release\net9.0\win-x64\Runtime.genruntimeconfig.cache
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Release\net9.0\win-x64\ref\qli.dll

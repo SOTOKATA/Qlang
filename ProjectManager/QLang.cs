@@ -9,7 +9,6 @@ public class QLang
     private ProgramNode? _programNode;
     private Dictionary<string, string> _stringDictionary = [];
     private Dictionary<string, object> _numberDictionary = [];
-    private NativeFunctionRegistry _nativeFunctions;
 
     public bool Compile(string path, string? filename = null)
     {
@@ -29,21 +28,17 @@ public class QLang
 
         _stringDictionary = c.StringDictionary;
         _numberDictionary = c.NumberDictionary;
-        _nativeFunctions = c.NativeFunctions;
         
         var dirName = Path.GetDirectoryName(path);
         if (filename != null)
             path = dirName is null ? filename : Path.Combine(dirName, filename);
         
-        
-        
-        SaveProgram(new QLIProgram()
+        SaveProgram(new QLIProgram
         {
             ProgramNode = _programNode,
             StringDictionary = _stringDictionary,
             NumberDictionary = _numberDictionary,
-            NativeFunctions = _nativeFunctions,
-            Dependencies = c.DllDependencies,
+            ExternalLibraries = c.DllDependencies,
         }, path);
 
         return true;
@@ -58,15 +53,41 @@ public class QLang
         if (!Directory.Exists(Path.Combine(pathToFile ?? "", "build")))
             Directory.CreateDirectory(Path.Combine(pathToFile ?? "", "build"));
 
-        var newDependencies = new List<string>();
-        foreach (var toCopy in qliProgram.Dependencies)
+        var newExternal = qliProgram.ExternalLibraries;
+        for (int index = 0; index < qliProgram.ExternalLibraries.Count; index++)
         {
-            var newPath = Path.Combine(pathToFile ?? "", "build", Path.GetFileName(toCopy));
+            QLIProgramLib? toCopy = qliProgram.ExternalLibraries[index];
+            var newPath = Path.Combine(pathToFile ?? "", "build", "external");
             
-            File.Copy(toCopy, newPath, true);
-            newDependencies.Add(newPath);
+            if (!Directory.Exists(newPath))
+                Directory.CreateDirectory(newPath);
+
+            for (var mainIndex = 0; mainIndex < toCopy.MainFilePaths.Count; mainIndex++)
+            {
+                var mainFile = toCopy.MainFilePaths[mainIndex];
+                var mainPath = Path.Combine(newPath, Path.GetFileName(mainFile));
+
+                File.Copy(mainFile, mainPath, true);
+
+                newExternal[index].MainFilePaths[mainIndex] = mainPath;
+            }
+
+            for (var depIndex = 0; depIndex < toCopy.DependenciesFilePaths.Count; depIndex++)
+            {
+                var depFile = toCopy.DependenciesFilePaths[depIndex];
+                var depPath = Path.Combine(newPath, "dependents", Path.GetFileName(depFile));
+
+                if (!Directory.Exists(Path.Combine(newPath, "dependents")))
+                    Directory.CreateDirectory(Path.Combine(newPath, "dependents"));
+
+                File.Copy(depFile, depPath, true);
+
+                newExternal[index].DependenciesFilePaths[depIndex] = depPath;
+            }
         }
-        qliProgram.Dependencies = newDependencies;
+
+        Console.WriteLine("ExternalLib::Main\n" + string.Join("\n", qliProgram.ExternalLibraries));
+        qliProgram.ExternalLibraries = newExternal;
         
         var path = Path.Combine(pathToFile ?? "", "build", Path.GetFileNameWithoutExtension(filePath) + ".resource.qli");
         
@@ -80,10 +101,11 @@ public class QLang
 
     public void Run(List<string?>? args)
     {
+        // TODO: Runtime execution (by build/program.exe)
         if (_programNode == null)
             throw new Exception("Program Node is null (program is not compiled)");
         
-        global::Interpreter.Interpreter interpreter = new(_stringDictionary, _numberDictionary, _nativeFunctions);
+        global::Interpreter.Interpreter interpreter = new(_stringDictionary, _numberDictionary, new NativeFunctionRegistry());
         
         interpreter.Execute(_programNode, args);
     }

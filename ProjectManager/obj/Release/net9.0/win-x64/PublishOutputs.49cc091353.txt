@@ -1,0 +1,5 @@
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\ql.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\Compiler.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\Interpreter.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\Core.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\ql.exe

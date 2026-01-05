@@ -11,7 +11,5 @@ public class QLIProgram
 
     public Dictionary<string, object> NumberDictionary { get; init; }
     
-    public NativeFunctionRegistry NativeFunctions { get; init; }
-    
-    public List<string> Dependencies { get; set; }
+    public List<QLIProgramLib> ExternalLibraries { get; set; }
 }
