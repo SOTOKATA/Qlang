@@ -1,2 +1,4 @@
 D:\Projects\Console\Qlang\out\qli.pdb
+D:\Projects\Console\Qlang\out\Interpreter.pdb
+D:\Projects\Console\Qlang\out\Core.pdb
 D:\Projects\Console\Qlang\out\qli.exe

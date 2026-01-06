@@ -8,7 +8,7 @@ namespace Compiler;
 public class Parser
 {
     private List<Token> _tokens = [];
-    private int _position = 0;
+    private int _position;
 
     private string _line = "";
 
@@ -78,6 +78,10 @@ public class Parser
                 SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
             };
         }
+        
+        // namespace declaration
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.NamespaceDeclaration)
+            return ParseNamespace(isPrivate);
 
         // function declaration
         if (Check(Tokens.Keyword) && Current().Value == Keywords.FunctionDeclaration)
@@ -185,6 +189,32 @@ public class Parser
             VariableName = name,
             Value = value,
             Type = type,
+            Line = (IsAtEnd() ? 0 : Current().Line + 1),
+            SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+        };
+    }
+
+    private NamespaceNode ParseNamespace(bool isPrivate)
+    {
+        Logger.Log("CompilationProcess: Parsing namespace");
+
+        // skip 'namespace'
+        Expect(Tokens.Keyword, Keywords.NamespaceDeclaration);
+
+        var name = Expect(Tokens.Identifier).Value;
+
+        Expect(Tokens.Colon);
+        
+        if (!Check(Tokens.LBrace))
+            throw new QlangCompileException("Namespace's body cannot be one-line", Current().Line, "Parser", Current().SourceFile);
+        
+        var body = ParseBlock();
+        
+        return new NamespaceNode
+        {
+            Name = name,
+            Body = body,
+            
             Line = (IsAtEnd() ? 0 : Current().Line + 1),
             SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
         };
@@ -905,7 +935,7 @@ public class Parser
                 Line = (IsAtEnd() ? 0 : Current().Line + 1),
             };
 
-        // Parse single path 
+        // Parse assign path 
         if (Check(Tokens.Equals) && Peek()?.TokenType != Tokens.Equals)
         {
             Logger.Log($"CompilationProcess.End: Parsing primary (PathAssignmentNode - single)");
@@ -920,6 +950,13 @@ public class Parser
             };
         }
 
+        if (Check(Tokens.Colon) && Peek()?.TokenType == Tokens.Colon)
+            current = new NamespacePointerNode(identifier)
+            {
+                Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+            };
+
         return current;
     }
 
@@ -928,7 +965,10 @@ public class Parser
         ASTNode astNode = ParsePrimary(true);
 
         // Is not path (NOT 'call.node.func().etc();', JUST LIKE 'call' or 'call()' etc.)
-        if (!Check(Tokens.Dot))
+        var isDot = Check(Tokens.Dot);
+        var isDoubleColon = Check(Tokens.Colon) && Peek()?.TokenType == Tokens.Colon;
+        
+        if (!isDot && !isDoubleColon)
         {
             return astNode switch
             {
@@ -936,7 +976,13 @@ public class Parser
                 {
                     Objects = [obj],
                     SourceFile = (IsAtEnd() ? "" : Current().SourceFile),
-                    Line = (IsAtEnd() ? 0 : Current().Line + 1),
+                    Line = (IsAtEnd() ? 0 : Current().Line + 1)
+                },
+                NamespacePointerNode namespacePointer => new CallNode()
+                {
+                    Objects = [namespacePointer],
+                    SourceFile = (IsAtEnd() ? "" : Current().SourceFile),
+                    Line = (IsAtEnd() ? 0 : Current().Line + 1)
                 },
                 FunctionPointerNode pointerFunction => new CallNode
                 {
@@ -957,14 +1003,19 @@ public class Parser
         
         do
         {
+            if (Current().TokenType == Tokens.Colon && Peek()?.TokenType == Tokens.Colon)
+                Advance();
+            
             Advance();
+            
             astNode = ParsePrimary(true);
 
             if (astNode is CallNode node)
                 path.AddRange(node.Objects);
             else path.Add(astNode);
             
-        } while (Check(Tokens.Dot));
+            // Do circle while '.' or '::'
+        } while (Check(Tokens.Dot) || (Check(Tokens.Colon) && Peek()?.TokenType == Tokens.Colon));
 
         if (path[^1] is AssignmentNode assignmentNode)
         {
@@ -1054,7 +1105,7 @@ public class Parser
             return token;
         }
 
-        Logger.Log(token.TokenType.ToString() + " " + token.Value, $"Token (Ln:{token.Line} Idx:{token.Index})");
+        Logger.Log(token.TokenType.ToString() + " " + token.Value, $"Token (Ln:{token.Line})");
         _line += $"{Token.TokenToString(token.TokenType)}{token.Value}";
         return token;
     }
@@ -1066,7 +1117,7 @@ public class Parser
             var current = Current();
             throw new QlangCompileException($"""
                                  Expected {type}, got {current.TokenType} (Value: {(current.Value == "" ? "Null" : current.Value)})
-                                        line: '{_line}' ({current.Index})
+                                        line: '{_line}'
                                  """, (IsAtEnd() ? 0 : Current().Line + 1), "Parser", Current().SourceFile);
         }
 

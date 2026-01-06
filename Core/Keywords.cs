@@ -4,6 +4,7 @@ public static class Keywords
 {
     public static string FunctionDeclaration => "function";
     public static string ClassDeclaration => "class";
+    public static string NamespaceDeclaration => "namespace";
     public static string VariableDeclaration => "let";
     
     public static string ThisKeyword => "this";
@@ -40,6 +41,6 @@ public static class Keywords
     [
         FunctionDeclaration, ClassDeclaration, VariableDeclaration, IfBlock, ElseBlock, WhileBlock, DoWhileBlock, 
         ForBlock, ReturnKeyword, TrueKeyword, FalseKeyword, IncludeKeyword, PrivateModificator, 
-        StaticModificator, ConstVariableDeclaration, ContinueKeyword, BreakKeyword, NullKeyword, ThisKeyword, ExtendsKeyword, SwitchBlock, CaseKeyword, DefaultKeyword
+        StaticModificator, ConstVariableDeclaration, ContinueKeyword, BreakKeyword, NullKeyword, ThisKeyword, ExtendsKeyword, SwitchBlock, CaseKeyword, DefaultKeyword, NamespaceDeclaration
     ];
 }

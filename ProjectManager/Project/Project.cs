@@ -86,7 +86,7 @@ public partial class Project
         var dict =  JsonConvert.DeserializeObject<Dictionary<string, object?>>(File.ReadAllText(settingsPath));
         CompileSettings = new CompileSettings(settingsPath, dict);
 
-        var isDebug = (bool)CompileSettings.Get("debug");
+        var isDebug = (bool)CompileSettings.Get("debug_mode");
         Logger.Debug = isDebug;
         FileLogger.Debug = isDebug;
         

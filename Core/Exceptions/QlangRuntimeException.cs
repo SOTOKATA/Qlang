@@ -19,7 +19,6 @@ public class QlangRuntimeException : Exception
         if (node is not null)
         {
             Line = node.Line;
-            Column = node.LineIndex;
             SourceFile = node.SourceFile;
         }
 

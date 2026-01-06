@@ -6,7 +6,7 @@ public class DynamicFunction(string name)
 {
     public readonly string Name = name;
     
-    public List<string> Parameters = [];
+    public readonly List<string> Parameters = [];
     
     public bool IsStatic = false;
     public bool IsPrivate = false;

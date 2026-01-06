@@ -25,12 +25,12 @@ public partial class Project
 
     public void Compile()
     {
-        _qlang.Compile(Path.Combine(Settings.GetString("path"), Settings.GetString("main_file_path")), CompileSettings.GetString("filename"));
+        _qlang.Compile(Path.Combine(Settings.GetString("path"), Settings.GetString("main_file_path")), CompileSettings.GetString("output_filename"));
     }
 
     public void Run(List<string?>? args)
     {
-        if (_qlang.Compile(Path.Combine(Settings.GetString("path"), Settings.GetString("main_file_path")), CompileSettings.GetString("filename")))
-            _qlang.Run(args, CompileSettings.GetString("filename"));
+        if (_qlang.Compile(Path.Combine(Settings.GetString("path"), Settings.GetString("main_file_path")), CompileSettings.GetString("output_filename")))
+            _qlang.Run(args, CompileSettings.GetString("output_filename"));
     }
 }

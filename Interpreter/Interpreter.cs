@@ -28,6 +28,8 @@ public partial class Interpreter
     private readonly List<Variable> _globalVariables = [];
 
     private readonly Dictionary<string, DynamicClass> _dynamicClasses = new();
+    
+    private readonly Dictionary<string, DynamicNamespace> _dynamicNamespaces = new();
 
     private readonly Stack<ASTContext> _contextStack = new();
     private bool HasContext => _contextStack.Count > 0;
@@ -48,6 +50,22 @@ public partial class Interpreter
                 case FunctionNode func:
                     _globalFunctions.Add(func);
                     break;
+                case NamespaceNode namespaceNode:
+                    if (_dynamicNamespaces.TryGetValue(namespaceNode.Name, out var baseNamespace))
+                    {
+                        var @namespace = ToDynamicNamespace(namespaceNode);
+
+                        baseNamespace.Classes.AddRange(@namespace.Classes);
+                        baseNamespace.Functions.AddRange(@namespace.Functions);
+
+                        foreach (var varPair in @namespace.Variables)
+                            baseNamespace.Variables[varPair.Key] = varPair.Value;
+                        
+                        _dynamicNamespaces[namespaceNode.Name] = baseNamespace;
+                    }
+                    else 
+                        _dynamicNamespaces[namespaceNode.Name] = ToDynamicNamespace(namespaceNode);
+                    break;
                 case AssignmentNode assignmentNode:
                     _globalVariables.Add(new Variable(assignmentNode.VariableName, EvaluateExpression(assignmentNode.Value), assignmentNode.IsStatic, assignmentNode.IsPrivate, assignmentNode.IsConst));
                     break;
@@ -64,20 +82,42 @@ public partial class Interpreter
         }
         
         if (function.Parameters.Count == 0)
-            ExecuteFunction(ToDynamicFunction(function), [], null);
+            ExecuteFunction(ToDynamicFunction(function), [], null, null);
         else 
-            ExecuteFunction(ToDynamicFunction(function), [args?.Cast<object?>().ToList()], null);
+            ExecuteFunction(ToDynamicFunction(function), [args?.Cast<object?>().ToList()], null, null);
+    }
+
+    private DynamicNamespace ToDynamicNamespace(NamespaceNode namespaceNode)
+    {
+        var dynamicNamespace = new DynamicNamespace(namespaceNode.Name);
+
+        dynamicNamespace.Classes.AddRange(
+            namespaceNode.Body
+                .OfType<ClassNode>()
+                .Select(ToDynamicClass)
+        );
+
+        dynamicNamespace.Functions.AddRange(namespaceNode.Body.OfType<FunctionNode>());
+        
+        foreach (var assignmentNode in namespaceNode.Body.OfType<AssignmentNode>())
+                dynamicNamespace.Variables[assignmentNode.VariableName!] = new Variable(assignmentNode.VariableName!,
+                    EvaluateExpression(assignmentNode.Value), assignmentNode.IsStatic, assignmentNode
+                        .IsPrivate, assignmentNode.IsConst);
+        
+        return dynamicNamespace;
     }
 
     private DynamicClass ToDynamicClass(ClassNode classNode)
     {
         DynamicClass dynamicClass = new(classNode.Name);
 
-        foreach (var node in classNode.Body)
-            if (node is AssignmentNode assignmentNode)
+        foreach (var assignmentNode in classNode.Body.OfType<AssignmentNode>())
                 dynamicClass.Variables[assignmentNode.VariableName] = new Variable(assignmentNode.VariableName,
                     EvaluateExpression(assignmentNode.Value), assignmentNode.IsStatic, assignmentNode
                     .IsPrivate, assignmentNode.IsConst);
+        
+        // Remove all AssignmentNodes from body
+        classNode.Body.RemoveAll(node => node is AssignmentNode);
 
         dynamicClass.Body = classNode.Body;
 
@@ -113,7 +153,7 @@ public partial class Interpreter
         _contextStack.Push(context);
     }
 
-    private object? ExecuteFunction(DynamicFunction? function, List<object?> arguments, DynamicClass? ownerClass)
+    private object? ExecuteFunction(DynamicFunction? function, List<object?> arguments, DynamicClass? ownerClass, DynamicNamespace? ownerNamespace)
     {
         if (function is null)
             return null;
@@ -349,7 +389,6 @@ public partial class Interpreter
             Objects = path.SkipLast(1).ToList(), 
             Arguments = path.SkipLast(1).ElementAt(^1) is FunctionPointerNode ptr ? ptr.Arguments : default,
             Line =  lastNode.Line,
-            LineIndex = lastNode.LineIndex,
             SourceFile = lastNode.SourceFile,
         };
 
@@ -405,7 +444,7 @@ public partial class Interpreter
         var fromClass = GetFunctionFromClass(dClass, "new", args);
         
         if (fromClass.function != null)
-            ExecuteFunction(ToDynamicFunction(fromClass.function), fromClass.Args, dClass);
+            ExecuteFunction(ToDynamicFunction(fromClass.function), fromClass.Args, dClass, null);
 
         return dClass;
     }
@@ -662,7 +701,8 @@ public partial class Interpreter
         var created = ExecuteFunction(
             ToDynamicFunction(createFunction),
             [obj],
-            copy);
+            copy,
+            null);
 
         if (created is not DynamicClass dClass ||
             dClass.ClassName != copy.ClassName)
@@ -720,7 +760,7 @@ public partial class Interpreter
         var result = ExecuteFunction(
             ToDynamicFunction(opFunction),
             [leftClass, rightClass],
-            leftClass);
+            leftClass, null);
 
         if ((result is not DynamicClass dynamicClass || dynamicClass.ClassName != leftClass.ClassName) &&
             binOp.Operator.All(c => c is '+' or '-' or '*' or '/'))
@@ -830,7 +870,7 @@ public partial class Interpreter
                 var leftToString = leftClassStr.Body.OfType<FunctionNode>().FirstOrDefault(f => f.Name == "toString");
 
                 if (leftToString is not null)
-                    left = ExecuteFunction(ToDynamicFunction(leftToString), [left], leftClassStr);
+                    left = ExecuteFunction(ToDynamicFunction(leftToString), [left], leftClassStr, null);
             }
             
             if (right is DynamicClass rightClassStr)
@@ -838,7 +878,7 @@ public partial class Interpreter
                 var rightToString = rightClassStr.Body.OfType<FunctionNode>().FirstOrDefault(f => f.Name == "toString");
 
                 if (rightToString is not null)
-                    right = ExecuteFunction(ToDynamicFunction(rightToString), [right], rightClassStr);
+                    right = ExecuteFunction(ToDynamicFunction(rightToString), [right], rightClassStr, null);
             }
             
             return left.ToString() + right.ToString();
@@ -917,6 +957,24 @@ public partial class Interpreter
         
         var functions = @class.Body.OfType<FunctionNode>().Where(f => f.Name == name).ToList();
         var values = @class.Variables.Where(f => f.Key == name).Select(var => var.Value.Value);
+        
+        functions.AddRange(values.OfType<FunctionNode>());
+        
+        foreach (var function in functions)
+            // Проверяем, можно ли вызвать эту функцию с данными аргументами
+            if (TryMatchFunction(function, args, out var finalArgs))
+                return (function, finalArgs);
+
+        return (null, null);
+    }
+    
+    private (FunctionNode? function, List<object?> Args) GetFunctionFromNamespace
+        (DynamicNamespace @namespace, string name, List<object?>? args = null)
+    {
+        args ??= [];
+
+        var functions = @namespace.Functions;
+        var values = @namespace.Variables.Where(f => f.Key == name).Select(var => var.Value.Value);
         
         functions.AddRange(values.OfType<FunctionNode>());
         

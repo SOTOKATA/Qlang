@@ -1,13 +1,12 @@
 ﻿namespace Compiler;
 
-public class Token(Tokens token, int line, int index, string value = "")
+public class Token(Tokens token, int line, string value = "")
 {
     public readonly Tokens TokenType = token;
     public readonly string Value = value;
     
     // Debug variables
     public int Line = line;
-    public int Index = index;
     public string SourceFile = "undefined";
 
     public static string TokenToString(Tokens token)

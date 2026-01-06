@@ -1,36 +1,52 @@
 include "$lib/base"
 include "$lib/core"
+include "$lib/meta"
 
 // Class to make operations with console
 class Console: {
     // Print text to console
     function print(let message): {
-        if (Object.isSimplify(message) == false):
-            message = message.toString();
+        if (Object.isSimplify(message) == false): {
+            if (Meta.getMethodListOf(message).contains("toString")): 
+                message = message.toString();
+            else: str(message);
+        }
+            
 
         _native("lib.console.write", _str(message));
     }
 
     // Print text to console with new line
     function println(let message = ""): {
-        if (Object.isSimplify(message) == false):
-            message = message.toString();
+        // if (Object.isSimplify(message) == false): {
+        //     if (Meta.getMethodListOf(message).contains("toString")): 
+        //         message = message.toString();
+        //     else: str(message);
+        // }
+
+        message = str(message);
 
         _native("lib.console.write", _str(message + "\n"));
     }
 
     // Print Verbatim text to console
     function printVerbatim(let message): {
-        if (Object.isSimplify(message) == false):
-            message = message.toString();
+        if (Object.isSimplify(message) == false): {
+            if (Meta.getMethodListOf(message).contains("toString")): 
+                message = message.toString();
+            else: str(message);
+        }
 
         _native("lib.console.write", message);
     }
 
     // Print Verbatim text to console with new line
     function printlnVerbatim(let message = ""): {
-        if (Object.isSimplify(message) == false):
-            message = message.toString();
+        if (Object.isSimplify(message) == false): {
+            if (Meta.getMethodListOf(message).contains("toString")): 
+                message = message.toString();
+            else: str(message);
+        }
 
         _native("lib.console.write", message + _str("\n"));
     }

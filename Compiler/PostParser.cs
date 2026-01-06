@@ -3,7 +3,7 @@ using Core.Exceptions;
 
 namespace Compiler;
 
-public class PostParser
+public static class PostParser
 {
     public static ProgramNode IncludeExtends(ProgramNode program)
     {

@@ -39,7 +39,6 @@ public class Lexer
                 {
                     charToken.Line = lineIndex;
                     charToken.SourceFile = fileName;
-                    charToken.Index = pos;
                     
                     tokens.Add(charToken);
                     pos++;
@@ -58,7 +57,6 @@ public class Lexer
                     {
                         wordToken.Line = lineIndex;
                         wordToken.SourceFile = fileName;
-                        wordToken.Index = pos;
                         
                         tokens.Add(wordToken);
                         continue;
@@ -88,7 +86,7 @@ public class Lexer
         if (IsKeyword(word, out token))
             return true;
         
-        token = new Token(Tokens.Identifier, -1, -1, word);
+        token = new Token(Tokens.Identifier, -1, word);
         return true;
     }
  
@@ -99,7 +97,7 @@ public class Lexer
         
         if (keywords.Contains(word.ToLower()))
         {
-            token = new Token(Tokens.Keyword, -1, -1, word);
+            token = new Token(Tokens.Keyword, -1, word);
             return true;
         }
         
@@ -111,28 +109,28 @@ public class Lexer
     {
         token = keychar switch
         {
-            '[' => new Token(Tokens.LSquareParen, -1, -1),
-            ']' => new Token(Tokens.RSquareParen, -1, -1),
-            '{' => new Token(Tokens.LBrace, -1, -1),
-            '}' => new Token(Tokens.RBrace, -1, -1),
-            ';' => new Token(Tokens.Semicolon, -1, -1),
-            '=' => new Token(Tokens.Equals, -1, -1),
-            '+' => new Token(Tokens.Plus, -1, -1),
-            '-' => new Token(Tokens.Minus, -1, -1),
-            '*' => new Token(Tokens.Star, -1, -1),
-            '/' => new Token(Tokens.Slash, -1, -1),
-            '%' => new Token(Tokens.Percent, -1, -1),
-            '(' => new Token(Tokens.LParen, -1, -1),
-            ')' => new Token(Tokens.RParen, -1, -1),
-            ':' => new Token(Tokens.Colon, -1, -1),
-            ',' => new Token(Tokens.Comma, -1, -1),
-            '.' => new Token(Tokens.Dot, -1, -1),
-            '!' => new Token(Tokens.Not, -1, -1),
-            '>' => new Token(Tokens.Greater, -1, -1),
-            '<' => new Token(Tokens.Less, -1, -1),
-            '|' => new Token(Tokens.Or, -1, -1),
-            '&' => new Token(Tokens.And, -1, -1),
-            '?' => new  Token(Tokens.Question, -1, -1),
+            '[' => new Token(Tokens.LSquareParen, -1),
+            ']' => new Token(Tokens.RSquareParen, -1),
+            '{' => new Token(Tokens.LBrace, -1),
+            '}' => new Token(Tokens.RBrace, -1),
+            ';' => new Token(Tokens.Semicolon, -1),
+            '=' => new Token(Tokens.Equals, -1),
+            '+' => new Token(Tokens.Plus, -1),
+            '-' => new Token(Tokens.Minus, -1),
+            '*' => new Token(Tokens.Star, -1),
+            '/' => new Token(Tokens.Slash, -1),
+            '%' => new Token(Tokens.Percent, -1),
+            '(' => new Token(Tokens.LParen, -1),
+            ')' => new Token(Tokens.RParen, -1),
+            ':' => new Token(Tokens.Colon, -1),
+            ',' => new Token(Tokens.Comma, -1),
+            '.' => new Token(Tokens.Dot, -1),
+            '!' => new Token(Tokens.Not, -1),
+            '>' => new Token(Tokens.Greater, -1),
+            '<' => new Token(Tokens.Less, -1),
+            '|' => new Token(Tokens.Or, -1),
+            '&' => new Token(Tokens.And, -1),
+            '?' => new  Token(Tokens.Question, -1),
             var _ => null
         };
         
