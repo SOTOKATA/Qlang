@@ -5,5 +5,5 @@ include "$lib/base"
 // Problema, programa ne zagruzhaet nuzhnye faily kotorye nahodyantsya v c++.
 
 function main(): {
-    Console.println("Hello, World!");
+    const f = 1 * Oleg;
 }

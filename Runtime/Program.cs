@@ -32,7 +32,7 @@ public class Program
 
         new Interpreter.Interpreter(qliProgram.StringDictionary, 
             qliProgram.NumberDictionary, 
-            LoadDependencies()).Execute(qliProgram.ProgramNode, args.ToList());
+            LoadDependencies()).Execute(qliProgram.ProgramNode, args.ToList()!);
     }
 
     private static NativeFunctionRegistry LoadDependencies()

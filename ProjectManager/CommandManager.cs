@@ -1,5 +1,4 @@
-﻿using Core;
-using Core.Exceptions;
+﻿using Core.Exceptions;
 using ProjectManager.Project;
 
 namespace ProjectManager;
@@ -19,7 +18,7 @@ public static class CommandManager
                     Run(args.Skip(1).ToList()!);
                     return;
                 case ["update"]:
-                    ConsoleLogger.Info("Qlang has the latest version");
+                    ConsoleLogger.Info("Now this function is not supported");
                     return;
                 case ["build"]:
                     Build();
@@ -33,14 +32,20 @@ public static class CommandManager
                 case ["help"]:
                     Help();
                     return;
-                case ["proj-info"]:
+                case ["info"]:
                     WriteProjectInfo();
+                    return;
+                case ["echo", ..]:
+                    ConsoleLogger.Info(string.Join(" ", args.Skip(1)));
                     return;
                 case []:
                     Qlang();
                     return;
                 default:
-                    ExceptionManager.ThrowMessage($"Unknown command: '{string.Join(" ", args)}'");
+                    ExceptionManager.ThrowMessage($"""
+                                                   Unknown command: '{string.Join(" ", args)}'
+                                                   To get information about commands, type 'ql help'.
+                                                   """);
                     return;
             }
         }
@@ -53,10 +58,7 @@ public static class CommandManager
         // }
         catch (QlangRuntimeException e)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("Runtime error: ");
-            Console.ResetColor();
-            Console.WriteLine(e);
+            ConsoleLogger.Log("Runtime error: ", e.ToString(), ConsoleColor.Red);
             Thread.Sleep(2000);
         }
         catch (ProjectException e)
@@ -90,7 +92,7 @@ public static class CommandManager
         var proj = Project.Project.LoadProject(Path.Combine(Directory.GetCurrentDirectory(),
             "project.settings.json"));
 
-        return proj ?? throw new Exception("Project is not found");
+        return proj ?? throw new ProjectException("Project is not found");
     }
 
     private static void WriteProjectInfo()
@@ -104,14 +106,14 @@ public static class CommandManager
 
         if (props is not null)
         {
-            values.AddRange(props.Values.Select(var => var is null ? "<null>" : var.ToString()).ToList());
+            values.AddRange(props.Values.Select(var => var is null ? "<null>" : var.ToString()).ToList()!);
             names.AddRange(props.Keys.ToList());
         }
 
         if (compileProps is not null)
         {
             names.AddRange(compileProps.Keys.ToList());
-            values.AddRange(compileProps.Values.Select(var => var is null ? "<null>" : var.ToString()).ToList());
+            values.AddRange(compileProps.Values.Select(var => var is null ? "<null>" : var.ToString()).ToList()!);
         }
 
         if (names.Count != values.Count)
@@ -120,20 +122,16 @@ public static class CommandManager
             return;
         }
         
-        var output = new List<string>();
-        for (var index = 0; index < names.Count; index++)
+        var table = new List<List<string>>
         {
-            output.Add(names[index]);
-            output.Add(values[index]);
-        }
+            new() { "Parameter name", "Parameter value" }
+        };
+        table.AddRange(names.Select((t, index) => (List<string>)[t, values[index]]));
 
-        
+
         Console.WriteLine($"""
-                           Information about project: 
-                           {TableCreator.Create([
-                               ["Name", "Value"],
-                               output
-                           ])}
+                           Information about project '{project.Settings.GetString("name")}':
+                           {TableCreator.Create(table, [":"])}
                            """);
     }
 
@@ -199,6 +197,11 @@ public static class CommandManager
                     new TableCell("[param]", ConsoleColor.DarkGray),
                     new TableCell("Get value of param by name (compiler options)")
                 ],
+                [
+                    new TableCell("info", ConsoleColor.Yellow),
+                    new TableCell(""),
+                    new TableCell("Write's information about current project")
+                ]
             ]
         ));
     }
@@ -217,7 +220,7 @@ public static class CommandManager
         Console.WriteLine("Program information");
         Console.WriteLine(TableCreator.Create([
             ["Path", ": " + (Environment.ProcessPath ?? "Undefined")],
-            ["Lib path", ": " + Path.Combine(Path.GetDirectoryName(Environment.ProcessPath), "lib")],
+            ["Lib path", ": " + Path.Combine(Path.GetDirectoryName(Environment.ProcessPath)!, "lib")]
         ]));
 
         ConsoleLogger.Info("Type 'ql help' to get information about available commands.");

@@ -11,12 +11,18 @@ public static class ConsoleLogger
             if (action != "")
             {
                 Console.ForegroundColor = color;
-                Console.Write(action + ": ");
+                Console.Write(action.ToLower() + ": ");
                 Console.ResetColor();
             }
 
             Console.WriteLine(line);
         }
+    }
+
+    // Write with unhandled action
+    public static void Log(string action, string message, ConsoleColor color = default)
+    {
+        _Log(action, message, color);
     }
 
     public static void Info(string message)
