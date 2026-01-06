@@ -1,6 +1,8 @@
-﻿using Core;
+﻿using System.Diagnostics;
+using Core;
 using Core.AST;
 using Core.Native;
+using ProjectManager.Project;
 
 namespace ProjectManager;
 
@@ -46,7 +48,10 @@ public class QLang
 
     private static void SaveDependencies(QLIProgram qliProgram, string path, string filename)
     {
-        string dirPath =  Path.Combine(path ?? "", filename + ".external.qli");
+        if (qliProgram.ExternalLibraries.Count == 0)
+            return;
+        
+        string dirPath =  Path.Combine(path, filename + ".external.qli");
         string dirDepsPath = Path.Combine(dirPath, "dependents");
         
         if (Directory.Exists(dirPath))
@@ -83,19 +88,27 @@ public class QLang
         if (!File.Exists(path))
             File.Create(path).Close();
         
-        File.Copy(Path.Combine(Path.GetDirectoryName(Environment.ProcessPath), "qli.exe"), Path.Combine(pathToFile ?? "", "build", Path.GetFileNameWithoutExtension(filePath) + ".exe"), true);
+        File.Copy(Path.Combine(Path.GetDirectoryName(Environment.ProcessPath), "qli" + OS.GetExecutableExtension()), Path.Combine(pathToFile ?? "", "build", Path.GetFileNameWithoutExtension(filePath) + OS.GetExecutableExtension()), true);
         
         File.WriteAllText(path, json);
     }
 
-    public void Run(List<string?>? args)
+    public void Run(List<string?>? args, string filename)
     {
         // TODO: Runtime execution (by build/program.exe)
-        if (_programNode == null)
-            throw new Exception("Program Node is null (program is not compiled)");
-        
-        global::Interpreter.Interpreter interpreter = new(_stringDictionary, _numberDictionary, new NativeFunctionRegistry());
-        
-        interpreter.Execute(_programNode, args);
+
+        string exePath = Path.Combine("build", filename + OS.GetExecutableExtension());
+        string resourcePath = Path.Combine("build", filename + ".resource.qli");
+
+        if (!File.Exists(exePath) || !File.Exists(resourcePath))
+            throw new ProjectException($"Files '{Path.GetFileName(exePath)}' and '{Path.GetFileName(resourcePath)}' is not found.\nProject is not compiled");
+
+        Console.WriteLine();
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = "cmd.exe",
+            Arguments = $"/c \"{exePath}\" {args}",
+        });
+
     }
 }

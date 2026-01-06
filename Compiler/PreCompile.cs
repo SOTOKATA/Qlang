@@ -190,9 +190,6 @@ public static class PreCompile
         
         dependencies.Add(qliLib);
 
-        for (int index = 0; index < dependencies.Count; index++)
-            Console.WriteLine($"{index}:\n" + string.Join(", ", dependencies[index].MainFilePaths) + "\n" + string.Join(", ", dependencies[index].DependenciesFilePaths));
-
         return (dependencies, script);
     }
     

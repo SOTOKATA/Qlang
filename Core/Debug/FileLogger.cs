@@ -4,18 +4,22 @@ public class FileLogger
 {
     private string _filePath;
 
-    public static bool Debug;
+    public static bool Debug = false;
     
     // Disabled because of using function SetPath what set's path
     #pragma warning restore CS8618 
     #pragma warning disable CS8618
     public FileLogger(string filePath, bool append = false)
     {
-        SetPath(filePath, append);
+        if (Debug)
+            SetPath(filePath, append);
     }
 
     public void SetPath(string path, bool append = false)
     {
+        if (!Debug)
+            return;
+        
         _filePath = path;
         
         if (!Directory.Exists(Path.GetDirectoryName(path)))

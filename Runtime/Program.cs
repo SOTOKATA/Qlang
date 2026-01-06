@@ -12,7 +12,7 @@ public class Program
     {
         Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 
-        var programPath = Path.Combine(Directory.GetCurrentDirectory(), $"{Path.GetFileNameWithoutExtension(Environment.ProcessPath)}.resource.qli");
+        var programPath = Path.Combine(Path.GetDirectoryName(Environment.ProcessPath) ?? "", $"{Path.GetFileNameWithoutExtension(Environment.ProcessPath)}.resource.qli");
         
         if (!File.Exists(programPath))
         {
@@ -37,7 +37,7 @@ public class Program
 
     private static NativeFunctionRegistry LoadDependencies()
     {
-        string dirPath = $"{Path.GetFileNameWithoutExtension(Environment.ProcessPath)}.external.qli";
+        string dirPath = Path.Combine(Path.GetDirectoryName(Environment.ProcessPath) ?? "", $"{Path.GetFileNameWithoutExtension(Environment.ProcessPath)}.external.qli");
         
         // Console.WriteLine("Path to load dependencies: " + dirPath);
         

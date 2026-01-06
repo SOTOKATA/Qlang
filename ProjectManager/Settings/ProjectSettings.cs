@@ -8,7 +8,8 @@ public class ProjectSettings : Settings
         {
             { "path", "" },
             { "name", "" },
-            { "main_file_path", "" }
+            { "main_file_path", "" },
+            { "build_directory", "build" }
         };
     }
 }

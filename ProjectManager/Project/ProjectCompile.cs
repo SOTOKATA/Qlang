@@ -31,6 +31,6 @@ public partial class Project
     public void Run(List<string?>? args)
     {
         if (_qlang.Compile(Path.Combine(Settings.GetString("path"), Settings.GetString("main_file_path")), CompileSettings.GetString("filename")))
-            _qlang.Run(args);
+            _qlang.Run(args, CompileSettings.GetString("filename"));
     }
 }
