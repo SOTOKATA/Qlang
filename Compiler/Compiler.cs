@@ -53,7 +53,7 @@ public class Compiler
         fl.SetPath("Logs\\script_tokenized.js");
 
         var line = "";
-        int indent = 0;
+        var indent = 0;
         foreach (var token in tokens)
         {
             line += $"{token.TokenType}{(token.Value == "" ? "" : ($"({token.Value})"))} ";

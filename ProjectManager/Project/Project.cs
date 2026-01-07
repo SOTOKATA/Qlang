@@ -38,7 +38,7 @@ public partial class Project
         proj.Settings.Set("main_file_path", mainFilePath);
     
         // create main.ql
-        string fullMainFilePath = Path.Combine(projectPath, mainFilePath);
+        var fullMainFilePath = Path.Combine(projectPath, mainFilePath);
         File.Create(fullMainFilePath).Close();
         File.WriteAllText(fullMainFilePath, """
                                             include "$lib/base"
@@ -50,7 +50,7 @@ public partial class Project
     
         proj.SaveProject();
 
-        string settingsPath = Path.Combine(projectPath, "compile.settings.json");
+        var settingsPath = Path.Combine(projectPath, "compile.settings.json");
         File.Create(settingsPath).Close();
         CompileSettings = new CompileSettings(settingsPath, null);
     
@@ -68,8 +68,8 @@ public partial class Project
         var settings = new ProjectSettings(path, ProjectManager.Settings.Settings.LoadDictionary(path));
         
         settings.Set("path", Directory.GetCurrentDirectory());
-        string projectPath = Directory.GetCurrentDirectory();
-        string mainFilePath = settings.GetString("main_file_path");
+        var projectPath = Directory.GetCurrentDirectory();
+        var mainFilePath = settings.GetString("main_file_path");
                 
         if (
             !File.Exists(Path.Combine(projectPath, mainFilePath)) ||
@@ -82,7 +82,7 @@ public partial class Project
             Settings = settings
         };
 
-        string settingsPath = Path.Combine(projectPath, "compile.settings.json");
+        var settingsPath = Path.Combine(projectPath, "compile.settings.json");
         var dict =  JsonConvert.DeserializeObject<Dictionary<string, object?>>(File.ReadAllText(settingsPath));
         CompileSettings = new CompileSettings(settingsPath, dict);
 

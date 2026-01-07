@@ -5944,118 +5944,108 @@ LOG [Parser/Advance Token (Ln:5)]: Keyword class
 LOG [Parser/Advance Token (Ln:5)]: Identifier Console
 LOG [Parser/Advance Token (Ln:5)]: Colon 
 LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, private)
+WARN [Parser/ParseBlock]: IsPrivate = true
+LOG [Parser/Advance Token (Ln:6)]: Keyword private
 LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
-LOG [Parser/Advance Token (Ln:7)]: Keyword function
-LOG [Parser/Advance Token (Ln:7)]: Identifier print
-LOG [Parser/Advance Token (Ln:7)]: LParen 
+LOG [Parser/Advance Token (Ln:6)]: Keyword function
+LOG [Parser/Advance Token (Ln:6)]: Identifier getStr
+LOG [Parser/Advance Token (Ln:6)]: LParen 
 LOG [Parser/ParseVariableDeclaration CompilationProcess]: Parsing variable declaration
-LOG [Parser/Advance Token (Ln:7)]: Keyword let
-LOG [Parser/Advance Token (Ln:7)]: Identifier message
+LOG [Parser/Advance Token (Ln:6)]: Keyword const
+LOG [Parser/Advance Token (Ln:6)]: Identifier message
 LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: message Value: Null)
-LOG [Parser/Advance Token (Ln:7)]: RParen 
-LOG [Parser/Advance Token (Ln:7)]: Colon 
+LOG [Parser/Advance Token (Ln:6)]: RParen 
+LOG [Parser/Advance Token (Ln:6)]: Colon 
 LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
 LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, if)
 LOG [Parser/ParseIf]: CompilationProcess: Parsing if
-LOG [Parser/Advance Token (Ln:8)]: Keyword if
+LOG [Parser/Advance Token (Ln:7)]: Keyword if
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 WARN [Parser/ParsePrimary]: Parsing parents
-LOG [Parser/Advance Token (Ln:8)]: LParen 
+LOG [Parser/Advance Token (Ln:7)]: LParen 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:8)]: Identifier Object
-LOG [Parser/Advance Token (Ln:8)]: Dot 
+LOG [Parser/Advance Token (Ln:7)]: Identifier Object
+LOG [Parser/Advance Token (Ln:7)]: Dot 
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:8)]: Identifier isSimplify
-LOG [Parser/Advance Token (Ln:8)]: LParen 
+LOG [Parser/Advance Token (Ln:7)]: Identifier isNull
+LOG [Parser/Advance Token (Ln:7)]: LParen 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:8)]: Identifier message
+LOG [Parser/Advance Token (Ln:7)]: Identifier message
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:8)]: RParen 
-LOG [Parser/Advance Token (Ln:8)]: Equals 
-LOG [Parser/Advance Token (Ln:8)]: Equals 
+LOG [Parser/Advance Token (Ln:7)]: RParen 
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:7)]: RParen 
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:7)]: Colon 
+LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, return)
+LOG [Parser/ParseReturn]: CompilationProcess: Parsing return
+LOG [Parser/Advance Token (Ln:8)]: Keyword return
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:8)]: Identifier ___STRING_99___
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/ParseReturn]: CompilationProcess.End: Parsing return
+LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
+WARN [Parser/ParseStatement]: Keyword
+WARN [Parser/ParseStatement]: if
+LOG [Parser/ParseIf]: CompilationProcess.End: Parsing if
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, if)
+LOG [Parser/ParseIf]: CompilationProcess: Parsing if
+LOG [Parser/Advance Token (Ln:10)]: Keyword if
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+WARN [Parser/ParsePrimary]: Parsing parents
+LOG [Parser/Advance Token (Ln:10)]: LParen 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:10)]: Identifier Object
+LOG [Parser/Advance Token (Ln:10)]: Dot 
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:10)]: Identifier isSimplify
+LOG [Parser/Advance Token (Ln:10)]: LParen 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:10)]: Identifier message
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:10)]: RParen 
+LOG [Parser/Advance Token (Ln:10)]: Equals 
+LOG [Parser/Advance Token (Ln:10)]: Equals 
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimaryKeywords]: CompilationProcess.End: Parsing primary
-LOG [Parser/Advance Token (Ln:8)]: Keyword false
+LOG [Parser/Advance Token (Ln:10)]: Keyword false
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:8)]: RParen 
+LOG [Parser/Advance Token (Ln:10)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:8)]: Colon 
+LOG [Parser/Advance Token (Ln:10)]: Colon 
 LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
 LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, if)
 LOG [Parser/ParseIf]: CompilationProcess: Parsing if
-LOG [Parser/Advance Token (Ln:9)]: Keyword if
+LOG [Parser/Advance Token (Ln:11)]: Keyword if
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 WARN [Parser/ParsePrimary]: Parsing parents
-LOG [Parser/Advance Token (Ln:9)]: LParen 
+LOG [Parser/Advance Token (Ln:11)]: LParen 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:9)]: Identifier Meta
-LOG [Parser/Advance Token (Ln:9)]: Dot 
+LOG [Parser/Advance Token (Ln:11)]: Identifier Meta
+LOG [Parser/Advance Token (Ln:11)]: Dot 
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:9)]: Identifier getMethodListOf
-LOG [Parser/Advance Token (Ln:9)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:9)]: Identifier message
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:9)]: RParen 
-LOG [Parser/Advance Token (Ln:9)]: Dot 
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:9)]: Identifier contains
-LOG [Parser/Advance Token (Ln:9)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:9)]: Identifier ___STRING_99___
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:9)]: RParen 
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:9)]: RParen 
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:9)]: Colon 
-LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, message)
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:10)]: Identifier message
-LOG [Parser/ParsePrimaryCall]: CompilationProcess.End: Parsing primary (PathAssignmentNode - single)
-LOG [Parser/Advance Token (Ln:10)]: Equals 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:10)]: Identifier message
-LOG [Parser/Advance Token (Ln:10)]: Dot 
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:10)]: Identifier toString
-LOG [Parser/Advance Token (Ln:10)]: LParen 
-LOG [Parser/Advance Token (Ln:10)]: RParen 
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
-LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
-WARN [Parser/ParseStatement]: Keyword
-WARN [Parser/ParseStatement]: else
-LOG [Parser/Advance Token (Ln:11)]: Keyword else
-LOG [Parser/Advance Token (Ln:11)]: Colon 
-LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, str)
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:11)]: Identifier str
+LOG [Parser/Advance Token (Ln:11)]: Identifier getMethodListOf
 LOG [Parser/Advance Token (Ln:11)]: LParen 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
@@ -6063,227 +6053,231 @@ LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/Advance Token (Ln:11)]: Identifier message
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/Advance Token (Ln:11)]: RParen 
+LOG [Parser/Advance Token (Ln:11)]: Dot 
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:11)]: Identifier contains
+LOG [Parser/Advance Token (Ln:11)]: LParen 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:11)]: Identifier ___STRING_100___
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:11)]: RParen 
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:11)]: RParen 
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:11)]: Colon 
+LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, return)
+LOG [Parser/ParseReturn]: CompilationProcess: Parsing return
+LOG [Parser/Advance Token (Ln:12)]: Keyword return
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:12)]: Identifier message
+LOG [Parser/Advance Token (Ln:12)]: Dot 
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:12)]: Identifier toString
+LOG [Parser/Advance Token (Ln:12)]: LParen 
+LOG [Parser/Advance Token (Ln:12)]: RParen 
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/ParseReturn]: CompilationProcess.End: Parsing return
+LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
+WARN [Parser/ParseStatement]: Keyword
+WARN [Parser/ParseStatement]: else
+LOG [Parser/Advance Token (Ln:13)]: Keyword else
+LOG [Parser/Advance Token (Ln:13)]: Colon 
+LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, return)
+LOG [Parser/ParseReturn]: CompilationProcess: Parsing return
+LOG [Parser/Advance Token (Ln:14)]: Keyword return
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:14)]: Identifier str
+LOG [Parser/Advance Token (Ln:14)]: LParen 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:14)]: Identifier message
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:14)]: RParen 
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/ParseReturn]: CompilationProcess.End: Parsing return
+LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
+LOG [Parser/ParseIf]: CompilationProcess.End: Parsing if
+LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
+WARN [Parser/ParseStatement]: Keyword
+WARN [Parser/ParseStatement]: return
+LOG [Parser/ParseIf]: CompilationProcess.End: Parsing if
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, return)
+LOG [Parser/ParseReturn]: CompilationProcess: Parsing return
+LOG [Parser/Advance Token (Ln:17)]: Keyword return
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:17)]: Keyword null
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/ParseReturn]: CompilationProcess.End: Parsing return
+LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
+LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
+LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
+LOG [Parser/Advance Token (Ln:21)]: Keyword function
+LOG [Parser/Advance Token (Ln:21)]: Identifier print
+LOG [Parser/Advance Token (Ln:21)]: LParen 
+LOG [Parser/ParseVariableDeclaration CompilationProcess]: Parsing variable declaration
+LOG [Parser/Advance Token (Ln:21)]: Keyword let
+LOG [Parser/Advance Token (Ln:21)]: Identifier message
+LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: message Value: Null)
+LOG [Parser/Advance Token (Ln:21)]: RParen 
+LOG [Parser/Advance Token (Ln:21)]: Colon 
+LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, message)
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:22)]: Identifier message
+LOG [Parser/ParsePrimaryCall]: CompilationProcess.End: Parsing primary (PathAssignmentNode - single)
+LOG [Parser/Advance Token (Ln:22)]: Equals 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:22)]: Identifier getStr
+LOG [Parser/Advance Token (Ln:22)]: LParen 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:22)]: Identifier message
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:22)]: RParen 
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
-LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
-LOG [Parser/ParseIf]: CompilationProcess.End: Parsing if
-LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
-WARN [Parser/ParseStatement]: Identifier
-WARN [Parser/ParseStatement]: _native
-LOG [Parser/ParseIf]: CompilationProcess.End: Parsing if
 LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, _native)
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:15)]: Identifier _native
-LOG [Parser/Advance Token (Ln:15)]: LParen 
+LOG [Parser/Advance Token (Ln:24)]: Identifier _native
+LOG [Parser/Advance Token (Ln:24)]: LParen 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:15)]: Identifier ___STRING_100___
+LOG [Parser/Advance Token (Ln:24)]: Identifier ___STRING_101___
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:15)]: Comma 
+LOG [Parser/Advance Token (Ln:24)]: Comma 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:15)]: Identifier _str
-LOG [Parser/Advance Token (Ln:15)]: LParen 
+LOG [Parser/Advance Token (Ln:24)]: Identifier _str
+LOG [Parser/Advance Token (Ln:24)]: LParen 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:15)]: Identifier message
+LOG [Parser/Advance Token (Ln:24)]: Identifier message
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:15)]: RParen 
+LOG [Parser/Advance Token (Ln:24)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:15)]: RParen 
+LOG [Parser/Advance Token (Ln:24)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
 LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
 LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
 LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
 LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
-LOG [Parser/Advance Token (Ln:19)]: Keyword function
-LOG [Parser/Advance Token (Ln:19)]: Identifier println
-LOG [Parser/Advance Token (Ln:19)]: LParen 
-LOG [Parser/ParseVariableDeclaration CompilationProcess]: Parsing variable declaration
-LOG [Parser/Advance Token (Ln:19)]: Keyword let
-LOG [Parser/Advance Token (Ln:19)]: Identifier message
-LOG [Parser/Advance Token (Ln:19)]: Equals 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:19)]: Identifier ___STRING_101___
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: message Value: StringRefNode)
-LOG [Parser/Advance Token (Ln:19)]: RParen 
-LOG [Parser/Advance Token (Ln:19)]: Colon 
-LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, message)
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:26)]: Identifier message
-LOG [Parser/ParsePrimaryCall]: CompilationProcess.End: Parsing primary (PathAssignmentNode - single)
-LOG [Parser/Advance Token (Ln:26)]: Equals 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:26)]: Identifier str
-LOG [Parser/Advance Token (Ln:26)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:26)]: Identifier message
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:26)]: RParen 
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, _native)
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:28)]: Identifier _native
+LOG [Parser/Advance Token (Ln:28)]: Keyword function
+LOG [Parser/Advance Token (Ln:28)]: Identifier println
 LOG [Parser/Advance Token (Ln:28)]: LParen 
+LOG [Parser/ParseVariableDeclaration CompilationProcess]: Parsing variable declaration
+LOG [Parser/Advance Token (Ln:28)]: Keyword let
+LOG [Parser/Advance Token (Ln:28)]: Identifier message
+LOG [Parser/Advance Token (Ln:28)]: Equals 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/Advance Token (Ln:28)]: Identifier ___STRING_102___
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:28)]: Comma 
+LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: message Value: StringRefNode)
+LOG [Parser/Advance Token (Ln:28)]: RParen 
+LOG [Parser/Advance Token (Ln:28)]: Colon 
+LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, message)
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:28)]: Identifier _str
-LOG [Parser/Advance Token (Ln:28)]: LParen 
+LOG [Parser/Advance Token (Ln:29)]: Identifier message
+LOG [Parser/ParsePrimaryCall]: CompilationProcess.End: Parsing primary (PathAssignmentNode - single)
+LOG [Parser/Advance Token (Ln:29)]: Equals 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:28)]: Identifier message
-LOG [Parser/Advance Token (Ln:28)]: Plus 
+LOG [Parser/Advance Token (Ln:29)]: Identifier getStr
+LOG [Parser/Advance Token (Ln:29)]: LParen 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:28)]: Identifier ___STRING_103___
+LOG [Parser/Advance Token (Ln:29)]: Identifier message
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:28)]: RParen 
+LOG [Parser/Advance Token (Ln:29)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:28)]: RParen 
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, _native)
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:31)]: Identifier _native
+LOG [Parser/Advance Token (Ln:31)]: LParen 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:31)]: Identifier ___STRING_103___
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:31)]: Comma 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:31)]: Identifier _str
+LOG [Parser/Advance Token (Ln:31)]: LParen 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:31)]: Identifier message
+LOG [Parser/Advance Token (Ln:31)]: Plus 
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:31)]: Identifier ___STRING_104___
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:31)]: RParen 
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:31)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
 LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
 LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
 LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
 LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
-LOG [Parser/Advance Token (Ln:32)]: Keyword function
-LOG [Parser/Advance Token (Ln:32)]: Identifier printVerbatim
-LOG [Parser/Advance Token (Ln:32)]: LParen 
+LOG [Parser/Advance Token (Ln:35)]: Keyword function
+LOG [Parser/Advance Token (Ln:35)]: Identifier printVerbatim
+LOG [Parser/Advance Token (Ln:35)]: LParen 
 LOG [Parser/ParseVariableDeclaration CompilationProcess]: Parsing variable declaration
-LOG [Parser/Advance Token (Ln:32)]: Keyword let
-LOG [Parser/Advance Token (Ln:32)]: Identifier message
+LOG [Parser/Advance Token (Ln:35)]: Keyword let
+LOG [Parser/Advance Token (Ln:35)]: Identifier message
 LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: message Value: Null)
-LOG [Parser/Advance Token (Ln:32)]: RParen 
-LOG [Parser/Advance Token (Ln:32)]: Colon 
-LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, if)
-LOG [Parser/ParseIf]: CompilationProcess: Parsing if
-LOG [Parser/Advance Token (Ln:33)]: Keyword if
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-WARN [Parser/ParsePrimary]: Parsing parents
-LOG [Parser/Advance Token (Ln:33)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:33)]: Identifier Object
-LOG [Parser/Advance Token (Ln:33)]: Dot 
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:33)]: Identifier isSimplify
-LOG [Parser/Advance Token (Ln:33)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:33)]: Identifier message
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:33)]: RParen 
-LOG [Parser/Advance Token (Ln:33)]: Equals 
-LOG [Parser/Advance Token (Ln:33)]: Equals 
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimaryKeywords]: CompilationProcess.End: Parsing primary
-LOG [Parser/Advance Token (Ln:33)]: Keyword false
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:33)]: RParen 
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:33)]: Colon 
-LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, if)
-LOG [Parser/ParseIf]: CompilationProcess: Parsing if
-LOG [Parser/Advance Token (Ln:34)]: Keyword if
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-WARN [Parser/ParsePrimary]: Parsing parents
-LOG [Parser/Advance Token (Ln:34)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:34)]: Identifier Meta
-LOG [Parser/Advance Token (Ln:34)]: Dot 
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:34)]: Identifier getMethodListOf
-LOG [Parser/Advance Token (Ln:34)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:34)]: Identifier message
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:34)]: RParen 
-LOG [Parser/Advance Token (Ln:34)]: Dot 
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:34)]: Identifier contains
-LOG [Parser/Advance Token (Ln:34)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:34)]: Identifier ___STRING_104___
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:34)]: RParen 
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:34)]: RParen 
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:34)]: Colon 
+LOG [Parser/Advance Token (Ln:35)]: RParen 
+LOG [Parser/Advance Token (Ln:35)]: Colon 
 LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
 LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, message)
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:35)]: Identifier message
+LOG [Parser/Advance Token (Ln:36)]: Identifier message
 LOG [Parser/ParsePrimaryCall]: CompilationProcess.End: Parsing primary (PathAssignmentNode - single)
-LOG [Parser/Advance Token (Ln:35)]: Equals 
+LOG [Parser/Advance Token (Ln:36)]: Equals 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:35)]: Identifier message
-LOG [Parser/Advance Token (Ln:35)]: Dot 
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:35)]: Identifier toString
-LOG [Parser/Advance Token (Ln:35)]: LParen 
-LOG [Parser/Advance Token (Ln:35)]: RParen 
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
-LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
-WARN [Parser/ParseStatement]: Keyword
-WARN [Parser/ParseStatement]: else
-LOG [Parser/Advance Token (Ln:36)]: Keyword else
-LOG [Parser/Advance Token (Ln:36)]: Colon 
-LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, str)
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:36)]: Identifier str
+LOG [Parser/Advance Token (Ln:36)]: Identifier getStr
 LOG [Parser/Advance Token (Ln:36)]: LParen 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
@@ -6292,188 +6286,125 @@ LOG [Parser/Advance Token (Ln:36)]: Identifier message
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/Advance Token (Ln:36)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
-LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
-LOG [Parser/ParseIf]: CompilationProcess.End: Parsing if
-LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
-WARN [Parser/ParseStatement]: Identifier
-WARN [Parser/ParseStatement]: _native
-LOG [Parser/ParseIf]: CompilationProcess.End: Parsing if
 LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, _native)
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:39)]: Identifier _native
-LOG [Parser/Advance Token (Ln:39)]: LParen 
+LOG [Parser/Advance Token (Ln:38)]: Identifier _native
+LOG [Parser/Advance Token (Ln:38)]: LParen 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:39)]: Identifier ___STRING_105___
+LOG [Parser/Advance Token (Ln:38)]: Identifier ___STRING_105___
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:39)]: Comma 
+LOG [Parser/Advance Token (Ln:38)]: Comma 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:39)]: Identifier message
+LOG [Parser/Advance Token (Ln:38)]: Identifier message
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:39)]: RParen 
+LOG [Parser/Advance Token (Ln:38)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
 LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
 LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
 LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
 LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
-LOG [Parser/Advance Token (Ln:43)]: Keyword function
-LOG [Parser/Advance Token (Ln:43)]: Identifier printlnVerbatim
-LOG [Parser/Advance Token (Ln:43)]: LParen 
+LOG [Parser/Advance Token (Ln:42)]: Keyword function
+LOG [Parser/Advance Token (Ln:42)]: Identifier printlnVerbatim
+LOG [Parser/Advance Token (Ln:42)]: LParen 
 LOG [Parser/ParseVariableDeclaration CompilationProcess]: Parsing variable declaration
-LOG [Parser/Advance Token (Ln:43)]: Keyword let
+LOG [Parser/Advance Token (Ln:42)]: Keyword let
+LOG [Parser/Advance Token (Ln:42)]: Identifier message
+LOG [Parser/Advance Token (Ln:42)]: Equals 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:42)]: Identifier ___STRING_106___
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: message Value: StringRefNode)
+LOG [Parser/Advance Token (Ln:42)]: RParen 
+LOG [Parser/Advance Token (Ln:42)]: Colon 
+LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, message)
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/Advance Token (Ln:43)]: Identifier message
+LOG [Parser/ParsePrimaryCall]: CompilationProcess.End: Parsing primary (PathAssignmentNode - single)
 LOG [Parser/Advance Token (Ln:43)]: Equals 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:43)]: Identifier ___STRING_106___
+LOG [Parser/Advance Token (Ln:43)]: Identifier getStr
+LOG [Parser/Advance Token (Ln:43)]: LParen 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:43)]: Identifier message
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: message Value: StringRefNode)
 LOG [Parser/Advance Token (Ln:43)]: RParen 
-LOG [Parser/Advance Token (Ln:43)]: Colon 
-LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, if)
-LOG [Parser/ParseIf]: CompilationProcess: Parsing if
-LOG [Parser/Advance Token (Ln:44)]: Keyword if
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-WARN [Parser/ParsePrimary]: Parsing parents
-LOG [Parser/Advance Token (Ln:44)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:44)]: Identifier Object
-LOG [Parser/Advance Token (Ln:44)]: Dot 
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:44)]: Identifier isSimplify
-LOG [Parser/Advance Token (Ln:44)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:44)]: Identifier message
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:44)]: RParen 
-LOG [Parser/Advance Token (Ln:44)]: Equals 
-LOG [Parser/Advance Token (Ln:44)]: Equals 
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimaryKeywords]: CompilationProcess.End: Parsing primary
-LOG [Parser/Advance Token (Ln:44)]: Keyword false
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:44)]: RParen 
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:44)]: Colon 
-LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, if)
-LOG [Parser/ParseIf]: CompilationProcess: Parsing if
-LOG [Parser/Advance Token (Ln:45)]: Keyword if
+LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, _native)
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-WARN [Parser/ParsePrimary]: Parsing parents
-LOG [Parser/Advance Token (Ln:45)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:45)]: Identifier Meta
-LOG [Parser/Advance Token (Ln:45)]: Dot 
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:45)]: Identifier getMethodListOf
-LOG [Parser/Advance Token (Ln:45)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:45)]: Identifier message
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:45)]: RParen 
-LOG [Parser/Advance Token (Ln:45)]: Dot 
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:45)]: Identifier contains
+LOG [Parser/Advance Token (Ln:45)]: Identifier _native
 LOG [Parser/Advance Token (Ln:45)]: LParen 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/Advance Token (Ln:45)]: Identifier ___STRING_107___
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:45)]: Comma 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:45)]: Identifier message
+LOG [Parser/Advance Token (Ln:45)]: Plus 
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:45)]: Identifier _str
+LOG [Parser/Advance Token (Ln:45)]: LParen 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:45)]: Identifier ___STRING_108___
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/Advance Token (Ln:45)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/Advance Token (Ln:45)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:45)]: Colon 
-LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, message)
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:46)]: Identifier message
-LOG [Parser/ParsePrimaryCall]: CompilationProcess.End: Parsing primary (PathAssignmentNode - single)
-LOG [Parser/Advance Token (Ln:46)]: Equals 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:46)]: Identifier message
-LOG [Parser/Advance Token (Ln:46)]: Dot 
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:46)]: Identifier toString
-LOG [Parser/Advance Token (Ln:46)]: LParen 
-LOG [Parser/Advance Token (Ln:46)]: RParen 
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
 LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
-WARN [Parser/ParseStatement]: Keyword
-WARN [Parser/ParseStatement]: else
-LOG [Parser/Advance Token (Ln:47)]: Keyword else
-LOG [Parser/Advance Token (Ln:47)]: Colon 
+LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
+LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
+LOG [Parser/Advance Token (Ln:49)]: Keyword function
+LOG [Parser/Advance Token (Ln:49)]: Identifier readln
+LOG [Parser/Advance Token (Ln:49)]: LParen 
+LOG [Parser/Advance Token (Ln:49)]: RParen 
+LOG [Parser/Advance Token (Ln:49)]: Colon 
 LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, str)
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, return)
+LOG [Parser/ParseReturn]: CompilationProcess: Parsing return
+LOG [Parser/Advance Token (Ln:50)]: Keyword return
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:47)]: Identifier str
-LOG [Parser/Advance Token (Ln:47)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/Advance Token (Ln:50)]: Identifier String
+LOG [Parser/Advance Token (Ln:50)]: Dot 
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:47)]: Identifier message
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:47)]: RParen 
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
-LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
-LOG [Parser/ParseIf]: CompilationProcess.End: Parsing if
-LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
-WARN [Parser/ParseStatement]: Identifier
-WARN [Parser/ParseStatement]: _native
-LOG [Parser/ParseIf]: CompilationProcess.End: Parsing if
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, _native)
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:50)]: Identifier _native
+LOG [Parser/Advance Token (Ln:50)]: Identifier new
 LOG [Parser/Advance Token (Ln:50)]: LParen 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:50)]: Identifier ___STRING_108___
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:50)]: Comma 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:50)]: Identifier message
-LOG [Parser/Advance Token (Ln:50)]: Plus 
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:50)]: Identifier _str
+LOG [Parser/Advance Token (Ln:50)]: Identifier _native
 LOG [Parser/Advance Token (Ln:50)]: LParen 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
@@ -6484,139 +6415,133 @@ LOG [Parser/Advance Token (Ln:50)]: RParen
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/Advance Token (Ln:50)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/ParseReturn]: CompilationProcess.End: Parsing return
+LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
+LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
+LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
+LOG [Parser/Advance Token (Ln:53)]: Keyword function
+LOG [Parser/Advance Token (Ln:53)]: Identifier readkey
+LOG [Parser/Advance Token (Ln:53)]: LParen 
+LOG [Parser/ParseVariableDeclaration CompilationProcess]: Parsing variable declaration
+LOG [Parser/Advance Token (Ln:53)]: Keyword const
+LOG [Parser/Advance Token (Ln:53)]: Less 
+LOG [Parser/Advance Token (Ln:53)]: Identifier Boolean
+LOG [Parser/Advance Token (Ln:53)]: Greater 
+LOG [Parser/Advance Token (Ln:53)]: Identifier intercept
+LOG [Parser/Advance Token (Ln:53)]: Equals 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimaryKeywords]: CompilationProcess.End: Parsing primary
+LOG [Parser/Advance Token (Ln:53)]: Keyword false
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: intercept Value: BooleanNode)
+LOG [Parser/Advance Token (Ln:53)]: RParen 
+LOG [Parser/Advance Token (Ln:53)]: Colon 
+LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, return)
+LOG [Parser/ParseReturn]: CompilationProcess: Parsing return
+LOG [Parser/Advance Token (Ln:54)]: Keyword return
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:54)]: Identifier String
+LOG [Parser/Advance Token (Ln:54)]: Dot 
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:54)]: Identifier new
+LOG [Parser/Advance Token (Ln:54)]: LParen 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:54)]: Identifier _native
+LOG [Parser/Advance Token (Ln:54)]: LParen 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:54)]: Identifier ___STRING_110___
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:54)]: Comma 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:54)]: Identifier intercept
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:54)]: RParen 
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:54)]: RParen 
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/ParseReturn]: CompilationProcess.End: Parsing return
+LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
+LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
+LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
+LOG [Parser/Advance Token (Ln:57)]: Keyword function
+LOG [Parser/Advance Token (Ln:57)]: Identifier isKeyAvailable
+LOG [Parser/Advance Token (Ln:57)]: LParen 
+LOG [Parser/Advance Token (Ln:57)]: RParen 
+LOG [Parser/Advance Token (Ln:57)]: Colon 
+LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, return)
+LOG [Parser/ParseReturn]: CompilationProcess: Parsing return
+LOG [Parser/Advance Token (Ln:58)]: Keyword return
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:58)]: Identifier _native
+LOG [Parser/Advance Token (Ln:58)]: LParen 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:58)]: Identifier ___STRING_111___
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:58)]: RParen 
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/ParseReturn]: CompilationProcess.End: Parsing return
+LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
+LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
+LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
+LOG [Parser/Advance Token (Ln:61)]: Keyword function
+LOG [Parser/Advance Token (Ln:61)]: Identifier cursorVisible
+LOG [Parser/Advance Token (Ln:61)]: LParen 
+LOG [Parser/ParseVariableDeclaration CompilationProcess]: Parsing variable declaration
+LOG [Parser/Advance Token (Ln:61)]: Keyword const
+LOG [Parser/Advance Token (Ln:61)]: Less 
+LOG [Parser/Advance Token (Ln:61)]: Identifier Boolean
+LOG [Parser/Advance Token (Ln:61)]: Greater 
+LOG [Parser/Advance Token (Ln:61)]: Identifier visible
+LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: visible Value: Null)
+LOG [Parser/Advance Token (Ln:61)]: RParen 
+LOG [Parser/Advance Token (Ln:61)]: Colon 
+LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, _native)
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:62)]: Identifier _native
+LOG [Parser/Advance Token (Ln:62)]: LParen 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:62)]: Identifier ___STRING_112___
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:62)]: Comma 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:62)]: Identifier visible
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:62)]: RParen 
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
 LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
 LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
 LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
 LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
-LOG [Parser/Advance Token (Ln:54)]: Keyword function
-LOG [Parser/Advance Token (Ln:54)]: Identifier readln
-LOG [Parser/Advance Token (Ln:54)]: LParen 
-LOG [Parser/Advance Token (Ln:54)]: RParen 
-LOG [Parser/Advance Token (Ln:54)]: Colon 
-LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, return)
-LOG [Parser/ParseReturn]: CompilationProcess: Parsing return
-LOG [Parser/Advance Token (Ln:55)]: Keyword return
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:55)]: Identifier String
-LOG [Parser/Advance Token (Ln:55)]: Dot 
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:55)]: Identifier new
-LOG [Parser/Advance Token (Ln:55)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:55)]: Identifier _native
-LOG [Parser/Advance Token (Ln:55)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:55)]: Identifier ___STRING_110___
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:55)]: RParen 
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:55)]: RParen 
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/ParseReturn]: CompilationProcess.End: Parsing return
-LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
-LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
-LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
-LOG [Parser/Advance Token (Ln:58)]: Keyword function
-LOG [Parser/Advance Token (Ln:58)]: Identifier readkey
-LOG [Parser/Advance Token (Ln:58)]: LParen 
-LOG [Parser/ParseVariableDeclaration CompilationProcess]: Parsing variable declaration
-LOG [Parser/Advance Token (Ln:58)]: Keyword const
-LOG [Parser/Advance Token (Ln:58)]: Less 
-LOG [Parser/Advance Token (Ln:58)]: Identifier Boolean
-LOG [Parser/Advance Token (Ln:58)]: Greater 
-LOG [Parser/Advance Token (Ln:58)]: Identifier intercept
-LOG [Parser/Advance Token (Ln:58)]: Equals 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimaryKeywords]: CompilationProcess.End: Parsing primary
-LOG [Parser/Advance Token (Ln:58)]: Keyword false
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: intercept Value: BooleanNode)
-LOG [Parser/Advance Token (Ln:58)]: RParen 
-LOG [Parser/Advance Token (Ln:58)]: Colon 
-LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, return)
-LOG [Parser/ParseReturn]: CompilationProcess: Parsing return
-LOG [Parser/Advance Token (Ln:59)]: Keyword return
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:59)]: Identifier String
-LOG [Parser/Advance Token (Ln:59)]: Dot 
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:59)]: Identifier new
-LOG [Parser/Advance Token (Ln:59)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:59)]: Identifier _native
-LOG [Parser/Advance Token (Ln:59)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:59)]: Identifier ___STRING_111___
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:59)]: Comma 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:59)]: Identifier intercept
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:59)]: RParen 
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:59)]: RParen 
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/ParseReturn]: CompilationProcess.End: Parsing return
-LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
-LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
-LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
-LOG [Parser/Advance Token (Ln:62)]: Keyword function
-LOG [Parser/Advance Token (Ln:62)]: Identifier isKeyAvailable
-LOG [Parser/Advance Token (Ln:62)]: LParen 
-LOG [Parser/Advance Token (Ln:62)]: RParen 
-LOG [Parser/Advance Token (Ln:62)]: Colon 
-LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, return)
-LOG [Parser/ParseReturn]: CompilationProcess: Parsing return
-LOG [Parser/Advance Token (Ln:63)]: Keyword return
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:63)]: Identifier _native
-LOG [Parser/Advance Token (Ln:63)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:63)]: Identifier ___STRING_112___
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:63)]: RParen 
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/ParseReturn]: CompilationProcess.End: Parsing return
-LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
-LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
-LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
 LOG [Parser/Advance Token (Ln:66)]: Keyword function
-LOG [Parser/Advance Token (Ln:66)]: Identifier cursorVisible
+LOG [Parser/Advance Token (Ln:66)]: Identifier clear
 LOG [Parser/Advance Token (Ln:66)]: LParen 
-LOG [Parser/ParseVariableDeclaration CompilationProcess]: Parsing variable declaration
-LOG [Parser/Advance Token (Ln:66)]: Keyword const
-LOG [Parser/Advance Token (Ln:66)]: Less 
-LOG [Parser/Advance Token (Ln:66)]: Identifier Boolean
-LOG [Parser/Advance Token (Ln:66)]: Greater 
-LOG [Parser/Advance Token (Ln:66)]: Identifier visible
-LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: visible Value: Null)
 LOG [Parser/Advance Token (Ln:66)]: RParen 
 LOG [Parser/Advance Token (Ln:66)]: Colon 
 LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
@@ -6631,12 +6556,6 @@ LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/Advance Token (Ln:67)]: Identifier ___STRING_113___
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:67)]: Comma 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:67)]: Identifier visible
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/Advance Token (Ln:67)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
@@ -6645,71 +6564,47 @@ LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
 LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
 LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
 LOG [Parser/Advance Token (Ln:71)]: Keyword function
-LOG [Parser/Advance Token (Ln:71)]: Identifier clear
+LOG [Parser/Advance Token (Ln:71)]: Identifier setCursorPosition
 LOG [Parser/Advance Token (Ln:71)]: LParen 
+LOG [Parser/ParseVariableDeclaration CompilationProcess]: Parsing variable declaration
+LOG [Parser/Advance Token (Ln:71)]: Keyword let
+LOG [Parser/Advance Token (Ln:71)]: Less 
+LOG [Parser/Advance Token (Ln:71)]: Identifier Number
+LOG [Parser/Advance Token (Ln:71)]: Greater 
+LOG [Parser/Advance Token (Ln:71)]: Identifier x
+LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: x Value: Null)
+LOG [Parser/Advance Token (Ln:71)]: Comma 
+LOG [Parser/ParseVariableDeclaration CompilationProcess]: Parsing variable declaration
+LOG [Parser/Advance Token (Ln:71)]: Keyword let
+LOG [Parser/Advance Token (Ln:71)]: Less 
+LOG [Parser/Advance Token (Ln:71)]: Identifier Number
+LOG [Parser/Advance Token (Ln:71)]: Greater 
+LOG [Parser/Advance Token (Ln:71)]: Identifier y
+LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: y Value: Null)
 LOG [Parser/Advance Token (Ln:71)]: RParen 
 LOG [Parser/Advance Token (Ln:71)]: Colon 
-LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, _native)
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:72)]: Identifier _native
-LOG [Parser/Advance Token (Ln:72)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:72)]: Identifier ___STRING_114___
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:72)]: RParen 
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
-LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
-LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
-LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
-LOG [Parser/Advance Token (Ln:76)]: Keyword function
-LOG [Parser/Advance Token (Ln:76)]: Identifier setCursorPosition
-LOG [Parser/Advance Token (Ln:76)]: LParen 
-LOG [Parser/ParseVariableDeclaration CompilationProcess]: Parsing variable declaration
-LOG [Parser/Advance Token (Ln:76)]: Keyword let
-LOG [Parser/Advance Token (Ln:76)]: Less 
-LOG [Parser/Advance Token (Ln:76)]: Identifier Number
-LOG [Parser/Advance Token (Ln:76)]: Greater 
-LOG [Parser/Advance Token (Ln:76)]: Identifier x
-LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: x Value: Null)
-LOG [Parser/Advance Token (Ln:76)]: Comma 
-LOG [Parser/ParseVariableDeclaration CompilationProcess]: Parsing variable declaration
-LOG [Parser/Advance Token (Ln:76)]: Keyword let
-LOG [Parser/Advance Token (Ln:76)]: Less 
-LOG [Parser/Advance Token (Ln:76)]: Identifier Number
-LOG [Parser/Advance Token (Ln:76)]: Greater 
-LOG [Parser/Advance Token (Ln:76)]: Identifier y
-LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: y Value: Null)
-LOG [Parser/Advance Token (Ln:76)]: RParen 
-LOG [Parser/Advance Token (Ln:76)]: Colon 
 LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
 LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, x)
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:77)]: Identifier x
+LOG [Parser/Advance Token (Ln:72)]: Identifier x
 LOG [Parser/ParsePrimaryCall]: CompilationProcess.End: Parsing primary (PathAssignmentNode - single)
-LOG [Parser/Advance Token (Ln:77)]: Equals 
+LOG [Parser/Advance Token (Ln:72)]: Equals 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:77)]: Identifier Parser
-LOG [Parser/Advance Token (Ln:77)]: Dot 
+LOG [Parser/Advance Token (Ln:72)]: Identifier Parser
+LOG [Parser/Advance Token (Ln:72)]: Dot 
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:77)]: Identifier asInt
-LOG [Parser/Advance Token (Ln:77)]: LParen 
+LOG [Parser/Advance Token (Ln:72)]: Identifier asInt
+LOG [Parser/Advance Token (Ln:72)]: LParen 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:77)]: Identifier x
+LOG [Parser/Advance Token (Ln:72)]: Identifier x
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:77)]: RParen 
+LOG [Parser/Advance Token (Ln:72)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
@@ -6717,26 +6612,69 @@ LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, y
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:78)]: Identifier y
+LOG [Parser/Advance Token (Ln:73)]: Identifier y
 LOG [Parser/ParsePrimaryCall]: CompilationProcess.End: Parsing primary (PathAssignmentNode - single)
-LOG [Parser/Advance Token (Ln:78)]: Equals 
+LOG [Parser/Advance Token (Ln:73)]: Equals 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:78)]: Identifier Parser
-LOG [Parser/Advance Token (Ln:78)]: Dot 
+LOG [Parser/Advance Token (Ln:73)]: Identifier Parser
+LOG [Parser/Advance Token (Ln:73)]: Dot 
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:78)]: Identifier asInt
-LOG [Parser/Advance Token (Ln:78)]: LParen 
+LOG [Parser/Advance Token (Ln:73)]: Identifier asInt
+LOG [Parser/Advance Token (Ln:73)]: LParen 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:78)]: Identifier y
+LOG [Parser/Advance Token (Ln:73)]: Identifier y
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:78)]: RParen 
+LOG [Parser/Advance Token (Ln:73)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, _native)
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:75)]: Identifier _native
+LOG [Parser/Advance Token (Ln:75)]: LParen 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:75)]: Identifier ___STRING_114___
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:75)]: Comma 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:75)]: Identifier x
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:75)]: Comma 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:75)]: Identifier y
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:75)]: RParen 
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
+LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
+LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
+LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
+LOG [Parser/Advance Token (Ln:79)]: Keyword function
+LOG [Parser/Advance Token (Ln:79)]: Identifier setForeColor
+LOG [Parser/Advance Token (Ln:79)]: LParen 
+LOG [Parser/ParseVariableDeclaration CompilationProcess]: Parsing variable declaration
+LOG [Parser/Advance Token (Ln:79)]: Keyword let
+LOG [Parser/Advance Token (Ln:79)]: Less 
+LOG [Parser/Advance Token (Ln:79)]: Identifier String
+LOG [Parser/Advance Token (Ln:79)]: Greater 
+LOG [Parser/Advance Token (Ln:79)]: Identifier color
+LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: color Value: Null)
+LOG [Parser/Advance Token (Ln:79)]: RParen 
+LOG [Parser/Advance Token (Ln:79)]: Colon 
+LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
 LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, _native)
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
@@ -6752,13 +6690,7 @@ LOG [Parser/Advance Token (Ln:80)]: Comma
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:80)]: Identifier x
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:80)]: Comma 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:80)]: Identifier y
+LOG [Parser/Advance Token (Ln:80)]: Identifier color
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/Advance Token (Ln:80)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
@@ -6767,150 +6699,113 @@ LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
 LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
 LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
 LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
-LOG [Parser/Advance Token (Ln:84)]: Keyword function
-LOG [Parser/Advance Token (Ln:84)]: Identifier setForeColor
+LOG [Parser/Advance Token (Ln:83)]: Keyword function
+LOG [Parser/Advance Token (Ln:83)]: Identifier setBackColor
+LOG [Parser/Advance Token (Ln:83)]: LParen 
+LOG [Parser/ParseVariableDeclaration CompilationProcess]: Parsing variable declaration
+LOG [Parser/Advance Token (Ln:83)]: Keyword let
+LOG [Parser/Advance Token (Ln:83)]: Less 
+LOG [Parser/Advance Token (Ln:83)]: Identifier String
+LOG [Parser/Advance Token (Ln:83)]: Greater 
+LOG [Parser/Advance Token (Ln:83)]: Identifier color
+LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: color Value: Null)
+LOG [Parser/Advance Token (Ln:83)]: RParen 
+LOG [Parser/Advance Token (Ln:83)]: Colon 
+LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, _native)
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:84)]: Identifier _native
 LOG [Parser/Advance Token (Ln:84)]: LParen 
-LOG [Parser/ParseVariableDeclaration CompilationProcess]: Parsing variable declaration
-LOG [Parser/Advance Token (Ln:84)]: Keyword let
-LOG [Parser/Advance Token (Ln:84)]: Less 
-LOG [Parser/Advance Token (Ln:84)]: Identifier String
-LOG [Parser/Advance Token (Ln:84)]: Greater 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:84)]: Identifier ___STRING_116___
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
+LOG [Parser/Advance Token (Ln:84)]: Comma 
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/Advance Token (Ln:84)]: Identifier color
-LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: color Value: Null)
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/Advance Token (Ln:84)]: RParen 
-LOG [Parser/Advance Token (Ln:84)]: Colon 
-LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, _native)
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:85)]: Identifier _native
-LOG [Parser/Advance Token (Ln:85)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:85)]: Identifier ___STRING_116___
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:85)]: Comma 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:85)]: Identifier color
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:85)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
 LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
 LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
 LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
 LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
-LOG [Parser/Advance Token (Ln:88)]: Keyword function
-LOG [Parser/Advance Token (Ln:88)]: Identifier setBackColor
+LOG [Parser/Advance Token (Ln:87)]: Keyword function
+LOG [Parser/Advance Token (Ln:87)]: Identifier resetColors
+LOG [Parser/Advance Token (Ln:87)]: LParen 
+LOG [Parser/Advance Token (Ln:87)]: RParen 
+LOG [Parser/Advance Token (Ln:87)]: Colon 
+LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
+LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, _native)
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:88)]: Identifier _native
 LOG [Parser/Advance Token (Ln:88)]: LParen 
-LOG [Parser/ParseVariableDeclaration CompilationProcess]: Parsing variable declaration
-LOG [Parser/Advance Token (Ln:88)]: Keyword let
-LOG [Parser/Advance Token (Ln:88)]: Less 
-LOG [Parser/Advance Token (Ln:88)]: Identifier String
-LOG [Parser/Advance Token (Ln:88)]: Greater 
-LOG [Parser/Advance Token (Ln:88)]: Identifier color
-LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: color Value: Null)
+LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
+LOG [Parser/Advance Token (Ln:88)]: Identifier ___STRING_117___
+LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/Advance Token (Ln:88)]: RParen 
-LOG [Parser/Advance Token (Ln:88)]: Colon 
-LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, _native)
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:89)]: Identifier _native
-LOG [Parser/Advance Token (Ln:89)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:89)]: Identifier ___STRING_117___
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:89)]: Comma 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:89)]: Identifier color
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:89)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
 LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
 LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
 LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
 LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
-LOG [Parser/Advance Token (Ln:92)]: Keyword function
-LOG [Parser/Advance Token (Ln:92)]: Identifier resetColors
-LOG [Parser/Advance Token (Ln:92)]: LParen 
-LOG [Parser/Advance Token (Ln:92)]: RParen 
-LOG [Parser/Advance Token (Ln:92)]: Colon 
-LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Identifier, _native)
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:93)]: Identifier _native
-LOG [Parser/Advance Token (Ln:93)]: LParen 
-LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:93)]: Identifier ___STRING_118___
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:93)]: RParen 
-LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/ParseStatement CompilationProcess]: Ended parsing statement (identifier)
-LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
-LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
-LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
-LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
-LOG [Parser/Advance Token (Ln:95)]: Keyword function
-LOG [Parser/Advance Token (Ln:95)]: Identifier width
-LOG [Parser/Advance Token (Ln:95)]: LParen 
-LOG [Parser/Advance Token (Ln:95)]: RParen 
-LOG [Parser/Advance Token (Ln:95)]: Colon 
+LOG [Parser/Advance Token (Ln:90)]: Keyword function
+LOG [Parser/Advance Token (Ln:90)]: Identifier width
+LOG [Parser/Advance Token (Ln:90)]: LParen 
+LOG [Parser/Advance Token (Ln:90)]: RParen 
+LOG [Parser/Advance Token (Ln:90)]: Colon 
 LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
 LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, return)
 LOG [Parser/ParseReturn]: CompilationProcess: Parsing return
-LOG [Parser/Advance Token (Ln:96)]: Keyword return
+LOG [Parser/Advance Token (Ln:91)]: Keyword return
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:96)]: Identifier _native
-LOG [Parser/Advance Token (Ln:96)]: LParen 
+LOG [Parser/Advance Token (Ln:91)]: Identifier _native
+LOG [Parser/Advance Token (Ln:91)]: LParen 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:96)]: Identifier ___STRING_119___
+LOG [Parser/Advance Token (Ln:91)]: Identifier ___STRING_118___
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:96)]: RParen 
+LOG [Parser/Advance Token (Ln:91)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/ParseReturn]: CompilationProcess.End: Parsing return
 LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
 LOG [Parser/ParseFunction]: CompilationProcess.End: Parsing function
 LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
 LOG [Parser/ParseFunction]: CompilationProcess: Parsing function
-LOG [Parser/Advance Token (Ln:98)]: Keyword function
-LOG [Parser/Advance Token (Ln:98)]: Identifier height
-LOG [Parser/Advance Token (Ln:98)]: LParen 
-LOG [Parser/Advance Token (Ln:98)]: RParen 
-LOG [Parser/Advance Token (Ln:98)]: Colon 
+LOG [Parser/Advance Token (Ln:93)]: Keyword function
+LOG [Parser/Advance Token (Ln:93)]: Identifier height
+LOG [Parser/Advance Token (Ln:93)]: LParen 
+LOG [Parser/Advance Token (Ln:93)]: RParen 
+LOG [Parser/Advance Token (Ln:93)]: Colon 
 LOG [Parser/ParseBlock]: CompilationProcess: Parsing block
 LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, return)
 LOG [Parser/ParseReturn]: CompilationProcess: Parsing return
-LOG [Parser/Advance Token (Ln:99)]: Keyword return
+LOG [Parser/Advance Token (Ln:94)]: Keyword return
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:99)]: Identifier _native
-LOG [Parser/Advance Token (Ln:99)]: LParen 
+LOG [Parser/Advance Token (Ln:94)]: Identifier _native
+LOG [Parser/Advance Token (Ln:94)]: LParen 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:99)]: Identifier ___STRING_120___
+LOG [Parser/Advance Token (Ln:94)]: Identifier ___STRING_119___
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
-LOG [Parser/Advance Token (Ln:99)]: RParen 
+LOG [Parser/Advance Token (Ln:94)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/ParseReturn]: CompilationProcess.End: Parsing return
 LOG [Parser/ParseBlock]: CompilationProcess.End: Parsing block
@@ -7017,7 +6912,7 @@ LOG [Parser/Advance Token (Ln:21)]: Equals
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:21)]: Identifier ___STRING_122___
+LOG [Parser/Advance Token (Ln:21)]: Identifier ___STRING_121___
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: var Value: StringRefNode)
 LOG [Parser/ParseStatement CompilationProcess]: Parsing statement (Keyword, function)
@@ -7040,7 +6935,7 @@ LOG [Parser/Advance Token (Ln:24)]: LParen
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:24)]: Identifier ___STRING_123___
+LOG [Parser/Advance Token (Ln:24)]: Identifier ___STRING_122___
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/Advance Token (Ln:24)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
@@ -7080,7 +6975,7 @@ LOG [Parser/Advance Token (Ln:31)]: LParen
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:31)]: Identifier ___STRING_124___
+LOG [Parser/Advance Token (Ln:31)]: Identifier ___STRING_123___
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/Advance Token (Ln:31)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression

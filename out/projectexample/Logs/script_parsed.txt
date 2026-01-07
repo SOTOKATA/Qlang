@@ -4861,9 +4861,33 @@ False
 [--]Console
 
 [--]@FunctionNode:
-[--]print
+[--]getStr
 [--]False
 [--]System.Collections.Generic.List`1[Core.AST.AssignmentNode]
+
+[--]@IfNode:
+[--]@CallNode:
+
+[--]@ObjectPointerNode:
+[--]Object
+[--]@FunctionPointerNode:
+[--]isNull
+
+[--]@CallNode:
+
+[--]@ObjectPointerNode:
+[--]message
+
+
+[--]@CallNode:
+
+[--]@ObjectPointerNode:
+[--]message
+
+
+[--]@ReturnNode:
+[--]@StringRefNode:
+[--]99
 
 [--]@IfNode:
 [--]@BinaryOperationNode:
@@ -4905,13 +4929,12 @@ False
 [--]contains
 
 [--]@StringRefNode:
-[--]99
+[--]100
 
 [--]@StringRefNode:
-[--]99
+[--]100
 
-[--]@AssignmentNode:
-[--]message
+[--]@ReturnNode:
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -4920,9 +4943,8 @@ False
 [--]toString
 
 
-[--]False
-[--]False
 
+[--]@ReturnNode:
 [--]@CallNode:
 
 [--]@FunctionPointerNode:
@@ -4940,13 +4962,40 @@ False
 [--]message
 
 
+[--]@ReturnNode:
+NullNode
+[--]@FunctionNode:
+[--]print
+[--]False
+[--]System.Collections.Generic.List`1[Core.AST.AssignmentNode]
+
+[--]@AssignmentNode:
+[--]message
+[--]@CallNode:
+
+[--]@FunctionPointerNode:
+[--]getStr
+
+[--]@CallNode:
+
+[--]@ObjectPointerNode:
+[--]message
+
+
+[--]@CallNode:
+
+[--]@ObjectPointerNode:
+[--]message
+
+[--]False
+[--]False
 [--]@CallNode:
 
 [--]@FunctionPointerNode:
 [--]_native
 
 [--]@StringRefNode:
-[--]100
+[--]101
 [--]@CallNode:
 
 [--]@FunctionPointerNode:
@@ -4965,7 +5014,7 @@ False
 
 
 [--]@StringRefNode:
-[--]100
+[--]101
 [--]@CallNode:
 
 [--]@FunctionPointerNode:
@@ -4992,7 +5041,7 @@ False
 [--]@CallNode:
 
 [--]@FunctionPointerNode:
-[--]str
+[--]getStr
 
 [--]@CallNode:
 
@@ -5013,7 +5062,7 @@ False
 [--]_native
 
 [--]@StringRefNode:
-[--]102
+[--]103
 [--]@CallNode:
 
 [--]@FunctionPointerNode:
@@ -5027,7 +5076,7 @@ False
 
 [--]Plus
 [--]@StringRefNode:
-[--]103
+[--]104
 
 [--]@BinaryOperationNode:
 [--]@CallNode:
@@ -5037,10 +5086,10 @@ False
 
 [--]Plus
 [--]@StringRefNode:
-[--]103
+[--]104
 
 [--]@StringRefNode:
-[--]102
+[--]103
 [--]@CallNode:
 
 [--]@FunctionPointerNode:
@@ -5054,7 +5103,7 @@ False
 
 [--]Plus
 [--]@StringRefNode:
-[--]103
+[--]104
 
 [--]@BinaryOperationNode:
 [--]@CallNode:
@@ -5064,87 +5113,32 @@ False
 
 [--]Plus
 [--]@StringRefNode:
-[--]103
+[--]104
 [--]@FunctionNode:
 [--]printVerbatim
 [--]False
 [--]System.Collections.Generic.List`1[Core.AST.AssignmentNode]
 
-[--]@IfNode:
-[--]@BinaryOperationNode:
-[--]@CallNode:
-
-[--]@ObjectPointerNode:
-[--]Object
-[--]@FunctionPointerNode:
-[--]isSimplify
-
-[--]@CallNode:
-
-[--]@ObjectPointerNode:
-[--]message
-
-
-[--]@CallNode:
-
-[--]@ObjectPointerNode:
-[--]message
-
-[--]==
-False
-
-[--]@IfNode:
-[--]@CallNode:
-
-[--]@ObjectPointerNode:
-[--]Meta
-[--]@FunctionPointerNode:
-[--]getMethodListOf
-
-[--]@CallNode:
-
-[--]@ObjectPointerNode:
-[--]message
-
-[--]@FunctionPointerNode:
-[--]contains
-
-[--]@StringRefNode:
-[--]104
-
-[--]@StringRefNode:
-[--]104
-
 [--]@AssignmentNode:
 [--]message
 [--]@CallNode:
 
+[--]@FunctionPointerNode:
+[--]getStr
+
+[--]@CallNode:
+
 [--]@ObjectPointerNode:
 [--]message
-[--]@FunctionPointerNode:
-[--]toString
 
+
+[--]@CallNode:
+
+[--]@ObjectPointerNode:
+[--]message
 
 [--]False
 [--]False
-
-[--]@CallNode:
-
-[--]@FunctionPointerNode:
-[--]str
-
-[--]@CallNode:
-
-[--]@ObjectPointerNode:
-[--]message
-
-
-[--]@CallNode:
-
-[--]@ObjectPointerNode:
-[--]message
-
-
 [--]@CallNode:
 
 [--]@FunctionPointerNode:
@@ -5170,88 +5164,33 @@ False
 [--]False
 [--]System.Collections.Generic.List`1[Core.AST.AssignmentNode]
 
-[--]@IfNode:
-[--]@BinaryOperationNode:
-[--]@CallNode:
-
-[--]@ObjectPointerNode:
-[--]Object
-[--]@FunctionPointerNode:
-[--]isSimplify
-
-[--]@CallNode:
-
-[--]@ObjectPointerNode:
-[--]message
-
-
-[--]@CallNode:
-
-[--]@ObjectPointerNode:
-[--]message
-
-[--]==
-False
-
-[--]@IfNode:
-[--]@CallNode:
-
-[--]@ObjectPointerNode:
-[--]Meta
-[--]@FunctionPointerNode:
-[--]getMethodListOf
-
-[--]@CallNode:
-
-[--]@ObjectPointerNode:
-[--]message
-
-[--]@FunctionPointerNode:
-[--]contains
-
-[--]@StringRefNode:
-[--]107
-
-[--]@StringRefNode:
-[--]107
-
 [--]@AssignmentNode:
 [--]message
 [--]@CallNode:
 
+[--]@FunctionPointerNode:
+[--]getStr
+
+[--]@CallNode:
+
 [--]@ObjectPointerNode:
 [--]message
-[--]@FunctionPointerNode:
-[--]toString
 
+
+[--]@CallNode:
+
+[--]@ObjectPointerNode:
+[--]message
 
 [--]False
 [--]False
-
-[--]@CallNode:
-
-[--]@FunctionPointerNode:
-[--]str
-
-[--]@CallNode:
-
-[--]@ObjectPointerNode:
-[--]message
-
-
-[--]@CallNode:
-
-[--]@ObjectPointerNode:
-[--]message
-
-
 [--]@CallNode:
 
 [--]@FunctionPointerNode:
 [--]_native
 
 [--]@StringRefNode:
-[--]108
+[--]107
 [--]@BinaryOperationNode:
 [--]@CallNode:
 
@@ -5265,13 +5204,13 @@ False
 [--]_str
 
 [--]@StringRefNode:
-[--]109
-
-[--]@StringRefNode:
-[--]109
+[--]108
 
 [--]@StringRefNode:
 [--]108
+
+[--]@StringRefNode:
+[--]107
 [--]@BinaryOperationNode:
 [--]@CallNode:
 
@@ -5285,10 +5224,10 @@ False
 [--]_str
 
 [--]@StringRefNode:
-[--]109
+[--]108
 
 [--]@StringRefNode:
-[--]109
+[--]108
 [--]@FunctionNode:
 [--]readln
 [--]False
@@ -5308,10 +5247,10 @@ False
 [--]_native
 
 [--]@StringRefNode:
-[--]110
+[--]109
 
 [--]@StringRefNode:
-[--]110
+[--]109
 
 [--]@CallNode:
 
@@ -5319,10 +5258,10 @@ False
 [--]_native
 
 [--]@StringRefNode:
-[--]110
+[--]109
 
 [--]@StringRefNode:
-[--]110
+[--]109
 [--]@FunctionNode:
 [--]readkey
 [--]False
@@ -5342,7 +5281,7 @@ False
 [--]_native
 
 [--]@StringRefNode:
-[--]111
+[--]110
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5350,7 +5289,7 @@ False
 
 
 [--]@StringRefNode:
-[--]111
+[--]110
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5363,7 +5302,7 @@ False
 [--]_native
 
 [--]@StringRefNode:
-[--]111
+[--]110
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5371,7 +5310,7 @@ False
 
 
 [--]@StringRefNode:
-[--]111
+[--]110
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5389,10 +5328,10 @@ False
 [--]_native
 
 [--]@StringRefNode:
-[--]112
+[--]111
 
 [--]@StringRefNode:
-[--]112
+[--]111
 [--]@FunctionNode:
 [--]cursorVisible
 [--]False
@@ -5404,7 +5343,7 @@ False
 [--]_native
 
 [--]@StringRefNode:
-[--]113
+[--]112
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5412,7 +5351,7 @@ False
 
 
 [--]@StringRefNode:
-[--]113
+[--]112
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5429,10 +5368,10 @@ False
 [--]_native
 
 [--]@StringRefNode:
-[--]114
+[--]113
 
 [--]@StringRefNode:
-[--]114
+[--]113
 [--]@FunctionNode:
 [--]setCursorPosition
 [--]False
@@ -5488,7 +5427,7 @@ False
 [--]_native
 
 [--]@StringRefNode:
-[--]115
+[--]114
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5501,7 +5440,7 @@ False
 
 
 [--]@StringRefNode:
-[--]115
+[--]114
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5523,7 +5462,7 @@ False
 [--]_native
 
 [--]@StringRefNode:
-[--]116
+[--]115
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5531,7 +5470,7 @@ False
 
 
 [--]@StringRefNode:
-[--]116
+[--]115
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5548,7 +5487,7 @@ False
 [--]_native
 
 [--]@StringRefNode:
-[--]117
+[--]116
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5556,7 +5495,7 @@ False
 
 
 [--]@StringRefNode:
-[--]117
+[--]116
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5573,10 +5512,10 @@ False
 [--]_native
 
 [--]@StringRefNode:
-[--]118
+[--]117
 
 [--]@StringRefNode:
-[--]118
+[--]117
 [--]@FunctionNode:
 [--]width
 [--]False
@@ -5589,10 +5528,10 @@ False
 [--]_native
 
 [--]@StringRefNode:
-[--]119
+[--]118
 
 [--]@StringRefNode:
-[--]119
+[--]118
 [--]@FunctionNode:
 [--]height
 [--]False
@@ -5605,10 +5544,10 @@ False
 [--]_native
 
 [--]@StringRefNode:
-[--]120
+[--]119
 
 [--]@StringRefNode:
-[--]120
+[--]119
 [--]@NamespaceNode:
 [--]base
 
@@ -5670,7 +5609,7 @@ False
 [--]@AssignmentNode:
 [--]var
 [--]@StringRefNode:
-[--]122
+[--]121
 [--]False
 [--]False
 [--]@FunctionNode:
@@ -5686,10 +5625,10 @@ False
 [--]println
 
 [--]@StringRefNode:
-[--]123
+[--]122
 
 [--]@StringRefNode:
-[--]123
+[--]122
 [--]@NamespaceNode:
 [--]system
 
@@ -5709,10 +5648,10 @@ False
 [--]println
 
 [--]@StringRefNode:
-[--]124
+[--]123
 
 [--]@StringRefNode:
-[--]124
+[--]123
 [--]@FunctionNode:
 [--]main
 [--]False

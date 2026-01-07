@@ -1,15 +1,11 @@
 ﻿using System.Runtime.CompilerServices;
 using Core.Debug;
 
-namespace Core.NativeLib.SystemLib;
+namespace Core.NativeLib.SystemLib.Classes;
 
-public class ParserLib : IQlangLib
+public class ParserClass : IQlangClass
 {
-    public string Name { get; } = "ParserLib";
-    public string Version { get; } = "0.0.0";
-    public string Author { get; } = "SOTOKATA";
-    public string Class { get; } = "parser";
-    public string Namespace { get; } = "lib";
+    public string Name { get; init; } = "parser";
     public List<(string name, Delegate body)> GetFunctions()
     {
         return [

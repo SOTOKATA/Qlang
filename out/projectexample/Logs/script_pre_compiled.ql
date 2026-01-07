@@ -1,4 +1,4 @@
-#FILE D:\Projects\Console\Qlang\out\lib\core\string.ql
+#FILE C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
 
 
 
@@ -231,7 +231,7 @@ class String: {
         return String.new(_native(___STRING_36___, _str(_value), startPos, length));
     }
 }
-#FILE D:\Projects\Console\Qlang\out\lib\core\object.ql
+#FILE C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
 
 
 class Object: {
@@ -247,7 +247,7 @@ class Object: {
 
 function str(const obj):
     return Object.toString(obj);
-#FILE D:\Projects\Console\Qlang\out\lib\core\number.ql
+#FILE C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
 
 
 
@@ -290,7 +290,7 @@ class Number: {
         return _native(___STRING_49___, number, _str(pattern));
     }
 }
-#FILE D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+#FILE C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
 
 
 class Dictionary: {
@@ -350,7 +350,7 @@ class Dictionary: {
         return _values.at(index);
     }
 }
-#FILE D:\Projects\Console\Qlang\out\lib\core\array.ql
+#FILE C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
 
 
 
@@ -429,7 +429,7 @@ class Array: {
     function length():
         return _native(___STRING_68___, _value);
 }
-#FILE D:\Projects\Console\Qlang\out\lib\base\throw.ql
+#FILE C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\throw.ql
 
 
 
@@ -455,7 +455,7 @@ class Throw: {
         exception(___STRING_73___);
     }
 }
-#FILE D:\Projects\Console\Qlang\out\lib\base\regex.ql
+#FILE C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\regex.ql
 
 
 
@@ -469,7 +469,7 @@ class Regex: {
     
     
 }
-#FILE D:\Projects\Console\Qlang\out\lib\base\parser.ql
+#FILE C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\parser.ql
 
 
 
@@ -490,7 +490,7 @@ class Parser: {
         return _native(___STRING_81___, object);
     }
 }
-#FILE D:\Projects\Console\Qlang\out\lib\base\math.ql
+#FILE C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\math.ql
 
 
 
@@ -511,7 +511,7 @@ class Math: {
         return ___NUMBER_13___-n;
     }
 }
-#FILE D:\Projects\Console\Qlang\out\lib\base\vectors\vector2.ql
+#FILE C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\vectors\vector2.ql
 
 
 
@@ -543,7 +543,7 @@ class Vector2: {
         return Parser.asNumber(_y);
     }
 }
-#FILE D:\Projects\Console\Qlang\out\lib\base\datetime\time.ql
+#FILE C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\datetime\time.ql
 
 
 class Time: {
@@ -557,10 +557,10 @@ class Time: {
         _native(___STRING_88___, millisec);
     }
 }
-#FILE D:\Projects\Console\Qlang\out\lib\base\include.ql
+#FILE C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\include.ql
 
 
-#FILE D:\Projects\Console\Qlang\out\lib\meta\Meta.ql
+#FILE C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\meta\Meta.ql
 
 
 
@@ -589,80 +589,75 @@ class Meta extends Object: {
         return Array.new(_native(___STRING_97___, object));
     }
 }
-#FILE D:\Projects\Console\Qlang\out\lib\base\console.ql
+#FILE C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\console.ql
 
 
 
 
 
 class Console: {
-    
-    function print(let message): {
-        if (Object.isSimplify(message) == false): {
-            if (Meta.getMethodListOf(message).contains(___STRING_99___)): 
-                message = message.toString();
-            else: str(message);
-        }
-            
+    private function getStr(const message): {
+        if (Object.isNull(message)):
+            return ___STRING_99___;
 
-        _native(___STRING_100___, _str(message));
+        if (Object.isSimplify(message) == false): {
+            if (Meta.getMethodListOf(message).contains(___STRING_100___)): 
+                return message.toString();
+            else: 
+                return str(message);
+        }
+
+        return null;
     }
 
     
-    function println(let message = ___STRING_101___): {
-        
-        
-        
-        
-        
+    function print(let message): {
+        message = getStr(message);
 
-        message = str(message);
+        _native(___STRING_101___, _str(message));
+    }
 
-        _native(___STRING_102___, _str(message + ___STRING_103___));
+    
+    function println(let message = ___STRING_102___): {
+        message = getStr(message);
+
+        _native(___STRING_103___, _str(message + ___STRING_104___));
     }
 
     
     function printVerbatim(let message): {
-        if (Object.isSimplify(message) == false): {
-            if (Meta.getMethodListOf(message).contains(___STRING_104___)): 
-                message = message.toString();
-            else: str(message);
-        }
+        message = getStr(message);
 
         _native(___STRING_105___, message);
     }
 
     
     function printlnVerbatim(let message = ___STRING_106___): {
-        if (Object.isSimplify(message) == false): {
-            if (Meta.getMethodListOf(message).contains(___STRING_107___)): 
-                message = message.toString();
-            else: str(message);
-        }
+        message = getStr(message);
 
-        _native(___STRING_108___, message + _str(___STRING_109___));
+        _native(___STRING_107___, message + _str(___STRING_108___));
     }
 
     
     function readln(): {
-        return String.new(_native(___STRING_110___));
+        return String.new(_native(___STRING_109___));
     }
 
     function readkey(const<Boolean> intercept = false): {
-        return String.new(_native(___STRING_111___, intercept));
+        return String.new(_native(___STRING_110___, intercept));
     }
 
     function isKeyAvailable(): {
-        return _native(___STRING_112___);
+        return _native(___STRING_111___);
     }
 
     function cursorVisible(const<Boolean> visible): {
-        _native(___STRING_113___, visible);
+        _native(___STRING_112___, visible);
     }
 
     
     function clear(): {
-        _native(___STRING_114___);
+        _native(___STRING_113___);
     }
 
     
@@ -670,28 +665,28 @@ class Console: {
         x = Parser.asInt(x);
         y = Parser.asInt(y);
 
-        _native(___STRING_115___, x, y);
+        _native(___STRING_114___, x, y);
     }
 
     
     function setForeColor(let<String> color):
-        _native(___STRING_116___, color);
+        _native(___STRING_115___, color);
     
     
     function setBackColor(let<String> color):
-        _native(___STRING_117___, color);
+        _native(___STRING_116___, color);
 
     
     function resetColors():
-        _native(___STRING_118___);
+        _native(___STRING_117___);
 
     function width(): 
-        return _native(___STRING_119___);
+        return _native(___STRING_118___);
 
     function height(): 
-        return _native(___STRING_120___);
+        return _native(___STRING_119___);
 }
-#FILE D:\Projects\Console\Qlang\out\projectexample\main.ql
+#FILE C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\projectexample\main.ql
 
 
 
@@ -713,17 +708,17 @@ namespace system: {
         }
    }
 
-   const var = ___STRING_122___;
+   const var = ___STRING_121___;
 
    function out():{
-        Console.println(___STRING_123___);
+        Console.println(___STRING_122___);
    }
 }
 
 namespace system: {
     class OtherClass: {
         function DoSomething(): {
-            Console.println(___STRING_124___);
+            Console.println(___STRING_123___);
         }
     }
 }

@@ -1,14 +1,11 @@
 ﻿using Core.Dynamic;
 
-namespace Core.NativeLib.SystemLib;
+namespace Core.NativeLib.SystemLib.Classes;
 
-public class StringLib : IQlangLib
+public class StringClass : IQlangClass
 {
-    public string Name { get; } = "StringLib";
-    public string Version { get; } = "0.0.0";
-    public string Author { get; } = "SOTOKATA";
-    public string Class { get; } = "string";
-    public string Namespace { get; } = "lib";
+    public string Name { get; init; } = "string";
+    
     public List<(string name, Delegate body)> GetFunctions()
     {
         return [

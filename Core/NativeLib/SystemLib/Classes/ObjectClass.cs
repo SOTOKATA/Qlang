@@ -1,12 +1,9 @@
-﻿namespace Core.NativeLib.SystemLib;
+﻿namespace Core.NativeLib.SystemLib.Classes;
 
-public class ObjectLib : IQlangLib
+public class ObjectClass : IQlangClass
 {
-    public string Name { get; } = "ObjectLib";
-    public string Version { get; } = "0.0.0";
-    public string Author { get; } = "SOTOKATA";
-    public string Class { get; } = "object";
-    public string Namespace { get; } = "lib";
+    public string Name { get; init; } = "object";
+    
     public List<(string name, Delegate body)> GetFunctions()
     {
         return [

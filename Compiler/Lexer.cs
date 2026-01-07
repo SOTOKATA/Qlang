@@ -10,7 +10,7 @@ public class Lexer
         List<Token> tokens = [];
         var scriptLines = script.Split('\n').ToList();
 
-        int lineIndex = 0;
+        var lineIndex = 0;
         foreach (var line in scriptLines.Select(rawLine => rawLine.Trim()))
         {
             if (string.IsNullOrWhiteSpace(line))

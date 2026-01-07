@@ -44,8 +44,8 @@ public class Parser
     {
         Logger.Log($"Parsing statement ({Current().TokenType}, {Current().Value})", "CompilationProcess");
 
-        bool isStatic = false;
-        bool isPrivate = false;
+        var isStatic = false;
+        var isPrivate = false;
 
         if (Check(Tokens.Keyword) && Current().Value == Keywords.StaticModificator)
         {
@@ -160,7 +160,7 @@ public class Parser
 
         Advance();
 
-        string type = "";
+        var type = "";
         if (Check(Tokens.Less))
         {
             if (!canUseType)
@@ -240,7 +240,7 @@ public class Parser
         Expect(Tokens.RParen);
         Expect(Tokens.Colon);
 
-        List<ASTNode> body = ParseBlock();
+        var body = ParseBlock();
 
         Logger.Log("CompilationProcess.End: Parsing function");
         return new FunctionNode
@@ -261,7 +261,7 @@ public class Parser
         Expect(Tokens.Keyword, Keywords.ClassDeclaration);
         var name = Expect(Tokens.Identifier).Value;
 
-        string extends = "";
+        var extends = "";
         if (Check(Tokens.Keyword) && Current().Value == Keywords.ExtendsKeyword &&
             Peek()?.TokenType == Tokens.Identifier)
         {
@@ -276,7 +276,7 @@ public class Parser
         if (!Check(Tokens.LBrace))
             throw new QlangCompileException("Class's body cannot be one-line", Current().Line, "Parser", Current().SourceFile);
 
-        List<ASTNode> body = ParseBlock();
+        var body = ParseBlock();
 
         Logger.Log("CompilationProcess.End: Parsing class");
         return new ClassNode { Name = name, Body = body, Extends = extends, Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
@@ -287,7 +287,7 @@ public class Parser
         Logger.Log("CompilationProcess: Parsing for");
         Expect(Tokens.Keyword, Keywords.ForBlock);
 
-        AssignmentNode assignment = ParseVariableDeclaration(false, false, false,
+        var assignment = ParseVariableDeclaration(false, false, false,
             (Check(Tokens.Keyword) && Current().Value == Keywords.ConstVariableDeclaration),
             true);
         Expect(Tokens.Semicolon);
@@ -298,7 +298,7 @@ public class Parser
         Expect(Tokens.Colon);
         // Expect(Tokens.Semicolon);
 
-        List<ASTNode> forBlock = ParseBlock();
+        var forBlock = ParseBlock();
 
 
         Logger.Log("CompilationProcess.End: Parsing for");
@@ -313,7 +313,7 @@ public class Parser
         Expect(Tokens.Colon);
         // Expect(Tokens.Semicolon);
 
-        List<ASTNode> whileBlock = ParseBlock();
+        var whileBlock = ParseBlock();
 
         Logger.Log("CompilationProcess.End: Parsing while");
         return new WhileNode { Condition = condition, Body = whileBlock, IsDoWhile = isDoWhile, Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFile = (IsAtEnd() ? "" : Current().SourceFile) };
@@ -358,7 +358,7 @@ public class Parser
         Expect(Tokens.Colon);
         // Expect(Tokens.Semicolon);
 
-        List<ASTNode> thenBlock = ParseBlock();
+        var thenBlock = ParseBlock();
 
 
         List<ASTNode> elseBlock = [];
@@ -962,7 +962,7 @@ public class Parser
 
     private ASTNode ParsePrimaryPath()
     {
-        ASTNode astNode = ParsePrimary(true);
+        var astNode = ParsePrimary(true);
 
         // Is not path (NOT 'call.node.func().etc();', JUST LIKE 'call' or 'call()' etc.)
         var isDot = Check(Tokens.Dot);
@@ -1047,7 +1047,7 @@ public class Parser
     {
         Logger.Log("CompilationProcess: Parsing primary");
 
-        bool isMinus = false;
+        var isMinus = false;
         if (Check(Tokens.Minus))
         {
             isMinus = true;

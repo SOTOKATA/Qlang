@@ -51,8 +51,8 @@ public class QLang
         if (qliProgram.ExternalLibraries.Count == 0)
             return;
         
-        string dirPath =  Path.Combine(path, filename + ".external.qli");
-        string dirDepsPath = Path.Combine(dirPath, "dependents");
+        var dirPath =  Path.Combine(path, filename + ".external.qli");
+        var dirDepsPath = Path.Combine(dirPath, "dependents");
         
         if (Directory.Exists(dirPath))
             Directory.Delete(dirPath, true);
@@ -97,8 +97,8 @@ public class QLang
     {
         // TODO: Runtime execution (by build/program.exe)
 
-        string exePath = Path.Combine("build", filename + OS.GetExecutableExtension());
-        string resourcePath = Path.Combine("build", filename + ".resource.qli");
+        var exePath = Path.Combine("build", filename + OS.GetExecutableExtension());
+        var resourcePath = Path.Combine("build", filename + ".resource.qli");
 
         if (!File.Exists(exePath) || !File.Exists(resourcePath))
             throw new ProjectException($"Files '{Path.GetFileName(exePath)}' and '{Path.GetFileName(resourcePath)}' is not found.\nProject is not compiled");

@@ -302,7 +302,7 @@ public partial class Interpreter
         // Context block
         if (CurrentContext.Blocks.Count > 0)
         {
-            for (int i = CurrentContext.Blocks.Count - 1; i >= 0; i--)
+            for (var i = CurrentContext.Blocks.Count - 1; i >= 0; i--)
             {
                 if (!CurrentContext.Blocks[i].Variables.TryGetValue(assign.VariableName, out var var))
                     continue;
@@ -469,7 +469,7 @@ public partial class Interpreter
         var sb = new StringBuilder(arg.Count * 10);
         sb.Append('[');
 
-        for (int i = 0; i < arg.Count; i++)
+        for (var i = 0; i < arg.Count; i++)
         {
             if (i > 0) sb.Append(',');
 
@@ -488,7 +488,7 @@ public partial class Interpreter
     {
         var sb = new StringBuilder(input.Length);
 
-        for (int i = 0; i < input.Length; i++)
+        for (var i = 0; i < input.Length; i++)
         {
             if (input[i] == '\\' && i + 1 < input.Length)
             {
@@ -729,8 +729,8 @@ public partial class Interpreter
 
         if (binOp.Operator.Any(c => c is '=' or '>' or '<' or '!'))
         {
-            string @operator = "";
-            for (int i = 0; i < binOp.Operator.Length; i++)
+            var @operator = "";
+            for (var i = 0; i < binOp.Operator.Length; i++)
             {
                 @operator += binOp.Operator[i] switch
                 {
@@ -951,8 +951,11 @@ public partial class Interpreter
     }
     
     private (FunctionNode? function, List<object?> Args) GetFunctionFromClass
-        (DynamicClass @class, string name, List<object?>? args = null)
+        (DynamicClass? @class, string name, List<object?>? args = null)
     {
+        if (@class is null)
+            return (null, null);
+        
         args ??= [];
         
         var functions = @class.Body.OfType<FunctionNode>().Where(f => f.Name == name).ToList();
@@ -969,8 +972,11 @@ public partial class Interpreter
     }
     
     private (FunctionNode? function, List<object?> Args) GetFunctionFromNamespace
-        (DynamicNamespace @namespace, string name, List<object?>? args = null)
+        (DynamicNamespace? @namespace, string name, List<object?>? args = null)
     {
+        if (@namespace is null)
+            return (null, null);
+        
         args ??= [];
 
         var functions = @namespace.Functions;

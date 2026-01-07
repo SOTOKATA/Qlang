@@ -4,49 +4,44 @@ include "$lib/meta"
 
 // Class to make operations with console
 class Console: {
-    // Print text to console
-    function print(let message): {
+    private function getStr(const message): {
+        if (Object.isNull(message)):
+            return "null";
+
         if (Object.isSimplify(message) == false): {
             if (Meta.getMethodListOf(message).contains("toString")): 
-                message = message.toString();
-            else: str(message);
+                return message.toString();
+            else: 
+                return str(message);
         }
-            
+
+        return null;
+    }
+
+    // Print text to console
+    function print(let message): {
+        message = getStr(message);
 
         _native("lib.console.write", _str(message));
     }
 
     // Print text to console with new line
     function println(let message = ""): {
-        // if (Object.isSimplify(message) == false): {
-        //     if (Meta.getMethodListOf(message).contains("toString")): 
-        //         message = message.toString();
-        //     else: str(message);
-        // }
-
-        message = str(message);
+        message = getStr(message);
 
         _native("lib.console.write", _str(message + "\n"));
     }
 
     // Print Verbatim text to console
     function printVerbatim(let message): {
-        if (Object.isSimplify(message) == false): {
-            if (Meta.getMethodListOf(message).contains("toString")): 
-                message = message.toString();
-            else: str(message);
-        }
+        message = getStr(message);
 
         _native("lib.console.write", message);
     }
 
     // Print Verbatim text to console with new line
     function printlnVerbatim(let message = ""): {
-        if (Object.isSimplify(message) == false): {
-            if (Meta.getMethodListOf(message).contains("toString")): 
-                message = message.toString();
-            else: str(message);
-        }
+        message = getStr(message);
 
         _native("lib.console.write", message + _str("\n"));
     }

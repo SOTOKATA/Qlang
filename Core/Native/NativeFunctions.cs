@@ -9,37 +9,27 @@ namespace Core.Native;
 public class NativeFunctionRegistry
 {
     private readonly HashSet<NativeFunctionRegister> _functions = [];
-    public List<IQlangLib> LoadedPlugins { get; set; } = [];
 
     public NativeFunctionRegistry()
     {
-        RegisterLib(new ConsoleLib());
-        RegisterLib(new ArrayLib());
-        RegisterLib(new DateTimeLib());
-        RegisterLib(new ExceptionLib());
-        RegisterLib(new FileSystemLib());
-        RegisterLib(new NumberLib());
-        RegisterLib(new ObjectLib());
-        RegisterLib(new ParserLib());
-        RegisterLib(new RegexLib());
-        RegisterLib(new StringLib());
-        RegisterLib(new ConsoleCommandLib());
-        RegisterLib(new MetaLib());
+        RegisterLib(new SystemLib());
     }
 
     public void RegisterLib(IQlangLib lib)
     {
-        if (string.IsNullOrWhiteSpace(lib.Namespace))
-            throw new QlangCompileException($"Native function register exception: Namespace cannot be empty", -1, "NativeFunctions", "undefined file");
-        
-        if (string.IsNullOrWhiteSpace(lib.Class))
-            throw new QlangCompileException($"Native function register exception: Class cannot be empty", -1, "NativeFunctions", "undefined file");
-        
         if (string.IsNullOrWhiteSpace(lib.Name))
             throw new QlangCompileException($"Native function register exception: Name cannot be empty", -1, "NativeFunctions", "undefined file");
         
-        foreach (var func in lib.GetFunctions())
-            Register(new NativeFunctionRegister(lib.Namespace, lib.Class, func.name, func.body));
+        if (lib.Namespaces.Any(@namespace => string.IsNullOrWhiteSpace(@namespace.Name)))
+            throw new QlangCompileException($"Native function register exception: Namespace cannot be empty (lib: '{lib.Name}')", -1, "NativeFunctions", "undefined file");
+        
+        if (lib.Namespaces.Any(@namespace => @namespace.Classes.Any(@class => string.IsNullOrWhiteSpace(@class.Name))))
+            throw new QlangCompileException($"Native function register exception: Class cannot be empty (lib: '{lib.Name}')", -1, "NativeFunctions", "undefined file");
+        
+        foreach (var libNamespace in lib.Namespaces)
+            foreach (var libClass in libNamespace.Classes)
+                foreach (var func in libClass.GetFunctions())
+                    Register(new NativeFunctionRegister(libNamespace.Name, libClass.Name, func.name, func.body));
     }
     
     private void Register(NativeFunctionRegister nativeRegister)
@@ -60,7 +50,7 @@ public class NativeFunctionRegistry
         {
             var arguments = func.Function.Method.GetParameters();
 
-            string debug = "args=\n";
+            var debug = "args=\n";
             for (var index = 0; index < arguments.Length; index++)
             {
                 var type = arguments[index];

@@ -1,12 +1,9 @@
-﻿namespace Core.NativeLib.SystemLib;
+﻿namespace Core.NativeLib.SystemLib.Classes;
 
-public class FileSystemLib : IQlangLib
+public class FileSystemClass : IQlangClass
 {
-    public string Name { get; } = "FileSystemLib";
-    public string Version { get; } = "0.0.0";
-    public string Author { get; } = "SOTOKATA";
-    public string Class { get; } = "filesystem";
-    public string Namespace { get; } = "lib";
+    public string Name { get; init; } = "filesystem";
+    
     public List<(string name, Delegate body)> GetFunctions()
     {
         return [

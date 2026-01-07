@@ -1,15 +1,12 @@
 ﻿using System.Diagnostics;
 using Core.Exceptions;
 
-namespace Core.NativeLib.SystemLib;
+namespace Core.NativeLib.SystemLib.Classes;
 
-public class ConsoleCommandLib : IQlangLib
+public class ConsoleCommandClass : IQlangClass
 {
-    public string Name { get; } = "ConsoleCommandLib";
-    public string Version { get; } = "0.0.0";
-    public string Author { get; } = "SOTOKATA";
-    public string Class { get; } = "console_command";
-    public string Namespace { get; } = "lib";
+    public string Name { get; init; } = "console_command";
+    
     public List<(string name, Delegate body)> GetFunctions()
     {
         return [
@@ -25,10 +22,10 @@ public class ConsoleCommandLib : IQlangLib
                 CreateNoWindow = true
             };
 
-            using Process? process = Process.Start(psi);
+            using var process = Process.Start(psi);
             
-            string output = process.StandardOutput.ReadToEnd();
-            string error = process.StandardError.ReadToEnd();
+            var output = process.StandardOutput.ReadToEnd();
+            var error = process.StandardError.ReadToEnd();
 
             process.WaitForExit();
 

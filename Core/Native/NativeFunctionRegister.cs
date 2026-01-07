@@ -8,4 +8,6 @@ public class NativeFunctionRegister(string @namespace, string @class, string nam
     public Delegate Function { get; } = function;
     
     public string GetName() => Namespace + "." +  Class + "." + Name;
+    
+    public override string ToString() => GetName();
 }

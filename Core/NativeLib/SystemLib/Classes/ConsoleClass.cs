@@ -1,17 +1,8 @@
-﻿namespace Core.NativeLib.SystemLib;
+﻿namespace Core.NativeLib.SystemLib.Classes;
 
-public class ConsoleLib : IQlangLib
+public class ConsoleClass : IQlangClass
 {
-    public string Name { get; } = "CSharpConsole";
-
-    public string Version { get; } = "0.0.0";
-    
-    public string Author { get; } = "SOTOKATA";
-
-    public string Class { get; } = "console";
-    
-    public string Namespace { get; } = "lib";
-
+    public string Name { get; init; } = "console";
 
     public List<(string name, Delegate body)> GetFunctions()
     {

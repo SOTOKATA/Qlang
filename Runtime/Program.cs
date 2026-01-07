@@ -37,7 +37,7 @@ public class Program
 
     private static NativeFunctionRegistry LoadDependencies()
     {
-        string dirPath = Path.Combine(Path.GetDirectoryName(Environment.ProcessPath) ?? "", $"{Path.GetFileNameWithoutExtension(Environment.ProcessPath)}.external.qli");
+        var dirPath = Path.Combine(Path.GetDirectoryName(Environment.ProcessPath) ?? "", $"{Path.GetFileNameWithoutExtension(Environment.ProcessPath)}.external.qli");
         
         // Console.WriteLine("Path to load dependencies: " + dirPath);
         
@@ -45,9 +45,9 @@ public class Program
         if (!Directory.Exists(dirPath))
             return new  NativeFunctionRegistry();
         
-        string dirDepsPath = Path.Combine(dirPath, "dependents");
+        var dirDepsPath = Path.Combine(dirPath, "dependents");
         
-        bool dirDepsExists = Directory.Exists(dirDepsPath);
+        var dirDepsExists = Directory.Exists(dirDepsPath);
 
         var filesToAdd = new List<string>();
         

@@ -11,23 +11,23 @@ public static class TableCreator
 
         StringBuilder str = new();
 
-        int columnCount = items.First().Count;
+        var columnCount = items.First().Count;
 
-        List<int> sizes = Enumerable.Repeat(0, columnCount).ToList();
+        var sizes = Enumerable.Repeat(0, columnCount).ToList();
 
         foreach (var line in items)
-            for (int i = 0; i < columnCount; i++)
+            for (var i = 0; i < columnCount; i++)
             {
-                string cell = i < line.Count ? line[i] : "";
+                var cell = i < line.Count ? line[i] : "";
                 sizes[i] = Math.Max(sizes[i], cell.Length);
             }
 
-        for (int index = 0; index < items.Count; index++)
+        for (var index = 0; index < items.Count; index++)
         {
-            List<string> line = items[index];
-            for (int i = 0; i < columnCount; i++)
+            var line = items[index];
+            for (var i = 0; i < columnCount; i++)
             {
-                string cell = i < line.Count ? line[i] : "";
+                var cell = i < line.Count ? line[i] : "";
                 str.Append(cell.PadRight(sizes[i] + 2));
 
                 if (separators != null && separators.Count > i && index != 0)
@@ -48,22 +48,22 @@ public static class TableCreator
             return;
         }
         
-        int columnCount = table.Items.First().Count;
+        var columnCount = table.Items.First().Count;
 
-        List<int> sizes = Enumerable.Repeat(0, columnCount).ToList();
+        var sizes = Enumerable.Repeat(0, columnCount).ToList();
 
         foreach (var line in table.Items)
-            for (int i = 0; i < columnCount; i++)
+            for (var i = 0; i < columnCount; i++)
             {
-                string cell = i < line.Count ? line[i].Content : "";
+                var cell = i < line.Count ? line[i].Content : "";
                 sizes[i] = Math.Max(sizes[i], cell.Length);
             }
 
         foreach (var row in table.Items)
         {
-            for (int index = 0; index < row.Count; index++)
+            for (var index = 0; index < row.Count; index++)
             {
-                TableCell? cell = row[index];
+                var cell = row[index];
                 Console.ForegroundColor = cell.ForeColor;
                 Console.BackgroundColor = cell.BackColor;
                 Console.Write(cell.Content.PadRight(sizes[index] + 2));

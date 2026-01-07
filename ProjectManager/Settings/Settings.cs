@@ -10,7 +10,7 @@ public abstract class Settings(string path, Dictionary<string, object?>? dict)
 
     public void Save()
     {
-        string serialized = Json.Serialize(Dictionary);
+        var serialized = Json.Serialize(Dictionary);
         
         if (!File.Exists(path))
             throw new FileNotFoundException($"Settings file '{path}' is not found.", path);
