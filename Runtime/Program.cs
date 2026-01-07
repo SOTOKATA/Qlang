@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Reflection;
 using Core;
+using Core.Exceptions;
 using Core.Native;
 using Core.NativeLib;
 
@@ -30,9 +31,22 @@ public class Program
             return;
         }
 
-        new Interpreter.Interpreter(qliProgram.StringDictionary, 
-            qliProgram.NumberDictionary, 
-            LoadDependencies()).Execute(qliProgram.ProgramNode, args.ToList()!);
+        try
+        {
+            new Interpreter.Interpreter(qliProgram.StringDictionary,
+                qliProgram.NumberDictionary,
+                LoadDependencies()).Execute(qliProgram.ProgramNode, args.ToList()!);
+        }
+        catch (QlangRuntimeException runtime)
+        {
+            Console.WriteLine("Runtime handled exception:");
+            Console.WriteLine(runtime);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Runtime unhandled exception:");
+            Console.WriteLine(e);
+        }
     }
 
     private static NativeFunctionRegistry LoadDependencies()

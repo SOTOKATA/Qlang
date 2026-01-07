@@ -620,44 +620,45 @@ class Console: {
     
     function println(let message = ___STRING_102___): {
         message = getStr(message);
+        _native(___STRING_103___, _str(___STRING_104___));
 
-        _native(___STRING_103___, _str(message + ___STRING_104___));
+        _native(___STRING_105___, _str(message + ___STRING_106___));
     }
 
     
     function printVerbatim(let message): {
         message = getStr(message);
 
-        _native(___STRING_105___, message);
+        _native(___STRING_107___, message);
     }
 
     
-    function printlnVerbatim(let message = ___STRING_106___): {
+    function printlnVerbatim(let message = ___STRING_108___): {
         message = getStr(message);
 
-        _native(___STRING_107___, message + _str(___STRING_108___));
+        _native(___STRING_109___, message + _str(___STRING_110___));
     }
 
     
     function readln(): {
-        return String.new(_native(___STRING_109___));
+        return String.new(_native(___STRING_111___));
     }
 
     function readkey(const<Boolean> intercept = false): {
-        return String.new(_native(___STRING_110___, intercept));
+        return String.new(_native(___STRING_112___, intercept));
     }
 
     function isKeyAvailable(): {
-        return _native(___STRING_111___);
+        return _native(___STRING_113___);
     }
 
     function cursorVisible(const<Boolean> visible): {
-        _native(___STRING_112___, visible);
+        _native(___STRING_114___, visible);
     }
 
     
     function clear(): {
-        _native(___STRING_113___);
+        _native(___STRING_115___);
     }
 
     
@@ -665,26 +666,26 @@ class Console: {
         x = Parser.asInt(x);
         y = Parser.asInt(y);
 
-        _native(___STRING_114___, x, y);
+        _native(___STRING_116___, x, y);
     }
 
     
     function setForeColor(let<String> color):
-        _native(___STRING_115___, color);
+        _native(___STRING_117___, color);
     
     
     function setBackColor(let<String> color):
-        _native(___STRING_116___, color);
+        _native(___STRING_118___, color);
 
     
     function resetColors():
-        _native(___STRING_117___);
+        _native(___STRING_119___);
 
     function width(): 
-        return _native(___STRING_118___);
+        return _native(___STRING_120___);
 
     function height(): 
-        return _native(___STRING_119___);
+        return _native(___STRING_121___);
 }
 #FILE C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\projectexample\main.ql
 
@@ -693,7 +694,6 @@ class Console: {
 namespace base: {
 
 }
-
 
 namespace system: {
    class Console: {
@@ -708,23 +708,23 @@ namespace system: {
         }
    }
 
-   const var = ___STRING_121___;
+   const var = ___STRING_123___;
 
    function out():{
-        Console.println(___STRING_122___);
+        Console.println(___STRING_124___);
    }
 }
 
 namespace system: {
     class OtherClass: {
         function DoSomething(): {
-            Console.println(___STRING_123___);
+            Console.println(___STRING_125___);
         }
     }
 }
 
 function main(): {
-    system::Console.WriteLine(system::var);
-    system::out();
-    system::Console.WriteLine(system::Console2);
+    system::Console.WriteLine(___STRING_126___);
+    
+    
 }

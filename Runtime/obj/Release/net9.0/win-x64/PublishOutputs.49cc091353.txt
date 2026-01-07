@@ -1,4 +1,2 @@
 C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\qli.pdb
-C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\Interpreter.pdb
-C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\Core.pdb
 C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\qli.exe

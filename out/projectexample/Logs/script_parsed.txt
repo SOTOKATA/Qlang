@@ -5068,28 +5068,31 @@ NullNode
 [--]@FunctionPointerNode:
 [--]_str
 
-[--]@BinaryOperationNode:
-[--]@CallNode:
-
-[--]@ObjectPointerNode:
-[--]message
-
-[--]Plus
 [--]@StringRefNode:
 [--]104
 
-[--]@BinaryOperationNode:
-[--]@CallNode:
-
-[--]@ObjectPointerNode:
-[--]message
-
-[--]Plus
 [--]@StringRefNode:
 [--]104
 
 [--]@StringRefNode:
 [--]103
+[--]@CallNode:
+
+[--]@FunctionPointerNode:
+[--]_str
+
+[--]@StringRefNode:
+[--]104
+
+[--]@StringRefNode:
+[--]104
+[--]@CallNode:
+
+[--]@FunctionPointerNode:
+[--]_native
+
+[--]@StringRefNode:
+[--]105
 [--]@CallNode:
 
 [--]@FunctionPointerNode:
@@ -5103,7 +5106,7 @@ NullNode
 
 [--]Plus
 [--]@StringRefNode:
-[--]104
+[--]106
 
 [--]@BinaryOperationNode:
 [--]@CallNode:
@@ -5113,7 +5116,34 @@ NullNode
 
 [--]Plus
 [--]@StringRefNode:
-[--]104
+[--]106
+
+[--]@StringRefNode:
+[--]105
+[--]@CallNode:
+
+[--]@FunctionPointerNode:
+[--]_str
+
+[--]@BinaryOperationNode:
+[--]@CallNode:
+
+[--]@ObjectPointerNode:
+[--]message
+
+[--]Plus
+[--]@StringRefNode:
+[--]106
+
+[--]@BinaryOperationNode:
+[--]@CallNode:
+
+[--]@ObjectPointerNode:
+[--]message
+
+[--]Plus
+[--]@StringRefNode:
+[--]106
 [--]@FunctionNode:
 [--]printVerbatim
 [--]False
@@ -5145,7 +5175,7 @@ NullNode
 [--]_native
 
 [--]@StringRefNode:
-[--]105
+[--]107
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5153,7 +5183,7 @@ NullNode
 
 
 [--]@StringRefNode:
-[--]105
+[--]107
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5190,7 +5220,7 @@ NullNode
 [--]_native
 
 [--]@StringRefNode:
-[--]107
+[--]109
 [--]@BinaryOperationNode:
 [--]@CallNode:
 
@@ -5204,13 +5234,13 @@ NullNode
 [--]_str
 
 [--]@StringRefNode:
-[--]108
+[--]110
 
 [--]@StringRefNode:
-[--]108
+[--]110
 
 [--]@StringRefNode:
-[--]107
+[--]109
 [--]@BinaryOperationNode:
 [--]@CallNode:
 
@@ -5224,10 +5254,10 @@ NullNode
 [--]_str
 
 [--]@StringRefNode:
-[--]108
+[--]110
 
 [--]@StringRefNode:
-[--]108
+[--]110
 [--]@FunctionNode:
 [--]readln
 [--]False
@@ -5247,10 +5277,10 @@ NullNode
 [--]_native
 
 [--]@StringRefNode:
-[--]109
+[--]111
 
 [--]@StringRefNode:
-[--]109
+[--]111
 
 [--]@CallNode:
 
@@ -5258,10 +5288,10 @@ NullNode
 [--]_native
 
 [--]@StringRefNode:
-[--]109
+[--]111
 
 [--]@StringRefNode:
-[--]109
+[--]111
 [--]@FunctionNode:
 [--]readkey
 [--]False
@@ -5281,7 +5311,7 @@ NullNode
 [--]_native
 
 [--]@StringRefNode:
-[--]110
+[--]112
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5289,7 +5319,7 @@ NullNode
 
 
 [--]@StringRefNode:
-[--]110
+[--]112
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5302,7 +5332,7 @@ NullNode
 [--]_native
 
 [--]@StringRefNode:
-[--]110
+[--]112
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5310,7 +5340,7 @@ NullNode
 
 
 [--]@StringRefNode:
-[--]110
+[--]112
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5328,10 +5358,10 @@ NullNode
 [--]_native
 
 [--]@StringRefNode:
-[--]111
+[--]113
 
 [--]@StringRefNode:
-[--]111
+[--]113
 [--]@FunctionNode:
 [--]cursorVisible
 [--]False
@@ -5343,7 +5373,7 @@ NullNode
 [--]_native
 
 [--]@StringRefNode:
-[--]112
+[--]114
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5351,7 +5381,7 @@ NullNode
 
 
 [--]@StringRefNode:
-[--]112
+[--]114
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5368,10 +5398,10 @@ NullNode
 [--]_native
 
 [--]@StringRefNode:
-[--]113
+[--]115
 
 [--]@StringRefNode:
-[--]113
+[--]115
 [--]@FunctionNode:
 [--]setCursorPosition
 [--]False
@@ -5427,7 +5457,7 @@ NullNode
 [--]_native
 
 [--]@StringRefNode:
-[--]114
+[--]116
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5440,7 +5470,7 @@ NullNode
 
 
 [--]@StringRefNode:
-[--]114
+[--]116
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5462,7 +5492,7 @@ NullNode
 [--]_native
 
 [--]@StringRefNode:
-[--]115
+[--]117
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5470,7 +5500,7 @@ NullNode
 
 
 [--]@StringRefNode:
-[--]115
+[--]117
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5487,7 +5517,7 @@ NullNode
 [--]_native
 
 [--]@StringRefNode:
-[--]116
+[--]118
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5495,7 +5525,7 @@ NullNode
 
 
 [--]@StringRefNode:
-[--]116
+[--]118
 [--]@CallNode:
 
 [--]@ObjectPointerNode:
@@ -5512,10 +5542,10 @@ NullNode
 [--]_native
 
 [--]@StringRefNode:
-[--]117
+[--]119
 
 [--]@StringRefNode:
-[--]117
+[--]119
 [--]@FunctionNode:
 [--]width
 [--]False
@@ -5528,10 +5558,10 @@ NullNode
 [--]_native
 
 [--]@StringRefNode:
-[--]118
+[--]120
 
 [--]@StringRefNode:
-[--]118
+[--]120
 [--]@FunctionNode:
 [--]height
 [--]False
@@ -5544,10 +5574,10 @@ NullNode
 [--]_native
 
 [--]@StringRefNode:
-[--]119
+[--]121
 
 [--]@StringRefNode:
-[--]119
+[--]121
 [--]@NamespaceNode:
 [--]base
 
@@ -5609,7 +5639,7 @@ NullNode
 [--]@AssignmentNode:
 [--]var
 [--]@StringRefNode:
-[--]121
+[--]123
 [--]False
 [--]False
 [--]@FunctionNode:
@@ -5625,10 +5655,10 @@ NullNode
 [--]println
 
 [--]@StringRefNode:
-[--]122
+[--]124
 
 [--]@StringRefNode:
-[--]122
+[--]124
 [--]@NamespaceNode:
 [--]system
 
@@ -5648,10 +5678,10 @@ NullNode
 [--]println
 
 [--]@StringRefNode:
-[--]123
+[--]125
 
 [--]@StringRefNode:
-[--]123
+[--]125
 [--]@FunctionNode:
 [--]main
 [--]False
@@ -5665,44 +5695,8 @@ NullNode
 [--]@FunctionPointerNode:
 [--]WriteLine
 
-[--]@CallNode:
+[--]@StringRefNode:
+[--]126
 
-[--]system
-[--]@ObjectPointerNode:
-[--]var
-
-
-[--]@CallNode:
-
-[--]system
-[--]@ObjectPointerNode:
-[--]var
-
-[--]@CallNode:
-
-[--]system
-[--]@FunctionPointerNode:
-[--]out
-
-
-[--]@CallNode:
-
-[--]system
-[--]@ObjectPointerNode:
-[--]Console
-[--]@FunctionPointerNode:
-[--]WriteLine
-
-[--]@CallNode:
-
-[--]system
-[--]@ObjectPointerNode:
-[--]Console2
-
-
-[--]@CallNode:
-
-[--]system
-[--]@ObjectPointerNode:
-[--]Console2
-
+[--]@StringRefNode:
+[--]126

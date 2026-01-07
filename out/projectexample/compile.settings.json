@@ -1,4 +1,4 @@
 {
   "output_filename": "compiled_output",
-  "debug_mode": false
+  "debug_mode": true
 }

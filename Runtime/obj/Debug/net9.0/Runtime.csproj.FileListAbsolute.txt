@@ -20,3 +20,25 @@ D:\Projects\Console\Qlang\Runtime\obj\Debug\net9.0\qli.dll
 D:\Projects\Console\Qlang\Runtime\obj\Debug\net9.0\refint\qli.dll
 D:\Projects\Console\Qlang\Runtime\obj\Debug\net9.0\qli.pdb
 D:\Projects\Console\Qlang\Runtime\obj\Debug\net9.0\ref\qli.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Debug\net9.0\qli.exe
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Debug\net9.0\qli.deps.json
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Debug\net9.0\qli.runtimeconfig.json
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Debug\net9.0\qli.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Debug\net9.0\qli.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Debug\net9.0\Core.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Debug\net9.0\Interpreter.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Debug\net9.0\Interpreter.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Debug\net9.0\Core.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Debug\net9.0\Runtime.csproj.AssemblyReference.cache
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Debug\net9.0\Runtime.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Debug\net9.0\Runtime.AssemblyInfoInputs.cache
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Debug\net9.0\Runtime.AssemblyInfo.cs
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Debug\net9.0\Runtime.csproj.CoreCompileInputs.cache
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Debug\net9.0\Runtime.sourcelink.json
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Debug\net9.0\Runtime.csproj.Up2Date
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Debug\net9.0\qli.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Debug\net9.0\refint\qli.dll
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Debug\net9.0\qli.pdb
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Debug\net9.0\Runtime.genruntimeconfig.cache
+C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Debug\net9.0\ref\qli.dll

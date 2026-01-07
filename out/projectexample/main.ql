@@ -34,7 +34,7 @@ namespace system: {
 }
 
 function main(): {
-    system::Console.WriteLine(system::var);
-    system::out();
-    system::Console.WriteLine(system::Console2);
+    system::Console.WriteLine("Hello, World!");
+    // system::out();
+    // system::Console.WriteLine(system::Console2);
 }
