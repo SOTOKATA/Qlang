@@ -7,15 +7,14 @@ class Console: {
     private function getStr(const message): {
         if (Object.isNull(message)):
             return "null";
-
         if (Object.isSimplify(message) == false): {
-            if (Meta.getMethodListOf(message).contains("toString")): 
-                return message.toString();
-            else: 
+            // if (Meta.getMethodListOf(message).contains("toString")): 
+            //     return message.toString();
+            // else: 
                 return str(message);
         }
 
-        return null;
+        return message;
     }
 
     // Print text to console
@@ -28,7 +27,6 @@ class Console: {
     // Print text to console with new line
     function println(let message = ""): {
         message = getStr(message);
-        _native("lib.console.write", _str("Povid"));
 
         _native("lib.console.write", _str(message + "\n"));
     }

@@ -1,4 +1,5 @@
-include "$lib/base"
+include "$lib/core"
+
 include "$lib/filesystem"
 
 class File: {

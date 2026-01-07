@@ -24,6 +24,8 @@ public partial class Interpreter
 
     private readonly Dictionary<string, object> _numberDictionary;
 
+    private readonly List<string> _usingsList = [];
+
     private readonly List<FunctionNode> _globalFunctions = [];
     private readonly List<Variable> _globalVariables = [];
 
@@ -49,6 +51,10 @@ public partial class Interpreter
                     break;
                 case FunctionNode func:
                     _globalFunctions.Add(func);
+                    break;
+                case UsingNode @using:
+                    if (!_usingsList.Contains(@using.NamespaceName))
+                        _usingsList.Add(@using.NamespaceName);
                     break;
                 case NamespaceNode namespaceNode:
                     if (_dynamicNamespaces.TryGetValue(namespaceNode.Name, out var baseNamespace))

@@ -79,6 +79,10 @@ public class Parser
             };
         }
         
+        // using declaration
+        if (Check(Tokens.Keyword) && Current().Value == Keywords.UsingKeyword)
+            return ParseUsing();
+        
         // namespace declaration
         if (Check(Tokens.Keyword) && Current().Value == Keywords.NamespaceDeclaration)
             return ParseNamespace(isPrivate);
@@ -191,6 +195,21 @@ public class Parser
             Type = type,
             Line = (IsAtEnd() ? 0 : Current().Line + 1),
             SourceFile = (IsAtEnd() ? "" : Current().SourceFile)
+        };
+    }
+
+    private UsingNode ParseUsing()
+    {
+        // Skip 'using'
+        Expect(Tokens.Keyword, Keywords.UsingKeyword);
+        
+        var identifier = Expect(Tokens.Identifier).Value;
+
+        return new UsingNode()
+        {
+            NamespaceName = identifier,
+            SourceFile = (IsAtEnd() ? "" : Current().SourceFile),
+            Line = (IsAtEnd() ? 0 : Current().Line + 1)
         };
     }
 

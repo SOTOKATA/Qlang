@@ -11,6 +11,10 @@ public static class PostParser
             .OfType<ClassNode>()
             .ToList();
 
+        foreach (var classes in program.Statements.OfType<NamespaceNode>().Select(@namespace => @namespace.Body.OfType<ClassNode>().ToList()))
+            classNodes.AddRange(classes);
+            
+
         foreach (var cls in classNodes)
         {
             ResolveClass(

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Runtime\\Runtime.csproj": {}
+    "D:\\Projects\\Console\\Qlang\\Runtime\\Runtime.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Core\\Core.csproj": {
+    "D:\\Projects\\Console\\Qlang\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Core\\Core.csproj",
+        "projectUniqueName": "D:\\Projects\\Console\\Qlang\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Core\\Core.csproj",
+        "projectPath": "D:\\Projects\\Console\\Qlang\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\sotok\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Core\\obj\\",
+        "outputPath": "D:\\Projects\\Console\\Qlang\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,7 +45,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
@@ -53,7 +54,7 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.0, )",
+              "version": "[9.0.10, )",
               "autoReferenced": true
             },
             "Newtonsoft.Json": {
@@ -75,19 +76,19 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-              "version": "[9.0.0, 9.0.0]"
+              "version": "[9.0.10, 9.0.10]"
             },
             {
               "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
-              "version": "[9.0.0, 9.0.0]"
+              "version": "[9.0.10, 9.0.10]"
             },
             {
               "name": "Microsoft.NETCore.App.Runtime.win-x64",
-              "version": "[9.0.0, 9.0.0]"
+              "version": "[9.0.10, 9.0.10]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-              "version": "[9.0.0, 9.0.0]"
+              "version": "[9.0.10, 9.0.10]"
             }
           ],
           "frameworkReferences": {
@@ -95,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
@@ -104,14 +105,14 @@
         }
       }
     },
-    "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Interpreter\\Interpreter.csproj": {
+    "D:\\Projects\\Console\\Qlang\\Interpreter\\Interpreter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Interpreter\\Interpreter.csproj",
+        "projectUniqueName": "D:\\Projects\\Console\\Qlang\\Interpreter\\Interpreter.csproj",
         "projectName": "Interpreter",
-        "projectPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Interpreter\\Interpreter.csproj",
+        "projectPath": "D:\\Projects\\Console\\Qlang\\Interpreter\\Interpreter.csproj",
         "packagesPath": "C:\\Users\\sotok\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Interpreter\\obj\\",
+        "outputPath": "D:\\Projects\\Console\\Qlang\\Interpreter\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -126,14 +127,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Core\\Core.csproj"
+              "D:\\Projects\\Console\\Qlang\\Core\\Core.csproj": {
+                "projectPath": "D:\\Projects\\Console\\Qlang\\Core\\Core.csproj"
               }
             }
           }
@@ -148,7 +150,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
@@ -157,7 +159,7 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.0, )",
+              "version": "[9.0.10, )",
               "autoReferenced": true
             }
           },
@@ -175,19 +177,19 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-              "version": "[9.0.0, 9.0.0]"
+              "version": "[9.0.10, 9.0.10]"
             },
             {
               "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
-              "version": "[9.0.0, 9.0.0]"
+              "version": "[9.0.10, 9.0.10]"
             },
             {
               "name": "Microsoft.NETCore.App.Runtime.win-x64",
-              "version": "[9.0.0, 9.0.0]"
+              "version": "[9.0.10, 9.0.10]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-              "version": "[9.0.0, 9.0.0]"
+              "version": "[9.0.10, 9.0.10]"
             }
           ],
           "frameworkReferences": {
@@ -195,7 +197,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
@@ -204,14 +206,14 @@
         }
       }
     },
-    "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Runtime\\Runtime.csproj": {
+    "D:\\Projects\\Console\\Qlang\\Runtime\\Runtime.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Runtime\\Runtime.csproj",
+        "projectUniqueName": "D:\\Projects\\Console\\Qlang\\Runtime\\Runtime.csproj",
         "projectName": "qli",
-        "projectPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Runtime\\Runtime.csproj",
+        "projectPath": "D:\\Projects\\Console\\Qlang\\Runtime\\Runtime.csproj",
         "packagesPath": "C:\\Users\\sotok\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Runtime\\obj\\",
+        "outputPath": "D:\\Projects\\Console\\Qlang\\Runtime\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -226,14 +228,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Interpreter\\Interpreter.csproj": {
-                "projectPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Interpreter\\Interpreter.csproj"
+              "D:\\Projects\\Console\\Qlang\\Interpreter\\Interpreter.csproj": {
+                "projectPath": "D:\\Projects\\Console\\Qlang\\Interpreter\\Interpreter.csproj"
               }
             }
           }
@@ -248,7 +251,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
@@ -257,7 +260,7 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.0, )",
+              "version": "[9.0.10, )",
               "autoReferenced": true
             }
           },
@@ -275,19 +278,19 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-              "version": "[9.0.0, 9.0.0]"
+              "version": "[9.0.10, 9.0.10]"
             },
             {
               "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
-              "version": "[9.0.0, 9.0.0]"
+              "version": "[9.0.10, 9.0.10]"
             },
             {
               "name": "Microsoft.NETCore.App.Runtime.win-x64",
-              "version": "[9.0.0, 9.0.0]"
+              "version": "[9.0.10, 9.0.10]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-              "version": "[9.0.0, 9.0.0]"
+              "version": "[9.0.10, 9.0.10]"
             }
           ],
           "frameworkReferences": {
@@ -295,7 +298,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {

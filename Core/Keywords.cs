@@ -30,6 +30,7 @@ public static class Keywords
 
     public static string IncludeKeyword => "include";
     public static string IncludeNativeKeyword => "native";
+    public static string UsingKeyword => "using";
     
     public static string ExtendsKeyword => "extends";
   
@@ -41,6 +42,7 @@ public static class Keywords
     [
         FunctionDeclaration, ClassDeclaration, VariableDeclaration, IfBlock, ElseBlock, WhileBlock, DoWhileBlock, 
         ForBlock, ReturnKeyword, TrueKeyword, FalseKeyword, IncludeKeyword, PrivateModificator, 
-        StaticModificator, ConstVariableDeclaration, ContinueKeyword, BreakKeyword, NullKeyword, ThisKeyword, ExtendsKeyword, SwitchBlock, CaseKeyword, DefaultKeyword, NamespaceDeclaration
+        StaticModificator, ConstVariableDeclaration, ContinueKeyword, BreakKeyword, NullKeyword, ThisKeyword, ExtendsKeyword, SwitchBlock, CaseKeyword, DefaultKeyword, NamespaceDeclaration,
+        UsingKeyword
     ];
 }

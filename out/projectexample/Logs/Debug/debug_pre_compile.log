@@ -1,282 +1,282 @@
 LOG [Compiler/Compile]: Include Files
-LOG [PreCompile/IncludeFiles IncludeFiles]: File: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\projectexample\main.ql
+LOG [PreCompile/IncludeFiles IncludeFiles]: File: D:\Projects\Console\Qlang\out\projectexample\main.ql
 LOG [PreCompile/IncludeFiles include]: (include "$lib/core", 1), (include "$lib/base", 2)
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-LOG [PreCompile/IncludeFiles IncludeFiles]: File: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+LOG [PreCompile/IncludeFiles IncludeFiles]: File: D:\Projects\Console\Qlang\out\lib\core\array.ql
 LOG [PreCompile/IncludeFiles include]: (include "$lib/core", 1)
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-LOG [PreCompile/IncludeFiles IncludeFiles]: File: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+LOG [PreCompile/IncludeFiles IncludeFiles]: File: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
 LOG [PreCompile/IncludeFiles include]: (include "$lib/core", 1)
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-LOG [PreCompile/IncludeFiles IncludeFiles]: File: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+LOG [PreCompile/IncludeFiles IncludeFiles]: File: D:\Projects\Console\Qlang\out\lib\core\number.ql
 LOG [PreCompile/IncludeFiles include]: (include "$lib/core", 1)
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-LOG [PreCompile/IncludeFiles IncludeFiles]: File: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+LOG [PreCompile/IncludeFiles IncludeFiles]: File: D:\Projects\Console\Qlang\out\lib\core\object.ql
 LOG [PreCompile/IncludeFiles include]: (include "$lib/core", 1)
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-LOG [PreCompile/IncludeFiles IncludeFiles]: File: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+LOG [PreCompile/IncludeFiles IncludeFiles]: File: D:\Projects\Console\Qlang\out\lib\core\string.ql
 LOG [PreCompile/IncludeFiles include]: (include "$lib/core", 1)
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-WARN [Compiler/Compile Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-WARN [Compiler/Compile Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-WARN [Compiler/Compile Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-WARN [Compiler/Compile Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\console.ql
-LOG [PreCompile/IncludeFiles IncludeFiles]: File: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\console.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+WARN [Compiler/Compile Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+WARN [Compiler/Compile Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+WARN [Compiler/Compile Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+WARN [Compiler/Compile Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\console.ql
+LOG [PreCompile/IncludeFiles IncludeFiles]: File: D:\Projects\Console\Qlang\out\lib\base\console.ql
 LOG [PreCompile/IncludeFiles include]: (include "$lib/base", 1), (include "$lib/core", 2), (include "$lib/meta", 3)
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\console.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\console.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\include.ql
-LOG [PreCompile/IncludeFiles IncludeFiles]: File: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\include.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\console.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\console.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\include.ql
+LOG [PreCompile/IncludeFiles IncludeFiles]: File: D:\Projects\Console\Qlang\out\lib\base\include.ql
 LOG [PreCompile/IncludeFiles include]: (include "$lib/base/vectors", 1), (include "$lib/base/datetime", 2)
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\vectors
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\vectors\vector2.ql
-LOG [PreCompile/IncludeFiles IncludeFiles]: File: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\vectors\vector2.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\vectors
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\vectors\vector2.ql
+LOG [PreCompile/IncludeFiles IncludeFiles]: File: D:\Projects\Console\Qlang\out\lib\base\vectors\vector2.ql
 LOG [PreCompile/IncludeFiles include]: (include "$lib/base", 1), (include "$lib/core", 2)
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\console.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\console.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\include.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\include.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\math.ql
-LOG [PreCompile/IncludeFiles IncludeFiles]: File: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\math.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\console.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\console.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\include.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\include.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\math.ql
+LOG [PreCompile/IncludeFiles IncludeFiles]: File: D:\Projects\Console\Qlang\out\lib\base\math.ql
 LOG [PreCompile/IncludeFiles include]: (include "$lib/base", 1), (include "$lib/core", 2)
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\console.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\console.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\include.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\include.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\math.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\math.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\parser.ql
-LOG [PreCompile/IncludeFiles IncludeFiles]: File: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\parser.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\console.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\console.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\include.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\include.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\math.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\math.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\parser.ql
+LOG [PreCompile/IncludeFiles IncludeFiles]: File: D:\Projects\Console\Qlang\out\lib\base\parser.ql
 LOG [PreCompile/IncludeFiles include]: (include "$lib/base", 1), (include "$lib/core", 2)
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\console.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\console.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\include.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\include.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\math.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\math.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\parser.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\parser.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\regex.ql
-LOG [PreCompile/IncludeFiles IncludeFiles]: File: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\regex.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\console.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\console.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\include.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\include.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\math.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\math.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\parser.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\parser.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\regex.ql
+LOG [PreCompile/IncludeFiles IncludeFiles]: File: D:\Projects\Console\Qlang\out\lib\base\regex.ql
 LOG [PreCompile/IncludeFiles include]: (include "$lib/base", 1), (include "$lib/core", 2)
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\console.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\console.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\include.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\include.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\math.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\math.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\parser.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\parser.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\regex.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\regex.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\throw.ql
-LOG [PreCompile/IncludeFiles IncludeFiles]: File: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\throw.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\console.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\console.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\include.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\include.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\math.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\math.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\parser.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\parser.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\regex.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\regex.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\throw.ql
+LOG [PreCompile/IncludeFiles IncludeFiles]: File: D:\Projects\Console\Qlang\out\lib\base\throw.ql
 LOG [PreCompile/IncludeFiles include]: (include "$lib/base", 1), (include "$lib/core", 2)
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\console.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\console.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\include.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\include.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\math.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\math.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\parser.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\parser.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\regex.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\regex.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\throw.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\throw.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\throw.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\throw.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\regex.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\regex.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\throw.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\throw.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\parser.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\parser.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\regex.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\regex.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\throw.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\throw.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\datetime
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\datetime\time.ql
-LOG [PreCompile/IncludeFiles IncludeFiles]: File: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\datetime\time.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\console.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\console.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\include.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\include.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\math.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\math.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\parser.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\parser.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\regex.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\regex.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\throw.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\throw.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\throw.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\throw.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\regex.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\regex.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\throw.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\throw.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\parser.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\parser.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\regex.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\regex.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\throw.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\throw.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\datetime
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\datetime\time.ql
+LOG [PreCompile/IncludeFiles IncludeFiles]: File: D:\Projects\Console\Qlang\out\lib\base\datetime\time.ql
 LOG [PreCompile/IncludeFiles include]: (include "$lib/core", 1)
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\math.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\math.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\parser.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\parser.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\regex.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\regex.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\throw.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\throw.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\meta
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\meta\Meta.ql
-LOG [PreCompile/IncludeFiles IncludeFiles]: File: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\meta\Meta.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\math.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\math.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\parser.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\parser.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\regex.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\regex.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\throw.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\throw.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\array.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\dictionary.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\number.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\object.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\core\string.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\meta
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\meta\Meta.ql
+LOG [PreCompile/IncludeFiles IncludeFiles]: File: D:\Projects\Console\Qlang\out\lib\meta\Meta.ql
 LOG [PreCompile/IncludeFiles include]: (include "$lib/meta", 1), (include "$lib/base", 2)
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\meta
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\meta\Meta.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\meta\Meta.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\console.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\console.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\include.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\include.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\math.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\math.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\parser.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\parser.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\regex.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\regex.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\throw.ql
-WARN [PreCompile/IncludeFiles Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\throw.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\include.ql
-WARN [Compiler/Compile Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\include.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\math.ql
-WARN [Compiler/Compile Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\math.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\parser.ql
-WARN [Compiler/Compile Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\parser.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\regex.ql
-WARN [Compiler/Compile Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\regex.ql
-LOG [PreCompile/IncludeFiles Path]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\throw.ql
-WARN [Compiler/Compile Skipped (already included)]: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\throw.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\meta
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\meta\Meta.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\meta\Meta.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\console.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\console.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\include.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\include.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\math.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\math.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\parser.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\parser.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\regex.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\regex.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\throw.ql
+WARN [PreCompile/IncludeFiles Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\throw.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\include.ql
+WARN [Compiler/Compile Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\include.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\math.ql
+WARN [Compiler/Compile Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\math.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\parser.ql
+WARN [Compiler/Compile Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\parser.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\regex.ql
+WARN [Compiler/Compile Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\regex.ql
+LOG [PreCompile/IncludeFiles Path]: D:\Projects\Console\Qlang\out\lib\base\throw.ql
+WARN [Compiler/Compile Skipped (already included)]: D:\Projects\Console\Qlang\out\lib\base\throw.ql
 SUCC [QLang/Compile]: All includes processed successfully.
 LOG [Compiler/Compile]: Include Native Files
-LOG [PreCompile/IncludeNativeFolders IncludeNativeFolders]: Folder: C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\projectexample\main.ql
+LOG [PreCompile/IncludeNativeFolders IncludeNativeFolders]: Folder: D:\Projects\Console\Qlang\out\projectexample\main.ql
 SUCC [QLang/Compile]: All native includes processed successfully.
 SUCC [Compiler/Compile]: Clear Comments
 LOG [<>c/<ClearComments>b__7_0]: comment='// Class to make string operations'
@@ -326,6 +326,9 @@ LOG [<>c/<ClearComments>b__7_0]: comment='// function match(let input, let patte
 LOG [<>c/<ClearComments>b__7_0]: comment='//     return _native("lib.regex.match", input, pattern);'
 LOG [<>c/<ClearComments>b__7_0]: comment='// }'
 LOG [<>c/<ClearComments>b__7_0]: comment='// Class to make operations with console'
+LOG [<>c/<ClearComments>b__7_0]: comment='// if (Meta.getMethodListOf(message).contains("toString")): '
+LOG [<>c/<ClearComments>b__7_0]: comment='//     return message.toString();'
+LOG [<>c/<ClearComments>b__7_0]: comment='// else: '
 LOG [<>c/<ClearComments>b__7_0]: comment='// Print text to console'
 LOG [<>c/<ClearComments>b__7_0]: comment='// Print text to console with new line'
 LOG [<>c/<ClearComments>b__7_0]: comment='// Print Verbatim text to console'
@@ -336,11 +339,9 @@ LOG [<>c/<ClearComments>b__7_0]: comment='// Set cursor position in console'
 LOG [<>c/<ClearComments>b__7_0]: comment='// Set foreground color for console'
 LOG [<>c/<ClearComments>b__7_0]: comment='// Set background color for console'
 LOG [<>c/<ClearComments>b__7_0]: comment='// Set default colors for console'
-LOG [<>c/<ClearComments>b__7_0]: comment='// system::out();'
-LOG [<>c/<ClearComments>b__7_0]: comment='// system::Console.WriteLine(system::Console2);'
 SUCC [Compiler/Compile]: Comments cleared successfully
 LOG [PreCompile/ExtractStrings]: Extract Strings
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_0___', value='C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\string.ql'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_0___', value='D:\Projects\Console\Qlang\out\lib\core\string.ql'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_1___', value=''
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_2___', value='\0'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_3___', value=''
@@ -377,11 +378,11 @@ LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_33___', value='s
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_34___', value='subString error: length must be number'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_35___', value='Value 'length' can't be more than string length'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_36___', value='lib.string.substring'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_37___', value='C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\object.ql'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_37___', value='D:\Projects\Console\Qlang\out\lib\core\object.ql'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_38___', value='lib.object.is_null'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_39___', value='lib.object.is_simplify'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_40___', value='lib.string.to_string'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_41___', value='C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\number.ql'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_41___', value='D:\Projects\Console\Qlang\out\lib\core\number.ql'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_42___', value='-1.7976931348623157E+308'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_43___', value='1.7976931348623157E+308'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_44___', value='lib.number.try_parse'
@@ -390,9 +391,9 @@ LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_46___', value='M
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_47___', value='lib.number.random'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_48___', value='0'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_49___', value='lib.number.to_string'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_50___', value='C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\dictionary.ql'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_50___', value='D:\Projects\Console\Qlang\out\lib\core\dictionary.ql'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_51___', value='Key is not existent in dictionary'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_52___', value='C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\core\array.ql'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_52___', value='D:\Projects\Console\Qlang\out\lib\core\array.ql'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_53___', value='['
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_54___', value='''
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_55___', value='','
@@ -409,28 +410,28 @@ LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_65___', value='l
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_66___', value='lib.array.remove_at'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_67___', value='lib.array.index_of'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_68___', value='lib.array.count'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_69___', value='C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\throw.ql'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_69___', value='D:\Projects\Console\Qlang\out\lib\base\throw.ql'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_70___', value='lib.exception.throw'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_71___', value='This function or object is not implement'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_72___', value='Parse error: '
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_73___', value='Object is null'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_74___', value='C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\regex.ql'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_74___', value='D:\Projects\Console\Qlang\out\lib\base\regex.ql'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_75___', value=''
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_76___', value='lib.regex.replace'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_77___', value='C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\parser.ql'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_77___', value='D:\Projects\Console\Qlang\out\lib\base\parser.ql'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_78___', value='lib.parser.int'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_79___', value='lib.parser.float'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_80___', value='lib.parser.string'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_81___', value='lib.parser.number'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_82___', value='C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\math.ql'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_83___', value='C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\vectors\vector2.ql'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_82___', value='D:\Projects\Console\Qlang\out\lib\base\math.ql'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_83___', value='D:\Projects\Console\Qlang\out\lib\base\vectors\vector2.ql'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_84___', value='X: '
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_85___', value=', Y: '
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_86___', value='C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\datetime\time.ql'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_86___', value='D:\Projects\Console\Qlang\out\lib\base\datetime\time.ql'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_87___', value='argument 'milliseconds' is not a number'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_88___', value='lib.datetime.wait'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_89___', value='C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\include.ql'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_90___', value='C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\meta\Meta.ql'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_89___', value='D:\Projects\Console\Qlang\out\lib\base\include.ql'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_90___', value='D:\Projects\Console\Qlang\out\lib\meta\Meta.ql'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_91___', value='lib.meta.is_dynamic_class'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_92___', value='Object is not a class'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_93___', value='lib.meta.get_method_list_of'
@@ -438,35 +439,29 @@ LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_94___', value='O
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_95___', value='lib.meta.get_variable_list_of'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_96___', value='Object is not a class'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_97___', value='lib.meta.get_info_of'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_98___', value='C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\lib\base\console.ql'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_98___', value='D:\Projects\Console\Qlang\out\lib\base\console.ql'
 LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_99___', value='null'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_100___', value='toString'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_101___', value='lib.console.write'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_102___', value=''
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_103___', value='lib.console.write'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_104___', value='Povid'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_105___', value='lib.console.write'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_106___', value='\n'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_107___', value='lib.console.write'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_108___', value=''
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_109___', value='lib.console.write'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_110___', value='\n'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_111___', value='lib.console.read'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_112___', value='lib.console.key'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_113___', value='lib.console.key_available'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_114___', value='lib.console.cursor_visible'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_115___', value='lib.console.clear'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_116___', value='lib.console.cursor_position'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_117___', value='lib.console.foreground'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_118___', value='lib.console.background'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_119___', value='lib.console.reset_color'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_120___', value='lib.console.width'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_121___', value='lib.console.height'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_122___', value='C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\out\projectexample\main.ql'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_123___', value='Hello, World!'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_124___', value='Output from system namespace'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_125___', value='Doing something!'
-LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_126___', value='Hello, World!'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_100___', value='lib.console.write'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_101___', value=''
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_102___', value='lib.console.write'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_103___', value='\n'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_104___', value='lib.console.write'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_105___', value=''
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_106___', value='lib.console.write'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_107___', value='\n'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_108___', value='lib.console.read'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_109___', value='lib.console.key'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_110___', value='lib.console.key_available'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_111___', value='lib.console.cursor_visible'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_112___', value='lib.console.clear'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_113___', value='lib.console.cursor_position'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_114___', value='lib.console.foreground'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_115___', value='lib.console.background'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_116___', value='lib.console.reset_color'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_117___', value='lib.console.width'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_118___', value='lib.console.height'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_119___', value='D:\Projects\Console\Qlang\out\projectexample\main.ql'
+LOG [<>c__DisplayClass5_0/<ExtractStrings>b__0]: key='___STRING_120___', value='Hello, World!'
 SUCC [Compiler/Compile]: Strings extracted successfully
 WARN [Compiler/Compile]: Extract Numbers
 WARN [<>c/<Replace>b__99_0]: key='___NUMBER_0___', value='0'
