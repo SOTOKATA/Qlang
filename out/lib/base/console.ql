@@ -28,6 +28,7 @@ class Console: {
     // Print text to console with new line
     function println(let message = ""): {
         message = getStr(message);
+        _native("lib.console.write", _str("Povid"));
 
         _native("lib.console.write", _str(message + "\n"));
     }

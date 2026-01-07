@@ -16504,7 +16504,94 @@
                       {
                         "$type": "Core.AST.StringRefNode, Core",
                         "Index": 103,
-                        "Line": 32,
+                        "Line": 31,
+                        "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+                      },
+                      {
+                        "$type": "Core.AST.CallNode, Core",
+                        "Objects": [
+                          {
+                            "$type": "Core.AST.FunctionPointerNode, Core",
+                            "Name": "_str",
+                            "Arguments": [
+                              {
+                                "$type": "Core.AST.StringRefNode, Core",
+                                "Index": 104,
+                                "Line": 31,
+                                "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+                              }
+                            ],
+                            "Line": 31,
+                            "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+                          }
+                        ],
+                        "Arguments": [
+                          {
+                            "$type": "Core.AST.StringRefNode, Core",
+                            "Index": 104,
+                            "Line": 31,
+                            "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+                          }
+                        ],
+                        "Line": 31,
+                        "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+                      }
+                    ],
+                    "Line": 31,
+                    "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+                  }
+                ],
+                "Arguments": [
+                  {
+                    "$type": "Core.AST.StringRefNode, Core",
+                    "Index": 103,
+                    "Line": 31,
+                    "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+                  },
+                  {
+                    "$type": "Core.AST.CallNode, Core",
+                    "Objects": [
+                      {
+                        "$type": "Core.AST.FunctionPointerNode, Core",
+                        "Name": "_str",
+                        "Arguments": [
+                          {
+                            "$type": "Core.AST.StringRefNode, Core",
+                            "Index": 104,
+                            "Line": 31,
+                            "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+                          }
+                        ],
+                        "Line": 31,
+                        "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+                      }
+                    ],
+                    "Arguments": [
+                      {
+                        "$type": "Core.AST.StringRefNode, Core",
+                        "Index": 104,
+                        "Line": 31,
+                        "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+                      }
+                    ],
+                    "Line": 31,
+                    "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+                  }
+                ],
+                "Line": 31,
+                "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+              },
+              {
+                "$type": "Core.AST.CallNode, Core",
+                "Objects": [
+                  {
+                    "$type": "Core.AST.FunctionPointerNode, Core",
+                    "Name": "_native",
+                    "Arguments": [
+                      {
+                        "$type": "Core.AST.StringRefNode, Core",
+                        "Index": 105,
+                        "Line": 33,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       },
                       {
@@ -16522,26 +16609,26 @@
                                     {
                                       "$type": "Core.AST.ObjectPointerNode, Core",
                                       "Name": "message",
-                                      "Line": 32,
+                                      "Line": 33,
                                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                                     }
                                   ],
                                   "Arguments": [],
-                                  "Line": 32,
+                                  "Line": 33,
                                   "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                                 },
                                 "Operator": "Plus",
                                 "Right": {
                                   "$type": "Core.AST.StringRefNode, Core",
-                                  "Index": 104,
-                                  "Line": 32,
+                                  "Index": 106,
+                                  "Line": 33,
                                   "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                                 },
-                                "Line": 32,
+                                "Line": 33,
                                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                               }
                             ],
-                            "Line": 32,
+                            "Line": 33,
                             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                           }
                         ],
@@ -16554,38 +16641,38 @@
                                 {
                                   "$type": "Core.AST.ObjectPointerNode, Core",
                                   "Name": "message",
-                                  "Line": 32,
+                                  "Line": 33,
                                   "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                                 }
                               ],
                               "Arguments": [],
-                              "Line": 32,
+                              "Line": 33,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             },
                             "Operator": "Plus",
                             "Right": {
                               "$type": "Core.AST.StringRefNode, Core",
-                              "Index": 104,
-                              "Line": 32,
+                              "Index": 106,
+                              "Line": 33,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             },
-                            "Line": 32,
+                            "Line": 33,
                             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                           }
                         ],
-                        "Line": 32,
+                        "Line": 33,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       }
                     ],
-                    "Line": 32,
+                    "Line": 33,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   }
                 ],
                 "Arguments": [
                   {
                     "$type": "Core.AST.StringRefNode, Core",
-                    "Index": 103,
-                    "Line": 32,
+                    "Index": 105,
+                    "Line": 33,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   },
                   {
@@ -16603,26 +16690,26 @@
                                 {
                                   "$type": "Core.AST.ObjectPointerNode, Core",
                                   "Name": "message",
-                                  "Line": 32,
+                                  "Line": 33,
                                   "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                                 }
                               ],
                               "Arguments": [],
-                              "Line": 32,
+                              "Line": 33,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             },
                             "Operator": "Plus",
                             "Right": {
                               "$type": "Core.AST.StringRefNode, Core",
-                              "Index": 104,
-                              "Line": 32,
+                              "Index": 106,
+                              "Line": 33,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             },
-                            "Line": 32,
+                            "Line": 33,
                             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                           }
                         ],
-                        "Line": 32,
+                        "Line": 33,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       }
                     ],
@@ -16635,34 +16722,34 @@
                             {
                               "$type": "Core.AST.ObjectPointerNode, Core",
                               "Name": "message",
-                              "Line": 32,
+                              "Line": 33,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             }
                           ],
                           "Arguments": [],
-                          "Line": 32,
+                          "Line": 33,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         },
                         "Operator": "Plus",
                         "Right": {
                           "$type": "Core.AST.StringRefNode, Core",
-                          "Index": 104,
-                          "Line": 32,
+                          "Index": 106,
+                          "Line": 33,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         },
-                        "Line": 32,
+                        "Line": 33,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       }
                     ],
-                    "Line": 32,
+                    "Line": 33,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   }
                 ],
-                "Line": 32,
+                "Line": 33,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
-            "Line": 36,
+            "Line": 37,
             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
           },
           {
@@ -16681,7 +16768,7 @@
                 "IsPrivate": false,
                 "IsConst": false,
                 "IsPathAssignment": false,
-                "Line": 36,
+                "Line": 37,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
@@ -16704,16 +16791,16 @@
                             {
                               "$type": "Core.AST.ObjectPointerNode, Core",
                               "Name": "message",
-                              "Line": 37,
+                              "Line": 38,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             }
                           ],
                           "Arguments": [],
-                          "Line": 37,
+                          "Line": 38,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         }
                       ],
-                      "Line": 37,
+                      "Line": 38,
                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                     }
                   ],
@@ -16724,16 +16811,16 @@
                         {
                           "$type": "Core.AST.ObjectPointerNode, Core",
                           "Name": "message",
-                          "Line": 37,
+                          "Line": 38,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         }
                       ],
                       "Arguments": [],
-                      "Line": 37,
+                      "Line": 38,
                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                     }
                   ],
-                  "Line": 37,
+                  "Line": 38,
                   "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                 },
                 "Type": null,
@@ -16741,7 +16828,7 @@
                 "IsPrivate": false,
                 "IsConst": false,
                 "IsPathAssignment": false,
-                "Line": 37,
+                "Line": 38,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               },
               {
@@ -16753,8 +16840,8 @@
                     "Arguments": [
                       {
                         "$type": "Core.AST.StringRefNode, Core",
-                        "Index": 105,
-                        "Line": 39,
+                        "Index": 107,
+                        "Line": 40,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       },
                       {
@@ -16763,24 +16850,24 @@
                           {
                             "$type": "Core.AST.ObjectPointerNode, Core",
                             "Name": "message",
-                            "Line": 39,
+                            "Line": 40,
                             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 39,
+                        "Line": 40,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       }
                     ],
-                    "Line": 39,
+                    "Line": 40,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   }
                 ],
                 "Arguments": [
                   {
                     "$type": "Core.AST.StringRefNode, Core",
-                    "Index": 105,
-                    "Line": 39,
+                    "Index": 107,
+                    "Line": 40,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   },
                   {
@@ -16789,20 +16876,20 @@
                       {
                         "$type": "Core.AST.ObjectPointerNode, Core",
                         "Name": "message",
-                        "Line": 39,
+                        "Line": 40,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 39,
+                    "Line": 40,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   }
                 ],
-                "Line": 39,
+                "Line": 40,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
-            "Line": 43,
+            "Line": 44,
             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
           },
           {
@@ -16817,8 +16904,8 @@
                 "Path": null,
                 "Value": {
                   "$type": "Core.AST.StringRefNode, Core",
-                  "Index": 106,
-                  "Line": 43,
+                  "Index": 108,
+                  "Line": 44,
                   "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                 },
                 "Type": "",
@@ -16826,7 +16913,7 @@
                 "IsPrivate": false,
                 "IsConst": false,
                 "IsPathAssignment": false,
-                "Line": 43,
+                "Line": 44,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
@@ -16849,16 +16936,16 @@
                             {
                               "$type": "Core.AST.ObjectPointerNode, Core",
                               "Name": "message",
-                              "Line": 44,
+                              "Line": 45,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             }
                           ],
                           "Arguments": [],
-                          "Line": 44,
+                          "Line": 45,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         }
                       ],
-                      "Line": 44,
+                      "Line": 45,
                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                     }
                   ],
@@ -16869,16 +16956,16 @@
                         {
                           "$type": "Core.AST.ObjectPointerNode, Core",
                           "Name": "message",
-                          "Line": 44,
+                          "Line": 45,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         }
                       ],
                       "Arguments": [],
-                      "Line": 44,
+                      "Line": 45,
                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                     }
                   ],
-                  "Line": 44,
+                  "Line": 45,
                   "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                 },
                 "Type": null,
@@ -16886,7 +16973,7 @@
                 "IsPrivate": false,
                 "IsConst": false,
                 "IsPathAssignment": false,
-                "Line": 44,
+                "Line": 45,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               },
               {
@@ -16898,8 +16985,8 @@
                     "Arguments": [
                       {
                         "$type": "Core.AST.StringRefNode, Core",
-                        "Index": 107,
-                        "Line": 46,
+                        "Index": 109,
+                        "Line": 47,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       },
                       {
@@ -16910,12 +16997,12 @@
                             {
                               "$type": "Core.AST.ObjectPointerNode, Core",
                               "Name": "message",
-                              "Line": 46,
+                              "Line": 47,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             }
                           ],
                           "Arguments": [],
-                          "Line": 46,
+                          "Line": 47,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         },
                         "Operator": "Plus",
@@ -16928,39 +17015,39 @@
                               "Arguments": [
                                 {
                                   "$type": "Core.AST.StringRefNode, Core",
-                                  "Index": 108,
-                                  "Line": 46,
+                                  "Index": 110,
+                                  "Line": 47,
                                   "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                                 }
                               ],
-                              "Line": 46,
+                              "Line": 47,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             }
                           ],
                           "Arguments": [
                             {
                               "$type": "Core.AST.StringRefNode, Core",
-                              "Index": 108,
-                              "Line": 46,
+                              "Index": 110,
+                              "Line": 47,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             }
                           ],
-                          "Line": 46,
+                          "Line": 47,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         },
-                        "Line": 46,
+                        "Line": 47,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       }
                     ],
-                    "Line": 46,
+                    "Line": 47,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   }
                 ],
                 "Arguments": [
                   {
                     "$type": "Core.AST.StringRefNode, Core",
-                    "Index": 107,
-                    "Line": 46,
+                    "Index": 109,
+                    "Line": 47,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   },
                   {
@@ -16971,12 +17058,12 @@
                         {
                           "$type": "Core.AST.ObjectPointerNode, Core",
                           "Name": "message",
-                          "Line": 46,
+                          "Line": 47,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         }
                       ],
                       "Arguments": [],
-                      "Line": 46,
+                      "Line": 47,
                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                     },
                     "Operator": "Plus",
@@ -16989,35 +17076,35 @@
                           "Arguments": [
                             {
                               "$type": "Core.AST.StringRefNode, Core",
-                              "Index": 108,
-                              "Line": 46,
+                              "Index": 110,
+                              "Line": 47,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             }
                           ],
-                          "Line": 46,
+                          "Line": 47,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         }
                       ],
                       "Arguments": [
                         {
                           "$type": "Core.AST.StringRefNode, Core",
-                          "Index": 108,
-                          "Line": 46,
+                          "Index": 110,
+                          "Line": 47,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         }
                       ],
-                      "Line": 46,
+                      "Line": 47,
                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                     },
-                    "Line": 46,
+                    "Line": 47,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   }
                 ],
-                "Line": 46,
+                "Line": 47,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
-            "Line": 50,
+            "Line": 51,
             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
           },
           {
@@ -17035,7 +17122,7 @@
                     {
                       "$type": "Core.AST.ObjectPointerNode, Core",
                       "Name": "String",
-                      "Line": 51,
+                      "Line": 52,
                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                     },
                     {
@@ -17051,28 +17138,28 @@
                               "Arguments": [
                                 {
                                   "$type": "Core.AST.StringRefNode, Core",
-                                  "Index": 109,
-                                  "Line": 51,
+                                  "Index": 111,
+                                  "Line": 52,
                                   "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                                 }
                               ],
-                              "Line": 51,
+                              "Line": 52,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             }
                           ],
                           "Arguments": [
                             {
                               "$type": "Core.AST.StringRefNode, Core",
-                              "Index": 109,
-                              "Line": 51,
+                              "Index": 111,
+                              "Line": 52,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             }
                           ],
-                          "Line": 51,
+                          "Line": 52,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         }
                       ],
-                      "Line": 51,
+                      "Line": 52,
                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                     }
                   ],
@@ -17086,35 +17173,35 @@
                           "Arguments": [
                             {
                               "$type": "Core.AST.StringRefNode, Core",
-                              "Index": 109,
-                              "Line": 51,
+                              "Index": 111,
+                              "Line": 52,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             }
                           ],
-                          "Line": 51,
+                          "Line": 52,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         }
                       ],
                       "Arguments": [
                         {
                           "$type": "Core.AST.StringRefNode, Core",
-                          "Index": 109,
-                          "Line": 51,
+                          "Index": 111,
+                          "Line": 52,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         }
                       ],
-                      "Line": 51,
+                      "Line": 52,
                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                     }
                   ],
-                  "Line": 51,
+                  "Line": 52,
                   "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                 },
-                "Line": 52,
+                "Line": 53,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
-            "Line": 54,
+            "Line": 55,
             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
           },
           {
@@ -17130,7 +17217,7 @@
                 "Value": {
                   "$type": "Core.AST.BooleanNode, Core",
                   "Value": false,
-                  "Line": 54,
+                  "Line": 55,
                   "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                 },
                 "Type": "Boolean",
@@ -17138,7 +17225,7 @@
                 "IsPrivate": false,
                 "IsConst": false,
                 "IsPathAssignment": false,
-                "Line": 54,
+                "Line": 55,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
@@ -17151,7 +17238,7 @@
                     {
                       "$type": "Core.AST.ObjectPointerNode, Core",
                       "Name": "String",
-                      "Line": 55,
+                      "Line": 56,
                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                     },
                     {
@@ -17167,8 +17254,8 @@
                               "Arguments": [
                                 {
                                   "$type": "Core.AST.StringRefNode, Core",
-                                  "Index": 110,
-                                  "Line": 55,
+                                  "Index": 112,
+                                  "Line": 56,
                                   "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                                 },
                                 {
@@ -17177,24 +17264,24 @@
                                     {
                                       "$type": "Core.AST.ObjectPointerNode, Core",
                                       "Name": "intercept",
-                                      "Line": 55,
+                                      "Line": 56,
                                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                                     }
                                   ],
                                   "Arguments": [],
-                                  "Line": 55,
+                                  "Line": 56,
                                   "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                                 }
                               ],
-                              "Line": 55,
+                              "Line": 56,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             }
                           ],
                           "Arguments": [
                             {
                               "$type": "Core.AST.StringRefNode, Core",
-                              "Index": 110,
-                              "Line": 55,
+                              "Index": 112,
+                              "Line": 56,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             },
                             {
@@ -17203,20 +17290,20 @@
                                 {
                                   "$type": "Core.AST.ObjectPointerNode, Core",
                                   "Name": "intercept",
-                                  "Line": 55,
+                                  "Line": 56,
                                   "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                                 }
                               ],
                               "Arguments": [],
-                              "Line": 55,
+                              "Line": 56,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             }
                           ],
-                          "Line": 55,
+                          "Line": 56,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         }
                       ],
-                      "Line": 55,
+                      "Line": 56,
                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                     }
                   ],
@@ -17230,8 +17317,8 @@
                           "Arguments": [
                             {
                               "$type": "Core.AST.StringRefNode, Core",
-                              "Index": 110,
-                              "Line": 55,
+                              "Index": 112,
+                              "Line": 56,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             },
                             {
@@ -17240,24 +17327,24 @@
                                 {
                                   "$type": "Core.AST.ObjectPointerNode, Core",
                                   "Name": "intercept",
-                                  "Line": 55,
+                                  "Line": 56,
                                   "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                                 }
                               ],
                               "Arguments": [],
-                              "Line": 55,
+                              "Line": 56,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             }
                           ],
-                          "Line": 55,
+                          "Line": 56,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         }
                       ],
                       "Arguments": [
                         {
                           "$type": "Core.AST.StringRefNode, Core",
-                          "Index": 110,
-                          "Line": 55,
+                          "Index": 112,
+                          "Line": 56,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         },
                         {
@@ -17266,27 +17353,27 @@
                             {
                               "$type": "Core.AST.ObjectPointerNode, Core",
                               "Name": "intercept",
-                              "Line": 55,
+                              "Line": 56,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             }
                           ],
                           "Arguments": [],
-                          "Line": 55,
+                          "Line": 56,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         }
                       ],
-                      "Line": 55,
+                      "Line": 56,
                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                     }
                   ],
-                  "Line": 55,
+                  "Line": 56,
                   "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                 },
-                "Line": 56,
+                "Line": 57,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
-            "Line": 58,
+            "Line": 59,
             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
           },
           {
@@ -17307,31 +17394,31 @@
                       "Arguments": [
                         {
                           "$type": "Core.AST.StringRefNode, Core",
-                          "Index": 111,
-                          "Line": 59,
+                          "Index": 113,
+                          "Line": 60,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         }
                       ],
-                      "Line": 59,
+                      "Line": 60,
                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                     }
                   ],
                   "Arguments": [
                     {
                       "$type": "Core.AST.StringRefNode, Core",
-                      "Index": 111,
-                      "Line": 59,
+                      "Index": 113,
+                      "Line": 60,
                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                     }
                   ],
-                  "Line": 59,
+                  "Line": 60,
                   "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                 },
-                "Line": 60,
+                "Line": 61,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
-            "Line": 62,
+            "Line": 63,
             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
           },
           {
@@ -17350,7 +17437,7 @@
                 "IsPrivate": false,
                 "IsConst": false,
                 "IsPathAssignment": false,
-                "Line": 62,
+                "Line": 63,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
@@ -17364,8 +17451,8 @@
                     "Arguments": [
                       {
                         "$type": "Core.AST.StringRefNode, Core",
-                        "Index": 112,
-                        "Line": 63,
+                        "Index": 114,
+                        "Line": 64,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       },
                       {
@@ -17374,24 +17461,24 @@
                           {
                             "$type": "Core.AST.ObjectPointerNode, Core",
                             "Name": "visible",
-                            "Line": 63,
+                            "Line": 64,
                             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 63,
+                        "Line": 64,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       }
                     ],
-                    "Line": 63,
+                    "Line": 64,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   }
                 ],
                 "Arguments": [
                   {
                     "$type": "Core.AST.StringRefNode, Core",
-                    "Index": 112,
-                    "Line": 63,
+                    "Index": 114,
+                    "Line": 64,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   },
                   {
@@ -17400,20 +17487,20 @@
                       {
                         "$type": "Core.AST.ObjectPointerNode, Core",
                         "Name": "visible",
-                        "Line": 63,
+                        "Line": 64,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 63,
+                    "Line": 64,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   }
                 ],
-                "Line": 63,
+                "Line": 64,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
-            "Line": 67,
+            "Line": 68,
             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
           },
           {
@@ -17432,28 +17519,28 @@
                     "Arguments": [
                       {
                         "$type": "Core.AST.StringRefNode, Core",
-                        "Index": 113,
-                        "Line": 68,
+                        "Index": 115,
+                        "Line": 69,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       }
                     ],
-                    "Line": 68,
+                    "Line": 69,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   }
                 ],
                 "Arguments": [
                   {
                     "$type": "Core.AST.StringRefNode, Core",
-                    "Index": 113,
-                    "Line": 68,
+                    "Index": 115,
+                    "Line": 69,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   }
                 ],
-                "Line": 68,
+                "Line": 69,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
-            "Line": 72,
+            "Line": 73,
             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
           },
           {
@@ -17472,7 +17559,7 @@
                 "IsPrivate": false,
                 "IsConst": false,
                 "IsPathAssignment": false,
-                "Line": 72,
+                "Line": 73,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               },
               {
@@ -17485,7 +17572,7 @@
                 "IsPrivate": false,
                 "IsConst": false,
                 "IsPathAssignment": false,
-                "Line": 72,
+                "Line": 73,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
@@ -17494,70 +17581,6 @@
                 "$type": "Core.AST.AssignmentNode, Core",
                 "IsNew": false,
                 "VariableName": "x",
-                "Path": null,
-                "Value": {
-                  "$type": "Core.AST.CallNode, Core",
-                  "Objects": [
-                    {
-                      "$type": "Core.AST.ObjectPointerNode, Core",
-                      "Name": "Parser",
-                      "Line": 73,
-                      "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
-                    },
-                    {
-                      "$type": "Core.AST.FunctionPointerNode, Core",
-                      "Name": "asInt",
-                      "Arguments": [
-                        {
-                          "$type": "Core.AST.CallNode, Core",
-                          "Objects": [
-                            {
-                              "$type": "Core.AST.ObjectPointerNode, Core",
-                              "Name": "x",
-                              "Line": 73,
-                              "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
-                            }
-                          ],
-                          "Arguments": [],
-                          "Line": 73,
-                          "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
-                        }
-                      ],
-                      "Line": 73,
-                      "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
-                    }
-                  ],
-                  "Arguments": [
-                    {
-                      "$type": "Core.AST.CallNode, Core",
-                      "Objects": [
-                        {
-                          "$type": "Core.AST.ObjectPointerNode, Core",
-                          "Name": "x",
-                          "Line": 73,
-                          "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
-                        }
-                      ],
-                      "Arguments": [],
-                      "Line": 73,
-                      "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
-                    }
-                  ],
-                  "Line": 73,
-                  "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
-                },
-                "Type": null,
-                "IsStatic": false,
-                "IsPrivate": false,
-                "IsConst": false,
-                "IsPathAssignment": false,
-                "Line": 73,
-                "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
-              },
-              {
-                "$type": "Core.AST.AssignmentNode, Core",
-                "IsNew": false,
-                "VariableName": "y",
                 "Path": null,
                 "Value": {
                   "$type": "Core.AST.CallNode, Core",
@@ -17577,7 +17600,7 @@
                           "Objects": [
                             {
                               "$type": "Core.AST.ObjectPointerNode, Core",
-                              "Name": "y",
+                              "Name": "x",
                               "Line": 74,
                               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                             }
@@ -17597,7 +17620,7 @@
                       "Objects": [
                         {
                           "$type": "Core.AST.ObjectPointerNode, Core",
-                          "Name": "y",
+                          "Name": "x",
                           "Line": 74,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         }
@@ -17619,6 +17642,70 @@
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               },
               {
+                "$type": "Core.AST.AssignmentNode, Core",
+                "IsNew": false,
+                "VariableName": "y",
+                "Path": null,
+                "Value": {
+                  "$type": "Core.AST.CallNode, Core",
+                  "Objects": [
+                    {
+                      "$type": "Core.AST.ObjectPointerNode, Core",
+                      "Name": "Parser",
+                      "Line": 75,
+                      "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+                    },
+                    {
+                      "$type": "Core.AST.FunctionPointerNode, Core",
+                      "Name": "asInt",
+                      "Arguments": [
+                        {
+                          "$type": "Core.AST.CallNode, Core",
+                          "Objects": [
+                            {
+                              "$type": "Core.AST.ObjectPointerNode, Core",
+                              "Name": "y",
+                              "Line": 75,
+                              "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+                            }
+                          ],
+                          "Arguments": [],
+                          "Line": 75,
+                          "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+                        }
+                      ],
+                      "Line": 75,
+                      "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+                    }
+                  ],
+                  "Arguments": [
+                    {
+                      "$type": "Core.AST.CallNode, Core",
+                      "Objects": [
+                        {
+                          "$type": "Core.AST.ObjectPointerNode, Core",
+                          "Name": "y",
+                          "Line": 75,
+                          "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+                        }
+                      ],
+                      "Arguments": [],
+                      "Line": 75,
+                      "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+                    }
+                  ],
+                  "Line": 75,
+                  "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+                },
+                "Type": null,
+                "IsStatic": false,
+                "IsPrivate": false,
+                "IsConst": false,
+                "IsPathAssignment": false,
+                "Line": 75,
+                "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
+              },
+              {
                 "$type": "Core.AST.CallNode, Core",
                 "Objects": [
                   {
@@ -17627,8 +17714,8 @@
                     "Arguments": [
                       {
                         "$type": "Core.AST.StringRefNode, Core",
-                        "Index": 114,
-                        "Line": 76,
+                        "Index": 116,
+                        "Line": 77,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       },
                       {
@@ -17637,12 +17724,12 @@
                           {
                             "$type": "Core.AST.ObjectPointerNode, Core",
                             "Name": "x",
-                            "Line": 76,
+                            "Line": 77,
                             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 76,
+                        "Line": 77,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       },
                       {
@@ -17651,24 +17738,24 @@
                           {
                             "$type": "Core.AST.ObjectPointerNode, Core",
                             "Name": "y",
-                            "Line": 76,
+                            "Line": 77,
                             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 76,
+                        "Line": 77,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       }
                     ],
-                    "Line": 76,
+                    "Line": 77,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   }
                 ],
                 "Arguments": [
                   {
                     "$type": "Core.AST.StringRefNode, Core",
-                    "Index": 114,
-                    "Line": 76,
+                    "Index": 116,
+                    "Line": 77,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   },
                   {
@@ -17677,12 +17764,12 @@
                       {
                         "$type": "Core.AST.ObjectPointerNode, Core",
                         "Name": "x",
-                        "Line": 76,
+                        "Line": 77,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 76,
+                    "Line": 77,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   },
                   {
@@ -17691,20 +17778,20 @@
                       {
                         "$type": "Core.AST.ObjectPointerNode, Core",
                         "Name": "y",
-                        "Line": 76,
+                        "Line": 77,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 76,
+                    "Line": 77,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   }
                 ],
-                "Line": 76,
+                "Line": 77,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
-            "Line": 80,
+            "Line": 81,
             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
           },
           {
@@ -17723,7 +17810,7 @@
                 "IsPrivate": false,
                 "IsConst": false,
                 "IsPathAssignment": false,
-                "Line": 80,
+                "Line": 81,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
@@ -17737,8 +17824,8 @@
                     "Arguments": [
                       {
                         "$type": "Core.AST.StringRefNode, Core",
-                        "Index": 115,
-                        "Line": 81,
+                        "Index": 117,
+                        "Line": 82,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       },
                       {
@@ -17747,24 +17834,24 @@
                           {
                             "$type": "Core.AST.ObjectPointerNode, Core",
                             "Name": "color",
-                            "Line": 81,
+                            "Line": 82,
                             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 81,
+                        "Line": 82,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       }
                     ],
-                    "Line": 81,
+                    "Line": 82,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   }
                 ],
                 "Arguments": [
                   {
                     "$type": "Core.AST.StringRefNode, Core",
-                    "Index": 115,
-                    "Line": 81,
+                    "Index": 117,
+                    "Line": 82,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   },
                   {
@@ -17773,20 +17860,20 @@
                       {
                         "$type": "Core.AST.ObjectPointerNode, Core",
                         "Name": "color",
-                        "Line": 81,
+                        "Line": 82,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 81,
+                    "Line": 82,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   }
                 ],
-                "Line": 81,
+                "Line": 82,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
-            "Line": 84,
+            "Line": 85,
             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
           },
           {
@@ -17805,7 +17892,7 @@
                 "IsPrivate": false,
                 "IsConst": false,
                 "IsPathAssignment": false,
-                "Line": 84,
+                "Line": 85,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
@@ -17819,8 +17906,8 @@
                     "Arguments": [
                       {
                         "$type": "Core.AST.StringRefNode, Core",
-                        "Index": 116,
-                        "Line": 85,
+                        "Index": 118,
+                        "Line": 86,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       },
                       {
@@ -17829,24 +17916,24 @@
                           {
                             "$type": "Core.AST.ObjectPointerNode, Core",
                             "Name": "color",
-                            "Line": 85,
+                            "Line": 86,
                             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                           }
                         ],
                         "Arguments": [],
-                        "Line": 85,
+                        "Line": 86,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       }
                     ],
-                    "Line": 85,
+                    "Line": 86,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   }
                 ],
                 "Arguments": [
                   {
                     "$type": "Core.AST.StringRefNode, Core",
-                    "Index": 116,
-                    "Line": 85,
+                    "Index": 118,
+                    "Line": 86,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   },
                   {
@@ -17855,20 +17942,20 @@
                       {
                         "$type": "Core.AST.ObjectPointerNode, Core",
                         "Name": "color",
-                        "Line": 85,
+                        "Line": 86,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       }
                     ],
                     "Arguments": [],
-                    "Line": 85,
+                    "Line": 86,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   }
                 ],
-                "Line": 85,
+                "Line": 86,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
-            "Line": 88,
+            "Line": 89,
             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
           },
           {
@@ -17887,28 +17974,28 @@
                     "Arguments": [
                       {
                         "$type": "Core.AST.StringRefNode, Core",
-                        "Index": 117,
-                        "Line": 89,
+                        "Index": 119,
+                        "Line": 90,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                       }
                     ],
-                    "Line": 89,
+                    "Line": 90,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   }
                 ],
                 "Arguments": [
                   {
                     "$type": "Core.AST.StringRefNode, Core",
-                    "Index": 117,
-                    "Line": 89,
+                    "Index": 119,
+                    "Line": 90,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                   }
                 ],
-                "Line": 89,
+                "Line": 90,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
-            "Line": 91,
+            "Line": 92,
             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
           },
           {
@@ -17929,31 +18016,31 @@
                       "Arguments": [
                         {
                           "$type": "Core.AST.StringRefNode, Core",
-                          "Index": 118,
-                          "Line": 92,
+                          "Index": 120,
+                          "Line": 93,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         }
                       ],
-                      "Line": 92,
+                      "Line": 93,
                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                     }
                   ],
                   "Arguments": [
                     {
                       "$type": "Core.AST.StringRefNode, Core",
-                      "Index": 118,
-                      "Line": 92,
+                      "Index": 120,
+                      "Line": 93,
                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                     }
                   ],
-                  "Line": 92,
+                  "Line": 93,
                   "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                 },
-                "Line": 94,
+                "Line": 95,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
-            "Line": 94,
+            "Line": 95,
             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
           },
           {
@@ -17974,31 +18061,31 @@
                       "Arguments": [
                         {
                           "$type": "Core.AST.StringRefNode, Core",
-                          "Index": 119,
-                          "Line": 95,
+                          "Index": 121,
+                          "Line": 96,
                           "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                         }
                       ],
-                      "Line": 95,
+                      "Line": 96,
                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                     }
                   ],
                   "Arguments": [
                     {
                       "$type": "Core.AST.StringRefNode, Core",
-                      "Index": 119,
-                      "Line": 95,
+                      "Index": 121,
+                      "Line": 96,
                       "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                     }
                   ],
-                  "Line": 95,
+                  "Line": 96,
                   "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
                 },
-                "Line": 96,
+                "Line": 97,
                 "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
               }
             ],
-            "Line": 96,
+            "Line": 97,
             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\lib\\base\\console.ql"
           }
         ],
@@ -18193,7 +18280,7 @@
             "Path": null,
             "Value": {
               "$type": "Core.AST.StringRefNode, Core",
-              "Index": 121,
+              "Index": 123,
               "Line": 22,
               "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
             },
@@ -18227,7 +18314,7 @@
                     "Arguments": [
                       {
                         "$type": "Core.AST.StringRefNode, Core",
-                        "Index": 122,
+                        "Index": 124,
                         "Line": 25,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
                       }
@@ -18239,7 +18326,7 @@
                 "Arguments": [
                   {
                     "$type": "Core.AST.StringRefNode, Core",
-                    "Index": 122,
+                    "Index": 124,
                     "Line": 25,
                     "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
                   }
@@ -18286,7 +18373,7 @@
                         "Arguments": [
                           {
                             "$type": "Core.AST.StringRefNode, Core",
-                            "Index": 123,
+                            "Index": 125,
                             "Line": 32,
                             "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
                           }
@@ -18298,7 +18385,7 @@
                     "Arguments": [
                       {
                         "$type": "Core.AST.StringRefNode, Core",
-                        "Index": 123,
+                        "Index": 125,
                         "Line": 32,
                         "SourceFile": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql"
                       }
@@ -18597,26 +18684,28 @@
     "___STRING_101___": "lib.console.write",
     "___STRING_102___": "",
     "___STRING_103___": "lib.console.write",
-    "___STRING_104___": "\\n",
+    "___STRING_104___": "Povid",
     "___STRING_105___": "lib.console.write",
-    "___STRING_106___": "",
+    "___STRING_106___": "\\n",
     "___STRING_107___": "lib.console.write",
-    "___STRING_108___": "\\n",
-    "___STRING_109___": "lib.console.read",
-    "___STRING_110___": "lib.console.key",
-    "___STRING_111___": "lib.console.key_available",
-    "___STRING_112___": "lib.console.cursor_visible",
-    "___STRING_113___": "lib.console.clear",
-    "___STRING_114___": "lib.console.cursor_position",
-    "___STRING_115___": "lib.console.foreground",
-    "___STRING_116___": "lib.console.background",
-    "___STRING_117___": "lib.console.reset_color",
-    "___STRING_118___": "lib.console.width",
-    "___STRING_119___": "lib.console.height",
-    "___STRING_120___": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql",
-    "___STRING_121___": "Hello, World!",
-    "___STRING_122___": "Output from system namespace",
-    "___STRING_123___": "Doing something!"
+    "___STRING_108___": "",
+    "___STRING_109___": "lib.console.write",
+    "___STRING_110___": "\\n",
+    "___STRING_111___": "lib.console.read",
+    "___STRING_112___": "lib.console.key",
+    "___STRING_113___": "lib.console.key_available",
+    "___STRING_114___": "lib.console.cursor_visible",
+    "___STRING_115___": "lib.console.clear",
+    "___STRING_116___": "lib.console.cursor_position",
+    "___STRING_117___": "lib.console.foreground",
+    "___STRING_118___": "lib.console.background",
+    "___STRING_119___": "lib.console.reset_color",
+    "___STRING_120___": "lib.console.width",
+    "___STRING_121___": "lib.console.height",
+    "___STRING_122___": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\out\\projectexample\\main.ql",
+    "___STRING_123___": "Hello, World!",
+    "___STRING_124___": "Output from system namespace",
+    "___STRING_125___": "Doing something!"
   },
   "NumberDictionary": {
     "___NUMBER_0___": 0,

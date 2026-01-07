@@ -5,7 +5,6 @@ namespace base: {
 
 }
 
-
 namespace system: {
    class Console: {
         function WriteLine(const message): {

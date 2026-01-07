@@ -314,7 +314,7 @@ public partial class Interpreter
             if (funcPair.function is not null)
                 return (ToDynamicFunction(funcPair.function), funcPair.args);
             
-            throw new QlangRuntimeException("Function is not found in current context",
+            throw new QlangRuntimeException($"Function '{node.Name}' is not found in current context",
                 node, GetStackTrace());
         }
         
@@ -334,6 +334,8 @@ public partial class Interpreter
                 return pair;
         }
         
+        throw new QlangRuntimeException($"Function '{node.Name}' is not found in current context",
+            node, GetStackTrace());
     }
 
     private object? FindObject(ObjectPointerNode node, object? lastObject, bool isPathStart)
@@ -372,7 +374,7 @@ public partial class Interpreter
             if (_dynamicClasses.TryGetValue(node.Name, out var dynamicClass))
                 return dynamicClass;
                 
-            throw new QlangRuntimeException("Object is not found in current context",
+            throw new QlangRuntimeException($"Object '{node.Name}' is not found in current context",
                 node, GetStackTrace());
         }
 
@@ -407,14 +409,14 @@ public partial class Interpreter
                 break;
         }
         
-        throw new QlangRuntimeException("Object is not found in current context",
+        throw new QlangRuntimeException($"Object '{node.Name}' is not found in current context",
             node, GetStackTrace());
     }
 
     private DynamicNamespace FindNamespace(NamespacePointerNode node, object? lastObject, bool isPathStart)
     {
         if (!_dynamicNamespaces.TryGetValue(node.Name, out var @namespace))
-            throw new QlangRuntimeException("Namespace is not found in current context", node, GetStackTrace());
+            throw new QlangRuntimeException($"Namespace '{node.Name}' is not found in current context", node, GetStackTrace());
         
         return @namespace;
     }
