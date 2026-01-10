@@ -1,3 +1,4 @@
+# Removing compile and object directories from github.
 out/QlProject/
 out/Compiler.pdb
 out/Core.pdb
