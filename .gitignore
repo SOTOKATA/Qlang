@@ -1,3 +1,4 @@
+# Reming ProjectManager (Compiler and Core) and Runtime (Interpreter and Core) from github
 out/QlProject/
 out/Compiler.pdb
 out/Core.pdb
@@ -6,6 +7,8 @@ out/ql.exe
 out/ql.pdb
 out/qli.exe
 out/qli.pdb
+
+# Removing compiled parts and not necessary files
 Core/bin/
 Core/obj/
 Compiler/bin/
