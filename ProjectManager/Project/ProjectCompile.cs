@@ -1,12 +1,14 @@
-﻿namespace ProjectManager.Project;
+﻿using ProjectManager.Settings;
+
+namespace ProjectManager.Project;
 
 public partial class Project
 {
-    public static void SetCompileSetting(string param, object value)
+    public void SetCompileSetting(string param, object value)
     {
         try
         {
-            CompileSettings.Set(param, value);
+            _compileSettings.Set(param, value);
         }
         catch (Exception ex)
         {
@@ -15,22 +17,22 @@ public partial class Project
         }
 
         ConsoleLogger.Set($"{param}: {value}");
-        CompileSettings.Save();
+        _compileSettings.Save();
     }
 
-    public static object? GetCompileSetting(string param)
+    public object? GetCompileSetting(string param)
     {
-        return CompileSettings?.Get(param);
+        return _compileSettings.Get(param);
     }
 
     public void Compile()
     {
-        _qlang.Compile(Path.Combine(Settings.GetString("path"), Settings.GetString("main_file_path")), CompileSettings.GetString("output_filename"));
+        _qlang.Compile(Path.Combine(_settings.GetString(ProjectSettings.RootPath), _settings.GetString(ProjectSettings.MainFilePath)), _compileSettings.GetString(CompileSettings.OutputFilename));
     }
 
     public void Run(List<string?>? args)
     {
-        if (_qlang.Compile(Path.Combine(Settings.GetString("path"), Settings.GetString("main_file_path")), CompileSettings.GetString("output_filename")))
-            _qlang.Run(args, CompileSettings.GetString("output_filename"));
+        if (_qlang.Compile(Path.Combine(_settings.GetString(ProjectSettings.RootPath), _settings.GetString(ProjectSettings.MainFilePath)), _compileSettings.GetString(CompileSettings.OutputFilename)))
+            _qlang.Run(args, _compileSettings.GetString(CompileSettings.OutputFilename));
     }
 }

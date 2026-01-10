@@ -322,7 +322,7 @@ public partial class Interpreter
             pair = TryGetFunctionFromClassContext(node.Name, args);
             // Try to get function from class context;
             if (pair.function is not null)
-                return (pair.function, pair.args, CurrentContext.Class, null);
+                return (pair.function, pair.args, CurrentContext.Class, CurrentContext.Namespace);
             
             // Try to get function from namespace context;
             pair = TryGetFunctionFromNamespaceContext(node.Name, args);

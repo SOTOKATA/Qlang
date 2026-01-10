@@ -4,58 +4,63 @@ using ProjectManager.Settings;
 
 namespace ProjectManager.Project;
 
-public partial class Project
+public partial class Project(ProjectSettings projectSettings, CompileSettings compileSettings)
 {
-    public ProjectSettings Settings;
+    private readonly ProjectSettings _settings = projectSettings;
 
-    public static CompileSettings? CompileSettings;
+    private readonly CompileSettings _compileSettings = compileSettings;
 
     private readonly QLang _qlang = new();
 
+    public ProjectSettings GetProjectSettings() => _settings;
+    public CompileSettings GetCompileSettings() => _compileSettings;
+
+    public object? GetProjectSetting(string param) => _settings.Get(param);
+
     public void SaveProject()
     {
-        if (!File.Exists(Settings.GetPath()))
-            File.Create(Settings.GetPath()).Close();
+        if (!File.Exists(_settings.GetPath()))
+            File.Create(_settings.GetPath()).Close();
 
-        Settings.Save();
+        if (!File.Exists(_compileSettings.GetPath()))
+            File.Create(_compileSettings.GetPath()).Close();
+        
+        _settings.Save();
+        _compileSettings.Save();
     }
 
     public static Project CreateProject(string projectName, string projectPath, string mainFilePath)
     {
         if (!Directory.Exists(projectPath))
             throw new DirectoryNotFoundException($"Directory '{projectPath}' not found");
-
-        var proj = new Project();
-
+        
         projectPath = Path.Combine(projectPath, projectName);
         Directory.CreateDirectory(projectPath);
 
-        File.Create(Path.Combine(projectPath, "project.settings.json")).Close();
-        proj.Settings = new ProjectSettings(Path.Combine(projectPath, "project.settings.json"), null);
+        File.Create(Path.Combine(projectPath, ProjectSettings.JsonFileName)).Close();
+        var settings = new ProjectSettings(Path.Combine(projectPath, ProjectSettings.JsonFileName), null);
     
-        proj.Settings.Set("path", projectPath);
-        proj.Settings.Set("name", projectName);
-        proj.Settings.Set("main_file_path", mainFilePath);
+        settings.Set(ProjectSettings.RootPath, projectPath);
+        settings.Set(ProjectSettings.ProjectName, projectName);
+        settings.Set(ProjectSettings.MainFilePath, mainFilePath);
     
         // create main.ql
         var fullMainFilePath = Path.Combine(projectPath, mainFilePath);
         File.Create(fullMainFilePath).Close();
         File.WriteAllText(fullMainFilePath, """
-                                            include "$lib/base"
+                                            include "$lib/standard"
+                                            using std;
 
                                             function main(): {
                                                 Console.println("Hello World!");
                                             }
                                             """);
     
+        var compileSettingsPath = Path.Combine(projectPath, CompileSettings.JsonFileName);
+        File.Create(compileSettingsPath).Close();
+        var proj = new Project(settings, new CompileSettings(compileSettingsPath, null));
         proj.SaveProject();
 
-        var settingsPath = Path.Combine(projectPath, "compile.settings.json");
-        File.Create(settingsPath).Close();
-        CompileSettings = new CompileSettings(settingsPath, null);
-    
-        CompileSettings.Save();
-        
         return proj;
     }
 
@@ -65,28 +70,26 @@ public partial class Project
         if (!File.Exists(path))
             throw new FileNotFoundException($"File '{path}' is not found.\nThe project may be corrupted or not created.", path);
 
-        var settings = new ProjectSettings(path, ProjectManager.Settings.Settings.LoadDictionary(path));
+        var settings = new ProjectSettings(path, ProjectManager.Settings.Settings.LoadDictionary<ProjectSettings>(path));
         
-        settings.Set("path", Directory.GetCurrentDirectory());
+        settings.Set(ProjectSettings.RootPath, Directory.GetCurrentDirectory());
         var projectPath = Directory.GetCurrentDirectory();
-        var mainFilePath = settings.GetString("main_file_path");
+        var mainFilePath = settings.GetString(ProjectSettings.MainFilePath);
                 
         if (
             !File.Exists(Path.Combine(projectPath, mainFilePath)) ||
-            !File.Exists(Path.Combine(projectPath, "compile.settings.json"))
+            !File.Exists(Path.Combine(projectPath, CompileSettings.JsonFileName))
         )
             throw new FileNotFoundException($"Project is corrupted or not created.\nPath to project settings: '{path}'.", path);
         
-        var proj = new Project
-        {
-            Settings = settings
-        };
+        var settingsPath = Path.Combine(projectPath, CompileSettings.JsonFileName);
+        var dict =  JsonConvert.DeserializeObject<Dictionary<string, (object? @object, Type type)>>(File.ReadAllText(settingsPath));
+        var compileSettings = new CompileSettings(settingsPath, dict);
 
-        var settingsPath = Path.Combine(projectPath, "compile.settings.json");
-        var dict =  JsonConvert.DeserializeObject<Dictionary<string, object?>>(File.ReadAllText(settingsPath));
-        CompileSettings = new CompileSettings(settingsPath, dict);
+        var proj = new Project(settings, compileSettings);
+        
 
-        var isDebug = (bool)CompileSettings.Get("debug_mode");
+        var isDebug = (bool)compileSettings.Get(CompileSettings.DebugMode)!;
         Logger.Debug = isDebug;
         FileLogger.Debug = isDebug;
         

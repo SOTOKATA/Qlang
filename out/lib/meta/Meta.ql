@@ -1,5 +1,5 @@
 include "$lib/meta"
-include "$lib/base"
+include "$lib/standard"
 
 class Meta extends Object: {
     private function _isClass(const object):

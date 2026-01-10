@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using Core;
 using Core.AST;
-using Core.Native;
 using ProjectManager.Project;
+using ProjectManager.Settings;
 
 namespace ProjectManager;
 
@@ -17,16 +17,7 @@ public class QLang
         var code = File.ReadAllText(path);
         Compiler.Compiler c = new();
 
-        try
-        {
-            _programNode = c.Compile(path, code);
-        }
-        catch (Exception ex)
-        {
-            ExceptionManager.Throw(ex);
-            
-            return false;
-        }
+        _programNode = c.Compile(path, code);
 
         _stringDictionary = c.StringDictionary;
         _numberDictionary = c.NumberDictionary;
@@ -78,17 +69,17 @@ public class QLang
 
         var pathToFile = Path.GetDirectoryName(filePath);
         
-        if (!Directory.Exists(Path.Combine(pathToFile ?? "", "build")))
-            Directory.CreateDirectory(Path.Combine(pathToFile ?? "", "build"));
+        if (!Directory.Exists(Path.Combine(pathToFile ?? "", ProjectSettings.BuildDirectoryPath)))
+            Directory.CreateDirectory(Path.Combine(pathToFile ?? "", ProjectSettings.BuildDirectoryPath));
 
-        SaveDependencies(qliProgram, Path.Combine(pathToFile ?? "", "build"), Path.GetFileNameWithoutExtension(filePath));
+        SaveDependencies(qliProgram, Path.Combine(pathToFile ?? "", ProjectSettings.BuildDirectoryPath), Path.GetFileNameWithoutExtension(filePath));
         
-        var path = Path.Combine(pathToFile ?? "", "build", Path.GetFileNameWithoutExtension(filePath) + ".resource.qli");
+        var path = Path.Combine(pathToFile ?? "", ProjectSettings.BuildDirectoryPath, Path.GetFileNameWithoutExtension(filePath) + ".resource.qli");
         
         if (!File.Exists(path))
             File.Create(path).Close();
         
-        File.Copy(Path.Combine(Path.GetDirectoryName(Environment.ProcessPath), "qli" + OS.GetExecutableExtension()), Path.Combine(pathToFile ?? "", "build", Path.GetFileNameWithoutExtension(filePath) + OS.GetExecutableExtension()), true);
+        File.Copy(Path.Combine(Path.GetDirectoryName(Environment.ProcessPath), "qli" + OS.GetExecutableExtension()), Path.Combine(pathToFile ?? "", ProjectSettings.BuildDirectoryPath, Path.GetFileNameWithoutExtension(filePath) + OS.GetExecutableExtension()), true);
         
         File.WriteAllText(path, json);
     }
@@ -97,13 +88,12 @@ public class QLang
     {
         // TODO: Runtime execution (by build/program.exe)
 
-        var exePath = Path.Combine("build", filename + OS.GetExecutableExtension());
-        var resourcePath = Path.Combine("build", filename + ".resource.qli");
+        var exePath = Path.Combine(ProjectSettings.BuildDirectoryPath, filename + OS.GetExecutableExtension());
+        var resourcePath = Path.Combine(ProjectSettings.BuildDirectoryPath, filename + ".resource.qli");
 
         if (!File.Exists(exePath) || !File.Exists(resourcePath))
             throw new ProjectException($"Files '{Path.GetFileName(exePath)}' and '{Path.GetFileName(resourcePath)}' is not found.\nProject is not compiled");
 
-        Console.WriteLine();
         Process.Start(new ProcessStartInfo
         {
             FileName = "cmd.exe",

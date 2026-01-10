@@ -1,0 +1,16 @@
+out/QlProject/
+out/Compiler.pdb
+out/Core.pdb
+out/Interpreter.pdb
+out/ql.exe
+out/ql.pdb
+out/qli.exe
+out/qli.pdb
+Core/bin/
+Core/obj/
+Compiler/bin/
+Compiler/obj/
+ProjectManager/bin/
+ProjectManager/obj/
+Runtime/bin/
+Runtime/obj/

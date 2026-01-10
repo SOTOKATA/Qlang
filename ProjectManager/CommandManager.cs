@@ -1,5 +1,6 @@
 ﻿using Core.Exceptions;
 using ProjectManager.Project;
+using ProjectManager.Settings;
 
 namespace ProjectManager;
 
@@ -18,7 +19,7 @@ public static class CommandManager
                     Run(args.Skip(1).ToList()!);
                     return;
                 case ["update"]:
-                    ConsoleLogger.Info("Now this function is not supported");
+                    ConsoleLogger.Info("Now, this function is not supported");
                     return;
                 case ["build"]:
                     Build();
@@ -90,7 +91,7 @@ public static class CommandManager
     private static Project.Project LoadProject()
     {
         var proj = Project.Project.LoadProject(Path.Combine(Directory.GetCurrentDirectory(),
-            "project.settings.json"));
+            ProjectSettings.JsonFileName));
 
         return proj ?? throw new ProjectException("Project is not found");
     }
@@ -98,27 +99,27 @@ public static class CommandManager
     private static void WriteProjectInfo()
     {
         var project = LoadProject();
-        var props = project.Settings.GetDictionary();
-        var compileProps = Project.Project.CompileSettings.GetDictionary();
+        var props = project.GetProjectSettings().GetDictionary();
+        var compileProps = project.GetCompileSettings().GetDictionary();
 
         var names = new List<string>();
         var values = new List<string>();
 
         if (props is not null)
         {
-            values.AddRange(props.Values.Select(var => var is null ? "<null>" : var.ToString()).ToList()!);
+            values.AddRange(props.Values.Select(var => var.@object is null ? "<null>" : var.@object.ToString()).ToList()!);
             names.AddRange(props.Keys.ToList());
         }
 
         if (compileProps is not null)
         {
             names.AddRange(compileProps.Keys.ToList());
-            values.AddRange(compileProps.Values.Select(var => var is null ? "<null>" : var.ToString()).ToList()!);
+            values.AddRange(compileProps.Values.Select(var => var.@object is null ? "<null>" : var.@object.ToString()).ToList()!);
         }
 
         if (names.Count != values.Count)
         {
-            WriteErrorMessageWithDelay("Internal error: names count is not equal to values count in function 'proj-info'");
+            WriteErrorMessageWithDelay("Internal error: names count is not equal to values count in command 'info'");
             return;
         }
         
@@ -130,7 +131,7 @@ public static class CommandManager
 
 
         Console.WriteLine($"""
-                           Information about project '{project.Settings.GetString("name")}':
+                           Information about '{project.GetProjectSetting(ProjectSettings.ProjectName)}':
                            {TableCreator.Create(table, [":"])}
                            """);
     }
@@ -141,7 +142,7 @@ public static class CommandManager
 
         proj.SaveProject();
 
-        ConsoleLogger.Info($"The project was created in the folder: '{proj.Settings.GetString("path")}'");
+        ConsoleLogger.Info($"The project was created in the folder: '{proj.GetProjectSetting(ProjectSettings.RootPath)}'");
     }
 
     private static void Run(List<string?>? args)
@@ -158,14 +159,13 @@ public static class CommandManager
 
     private static void Get(string param)
     {
-        LoadProject();
-        ConsoleLogger.Get($"{param}: {Project.Project.GetCompileSetting(param.Trim())}");
+        ConsoleLogger.Get($"{param}: {LoadProject().GetCompileSetting(param.Trim())}");
     }
     
     private static void Set(string param, string value)
     {
-        LoadProject();
-        Project.Project.SetCompileSetting(param.Trim(), value.Trim());
+        var project = LoadProject();
+        project.SetCompileSetting(param.Trim(), value.Trim());
     }
 
     private static void Help()
@@ -208,16 +208,14 @@ public static class CommandManager
 
     private static void Qlang()
     {
-        Console.WriteLine("Qlang information");
+        Console.WriteLine("Qlang information:");
         Console.WriteLine(TableCreator.Create([
-            ["Version", "0.10.1 'Project Update v0.1'"],
-            ["Update date", "03.12.2025"],
             ["Author", "SOTOKATA (https://github.com/SOTOKATA)"],
             ["Github", "https://github.com/SOTOKATA/Qlang"],
             ["Guide book", "https://sotokata.github.io/Qlang-guide-book/"]
         ]));
 
-        Console.WriteLine("Program information");
+        Console.WriteLine("Program information:");
         Console.WriteLine(TableCreator.Create([
             ["Path", ": " + (Environment.ProcessPath ?? "Undefined")],
             ["Lib path", ": " + Path.Combine(Path.GetDirectoryName(Environment.ProcessPath)!, "lib")]
