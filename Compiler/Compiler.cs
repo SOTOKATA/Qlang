@@ -50,7 +50,7 @@ public class Compiler
 
         tokens = Lexer.Lex(fileName, _outputScript);
 
-        fl.SetPath("Logs\\script_tokenized.js");
+        fl.SetPath("Logs\\script_tokenized.txt");
 
         var line = "";
         var indent = 0;
