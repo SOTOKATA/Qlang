@@ -5,7 +5,7 @@ include "$lib/core"
 namespace std:  {
     class Throw: {
         // Throw default exception
-        function exception(const<core::String> message): {
+        function exception(const<String> message): {
             _native("lib.exception.throw", _str(message));
         }
 
@@ -15,7 +15,7 @@ namespace std:  {
         }
 
         // Thow exception when parse error
-        function parseException(const<core::String> error): {
+        function parseException(const<String> error): {
             exception("Parse error: " + error);
         }
 

@@ -1,19 +1,79 @@
-Мы учим в школе (португалальска школа) Fernando Pessoa, португальський деятель, и мне нужно написать текст на контрольной (мне учитель разрешил)
+INCLUDE 0x312_34141000;
 
-Вот критерии на португальском:
+print:
+    _lxc argument;
+    INIT out;
+    SET out x0321_3000;
+    out argument;
+    CLEAR out;
+end;
 
-150 a 250 palavras
+main:
+    alloc_mem 128kb;
 
-Escrever textos de opinião, respeitando as marcas de género. Redigir o texto com domínio seguro da organização em parágrafos e dos mecanismos de coerência e de coesão textual. 
+    CALL print:
+        _lxc "Test console" *lns;
+    end;
 
-Editar os textos escritos, em diferentes suportes, após revisão, tendo em conta a adequação, a propriedade vocabular e a correção linguística.
+    CLEAR alloc_mem;
+end;
 
+lic_m: 
+    CALL main:
+        _lxc *CVOID;
+    end;
 
+    CLEAR main;
+end;
 
-С начала напиши текст на русском, а потом уже на португальском
+; FILE WORK
+finit:
+    _lxc fpath;
 
-Используй граматику португальского португалии
+    API fwork INCLUDE;
 
-Мне нужно написать текст на эту тему:
+    fwork open fpath;
 
-Defesa da(s) razão/razões pela(s) qual/quais a obra de Fernando Pessoa continua a ser estudada nos dias de hoje.
+    assign file fwork create_pointer;
+
+    ret_0:
+        _0_lxc: 
+            file;
+        end;
+    end;
+end;
+
+fopen:
+    _lxc fpath;
+
+    ret_0:
+        _0_lxc: 
+            CALL finit:
+                _lxc fpath;
+            end;
+        end;
+    end;
+end;
+
+fclose:
+    _lxc xlcpointer;
+
+    API fwork INCLUDE;
+
+    fwork close_pointer xlcpointer;
+end;
+
+fwrite:
+    _lxc xlcpointer&text;
+    
+    API fwork INCLUDE;
+    
+    fwork write xlcpointer&text;
+end;
+
+; DOC WRITE
+docw: 
+    CALL fopen:
+        _lxc "lib.mkd" *lns;
+    end;
+end;

@@ -12,7 +12,9 @@ public class IfNode : ASTBlock
         {
             Condition = Condition.Clone(), 
             ThenBlock = ThenBlock.Select(node => node.Clone()).ToList(), 
-            ElseBlock = ElseBlock.Select(node => node.Clone()).ToList()
+            ElseBlock = ElseBlock.Select(node => node.Clone()).ToList(),
+            SourceFile =  SourceFile, 
+            Line =  Line 
         };
     }
 

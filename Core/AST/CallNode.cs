@@ -2,7 +2,6 @@
 
 public class CallNode : ASTNode
 {
-    // its: 'Term', 'read()', 'trim()'
     public List<ASTNode> Objects = [];
     public List<ASTNode> Arguments { get; set; } = [];
 
@@ -11,7 +10,9 @@ public class CallNode : ASTNode
         return new CallNode
         {
             Arguments = Arguments.Select(node => node.Clone()).ToList(),
-            Objects = Objects.Select(node => node.Clone()).ToList()
+            Objects = Objects.Select(node => node.Clone()).ToList(),
+            SourceFile =  SourceFile, 
+            Line =  Line 
         };
     }
 

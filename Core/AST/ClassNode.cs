@@ -8,7 +8,14 @@ public class ClassNode : ASTNode
 
     public override ASTNode Clone()
     {
-        return new ClassNode { Name = Name, Extends = Extends, Body = Body.Select(node => node.Clone()).ToList() };
+        return new ClassNode
+        {
+            Name = Name, 
+            Extends = Extends,
+            Body = Body.Select(node => node.Clone()).ToList(),
+            SourceFile =  SourceFile, 
+            Line =  Line 
+        };
     }
 
     public override string GetTree(string indent = "")

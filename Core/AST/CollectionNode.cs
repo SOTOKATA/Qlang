@@ -13,7 +13,9 @@ public class CollectionNode : ASTNode
     {
         var node = new CollectionNode
         {
-            Collection = Collection.Select(node => node.Clone()).ToList()
+            Collection = Collection.Select(node => node.Clone()).ToList(),
+            SourceFile =  SourceFile, 
+            Line =  Line 
         };
 
         return node;

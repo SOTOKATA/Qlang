@@ -14,7 +14,9 @@ public class WhileNode : ASTBlock
         {
             Condition = Condition?.Clone(), 
             Body = Body.Select(node => node.Clone()).ToList(),
-            IsDoWhile = IsDoWhile
+            IsDoWhile = IsDoWhile,
+            SourceFile =  SourceFile, 
+            Line =  Line 
         };
     }
 

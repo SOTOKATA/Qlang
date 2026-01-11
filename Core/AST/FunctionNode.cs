@@ -18,7 +18,9 @@ public class FunctionNode : ASTNode
             IsPrivate = IsPrivate,
             Parameters = Parameters.Select(node => node.Clone()).Cast<AssignmentNode>().ToList(),
             Name = Name, 
-            Body = Body.Select(node => node.Clone()).ToList()
+            Body = Body.Select(node => node.Clone()).ToList(),
+            SourceFile =  SourceFile, 
+            Line =  Line 
         };
     }
 

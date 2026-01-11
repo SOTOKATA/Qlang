@@ -14,6 +14,8 @@ public class ObjectPointerNode : ASTNode
         return new ObjectPointerNode
         {
             Name = Name,
+            SourceFile =  SourceFile, 
+            Line =  Line 
         };
     }
 }

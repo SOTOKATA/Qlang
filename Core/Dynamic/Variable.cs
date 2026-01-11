@@ -1,6 +1,8 @@
-﻿namespace Core.Dynamic;
+﻿using Core.AST;
 
-public class Variable(string name, object? value, bool isStatic, bool isPrivate, bool isConst, string type = "")
+namespace Core.Dynamic;
+
+public class Variable(string name, object? value, bool isStatic, bool isPrivate, bool isConst, CallNode? type = null)
 {
     public override string? ToString()
     {
@@ -10,7 +12,7 @@ public class Variable(string name, object? value, bool isStatic, bool isPrivate,
     public string Name { get; set; } = name;
     public object? Value { get; set; } = value;
 
-    public string Type { get; set; } = type;
+    public CallNode? Type { get; set; } = type;
     
     public bool IsStatic { get; set; } = isStatic;
     

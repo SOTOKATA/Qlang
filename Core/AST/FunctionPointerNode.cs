@@ -16,6 +16,8 @@ public class FunctionPointerNode : ASTNode
         {
             Name = Name,
             Arguments = [..Arguments.ConvertAll(arg => arg.Clone())],
+            SourceFile =  SourceFile, 
+            Line =  Line 
         };
     }
 }

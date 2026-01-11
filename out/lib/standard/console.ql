@@ -6,9 +6,9 @@ include "$lib/meta"
 namespace std:  {
     class Console: {
         private function getStr(const message): {
-            if (core::Object.isNull(message)):
+            if (Object.isNull(message)):
                 return "null";
-            if (core::Object.isSimplify(message) == false): {
+            if (Object.isSimplify(message) == false): {
                 // if (Meta.getMethodListOf(message).contains("toString")): 
                 //     return message.toString();
                 // else: 
@@ -48,18 +48,18 @@ namespace std:  {
 
         // Read line from console
         function readln(): {
-            return core::String.new(_native("lib.console.read"));
+            return String.new(_native("lib.console.read"));
         }
 
-        function readkey(const<core::Boolean> intercept = false): {
-            return core::String.new(_native("lib.console.key", intercept));
+        function readkey(const<Boolean> intercept = false): {
+            return String.new(_native("lib.console.key", intercept));
         }
 
         function isKeyAvailable(): {
             return _native("lib.console.key_available");
         }
 
-        function cursorVisible(const<core::Boolean> visible): {
+        function cursorVisible(const<Boolean> visible): {
             _native("lib.console.cursor_visible", visible);
         }
 
@@ -69,7 +69,7 @@ namespace std:  {
         }
 
         // Set cursor position in console
-        function setCursorPosition(let<core::Number> x, let<core::Number> y): {
+        function setCursorPosition(let<Number> x, let<Number> y): {
             x = Parser.asInt(x);
             y = Parser.asInt(y);
 
@@ -77,11 +77,11 @@ namespace std:  {
         }
 
         // Set foreground color for console
-        function setForeColor(let<core::String> color):
+        function setForeColor(let<String> color):
             _native("lib.console.foreground", color);
         
         // Set background color for console
-        function setBackColor(let<core::String> color):
+        function setBackColor(let<String> color):
             _native("lib.console.background", color);
 
         // Set default colors for console

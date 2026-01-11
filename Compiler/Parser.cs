@@ -164,7 +164,7 @@ public class Parser
 
         Advance();
 
-        var type = "";
+        CallNode? type = null;
         if (Check(Tokens.Less))
         {
             if (!canUseType)
@@ -174,13 +174,21 @@ public class Parser
                     "Using variables with types is only possible with function arguments", (token.Line + 1), "Parser", token.SourceFile);
             }
             Advance();
-            type = Expect(Tokens.Identifier).Value;
+            var returnValue  = ParsePrimaryPath();
+
+            if (returnValue is not CallNode node)
+            {
+                var token = Current();
+                throw new QlangCompileException("Cannot use follow node as path to class", (token.Line + 1), "Parser", token.SourceFile);
+            }
+
+            type = node;
             Expect(Tokens.Greater);
         }
 
         var name = Expect(Tokens.Identifier).Value;
 
-        ASTNode value = null;
+        ASTNode? value = null;
         if (Current().TokenType == Tokens.Equals)
         {
             Advance();

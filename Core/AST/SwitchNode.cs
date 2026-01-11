@@ -13,7 +13,9 @@ public class SwitchNode : ASTBlock
         {
             Condition = Condition.Clone(), 
             CaseBlocks = CaseBlocks.ToDictionary(caseBlock => caseBlock.Key.Clone(), caseBlock => caseBlock.Value.Select(node => node.Clone()).ToList()),
-            DefaultBlock =  DefaultBlock?.Select(node => node.Clone()).ToList()
+            DefaultBlock =  DefaultBlock?.Select(node => node.Clone()).ToList(),
+            SourceFile =  SourceFile, 
+            Line =  Line 
         };
     }
 

@@ -32,6 +32,8 @@ public static class Keywords
     public static string IncludeNativeKeyword => "native";
     public static string UsingKeyword => "using";
     
+    public static string CreateClassInstanceKeyword => "new";
+    
     public static string ExtendsKeyword => "extends";
   
     public static string PrivateModificator => "private";

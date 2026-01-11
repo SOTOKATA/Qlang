@@ -12,7 +12,9 @@ public class BinaryOperationNode : ASTNode
         {
             Left = Left?.Clone(),
             Operator = Operator,
-            Right = Right?.Clone(),
+            Right = Right?.Clone(), 
+            SourceFile =  SourceFile, 
+            Line =  Line 
         };
     }
 

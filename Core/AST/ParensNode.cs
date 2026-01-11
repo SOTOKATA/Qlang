@@ -14,6 +14,8 @@ public class ParensNode : ASTNode
         return new ParensNode
         {
             Statement = Statement?.Clone(),
+            SourceFile =  SourceFile, 
+            Line =  Line 
         };
     }
 }

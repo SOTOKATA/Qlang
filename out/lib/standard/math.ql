@@ -3,19 +3,19 @@ include "$lib/core"
 
 namespace std:  {
     class Math: {
-        function max(const<core::Number> a, const<core::Number> b): {
+        function max(const<Number> a, const<Number> b): {
             if a > b:
                 return a;
             return b;
         }
 
-        function min(const<core::Number> a, const<core::Number> b): {
+        function min(const<Number> a, const<Number> b): {
             if a < b:
                 return a;
             return b;
         }
 
-        function abs(const<core::Number> n): {
+        function abs(const<Number> n): {
             return 0-n;
         }
     }

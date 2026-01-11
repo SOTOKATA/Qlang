@@ -11,10 +11,12 @@ public class ForNode : ASTBlock
     public override ASTNode Clone()
     {
         return new ForNode { 
-            Assignment = Assignment.Clone() as AssignmentNode,
+            Assignment = (Assignment.Clone() as AssignmentNode)!,
             Statement = Statement.Clone(),
             Condition = Condition, 
-            Body = Body.Select(node => node.Clone()).ToList() 
+            Body = Body.Select(node => node.Clone()).ToList(),
+            SourceFile =  SourceFile, 
+            Line =  Line 
         };
     }
 

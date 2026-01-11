@@ -178,7 +178,7 @@ public partial class Interpreter
                 {
                     var var = function.Variables[function.Parameters[i]];
 
-                    if (!string.IsNullOrWhiteSpace(var.Type) && var.Type != Typeof(arguments[i]))
+                    if (var.Type is not null && Typeof(var.Type) != Typeof(arguments[i]))
                         throw new QlangRuntimeException($"The type of param is '{Typeof(arguments[i])}' but must be '{var.Type}'", null, GetStackTrace());
                     
                     function.Variables[function.Parameters[i]] = new Variable(
@@ -447,7 +447,7 @@ public partial class Interpreter
         Logger.Warn("Is new instance class");
         var dClass = dynamicClass.Clone();
         
-        var fromClass = GetFunctionFromClass(dClass, "new", args);
+        var fromClass = GetFunctionFromClass(dClass, Keywords.CreateClassInstanceKeyword, args);
         
         if (fromClass.function != null)
             ExecuteFunction(ToDynamicFunction(fromClass.function), fromClass.Args, dClass, null);

@@ -7,5 +7,9 @@ public class NullNode : ASTNode
         return "NullNode";
     }
 
-    public override ASTNode Clone() => new NullNode();
+    public override ASTNode Clone() => new NullNode
+    {
+        SourceFile =  SourceFile, 
+        Line =  Line 
+    };
 }

@@ -12,7 +12,7 @@ public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool is
 
     public ASTNode? Value { get; set; }
     
-    public string? Type { get; set; }
+    public CallNode? Type { get; set; }
 
     public bool IsStatic { get; set; } = isStatic;
 
@@ -21,7 +21,7 @@ public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool is
     public bool IsConst { get; set; } = isConst;
 
     // Helper property to check if this is a simple variable assignment or a path assignment
-    public bool IsPathAssignment => Path != null && Path.Count > 0;
+    public bool IsPathAssignment => Path is { Count: > 0 };
 
     // Helper method to get the assignment target as a string (for debugging/logging)
     public string GetAssignmentTarget()
@@ -49,7 +49,9 @@ public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool is
             IsStatic = IsStatic,
             IsPrivate = IsPrivate,
             IsConst = IsConst,
-            IsNew = IsNew
+            IsNew = IsNew, 
+            SourceFile =  SourceFile, 
+            Line =  Line 
         };
     }
 

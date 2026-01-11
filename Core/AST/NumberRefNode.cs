@@ -5,7 +5,13 @@ public class NumberRefNode : ASTNode
     public bool IsNegative { get; set; } = false;
     public int Index { get; set; }
 
-    public override ASTNode Clone() => new NumberRefNode { Index = Index, IsNegative = IsNegative };
+    public override ASTNode Clone() => new NumberRefNode
+    {
+        Index = Index, 
+        IsNegative = IsNegative,
+        SourceFile =  SourceFile, 
+        Line =  Line 
+    };
 
     public override string GetTree(string indent = "")
     {

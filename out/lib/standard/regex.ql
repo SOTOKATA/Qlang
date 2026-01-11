@@ -3,7 +3,7 @@ include "$lib/core"
 
 namespace std: {
     class Regex: {
-        function replace(const<core::String> input, const<core::String> pattern, const<core::String> replacement = ""): {
+        function replace(const<String> input, const<String> pattern, const<String> replacement = ""): {
             return _native("lib.regex.replace", input, pattern, replacement);
         }
 
@@ -12,4 +12,4 @@ namespace std: {
         //     return _native("lib.regex.match", input, pattern);
         // }
     }
-}Да 
+}
