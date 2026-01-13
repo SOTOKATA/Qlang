@@ -167,7 +167,8 @@ public partial class Interpreter
         Logger.Log($"'{function.Name}'({string.Join(", ", arguments)})");
 
         var contextClass = ownerClass ?? (HasContext ? CurrentContext.Class : null);
-        ASTContext newContext = new() { Function = function, Class = contextClass };
+        var contextNamespace = ownerNamespace ?? (HasContext ? CurrentContext.Namespace : null);
+        ASTContext newContext = new() { Function = function, Class = contextClass, Namespace = contextNamespace};
 
         AddContext(newContext);
 
@@ -179,7 +180,7 @@ public partial class Interpreter
                     var var = function.Variables[function.Parameters[i]];
 
                     if (var.Type is not null && Typeof(var.Type) != Typeof(arguments[i]))
-                        throw new QlangRuntimeException($"The type of param is '{Typeof(arguments[i])}' but must be '{var.Type}'", null, GetStackTrace());
+                        throw new QlangRuntimeException($"The type of param is '{Typeof(arguments[i])}' but must be '{Typeof(var.Type)}'", null, GetStackTrace());
                     
                     function.Variables[function.Parameters[i]] = new Variable(
                         function.Parameters[i],
@@ -490,6 +491,7 @@ public partial class Interpreter
         return arg;
     }
 
+	// TODO: Bug fix with '"' and other specials
     private static string ParseString(ReadOnlySpan<char> input, bool csharpString = false)
     {
         var sb = new StringBuilder(input.Length);
@@ -499,13 +501,14 @@ public partial class Interpreter
             if (input[i] == '\\' && i + 1 < input.Length)
             {
                 var next = input[i + 1];
+                
                 sb.Append(next switch
                 {
                     'n' => '\n',
                     't' => '\t',
                     '\\' => '\\',
                     '"' => '"',
-                    _ => input.Slice(i, 2).ToString()
+                    var _ => input.Slice(i, 2).ToString()
                 });
 
                 if (next is 'n' or 't' or '\\' or '"')
@@ -515,8 +518,8 @@ public partial class Interpreter
                 sb.Append(input[i]);
         }
 
-        var processed = sb.ToString().Replace("\"", "\"\"");
-        return csharpString ? $"@\"{processed}\"" : processed;
+        var processed = sb.ToString();
+        return csharpString ? $"{processed}" : processed;
     }
 
     private object? EvaluateExpression(ASTNode? expr)

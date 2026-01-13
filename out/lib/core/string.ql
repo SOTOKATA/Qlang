@@ -10,6 +10,8 @@ class String: {
     function toString(): {
         return Object.toString(_value);
     }
+
+    function getValue(): return _value;
     
     // Parse object to String
     function ___create_from___(const obj):
@@ -17,13 +19,13 @@ class String: {
 
     // Parse additional operations
     function ___operator_plus___(const obj1, const obj2):
-        return String.new(obj1._value + obj2._value);
+        return String.new(obj1.getValue() + obj2.getValue());
 
     // Parse multiplication operations
     function ___operator_star___(const obj1, const obj2): {
         let val = "";
 
-        for let i = 0; i < obj2._value; i = i + 1:
+        for let i = 0; i < obj2.getValue(); i = i + 1:
             val = val + obj1;
 
         return String.new(val);
@@ -33,7 +35,7 @@ class String: {
     function ___operator_slash___(const obj1, const obj2): {
         let val = "";
 
-        const index = obj1.length() / obj2._value;
+        const index = obj1.length() / obj2.getValue();
 
         for let i = 0; i < index; i = i + 1:
             val = val + obj1.charAt(i);
@@ -43,11 +45,11 @@ class String: {
 
     // Parse '==' operations
     function ___operator_equal_equal___(const obj1, const obj2):
-        return obj1._value == obj2._value;
+        return obj1.getValue() == obj2.getValue();
 
     // Parse '!=' operations
     function ___operator_not_equal___(const obj1, const obj2):
-        return obj1._value == obj2._value;
+        return obj1.getValue() == obj2.getValue();
 
     // Parse '>=' operations
     function ___operator_greater_equal___(const obj1, const obj2): 
@@ -229,4 +231,16 @@ class String: {
 
         return String.new(_native("lib.string.substring", _str(_value), startPos, length));
     }
+
+    // get index of first 'toFind'
+    function indexOf(const<String> toFind):
+        return _native("lib.string.index_of", _value, toFind);
+
+    // get index of last 'toFind'
+    function lastIndexOf(const<String> toFind):
+        return _native("lib.string.last_index_of", _value, toFind);
+
+    // Replace '{n}' to replacement
+    function format(const<Collection> replacement):
+        return _native("lib.string.format", _value, replacement);
 }
