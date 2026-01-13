@@ -1,15 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "WAHpJKnGNfw=",
+  "dgSpecHash": "ScFqbmB6nfw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\ProjectManager\\ProjectManager.csproj",
+  "projectFilePath": "D:\\Projects\\Console\\Qlang\\ProjectManager\\ProjectManager.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.net.illink.tasks\\9.0.0\\microsoft.net.illink.tasks.9.0.0.nupkg.sha512",
+    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.net.illink.tasks\\9.0.10\\microsoft.net.illink.tasks.9.0.10.nupkg.sha512",
     "C:\\Users\\sotok\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512",
-    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\9.0.0\\microsoft.netcore.app.runtime.win-x64.9.0.0.nupkg.sha512",
-    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\9.0.0\\microsoft.windowsdesktop.app.runtime.win-x64.9.0.0.nupkg.sha512",
-    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\9.0.0\\microsoft.aspnetcore.app.runtime.win-x64.9.0.0.nupkg.sha512",
-    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\9.0.0\\microsoft.netcore.app.crossgen2.win-x64.9.0.0.nupkg.sha512"
+    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\9.0.10\\microsoft.netcore.app.runtime.win-x64.9.0.10.nupkg.sha512",
+    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\9.0.10\\microsoft.windowsdesktop.app.runtime.win-x64.9.0.10.nupkg.sha512",
+    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\9.0.10\\microsoft.aspnetcore.app.runtime.win-x64.9.0.10.nupkg.sha512",
+    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\9.0.10\\microsoft.netcore.app.crossgen2.win-x64.9.0.10.nupkg.sha512"
   ],
   "logs": []
 }

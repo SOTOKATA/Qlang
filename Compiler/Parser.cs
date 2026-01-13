@@ -241,6 +241,7 @@ public class Parser
         {
             Name = name,
             Body = body,
+            IsPrivate = isPrivate,
             
             Line = (IsAtEnd() ? 0 : Current().Line + 1),
             SourceFile = (IsAtEnd() ? "" : Current().SourceFile)

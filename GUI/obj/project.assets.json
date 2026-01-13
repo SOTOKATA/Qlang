@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net9.0": {
-      "Microsoft.NET.ILLink.Tasks/9.0.0": {
+      "Microsoft.NET.ILLink.Tasks/9.0.10": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -71,7 +71,7 @@
       }
     },
     "net9.0/win-x64": {
-      "Microsoft.NET.ILLink.Tasks/9.0.0": {
+      "Microsoft.NET.ILLink.Tasks/9.0.10": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -122,10 +122,10 @@
     }
   },
   "libraries": {
-    "Microsoft.NET.ILLink.Tasks/9.0.0": {
-      "sha512": "zAwp213evC3UkimtVXRb+Dlgc/40QG145nmZDtp2LO9zJJMfrp+i/87BnXN7tRXEA4liyzdFkjqG1HE8/RPb4A==",
+    "Microsoft.NET.ILLink.Tasks/9.0.10": {
+      "sha512": "sseaSJcBxKEpkc59hnB00b3NmJdGvJLfj74HK+nucHxERxbZSUREuWKjC9ywc+HdzJvJyiP2eiyEOROaGSfcPw==",
       "type": "package",
-      "path": "microsoft.net.illink.tasks/9.0.0",
+      "path": "microsoft.net.illink.tasks/9.0.10",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -139,7 +139,7 @@
         "build/Microsoft.NET.ILLink.Analyzers.props",
         "build/Microsoft.NET.ILLink.Tasks.props",
         "build/Microsoft.NET.ILLink.targets",
-        "microsoft.net.illink.tasks.9.0.0.nupkg.sha512",
+        "microsoft.net.illink.tasks.9.0.10.nupkg.sha512",
         "microsoft.net.illink.tasks.nuspec",
         "tools/net472/ILLink.Tasks.dll",
         "tools/net472/ILLink.Tasks.dll.config",
@@ -234,7 +234,7 @@
   "projectFileDependencyGroups": {
     "net9.0": [
       "Core >= 1.0.0",
-      "Microsoft.NET.ILLink.Tasks >= 9.0.0",
+      "Microsoft.NET.ILLink.Tasks >= 9.0.10",
       "Raylib-cs >= 7.0.2"
     ]
   },
@@ -245,11 +245,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\GUI\\GUI.csproj",
+      "projectUniqueName": "D:\\Projects\\Console\\Qlang\\GUI\\GUI.csproj",
       "projectName": "GUI",
-      "projectPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\GUI\\GUI.csproj",
+      "projectPath": "D:\\Projects\\Console\\Qlang\\GUI\\GUI.csproj",
       "packagesPath": "C:\\Users\\sotok\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\GUI\\obj\\",
+      "outputPath": "D:\\Projects\\Console\\Qlang\\GUI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -264,14 +264,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Core\\Core.csproj"
+            "D:\\Projects\\Console\\Qlang\\Core\\Core.csproj": {
+              "projectPath": "D:\\Projects\\Console\\Qlang\\Core\\Core.csproj"
             }
           }
         }
@@ -286,7 +287,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
@@ -295,7 +296,7 @@
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[9.0.0, )",
+            "version": "[9.0.10, )",
             "autoReferenced": true
           },
           "Raylib-cs": {
@@ -317,19 +318,19 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-            "version": "[9.0.0, 9.0.0]"
+            "version": "[9.0.10, 9.0.10]"
           },
           {
             "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
-            "version": "[9.0.0, 9.0.0]"
+            "version": "[9.0.10, 9.0.10]"
           },
           {
             "name": "Microsoft.NETCore.App.Runtime.win-x64",
-            "version": "[9.0.0, 9.0.0]"
+            "version": "[9.0.10, 9.0.10]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-            "version": "[9.0.0, 9.0.0]"
+            "version": "[9.0.10, 9.0.10]"
           }
         ],
         "frameworkReferences": {
@@ -337,7 +338,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {

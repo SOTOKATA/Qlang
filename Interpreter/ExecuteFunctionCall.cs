@@ -99,6 +99,9 @@ public partial class Interpreter
             {
                 var @namespace = FindNamespace(namespacePointer, lastReturnValue, isPathStart);
 
+                if (@namespace is not null && HasContext)
+                    CurrentContext.Namespace = @namespace;
+
                 return @namespace;
             }
             case FunctionPointerNode fn:
@@ -127,6 +130,10 @@ public partial class Interpreter
                     return GetNewClass(@class, fn.Arguments.ConvertAll(EvaluateExpression));
              
                 var function = FindFunction(fn, lastReturnValue, isPathStart);
+                
+                // Console.WriteLine("\nCURRENT CLASS: " + (function.@class is null ? "NULL" : function.@class.ClassName));
+                // Console.WriteLine("CURRENT NAMES: " + (function.@namespace is null ? "NULL" : function.@namespace.Name));
+                // Console.WriteLine("CURRENT FUNCT: " + (function.function is null ? "NULL" : function.function.Name));
                 
                 return ExecuteFunction(function.function, function.args ?? [], function.@class, function.@namespace);
             }
@@ -394,10 +401,18 @@ public partial class Interpreter
             node, GetStackTrace());
     }
 
-    private DynamicNamespace FindNamespace(NamespacePointerNode node, object? lastObject, bool isPathStart)
+    private DynamicNamespace? FindNamespace(NamespacePointerNode node, object? lastObject, bool isPathStart)
     {
         if (_dynamicNamespaces.TryGetValue(node.Name, out var @namespace))
             return @namespace;
+
+        if (lastObject is DynamicNamespace dynamicNamespace)
+        {
+            var ns = dynamicNamespace.Namespaces.FirstOrDefault(ns => ns.Name == node.Name);
+
+            if (ns is not null)
+                return ns.IsPrivate ? throw new QlangRuntimeException($"Cannot get access to private namespace from namespace '{dynamicNamespace.Name}'", node, GetStackTrace()) : ns;
+        }
 
         // TODO: Add 'namespace' to 'namespace'
         // if (lastObject is DynamicNamespace dynamicNamespace)

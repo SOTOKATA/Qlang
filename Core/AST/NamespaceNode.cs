@@ -6,6 +6,8 @@ public class NamespaceNode : ASTNode
     
     public List<ASTNode> Body { get; set; }
 
+    public bool IsPrivate = false;
+
     public override ASTNode Clone()
     {
         return new NamespaceNode { Name = Name, Body = Body.Select(node => node.Clone()).ToList(), SourceFile =  SourceFile, Line =  Line };

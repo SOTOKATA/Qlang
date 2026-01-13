@@ -95,13 +95,21 @@ public partial class Interpreter
 
     private DynamicNamespace ToDynamicNamespace(NamespaceNode namespaceNode)
     {
-        var dynamicNamespace = new DynamicNamespace(namespaceNode.Name);
+        var dynamicNamespace = new DynamicNamespace(namespaceNode.Name)
+        {
+            IsPrivate = namespaceNode.IsPrivate
+        };
 
         dynamicNamespace.Classes.AddRange(
             namespaceNode.Body
                 .OfType<ClassNode>()
                 .Select(ToDynamicClass)
         );
+        
+        dynamicNamespace.Namespaces.AddRange(
+            namespaceNode.Body.OfType<NamespaceNode>()
+                .Select(ToDynamicNamespace)
+            );
 
         dynamicNamespace.Functions.AddRange(namespaceNode.Body.OfType<FunctionNode>());
         

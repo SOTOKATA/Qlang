@@ -10,7 +10,7 @@ namespace std:  {
                 return "null";
                 
             if (Object.isSimplify(message) == false): {
-                if (Meta.getMethodListOf(message).contains("toString")): 
+                if (meta::Meta.getMethodListOf(message).contains("toString")): 
                     return message.toString();
                 else: 
                     return str(message);
