@@ -1,6 +1,8 @@
 include "$lib/standard"
+using std;
 
-class SnakeGame: {
+namespace games: {
+class Snake: {
     const dir = {
         const left = "a",
         const right = "d",
@@ -172,4 +174,5 @@ class SnakeGame: {
         Console.cursorVisible(true);
 
     }
+}
 }

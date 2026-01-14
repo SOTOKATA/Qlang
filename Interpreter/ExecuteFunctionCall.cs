@@ -18,12 +18,14 @@ public partial class Interpreter
                 return "Collection";
             case float or double or int or long or decimal:
                 return "Number";
+            case bool:
+                return "Boolean";
             default:
             {
                 if (arg is CallNode call)
                 {
                     var first = call.Objects.FirstOrDefault();
-                    if (first is ObjectPointerNode { Name: "Collection" or "Number" } obj) 
+                    if (first is ObjectPointerNode { Name: "Collection" or "Number" or "Boolean" } obj) 
                         return obj.Name;
 
                     var result = ExecuteObjectCalls(call);
@@ -152,7 +154,7 @@ public partial class Interpreter
                 }
                 
                 Logger.Log($"Detected object pointer: {objCall.Name}");
-
+                
                 var @object = FindObject(objCall, lastReturnValue, isPathStart);
 
                 // if (@object.@namespace is not null && HasContext)
@@ -160,6 +162,9 @@ public partial class Interpreter
                 //     CurrentContext.Namespace = @object.@namespace;
                 //     Console.WriteLine("Current context namespace is: " + @object.@namespace.Name);
                 // }
+
+                // if (@object.@object is DynamicClass dynamicClass && HasContext)
+                    // CurrentContext.Class = dynamicClass;
                 
                 return @object.@object;
             default:
