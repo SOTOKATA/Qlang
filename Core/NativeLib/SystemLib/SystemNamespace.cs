@@ -4,11 +4,11 @@ namespace Core.NativeLib.SystemLib;
 
 public class SystemNamespace  : IQlangNamespace
 {
-    public string Name { get; set; } = "lib";
+    public string Name { get; set; } = "std";
     public List<IQlangClass> Classes { get; set; } = [ 
     new ArrayClass(), new ConsoleClass(), new ConsoleCommandClass(),
     new DateTimeClass(), new ExceptionClass(), new FileSystemClass(),
     new MetaClass(), new NumberClass(), new ObjectClass(), new ParserClass(),
-    new RegexClass(), new StringClass()
+    new RegexClass(), new StringClass(), new MathClass()
     ];
 }

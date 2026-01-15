@@ -560,6 +560,7 @@ public partial class Interpreter
         {
             return expr switch
             {
+                CastNode cast => CastObject(cast),
                 VariableNode varNode => GetVariableValue(varNode),
                 StringRefNode strRef => GetStringRef(strRef),
                 NumberRefNode numberRef => GetNumberRef(numberRef),
@@ -597,6 +598,16 @@ public partial class Interpreter
         }
     }
 
+    // TODO: Finish work with casting
+    private object? CastObject(CastNode cast)
+    {
+        var type = ExecuteObjectCalls(cast.TypeCastPath);
+
+        var @object = ExecuteObjectCalls(cast.ToCastObject);
+
+        
+    }
+    
     private double DivideWithCheck(object left, object right, BinaryOperationNode node)
     {
         var divisor = right.ToString().ParseNumber();

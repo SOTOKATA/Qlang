@@ -2,5 +2,5 @@ include "$lib/standard"
 
 class ConsoleProcess: {
     function run(const<String> command):
-        return _native("lib.console_command.run", command);
+        return _native("std.console_command.run", command);
 }

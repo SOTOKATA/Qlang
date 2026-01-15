@@ -6,7 +6,7 @@ namespace std:  {
     class Throw: {
         // Throw default exception
         function exception(const<String> message): {
-            _native("lib.exception.throw", _str(message));
+            _native("std.exception.throw", _str(message));
         }
 
         // Thow exception if function is not implement

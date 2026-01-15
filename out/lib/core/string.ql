@@ -84,7 +84,7 @@ class String: {
         if String.new(char).length() < 0:
             Throw.exception("Length of string must be more than 0");
 
-        _value = _native("lib.string.create", char, count);
+        _value = _native("std.string.create", char, count);
     }
 
     function getPrimitive(const strOrPrimite, let allowOther = false): {
@@ -136,38 +136,38 @@ class String: {
     }
 
     function toLower(): {
-        return String.new(_native("lib.string.to_lower", _str(_value)));
+        return String.new(_native("std.string.to_lower", _str(_value)));
     }
 
     function toUpper(): {
-        return String.new(_native("lib.string.to_upper", _str(_value)));
+        return String.new(_native("std.string.to_upper", _str(_value)));
     }
 
     function isString(let value): {
-        value =  _native("lib.string.is_str", value);
+        value =  _native("std.string.is_str", value);
         return value;
     }
 
     function isPrimitive(let value): {
-        return _native("lib.string.is_primitive", value);
+        return _native("std.string.is_primitive", value);
     }
 
     function split(let<String> pattern): {
-        return Array.new(_native("lib.string.split", _str(_value), _str(pattern)));
+        return Array.new(_native("std.string.split", _str(_value), _str(pattern)));
     }
 
     function charAt(const<Number> index): {
         if length() <= index:
             Throw.exception("The index must be less than the length of the string.");
 
-        return _native("lib.string.at", _str(_value), index);
+        return _native("std.string.at", _str(_value), index);
     }
 
     function setAt(const<Number> index, const<String> replaceValue): {
         if length() <= index:
             Throw.exception("The index must be less than the length of the string.");
 
-        _value = _native("lib.string.set_at", _str(_value), _str(replaceValue), index);
+        _value = _native("std.string.set_at", _str(_value), _str(replaceValue), index);
     }
 
     function join(let strArr, let<String> pattern): {
@@ -177,12 +177,12 @@ class String: {
         if Array.isArray(strArr):
             strArr = strArr.getCollection();
 
-        return String.new(_native("lib.string.join", strArr, pattern));
+        return String.new(_native("std.string.join", strArr, pattern));
     }
 
     // Get length of string
     function length():
-        return _native("lib.string.length", _str(_value));
+        return _native("std.string.length", _str(_value));
 
     // Check if string is empty or null
     function isNullOrEmpty(let str): {
@@ -195,7 +195,7 @@ class String: {
         if String.isString(str):
             str = str.toString();
 
-        return _native("lib.string.is_null_or_empty", _str(str));
+        return _native("std.string.is_null_or_empty", _str(str));
     }
     
     // Check if string is white space or null
@@ -209,20 +209,20 @@ class String: {
         if String.isString(str): 
             str = str.toString();
 
-        return _native("lib.string.is_null_or_whitespace", _str(str));
+        return _native("std.string.is_null_or_whitespace", _str(str));
     }
 
     // Trim string
     function trim():
-        return String.new(_native("lib.string.trim", _str(_value)));
+        return String.new(_native("std.string.trim", _str(_value)));
 
     // Trim start string
     function trimStart():
-        return String.new(_native("lib.string.trim_start", _str(_value)));
+        return String.new(_native("std.string.trim_start", _str(_value)));
 
     // Trim end string
     function trimEnd():
-        return String.new(_native("lib.string.trim_end", _str(_value)));
+        return String.new(_native("std.string.trim_end", _str(_value)));
 
     // Cut string by 'startPos' and 'length'
     function subString(let<Number> startPos, let<Number> length): {
@@ -235,18 +235,18 @@ class String: {
         if length() <= length:
             Throw.exception("Value 'length' can't be more than string length");
 
-        return String.new(_native("lib.string.substring", _str(_value), startPos, length));
+        return String.new(_native("std.string.substring", _str(_value), startPos, length));
     }
 
     // get index of first 'toFind'
     function indexOf(const<String> toFind):
-        return _native("lib.string.index_of", _value, toFind);
+        return _native("std.string.index_of", _value, toFind);
 
     // get index of last 'toFind'
     function lastIndexOf(const<String> toFind):
-        return _native("lib.string.last_index_of", _value, toFind);
+        return _native("std.string.last_index_of", _value, toFind);
 
     // Replace '{n}' to replacement
     function format(const<Collection> replacement):
-        return _native("lib.string.format", _value, replacement);
+        return _native("std.string.format", _value, replacement);
 }

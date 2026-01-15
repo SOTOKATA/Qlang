@@ -4,19 +4,19 @@ include "$lib/core"
 namespace std:  {
     class Parser: {
         static function asInt(const object): {
-            return _native("lib.parser.int", object);
+            return _native("std.parser.int", object);
         }
 
         static function asFloat(const object): {
-            return _native("lib.parser.float", object);
+            return _native("std.parser.float", object);
         }
 
         static function asString(const object): {
-            return _native("lib.parser.string", object);
+            return _native("std.parser.string", object);
         }
         
         static function asNumber(const object): {
-            return _native("lib.parser.number", object);
+            return _native("std.parser.number", object);
         }
     }
 }

@@ -74,6 +74,6 @@ end;
 ; DOC WRITE
 docw: 
     CALL fopen:
-        _lxc "lib.mkd" *lns;
+        _lxc "std.mkd" *lns;
     end;
 end;

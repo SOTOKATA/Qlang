@@ -1,7 +1,7 @@
 include "$lib/core"
 include "$lib/standard"
 
-namespace std:  {
+namespace dt:  {
     class Time: {
         function wait(let<Number> millisec): {
             if Number.isNumber(millisec) == false: {
@@ -10,7 +10,7 @@ namespace std:  {
 
             millisec = Parser.asInt(millisec);
 
-            _native("lib.datetime.wait", millisec);
+            _native("std.datetime.wait", millisec);
         }
     }
 }

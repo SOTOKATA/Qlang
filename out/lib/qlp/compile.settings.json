@@ -1,0 +1,10 @@
+{
+  "output_filename": {
+    "Item1": "program",
+    "Item2": "System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+  },
+  "debug_mode": {
+    "Item1": false,
+    "Item2": "System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+  }
+}

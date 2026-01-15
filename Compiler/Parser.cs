@@ -1100,9 +1100,29 @@ public class Parser
         };
     }
 
-    /// <summary>
-    /// Parsing primitive calls and function calls
-    /// </summary>
+    private CastNode? ParseCast()
+    {
+        if (!Check(Tokens.Less))
+            return null;
+
+        Advance();
+
+        var path = ParsePrimaryPath();
+
+        if (path is not CallNode callNode)
+            throw new QlangCompileException("Cannot find type to cast", path.Line, "Parser", path.SourceFile ?? "undefined");
+        
+        Expect(Tokens.Greater);
+        
+        path = ParsePrimaryPath();
+
+        if (path is not CallNode objCallNode)
+            throw new QlangCompileException("Cannot find object to cast", path.Line, "Parser", path.SourceFile ?? "undefined");
+
+        return new CastNode(callNode, objCallNode);
+    }
+
+    
     private ASTNode ParsePrimary(bool isLoop = false)
     {
         Logger.Log("CompilationProcess: Parsing primary");
@@ -1121,6 +1141,10 @@ public class Parser
             baseExpression = ParsePrimaryPath();
             return baseExpression;
         }
+
+        baseExpression = ParseCast();
+        if (baseExpression is not null)
+            return baseExpression;
 
         baseExpression = ParsePrimaryPointers();
         if (baseExpression is not null)

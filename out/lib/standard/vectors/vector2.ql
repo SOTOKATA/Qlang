@@ -18,7 +18,7 @@ namespace std:  {
         }
 
         function ___create_from___(const object): {
-            _native("lib.console.write", str("type = " + object.toString()));
+            _native("std.console.write", str("type = " + object.toString()));
             if (Number.isNumber(object)):
                 return Vector2.new(object, object);
 
