@@ -1,4 +1,4 @@
-include "$lib/core"
+import "$lib/core";
 
 // Dynamic array
 class Array: {

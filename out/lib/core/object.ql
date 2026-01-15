@@ -1,8 +1,11 @@
-include "$lib/core"
+import "$lib/core";
 
 class Object: {
     function isNull(let obj):
         return _native("std.object.is_null", obj);
+
+    function getType():
+        return _native("std.object.get_type", this);
 
     function isSimplify(const val): 
         return _native("std.object.is_simplify", val);

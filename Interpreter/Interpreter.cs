@@ -531,7 +531,7 @@ public partial class Interpreter
                     't' => '\t',
                     '\\' => '\\',
                     '"' => '"',
-                    var _ => input.Slice(i, 2).ToString()
+                    _ => input.Slice(i, 2).ToString()
                 });
 
                 if (next is 'n' or 't' or '\\' or '"')
@@ -598,14 +598,31 @@ public partial class Interpreter
         }
     }
 
-    // TODO: Finish work with casting
+    // TODO: Finish work with casting (adding casting to DynamicClass)
     private object? CastObject(CastNode cast)
     {
         var type = ExecuteObjectCalls(cast.TypeCastPath);
 
         var @object = ExecuteObjectCalls(cast.ToCastObject);
 
+        // cast string to number
+        if (Typeof(type) == "Number" && @object is string str 
+                                     && str.TryParseNumber(out var number)) 
+            return number;
         
+        // cast any object to string
+        if (Typeof(type) == "String" && @object is not null)
+            return @object.ToString();
+
+        var typeStr = type switch
+        {
+            DynamicClass dw => dw.ClassName,
+            null => "<null>",
+            _ => type.ToString()!
+        };
+
+        throw new QlangRuntimeException($"Cannot cast object to type '{typeStr}'", cast,
+            GetStackTrace());
     }
     
     private double DivideWithCheck(object left, object right, BinaryOperationNode node)

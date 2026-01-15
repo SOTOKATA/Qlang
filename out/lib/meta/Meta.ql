@@ -1,5 +1,5 @@
-include "$lib/meta"
-include "$lib/standard"
+import "$lib/meta";
+import "$lib/standard";
 
 namespace meta: {
     class Meta extends Object: {

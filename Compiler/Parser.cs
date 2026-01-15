@@ -1108,7 +1108,7 @@ public class Parser
         Advance();
 
         var path = ParsePrimaryPath();
-
+        
         if (path is not CallNode callNode)
             throw new QlangCompileException("Cannot find type to cast", path.Line, "Parser", path.SourceFile ?? "undefined");
         
@@ -1116,10 +1116,15 @@ public class Parser
         
         path = ParsePrimaryPath();
 
-        if (path is not CallNode objCallNode)
-            throw new QlangCompileException("Cannot find object to cast", path.Line, "Parser", path.SourceFile ?? "undefined");
+        var callPathNode = path as CallNode ?? new CallNode
+        {
+            Objects = [path]
+        };
 
-        return new CastNode(callNode, objCallNode);
+        // if (path is not CallNode objCallNode)
+            // throw new QlangCompileException("Cannot find object to cast", path.Line, "Parser", path.SourceFile ?? "undefined");
+
+        return new CastNode(callNode, callPathNode);
     }
 
     

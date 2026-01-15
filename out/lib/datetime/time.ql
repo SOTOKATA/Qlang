@@ -1,5 +1,5 @@
-include "$lib/core"
-include "$lib/standard"
+import "$lib/core";
+import "$lib/standard";
 
 namespace dt:  {
     class Time: {

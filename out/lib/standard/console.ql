@@ -1,6 +1,6 @@
-include "$lib/standard"
-include "$lib/core"
-include "$lib/meta"
+import "$lib/standard";
+import "$lib/core";
+import "$lib/meta";
 
 // Class to make operations with console
 namespace std:  {

@@ -1,4 +1,4 @@
-include "$lib/standard"
+import "$lib/standard";
 using std;
 
 namespace games: {

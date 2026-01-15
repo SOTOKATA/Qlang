@@ -18,7 +18,7 @@ public static class PreCompile
         var includeLines = script
             .Split('\n')
             .Select((line, index) => (Line: line.Trim(), LineNumber: index + 1))
-            .Where(x => x.Line.StartsWith(Keywords.IncludeKeyword + " "))
+            .Where(x => x.Line.StartsWith(Keywords.IncludeKeyword + " ") && x.Line.EndsWith(';'))
             .ToArray();
 
         if (includeLines.Length > 0)
@@ -26,9 +26,13 @@ public static class PreCompile
 
         List<string> includedContents = [];
 
-        foreach ((var source, var index) in includeLines)
+        foreach (var (source, index) in includeLines)
         {
-            var line = source.Replace($"{Keywords.IncludeKeyword} ", "").Replace("\"", "");
+            // Removing unused things
+            var line = source.Substring(
+                source.IndexOf('"') + 1,
+                source.LastIndexOf('"') - source.IndexOf('"') - 1
+            );
 
             string fullPath;
 
@@ -39,7 +43,7 @@ public static class PreCompile
                 if (exePath is null)
                     throw new QlangCompileException(
                         $"{Keywords.IncludeKeyword} '{line}' Error: Process path is not found", index,
-                        "PreCompile/IncludeFiles", fileName);
+                        "PreCompile/ImportFiles", fileName);
 
                 fullPath = Path.Combine(exePath, line[1..]);
             }
@@ -56,7 +60,7 @@ public static class PreCompile
 
             if (!isDirectory && !isFile)
                 throw new QlangCompileException($"{Keywords.IncludeKeyword} file or directory not found: {fullPath}",
-                    index, "PreCompile/IncludeFiles", fileName);
+                    index, "PreCompile/ImportFiles", fileName);
 
             script = script.Replace(source, "");
 

@@ -1,4 +1,4 @@
-include "$lib/core"
+import "$lib/core";
 
 class Dictionary: {
     private let _keys;

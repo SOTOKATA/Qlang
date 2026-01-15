@@ -1,5 +1,5 @@
-include "$lib/standard"
-include "$lib/core"
+import "$lib/standard";
+import "$lib/core";
 
 // Class to throw exceptions
 namespace std:  {

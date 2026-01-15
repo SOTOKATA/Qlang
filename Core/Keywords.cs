@@ -28,7 +28,7 @@ public static class Keywords
     public static string TrueKeyword => "true";
     public static string FalseKeyword => "false";
 
-    public static string IncludeKeyword => "include";
+    public static string IncludeKeyword => "import"; // Old: include
     public static string IncludeNativeKeyword => "native";
     public static string UsingKeyword => "using";
     

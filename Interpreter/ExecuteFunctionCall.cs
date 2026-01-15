@@ -221,8 +221,7 @@ public partial class Interpreter
                 return (ToDynamicFunction(funcPair.function), funcPair.args, null, null);
             
             // Try to add namespace keyword to path (get VAR);
-            var namespaces = _dynamicNamespaces.Where(@namespace => _usingsList.Contains(@namespace.Value)).ToList();
-            var @namespace = namespaces.FirstOrDefault(@namespace => @namespace.Value.Functions.Any(function => function.Name == node.Name)).Value;
+            var @namespace = _usingsList.FirstOrDefault(@namespace => @namespace.Functions.Any(function => function.Name == node.Name));
 
             if (@namespace is not null)
             {
@@ -346,8 +345,7 @@ public partial class Interpreter
                 return (dynamicClass, null);
 
             // Try to add namespace keyword to path (get VAR);
-            var namespaces = _dynamicNamespaces.Where(@namespace => _usingsList.Contains(@namespace.Value)).ToList();
-            var namespaceVar = namespaces.FirstOrDefault(@namespace => @namespace.Value.Variables.ContainsKey(node.Name)).Value;
+            var namespaceVar = _usingsList.FirstOrDefault(@namespace => @namespace.Variables.ContainsKey(node.Name));
             if (namespaceVar is not null && namespaceVar.Variables.TryGetValue(node.Name, out var value))
             {
                 if (value.IsPrivate)
@@ -359,7 +357,7 @@ public partial class Interpreter
             }
             
             // Try to add namespace keyword to path (get CLASS);
-            var namespaceClass = namespaces.FirstOrDefault(@namespace => @namespace.Value.Classes.Any(@class => @class.ClassName == node.Name)).Value;
+            var namespaceClass = _usingsList.FirstOrDefault(@namespace => @namespace.Classes.Any(@class => @class.ClassName == node.Name));
             if (namespaceClass is not null)
                 return (namespaceClass.Classes.FirstOrDefault(@class => @class.ClassName == node.Name), namespaceClass);
                 

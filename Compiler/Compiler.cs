@@ -21,7 +21,6 @@ public class Compiler
     public ProgramNode Compile(string fileName, string script)
     {
         _originalScript = script; //"include \"$lib/base/datatypes\"" + Environment.NewLine + 
-
         FileLogger fl = new("Logs\\script.ql");
         fl.Log(_originalScript);
         

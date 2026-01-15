@@ -1,4 +1,4 @@
-include "$lib/core"
+import "$lib/core";
 
 // Class to make string operations
 class String: {

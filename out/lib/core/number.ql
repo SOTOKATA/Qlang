@@ -1,4 +1,4 @@
-include "$lib/core"
+import "$lib/core";
 
 // Full static class
 // Class to make operations with numbers

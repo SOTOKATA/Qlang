@@ -1,4 +1,4 @@
-include "$lib/standard"
+import "$lib/standard";
 
 class LanguageDemo: {
     function run(): {

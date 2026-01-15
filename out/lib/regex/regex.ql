@@ -1,7 +1,7 @@
-include "$lib/standard"
-include "$lib/core"
+import "$lib/standard";
+import "$lib/core";
 
-namespace std: {
+namespace regex: {
     class Regex: {
         function replace(const<String> input, const<String> pattern, const<String> replacement = ""): {
             return _native("std.regex.replace", input, pattern, replacement);
