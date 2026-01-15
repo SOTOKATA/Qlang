@@ -6,7 +6,7 @@ public class NamespaceNode : ASTNode
     
     public List<ASTNode> Body { get; set; }
 
-    public bool IsPrivate = false;
+    public bool IsPrivate;
 
     public override ASTNode Clone()
     {

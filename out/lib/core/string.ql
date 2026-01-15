@@ -185,7 +185,10 @@ class String: {
         return _native("lib.string.length", _str(_value));
 
     // Check if string is empty or null
-    function isNullOrEmpty(let<String> str): {
+    function isNullOrEmpty(let str): {
+        if Object.isNull(str):
+            return true;
+
         if (String.isPrimitive(str) == false) && (String.isString(str) == false):
             Throw.exception("Param must be string class or primitive");
 
@@ -196,7 +199,10 @@ class String: {
     }
     
     // Check if string is white space or null
-    function isNullOrWhitespace(let<String> str): {
+    function isNullOrWhitespace(let str): {
+        if Object.isNull(str):
+            return true;
+
         if (String.isPrimitive(str) == false) && (String.isString(str) == false):
             Throw.exception("Param must be string class or primitive");
 

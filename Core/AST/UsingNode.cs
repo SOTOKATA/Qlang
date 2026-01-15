@@ -2,18 +2,18 @@
 
 public class UsingNode : ASTNode
 {
-    public required string NamespaceName { get; set; }
+    public required CallNode CallPath { get; set; }
     
     public override string GetTree(string indent = "")
     {
-        return NamespaceName;
+        return CallPath.GetTree(indent);
     }
 
     public override ASTNode Clone()
     {
-        return new UsingNode()
+        return new UsingNode
         {
-            NamespaceName = NamespaceName,
+            CallPath = CallPath,
             SourceFile = SourceFile,
             Line = Line,
         };

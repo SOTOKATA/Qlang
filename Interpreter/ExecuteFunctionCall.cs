@@ -47,7 +47,8 @@ public partial class Interpreter
     {
         Logger.Log($"Objects: " + string.Join(".", call.Objects));
         
-        Logger.Log($"CurrentContext: class = '{CurrentContext.Class?.Name}', function = '{CurrentContext.Function?.Name}'");
+        if (HasContext)
+            Logger.Log($"CurrentContext: class = '{CurrentContext.Class?.Name}', function = '{CurrentContext.Function?.Name}'");
 
         // overriding system calls
         if (call.Objects.Count > 0 && call.Objects[0] is FunctionPointerNode fn)
@@ -220,7 +221,7 @@ public partial class Interpreter
                 return (ToDynamicFunction(funcPair.function), funcPair.args, null, null);
             
             // Try to add namespace keyword to path (get VAR);
-            var namespaces = _dynamicNamespaces.Where(@namespace => _usingsList.Contains(@namespace.Key)).ToList();
+            var namespaces = _dynamicNamespaces.Where(@namespace => _usingsList.Contains(@namespace.Value)).ToList();
             var @namespace = namespaces.FirstOrDefault(@namespace => @namespace.Value.Functions.Any(function => function.Name == node.Name)).Value;
 
             if (@namespace is not null)
@@ -343,9 +344,9 @@ public partial class Interpreter
             // Try to get CLASS from global class list;
             if (_dynamicClasses.TryGetValue(node.Name, out var dynamicClass))
                 return (dynamicClass, null);
-            
+
             // Try to add namespace keyword to path (get VAR);
-            var namespaces = _dynamicNamespaces.Where(@namespace => _usingsList.Contains(@namespace.Key)).ToList();
+            var namespaces = _dynamicNamespaces.Where(@namespace => _usingsList.Contains(@namespace.Value)).ToList();
             var namespaceVar = namespaces.FirstOrDefault(@namespace => @namespace.Value.Variables.ContainsKey(node.Name)).Value;
             if (namespaceVar is not null && namespaceVar.Variables.TryGetValue(node.Name, out var value))
             {

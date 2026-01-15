@@ -195,7 +195,7 @@ public class Parser
             value = ParseExpression();
         }
 
-        Logger.Log($"CompilationProcess.End: Parsing Variable declaration (Name: {name} Value: {value?.GetType().Name ?? "Null"})");
+        Logger.Log($"CompilationProcess.End: Parsing Variable declaration (Name: {name} Value: {value?.GetType().Name ?? "<null>"})");
         return new AssignmentNode(isStatic, isPrivate, isConst, isNew)
         {
             VariableName = name,
@@ -210,12 +210,38 @@ public class Parser
     {
         // Skip 'using'
         Expect(Tokens.Keyword, Keywords.UsingKeyword);
-        
-        var identifier = Expect(Tokens.Identifier).Value;
 
-        return new UsingNode()
+        var node = ParsePrimary();
+
+        if (node is not CallNode callNode)
+            throw new QlangCompileException("Using must be path to namespace.", node.Line, "Parser", node.SourceFile ?? "undefined");
+
+        var newObjects = new List<NamespacePointerNode>();
+
+        foreach (var o in callNode.Objects)
         {
-            NamespaceName = identifier,
+            switch (o)
+            {
+                case ObjectPointerNode pointer:
+                    newObjects.Add(new NamespacePointerNode(pointer.Name!)
+                    {
+                        SourceFile = pointer.SourceFile,
+                        Line = pointer.Line,
+                    });
+                    break;
+                case NamespacePointerNode namespacePointerNode:
+                    newObjects.Add(namespacePointerNode);
+                    break;
+                default:
+                    throw new QlangCompileException("Using objects in the path that are not namespaces is not allowed.", o.Line, "Parser", o.SourceFile ?? "undefined");
+            }
+        }
+
+        callNode.Objects = newObjects.Cast<ASTNode>().ToList();
+        Expect(Tokens.Semicolon);
+        return new UsingNode
+        {
+            CallPath = callNode,
             SourceFile = (IsAtEnd() ? "" : Current().SourceFile),
             Line = (IsAtEnd() ? 0 : Current().Line + 1)
         };
@@ -364,7 +390,13 @@ public class Parser
             Expect(Tokens.Colon);
             var block = ParseBlock();
 
-            @switch.CaseBlocks[condition] = block;
+            @switch.CaseBlocks.Add(new SwitchCaseNode
+            {
+                CaseBlock = block,
+                Condition = condition,
+                SourceFile =  (IsAtEnd() ? "" : Current().SourceFile),
+                Line = (IsAtEnd() ? 0 : Current().Line + 1),
+            });
         }
 
         if (Check(Tokens.Keyword) && Current().Value == Keywords.DefaultKeyword)

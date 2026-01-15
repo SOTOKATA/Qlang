@@ -143,12 +143,12 @@ public partial class Interpreter
         var block = switchNode.DefaultBlock;
         foreach (var pair in from pair in switchNode.CaseBlocks let binOp = new BinaryOperationNode
                  {
-                     Left = pair.Key,
+                     Left = pair.Condition,
                      Right = switchNode.Condition,
                      Operator = "=="
                  } let obj = (bool)EvaluateBinaryOperation(binOp) where obj select pair)
         {
-            block = pair.Value;
+            block = pair.CaseBlock;
             break;
         }
 

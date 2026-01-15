@@ -24,7 +24,7 @@ public partial class Interpreter
 
     private readonly Dictionary<string, object> _numberDictionary;
 
-    private readonly List<string> _usingsList = [];
+    private readonly List<DynamicNamespace> _usingsList = [];
 
     private readonly List<FunctionNode> _globalFunctions = [];
     private readonly List<Variable> _globalVariables = [];
@@ -39,7 +39,9 @@ public partial class Interpreter
 
     public void Execute(ProgramNode program, List<string?>? args = null)
     {
-        Logger.SetLoggerPath(Path.Combine("Logs", "Debug", "debug_interpreter.log"));
+        Logger.Debug = true;
+        FileLogger.Debug = true;
+        Logger.SetLoggerPath(Path.Combine("debug", "debug_interpreter.log"));
         Logger.Warn("----------- Interpreter -----------");
 
         foreach (var statement in program.Statements)
@@ -51,10 +53,6 @@ public partial class Interpreter
                     break;
                 case FunctionNode func:
                     _globalFunctions.Add(func);
-                    break;
-                case UsingNode @using:
-                    if (!_usingsList.Contains(@using.NamespaceName))
-                        _usingsList.Add(@using.NamespaceName);
                     break;
                 case NamespaceNode namespaceNode:
                     if (_dynamicNamespaces.TryGetValue(namespaceNode.Name, out var baseNamespace))
@@ -76,6 +74,23 @@ public partial class Interpreter
                     _globalVariables.Add(new Variable(assignmentNode.VariableName, EvaluateExpression(assignmentNode.Value), assignmentNode.IsStatic, assignmentNode.IsPrivate, assignmentNode.IsConst));
                     break;
             }
+        }
+
+        foreach (var @using in program.Statements.OfType<UsingNode>())
+        {
+            Logger.Log("Process convent using: " + string.Join("::", @using.CallPath.Objects.Cast<NamespacePointerNode>().Select(n => n.Name)));
+            var @object = ExecuteObjectCalls(@using.CallPath);
+            
+            Logger.Log("@object: " + @object);
+
+            if (@object is not DynamicNamespace dynamicNamespace)
+                throw new QlangRuntimeException("Using can only refer to namespaces", @using,
+                    GetStackTrace());
+                    
+            if (!_usingsList.Contains(dynamicNamespace))
+                _usingsList.Add(dynamicNamespace);
+            
+            Logger.Log("@object added: " + dynamicNamespace.Name);
         }
 
         var function = _globalFunctions.FirstOrDefault(f => f.Name == "main");
@@ -188,7 +203,7 @@ public partial class Interpreter
                     var var = function.Variables[function.Parameters[i]];
 
                     if (var.Type is not null && Typeof(var.Type) != Typeof(arguments[i]))
-                        throw new QlangRuntimeException($"The type of param is '{Typeof(arguments[i])}' but must be '{Typeof(var.Type)}'", null, GetStackTrace());
+                        throw new QlangRuntimeException($"The type of param is '{(Typeof(arguments[i]) ?? "<null>")}' but must be '{Typeof(var.Type)}'", null, GetStackTrace());
                     
                     function.Variables[function.Parameters[i]] = new Variable(
                         function.Parameters[i],

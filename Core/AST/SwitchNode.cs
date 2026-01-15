@@ -3,7 +3,7 @@
 public class SwitchNode : ASTBlock
 {
     public ASTNode Condition { get; set; }
-    public Dictionary<ASTNode, List<ASTNode>> CaseBlocks { get; set; } = [];
+    public List<SwitchCaseNode> CaseBlocks { get; set; } = [];
     
     public List<ASTNode>? DefaultBlock { get; set; }
 
@@ -12,7 +12,7 @@ public class SwitchNode : ASTBlock
         return new SwitchNode
         {
             Condition = Condition.Clone(), 
-            CaseBlocks = CaseBlocks.ToDictionary(caseBlock => caseBlock.Key.Clone(), caseBlock => caseBlock.Value.Select(node => node.Clone()).ToList()),
+            CaseBlocks = CaseBlocks.Select(node => node.Clone()).Cast<SwitchCaseNode>().ToList(),
             DefaultBlock =  DefaultBlock?.Select(node => node.Clone()).ToList(),
             SourceFile =  SourceFile, 
             Line =  Line 
