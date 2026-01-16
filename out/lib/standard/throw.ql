@@ -1,10 +1,10 @@
-import "$lib/standard";
-import "$lib/core";
+import "$lib/standard"
+import "$lib/core"
 
 // Class to throw exceptions
 namespace std:  {
     class Throw: {
-        // Throw default exception
+        // std::Throw default exception
         function exception(const<String> message): {
             _native("std.exception.throw", _str(message));
         }

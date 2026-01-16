@@ -1,5 +1,5 @@
-import "$lib/core";
-import "$lib/filesystem";
+import "$lib/core"
+import "$lib/filesystem"
 
 namespace fs: {
     class File: {
@@ -19,7 +19,7 @@ namespace fs: {
         // Append content to end file
         function appendContent(const<String> path, const<String> content): {
             if exists(path) == false:
-                Throw.exception("file path '" + path + "' is not found");
+                std::Throw.exception("file path '" + path + "' is not found");
 
             _native("std.filesystem.append_content", path, _str(content));
         }
@@ -28,7 +28,7 @@ namespace fs: {
         // Get file content
         function getContent(const<String> path): {
             if exists(path) == false:
-                Throw.exception("file path '" + path + "' is not found");
+                std::Throw.exception("file path '" + path + "' is not found");
 
             return String.new(_native("std.filesystem.get_content", path));
         }
@@ -40,7 +40,7 @@ namespace fs: {
         // Remove file
         function remove(const<String> path): {
             if exists(path) == false:
-                Throw.exception("file path '" + path + "' is not found");
+                std::Throw.exception("file path '" + path + "' is not found");
 
             _native("std.filesystem.file_remove", path);
         }

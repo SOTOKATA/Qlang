@@ -1,5 +1,5 @@
-import "$lib/core";
-import "$lib/filesystem";
+import "$lib/core"
+import "$lib/filesystem"
 
 namespace fs: {
     class Path: {

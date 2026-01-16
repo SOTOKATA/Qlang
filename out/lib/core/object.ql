@@ -1,4 +1,4 @@
-import "$lib/core";
+import "$lib/core"
 
 class Object: {
     function isNull(let obj):

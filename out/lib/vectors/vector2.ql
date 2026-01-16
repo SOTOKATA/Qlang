@@ -1,5 +1,5 @@
-import "$lib/standard";
-import "$lib/core";
+import "$lib/standard"
+import "$lib/core"
 
 namespace std:  {
     class Vector2: {
@@ -25,7 +25,7 @@ namespace std:  {
             if (typeof(object) == typeof(Vector2)):
                 return object;
 
-            Throw.exception("Undefined object");
+            std::Throw.exception("Undefined object");
         }
 
         function ___operator_plus___(const obj1, const obj2): {

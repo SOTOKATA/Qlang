@@ -1,4 +1,4 @@
-import "$lib/standard";
+import "$lib/standard"
 
 namespace std: {
     class Environment: {

@@ -1,4 +1,4 @@
-import "$lib/core";
+import "$lib/core"
 
 // Class to make string operations
 class String: {
@@ -76,20 +76,20 @@ class String: {
 
     function new(const<String> char, const<Number> count): {
         if (Number.isNumber(count) == false):
-            Throw.exception("Param 'count' must be number");
+            std::Throw.exception("Param 'count' must be number");
 
         if count < 0: 
-            Throw.exception("Param 'count' must be more than 0");
+            std::Throw.exception("Param 'count' must be more than 0");
 
         if String.new(char).length() < 0:
-            Throw.exception("Length of string must be more than 0");
+            std::Throw.exception("Length of string must be more than 0");
 
         _value = _native("std.string.create", char, count);
     }
 
     function getPrimitive(const strOrPrimite, let allowOther = false): {
         if (Object.isNull(strOrPrimite)): {
-            Throw.exception("Object is null");
+            std::Throw.exception("Object is null");
         }
 
         if (String.isString(strOrPrimite)): {
@@ -105,18 +105,18 @@ class String: {
             return strOrPrimite;
         }
 
-        Throw.exception("Object is not string or primitive");
+        std::Throw.exception("Object is not string or primitive");
     }
 
     private function _checkIsCollection(let value): {
         if Array.isCollection(value) == false: {
-            Throw.parceException("argument is not collection");
+            std::Throw.parceException("argument is not collection");
         }
     }
 
     private function _checkIsArray(let value): {
         if Array.isArray(value) == false: {
-            Throw.parceException("argument is not array");
+            std::Throw.parceException("argument is not array");
         }
     }
 
@@ -158,21 +158,21 @@ class String: {
 
     function charAt(const<Number> index): {
         if length() <= index:
-            Throw.exception("The index must be less than the length of the string.");
+            std::Throw.exception("The index must be less than the length of the string.");
 
         return _native("std.string.at", _str(_value), index);
     }
 
     function setAt(const<Number> index, const<String> replaceValue): {
         if length() <= index:
-            Throw.exception("The index must be less than the length of the string.");
+            std::Throw.exception("The index must be less than the length of the string.");
 
         _value = _native("std.string.set_at", _str(_value), _str(replaceValue), index);
     }
 
     function join(let strArr, let<String> pattern): {
         if (Array.isCollection(strArr) == false) && (Array.isArray(strArr) == false):
-            Throw.exception("argument is not collection or array");
+            std::Throw.exception("argument is not collection or array");
 
         if Array.isArray(strArr):
             strArr = strArr.getCollection();
@@ -190,7 +190,7 @@ class String: {
             return true;
 
         if (String.isPrimitive(str) == false) && (String.isString(str) == false):
-            Throw.exception("Param must be string class or primitive");
+            std::Throw.exception("Param must be string class or primitive");
 
         if String.isString(str):
             str = str.toString();
@@ -204,7 +204,7 @@ class String: {
             return true;
 
         if (String.isPrimitive(str) == false) && (String.isString(str) == false):
-            Throw.exception("Param must be string class or primitive");
+            std::Throw.exception("Param must be string class or primitive");
 
         if String.isString(str): 
             str = str.toString();
@@ -227,13 +227,13 @@ class String: {
     // Cut string by 'startPos' and 'length'
     function subString(let<Number> startPos, let<Number> length): {
         if Number.isNumber(startPos) == false:
-            Throw.exception("subString error: startPos must be number");
+            std::Throw.exception("subString error: startPos must be number");
 
         if Number.isNumber(length) == false:
-            Throw.exception("subString error: length must be number");
+            std::Throw.exception("subString error: length must be number");
 
         if length() <= length:
-            Throw.exception("Value 'length' can't be more than string length");
+            std::Throw.exception("Value 'length' can't be more than string length");
 
         return String.new(_native("std.string.substring", _str(_value), startPos, length));
     }

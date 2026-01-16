@@ -1,5 +1,5 @@
-import "$lib/standard";
-import "$lib/core";
+import "$lib/standard"
+import "$lib/core"
 
 namespace regex: {
     class Regex: {

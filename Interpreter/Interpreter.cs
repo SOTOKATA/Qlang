@@ -391,6 +391,35 @@ public partial class Interpreter
                 return;
             }
         }
+
+        if (CurrentContext.Namespace != null)
+        {
+            if (CurrentContext.Namespace.Variables.TryGetValue(assign.VariableName, out var var))
+            {
+                if (var.IsConst)
+                    throw new QlangRuntimeException($"Can't re-assign const variable '{assign.VariableName}'",
+                        assign, GetStackTrace());
+
+                CurrentContext.Namespace.Variables[var.Name] = new Variable(
+                    var.Name,
+                    value,
+                    var.IsStatic,
+                    var.IsPrivate,
+                    var.IsConst);
+                return;
+            }
+
+            if (assign.IsNew)
+            {
+                CurrentContext.Namespace.Variables[assign.VariableName] = new Variable(
+                    assign.VariableName,
+                    value,
+                    assign.IsStatic,
+                    assign.IsPrivate,
+                    assign.IsConst);
+                return;
+            }
+        }
         
         var globalVar = _globalVariables.FirstOrDefault(v => v.Name == assign.VariableName);
         if (globalVar != null && !assign.IsNew)

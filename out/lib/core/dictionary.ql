@@ -1,4 +1,4 @@
-import "$lib/core";
+import "$lib/core"
 
 class Dictionary: {
     private let _keys;
@@ -49,7 +49,7 @@ class Dictionary: {
 
     function get(let key): {
         if (_keys.contains(key) == false): {
-            Throw.exception("Key is not existent in dictionary");
+            std::Throw.exception("Key is not existent in dictionary");
         }
 
         let index = _keys.indexOf(key);

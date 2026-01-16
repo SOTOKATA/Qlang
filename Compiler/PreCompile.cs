@@ -13,16 +13,14 @@ public static class PreCompile
 
     public static string IncludeFiles(string script, string fileName)
     {
-        Logger.Log($"File: " + fileName, "IncludeFiles");
-
         var includeLines = script
             .Split('\n')
             .Select((line, index) => (Line: line.Trim(), LineNumber: index + 1))
-            .Where(x => x.Line.StartsWith(Keywords.IncludeKeyword + " ") && x.Line.EndsWith(';'))
+            .Where(x => x.Line.StartsWith(Keywords.IncludeKeyword + " ") && x.Line.EndsWith('"'))
             .ToArray();
 
-        if (includeLines.Length > 0)
-            Logger.Log(string.Join(", ", includeLines), Keywords.IncludeKeyword);
+        if (includeLines.Length < 1)
+            return script;
 
         List<string> includedContents = [];
 
@@ -36,6 +34,7 @@ public static class PreCompile
 
             string fullPath;
 
+            // Set path from compile directory
             if (line.StartsWith('$'))
             {
                 var exePath = Path.GetDirectoryName(Environment.ProcessPath);
@@ -48,36 +47,31 @@ public static class PreCompile
                 fullPath = Path.Combine(exePath, line[1..]);
             }
             else
-                fullPath = Path.Combine(Directory.GetCurrentDirectory(), line);
+                fullPath = Path.Combine(Path.GetDirectoryName(fileName) ?? Directory.GetCurrentDirectory(), line);
 
+            // Make path dependent to system
             fullPath = fullPath.Replace('\\', Path.DirectorySeparatorChar)
                 .Replace('/', Path.DirectorySeparatorChar);
-
-            Logger.Log(fullPath, "Path");
 
             var isDirectory = Directory.Exists(fullPath);
             var isFile = File.Exists(fullPath) || File.Exists(fullPath + ".ql");
 
             if (!isDirectory && !isFile)
                 throw new QlangCompileException($"{Keywords.IncludeKeyword} file or directory not found: {fullPath}",
-                    index, "PreCompile/ImportFiles", fileName);
+                    index, "Import", fileName);
 
+            // Remove import line
             script = script.Replace(source, "");
 
             if (isDirectory)
             {
-                foreach (var file in Directory.GetFiles(fullPath, "*.ql", SearchOption.TopDirectoryOnly))
+                foreach (var filePath in Directory.GetFiles(fullPath, "*.ql", SearchOption.TopDirectoryOnly))
                 {
-                    Logger.Log(file, "Path");
-
-                    if (!Included.Add(file))
-                    {
-                        Logger.Warn($"{file}", "Skipped (already included)");
+                    if (!Included.Add(filePath))
                         continue;
-                    }
 
-                    var fileContent = File.ReadAllText(file);
-                    var processedContent = IncludeFiles(fileContent, file);
+                    var fileContent = File.ReadAllText(filePath);
+                    var processedContent = IncludeFiles(fileContent, filePath);
                     includedContents.Add(processedContent);
                 }
             }
@@ -86,15 +80,8 @@ public static class PreCompile
                 if (!fullPath.EndsWith(".ql"))
                     fullPath += ".ql";
 
-                if (!fullPath.EndsWith(".ql"))
-                    throw new QlangCompileException($"File '{fullPath}' is not Qlang file type (.ql)", index,
-                        "PreCompile/IncludeFiles", fileName);
-
                 if (!Included.Add(fullPath))
-                {
-                    Logger.Warn($"{fullPath}", "Skipped (already included)");
                     continue;
-                }
 
                 var fileContent = File.ReadAllText(fullPath);
                 var processedContent = IncludeFiles(fileContent, fullPath);

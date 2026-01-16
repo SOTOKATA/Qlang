@@ -1,5 +1,5 @@
-import "$lib/standard";
-import "$lib/filesystem";
+import "$lib/standard"
+import "$lib/filesystem"
 
 class BaseTest: {
     function runTest(): {

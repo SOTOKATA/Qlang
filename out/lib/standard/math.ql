@@ -1,5 +1,5 @@
-import "$lib/standard";
-import "$lib/core";
+import "$lib/standard"
+import "$lib/core"
 
 namespace std:  {
     class Math: {
@@ -30,7 +30,7 @@ namespace std:  {
             const cos = cos(radians);
 
             if cos == 0:
-                Throw.exception("Cos value cannot be zero!");
+                std::Throw.exception("Cos value cannot be zero!");
 
             return sin(radians) / cos;
         }
@@ -39,7 +39,7 @@ namespace std:  {
             const sin = sin(radians);
 
             if sin == 0:
-                Throw.exception("Sin value cannot be zero!");
+                std::Throw.exception("Sin value cannot be zero!");
         
             return cos(radians) / sin;
         }

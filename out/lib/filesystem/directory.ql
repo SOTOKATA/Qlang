@@ -1,5 +1,5 @@
-import "$lib/core";
-import "$lib/filesystem";
+import "$lib/core"
+import "$lib/filesystem"
 
 namespace fs: {
     class Directory: {
@@ -12,7 +12,7 @@ namespace fs: {
         // Create if not exists directory
         function create(const<String> path): {
             if exists(path) == true:
-                Throw.exception("Directory already created.");
+                std::Throw.exception("Directory already created.");
 
             _native("std.filesystem.directory_create", path);
         }
@@ -20,7 +20,7 @@ namespace fs: {
         // Remove if exists directory (recursive)
         function remove(const<String> path): {
             if exists(path) == false:
-                Throw.exception("Directory is not exists.");
+                std::Throw.exception("Directory is not exists.");
             
             _native("std.filesystem.directory_remove", path, true);
         }

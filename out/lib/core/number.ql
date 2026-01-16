@@ -1,4 +1,4 @@
-import "$lib/core";
+import "$lib/core"
 
 // Full static class
 // Class to make operations with numbers
@@ -16,7 +16,7 @@ class Number: {
     // get random number with range 'min' to 'max'
     function randInt(let min, let max): {
         if (isNumber(min) == false) || (isNumber(max) == false): {
-            Throw.exception("One or two input is not a number");
+            std::Throw.exception("One or two input is not a number");
         }
 
         // Convert '3.42...' to '3'
@@ -24,7 +24,7 @@ class Number: {
         max = Parser.asInt(max);
 
         if min >= max: {
-            Throw.exception("Minimum can't be more than maximum");
+            std::Throw.exception("Minimum can't be more than maximum");
         }
 
         return Parser.asNumber(_native("std.number.random", min, max));
