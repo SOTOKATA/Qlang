@@ -10,6 +10,8 @@ public class BreakNode : ASTNode
 
     public override string GetTree(string indent = "")
     {
-        return ASTGetTreeBuilder.Build(nameof(BreakNode), ["is break"], indent);
+        return DebugIndent($"""
+                            BreakNode
+                            """, indent);
     }
 }

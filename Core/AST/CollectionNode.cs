@@ -6,7 +6,10 @@ public class CollectionNode : ASTNode
     public List<ASTNode> Collection { get; set; }
     public override string GetTree(string indent = "")
     {
-        return ASTGetTreeBuilder.Build(nameof(CollectionNode), [Collection], indent);
+        return DebugIndent($"""
+                            CollectionNode:
+                                Collection: [{string.Join(",\n", Collection.Select(x => x.GetTree("\t\t")))}]
+                            """, indent);
     }
 
     public override ASTNode Clone()

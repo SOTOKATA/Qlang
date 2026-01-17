@@ -22,6 +22,12 @@ public class ForNode : ASTBlock
 
     public override string GetTree(string indent = "")
     {
-        return "";
+        return DebugIndent($"""
+                            ForNode:
+                                Assignment: {Assignment.GetTree("\t\t")}
+                                Condition: {Condition.GetTree("\t\t")}
+                                Statement: {Condition.GetTree("\t\t")}
+                                Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t\t")))}]
+                            """, indent);
     }
 }

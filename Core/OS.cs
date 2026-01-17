@@ -1,6 +1,6 @@
 ﻿namespace Core;
 
-public class OS
+public static class OS
 {
     public static string GetExecutableExtension()
     {

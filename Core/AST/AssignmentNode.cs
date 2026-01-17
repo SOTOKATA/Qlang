@@ -4,10 +4,8 @@ public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool is
 {
     public bool IsNew { get; set; } = isNew;
 
-    // For simple variable assignments (backward compatibility)
     public string? VariableName { get; set; }
 
-    // For path-based assignments (e.g., object.property.subproperty = value)
     public List<ASTNode>? Path { get; set; }
 
     public ASTNode? Value { get; set; }
@@ -20,10 +18,8 @@ public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool is
 
     public bool IsConst { get; set; } = isConst;
 
-    // Helper property to check if this is a simple variable assignment or a path assignment
     public bool IsPathAssignment => Path is { Count: > 0 };
 
-    // Helper method to get the assignment target as a string (for debugging/logging)
     public string GetAssignmentTarget()
     {
         if (IsPathAssignment)
@@ -57,15 +53,15 @@ public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool is
 
     public override string GetTree(string indent = "")
     {
-        if (IsPathAssignment)
-        {
-            return ASTGetTreeBuilder.Build(nameof(AssignmentNode),
-                [GetAssignmentTarget(), Path, Value, IsStatic, IsPrivate], indent);
-        }
-        else
-        {
-            return ASTGetTreeBuilder.Build(nameof(AssignmentNode),
-                [VariableName, Value, IsStatic, IsPrivate], indent);
-        }
+        return DebugIndent($"""
+                            VariableName (Legacy): {VariableName}
+                            Path: [{string.Join(",\n", Path?.Select(x => x.GetTree("\t\t")) ?? ["<not_exists>"])}]
+                            Value: {Value?.GetTree("\t\t") ?? "<undefined>"}
+                            Type: {Type?.GetTree("\t\t")}
+                            IsStatic: {IsStatic}
+                            IsPrivate: {IsPrivate}
+                            IsConst: {IsConst}
+                            IsNew: {IsNew}
+                            """, indent);
     }
 }

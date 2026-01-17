@@ -2,11 +2,14 @@
 
 public class ParensNode : ASTNode
 {
-    public ASTNode? Statement { get; set; } = null;
+    public ASTNode? Statement { get; set; }
     
     public override string GetTree(string indent = "")
     {
-        return ASTGetTreeBuilder.Build(nameof(ParensNode), [Statement], indent);
+        return DebugIndent($"""
+                            ParensNode:
+                                Statement: {(Statement is null ? "<null>" : Statement.GetTree("\t\t"))}
+                            """, indent);
     }
 
     public override ASTNode Clone()

@@ -4,7 +4,7 @@ public class NullNode : ASTNode
 {
     public override string GetTree(string indent = "")
     {
-        return "NullNode";
+        return DebugIndent("NullNode", indent);
     }
 
     public override ASTNode Clone() => new NullNode

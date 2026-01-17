@@ -15,6 +15,11 @@ public class NamespaceNode : ASTNode
 
     public override string GetTree(string indent = "")
     {
-        return ASTGetTreeBuilder.Build(nameof(NamespaceNode), [Name, Body], indent);
+        return DebugIndent($"""
+                            NamespaceNode:
+                                Name: {Name}
+                                IsPrivate: {IsPrivate}
+                                Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t\t")))}]
+                            """, indent);
     }
 }

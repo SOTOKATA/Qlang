@@ -2,7 +2,7 @@
 
 public class NumberRefNode : ASTNode
 {
-    public bool IsNegative { get; set; } = false;
+    public bool IsNegative { get; set; }
     public int Index { get; set; }
 
     public override ASTNode Clone() => new NumberRefNode
@@ -15,6 +15,10 @@ public class NumberRefNode : ASTNode
 
     public override string GetTree(string indent = "")
     {
-        return ASTGetTreeBuilder.Build(nameof(NumberNode), [Index], indent);
+        return DebugIndent($"""
+                            NumberRefNode:
+                                Ref: {Index}
+                                IsNegative: {IsNegative}
+                            """, indent);
     }
 }

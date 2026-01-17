@@ -1,4 +1,5 @@
-﻿using Core.AST;
+﻿using Core;
+using Core.AST;
 using Core.Exceptions;
 
 namespace Compiler;
@@ -11,8 +12,14 @@ public static class PostParser
             .OfType<ClassNode>()
             .ToList();
 
-        foreach (var classes in program.Statements.OfType<NamespaceNode>().Select(@namespace => @namespace.Body.OfType<ClassNode>().ToList()))
-            classNodes.AddRange(classes);
+        foreach (var @namespace in program.Statements.OfType<NamespaceNode>())
+            classNodes.AddRange(Parser.GetClassesFromNamespaceRecursively(@namespace));
+
+        classNodes.ForEach(c =>
+        {
+            if (string.IsNullOrEmpty(c.Extends) && c.Name != QlSystemClasses.ObjectClassName)
+                c.Extends = QlSystemClasses.ObjectClassName;
+        });
             
 
         foreach (var cls in classNodes)

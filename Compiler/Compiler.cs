@@ -28,11 +28,11 @@ public class Compiler
 
         Logger.Log("Include Files");
         _outputScript = PreCompile.IncludeFiles(_originalScript, fileName);
-        Logger.Succ("All includes processed successfully.");
+        Logger.Log("All includes processed successfully.");
         
         Logger.Log("Include Native Files");
         (DllDependencies, _outputScript) = PreCompile.IncludeNativeFolders(_outputScript, fileName, []);
-        Logger.Succ("All native includes processed successfully.");
+        Logger.Log("All native includes processed successfully.");
         
         _outputScript = PreCompile.ClearComments(_outputScript);
         

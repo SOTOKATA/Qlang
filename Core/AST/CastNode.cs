@@ -8,7 +8,11 @@ public class CastNode(CallNode call, CallNode obj) : ASTNode
     
     public override string GetTree(string indent = "")
     {
-        return "!ignored";
+        return DebugIndent($"""
+                            CastNode:
+                                TypeCastPath: {call.GetTree()}
+                                ToCastObject: {obj.GetTree()}
+                            """, indent);
     }
 
     public override ASTNode Clone()

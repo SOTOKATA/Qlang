@@ -171,7 +171,7 @@ public static class PreCompile
 
                 if (!IncludedNative.Add(file))
                 {
-                    Logger.Warn($"{file}", "Skipped (already included)");
+                    Logger.Log($"{file}", "Skipped (already included)");
                     continue;
                 }
                 
@@ -186,7 +186,7 @@ public static class PreCompile
     
     public static (string outScript, Dictionary<string, object> dictionary) ExtractNumbers(string script)
     {
-        Logger.Warn($"Extract Numbers");
+        Logger.Log($"Extract Numbers");
         Dictionary<string, object> numberDictionary = [];
         
         var numberCounter = 0;
@@ -207,12 +207,12 @@ public static class PreCompile
             
             numberCounter++;
             
-            Logger.Warn($"key='{key}', value='{numberValue}'");
+            Logger.Log($"key='{key}', value='{numberValue}'");
             
             return key;
         });
         
-        Logger.Warn("Numbers extracted successfully");
+        Logger.Log("Numbers extracted successfully");
         return (result, numberDictionary);
     }
     
@@ -245,7 +245,7 @@ public static class PreCompile
             return key;
         });
         
-        Logger.Succ("Strings extracted successfully");
+        Logger.Log("Strings extracted successfully");
         return (result, stringDictionary);
     }
     
@@ -262,13 +262,13 @@ public static class PreCompile
                 : match.Value;
         }, RegexOptions.Multiline);
     
-        Logger.Succ("Strings file returned successfully");
+        Logger.Log("Strings file returned successfully");
         return result;
     }
 
     public static string ClearComments(string script)
     {
-        Logger.Succ("Clear Comments");
+        Logger.Log("Clear Comments");
         const string pattern = @"//[^\r\n]*|/\*[\s\S]*?\*/";
         
         var result = Regex.Replace(script, pattern, match =>
@@ -280,7 +280,7 @@ public static class PreCompile
             return "";
         });
         
-        Logger.Succ("Comments cleared successfully");
+        Logger.Log("Comments cleared successfully");
         return result;
     }
 

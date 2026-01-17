@@ -6,7 +6,11 @@ public class ObjectPointerNode : ASTNode
     
     public override string GetTree(string indent = "")
     {
-        return ASTGetTreeBuilder.Build(nameof(ObjectPointerNode), [Name], indent);
+        return DebugIndent($"""
+                            ObjectPointerNode:
+                                Name: {Name ?? "<undefined>"}
+                            """,
+            indent);
     }
 
     public override ASTNode Clone()

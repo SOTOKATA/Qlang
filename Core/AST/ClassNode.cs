@@ -20,6 +20,11 @@ public class ClassNode : ASTNode
 
     public override string GetTree(string indent = "")
     {
-        return ASTGetTreeBuilder.Build(nameof(ClassNode), [Name, Body], indent);
+        return DebugIndent($"""
+                ClassNode:
+                    Name: {Name}
+                    Extends: {(Extends == "" ? "<not_exists>" : Extends)}
+                    Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t\t")))}]
+                """, indent);
     }
 }

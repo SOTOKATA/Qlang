@@ -8,7 +8,10 @@ public class NamespacePointerNode(string name) : ASTNode
     
     public override string GetTree(string indent = "")
     {
-        return $"{indent}{Name}";
+        return DebugIndent($"""
+                            NamespacePointerNode:
+                                Name: {Name}
+                            """, indent);
     }
 
     public override ASTNode Clone()

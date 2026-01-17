@@ -13,6 +13,9 @@ public class StringRefNode : ASTNode
 
     public override string GetTree(string indent = "")
     {
-        return ASTGetTreeBuilder.Build(nameof(StringRefNode), [Index], indent);
+        return DebugIndent($"""
+                            StringRefNode:
+                                Ref: {Index}
+                            """, indent);
     }
 }

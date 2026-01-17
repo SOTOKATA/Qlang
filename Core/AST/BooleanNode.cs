@@ -12,6 +12,9 @@ public class BooleanNode : ASTNode
 
     public override string GetTree(string indent = "")
     {
-        return Value.ToString();
+        return DebugIndent($"""
+                            BreakNode:
+                                Value: {Value}
+                            """, indent);
     }
 }

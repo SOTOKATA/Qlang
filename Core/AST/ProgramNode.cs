@@ -13,6 +13,9 @@ public class ProgramNode : ASTNode
 
     public override string GetTree(string indent = "")
     {
-        return ASTGetTreeBuilder.Build(nameof(ProgramNode), [Statements], indent);
+        return DebugIndent($""" 
+                            ProgramNode:
+                                Statements: [{string.Join(",\n", Statements.Select(x => x.GetTree("\t\t")))}]
+                            """, indent);
     }
 }

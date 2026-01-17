@@ -20,8 +20,11 @@ public class BinaryOperationNode : ASTNode
 
     public override string GetTree(string indent = "")
     {
-        return ASTGetTreeBuilder.Build(nameof(BinaryOperationNode), 
-            [Left, Operator, Right]
-            , indent);
+        return DebugIndent($"""
+                            BinaryOperationNode:
+                                Operator: {Operator ?? "<undefined>"}
+                                Left: {Left?.GetTree("\t\t") ??  "<undefined>"}
+                                Left: {Right?.GetTree("\t\t") ??  "<undefined>"}
+                            """, indent);
     }
 }

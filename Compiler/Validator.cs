@@ -10,11 +10,15 @@ public static class Validator
         CheckDuplicate(program);
     }
     
+    
     private static void CheckDuplicate(ProgramNode program)
     {
         var classes = program.Statements
             .OfType<ClassNode>()
             .ToList();
+
+        foreach (var @namespace in program.Statements.OfType<NamespaceNode>())
+            classes.AddRange(Parser.GetClassesFromNamespaceRecursively(@namespace));
 
         var @class = new ClassNode
         {

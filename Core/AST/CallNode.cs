@@ -18,6 +18,10 @@ public class CallNode : ASTNode
 
     public override string GetTree(string indent = "")
     {
-        return ASTGetTreeBuilder.Build(nameof(CallNode), [Objects, Arguments], indent);
+        return DebugIndent($"""
+                            CallNode:
+                                Objects: [{string.Join(",\n", Objects.Select(x => x.GetTree("\t\t")))}]
+                                Arguments: [{string.Join(",\n", Arguments.Select(x => x.GetTree("\t\t")))}]
+                            """, indent);
     }
 }

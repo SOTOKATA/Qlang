@@ -7,7 +7,7 @@ using Core.NativeLib;
 
 namespace Runtime;
 
-public class Program
+public static class Program
 {
     public static void Main(string[] args)
     {

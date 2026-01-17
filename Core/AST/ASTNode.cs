@@ -12,4 +12,6 @@ public abstract class ASTNode
     
     public int Line { get; set; }
     public string? SourceFile { get; set; }
+    
+    protected static string DebugIndent(string text, string indent) => "\n" + string.Join("\n", text.Split('\n').Select(line => indent + line));
 }

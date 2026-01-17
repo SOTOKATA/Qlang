@@ -37,13 +37,19 @@ public partial class Interpreter
     private bool HasContext => _contextStack.Count > 0;
     private ASTContext CurrentContext => HasContext ? _contextStack.Peek() : null;
 
+    /// <summary>
+    /// Load program and starts execution
+    /// </summary>
+    /// <param name="program"></param>
+    /// <param name="args"></param>
+    /// <exception cref="QlangRuntimeException"></exception>
     public void Execute(ProgramNode program, List<string?>? args = null)
     {
-        Logger.Debug = true;
-        FileLogger.Debug = true;
-        Logger.SetLoggerPath(Path.Combine("debug", "debug_interpreter.log"));
-        Logger.Warn("----------- Interpreter -----------");
+        // Debug initialize
+        Logger.Initialize(true);
+        Logger.SetLoggerPath(Path.Combine("debug_log_interpreter.txt"));
 
+        // Load classes, functions, namespaces
         foreach (var statement in program.Statements)
         {
             switch (statement)
@@ -76,23 +82,20 @@ public partial class Interpreter
             }
         }
 
+        // Load usings
         foreach (var @using in program.Statements.OfType<UsingNode>())
         {
-            Logger.Log("Process convent using: " + string.Join("::", @using.CallPath.Objects.Cast<NamespacePointerNode>().Select(n => n.Name)));
             var @object = ExecuteObjectCalls(@using.CallPath);
             
-            Logger.Log("@object: " + @object);
-
             if (@object is not DynamicNamespace dynamicNamespace)
                 throw new QlangRuntimeException("Using can only refer to namespaces", @using,
                     GetStackTrace());
                     
             if (!_usingsList.Contains(dynamicNamespace))
                 _usingsList.Add(dynamicNamespace);
-            
-            Logger.Log("@object added: " + dynamicNamespace.Name);
         }
 
+        // Search main function
         var function = _globalFunctions.FirstOrDefault(f => f.Name == "main");
         if (function is null)
         {
@@ -102,12 +105,18 @@ public partial class Interpreter
                 []);
         }
         
+        // Run main function (and send arguments if exists)
         if (function.Parameters.Count == 0)
             ExecuteFunction(ToDynamicFunction(function), [], null, null);
         else 
             ExecuteFunction(ToDynamicFunction(function), [args?.Cast<object?>().ToList()], null, null);
     }
 
+    /// <summary>
+    /// Convert static namespace to dynamic
+    /// </summary>
+    /// <param name="namespaceNode"></param>
+    /// <returns></returns>
     private DynamicNamespace ToDynamicNamespace(NamespaceNode namespaceNode)
     {
         var dynamicNamespace = new DynamicNamespace(namespaceNode.Name)
@@ -136,6 +145,11 @@ public partial class Interpreter
         return dynamicNamespace;
     }
 
+    /// <summary>
+    /// Convert static class to dynamic
+    /// </summary>
+    /// <param name="classNode"></param>
+    /// <returns></returns>
     private DynamicClass ToDynamicClass(ClassNode classNode)
     {
         DynamicClass dynamicClass = new(classNode.Name);
@@ -153,8 +167,16 @@ public partial class Interpreter
         return dynamicClass;
     }
 
+    /// <summary>
+    /// Convert static function to dynamic
+    /// </summary>
+    /// <param name="functionNode"></param>
+    /// <returns></returns>
     private DynamicFunction ToDynamicFunction(FunctionNode? functionNode)
     {
+        if (functionNode is null)
+            throw new QlangRuntimeException("Internal: Undefined function", functionNode, GetStackTrace());
+        
         DynamicFunction dynamicFunction = new(functionNode.Name);
 
         foreach (var node in functionNode.Parameters)
@@ -182,12 +204,22 @@ public partial class Interpreter
         _contextStack.Push(context);
     }
 
+    /// <summary>
+    /// Runs function
+    /// </summary>
+    /// <param name="function"></param>
+    /// <param name="arguments"></param>
+    /// <param name="ownerClass"></param>
+    /// <param name="ownerNamespace"></param>
+    /// <returns></returns>
+    /// <exception cref="QlangRuntimeException"></exception>
     private object? ExecuteFunction(DynamicFunction? function, List<object?> arguments, DynamicClass? ownerClass, DynamicNamespace? ownerNamespace)
     {
         if (function is null)
             return null;
 
         Logger.Log($"'{function.Name}'({string.Join(", ", arguments)})");
+        Logger.Log($"Function:\nName={function.Name}\nArguments={string.Join(", ", arguments)}");
 
         var contextClass = ownerClass ?? (HasContext ? CurrentContext.Class : null);
         var contextNamespace = ownerNamespace ?? (HasContext ? CurrentContext.Namespace : null);
@@ -236,7 +268,7 @@ public partial class Interpreter
             _return = false;
             _isBreakKeyword = false;
             _isContinueKeyword = false;
-            Logger.Warn("Return value: " + _returnValue);
+            Logger.Log("Return:\nValue=" + _returnValue);
             return _returnValue;
         }
         finally
@@ -247,38 +279,34 @@ public partial class Interpreter
 
     private void ExecuteStatement(ASTNode statement)
     {
+        Logger.Log("Statement: " + statement.GetTree(), "ExecuteStatement");
+        
         if (HasContext)
             CurrentContext.CurrentNode = statement;
         
         switch (statement)
         {
             case AssignmentNode assign:
-                Logger.Warn($"Context: class='{CurrentContext.Class?.Name}' function='{CurrentContext.Function?.Name}'");
                 AssignmentNode(assign);
                 break;
 
             case CallNode call:
-                Logger.Log("CallNode");
                 ExecuteObjectCalls(call);
                 break;
 
             case IfNode ifNode:
-                Logger.Log("IfNode");
                 ExecuteIf(ifNode);
                 break;
             
             case SwitchNode switchNode:
-                Logger.Log("SwitchNode");
                 ExecuteSwitch(switchNode);
                 break;
 
             case WhileNode whileNode:
-                Logger.Log("WhileNode");
                 ExecuteWhile(whileNode);
                 break;
 
             case ForNode forNode:
-                Logger.Log("ForNode");
                 ExecuteFor(forNode);
                 break;
 
@@ -297,18 +325,12 @@ public partial class Interpreter
         // Handle path-based assignments (e.g., object.property = value)
         if (assign.IsPathAssignment)
         {
-            Logger.Log($"path='{assign.GetAssignmentTarget()}' value='{assign.Value}' value(after evaluating)='{value}'", "PathAssignmentNode");
             AssignToPath(assign.Path!, value, assign);
             return;
         }
 
-        Logger.Log($"name='{assign.VariableName}' value='{assign.Value}' value(after evaluating)='{value}'", "AssignmentNode");
-
         if (value is DynamicClass dynamicClass)
-        {
-            Logger.Log($"Change name old='{dynamicClass.Name}' new='{assign.VariableName}'", "AssignmentNode");
             dynamicClass.Name = assign.VariableName;
-        }
 
         // Context class
         if (CurrentContext.Class != null)
@@ -368,7 +390,7 @@ public partial class Interpreter
             if (CurrentContext.Function.Variables.TryGetValue(assign.VariableName, out var var))
             {
                 if (var.IsConst)
-                    throw new QlangRuntimeException($"Can't re-assign const variable '{assign.VariableName}'",
+                    throw new QlangRuntimeException($"Cannot re-assign const variable '{assign.VariableName}'",
                         assign, GetStackTrace());
 
                 CurrentContext.Function.Variables[var.Name] = new Variable(
@@ -397,7 +419,7 @@ public partial class Interpreter
             if (CurrentContext.Namespace.Variables.TryGetValue(assign.VariableName, out var var))
             {
                 if (var.IsConst)
-                    throw new QlangRuntimeException($"Can't re-assign const variable '{assign.VariableName}'",
+                    throw new QlangRuntimeException($"Cannot re-assign const variable '{assign.VariableName}'",
                         assign, GetStackTrace());
 
                 CurrentContext.Namespace.Variables[var.Name] = new Variable(
@@ -492,12 +514,10 @@ public partial class Interpreter
                 throw new QlangRuntimeException($"Invalid assignment target: {lastNode.GetType().Name}", assignNode, GetStackTrace());
         }
 
-        Logger.Log($"Successfully assigned value to path: {string.Join(".", path.Select(p => p switch { ObjectPointerNode op => op.Name, FunctionPointerNode fp => $"{fp.Name}()", _ => "?" }))}", "PathAssignment");
     }
 
     private DynamicClass GetNewClass(DynamicClass dynamicClass, List<object?> args)
     {
-        Logger.Warn("Is new instance class");
         var dClass = dynamicClass.Clone();
         
         var fromClass = GetFunctionFromClass(dClass, Keywords.CreateClassInstanceKeyword, args);
@@ -513,8 +533,7 @@ public partial class Interpreter
         if (!HasContext) 
             return;
         
-        var context = _contextStack.Pop();
-        Logger.Warn($"class='{context.Class?.Name}' function='{context.Function?.Name}'", "RestoreContextStack");
+        _contextStack.Pop();
     }
 
     private List<object?> GetCollection(List<object?> arg)
@@ -582,8 +601,7 @@ public partial class Interpreter
         if (HasContext)
             CurrentContext.CurrentNode = expr;
 
-        Logger.Log("TypeofExpression: " + expr.GetType().Name);
-        Logger.Log("Expression: " + expr);
+        Logger.Log("Expression: " + expr.GetTree(), "EvaluateExpression");
 
         try
         {
@@ -613,9 +631,6 @@ public partial class Interpreter
         }
         catch (Exception ex)
         {
-            Logger.Error("Exception from EvaluateExpression");
-            Logger.Error("Expression: " + expr);
-
             if (expr is BinaryOperationNode binOp)
                 Logger.Error($"expr is BinaryOperationNode [{(binOp.Left as VariableNode)?.Name},{binOp
                 .Operator},{(binOp.Right as StringRefNode)?.Index}]");
@@ -710,20 +725,16 @@ public partial class Interpreter
 
             if (CurrentContext?.Class != null)
             {
-                Logger.Log("Current var count: " + CurrentContext.Class.Variables.Count);
-                Logger.Log("Current class name: " + CurrentContext.Class.Name);
                 foreach (var var2 in CurrentContext.Class.Variables)
                 {
                     var val = var2.Value.Value;
                     var name = var2.Value.Name;
-                    Logger.Log($"\tVariable: '{name}' = '{val}'");
                 }
             }
             else Logger.Error($"Context Class is null");
 
             if (CurrentContext?.Function != null)
             {
-                Logger.Log("Current var count: " + CurrentContext.Function.Variables.Count);
                 Logger.Log("Current function name: " + CurrentContext.Function.Name);
                 foreach (var var2 in CurrentContext.Function.Variables)
                 {
@@ -869,11 +880,11 @@ public partial class Interpreter
 
     private object? EvaluateBinaryOperation(BinaryOperationNode binOp)
     {
-        Logger.Warn("Detected binary operation");
-        Logger.Warn($"Params: {binOp.Left} {binOp.Operator} {binOp.Right}");
+        Logger.Log("Detected binary operation");
+        Logger.Log($"Params: {binOp.Left} {binOp.Operator} {binOp.Right}");
         var left = EvaluateExpression(binOp.Left);
         var right = EvaluateExpression(binOp.Right);
-        Logger.Warn($"ExpressionParams: {left}: {left?.GetType().Name}; {right}: {right?.GetType().Name}");
+        Logger.Log($"ExpressionParams: {left}: {left?.GetType().Name}; {right}: {right?.GetType().Name}");
 
         if (left is null || right is null)
             return null;
@@ -898,7 +909,7 @@ public partial class Interpreter
                     // Short-circuit: если левая часть false, правую не вычисляем
                     if (!leftBool)
                     {
-                        Logger.Warn($"Short-circuit &&: left is false, returning false");
+                        Logger.Log($"Short-circuit &&: left is false, returning false");
                         return false;
                     }
 
@@ -907,7 +918,7 @@ public partial class Interpreter
                             $"Type error: Right operand of '&&' must be boolean, got '{right}'",
                             binOp, GetStackTrace());
 
-                    Logger.Warn($"Operation &&: {leftBool} && {rightBool} = {rightBool}");
+                    Logger.Log($"Operation &&: {leftBool} && {rightBool} = {rightBool}");
                     return rightBool;
                 }
             case "||":
@@ -920,19 +931,19 @@ public partial class Interpreter
                     // Short-circuit: если левая часть true, правую не вычисляем
                     if (leftBool)
                     {
-                        Logger.Warn("LeftRight: " + binOp.Left?.GetTree() + " and " + binOp.Right?.GetTree());
-                        Logger.Warn($"Short-circuit ||: left is true, returning true");
+                        Logger.Log("LeftRight: " + binOp.Left?.GetTree() + " and " + binOp.Right?.GetTree());
+                        Logger.Log($"Short-circuit ||: left is true, returning true");
                         return true;
                     }
 
-                    Logger.Warn($"Short-circuit ||: left not is true, continue");
+                    Logger.Log($"Short-circuit ||: left not is true, continue");
 
                     if (!bool.TryParse(right.ToString(), out rightBool))
                         throw new QlangRuntimeException(
                             $"Type error: Right operand of '||' must be boolean, got '{right}'",
                             binOp, GetStackTrace());
 
-                    Logger.Warn($"Operation ||: {leftBool} || {rightBool} = {rightBool}");
+                    Logger.Log($"Operation ||: {leftBool} || {rightBool} = {rightBool}");
                     return rightBool;
                 }
         }
@@ -940,7 +951,7 @@ public partial class Interpreter
         // If it's bool condition
         if (bool.TryParse(left.ToString(), out leftBool) && bool.TryParse(right.ToString(), out rightBool))
         {
-            Logger.Warn($"IsBooleanOperation: {left}{binOp.Operator}{right}");
+            Logger.Log($"IsBooleanOperation: {left}{binOp.Operator}{right}");
             return binOp.Operator switch
             {
                 "==" => Equals(leftBool, rightBool),
@@ -994,7 +1005,7 @@ public partial class Interpreter
         {
             var leftNum = Convert.ToDouble(left);
             var rightNum = Convert.ToDouble(right);
-            Logger.Warn($"Operation: {left}{binOp.Operator}{right}");
+            Logger.Log($"Operation: {left}{binOp.Operator}{right}");
             return binOp.Operator switch
             {
                 "==" => Equals(leftNum, rightNum),

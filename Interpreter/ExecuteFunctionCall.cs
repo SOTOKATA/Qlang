@@ -78,7 +78,7 @@ public partial class Interpreter
                         throw new QlangRuntimeException(ex.Message, fn, GetStackTrace());
                     }
 
-                    Logger.Warn($"Native call return: value='{returnValue}' type='{returnValue?.GetType().Name}'");
+                    Logger.Log($"Native call return: value='{returnValue}' type='{returnValue?.GetType().Name}'");
             
                     return returnValue;
                 case "typeof":
@@ -114,14 +114,14 @@ public partial class Interpreter
                     case string when !isPathStart:
                     {
                         var str = lastReturnValue;
-                        lastReturnValue = _dynamicClasses["String"];
+                        lastReturnValue = _dynamicClasses[QlSystemClasses.StringClassName];
                         (lastReturnValue as DynamicClass).Variables["_value"].Value = str;
                         break;
                     }
                     case List<object?> when !isPathStart:
                     {
                         var arr = lastReturnValue;
-                        lastReturnValue = _dynamicClasses["Array"];
+                        lastReturnValue = _dynamicClasses[QlSystemClasses.ArrayClassName];
                         (lastReturnValue as DynamicClass).Variables["_value"].Value = arr;
                         break;
                     }
@@ -144,13 +144,13 @@ public partial class Interpreter
                 if (lastReturnValue is string && !isPathStart)
                 {
                     var str = lastReturnValue;
-                    lastReturnValue = _dynamicClasses["String"];
+                    lastReturnValue = _dynamicClasses[QlSystemClasses.StringClassName];
                     (lastReturnValue as DynamicClass).Variables["_value"].Value = str;
                 }
                 else if (lastReturnValue is List<object?> && !isPathStart)
                 {
                     var arr = lastReturnValue;
-                    lastReturnValue = _dynamicClasses["Array"];
+                    lastReturnValue = _dynamicClasses[QlSystemClasses.ArrayClassName];
                     (lastReturnValue as DynamicClass).Variables["_value"].Value = arr;
                 }
                 

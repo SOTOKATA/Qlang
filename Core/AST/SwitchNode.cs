@@ -21,6 +21,11 @@ public class SwitchNode : ASTBlock
 
     public override string GetTree(string indent = "")
     {
-        return ASTGetTreeBuilder.Build(nameof(SwitchNode), [Condition, CaseBlocks], indent);
+        return DebugIndent($"""
+                            SwitchNode:
+                                Condition: {Condition.GetTree("\t\t")}
+                                DefaultBlock: [{string.Join(",\n", DefaultBlock?.Select(x => x.GetTree("\t\t")) ?? ["<not_exists>"])}]
+                                CaseBlocks: [{string.Join(",\n", CaseBlocks.Select(x => x.GetTree("\t\t")))}]
+                            """, indent);
     }
 }

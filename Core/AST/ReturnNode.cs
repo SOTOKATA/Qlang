@@ -13,6 +13,9 @@ public class ReturnNode : ASTNode
 
     public override string GetTree(string indent = "")
     {
-        return ASTGetTreeBuilder.Build(nameof(ReturnNode), [ReturnValue], indent);
+        return DebugIndent($"""
+                            ReturnNode:
+                                ReturnValue: {(ReturnValue is null ? "<nothing>" : ReturnValue.GetTree("\t\t"))}
+                            """, indent);
     }
 }

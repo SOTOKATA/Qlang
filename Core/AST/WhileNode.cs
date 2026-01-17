@@ -2,17 +2,17 @@
 
 public class WhileNode : ASTBlock
 {
-    public ASTNode? Condition { get; set; }
+    public ASTNode Condition { get; set; }
 
     public List<ASTNode> Body { get; set; } = [];
     
-    public bool IsDoWhile { get; set; } = false;
+    public bool IsDoWhile { get; set; }
 
     public override ASTNode Clone()
     {
         return new WhileNode
         {
-            Condition = Condition?.Clone(), 
+            Condition = Condition.Clone(), 
             Body = Body.Select(node => node.Clone()).ToList(),
             IsDoWhile = IsDoWhile,
             SourceFile =  SourceFile, 
@@ -22,6 +22,11 @@ public class WhileNode : ASTBlock
 
     public override string GetTree(string indent = "")
     {
-        return ASTGetTreeBuilder.Build(nameof(WhileNode), [Condition, Body, IsDoWhile], indent);
+        return DebugIndent($"""
+                            WhileNode:
+                                Condition: {Condition.GetTree("\t\t")}
+                                IsDoWhile: {IsDoWhile}
+                                Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t\t")))}]
+                            """, indent);
     }
 }

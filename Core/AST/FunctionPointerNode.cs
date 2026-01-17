@@ -7,7 +7,11 @@ public class FunctionPointerNode : ASTNode
     
     public override string GetTree(string indent = "")
     {
-        return ASTGetTreeBuilder.Build(nameof(FunctionPointerNode), [Name, Arguments], indent);
+        return DebugIndent($"""
+                            FunctionPointerNode:
+                                Name: {Name}
+                                Arguments: [{string.Join(",\n", Arguments.Select(x => x.GetTree("\t\t")))}]
+                            """, indent);
     }
 
     public override ASTNode Clone()

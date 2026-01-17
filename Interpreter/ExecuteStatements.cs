@@ -27,8 +27,8 @@ public partial class Interpreter
         AddBlockToContext(whileNode);
 
         var condition = whileNode.IsDoWhile || (bool)EvaluateExpression(whileNode.Condition);
-        Logger.Log("FirstCheck (node)\n" + whileNode.Condition.GetTree("     "), "While.Condition", ConsoleColor.Magenta);
-        Logger.Log("FirstCheck: \n" + condition, "While.Condition", ConsoleColor.Magenta);
+        Logger.Log("FirstCheck (node)\n" + whileNode.Condition.GetTree("     "), "While.Condition");
+        Logger.Log("FirstCheck: \n" + condition, "While.Condition");
 
         while (condition)
         {
@@ -39,11 +39,11 @@ public partial class Interpreter
             }
 
             condition = (bool)EvaluateExpression(whileNode.Condition);
-            Logger.Log("FirstCheck: \n" + condition, "While.Condition", ConsoleColor.Magenta);
+            Logger.Log("FirstCheck: \n" + condition, "While.Condition");
         }
 
         RemoveLastBlockFromContext();
-        Logger.Log("Ended", "While", ConsoleColor.Magenta);
+        Logger.Log("Ended", "While");
     }
 
     private bool ExecuteBlock(List<ASTNode> block, bool isLoop)
@@ -102,7 +102,7 @@ public partial class Interpreter
 
         // Add condition
         var condition = (bool)EvaluateExpression(forNode.Condition);
-        Logger.Log("FirstCheck: \n" + condition, "For.Condition", ConsoleColor.Magenta);
+        Logger.Log("FirstCheck: \n" + condition, "For.Condition");
 
         while (condition)
         {
@@ -114,11 +114,11 @@ public partial class Interpreter
 
             ExecuteStatement(forNode.Statement);
             condition = (bool)EvaluateExpression(forNode.Condition);
-            Logger.Log("FirstCheck: \n" + condition, "For.Condition", ConsoleColor.Magenta);
+            Logger.Log("FirstCheck: \n" + condition, "For.Condition");
         }
 
         RemoveLastBlockFromContext();
-        Logger.Log("Ended", "For", ConsoleColor.Magenta);
+        Logger.Log("Ended", "For");
 
     }
 

@@ -26,6 +26,13 @@ public class FunctionNode : ASTNode
 
     public override string GetTree(string indent = "")
     {
-        return ASTGetTreeBuilder.Build(nameof(FunctionNode), [Name, IsStatic, Parameters, Body], indent);
+        return DebugIndent($"""
+                            FunctionNode:
+                                Name: {Name}
+                                IsStatic: {IsStatic}
+                                IsPrivate: {IsPrivate}
+                                Parameters: [{string.Join(",\n", Parameters.Select(x => x.GetTree("\t\t")))}]
+                                Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t\t")))}]
+                            """, indent);
     }
 }

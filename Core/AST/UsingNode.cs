@@ -6,7 +6,10 @@ public class UsingNode : ASTNode
     
     public override string GetTree(string indent = "")
     {
-        return CallPath.GetTree(indent);
+        return DebugIndent($"""
+                            UsingNode:
+                                CallPath: {CallPath.GetTree("\t\t")}
+                            """, indent);
     }
 
     public override ASTNode Clone()

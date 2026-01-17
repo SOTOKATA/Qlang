@@ -20,6 +20,11 @@ public class IfNode : ASTBlock
 
     public override string GetTree(string indent = "")
     {
-        return ASTGetTreeBuilder.Build(nameof(IfNode), [Condition, ThenBlock, ElseBlock], indent);
+        return DebugIndent($"""
+                            IfNode:
+                                Condition: {Condition.GetTree("\t\t")}
+                                ThenBlock: [{string.Join(",\n", ThenBlock.Select(x => x.GetTree("\t\t")))}]
+                                ElseBlock: [{string.Join(",\n", ElseBlock.Select(x => x.GetTree("\t\t")))}]
+                            """, indent);
     }
 }

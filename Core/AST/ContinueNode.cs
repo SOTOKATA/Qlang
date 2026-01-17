@@ -10,6 +10,8 @@ public class ContinueNode : ASTNode
 
     public override string GetTree(string indent = "")
     {
-        return ASTGetTreeBuilder.Build(nameof(ContinueNode), ["is continue"], indent);
+        return DebugIndent($"""
+                            ContinueNode
+                            """, indent);
     }
 }

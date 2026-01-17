@@ -20,7 +20,7 @@ public class Parser
         ProgramNode program = new();
 
         Logger.SetLoggerPath(Path.Combine("Logs", "Debug", "debug_parser.log"));
-        Logger.Warn("----------- Parser -----------");
+        Logger.Log("----------- Parser -----------");
 
         while (!IsAtEnd())
         {
@@ -49,13 +49,13 @@ public class Parser
 
         if (Check(Tokens.Keyword) && Current().Value == Keywords.StaticModificator)
         {
-            Logger.Warn("IsStatic = true");
+            Logger.Log("IsStatic = true");
             isStatic = true;
             Advance();
         }
         if (Check(Tokens.Keyword) && Current().Value == Keywords.PrivateModificator)
         {
-            Logger.Warn("IsPrivate = true");
+            Logger.Log("IsPrivate = true");
             isPrivate = true;
             Advance();
         }
@@ -423,8 +423,8 @@ public class Parser
 
         List<ASTNode> elseBlock = [];
 
-        Logger.Warn(Current().TokenType.ToString());
-        Logger.Warn(Current().Value);
+        Logger.Log(Current().TokenType.ToString());
+        Logger.Log(Current().Value);
         if (Check(Tokens.Keyword) && Current().Value == Keywords.ElseBlock)
         {
             Advance();
@@ -888,7 +888,7 @@ public class Parser
         // parse: '('expression')'
         if (Check(Tokens.LParen))
         {
-            Logger.Warn("Parsing parents");
+            Logger.Log("Parsing parents");
             // Advance '('
             Expect(Tokens.LParen);
             var parsed = ParseExpression();
@@ -1214,5 +1214,15 @@ public class Parser
             throw new QlangCompileException($"Expected '{value}', got '{Current().Value}'", (IsAtEnd() ? 0 : Current().Line + 1), "Parser", Current().SourceFile);
 
         return Advance();
+    }
+    
+    public static List<ClassNode> GetClassesFromNamespaceRecursively(NamespaceNode @namespace)
+    {
+        var list = @namespace.Body.OfType<ClassNode>().ToList();
+        
+        if (@namespace.Body.OfType<NamespaceNode>().ToList().Count > 0)
+            list.AddRange(GetClassesFromNamespaceRecursively(@namespace));
+        
+        return list;
     }
 }
