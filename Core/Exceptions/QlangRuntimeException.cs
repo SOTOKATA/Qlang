@@ -7,20 +7,27 @@ public class QlangRuntimeException : Exception
 {
     private int Line { get; }
     private int Column { get; }
-    private string? SourceFile { get; }
+    private string SourceFile { get; }
     private new List<string> StackTrace { get; }
 
     public QlangRuntimeException(
         string message, 
-        ASTNode? node, 
+        int line, string source, 
         List<string>? stackTrace = null) 
         : base(message)
     {
-        if (node is not null)
-        {
-            Line = node.Line;
-            SourceFile = node.SourceFile;
-        }
+        Line = line;
+        SourceFile = source;
+
+        StackTrace = stackTrace ?? [];
+    }
+    
+    public QlangRuntimeException(
+        string message, List<string>? stackTrace = null) 
+        : base(message)
+    {
+        Line = -1;
+        SourceFile = "";
 
         StackTrace = stackTrace ?? [];
     }

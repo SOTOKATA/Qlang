@@ -1,3 +1,4 @@
+using Core;
 using Core.AST;
 using Core.Debug;
 
@@ -62,13 +63,13 @@ public partial class Interpreter
 
             if (isLoop)
             {
-                if (statement is ContinueNode || _isContinueKeyword)
+                if ((statement is KeywordNode knode && knode.Value == Keywords.ContinueKeyword) || _isContinueKeyword)
                 {
                     _isContinueKeyword = false;
                     return false;
                 }
 
-                if (statement is BreakNode || _isBreakKeyword)
+                if ((statement is KeywordNode node && node.Value == Keywords.BreakKeyword) || _isBreakKeyword)
                 {
                     _isBreakKeyword = false;
                     return true;
@@ -78,10 +79,10 @@ public partial class Interpreter
             {
                 switch (statement)
                 {
-                    case BreakNode:
+                    case KeywordNode node when node.Value == Keywords.BreakKeyword:
                         _isBreakKeyword = true;
                         return true;
-                    case ContinueNode:
+                    case KeywordNode node when node.Value == Keywords.ContinueKeyword:
                         _isContinueKeyword = true;
                         return true;
                 }
@@ -141,7 +142,7 @@ public partial class Interpreter
         AddBlockToContext(switchNode);
 
         var block = switchNode.DefaultBlock;
-        foreach (var pair in from pair in switchNode.CaseBlocks let binOp = new BinaryOperationNode
+        foreach (var pair in from pair in switchNode.CaseBlocks let binOp = new BinaryOperationNode(pair.Line, pair.SourceFileId)
                  {
                      Left = pair.Condition,
                      Right = switchNode.Condition,

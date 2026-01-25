@@ -1,17 +1,20 @@
-﻿using Core.AST;
+﻿using Core;
+using Core.AST;
 using Core.Exceptions;
 
 namespace Compiler;
 
-public static class Validator
+public class Validator(SourceFileTable sourceFileTable)
 {
-    public static void CheckValidate(ProgramNode program)
+    private SourceFileTable _sourceFileTable = sourceFileTable;
+    
+    public void CheckValidate(ProgramNode program)
     {
         CheckDuplicate(program);
     }
     
     
-    private static void CheckDuplicate(ProgramNode program)
+    private void CheckDuplicate(ProgramNode program)
     {
         var classes = program.Statements
             .OfType<ClassNode>()
@@ -20,14 +23,6 @@ public static class Validator
         foreach (var @namespace in program.Statements.OfType<NamespaceNode>())
             classes.AddRange(Parser.GetClassesFromNamespaceRecursively(@namespace));
 
-        var @class = new ClassNode
-        {
-            Name = "0",
-            Body = program.Statements.OfType<FunctionNode>().Cast<ASTNode>().ToList()
-        };
-        
-        classes.Add(@class);
-        
         CheckDuplicateClasses(classes);
 
         foreach (var classNode in classes)
@@ -37,7 +32,7 @@ public static class Validator
         }
     }
 
-    private static void CheckDuplicateClasses(List<ClassNode> classes)
+    private void CheckDuplicateClasses(List<ClassNode> classes)
     {
         var duplicateGroups = classes
             .GroupBy(f => new {
@@ -46,10 +41,10 @@ public static class Validator
             .Where(g => g.Count() > 1);
 
         foreach (var group in duplicateGroups)
-            throw new QlangCompileException($"Duplicate class found: '{group.Key.Name}'", group.First().Line, "Validator",  group.First().SourceFile);
+            throw new QlangCompileException($"Duplicate class found: '{group.Key.Name}'", group.First().Line, "Validator",  _sourceFileTable[group.First().SourceFileId]);
     }
 
-    private static void CheckDuplicateFunctions(ClassNode @class)
+    private void CheckDuplicateFunctions(ClassNode @class)
     {
         var functions = @class.Body
             .OfType<FunctionNode>()
@@ -67,11 +62,11 @@ public static class Validator
                 $"Duplicate function found: '{group.Key.Name}' in class '{@class.Name}'",
                 group.First().Line,
                 "Validator",
-                group.First().SourceFile
+                _sourceFileTable[group.First().SourceFileId]
             );
     }
     
-    private static void CheckDuplicateAssignments(ClassNode @class)
+    private void CheckDuplicateAssignments(ClassNode @class)
     {
         var assignments = @class.Body
             .OfType<AssignmentNode>()
@@ -79,11 +74,11 @@ public static class Validator
 
         var duplicateGroups = assignments
             .GroupBy(f => new {
-                f.VariableName
+                VariableName = f.GetLastName()
             })
             .Where(g => g.Count() > 1);
 
         foreach (var group in duplicateGroups)
-            throw new QlangCompileException($"Duplicate assignment found: '{group.Key.VariableName}' in class '{@class.Name}'", group.First().Line, "Validator", group.First().SourceFile);
+            throw new QlangCompileException($"Duplicate assignment found: '{group.Key.VariableName}' in class '{@class.Name}'", group.First().Line, "Validator", _sourceFileTable[group.First().SourceFileId]);
     }
 }

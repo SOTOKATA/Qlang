@@ -1,8 +1,12 @@
-﻿namespace Core.AST;
+﻿using Newtonsoft.Json;
 
-public class SwitchCaseNode : ASTNode
+namespace Core.AST;
+
+public class SwitchCaseNode(int line, int sfId) : ASTNode(line, sfId)
 {
+    [JsonProperty("a")]
     public ASTNode Condition { get; set; }
+    [JsonProperty("b")]
     public List<ASTNode> CaseBlock { get; set; } = [];
     
     public override string GetTree(string indent = "")
@@ -18,7 +22,7 @@ public class SwitchCaseNode : ASTNode
 
     public override ASTNode Clone()
     {
-        return new SwitchCaseNode
+        return new SwitchCaseNode(Line,  SourceFileId)
         {
             Condition = Condition.Clone(),
             CaseBlock = CaseBlock.Select(node => node.Clone()).ToList()

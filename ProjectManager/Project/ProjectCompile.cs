@@ -27,12 +27,12 @@ public partial class Project
 
     public void Compile()
     {
-        _qlang.Compile(Path.Combine(_settings.GetString(ProjectSettings.RootPath), _settings.GetString(ProjectSettings.MainFilePath)), _compileSettings.GetString(CompileSettings.OutputFilename));
+        _qlang.Compile(Path.Combine(_settings.GetString(ProjectSettings.RootPath), _settings.GetString(ProjectSettings.MainFilePath)), _compileSettings.GetString(CompileSettings.OutputFilename), _compileSettings.GetBool(CompileSettings.GZipCompress));
     }
 
     public void Run(List<string?>? args)
     {
-        if (_qlang.Compile(Path.Combine(_settings.GetString(ProjectSettings.RootPath), _settings.GetString(ProjectSettings.MainFilePath)), _compileSettings.GetString(CompileSettings.OutputFilename)))
+        if (_qlang.Compile(Path.Combine(_settings.GetString(ProjectSettings.RootPath), _settings.GetString(ProjectSettings.MainFilePath)), _compileSettings.GetString(CompileSettings.OutputFilename), _compileSettings.GetBool(CompileSettings.GZipCompress)))
             _qlang.Run(args, _compileSettings.GetString(CompileSettings.OutputFilename));
     }
 }

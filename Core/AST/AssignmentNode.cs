@@ -1,67 +1,53 @@
+using Newtonsoft.Json;
+
 namespace Core.AST;
 
-public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool isNew) : ASTNode
+public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool isNew, int line, int sfId) : ASTNode(line, sfId)
 {
+    [JsonProperty("a")]
     public bool IsNew { get; set; } = isNew;
 
-    public string? VariableName { get; set; }
+    [JsonProperty("b")]
+    public List<ASTNode> Path { get; set; }
 
-    public List<ASTNode>? Path { get; set; }
-
+    [JsonProperty("c")]
     public ASTNode? Value { get; set; }
     
+    [JsonProperty("d")]
     public CallNode? Type { get; set; }
 
+    [JsonProperty("e")]
     public bool IsStatic { get; set; } = isStatic;
 
+    [JsonProperty("f")]
     public bool IsPrivate { get; set; } = isPrivate;
 
+    [JsonProperty("g")]
     public bool IsConst { get; set; } = isConst;
 
-    public bool IsPathAssignment => Path is { Count: > 0 };
-
-    public string GetAssignmentTarget()
-    {
-        if (IsPathAssignment)
-        {
-            return string.Join(".", Path!.Select(p => p switch
-            {
-                ObjectPointerNode obj => obj.Name,
-                FunctionPointerNode func => $"{func.Name}()",
-                _ => p.GetType().Name
-            }));
-        }
-        return VariableName ?? "unknown";
-    }
+    public string GetLastName() => (Path[^1] as ObjectPointerNode)!.Name!;
 
     public override ASTNode Clone()
     {
-        return new AssignmentNode(IsStatic, IsPrivate, IsConst, IsNew)
+        return new AssignmentNode(IsStatic, IsPrivate, IsConst, IsNew, line, sfId)
         {
-            VariableName = VariableName,
-            Path = Path?.Select(node => node.Clone()).ToList(),
+            Path = Path.Select(node => node.Clone()).ToList(),
             Value = Value?.Clone(),
-            Type = Type,
-            IsStatic = IsStatic,
-            IsPrivate = IsPrivate,
-            IsConst = IsConst,
-            IsNew = IsNew, 
-            SourceFile =  SourceFile, 
-            Line =  Line 
+            Type = Type
         };
     }
 
     public override string GetTree(string indent = "")
     {
         return DebugIndent($"""
-                            VariableName (Legacy): {VariableName}
-                            Path: [{string.Join(",\n", Path?.Select(x => x.GetTree("\t\t")) ?? ["<not_exists>"])}]
-                            Value: {Value?.GetTree("\t\t") ?? "<undefined>"}
-                            Type: {Type?.GetTree("\t\t")}
-                            IsStatic: {IsStatic}
-                            IsPrivate: {IsPrivate}
-                            IsConst: {IsConst}
-                            IsNew: {IsNew}
+                            VariableNode:
+                                Path: [{string.Join(",\n", Path?.Select(x => x.GetTree("\t\t")) ?? ["<not_exists>"])}]
+                                Value: {Value?.GetTree("\t\t") ?? "<undefined>"}
+                                Type: {Type?.GetTree("\t\t")}
+                                IsStatic: {IsStatic}
+                                IsPrivate: {IsPrivate}
+                                IsConst: {IsConst}
+                                IsNew: {IsNew}
                             """, indent);
     }
 }

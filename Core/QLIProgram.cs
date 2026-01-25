@@ -1,15 +1,22 @@
 ﻿using Core.AST;
-using Core.Native;
+using Newtonsoft.Json;
 
 namespace Core;
 
 public class QLIProgram
 {
+    [JsonProperty("a")]
     public ProgramNode ProgramNode { get; init; }
     
-    public Dictionary<string, string> StringDictionary { get; init; }
+    [JsonProperty("b")]
+    public List<string> StringList { get; init; }
 
-    public Dictionary<string, object> NumberDictionary { get; init; }
+    [JsonProperty("c")]
+    public List<double> NumberList { get; init; }
     
+    [JsonProperty("d")]
+    public SourceFileTable SourceFileTable { get; init; }
+    
+    [JsonProperty("e")]
     public List<QLIProgramLib> ExternalLibraries { get; set; }
 }

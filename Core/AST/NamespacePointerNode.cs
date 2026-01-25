@@ -1,10 +1,11 @@
-﻿namespace Core.AST;
+﻿using Newtonsoft.Json;
 
-public class NamespacePointerNode(string name) : ASTNode
+namespace Core.AST;
+
+public class NamespacePointerNode(string name, int line, int sfId) : ASTNode(line, sfId)
 {
+    [JsonProperty("a")]
     public string Name { get; set; } = name;
-    
-    
     
     public override string GetTree(string indent = "")
     {
@@ -16,10 +17,6 @@ public class NamespacePointerNode(string name) : ASTNode
 
     public override ASTNode Clone()
     {
-        return new NamespacePointerNode(Name)
-        {
-            SourceFile =  SourceFile,
-            Line =  Line,
-        };
+        return new NamespacePointerNode(Name,  Line, SourceFileId);
     }
 }

@@ -1,22 +1,25 @@
-﻿namespace Core.AST;
+﻿using Newtonsoft.Json;
 
-public class WhileNode : ASTBlock
+namespace Core.AST;
+
+public class WhileNode(int line, int sfId) : ASTBlock(line, sfId)
 {
+    [JsonProperty("a")]
     public ASTNode Condition { get; set; }
 
+    [JsonProperty("b")]
     public List<ASTNode> Body { get; set; } = [];
     
+    [JsonProperty("c")]
     public bool IsDoWhile { get; set; }
 
     public override ASTNode Clone()
     {
-        return new WhileNode
+        return new WhileNode(Line,  SourceFileId)
         {
             Condition = Condition.Clone(), 
             Body = Body.Select(node => node.Clone()).ToList(),
-            IsDoWhile = IsDoWhile,
-            SourceFile =  SourceFile, 
-            Line =  Line 
+            IsDoWhile = IsDoWhile
         };
     }
 

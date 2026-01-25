@@ -36,8 +36,16 @@ public static class CommandManager
                 case ["info"]:
                     WriteProjectInfo();
                     return;
-                case ["echo", ..]:
-                    ConsoleLogger.Info(string.Join(" ", args.Skip(1)));
+                case ["sysdir"]:
+                    ConsoleLogger.Info("System directory: " + Path.GetDirectoryName(Environment.ProcessPath));
+                    return;
+                case ["libdir"]:
+                    var dir = Path.Combine(Path.GetDirectoryName(Environment.ProcessPath) ?? "", "lib");
+
+                    if (!Directory.Exists(dir))
+                        throw new ProjectException("System library directory is not found.");
+                    
+                    ConsoleLogger.Info("System library directory: " + dir);
                     return;
                 case []:
                     Qlang();
@@ -171,6 +179,7 @@ public static class CommandManager
     private static void Help()
     {
         Console.WriteLine("List of all commands:");
+        Console.WriteLine("Project manager:");
         TableCreator.WriteTable(new ConsoleTable(
             [
                 [new TableCell("Commands"), new TableCell("Params"), new TableCell("Description")],
@@ -201,6 +210,28 @@ public static class CommandManager
                     new TableCell("info", ConsoleColor.Yellow),
                     new TableCell(""),
                     new TableCell("Write's information about current project")
+                ]
+            ]
+        ));
+        
+        Console.WriteLine("\nQlang manager:");
+        TableCreator.WriteTable(new ConsoleTable(
+            [
+                [new TableCell("Commands"), new TableCell("Params"), new TableCell("Description")],
+                [
+                    new TableCell("update", ConsoleColor.Yellow),
+                    new TableCell(""),
+                    new TableCell("Checks for updates and updates the program if available")
+                ],
+                [
+                    new TableCell("libdir", ConsoleColor.Yellow),
+                    new TableCell(""),
+                    new TableCell("Open the standard library directory")
+                ],
+                [
+                    new TableCell("sysdir", ConsoleColor.Yellow),
+                    new TableCell(""),
+                    new TableCell("Open the program directory")
                 ]
             ]
         ));

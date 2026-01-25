@@ -1,7 +1,10 @@
-﻿namespace Core.AST;
+﻿using Newtonsoft.Json;
 
-public class ParensNode : ASTNode
+namespace Core.AST;
+
+public class ParensNode(int line, int sfId) : ASTNode(line, sfId)
 {
+    [JsonProperty("a")]
     public ASTNode? Statement { get; set; }
     
     public override string GetTree(string indent = "")
@@ -14,11 +17,9 @@ public class ParensNode : ASTNode
 
     public override ASTNode Clone()
     {
-        return new ParensNode
+        return new ParensNode(Line, SourceFileId)
         {
-            Statement = Statement?.Clone(),
-            SourceFile =  SourceFile, 
-            Line =  Line 
+            Statement = Statement?.Clone()
         };
     }
 }

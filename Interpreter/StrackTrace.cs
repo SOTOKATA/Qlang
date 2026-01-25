@@ -6,7 +6,7 @@ public partial class Interpreter
     {
         return (from context in _contextStack.Reverse()
             let location = context.CurrentNode != null
-                ? $"{context.CurrentNode.SourceFile}:{context.CurrentNode.Line}"
+                ? $"{context.CurrentNode.SourceFileId}:{context.CurrentNode.Line}"
                 : "unknown"
             let funcName = context.Function?.Name ?? "global"
             let className = context.Class?.Name

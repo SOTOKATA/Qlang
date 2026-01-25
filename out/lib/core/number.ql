@@ -7,11 +7,10 @@ class Number: {
     const MIN_VALUE = "-1.7976931348623157E+308";
     const MAX_VALUE = "1.7976931348623157E+308";
 
-    // check if 'var' is numbers
+    // check if 'var' is number
     function isNumber(let var): {
         return _native("std.number.try_parse", var);
     }
-
 
     // get random number with range 'min' to 'max'
     function randInt(let min, let max): {
@@ -27,7 +26,7 @@ class Number: {
             std::Throw.exception("Minimum can't be more than maximum");
         }
 
-        return Parser.asNumber(_native("std.number.random", min, max));
+        return std::Parser.asNumber(_native("std.number.random", min, max));
     }
 
     // Get int styled number ('3.421' to '3')

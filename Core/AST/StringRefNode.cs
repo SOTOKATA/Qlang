@@ -1,14 +1,15 @@
-﻿namespace Core.AST;
+﻿using Newtonsoft.Json;
 
-public class StringRefNode : ASTNode
+namespace Core.AST;
+
+public class StringRefNode(int line, int sfId) : ASTNode(line, sfId)
 {
+    [JsonProperty("a")]
     public int Index { get; set; }
 
-    public override ASTNode Clone() => new StringRefNode
+    public override ASTNode Clone() => new StringRefNode(line, SourceFileId)
     {
-        Index = Index,
-        SourceFile =  SourceFile, 
-        Line =  Line 
+        Index = Index
     };
 
     public override string GetTree(string indent = "")

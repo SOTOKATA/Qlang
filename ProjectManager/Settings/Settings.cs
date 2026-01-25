@@ -78,6 +78,20 @@ public abstract class Settings(string path, Dictionary<string, (object? @object,
         
         return (string)value.@object!;
     }
+    
+    public bool GetBool(string param)
+    {
+        if (Dictionary is null)
+            throw new ProjectException("Settings dictionary is not set.");
+        
+        if (!Dictionary.TryGetValue(param, out var value))
+            throw new ProjectException($"Key '{param}' did not exist.\nPath: {path}");
+        
+        if (value.type != typeof(bool))
+            throw new ProjectException($"Type of key '{param}' is not equal to type of '{(value.@object ?? "null")}'");
+        
+        return (bool)value.@object!;
+    }
 
     protected Dictionary<string, (object? @object, Type type)>? Dictionary = dict;
 }

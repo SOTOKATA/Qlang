@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Globalization;
+using Newtonsoft.Json;
 
 namespace Core;
 
@@ -6,9 +7,11 @@ public static class Json
 {
     private static readonly JsonSerializerSettings JsonSettings = new()
     {
-        Formatting = Formatting.Indented,
         TypeNameHandling = TypeNameHandling.Auto,
-        TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple
+        TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
+        DefaultValueHandling = DefaultValueHandling.Ignore,
+        NullValueHandling = NullValueHandling.Ignore,
+        Culture = CultureInfo.InvariantCulture
     };
     
     public static string Serialize(object obj)

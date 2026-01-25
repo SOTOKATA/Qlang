@@ -6,7 +6,7 @@ namespace meta: {
         private function _isClass(const object):
             return _native("std.meta.is_dynamic_class", object);
 
-        function getMethodListOf(const object): {
+        function getFunctionListOf(const object): {
             if (_isClass(object) == false):
                 std::Throw.exception("Object is not a class");
 

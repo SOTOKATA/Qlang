@@ -1,7 +1,10 @@
-﻿namespace Core.AST;
+﻿using Newtonsoft.Json;
 
-public class ObjectPointerNode : ASTNode
+namespace Core.AST;
+
+public class ObjectPointerNode(int line, int sfId) : ASTNode(line, sfId)
 {
+    [JsonProperty("a")]
     public string? Name;
     
     public override string GetTree(string indent = "")
@@ -15,11 +18,9 @@ public class ObjectPointerNode : ASTNode
 
     public override ASTNode Clone()
     {
-        return new ObjectPointerNode
+        return new ObjectPointerNode(Line,  SourceFileId)
         {
-            Name = Name,
-            SourceFile =  SourceFile, 
-            Line =  Line 
+            Name = Name
         };
     }
 }

@@ -21,9 +21,17 @@ public static class Program
             return;
         }
 
-        var content = File.ReadAllText(programPath);
-        
-        var qliProgram = Json.Deserialize<QLIProgram>(content);
+        QLIProgram? qliProgram;
+
+        // If trying to read .qli file as JSON will throw exception, will use GZip decompress
+        try
+        {
+            qliProgram = Json.Deserialize<QLIProgram>(File.ReadAllText(programPath));
+        }
+        catch
+        {
+            qliProgram = Json.Deserialize<QLIProgram>(GZip.Decompress(File.ReadAllBytes(programPath)));
+        }
 
         if (qliProgram is null)
         {
@@ -33,9 +41,9 @@ public static class Program
 
         try
         {
-            new Interpreter.Interpreter(qliProgram.StringDictionary,
-                qliProgram.NumberDictionary,
-                LoadDependencies()).Execute(qliProgram.ProgramNode, args.ToList()!);
+            new Interpreter.Interpreter(qliProgram.StringList,
+                qliProgram.NumberList,
+                LoadDependencies(), qliProgram.SourceFileTable).Execute(qliProgram.ProgramNode, args.ToList()!);
         }
         catch (QlangRuntimeException runtime)
         {

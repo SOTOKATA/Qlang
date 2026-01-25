@@ -9,6 +9,11 @@ public class Variable(string name, object? value, bool isStatic, bool isPrivate,
         return Value?.ToString();       
     }
 
+    public static Variable FromAssignmentNode(AssignmentNode assignNode, object? value)
+    {
+        return new Variable(assignNode.GetLastName(), value, assignNode.IsStatic, assignNode.IsPrivate, assignNode.IsConst, assignNode.Type);
+    }
+
     public string Name { get; set; } = name;
     public object? Value { get; set; } = value;
 

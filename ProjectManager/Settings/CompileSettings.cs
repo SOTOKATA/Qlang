@@ -8,11 +8,13 @@ public class CompileSettings : Settings
         {
             { OutputFilename, ("program", typeof(string)) },
             { DebugMode, (false, typeof(bool)) },
+            { GZipCompress, (true, typeof(bool)) },
         };
     }
 
     public static string OutputFilename => "output_filename";
     public static string DebugMode => "debug_mode";
+    public static string GZipCompress => "gzip_compress";
 
     public static string JsonFileName => "compile.settings.json";
 }

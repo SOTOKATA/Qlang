@@ -1,20 +1,23 @@
-﻿namespace Core.AST;
+﻿using Newtonsoft.Json;
 
-public class ClassNode : ASTNode
+namespace Core.AST;
+
+public class ClassNode(int line, int sfId) : ASTNode(line, sfId)
 {
+    [JsonProperty("a")]
     public string Name { get; set; }
+    [JsonProperty("b")]
     public string Extends { get; set; }
+    [JsonProperty("c")]
     public List<ASTNode> Body { get; set; }
 
     public override ASTNode Clone()
     {
-        return new ClassNode
+        return new ClassNode(Line, SourceFileId)
         {
             Name = Name, 
             Extends = Extends,
-            Body = Body.Select(node => node.Clone()).ToList(),
-            SourceFile =  SourceFile, 
-            Line =  Line 
+            Body = Body.Select(node => node.Clone()).ToList()
         };
     }
 

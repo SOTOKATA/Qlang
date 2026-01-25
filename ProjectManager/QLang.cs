@@ -9,18 +9,18 @@ namespace ProjectManager;
 public class QLang
 {
     private ProgramNode? _programNode;
-    private Dictionary<string, string> _stringDictionary = [];
-    private Dictionary<string, object> _numberDictionary = [];
+    private List<string> _stringList = [];
+    private List<double> _numberList = [];
 
-    public bool Compile(string path, string? filename = null)
+    public bool Compile(string path, string? filename = null, bool useGZipCompress = false)
     {
         var code = File.ReadAllText(path);
         Compiler.Compiler c = new();
 
         _programNode = c.Compile(path, code);
 
-        _stringDictionary = c.StringDictionary;
-        _numberDictionary = c.NumberDictionary;
+        _stringList = c.StringList;
+        _numberList = c.NumberList;
         
         var dirName = Path.GetDirectoryName(path);
         if (filename != null)
@@ -29,10 +29,11 @@ public class QLang
         SaveProgram(new QLIProgram
         {
             ProgramNode = _programNode,
-            StringDictionary = _stringDictionary,
-            NumberDictionary = _numberDictionary,
+            StringList = _stringList,
+            NumberList = _numberList,
             ExternalLibraries = c.DllDependencies,
-        }, path);
+            SourceFileTable = c.SourceFileTable,
+        }, path, useGZipCompress);
 
         return true;
     }
@@ -63,33 +64,34 @@ public class QLang
         }
     }
 
-    private static void SaveProgram(QLIProgram qliProgram, string filePath)
+    private static void SaveProgram(QLIProgram qliProgram, string filePath, bool useGZipCompress)
     {
-        var json = Json.Serialize(qliProgram);
-
         var pathToFile = Path.GetDirectoryName(filePath);
         
-        if (!Directory.Exists(Path.Combine(pathToFile ?? "", ProjectSettings.BuildDirectoryPath)))
-            Directory.CreateDirectory(Path.Combine(pathToFile ?? "", ProjectSettings.BuildDirectoryPath));
+        if (!Directory.Exists(Path.Combine(pathToFile ?? "", "build")))
+            Directory.CreateDirectory(Path.Combine(pathToFile ?? "", "build"));
 
-        SaveDependencies(qliProgram, Path.Combine(pathToFile ?? "", ProjectSettings.BuildDirectoryPath), Path.GetFileNameWithoutExtension(filePath));
+        SaveDependencies(qliProgram, Path.Combine(pathToFile ?? "", "build"), Path.GetFileNameWithoutExtension(filePath));
         
-        var path = Path.Combine(pathToFile ?? "", ProjectSettings.BuildDirectoryPath, Path.GetFileNameWithoutExtension(filePath) + ".resource.qli");
+        var path = Path.Combine(pathToFile ?? "", "build", Path.GetFileNameWithoutExtension(filePath) + ".resource.qli");
         
         if (!File.Exists(path))
             File.Create(path).Close();
         
-        File.Copy(Path.Combine(Path.GetDirectoryName(Environment.ProcessPath), "qli" + OS.GetExecutableExtension()), Path.Combine(pathToFile ?? "", ProjectSettings.BuildDirectoryPath, Path.GetFileNameWithoutExtension(filePath) + OS.GetExecutableExtension()), true);
+        File.Copy(Path.Combine(Path.GetDirectoryName(Environment.ProcessPath), "qli" + OS.GetExecutableExtension()), Path.Combine(pathToFile ?? "", "build", Path.GetFileNameWithoutExtension(filePath) + OS.GetExecutableExtension()), true);
         
-        File.WriteAllText(path, json);
+        if (useGZipCompress)
+            File.WriteAllBytes(path, GZip.Compress(Json.Serialize(qliProgram)));
+        else File.WriteAllText(path, Json.Serialize(qliProgram));
+        
     }
 
     public void Run(List<string?>? args, string filename)
     {
         // TODO: Runtime execution (by build/program.exe)
 
-        var exePath = Path.Combine(ProjectSettings.BuildDirectoryPath, filename + OS.GetExecutableExtension());
-        var resourcePath = Path.Combine(ProjectSettings.BuildDirectoryPath, filename + ".resource.qli");
+        var exePath = Path.Combine("build", filename + OS.GetExecutableExtension());
+        var resourcePath = Path.Combine("build", filename + ".resource.qli");
 
         if (!File.Exists(exePath) || !File.Exists(resourcePath))
             throw new ProjectException($"Files '{Path.GetFileName(exePath)}' and '{Path.GetFileName(resourcePath)}' is not found.\nProject is not compiled");

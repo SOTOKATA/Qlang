@@ -6,6 +6,8 @@ public static class QlSystemClasses
     public const string StringClassName = "String";
     public const string ObjectClassName = "Object";
     public const string ArrayClassName = "Array";
+    public const string NumberClassName = "Number";
+    public const string DictionaryClassName = "Dictionary";
 
-    public static List<string> GetClassNames() => [ StringClassName, ObjectClassName, ArrayClassName ];
+    public static List<string> GetClassNames() => [ StringClassName, ObjectClassName, ArrayClassName, NumberClassName, DictionaryClassName ];
 }

@@ -7,7 +7,7 @@ public class Token(Tokens token, int line, string value = "")
     
     // Debug variables
     public int Line = line;
-    public string SourceFile = "undefined";
+    public int SourceFileId = -12;
 
     public static string TokenToString(Tokens token)
     {

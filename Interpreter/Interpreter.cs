@@ -11,192 +11,61 @@ namespace Interpreter;
 
 public partial class Interpreter
 {
-    public Interpreter(Dictionary<string, string> stringDictionary, Dictionary<string, object> numberDictionary, NativeFunctionRegistry nativeFunctions)
+    public Interpreter(List<string> stringList, List<double> numberList, NativeFunctionRegistry nativeFunctions, SourceFileTable sourceFileTable)
     {
-        _stringDictionary = stringDictionary;
-        _numberDictionary = numberDictionary;
+        _stringList = stringList;
+        _numberList = numberList;
         _nativeFunctions = nativeFunctions;
+        _sourceFileTable = sourceFileTable;
+        _sourceFileTable.RebuildCache();
     }
+
+    private readonly SourceFileTable _sourceFileTable;
 
     private readonly NativeFunctionRegistry _nativeFunctions;
 
-    private readonly Dictionary<string, string> _stringDictionary;
+    private readonly List<string> _stringList;
 
-    private readonly Dictionary<string, object> _numberDictionary;
+    private readonly List<double> _numberList;
 
-    private readonly List<DynamicNamespace> _usingsList = [];
-
-    private readonly List<FunctionNode> _globalFunctions = [];
-    private readonly List<Variable> _globalVariables = [];
-
-    private readonly Dictionary<string, DynamicClass> _dynamicClasses = new();
-    
     private readonly Dictionary<string, DynamicNamespace> _dynamicNamespaces = new();
 
     private readonly Stack<ASTContext> _contextStack = new();
     private bool HasContext => _contextStack.Count > 0;
     private ASTContext CurrentContext => HasContext ? _contextStack.Peek() : null;
+    
+    public const string GlobalNamespaceName = "0global";
 
-    /// <summary>
-    /// Load program and starts execution
-    /// </summary>
-    /// <param name="program"></param>
-    /// <param name="args"></param>
-    /// <exception cref="QlangRuntimeException"></exception>
     public void Execute(ProgramNode program, List<string?>? args = null)
     {
         // Debug initialize
-        Logger.Initialize(true);
+        Logger.Initialize(false);
         Logger.SetLoggerPath(Path.Combine("debug_log_interpreter.txt"));
 
-        // Load classes, functions, namespaces
+        // Load namespaces
         foreach (var statement in program.Statements)
         {
-            switch (statement)
-            {
-                case ClassNode classNode:
-                    _dynamicClasses[classNode.Name] = ToDynamicClass(classNode);
-                    break;
-                case FunctionNode func:
-                    _globalFunctions.Add(func);
-                    break;
-                case NamespaceNode namespaceNode:
-                    if (_dynamicNamespaces.TryGetValue(namespaceNode.Name, out var baseNamespace))
-                    {
-                        var @namespace = ToDynamicNamespace(namespaceNode);
-
-                        baseNamespace.Classes.AddRange(@namespace.Classes);
-                        baseNamespace.Functions.AddRange(@namespace.Functions);
-
-                        foreach (var varPair in @namespace.Variables)
-                            baseNamespace.Variables[varPair.Key] = varPair.Value;
-                        
-                        _dynamicNamespaces[namespaceNode.Name] = baseNamespace;
-                    }
-                    else 
-                        _dynamicNamespaces[namespaceNode.Name] = ToDynamicNamespace(namespaceNode);
-                    break;
-                case AssignmentNode assignmentNode:
-                    _globalVariables.Add(new Variable(assignmentNode.VariableName, EvaluateExpression(assignmentNode.Value), assignmentNode.IsStatic, assignmentNode.IsPrivate, assignmentNode.IsConst));
-                    break;
-            }
-        }
-
-        // Load usings
-        foreach (var @using in program.Statements.OfType<UsingNode>())
-        {
-            var @object = ExecuteObjectCalls(@using.CallPath);
+            if (statement is not NamespaceNode namespaceNode)
+                    throw new QlangRuntimeException("Undefined structure." + statement, statement.Line, _sourceFileTable[statement.SourceFileId], GetStackTrace());
             
-            if (@object is not DynamicNamespace dynamicNamespace)
-                throw new QlangRuntimeException("Using can only refer to namespaces", @using,
-                    GetStackTrace());
-                    
-            if (!_usingsList.Contains(dynamicNamespace))
-                _usingsList.Add(dynamicNamespace);
+            _dynamicNamespaces[namespaceNode.Name] = ToDynamicNamespace(namespaceNode);
         }
 
         // Search main function
-        var function = _globalFunctions.FirstOrDefault(f => f.Name == "main");
+        var function = _dynamicNamespaces[GlobalNamespaceName].Functions.FirstOrDefault(f => f.Name == "main");
         if (function is null)
         {
             throw new QlangRuntimeException(
                 "No 'main' function found in program",
-                program.Statements.FirstOrDefault() ?? new ProgramNode(),
+                0, "",
                 []);
         }
         
         // Run main function (and send arguments if exists)
         if (function.Parameters.Count == 0)
-            ExecuteFunction(ToDynamicFunction(function), [], null, null);
+            ExecuteFunction(ToDynamicFunction(function), [], null, _dynamicNamespaces[GlobalNamespaceName]);
         else 
-            ExecuteFunction(ToDynamicFunction(function), [args?.Cast<object?>().ToList()], null, null);
-    }
-
-    /// <summary>
-    /// Convert static namespace to dynamic
-    /// </summary>
-    /// <param name="namespaceNode"></param>
-    /// <returns></returns>
-    private DynamicNamespace ToDynamicNamespace(NamespaceNode namespaceNode)
-    {
-        var dynamicNamespace = new DynamicNamespace(namespaceNode.Name)
-        {
-            IsPrivate = namespaceNode.IsPrivate
-        };
-
-        dynamicNamespace.Classes.AddRange(
-            namespaceNode.Body
-                .OfType<ClassNode>()
-                .Select(ToDynamicClass)
-        );
-        
-        dynamicNamespace.Namespaces.AddRange(
-            namespaceNode.Body.OfType<NamespaceNode>()
-                .Select(ToDynamicNamespace)
-            );
-
-        dynamicNamespace.Functions.AddRange(namespaceNode.Body.OfType<FunctionNode>());
-        
-        foreach (var assignmentNode in namespaceNode.Body.OfType<AssignmentNode>())
-                dynamicNamespace.Variables[assignmentNode.VariableName!] = new Variable(assignmentNode.VariableName!,
-                    EvaluateExpression(assignmentNode.Value), assignmentNode.IsStatic, assignmentNode
-                        .IsPrivate, assignmentNode.IsConst);
-        
-        return dynamicNamespace;
-    }
-
-    /// <summary>
-    /// Convert static class to dynamic
-    /// </summary>
-    /// <param name="classNode"></param>
-    /// <returns></returns>
-    private DynamicClass ToDynamicClass(ClassNode classNode)
-    {
-        DynamicClass dynamicClass = new(classNode.Name);
-
-        foreach (var assignmentNode in classNode.Body.OfType<AssignmentNode>())
-                dynamicClass.Variables[assignmentNode.VariableName] = new Variable(assignmentNode.VariableName,
-                    EvaluateExpression(assignmentNode.Value), assignmentNode.IsStatic, assignmentNode
-                    .IsPrivate, assignmentNode.IsConst);
-        
-        // Remove all AssignmentNodes from body
-        classNode.Body.RemoveAll(node => node is AssignmentNode);
-
-        dynamicClass.Body = classNode.Body;
-
-        return dynamicClass;
-    }
-
-    /// <summary>
-    /// Convert static function to dynamic
-    /// </summary>
-    /// <param name="functionNode"></param>
-    /// <returns></returns>
-    private DynamicFunction ToDynamicFunction(FunctionNode? functionNode)
-    {
-        if (functionNode is null)
-            throw new QlangRuntimeException("Internal: Undefined function", functionNode, GetStackTrace());
-        
-        DynamicFunction dynamicFunction = new(functionNode.Name);
-
-        foreach (var node in functionNode.Parameters)
-        {
-            dynamicFunction.Variables[node.VariableName] = new Variable(
-                node.VariableName,
-                EvaluateExpression(node.Value),
-                node.IsStatic,
-                node.IsPrivate,
-                node.IsConst,
-                node.Type);
-
-            dynamicFunction.Parameters.Add(node.VariableName);
-        }
-
-        dynamicFunction.Body = functionNode.Body;
-        dynamicFunction.IsStatic = functionNode.IsStatic;
-        dynamicFunction.IsPrivate = functionNode.IsPrivate;
-
-        return dynamicFunction;
+            ExecuteFunction(ToDynamicFunction(function), [args?.Cast<object?>().ToList()], null, _dynamicNamespaces[GlobalNamespaceName]);
     }
 
     private void AddContext(ASTContext context)
@@ -207,18 +76,18 @@ public partial class Interpreter
     /// <summary>
     /// Runs function
     /// </summary>
-    /// <param name="function"></param>
-    /// <param name="arguments"></param>
-    /// <param name="ownerClass"></param>
-    /// <param name="ownerNamespace"></param>
+    /// <param name="function">dynamic function to execute</param>
+    /// <param name="arguments">argument (similar to other arguments in other languages)</param>
+    /// <param name="ownerClass">owner class if exists (required for context)</param>
+    /// <param name="ownerNamespace">owner namespace if exists (required for context)</param>
     /// <returns></returns>
-    /// <exception cref="QlangRuntimeException"></exception>
+    /// <exception cref="QlangRuntimeException">will call exception if arguments is not valid or during execution function expcetion will occur</exception>
     private object? ExecuteFunction(DynamicFunction? function, List<object?> arguments, DynamicClass? ownerClass, DynamicNamespace? ownerNamespace)
     {
         if (function is null)
             return null;
 
-        Logger.Log($"'{function.Name}'({string.Join(", ", arguments)})");
+        Logger.Log($"EXECF'{function.Name}'({string.Join(", ", arguments)})");
         Logger.Log($"Function:\nName={function.Name}\nArguments={string.Join(", ", arguments)}");
 
         var contextClass = ownerClass ?? (HasContext ? CurrentContext.Class : null);
@@ -235,7 +104,7 @@ public partial class Interpreter
                     var var = function.Variables[function.Parameters[i]];
 
                     if (var.Type is not null && Typeof(var.Type) != Typeof(arguments[i]))
-                        throw new QlangRuntimeException($"The type of param is '{(Typeof(arguments[i]) ?? "<null>")}' but must be '{Typeof(var.Type)}'", null, GetStackTrace());
+                        throw new QlangRuntimeException($"The type of param is '{(Typeof(arguments[i]) ?? "<null>")}' but must be '{Typeof(var.Type)}'", GetStackTrace());
                     
                     function.Variables[function.Parameters[i]] = new Variable(
                         function.Parameters[i],
@@ -245,8 +114,7 @@ public partial class Interpreter
                         var.IsConst);
                 }
             else
-                throw new QlangRuntimeException("The number of arguments must be equal to the number of params",
-                    null, GetStackTrace());
+                throw new QlangRuntimeException("The number of arguments must be equal to the number of params", GetStackTrace());
 
             _return = false;
             _isBreakKeyword = false;
@@ -268,7 +136,7 @@ public partial class Interpreter
             _return = false;
             _isBreakKeyword = false;
             _isContinueKeyword = false;
-            Logger.Log("Return:\nValue=" + _returnValue);
+            Logger.Log($"({function.Name}) Return:\nValue=" + _returnValue);
             return _returnValue;
         }
         finally
@@ -311,217 +179,100 @@ public partial class Interpreter
                 break;
 
             default:
-                throw new QlangRuntimeException($"Unknown statement type: {statement.GetType()}", statement, GetStackTrace());
+                throw new QlangRuntimeException($"Unknown statement type: {statement.GetType()}", statement.Line, _sourceFileTable[statement.SourceFileId], GetStackTrace());
         }
     }
 
-    private void AssignmentNode(AssignmentNode assign)
+    private void AssignmentNode(AssignmentNode assignNode)
     {
         if (_contextStack.Count == 0)
             return;
 
-        var value = EvaluateExpression(assign.Value);
+        var value = EvaluateExpression(assignNode.Value);
 
-        // Handle path-based assignments (e.g., object.property = value)
-        if (assign.IsPathAssignment)
-        {
-            AssignToPath(assign.Path!, value, assign);
-            return;
-        }
+        var path = assignNode.Path;
 
-        if (value is DynamicClass dynamicClass)
-            dynamicClass.Name = assign.VariableName;
-
-        // Context class
-        if (CurrentContext.Class != null)
-        {
-            if (CurrentContext.Class.Variables.TryGetValue(assign.VariableName, out var var))
-            {
-                if (var.IsConst)
-                    throw new QlangRuntimeException($"Cannot re-assign const variable '{assign.VariableName}'",
-                        assign, GetStackTrace());
-
-                CurrentContext.Class.Variables[var.Name] = new Variable(
-                    var.Name,
-                    value,
-                    var.IsStatic,
-                    var.IsPrivate,
-                    var.IsConst);
-                return;
-            }
-        }
-
-        // Context block
-        if (CurrentContext.Blocks.Count > 0)
-        {
-            for (var i = CurrentContext.Blocks.Count - 1; i >= 0; i--)
-            {
-                if (!CurrentContext.Blocks[i].Variables.TryGetValue(assign.VariableName, out var var))
-                    continue;
-
-                if (var.IsConst)
-                    throw new QlangRuntimeException($"Cannot re-assign const variable '{assign.VariableName}'",
-                        assign, GetStackTrace());
-
-                CurrentContext.Blocks[i].Variables[var.Name] = new Variable(
-                    var.Name,
-                    value,
-                    var.IsStatic,
-                    var.IsPrivate,
-                    var.IsConst);
-                return;
-            }
-
-            if (CurrentContext.Blocks.Count > 0 && assign.IsNew)
-            {
-                CurrentContext.Blocks[^1].Variables[assign.VariableName] = new Variable(
-                    assign.VariableName,
-                    value,
-                    assign.IsStatic,
-                    assign.IsPrivate,
-                    assign.IsConst);
-                return;
-            }
-        }
-
-        // Context function
-        if (CurrentContext.Function != null)
-        {
-            if (CurrentContext.Function.Variables.TryGetValue(assign.VariableName, out var var))
-            {
-                if (var.IsConst)
-                    throw new QlangRuntimeException($"Cannot re-assign const variable '{assign.VariableName}'",
-                        assign, GetStackTrace());
-
-                CurrentContext.Function.Variables[var.Name] = new Variable(
-                    var.Name,
-                    value,
-                    var.IsStatic,
-                    var.IsPrivate,
-                    var.IsConst);
-                return;
-            }
-
-            if (assign.IsNew)
-            {
-                CurrentContext.Function.Variables[assign.VariableName] = new Variable(
-                    assign.VariableName,
-                    value,
-                    assign.IsStatic,
-                    assign.IsPrivate,
-                    assign.IsConst);
-                return;
-            }
-        }
-
-        if (CurrentContext.Namespace != null)
-        {
-            if (CurrentContext.Namespace.Variables.TryGetValue(assign.VariableName, out var var))
-            {
-                if (var.IsConst)
-                    throw new QlangRuntimeException($"Cannot re-assign const variable '{assign.VariableName}'",
-                        assign, GetStackTrace());
-
-                CurrentContext.Namespace.Variables[var.Name] = new Variable(
-                    var.Name,
-                    value,
-                    var.IsStatic,
-                    var.IsPrivate,
-                    var.IsConst);
-                return;
-            }
-
-            if (assign.IsNew)
-            {
-                CurrentContext.Namespace.Variables[assign.VariableName] = new Variable(
-                    assign.VariableName,
-                    value,
-                    assign.IsStatic,
-                    assign.IsPrivate,
-                    assign.IsConst);
-                return;
-            }
-        }
-        
-        var globalVar = _globalVariables.FirstOrDefault(v => v.Name == assign.VariableName);
-        if (globalVar != null && !assign.IsNew)
-        {
-            if (globalVar.IsConst)
-                throw new QlangRuntimeException($"Cannot re-assign const variable '{assign.VariableName}'",
-                    assign, GetStackTrace());
-            
-            globalVar.Value = value;
-            _globalVariables[_globalVariables.IndexOf(globalVar)] = globalVar;
-            return;
-        }
-            
-        throw new QlangRuntimeException($"The variable definition is incorrect or the variable has not been created (Variable: '{assign.VariableName}')", assign, GetStackTrace());
-    }
-
-    private void AssignToPath(List<ASTNode> path, object value, AssignmentNode assignNode)
-    {
         if (path.Count == 0)
-            throw new QlangRuntimeException("Assignment path cannot be empty", assignNode, GetStackTrace());
+            throw new QlangRuntimeException("Assignment path cannot be empty", assignNode.Line, _sourceFileTable[assignNode.SourceFileId], GetStackTrace());
 
-        var lastNode = path[^1];
+        var lastNode = (ObjectPointerNode)path[^1];
 
-        var callNode = new CallNode
+        object? currentObject = null;
+
+        if (path.Count > 1)
         {
-            Objects = path.SkipLast(1).ToList(), 
-            Arguments = path.SkipLast(1).ElementAt(^1) is FunctionPointerNode ptr ? ptr.Arguments : default,
-            Line =  lastNode.Line,
-            SourceFile = lastNode.SourceFile,
-        };
+            var callNode = new CallNode(lastNode.Line, lastNode.SourceFileId)
+            {
+                Objects = path.SkipLast(1).ToList(),
+                Arguments = path.SkipLast(1).ElementAt(^1) is FunctionPointerNode ptr ? ptr.Arguments : default
+            };
 
-        var currentObject = ExecuteObjectCalls(callNode);
-
-        switch (lastNode)
-        {
-            case ObjectPointerNode objPtr:
-                if (currentObject is DynamicClass targetClass)
-                {
-                    if (targetClass.Variables.TryGetValue(objPtr.Name, out var existingVar))
-                    {
-                        if (existingVar.IsConst)
-                            throw new QlangRuntimeException($"Cannot re-assign const property '{objPtr.Name}'", assignNode, GetStackTrace());
-                        if (existingVar.IsPrivate)
-                            throw new QlangRuntimeException("Cannot access to private variable from external source",
-                                objPtr, GetStackTrace());
-
-                        targetClass.Variables[objPtr.Name] = new Variable(
-                            objPtr.Name,
-                            value,
-                            existingVar.IsStatic,
-                            existingVar.IsPrivate,
-                            existingVar.IsConst);
-                    }
-                    else
-                    {
-                        // Create new property
-                        targetClass.Variables[objPtr.Name] = new Variable(
-                            objPtr.Name,
-                            value,
-                            false,
-                            false,
-                            false);
-                    }
-                }
-                else
-                    throw new QlangRuntimeException($"Cannot assign property '{objPtr.Name}' to non-object type {currentObject?.GetType().Name ?? "null"}", assignNode, GetStackTrace());
-                break;
-
-            default:
-                throw new QlangRuntimeException($"Invalid assignment target: {lastNode.GetType().Name}", assignNode, GetStackTrace());
+            currentObject = ExecuteObjectCalls(callNode);
         }
 
+        // Change value
+        if (!assignNode.IsNew)
+        {
+            var obj = FindObject(lastNode, currentObject, currentObject is null);
+
+            if (obj.@object is Variable var)
+            {
+                if (var.IsConst && !assignNode.IsNew)
+                    throw new QlangRuntimeException($"Cannot re-assign const property '{lastNode.Name}'", assignNode.Line, _sourceFileTable[assignNode.SourceFileId],
+                        GetStackTrace());
+
+                if (currentObject is not null && var.IsPrivate)
+                    throw new QlangRuntimeException("Cannot access to private variable from external source",
+                        lastNode.Line, _sourceFileTable[lastNode.SourceFileId], GetStackTrace());
+
+                var.Value = value;
+                return;
+            }
+
+            throw new QlangRuntimeException($"Invalid assignment target: {obj.@object?.GetType().Name}", assignNode.Line, _sourceFileTable[assignNode.SourceFileId],
+                GetStackTrace());
+        }
+
+        if (HasContext)
+        {
+            if (CurrentContext.Function is not null)
+            {
+                CurrentContext.Function.Variables[assignNode.GetLastName()] =
+                    Variable.FromAssignmentNode(assignNode, value);
+                return;
+            }
+
+            if (CurrentContext.Class is not null)
+            {
+                CurrentContext.Class.Variables[assignNode.GetLastName()] =
+                    Variable.FromAssignmentNode(assignNode, value);
+                return;
+            }
+
+            if (CurrentContext.Namespace is not null)
+            {
+                CurrentContext.Namespace.Variables[assignNode.GetLastName()] =
+                    Variable.FromAssignmentNode(assignNode, value);
+                return;
+            }
+        }
+
+        _dynamicNamespaces[GlobalNamespaceName].Variables[assignNode.GetLastName()] = Variable.FromAssignmentNode(assignNode, value);
     }
 
     private DynamicClass GetNewClass(DynamicClass dynamicClass, List<object?> args)
     {
         var dClass = dynamicClass.Clone();
-        
+
         var fromClass = GetFunctionFromClass(dClass, Keywords.CreateClassInstanceKeyword, args);
-        
+
+        if (dClass.Body.OfType<FunctionNode>().Any(f => f.Name == Keywords.CreateClassInstanceKeyword) &&
+            fromClass.function == null)
+        {
+            // Console.WriteLine("Functions: " + string.Join(", ", dClass.Body.OfType<FunctionNode>().Where(x => x.Name == "new").Select(f => $"{f.Name}({string.Join(", ", f.Parameters.Select(x => x.Path))})")));
+            throw new QlangRuntimeException($"Can't initialize class '{dynamicClass.ClassName}' with this parameters.", GetStackTrace());
+        }
+
         if (fromClass.function != null)
             ExecuteFunction(ToDynamicFunction(fromClass.function), fromClass.Args, dClass, null);
 
@@ -534,32 +285,6 @@ public partial class Interpreter
             return;
         
         _contextStack.Pop();
-    }
-
-    private List<object?> GetCollection(List<object?> arg)
-    {
-        if (arg is null)
-            throw new QlangRuntimeException("collection is null", null, GetStackTrace());
-
-        if (arg.Count == 0)
-            return arg;
-
-        var sb = new StringBuilder(arg.Count * 10);
-        sb.Append('[');
-
-        for (var i = 0; i < arg.Count; i++)
-        {
-            if (i > 0) sb.Append(',');
-
-            if (arg[i] is string)
-                sb.Append('"').Append(arg[i]).Append('"');
-            else
-                sb.Append(arg[i]);
-        }
-        sb.Append(']');
-
-        Logger.Log(sb.ToString());
-        return arg;
     }
 
 	// TODO: Bug fix with '"' and other specials
@@ -608,20 +333,19 @@ public partial class Interpreter
             return expr switch
             {
                 CastNode cast => CastObject(cast),
-                VariableNode varNode => GetVariableValue(varNode),
                 StringRefNode strRef => GetStringRef(strRef),
                 NumberRefNode numberRef => GetNumberRef(numberRef),
                 ClassNode classNode => ToDynamicClass(classNode),
                 BooleanNode booleanNode => booleanNode.Value,
                 NumberNode num => num.Value,
                 BinaryOperationNode binOp => EvaluateBinaryOperation(binOp),
-                CollectionNode collection => GetCollection(collection.Collection.ConvertAll(EvaluateExpression)),
-                NullNode => null,
+                CollectionNode collection => collection.Collection.ConvertAll(EvaluateExpression),
+                KeywordNode node when node.Value == Keywords.NullKeyword => null,
                 CallNode call => ExecuteObjectCalls(call),
                 FunctionNode => expr,
                 _ => throw new QlangRuntimeException(
                     $"Unknown expression type: {expr.GetType().Name}",
-                    expr,
+                    expr.Line, _sourceFileTable[expr.SourceFileId],
                     GetStackTrace())
             };
         }
@@ -631,13 +355,9 @@ public partial class Interpreter
         }
         catch (Exception ex)
         {
-            if (expr is BinaryOperationNode binOp)
-                Logger.Error($"expr is BinaryOperationNode [{(binOp.Left as VariableNode)?.Name},{binOp
-                .Operator},{(binOp.Right as StringRefNode)?.Index}]");
-
             throw new QlangRuntimeException(
                 $"Internal error: {ex}",
-                expr,
+                expr.Line, _sourceFileTable[expr.SourceFileId],
                 GetStackTrace());
         }
     }
@@ -649,10 +369,17 @@ public partial class Interpreter
 
         var @object = ExecuteObjectCalls(cast.ToCastObject);
 
+        if (Typeof(type) == "Number" && @object is DynamicClass { ClassName: QlSystemClasses.StringClassName } @class &&
+            @class.Variables["_value"].Value!.ToString().TryParseNumber(out var number))
+            return number;
+
         // cast string to number
         if (Typeof(type) == "Number" && @object is string str 
-                                     && str.TryParseNumber(out var number)) 
+                                     && str.TryParseNumber(out number)) 
             return number;
+        
+        if (Typeof(type) == "Number" && @object is int or long or double or float)
+            return Convert.ToDouble(@object);
         
         // cast any object to string
         if (Typeof(type) == "String" && @object is not null)
@@ -664,8 +391,8 @@ public partial class Interpreter
             null => "<null>",
             _ => type.ToString()!
         };
-
-        throw new QlangRuntimeException($"Cannot cast object to type '{typeStr}'", cast,
+        
+        throw new QlangRuntimeException($"Cannot cast object to type '{typeStr}'", cast.Line, _sourceFileTable[cast.SourceFileId],
             GetStackTrace());
     }
     
@@ -677,125 +404,52 @@ public partial class Interpreter
         {
             throw new QlangRuntimeException(
                 "Division by zero",
-                node,
+                node.Line, _sourceFileTable[node.SourceFileId],
                 GetStackTrace());
         }
         return left.ToString().ParseNumber() / divisor;
     }
 
-    private object? GetVariableValue(VariableNode varNode)
-    {
-        try
-        {
-            Variable? var;
-            
-            if (varNode.Name == Keywords.ThisKeyword && HasContext)
-                return CurrentContext?.Class;
-
-            if (HasContext && CurrentContext.Blocks.Count > 0)
-                for (var i = CurrentContext.Blocks.Count; i > 0; i--)
-                    if (CurrentContext.Blocks[i].Variables.TryGetValue(varNode.Name, out var))
-                        return var.Value;
-
-            if (HasContext && (CurrentContext?.Function?.Variables.TryGetValue(varNode.Name, out var) == true ||
-                               CurrentContext?.Class?.Variables.TryGetValue(varNode.Name, out var) == true))
-                return var.Value;
-
-            // static classes var
-            if (_dynamicClasses.TryGetValue(varNode.ClassName, out var dynamicClass) &&
-                dynamicClass.Variables.TryGetValue(varNode.Name, out var))
-            {
-                if (var.IsPrivate)
-                    throw new QlangRuntimeException("Scope can't be call from external class " +
-                                                    "because of is private scope" +
-                                                    $" (class: {dynamicClass.Name}, scope: {var.Name})",
-                        varNode, GetStackTrace());
-
-                return var.Value;
-            }
-            
-            // static classes
-            if (_dynamicClasses.TryGetValue(varNode.Name, out dynamicClass))
-                return dynamicClass;
-            
-            // Global variables
-            var node = _globalVariables.FirstOrDefault(x => x.Name == varNode.Name);
-            if (node != null)
-                return node.Value;
-
-            if (CurrentContext?.Class != null)
-            {
-                foreach (var var2 in CurrentContext.Class.Variables)
-                {
-                    var val = var2.Value.Value;
-                    var name = var2.Value.Name;
-                }
-            }
-            else Logger.Error($"Context Class is null");
-
-            if (CurrentContext?.Function != null)
-            {
-                Logger.Log("Current function name: " + CurrentContext.Function.Name);
-                foreach (var var2 in CurrentContext.Function.Variables)
-                {
-                    var val = var2.Value.Value;
-                    var name = var2.Value.Name;
-                    Logger.Log($"\tVariable: '{name}' = '{val}'");
-                }
-            }
-            else Logger.Error($"Context Class is null");
-        }
-        catch (QlangRuntimeException)
-        {
-            Logger.Error("GetVariable exception");
-            throw;
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(ex.ToString());
-        }
-
-        throw new QlangRuntimeException(
-            $"Undefined variable: '{varNode.Name}'",
-            varNode,
-            GetStackTrace());
-
-    }
-
     private string GetStringRef(StringRefNode strStringRef)
     {
-        if (!_stringDictionary.TryGetValue($"___STRING_{strStringRef.Index}___", out var value))
+        if (strStringRef.Index >= _stringList.Count || strStringRef.Index < 0)
         {
             throw new QlangRuntimeException(
-                $"Undefined string reference: {value}",
-                strStringRef,
+                $"Undefined string reference: {strStringRef.Index}",
+                strStringRef.Line, _sourceFileTable[strStringRef.SourceFileId],
                 GetStackTrace());
         }
-        return value;
+        return _stringList[strStringRef.Index];
     }
 
-    private object GetNumberRef(NumberRefNode numberRef)
+    private double GetNumberRef(NumberRefNode numberRef)
     {
-        if (!_numberDictionary.TryGetValue($"___NUMBER_{numberRef.Index}___", out var value))
+        if (numberRef.Index >= _numberList.Count || numberRef.Index < 0)
         {
             throw new QlangRuntimeException(
-                $"Undefined number reference: {value}",
-                numberRef,
+                $"Undefined number reference: {numberRef.Index}",
+                numberRef.Line, _sourceFileTable[numberRef.SourceFileId],
                 GetStackTrace());
         }
-        return numberRef.IsNegative ? $"-{value}" : value;
+
+        var number = _numberList[numberRef.Index];
+        
+        return numberRef.IsNegative ? -number : number;
     }
 
-    private DynamicClass? CreateClassFrom(object? obj, DynamicClass copy, ASTNode? context = null)
+    private DynamicClass? CreateClassFrom(object? obj, DynamicClass copy, ASTNode context)
     {
+        if (obj is DynamicClass dynamic && dynamic.ClassName == copy.ClassName)
+            return dynamic;
+        
         var createFunction = copy.Body
             .OfType<FunctionNode>()
-            .FirstOrDefault(f => f.Name == "___create_from___");
+            .FirstOrDefault(f => f.Name == "_createFrom");
 
         if (createFunction is null)
             throw new QlangRuntimeException(
                 "Second value is incompatible",
-                context,
+                context.Line, _sourceFileTable[context.SourceFileId],
                 GetStackTrace());
 
         var created = ExecuteFunction(
@@ -808,7 +462,7 @@ public partial class Interpreter
             dClass.ClassName != copy.ClassName)
             throw new QlangRuntimeException(
                 "Second value is null or incompatible",
-                context,
+                context.Line, _sourceFileTable[context.SourceFileId],
                 GetStackTrace());
 
         return dClass;
@@ -826,22 +480,40 @@ public partial class Interpreter
 
         leftClass ??= CreateClassFrom(left, rightClass, binOp);
         rightClass ??= CreateClassFrom(right, leftClass, binOp);
+        
+        // Console.WriteLine("\nOperator: " + binOp.Operator);
+        // Console.WriteLine($"First operand: '{leftClass.Variables["_value"].Value}'");
+        // Console.WriteLine($"Second operand: '{rightClass.Variables["_value"].Value}'");
 
-        if (binOp.Operator.Any(c => c is '=' or '>' or '<' or '!'))
+        if (binOp.Operator.Any(c => c is '=' or '>' or '<' or '!' or '*' or '/' or '%' or '+' or '-'))
         {
             var @operator = "";
             for (var i = 0; i < binOp.Operator.Length; i++)
             {
                 @operator += binOp.Operator[i] switch
                 {
-                    '=' => "equal",
-                    '>' => "greater",
-                    '<' => "less",
-                    '!' => "not"
+                    '=' => "Equal",
+                    '>' => "Greater",
+                    '<' => "Less",
+                    '!' => "Not",
+                    '+' => "Addition",
+                    '-' => "Subtraction",
+                    '/' => "Division",
+                    '*' => "Multiplication",
+                    '%' => "Percent",
                 };
-            
+
+                if (i == 0 && binOp.Operator.Length == 2 && binOp.Operator[i] == '=' && binOp.Operator[i + 1] == '=')
+                    break;
+
+                if (i == 0 && binOp.Operator.Length == 2 && binOp.Operator[i] == '!' && binOp.Operator[i + 1] == '=')
+                {
+                    @operator += "Equal";
+                    break;
+                }
+                
                 if (i !=  binOp.Operator.Length - 1)
-                    @operator += "_";
+                    @operator += "Or";
             }
             binOp.Operator = @operator;
         }
@@ -849,12 +521,12 @@ public partial class Interpreter
         var opFunction = leftClass.Body
             .OfType<FunctionNode>()
             .FirstOrDefault(f =>
-                f.Name == $"___operator_{binOp.Operator.ToLower()}___");
+                f.Name == $"_operator{binOp.Operator}" && f.Parameters.Count == 2);
 
         if (opFunction is null)
             throw new QlangRuntimeException(
                 $"Class '{leftClass.ClassName}' is incompatible for operator '{binOp.Operator}'",
-                binOp,
+                binOp.Line, _sourceFileTable[binOp.SourceFileId],
                 GetStackTrace());
 
         var result = ExecuteFunction(
@@ -862,19 +534,20 @@ public partial class Interpreter
             [leftClass, rightClass],
             leftClass, null);
 
-        if ((result is not DynamicClass dynamicClass || dynamicClass.ClassName != leftClass.ClassName) &&
-            binOp.Operator.All(c => c is '+' or '-' or '*' or '/'))
+        if ((result is not DynamicClass dynamicClass || dynamicClass.ClassName != leftClass.ClassName) && 
+            (binOp.Operator.Contains("Division") ||binOp.Operator.Contains("Subtraction") || binOp.Operator.Contains("Multiplication") || binOp.Operator.Contains("Addition")))
             throw new QlangRuntimeException(
-                $"Return value of '___operator_{binOp.Operator.ToLower()}___' must be equal to type '{leftClass.ClassName}'", binOp,
+                $"Return value of '_operator{binOp.Operator.ToLower()}' must be equal to type '{leftClass.ClassName}'", binOp.Line, _sourceFileTable[binOp.SourceFileId],
                 GetStackTrace()); 
         
         if (result is not bool && 
-            (binOp.Operator.Contains("equal") ||  binOp.Operator.Contains("greater") || 
-             binOp.Operator.Contains("less")))
+            (binOp.Operator.Contains("Equal") ||  binOp.Operator.Contains("Greater") || 
+             binOp.Operator.Contains("Less")))
             throw new QlangRuntimeException(
-                $"Return value of '___operator_{binOp.Operator.ToLower()}___' must be equal to type 'bool'", binOp,
+                $"Return value of '_operator{binOp.Operator.ToLower()}' must be equal to type 'bool'", binOp.Line, _sourceFileTable[binOp.SourceFileId],
                 GetStackTrace()); 
         
+        // Console.WriteLine("Result: " + (result as DynamicClass)?.Variables["_value"]);
         return result;
     }
 
@@ -886,8 +559,16 @@ public partial class Interpreter
         var right = EvaluateExpression(binOp.Right);
         Logger.Log($"ExpressionParams: {left}: {left?.GetType().Name}; {right}: {right?.GetType().Name}");
 
+
         if (left is null || right is null)
-            return null;
+        {
+            return binOp.Operator switch
+            {
+                "==" => left == right,
+                "!=" => left != right,
+                _ => null
+            };
+        }
 
         if ((left is DynamicClass || right is DynamicClass))
             return EvaluateClassBinaryOperation(left, right, binOp);
@@ -904,7 +585,7 @@ public partial class Interpreter
                     if (!bool.TryParse(left.ToString(), out leftBool))
                         throw new QlangRuntimeException(
                             $"Type error: Left operand of '&&' must be boolean, got '{left}'",
-                            binOp, GetStackTrace());
+                            binOp.Line, _sourceFileTable[binOp.SourceFileId], GetStackTrace());
 
                     // Short-circuit: если левая часть false, правую не вычисляем
                     if (!leftBool)
@@ -916,7 +597,7 @@ public partial class Interpreter
                     if (!bool.TryParse(right.ToString(), out rightBool))
                         throw new QlangRuntimeException(
                             $"Type error: Right operand of '&&' must be boolean, got '{right}'",
-                            binOp, GetStackTrace());
+                            binOp.Line, _sourceFileTable[binOp.SourceFileId], GetStackTrace());
 
                     Logger.Log($"Operation &&: {leftBool} && {rightBool} = {rightBool}");
                     return rightBool;
@@ -926,7 +607,7 @@ public partial class Interpreter
                     if (!bool.TryParse(left.ToString(), out leftBool))
                         throw new QlangRuntimeException(
                             $"Type error: Left operand of '||' must be boolean, got '{left}'",
-                            binOp, GetStackTrace());
+                            binOp.Line, _sourceFileTable[binOp.SourceFileId], GetStackTrace());
 
                     // Short-circuit: если левая часть true, правую не вычисляем
                     if (leftBool)
@@ -941,7 +622,7 @@ public partial class Interpreter
                     if (!bool.TryParse(right.ToString(), out rightBool))
                         throw new QlangRuntimeException(
                             $"Type error: Right operand of '||' must be boolean, got '{right}'",
-                            binOp, GetStackTrace());
+                            binOp.Line, _sourceFileTable[binOp.SourceFileId], GetStackTrace());
 
                     Logger.Log($"Operation ||: {leftBool} || {rightBool} = {rightBool}");
                     return rightBool;
@@ -958,12 +639,12 @@ public partial class Interpreter
                 "!=" => !Equals(leftBool, rightBool),
                 _ => throw new QlangRuntimeException(
                     $"Unknown operator for boolean: {binOp.Operator}",
-                    binOp,
+                    binOp.Line, _sourceFileTable[binOp.SourceFileId],
                     GetStackTrace())
             };
         }
 
-        if (binOp.Operator == "Plus" && (left is string || right is string))
+        if (binOp.Operator == "+" && (left is string || right is string))
         {
             if (left is DynamicClass leftClassStr)
             {
@@ -996,8 +677,8 @@ public partial class Interpreter
 
             throw new QlangRuntimeException(
                 $"Type error: Cannot apply operator '{binOp.Operator}' to " +
-                $"'{left?.ToString() ?? "null"}' (type={left?.GetType().Name}) and '{right?.ToString() ?? "null"}' (type={right?.GetType().Name})",
-                binOp,
+                $"'{left?.ToString() ?? "null"}' ({left?.GetType().Name}) and '{right?.ToString() ?? "null"}' ({right?.GetType().Name})",
+                binOp.Line, _sourceFileTable[binOp.SourceFileId],
                 GetStackTrace());
         }
 
@@ -1010,18 +691,18 @@ public partial class Interpreter
             {
                 "==" => Equals(leftNum, rightNum),
                 "!=" => !Equals(leftNum, rightNum),
-                "Less" => leftNum < rightNum,
-                "Greater" => leftNum > rightNum,
+                "<" => leftNum < rightNum,
+                ">" => leftNum > rightNum,
                 ">=" => leftNum >= rightNum,
                 "<=" => leftNum <= rightNum,
-                "Plus" => leftNum + rightNum,
-                "Minus" => leftNum - rightNum,
-                "Star" => leftNum * rightNum,
-                "Slash" => DivideWithCheck(leftNum, rightNum, binOp),
-                "Percent" => leftNum % rightNum,
+                "+" => leftNum + rightNum,
+                "-" => leftNum - rightNum,
+                "*" => leftNum * rightNum,
+                "/" => DivideWithCheck(leftNum, rightNum, binOp),
+                "%" => leftNum % rightNum,
                 _ => throw new QlangRuntimeException(
                     $"Unknown operator: {binOp.Operator}",
-                    binOp,
+                    binOp.Line, _sourceFileTable[binOp.SourceFileId],
                     GetStackTrace())
             };
         }
@@ -1033,17 +714,35 @@ public partial class Interpreter
         {
             throw new QlangRuntimeException(
                 $"Error evaluating operation: {ex.Message}",
-                binOp,
+                binOp.Line, _sourceFileTable[binOp.SourceFileId],
                 GetStackTrace());
         }
     }
     
-    private (FunctionNode? function, List<object?> args) GetFunctionFromFunctionList
+    private (FunctionNode? function, List<object?> args) GetFunctionFromGlobal
         (string name, List<object?>? args = null)
     {
         args ??= [];
         
-        foreach (var function in _globalFunctions.Where(f => f.Name == name))
+        foreach (var function in _dynamicNamespaces[GlobalNamespaceName].Functions.Where(f => f.Name == name))
+            if (TryMatchFunction(function, args, out var finalArgs))
+                return (function, finalArgs);
+
+        return (null, null);
+    }
+        
+    private (FunctionNode? function, List<object?> Args) GetFunctionFromFunctionVariables
+        (DynamicFunction? func, string name, List<object?>? args = null)
+    {
+        if (func is null)
+            return (null, null)!;
+        
+        args ??= [];
+        
+        var functions = func.Variables.Where(f => f.Key == name).Select(var => var.Value.Value).OfType<FunctionNode>();
+        
+        foreach (var function in functions)
+            // Проверяем, можно ли вызвать эту функцию с данными аргументами
             if (TryMatchFunction(function, args, out var finalArgs))
                 return (function, finalArgs);
 
@@ -1054,7 +753,7 @@ public partial class Interpreter
         (DynamicClass? @class, string name, List<object?>? args = null)
     {
         if (@class is null)
-            return (null, null);
+            return (null, null)!;
         
         args ??= [];
         
@@ -1075,45 +774,46 @@ public partial class Interpreter
         (DynamicNamespace? @namespace, string name, List<object?>? args = null)
     {
         if (@namespace is null)
-            return (null, null);
+            return (null, null)!;
         
         args ??= [];
 
-        var functions = @namespace.Functions;
+        var functions = @namespace.Functions.Where(f => f.Name == name).ToList();
         var values = @namespace.Variables.Where(f => f.Key == name).Select(var => var.Value.Value);
         
         functions.AddRange(values.OfType<FunctionNode>());
         
         foreach (var function in functions)
-            // Проверяем, можно ли вызвать эту функцию с данными аргументами
             if (TryMatchFunction(function, args, out var finalArgs))
                 return (function, finalArgs);
 
-        return (null, null);
+        return (null, null)!;
     }
-
     private bool TryMatchFunction(FunctionNode function, List<object?> args, out List<object?> finalArgs)
     {
         finalArgs = [];
-        
+    
         var requiredParamsCount = 0;
         var totalParamsCount = function.Parameters.Count;
-        
-        foreach (var t in function.Parameters)
+    
+        // Подсчет обязательных параметров (без значения по умолчанию)
+        foreach (var param in function.Parameters)
         {
-            if (t.Value == null)
+            if (param.Value == null)
                 requiredParamsCount++;
-            else
-                break;
         }
-        
+    
+        // Проверка количества аргументов
         if (args.Count < requiredParamsCount || args.Count > totalParamsCount)
             return false;
-        
+    
+        // Заполнение финального списка аргументов
         for (var i = 0; i < totalParamsCount; i++)
         {
             if (i < args.Count)
+            {
                 finalArgs.Add(args[i]);
+            }
             else
             {
                 var param = function.Parameters[i];
@@ -1123,10 +823,49 @@ public partial class Interpreter
                     finalArgs.Add(defaultValue);
                 }
                 else
-                    return false;
+                {
+                    return false; // Обязательный параметр не предоставлен
+                }
             }
         }
-        
+    
         return true;
     }
+    // private bool TryMatchFunction(FunctionNode function, List<object?> args, out List<object?> finalArgs)
+    // {
+    //     finalArgs = [];
+    //     
+    //     var requiredParamsCount = 0;
+    //     var totalParamsCount = function.Parameters.Count;
+    //     
+    //     foreach (var t in function.Parameters)
+    //     {
+    //         if (t.Value == null)
+    //             requiredParamsCount++;
+    //         else
+    //             break;
+    //     }
+    //     
+    //     if (args.Count < requiredParamsCount || args.Count > totalParamsCount)
+    //         return false;
+    //     
+    //     for (var i = 0; i < totalParamsCount; i++)
+    //     {
+    //         if (i < args.Count)
+    //             finalArgs.Add(args[i]);
+    //         else
+    //         {
+    //             var param = function.Parameters[i];
+    //             if (param.Value != null)
+    //             {
+    //                 var defaultValue = EvaluateExpression(param.Value);
+    //                 finalArgs.Add(defaultValue);
+    //             }
+    //             else
+    //                 return false;
+    //         }
+    //     }
+    //     
+    //     return true;
+    // }
 }

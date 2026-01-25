@@ -1,20 +1,23 @@
-﻿namespace Core.AST;
+﻿using Newtonsoft.Json;
 
-public class IfNode : ASTBlock
+namespace Core.AST;
+
+public class IfNode(int line, int sfId) : ASTBlock(line, sfId)
 {
+    [JsonProperty("a")]
     public ASTNode Condition { get; set; }
+    [JsonProperty("b")]
     public List<ASTNode> ThenBlock { get; set; } = [];
+    [JsonProperty("c")]
     public List<ASTNode> ElseBlock { get; set; } = [];
 
     public override ASTNode Clone()
     {
-        return new IfNode
+        return new IfNode(Line,  SourceFileId)
         {
             Condition = Condition.Clone(), 
             ThenBlock = ThenBlock.Select(node => node.Clone()).ToList(), 
-            ElseBlock = ElseBlock.Select(node => node.Clone()).ToList(),
-            SourceFile =  SourceFile, 
-            Line =  Line 
+            ElseBlock = ElseBlock.Select(node => node.Clone()).ToList()
         };
     }
 

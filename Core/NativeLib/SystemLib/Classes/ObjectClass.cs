@@ -8,7 +8,7 @@ public class ObjectClass : IQlangClass
     {
         return [
             ("is_null",  (Func<object?, bool>)(obj => obj is null)),
-            ("is_simplify",  (Func<object?, bool>)(obj => obj is float or double or int or long or decimal or string or bool or List<object> or List<object?>))
+            ("is_simplify",  (Func<object?, bool>)(obj => obj is int or long or double or float or string or bool or List<object> or List<object?>))
         ];
     }
 }

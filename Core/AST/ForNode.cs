@@ -1,22 +1,26 @@
-﻿namespace Core.AST;
+﻿using Newtonsoft.Json;
 
-public class ForNode : ASTBlock
+namespace Core.AST;
+
+public class ForNode(int line, int sfId) : ASTBlock(line, sfId)
 {
+    [JsonProperty("a")]
     public AssignmentNode Assignment { get; set; }
+    [JsonProperty("b")]
     public ASTNode Condition { get; set; }
+    [JsonProperty("c")]
     public ASTNode Statement { get; set; }
 
+    [JsonProperty("d")]
     public List<ASTNode> Body { get; set; } = [];
 
     public override ASTNode Clone()
     {
-        return new ForNode { 
+        return new ForNode(Line, SourceFileId) { 
             Assignment = (Assignment.Clone() as AssignmentNode)!,
             Statement = Statement.Clone(),
             Condition = Condition, 
-            Body = Body.Select(node => node.Clone()).ToList(),
-            SourceFile =  SourceFile, 
-            Line =  Line 
+            Body = Body.Select(node => node.Clone()).ToList()
         };
     }
 

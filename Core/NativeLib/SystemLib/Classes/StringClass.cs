@@ -1,4 +1,5 @@
-﻿using Core.Dynamic;
+﻿using System.Text.RegularExpressions;
+using Core.Dynamic;
 
 namespace Core.NativeLib.SystemLib.Classes;
 
@@ -34,7 +35,7 @@ public class StringClass : IQlangClass
             ("length", (Func<string, double>)(msg => msg.Length)),
             ("index_of", (Func<string, string, int>)((str, pattern) => str.IndexOf(pattern, StringComparison.CurrentCulture))),
             ("last_index_of", (Func<string, string, int>)((str, pattern) => str.LastIndexOf(pattern, StringComparison.CurrentCulture))),
-            ("format", (Func<string, List<object?>, string?>)((str, numArray) => string.Format(str, numArray.ToArray())))
+            ("format", (Func<string, List<object?>, string?>)((str, numArray) => string.Format(str, numArray.ToArray()))),
         ];
     }
 }

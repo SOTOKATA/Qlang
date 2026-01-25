@@ -8,7 +8,7 @@ public class ExceptionClass : IQlangClass
     public List<(string name, Delegate body)> GetFunctions()
     {
         return [
-            ("throw", (Action<string>)(msg => throw new QlangRuntimeException(msg, null)))
+            ("throw", (Action<string>)(msg => throw new QlangRuntimeException(msg)))
         ];
     }
 }

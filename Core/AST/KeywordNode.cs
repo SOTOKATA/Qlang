@@ -1,7 +1,10 @@
-﻿namespace Core.AST;
+﻿using Newtonsoft.Json;
 
-public class KeywordNode(string keyword) : ASTNode
+namespace Core.AST;
+
+public class KeywordNode(string keyword, int line, int sfId) : ASTNode(line, sfId)
 {
+    [JsonProperty("a")]
     public string Value { get; set; } = keyword;
     
     public override string GetTree(string indent = "")
@@ -11,10 +14,6 @@ public class KeywordNode(string keyword) : ASTNode
 
     public override ASTNode Clone()
     {
-        return new KeywordNode(Value)
-        {
-            Line = Line,
-            SourceFile = SourceFile
-        };
+        return new KeywordNode(Value,  Line, SourceFileId);
     }
 }

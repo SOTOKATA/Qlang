@@ -4,8 +4,6 @@ import "$lib/core"
 class String: {
     private let _value = "";
 
-    const zeroChar = "\0";
-
     // overriding functions 
     function toString(): {
         return Object.toString(_value);
@@ -14,25 +12,26 @@ class String: {
     function getValue(): return _value;
     
     // Parse object to String
-    function ___create_from___(const obj):
+    function _createFrom(const obj):
         return String.new(obj);
 
     // Parse additional operations
-    function ___operator_plus___(const obj1, const obj2):
+    function _operatorAddition(const obj1, const obj2):
         return String.new(obj1.getValue() + obj2.getValue());
+        
 
     // Parse multiplication operations
-    function ___operator_star___(const obj1, const obj2): {
+    function _operatorMultiplication(const obj1, const obj2): {
         let val = "";
 
-        for let i = 0; i < obj2.getValue(); i = i + 1:
+        for let i = 0; i < <Number>obj2.getValue(); i = i + 1:
             val = val + obj1;
 
         return String.new(val);
     }
 
     // Parse division operations
-    function ___operator_slash___(const obj1, const obj2): {
+    function _operatorDivision(const obj1, const obj2): {
         let val = "";
 
         const index = obj1.length() / obj2.getValue();
@@ -44,34 +43,34 @@ class String: {
     }
 
     // Parse '==' operations
-    function ___operator_equal_equal___(const obj1, const obj2):
+    function _operatorEqual(const obj1, const obj2):
         return obj1.getValue() == obj2.getValue();
 
     // Parse '!=' operations
-    function ___operator_not_equal___(const obj1, const obj2):
+    function _operatorNotEqual(const obj1, const obj2):
         return obj1.getValue() == obj2.getValue();
 
     // Parse '>=' operations
-    function ___operator_greater_equal___(const obj1, const obj2): 
+    function _operatorGreaterOrEqual(const obj1, const obj2): 
         return obj1.length() >= obj2.length();
 
     // Parse '<=' operations
-    function ___operator_less_equal___(const obj1, const obj2): 
+    function _operatorLessOrEqual(const obj1, const obj2): 
         return obj1.length() <= obj2.length();
 
     // Parse '>' operations
-    function ___operator_greater___(const obj1, const obj2): 
+    function _operatorGreater(const obj1, const obj2): 
         return obj1.length() > obj2.length();
 
     // Parse '<' operations
-    function ___operator_less___(const obj1, const obj2): 
+    function _operatorLess(const obj1, const obj2): 
         return obj1.length() < obj2.length();
 
-    function new(const<String> input): {
+    function new(const input): {
         if String.isString(input):
-            _value = input.toString();
+            _value = input.getValue();
         else:
-            _value = input;
+            _value = str(input);
     }
 
     function new(const<String> char, const<Number> count): {
@@ -93,7 +92,6 @@ class String: {
         }
 
         if (String.isString(strOrPrimite)): {
-            
             return strOrPrimite.toString();
         }
 
@@ -226,12 +224,6 @@ class String: {
 
     // Cut string by 'startPos' and 'length'
     function subString(let<Number> startPos, let<Number> length): {
-        if Number.isNumber(startPos) == false:
-            std::Throw.exception("subString error: startPos must be number");
-
-        if Number.isNumber(length) == false:
-            std::Throw.exception("subString error: length must be number");
-
         if length() <= length:
             std::Throw.exception("Value 'length' can't be more than string length");
 

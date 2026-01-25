@@ -46,25 +46,33 @@ class Array: {
 
     // Get at index
     function at(const<Number> index): {
-        index = Parser.asInt(index);
+        checkIndex(index);
+
+        index = std::Parser.asInt(index);
         return _native("std.array.get", _value, index);
     }
 
     // Set at index
     function setAt(const<Number> index, let item): {
-        index = Parser.asInt(index);
+        checkIndex(index);
+        
+        index = std::Parser.asInt(index);
 
         _native("std.array.set", _value, index, item);
     }
 
     function insert(const<Number> index, let item): {
-        index = Parser.asInt(index);
+        checkIndex(index);
+        
+        index = std::Parser.asInt(index);
         _native("std.array.insert", _value, index, item);
     }
 
     // Remove at index
     function removeAt(const<Number> index): {
-        index = Parser.asInt(index);
+        checkIndex(index);
+
+        index = std::Parser.asInt(index);
         _native("std.array.remove_at", _value, index);
     }
 
@@ -75,4 +83,63 @@ class Array: {
     // Get length
     function length():
         return _native("std.array.count", _value);
+
+    function forEach(const func): {
+        const length = length();
+        for let i = 0; i < length; i = i + 1:
+            func(at(i));
+    }
+
+    function where(const func): {
+        const length = length();
+
+        const arr = Array.new([]);
+
+        for let i = 0; i < length; i = i + 1: {
+            if func(at(i)):
+                arr.push(at(i));
+        }
+
+        return arr;
+    }
+
+    function select(const func): {
+        const length = length();
+
+        const arr = Array.new([]);
+
+        for let i = 0; i < length; i = i + 1:
+            arr.push(func(at(i)));
+
+        return arr;
+    }
+
+    function count(const func): {
+        const length = length();
+        let count = 0;
+
+        for let i = 0; i < length; i = i + 1:
+            if func(at(i)):
+                count = count + 1;
+
+        return count;
+    }
+
+    function firstOrDefault(const func): {
+        const length = length();
+
+        for let i = 0; i < length; i = i + 1: {
+            const boolResult = func(at(i));
+
+            if boolResult:
+                return at(i);
+        }
+
+        return null;
+    }
+
+    private function checkIndex(const<Number> index): {
+        if (index < 0 || index >= length()):
+            std::Throw.exception("Index is out of range.");
+    }
 }

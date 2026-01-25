@@ -1,13 +1,14 @@
-﻿namespace Core.AST;
+﻿using Newtonsoft.Json;
 
-public class BooleanNode : ASTNode
+namespace Core.AST;
+
+public class BooleanNode(int line, int sfId) : ASTNode(line, sfId)
 {
+    [JsonProperty("a")]
     public bool Value { get; set; }
 
-    public override ASTNode Clone() => new BooleanNode { 
-            Value = Value, 
-            SourceFile =  SourceFile, 
-            Line =  Line 
+    public override ASTNode Clone() => new BooleanNode(Line, SourceFileId) { 
+            Value = Value
     };
 
     public override string GetTree(string indent = "")

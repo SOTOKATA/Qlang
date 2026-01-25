@@ -1,14 +1,15 @@
-﻿namespace Core.AST;
+﻿using Newtonsoft.Json;
 
-public class ReturnNode : ASTNode
+namespace Core.AST;
+
+public class ReturnNode(int line, int sfId) : ASTNode(line, sfId)
 {
+    [JsonProperty("a")]
     public ASTNode? ReturnValue { get; set; }
 
-    public override ASTNode Clone() => new ReturnNode
+    public override ASTNode Clone() => new ReturnNode(line, SourceFileId)
     {
-        ReturnValue = ReturnValue?.Clone(),
-        SourceFile =  SourceFile, 
-        Line =  Line 
+        ReturnValue = ReturnValue?.Clone() 
     };
 
     public override string GetTree(string indent = "")

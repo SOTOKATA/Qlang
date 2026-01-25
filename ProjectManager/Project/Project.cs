@@ -48,7 +48,7 @@ public partial class Project(ProjectSettings projectSettings, CompileSettings co
         var fullMainFilePath = Path.Combine(projectPath, mainFilePath);
         File.Create(fullMainFilePath).Close();
         File.WriteAllText(fullMainFilePath, """
-                                            import "$lib/standard";
+                                            import "$lib/standard"
                                             using std;
 
                                             function main(): {

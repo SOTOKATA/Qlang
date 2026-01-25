@@ -1,14 +1,15 @@
-﻿namespace Core.AST;
+﻿using Newtonsoft.Json;
 
-public class ProgramNode : ASTNode
+namespace Core.AST;
+
+public class ProgramNode(int line, int sfId) : ASTNode(line, sfId)
 {
+    [JsonProperty("a")]
     public List<ASTNode> Statements { get; set; } = [];
 
-    public override ASTNode Clone() => new ProgramNode
+    public override ASTNode Clone() => new ProgramNode(Line,  SourceFileId)
     {
-        Statements = Statements.Select(node => node.Clone()).ToList(),
-        SourceFile =  SourceFile, 
-        Line =  Line 
+        Statements = Statements.Select(node => node.Clone()).ToList()
     };
 
     public override string GetTree(string indent = "")

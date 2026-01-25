@@ -1,20 +1,24 @@
-﻿namespace Core.AST;
+﻿using Newtonsoft.Json;
 
-public class BinaryOperationNode : ASTNode
+namespace Core.AST;
+
+public class BinaryOperationNode(int line, int sfId) : ASTNode(line, sfId)
 {
+    [JsonProperty("a")]
     public ASTNode? Left { get; set; }
-    public string? Operator { get; set; }  // "==", "+", "-", etc.
+
+    [JsonProperty("b")]
+    public string? Operator { get; set; } // "==", "+", "-", etc.
+    [JsonProperty("c")]
     public ASTNode? Right { get; set; }
 
     public override ASTNode Clone()
     {
-        return new BinaryOperationNode
+        return new BinaryOperationNode(Line, SourceFileId)
         {
             Left = Left?.Clone(),
             Operator = Operator,
-            Right = Right?.Clone(), 
-            SourceFile =  SourceFile, 
-            Line =  Line 
+            Right = Right?.Clone()
         };
     }
 

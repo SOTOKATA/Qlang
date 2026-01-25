@@ -1,8 +1,10 @@
-﻿namespace Core.AST;
+﻿using Newtonsoft.Json;
 
-public class CollectionNode : ASTNode
+namespace Core.AST;
+
+public class CollectionNode(int line, int sfId) : ASTNode(line, sfId)
 {
-
+    [JsonProperty("a")]
     public List<ASTNode> Collection { get; set; }
     public override string GetTree(string indent = "")
     {
@@ -14,11 +16,9 @@ public class CollectionNode : ASTNode
 
     public override ASTNode Clone()
     {
-        var node = new CollectionNode
+        var node = new CollectionNode(Line, SourceFileId)
         {
-            Collection = Collection.Select(node => node.Clone()).ToList(),
-            SourceFile =  SourceFile, 
-            Line =  Line 
+            Collection = Collection.Select(node => node.Clone()).ToList()
         };
 
         return node;

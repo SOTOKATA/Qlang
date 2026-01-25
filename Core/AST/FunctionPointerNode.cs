@@ -1,8 +1,12 @@
-﻿namespace Core.AST;
+﻿using Newtonsoft.Json;
 
-public class FunctionPointerNode : ASTNode
+namespace Core.AST;
+
+public class FunctionPointerNode(int line, int sfId) : ASTNode(line, sfId)
 {
+    [JsonProperty("a")]
     public string Name;
+    [JsonProperty("b")]
     public List<ASTNode> Arguments;
     
     public override string GetTree(string indent = "")
@@ -16,12 +20,10 @@ public class FunctionPointerNode : ASTNode
 
     public override ASTNode Clone()
     {
-        return new FunctionPointerNode
+        return new FunctionPointerNode(Line, SourceFileId)
         {
             Name = Name,
-            Arguments = [..Arguments.ConvertAll(arg => arg.Clone())],
-            SourceFile =  SourceFile, 
-            Line =  Line 
+            Arguments = [..Arguments.ConvertAll(arg => arg.Clone())]
         };
     }
 }

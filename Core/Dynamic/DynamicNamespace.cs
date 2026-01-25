@@ -6,13 +6,13 @@ public class DynamicNamespace(string name)
 {
     public readonly string Name = name;
     
-    public Dictionary<string, Variable> Variables = [];
+    public readonly Dictionary<string, Variable> Variables = [];
 
-    public List<DynamicClass> Classes = [];
+    public readonly List<DynamicClass> Classes = [];
     
-    public List<DynamicNamespace> Namespaces = [];
+    public readonly List<DynamicNamespace> Namespaces = [];
 
-    public List<FunctionNode> Functions = [];
+    public readonly List<FunctionNode> Functions = [];
 
     public bool IsPrivate = false;
 

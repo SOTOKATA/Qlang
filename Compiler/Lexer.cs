@@ -3,11 +3,13 @@ using Core.Exceptions;
 
 namespace Compiler;
 
-public class Lexer
+public static class Lexer
 {
-    public static List<Token> Lex(string fileName, string script)
+    public static (List<Token> tokens, SourceFileTable sourceFileTable) Lex(string fileName, string script)
     {
         List<Token> tokens = [];
+        SourceFileTable table = new();
+        
         var scriptLines = script.Split('\n').ToList();
 
         var lineIndex = 0;
@@ -38,7 +40,7 @@ public class Lexer
                 if (TryCharToToken(line[pos], out var charToken))
                 {
                     charToken.Line = lineIndex;
-                    charToken.SourceFile = fileName;
+                    charToken.SourceFileId = table.GetOrAdd(fileName);
                     
                     tokens.Add(charToken);
                     pos++;
@@ -56,19 +58,19 @@ public class Lexer
                     if (TryWordToToken(word, out var wordToken))
                     {
                         wordToken.Line = lineIndex;
-                        wordToken.SourceFile = fileName;
+                        wordToken.SourceFileId = table.GetOrAdd(fileName);
                         
                         tokens.Add(wordToken);
                         continue;
                     }
                 }
 
-                throw new QlangCompileException($"Failed to detect: '{line[pos]}' at position {pos}", pos, "Lexer", fileName);
+                throw new QlangCompileException($"Failed to detect: '{line[pos]}' at position {lineIndex}:{pos}", lineIndex, "Lexer", fileName);
             }
             lineIndex++;
         }
 
-        return tokens;
+        return (tokens, table);
     }
 
     private static bool IsIdentifierStart(char c)
