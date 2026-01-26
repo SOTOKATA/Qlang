@@ -4,7 +4,7 @@ class Object: {
     function isNull(let obj):
         return _native("std.object.is_null", obj);
 
-    function getType(const obj = this):
+    function getType():
         return _native("std.object.get_type", this);
 
     function isSimplify(const val): 
@@ -12,7 +12,7 @@ class Object: {
 
     function toString(const obj): {
         if (isNull(obj)):
-            return "object_<null>";
+            return "<null>";
             
         return _native("std.string.to_string", obj);
     }

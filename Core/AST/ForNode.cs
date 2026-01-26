@@ -2,21 +2,21 @@
 
 namespace Core.AST;
 
-public class ForNode(int line, int sfId) : ASTBlock(line, sfId)
+public class ForNode(int line) : ASTBlock(line)
 {
     [JsonProperty("a")]
-    public AssignmentNode Assignment { get; set; }
+    public required AssignmentNode Assignment { get; set; }
     [JsonProperty("b")]
-    public ASTNode Condition { get; set; }
+    public required ASTNode Condition { get; set; }
     [JsonProperty("c")]
-    public ASTNode Statement { get; set; }
+    public required ASTNode Statement { get; set; }
 
     [JsonProperty("d")]
     public List<ASTNode> Body { get; set; } = [];
 
     public override ASTNode Clone()
     {
-        return new ForNode(Line, SourceFileId) { 
+        return new ForNode(DebugIndex) { 
             Assignment = (Assignment.Clone() as AssignmentNode)!,
             Statement = Statement.Clone(),
             Condition = Condition, 

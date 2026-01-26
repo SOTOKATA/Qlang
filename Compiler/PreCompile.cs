@@ -11,16 +11,18 @@ public static class PreCompile
 {
     private static readonly HashSet<string> Included = new(StringComparer.OrdinalIgnoreCase);
 
-    public static string IncludeFiles(string script, string fileName)
+    public static (string script, List<QLIProgramLib> libs) IncludeFiles(string script, string fileName, List<QLIProgramLib> libs)
     {
+        (script, libs) = IncludeNativeFoldersInFile(script, fileName, libs);
+        
         var includeLines = script
             .Split('\n')
             .Select((line, index) => (Line: line.Trim(), LineNumber: index + 1))
-            .Where(x => x.Line.StartsWith(Keywords.IncludeKeyword + " ") && x.Line.EndsWith('"'))
+            .Where(x => x.Line.StartsWith(Keywords.ImportKeyword + " ") && x.Line.EndsWith('"'))
             .ToArray();
 
         if (includeLines.Length < 1)
-            return script;
+            return (script, libs);
 
         List<string> includedContents = [];
 
@@ -41,7 +43,7 @@ public static class PreCompile
 
                 if (exePath is null)
                     throw new QlangCompileException(
-                        $"{Keywords.IncludeKeyword} '{line}' Error: Process path is not found", index,
+                        $"{Keywords.ImportKeyword} '{line}' Error: Process path is not found", index,
                         "PreCompile/ImportFiles", fileName);
 
                 fullPath = Path.Combine(exePath, line[1..]);
@@ -57,7 +59,7 @@ public static class PreCompile
             var isFile = File.Exists(fullPath) || File.Exists(fullPath + ".ql");
 
             if (!isDirectory && !isFile)
-                throw new QlangCompileException($"{Keywords.IncludeKeyword} file or directory not found: {fullPath}",
+                throw new QlangCompileException($"{Keywords.ImportKeyword} file or directory not found: {fullPath}",
                     index, "Import", fileName);
 
             // Remove import line
@@ -71,7 +73,7 @@ public static class PreCompile
                         continue;
 
                     var fileContent = File.ReadAllText(filePath);
-                    var processedContent = IncludeFiles(fileContent, filePath);
+                    (var processedContent, libs) = IncludeFiles(fileContent, filePath, libs);
                     includedContents.Add(processedContent);
                 }
             }
@@ -84,7 +86,7 @@ public static class PreCompile
                     continue;
 
                 var fileContent = File.ReadAllText(fullPath);
-                var processedContent = IncludeFiles(fileContent, fullPath);
+                (var processedContent, libs) = IncludeFiles(fileContent, fullPath, libs);
                 includedContents.Add(processedContent);
             }
         }
@@ -97,31 +99,22 @@ public static class PreCompile
         result.AppendLine($"#FILE \"{fileName}\"");
         result.Append(script);
 
-        return result.ToString();
+        return (result.ToString(), libs);
     }
-
+    
     private static readonly HashSet<string> IncludedNative = new(StringComparer.OrdinalIgnoreCase);
 
-    public static (List<QLIProgramLib> dependencies, string newScript) IncludeNativeFolders(string script, string fileName, List<QLIProgramLib> dependencies)
+    private static (string newScript, List<QLIProgramLib> dependencies) IncludeNativeFoldersInFile(string script, string fullPath, List<QLIProgramLib> libs)
     {
-        Logger.Log($"Folder: " + fileName, "IncludeNativeFolders");
-
         var includeLines = script
             .Split('\n')
             .Select((line, index) => (Line: line.Trim(), LineNumber: index + 1))
-            .Where(x => x.Line.StartsWith(Keywords.IncludeNativeKeyword + " "))
+            .Where(x => x.Line.StartsWith(Keywords.ImportNativeKeyword + " "))
             .ToArray();
-
-        if (includeLines.Length > 0)
-            Logger.Log(string.Join(", ", includeLines), Keywords.IncludeNativeKeyword);
-
-        var qliLib = new QLIProgramLib();
         
         foreach (var (source, index) in includeLines)
         {
-            var line = source.Replace($"{Keywords.IncludeNativeKeyword} ", "").Replace("\"", "");
-
-            string fullPath;
+            var line = source.Replace($"{Keywords.ImportNativeKeyword} ", "").Replace("\"", "");
 
             if (line.StartsWith('$'))
             {
@@ -129,61 +122,61 @@ public static class PreCompile
 
                 if (exePath is null)
                     throw new QlangCompileException(
-                        $"{Keywords.IncludeNativeKeyword} '{line}' Error: Process path is not found", index,
-                        "PreCompile/IncludeNativeFolders", fileName);
+                        $"{Keywords.ImportNativeKeyword} '{line}' Error: Process path is not found", index,
+                        "PreCompile", fullPath);
 
                 fullPath = Path.Combine(exePath, line[1..]);
             }
             else
-                fullPath = Path.Combine(Directory.GetCurrentDirectory(), line);
+                fullPath = Path.Combine(Path.GetDirectoryName(fullPath) ?? "", line);
 
             fullPath = fullPath.Replace('\\', Path.DirectorySeparatorChar)
                 .Replace('/', Path.DirectorySeparatorChar);
 
-            Logger.Log(fullPath, "Path");
-
             var isDirectory = Directory.Exists(fullPath);
 
             if (File.Exists(fullPath))
-                throw new QlangCompileException($"Unable to add an external file. ({fullPath})", index, "PreCompile/IncludeNativeFolders", fileName);
+                throw new QlangCompileException($"Unable to add an external file. ({fullPath})", index, "PreCompile", fullPath);
 
             if (!isDirectory)
                 throw new QlangCompileException($"Directory not found: {fullPath}",
-                    index, "PreCompile/IncludeNativeFiles", fileName);
+                    index, "PreCompile", fullPath);
+            
+            if (!IncludedNative.Add(fullPath))
+                Console.WriteLine("warn: Skipped native include path (already included): " + fullPath);
 
             script = script.Replace(source, "");
 
-            var dependentsPath = Path.Combine(fullPath, "dependents");
+            var dependentsPath = Path.Combine(fullPath, "deps");
             
             if (!Directory.Exists(dependentsPath))
-                throw new QlangCompileException($"Directory '{dependentsPath}' is not found.",  index, "PreCompile/IncludeNativeFolders", fileName);
+                throw new QlangCompileException($"Directory '{dependentsPath}' is not found.",  index, "PreCompile", fullPath);
 
-            var folders = Directory.GetFiles(dependentsPath, "*.dll", SearchOption.AllDirectories).ToList();
+            var lib = new QLIProgramLib();
 
-            foreach (var folder in folders.Where(folder => !qliLib.DependenciesFilePaths.Contains(folder)))
-                qliLib.DependenciesFilePaths.Add(folder);
+            var files = Directory.GetFiles(dependentsPath, "*.dll", SearchOption.AllDirectories).ToList();
+            foreach (var folder in files.Where(folder => !lib.DependenciesFilePaths.Contains(folder)))
+                lib.DependenciesFilePaths.Add(folder);
 
-            folders.AddRange(Directory.GetFiles(fullPath, "*.dll", SearchOption.TopDirectoryOnly));
+            files = Directory.GetFiles(fullPath, "*.dll", SearchOption.TopDirectoryOnly).ToList();
             
-            foreach (var file in folders)
+            foreach (var file in files)
             {
-                Logger.Log(file, "Path");
-
-                if (!IncludedNative.Add(file))
+                if (lib.MainFilePaths.Contains(file))
                 {
                     Logger.Log($"{file}", "Skipped (already included)");
                     continue;
                 }
                 
-                qliLib.MainFilePaths.Add(file);
+                lib.MainFilePaths.Add(file);
             }
+            
+            libs.Add(lib);
         }
-        
-        dependencies.Add(qliLib);
 
-        return (dependencies, script);
+        return (script, libs);
     }
-    
+
     public static (string outScript, List<double> list) ExtractNumbers(string script)
     {
         Logger.Log($"Extract Numbers");
@@ -314,7 +307,7 @@ public static class PreCompile
             var result = $"String.new({founded}).format([{string.Join(", ", GetFormatting(outString))}])";
 
             
-            Console.WriteLine($"Replaced '{founded}' to '{result}'");
+            // Console.WriteLine($"Replaced '{founded}' to '{result}'");
             return result;
             
         });

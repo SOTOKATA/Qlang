@@ -1,9 +1,7 @@
 import "$lib/core"
 
 // Dynamic array
-class Array: {
-    private let _value;
-
+class Array extends DataType: {
     // Create empty array
     function new(const<Collection> collection = []):
         _value = collection;

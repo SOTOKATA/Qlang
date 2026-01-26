@@ -4,7 +4,7 @@ namespace Core.Dynamic;
 
 public class DynamicClass(string name)
 {
-    public string Name = name;
+    public readonly string Name = name;
 
     public readonly string ClassName = name;
     

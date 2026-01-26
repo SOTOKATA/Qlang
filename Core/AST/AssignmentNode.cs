@@ -2,13 +2,13 @@ using Newtonsoft.Json;
 
 namespace Core.AST;
 
-public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool isNew, int line, int sfId) : ASTNode(line, sfId)
+public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool isNew, int line) : ASTNode(line)
 {
     [JsonProperty("a")]
     public bool IsNew { get; set; } = isNew;
 
     [JsonProperty("b")]
-    public List<ASTNode> Path { get; set; }
+    public required List<ASTNode> Path { get; set; }
 
     [JsonProperty("c")]
     public ASTNode? Value { get; set; }
@@ -29,7 +29,7 @@ public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool is
 
     public override ASTNode Clone()
     {
-        return new AssignmentNode(IsStatic, IsPrivate, IsConst, IsNew, line, sfId)
+        return new AssignmentNode(IsStatic, IsPrivate, IsConst, IsNew, DebugIndex)
         {
             Path = Path.Select(node => node.Clone()).ToList(),
             Value = Value?.Clone(),
@@ -41,7 +41,7 @@ public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool is
     {
         return DebugIndent($"""
                             VariableNode:
-                                Path: [{string.Join(",\n", Path?.Select(x => x.GetTree("\t\t")) ?? ["<not_exists>"])}]
+                                Path: [{string.Join(",\n", Path.Select(x => x.GetTree("\t\t")))}]
                                 Value: {Value?.GetTree("\t\t") ?? "<undefined>"}
                                 Type: {Type?.GetTree("\t\t")}
                                 IsStatic: {IsStatic}

@@ -1,4 +1,5 @@
-﻿using Core.Exceptions;
+﻿using Core;
+using Core.Exceptions;
 using ProjectManager.Project;
 using ProjectManager.Settings;
 
@@ -160,9 +161,24 @@ public static class CommandManager
 
     private static void Build()
     {
-        LoadProject().Compile();
+        var project = LoadProject();
+        if (!project.Compile())
+        {
+            ConsoleLogger.Error("Cannot build current project.");
+            return;
+        }
+
+        var outputFile = Path.Combine(project.GetProjectSetting(ProjectSettings.RootPath).ToString(), "build",
+            project.GetCompileSetting(CompileSettings.OutputFilename) + OS.GetExecutableExtension());
+
+        var outputProgramFile = Path.Combine(Path.GetDirectoryName(outputFile) ?? "",
+            Path.GetFileNameWithoutExtension(outputFile) + ".resource.qli");
         
         ConsoleLogger.Info("Project built successfully.");
+        ConsoleLogger.Info("Output file: " + outputFile);
+        ConsoleLogger.Info("Output executable size: " +
+                           (new FileInfo(outputFile).Length / 1024.0 / 1024.0).ToString("F5") + " Mb");
+        ConsoleLogger.Info("Output program size: " + (new FileInfo(outputProgramFile).Length / 1024.0 / 1024.0).ToString("F6") + " Mb");
     }
 
     private static void Get(string param)

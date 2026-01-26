@@ -2,10 +2,10 @@
 
 namespace Core.AST;
 
-public class CollectionNode(int line, int sfId) : ASTNode(line, sfId)
+public class CollectionNode(int line) : ASTNode(line)
 {
     [JsonProperty("a")]
-    public List<ASTNode> Collection { get; set; }
+    public required List<ASTNode> Collection { get; set; }
     public override string GetTree(string indent = "")
     {
         return DebugIndent($"""
@@ -16,7 +16,7 @@ public class CollectionNode(int line, int sfId) : ASTNode(line, sfId)
 
     public override ASTNode Clone()
     {
-        var node = new CollectionNode(Line, SourceFileId)
+        var node = new CollectionNode(DebugIndex)
         {
             Collection = Collection.Select(node => node.Clone()).ToList()
         };

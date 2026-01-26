@@ -1,6 +1,5 @@
 ﻿using Core.AST;
 using Core.Dynamic;
-using Core.Exceptions;
 
 namespace Interpreter;
 
@@ -73,11 +72,8 @@ public partial class Interpreter
     /// </summary>
     /// <param name="functionNode">function to convert</param>
     /// <returns>DynamicFunction</returns>
-    private DynamicFunction ToDynamicFunction(FunctionNode? functionNode)
+    private DynamicFunction ToDynamicFunction(FunctionNode functionNode)
     {
-        if (functionNode is null)
-            throw new QlangRuntimeException("Internal: Undefined function", functionNode.Line, _sourceFileTable[functionNode.SourceFileId], GetStackTrace());
-        
         // Create dynamic instance
         DynamicFunction dynamicFunction = new(functionNode.Name);
 

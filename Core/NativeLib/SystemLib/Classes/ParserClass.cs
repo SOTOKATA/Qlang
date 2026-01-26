@@ -9,10 +9,10 @@ public class ParserClass : IQlangClass
     public List<(string name, Delegate body)> GetFunctions()
     {
         return [
-            ("int", (Func<object?, int>)(obj => (int)Parse(obj, "int"))),
-            ("float", (Func<object, double>)(obj => (double)Parse(obj, "float"))),
-            ("number", (Func<object, double>)(obj => (double)Parse(obj, "double"))),
-            ("string", (Func<object, string>)(obj => (string)Parse(obj, "string"))),
+            ("int", (Func<object?, int>)(obj => (int)Parse(obj, "int")!)),
+            ("float", (Func<object, double>)(obj => (double)Parse(obj, "float")!)),
+            ("number", (Func<object, double>)(obj => (double)Parse(obj, "double")!)),
+            ("string", (Func<object, string>)(obj => (string)Parse(obj, "string")!)),
         ];
     }
     
@@ -20,7 +20,6 @@ public class ParserClass : IQlangClass
     {
         if (obj is null)
         {
-            Logger.Error("Object is null");
             return null;
         }
 
@@ -36,7 +35,7 @@ public class ParserClass : IQlangClass
         }
         catch (Exception e)
         {
-            Logger.Error(e.ToString());
+            
             return null;
         }
     }

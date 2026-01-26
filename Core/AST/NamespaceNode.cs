@@ -2,10 +2,10 @@
 
 namespace Core.AST;
 
-public class NamespaceNode(int line, int sfId) : ASTNode(line, sfId)
+public class NamespaceNode(int line) : ASTNode(line)
 {
     [JsonProperty("a")]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     [JsonProperty("b")]
     public List<ASTNode> Body { get; set; } = [];
@@ -15,7 +15,7 @@ public class NamespaceNode(int line, int sfId) : ASTNode(line, sfId)
 
     public override ASTNode Clone()
     {
-        return new NamespaceNode(Line, SourceFileId) { Name = Name, Body = Body.Select(node => node.Clone()).ToList() };
+        return new NamespaceNode(DebugIndex) { Name = Name, Body = Body.Select(node => node.Clone()).ToList() };
     }
 
     public override string GetTree(string indent = "")

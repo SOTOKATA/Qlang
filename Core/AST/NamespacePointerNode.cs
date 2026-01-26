@@ -2,7 +2,7 @@
 
 namespace Core.AST;
 
-public class NamespacePointerNode(string name, int line, int sfId) : ASTNode(line, sfId)
+public class NamespacePointerNode(string name, int line) : ASTNode(line)
 {
     [JsonProperty("a")]
     public string Name { get; set; } = name;
@@ -17,6 +17,6 @@ public class NamespacePointerNode(string name, int line, int sfId) : ASTNode(lin
 
     public override ASTNode Clone()
     {
-        return new NamespacePointerNode(Name,  Line, SourceFileId);
+        return new NamespacePointerNode(Name, DebugIndex);
     }
 }

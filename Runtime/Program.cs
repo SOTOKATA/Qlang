@@ -43,7 +43,7 @@ public static class Program
         {
             new Interpreter.Interpreter(qliProgram.StringList,
                 qliProgram.NumberList,
-                LoadDependencies(), qliProgram.SourceFileTable).Execute(qliProgram.ProgramNode, args.ToList()!);
+                LoadDependencies(), qliProgram.SourceFileTable, qliProgram.DebugTable).Execute(qliProgram.ProgramNode, args.ToList()!);
         }
         catch (QlangRuntimeException runtime)
         {
@@ -66,39 +66,34 @@ public static class Program
         // Case if native libs is not exists
         if (!Directory.Exists(dirPath))
             return new  NativeFunctionRegistry();
-        
-        var dirDepsPath = Path.Combine(dirPath, "dependents");
-        
-        var dirDepsExists = Directory.Exists(dirDepsPath);
-
-        var filesToAdd = new List<string>();
-        
-        // Add dependencies
-        if (dirDepsExists)
-            filesToAdd.AddRange(Directory.GetFiles(dirDepsPath, "*.dll", SearchOption.AllDirectories));
-        
-        // Add lib (main) files
-        filesToAdd.AddRange(Directory.GetFiles(dirPath, "*.dll", SearchOption.TopDirectoryOnly));
 
         var nativeLibRegister = new NativeFunctionRegistry();
         
-        foreach (var file in filesToAdd)
+        foreach (var dir in Directory.GetDirectories(dirPath))
         {
-            var assembly = Assembly.LoadFrom(file);
+            var dirDepsPath = Path.Combine(dir, "deps");
+        
+            var dirDepsExists = Directory.Exists(dirDepsPath);
 
-            var types = assembly.GetTypes();
-
-            var libTypes = types
-                .Where(t => typeof(IQlangLib).IsAssignableFrom(t) && t is { IsInterface: false, IsAbstract: false });
-
-            foreach (var type in libTypes)
-            {
-                var nativeLib = Activator.CreateInstance(type) as IQlangLib;
-                // If lib exists and is not corrupted: add
-                nativeLibRegister.RegisterLib(nativeLib);
-            }
+            var filesToAdd = new List<string>();
+        
+            // Add dependencies
+            if (dirDepsExists)
+                filesToAdd.AddRange(Directory.GetFiles(dirDepsPath, "*.dll", SearchOption.AllDirectories));
+        
+            // Add lib (main) files
+            filesToAdd.AddRange(Directory.GetFiles(dir, "*.dll", SearchOption.TopDirectoryOnly));
             
-            // Console.WriteLine("Loaded dependence: " + file);
+            foreach (var file in filesToAdd)
+            {
+                var ctx = new LibLoadContext(file);
+                var asm = ctx.LoadFromAssemblyPath(file);
+                
+                foreach (var type in asm.GetTypes()
+                             .Where(t => typeof(IQlangLib).IsAssignableFrom(t) && !t.IsAbstract))
+                    if (Activator.CreateInstance(type) is IQlangLib lib)
+                        nativeLibRegister.RegisterLib(lib);
+            }
         }
         
         return nativeLibRegister;

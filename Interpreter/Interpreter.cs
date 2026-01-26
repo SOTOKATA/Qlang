@@ -11,16 +11,18 @@ namespace Interpreter;
 
 public partial class Interpreter
 {
-    public Interpreter(List<string> stringList, List<double> numberList, NativeFunctionRegistry nativeFunctions, SourceFileTable sourceFileTable)
+    public Interpreter(List<string> stringList, List<double> numberList, NativeFunctionRegistry nativeFunctions, SourceFileTable sourceFileTable, DebugTable debugTable)
     {
         _stringList = stringList;
         _numberList = numberList;
         _nativeFunctions = nativeFunctions;
         _sourceFileTable = sourceFileTable;
         _sourceFileTable.RebuildCache();
+        _debugTable = debugTable;
     }
 
     private readonly SourceFileTable _sourceFileTable;
+    private readonly DebugTable _debugTable;
 
     private readonly NativeFunctionRegistry _nativeFunctions;
 
@@ -46,7 +48,7 @@ public partial class Interpreter
         foreach (var statement in program.Statements)
         {
             if (statement is not NamespaceNode namespaceNode)
-                    throw new QlangRuntimeException("Undefined structure." + statement, statement.Line, _sourceFileTable[statement.SourceFileId], GetStackTrace());
+                    throw new QlangRuntimeException("Undefined structure." + statement, GetDebug(statement), GetStackTrace());
             
             _dynamicNamespaces[namespaceNode.Name] = ToDynamicNamespace(namespaceNode);
         }
@@ -179,7 +181,7 @@ public partial class Interpreter
                 break;
 
             default:
-                throw new QlangRuntimeException($"Unknown statement type: {statement.GetType()}", statement.Line, _sourceFileTable[statement.SourceFileId], GetStackTrace());
+                throw new QlangRuntimeException($"Unknown statement type: {statement.GetType()}", GetDebug(statement), GetStackTrace());
         }
     }
 
@@ -193,7 +195,7 @@ public partial class Interpreter
         var path = assignNode.Path;
 
         if (path.Count == 0)
-            throw new QlangRuntimeException("Assignment path cannot be empty", assignNode.Line, _sourceFileTable[assignNode.SourceFileId], GetStackTrace());
+            throw new QlangRuntimeException("Assignment path cannot be empty", GetDebug(assignNode), GetStackTrace());
 
         var lastNode = (ObjectPointerNode)path[^1];
 
@@ -201,7 +203,7 @@ public partial class Interpreter
 
         if (path.Count > 1)
         {
-            var callNode = new CallNode(lastNode.Line, lastNode.SourceFileId)
+            var callNode = new CallNode(lastNode.DebugIndex)
             {
                 Objects = path.SkipLast(1).ToList(),
                 Arguments = path.SkipLast(1).ElementAt(^1) is FunctionPointerNode ptr ? ptr.Arguments : default
@@ -218,18 +220,18 @@ public partial class Interpreter
             if (obj.@object is Variable var)
             {
                 if (var.IsConst && !assignNode.IsNew)
-                    throw new QlangRuntimeException($"Cannot re-assign const property '{lastNode.Name}'", assignNode.Line, _sourceFileTable[assignNode.SourceFileId],
+                    throw new QlangRuntimeException($"Cannot re-assign const property '{lastNode.Name}'", GetDebug(assignNode),
                         GetStackTrace());
 
-                if (currentObject is not null && var.IsPrivate)
+                if (currentObject is not null && var.IsPrivate && !_allowPrivateCall)
                     throw new QlangRuntimeException("Cannot access to private variable from external source",
-                        lastNode.Line, _sourceFileTable[lastNode.SourceFileId], GetStackTrace());
+                        GetDebug(lastNode), GetStackTrace());
 
                 var.Value = value;
                 return;
             }
 
-            throw new QlangRuntimeException($"Invalid assignment target: {obj.@object?.GetType().Name}", assignNode.Line, _sourceFileTable[assignNode.SourceFileId],
+            throw new QlangRuntimeException($"Invalid assignment target: {obj.@object?.GetType().Name}", GetDebug(assignNode),
                 GetStackTrace());
         }
 
@@ -345,7 +347,7 @@ public partial class Interpreter
                 FunctionNode => expr,
                 _ => throw new QlangRuntimeException(
                     $"Unknown expression type: {expr.GetType().Name}",
-                    expr.Line, _sourceFileTable[expr.SourceFileId],
+                    GetDebug(expr),
                     GetStackTrace())
             };
         }
@@ -357,7 +359,7 @@ public partial class Interpreter
         {
             throw new QlangRuntimeException(
                 $"Internal error: {ex}",
-                expr.Line, _sourceFileTable[expr.SourceFileId],
+                GetDebug(expr),
                 GetStackTrace());
         }
     }
@@ -392,7 +394,7 @@ public partial class Interpreter
             _ => type.ToString()!
         };
         
-        throw new QlangRuntimeException($"Cannot cast object to type '{typeStr}'", cast.Line, _sourceFileTable[cast.SourceFileId],
+        throw new QlangRuntimeException($"Cannot cast object to type '{typeStr}'", GetDebug(cast),
             GetStackTrace());
     }
     
@@ -404,7 +406,7 @@ public partial class Interpreter
         {
             throw new QlangRuntimeException(
                 "Division by zero",
-                node.Line, _sourceFileTable[node.SourceFileId],
+                GetDebug(node),
                 GetStackTrace());
         }
         return left.ToString().ParseNumber() / divisor;
@@ -416,7 +418,7 @@ public partial class Interpreter
         {
             throw new QlangRuntimeException(
                 $"Undefined string reference: {strStringRef.Index}",
-                strStringRef.Line, _sourceFileTable[strStringRef.SourceFileId],
+                GetDebug(strStringRef),
                 GetStackTrace());
         }
         return _stringList[strStringRef.Index];
@@ -428,7 +430,7 @@ public partial class Interpreter
         {
             throw new QlangRuntimeException(
                 $"Undefined number reference: {numberRef.Index}",
-                numberRef.Line, _sourceFileTable[numberRef.SourceFileId],
+                GetDebug(numberRef),
                 GetStackTrace());
         }
 
@@ -449,7 +451,7 @@ public partial class Interpreter
         if (createFunction is null)
             throw new QlangRuntimeException(
                 "Second value is incompatible",
-                context.Line, _sourceFileTable[context.SourceFileId],
+                GetDebug(context),
                 GetStackTrace());
 
         var created = ExecuteFunction(
@@ -462,7 +464,7 @@ public partial class Interpreter
             dClass.ClassName != copy.ClassName)
             throw new QlangRuntimeException(
                 "Second value is null or incompatible",
-                context.Line, _sourceFileTable[context.SourceFileId],
+                GetDebug(context),
                 GetStackTrace());
 
         return dClass;
@@ -526,7 +528,7 @@ public partial class Interpreter
         if (opFunction is null)
             throw new QlangRuntimeException(
                 $"Class '{leftClass.ClassName}' is incompatible for operator '{binOp.Operator}'",
-                binOp.Line, _sourceFileTable[binOp.SourceFileId],
+                GetDebug(binOp),
                 GetStackTrace());
 
         var result = ExecuteFunction(
@@ -537,14 +539,14 @@ public partial class Interpreter
         if ((result is not DynamicClass dynamicClass || dynamicClass.ClassName != leftClass.ClassName) && 
             (binOp.Operator.Contains("Division") ||binOp.Operator.Contains("Subtraction") || binOp.Operator.Contains("Multiplication") || binOp.Operator.Contains("Addition")))
             throw new QlangRuntimeException(
-                $"Return value of '_operator{binOp.Operator.ToLower()}' must be equal to type '{leftClass.ClassName}'", binOp.Line, _sourceFileTable[binOp.SourceFileId],
+                $"Return value of '_operator{binOp.Operator.ToLower()}' must be equal to type '{leftClass.ClassName}'", GetDebug(binOp),
                 GetStackTrace()); 
         
         if (result is not bool && 
             (binOp.Operator.Contains("Equal") ||  binOp.Operator.Contains("Greater") || 
              binOp.Operator.Contains("Less")))
             throw new QlangRuntimeException(
-                $"Return value of '_operator{binOp.Operator.ToLower()}' must be equal to type 'bool'", binOp.Line, _sourceFileTable[binOp.SourceFileId],
+                $"Return value of '_operator{binOp.Operator.ToLower()}' must be equal to type 'bool'", GetDebug(binOp),
                 GetStackTrace()); 
         
         // Console.WriteLine("Result: " + (result as DynamicClass)?.Variables["_value"]);
@@ -585,7 +587,7 @@ public partial class Interpreter
                     if (!bool.TryParse(left.ToString(), out leftBool))
                         throw new QlangRuntimeException(
                             $"Type error: Left operand of '&&' must be boolean, got '{left}'",
-                            binOp.Line, _sourceFileTable[binOp.SourceFileId], GetStackTrace());
+                            GetDebug(binOp), GetStackTrace());
 
                     // Short-circuit: если левая часть false, правую не вычисляем
                     if (!leftBool)
@@ -597,7 +599,7 @@ public partial class Interpreter
                     if (!bool.TryParse(right.ToString(), out rightBool))
                         throw new QlangRuntimeException(
                             $"Type error: Right operand of '&&' must be boolean, got '{right}'",
-                            binOp.Line, _sourceFileTable[binOp.SourceFileId], GetStackTrace());
+                            GetDebug(binOp), GetStackTrace());
 
                     Logger.Log($"Operation &&: {leftBool} && {rightBool} = {rightBool}");
                     return rightBool;
@@ -607,7 +609,7 @@ public partial class Interpreter
                     if (!bool.TryParse(left.ToString(), out leftBool))
                         throw new QlangRuntimeException(
                             $"Type error: Left operand of '||' must be boolean, got '{left}'",
-                            binOp.Line, _sourceFileTable[binOp.SourceFileId], GetStackTrace());
+                            GetDebug(binOp), GetStackTrace());
 
                     // Short-circuit: если левая часть true, правую не вычисляем
                     if (leftBool)
@@ -622,7 +624,7 @@ public partial class Interpreter
                     if (!bool.TryParse(right.ToString(), out rightBool))
                         throw new QlangRuntimeException(
                             $"Type error: Right operand of '||' must be boolean, got '{right}'",
-                            binOp.Line, _sourceFileTable[binOp.SourceFileId], GetStackTrace());
+                            GetDebug(binOp), GetStackTrace());
 
                     Logger.Log($"Operation ||: {leftBool} || {rightBool} = {rightBool}");
                     return rightBool;
@@ -639,7 +641,7 @@ public partial class Interpreter
                 "!=" => !Equals(leftBool, rightBool),
                 _ => throw new QlangRuntimeException(
                     $"Unknown operator for boolean: {binOp.Operator}",
-                    binOp.Line, _sourceFileTable[binOp.SourceFileId],
+                    GetDebug(binOp),
                     GetStackTrace())
             };
         }
@@ -678,7 +680,7 @@ public partial class Interpreter
             throw new QlangRuntimeException(
                 $"Type error: Cannot apply operator '{binOp.Operator}' to " +
                 $"'{left?.ToString() ?? "null"}' ({left?.GetType().Name}) and '{right?.ToString() ?? "null"}' ({right?.GetType().Name})",
-                binOp.Line, _sourceFileTable[binOp.SourceFileId],
+                GetDebug(binOp),
                 GetStackTrace());
         }
 
@@ -702,7 +704,7 @@ public partial class Interpreter
                 "%" => leftNum % rightNum,
                 _ => throw new QlangRuntimeException(
                     $"Unknown operator: {binOp.Operator}",
-                    binOp.Line, _sourceFileTable[binOp.SourceFileId],
+                    GetDebug(binOp),
                     GetStackTrace())
             };
         }
@@ -714,7 +716,7 @@ public partial class Interpreter
         {
             throw new QlangRuntimeException(
                 $"Error evaluating operation: {ex.Message}",
-                binOp.Line, _sourceFileTable[binOp.SourceFileId],
+                GetDebug(binOp),
                 GetStackTrace());
         }
     }
@@ -831,41 +833,9 @@ public partial class Interpreter
     
         return true;
     }
-    // private bool TryMatchFunction(FunctionNode function, List<object?> args, out List<object?> finalArgs)
-    // {
-    //     finalArgs = [];
-    //     
-    //     var requiredParamsCount = 0;
-    //     var totalParamsCount = function.Parameters.Count;
-    //     
-    //     foreach (var t in function.Parameters)
-    //     {
-    //         if (t.Value == null)
-    //             requiredParamsCount++;
-    //         else
-    //             break;
-    //     }
-    //     
-    //     if (args.Count < requiredParamsCount || args.Count > totalParamsCount)
-    //         return false;
-    //     
-    //     for (var i = 0; i < totalParamsCount; i++)
-    //     {
-    //         if (i < args.Count)
-    //             finalArgs.Add(args[i]);
-    //         else
-    //         {
-    //             var param = function.Parameters[i];
-    //             if (param.Value != null)
-    //             {
-    //                 var defaultValue = EvaluateExpression(param.Value);
-    //                 finalArgs.Add(defaultValue);
-    //             }
-    //             else
-    //                 return false;
-    //         }
-    //     }
-    //     
-    //     return true;
-    // }
+
+    private (int, string) GetDebug(ASTNode node)
+    {
+        return (_debugTable.GetLineIndex(node.DebugIndex) + 1, _sourceFileTable[_debugTable.GetFileId(node.DebugIndex)]);
+    }
 }

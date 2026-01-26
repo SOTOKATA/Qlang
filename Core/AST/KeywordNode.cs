@@ -2,7 +2,7 @@
 
 namespace Core.AST;
 
-public class KeywordNode(string keyword, int line, int sfId) : ASTNode(line, sfId)
+public class KeywordNode(string keyword, int line) : ASTNode(line)
 {
     [JsonProperty("a")]
     public string Value { get; set; } = keyword;
@@ -14,6 +14,6 @@ public class KeywordNode(string keyword, int line, int sfId) : ASTNode(line, sfI
 
     public override ASTNode Clone()
     {
-        return new KeywordNode(Value,  Line, SourceFileId);
+        return new KeywordNode(Value,  DebugIndex);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Core.AST;
 
-public class BinaryOperationNode(int line, int sfId) : ASTNode(line, sfId)
+public class BinaryOperationNode(int line) : ASTNode(line)
 {
     [JsonProperty("a")]
     public ASTNode? Left { get; set; }
@@ -14,7 +14,7 @@ public class BinaryOperationNode(int line, int sfId) : ASTNode(line, sfId)
 
     public override ASTNode Clone()
     {
-        return new BinaryOperationNode(Line, SourceFileId)
+        return new BinaryOperationNode(DebugIndex)
         {
             Left = Left?.Clone(),
             Operator = Operator,

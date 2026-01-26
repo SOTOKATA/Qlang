@@ -2,7 +2,7 @@
 
 namespace Core.AST;
 
-public class ParensNode(int line, int sfId) : ASTNode(line, sfId)
+public class ParensNode(int line) : ASTNode(line)
 {
     [JsonProperty("a")]
     public ASTNode? Statement { get; set; }
@@ -17,7 +17,7 @@ public class ParensNode(int line, int sfId) : ASTNode(line, sfId)
 
     public override ASTNode Clone()
     {
-        return new ParensNode(Line, SourceFileId)
+        return new ParensNode(DebugIndex)
         {
             Statement = Statement?.Clone()
         };

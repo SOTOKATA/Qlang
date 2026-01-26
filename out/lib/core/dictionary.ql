@@ -1,6 +1,6 @@
 import "$lib/core"
 
-class Dictionary: {
+class Dictionary extends DataType: {
     private let _keys;
     private let _values;
 

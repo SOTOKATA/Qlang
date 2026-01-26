@@ -2,7 +2,7 @@
 
 namespace Core.AST;
 
-public class CallNode(int line, int sfId) : ASTNode(line, sfId)
+public class CallNode(int line) : ASTNode(line)
 {
     [JsonProperty("a")]
     public List<ASTNode> Objects = [];
@@ -11,7 +11,7 @@ public class CallNode(int line, int sfId) : ASTNode(line, sfId)
 
     public override ASTNode Clone()
     {
-        return new CallNode(Line, SourceFileId)
+        return new CallNode(DebugIndex)
         {
             Arguments = Arguments.Select(node => node.Clone()).ToList(),
             Objects = Objects.Select(node => node.Clone()).ToList()

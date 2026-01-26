@@ -5,6 +5,10 @@ using Core.Exceptions;
 
 namespace Compiler;
 
+/*
+ * Second stage of compilation
+ * Translated code from the lexer is converted into C# classes
+ */
 public class Parser
 {
     private List<Token> _tokens = [];
@@ -17,13 +21,16 @@ public class Parser
     
     private SourceFileTable _sourceFileTable;
 
-    public ProgramNode Parse(List<Token> tokens, SourceFileTable table)
+    private DebugTable _debugTable;
+
+    public ProgramNode Parse(List<Token> tokens, SourceFileTable table, DebugTable debugTable)
     {
         _sourceFileTable = table;
+        _debugTable = debugTable;
         _tokens = tokens;
         _position = 0;
 
-        ProgramNode program = new(-830, -830);
+        ProgramNode program = new(-1);
 
         Logger.SetLoggerPath(Path.Combine("Logs", "Debug", "debug_parser.log"));
         Logger.Log("----------- Parser -----------");
@@ -39,14 +46,14 @@ public class Parser
             program.Statements.Add(ParseStatement());
         }
 
-        var postParser = new PostParser(_sourceFileTable);
+        var postParser = new PostParser(_sourceFileTable, _debugTable);
         
         program = postParser.CreateGlobalNamespace(program);
         postParser.MergeNamespaces(program.Statements);
         program = postParser.IncludeUsings(program, _callNodes, _assignmentNodes);
         program = postParser.IncludeExtends(program);
 
-        new Validator(_sourceFileTable).CheckValidate(program);
+        new Validator(_sourceFileTable, _debugTable).CheckValidate(program);
 
         return program;
     }
@@ -72,17 +79,9 @@ public class Parser
         }
 
         if (Check(Tokens.Keyword) && Current().Value == Keywords.BreakKeyword)
-        {
-            Advance();
-            return new KeywordNode(Keywords.BreakKeyword, (IsAtEnd() ? 0 : Current().Line + 1),
-                (IsAtEnd() ? -1 : Current().SourceFileId));
-        }
+            return new KeywordNode(Keywords.BreakKeyword, Advance().DebugIndex);
         if (Check(Tokens.Keyword) && Current().Value == Keywords.ContinueKeyword)
-        {
-            Advance();
-            return new KeywordNode(Keywords.ContinueKeyword, (IsAtEnd() ? 0 : Current().Line + 1),
-                (IsAtEnd() ? -1 : Current().SourceFileId));
-        }
+            return new KeywordNode(Keywords.ContinueKeyword, Advance().DebugIndex);
         
         // using declaration
         if (Check(Tokens.Keyword) && Current().Value == Keywords.UsingKeyword)
@@ -156,7 +155,7 @@ public class Parser
             return expr;
         }
 
-        throw new QlangCompileException($"Unexpected token: {Current().TokenType} '{Current().Value}'", (IsAtEnd() ? 0 : Current().Line + 1), "Parser", _sourceFileTable[Current().SourceFileId]);
+        throw new QlangCompileException($"Unexpected token: {Current().TokenType} '{Current().Value}'", (IsAtEnd() ? 0 : _debugTable.GetLineIndex(Current().DebugIndex) + 1), "Parser", _sourceFileTable[_debugTable.GetFileId(Current().DebugIndex)]);
     }
 
     private AssignmentNode ParseVariableDeclaration(bool canUseType, bool isStatic = false, bool isPrivate = false, bool isConst = false, bool isNew = false)
@@ -165,7 +164,7 @@ public class Parser
         if (!Check(Tokens.Keyword) ||
             (Current().Value != Keywords.VariableDeclaration &&
              Current().Value != Keywords.ConstVariableDeclaration))
-            throw new QlangCompileException($"(ParseVariableDeclaration) Unexpected token: {Current().TokenType}", (IsAtEnd() ? 0 : Current().Line + 1), "Parser", _sourceFileTable[Current().SourceFileId]);
+            throw new QlangCompileException($"(ParseVariableDeclaration) Unexpected token: {Current().TokenType}", (IsAtEnd() ? 0 : _debugTable.GetLineIndex(Current().DebugIndex) + 1), "Parser", _sourceFileTable[_debugTable.GetFileId(Current().DebugIndex)]);
 
         Advance();
 
@@ -176,7 +175,7 @@ public class Parser
             {
                 var token = Current();
                 throw new QlangCompileException(
-                    "Using variables with types is only possible with function arguments", (token.Line + 1), "Parser", _sourceFileTable[token.SourceFileId]);
+                    "Using variables with types is only possible with function arguments", _debugTable.GetLineIndex(token.DebugIndex), "Parser", _sourceFileTable[_debugTable.GetFileId(token.DebugIndex)]);
             }
             Advance();
             var returnValue  = ParsePrimaryPath();
@@ -184,7 +183,7 @@ public class Parser
             if (returnValue is not CallNode node)
             {
                 var token = Current();
-                throw new QlangCompileException("Cannot use follow node as path to class", (token.Line + 1), "Parser", _sourceFileTable[token.SourceFileId]);
+                throw new QlangCompileException("Cannot use follow node as path to class", (_debugTable.GetLineIndex(token.DebugIndex) + 1), "Parser", _sourceFileTable[_debugTable.GetFileId(token.DebugIndex)]);
             }
 
             type = node;
@@ -201,9 +200,9 @@ public class Parser
         }
 
         Logger.Log($"CompilationProcess.End: Parsing Variable declaration (Name: {name} Value: {value?.GetType().Name ?? "<null>"})");
-        var assignmentNode = new AssignmentNode(isStatic, isPrivate, isConst, isNew, (IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+        var assignmentNode = new AssignmentNode(isStatic, isPrivate, isConst, isNew, Current().DebugIndex)
         {
-            Path = [new ObjectPointerNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId)) { Name = name }],
+            Path = [new ObjectPointerNode(Current().DebugIndex) { Name = name }],
             Value = value,
             Type = type
         };
@@ -221,7 +220,7 @@ public class Parser
         var node = ParsePrimary();
 
         if (node is not CallNode callNode)
-            throw new QlangCompileException("Using must be path to namespace.", node.Line, "Parser", _sourceFileTable[node.SourceFileId]);
+            throw new QlangCompileException("Using must be path to namespace.", GetDebug(node), "Parser");
 
         var newObjects = new List<NamespacePointerNode>();
 
@@ -230,19 +229,18 @@ public class Parser
             switch (o)
             {
                 case ObjectPointerNode pointer:
-                    newObjects.Add(new NamespacePointerNode(pointer.Name!, pointer.Line, pointer.SourceFileId));
+                    newObjects.Add(new NamespacePointerNode(pointer.Name!, pointer.DebugIndex));
                     break;
                 case NamespacePointerNode namespacePointerNode:
                     newObjects.Add(namespacePointerNode);
                     break;
                 default:
-                    throw new QlangCompileException("Using objects in the path that are not namespaces is not allowed.", o.Line, "Parser", _sourceFileTable[o.SourceFileId]);
+                    throw new QlangCompileException("Using objects in the path that are not namespaces is not allowed.", GetDebug(o), "Parser");
             }
         }
 
         callNode.Objects = newObjects.Cast<ASTNode>().ToList();
-        Expect(Tokens.Semicolon);
-        return new UsingNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+        return new UsingNode(Expect(Tokens.Semicolon).DebugIndex)
         {
             CallPath = callNode
         };
@@ -255,18 +253,18 @@ public class Parser
         // skip 'namespace'
         Expect(Tokens.Keyword, Keywords.NamespaceDeclaration);
 
-        var name = Expect(Tokens.Identifier).Value;
+        var nameToken = Expect(Tokens.Identifier);
 
         Expect(Tokens.Colon);
         
         if (!Check(Tokens.LBrace))
-            throw new QlangCompileException("Namespace's body cannot be one-line", Current().Line, "Parser", _sourceFileTable[Current().SourceFileId]);
+            throw new QlangCompileException("Namespace's body cannot be one-line", _debugTable.GetLineIndex(Current().DebugIndex), "Parser", _sourceFileTable[_debugTable.GetFileId(Current().DebugIndex)]);
         
         var body = ParseBlock();
         
-        return new NamespaceNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+        return new NamespaceNode(nameToken.DebugIndex)
         {
-            Name = name,
+            Name = nameToken.Value,
             Body = body,
             IsPrivate = isPrivate,
         };
@@ -277,7 +275,7 @@ public class Parser
         Logger.Log("CompilationProcess: Parsing function");
 
         Expect(Tokens.Keyword, Keywords.FunctionDeclaration);
-        var name = Expect(Tokens.Identifier).Value;
+        var nameToken = Expect(Tokens.Identifier);
         Expect(Tokens.LParen);
 
         List<AssignmentNode> parameters = [];
@@ -295,9 +293,9 @@ public class Parser
         var body = ParseBlock();
 
         Logger.Log("CompilationProcess.End: Parsing function");
-        return new FunctionNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+        return new FunctionNode(nameToken.DebugIndex)
         {
-            Name = name,
+            Name = nameToken.Value,
             Parameters = parameters,
             Body = body,
             IsStatic = isStatic,
@@ -309,27 +307,27 @@ public class Parser
     {
         Logger.Log("CompilationProcess: Parsing class");
         Expect(Tokens.Keyword, Keywords.ClassDeclaration);
-        var name = Expect(Tokens.Identifier).Value;
+        var nameToken = Expect(Tokens.Identifier);
 
         var extends = "";
         if (Check(Tokens.Keyword) && Current().Value == Keywords.ExtendsKeyword &&
             Peek()?.TokenType == Tokens.Identifier)
         {
+            // Skip extends keyword
             Advance();
-            extends = Current().Value;
-            Advance();
-        }
 
+            extends = Expect(Tokens.Identifier).Value;
+        }
+        
         Expect(Tokens.Colon);
-        // Expect(Tokens.Semicolon);
 
         if (!Check(Tokens.LBrace))
-            throw new QlangCompileException("Class's body cannot be one-line", Current().Line, "Parser", _sourceFileTable[Current().SourceFileId]);
+            throw new QlangCompileException("Class's body cannot be one-line", _debugTable.GetLineIndex(Current().DebugIndex), "Parser", _sourceFileTable[_debugTable.GetFileId(Current().DebugIndex)]);
 
         var body = ParseBlock();
 
         Logger.Log("CompilationProcess.End: Parsing class");
-        return new ClassNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId)) { Name = name, Body = body, Extends = extends };
+        return new ClassNode(nameToken.DebugIndex) { Name = nameToken.Value, Body = body, Extends = extends };
     }
 
     private ForNode ParseFor()
@@ -352,7 +350,7 @@ public class Parser
 
 
         Logger.Log("CompilationProcess.End: Parsing for");
-        return new ForNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId)) { Assignment = assignment, Statement = statement, Condition = condition, Body = forBlock };
+        return new ForNode(Current().DebugIndex) { Assignment = assignment, Statement = statement, Condition = condition, Body = forBlock };
     }
 
     private WhileNode ParseWhile(bool isDoWhile = false)
@@ -366,7 +364,7 @@ public class Parser
         var whileBlock = ParseBlock();
 
         Logger.Log("CompilationProcess.End: Parsing while");
-        return new WhileNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId)) { Condition = condition, Body = whileBlock, IsDoWhile = isDoWhile };
+        return new WhileNode(Current().DebugIndex) { Condition = condition, Body = whileBlock, IsDoWhile = isDoWhile };
     }
 
     private SwitchNode ParseSwitch()
@@ -377,7 +375,7 @@ public class Parser
         Expect(Tokens.Colon);
         Expect(Tokens.LBrace);
 
-        var @switch = new SwitchNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId)) { Condition = condition };
+        var @switch = new SwitchNode(Current().DebugIndex) { Condition = condition };
         
         while (Check(Tokens.Keyword) && Current().Value == Keywords.CaseKeyword)
         {
@@ -386,7 +384,7 @@ public class Parser
             Expect(Tokens.Colon);
             var block = ParseBlock();
 
-            @switch.CaseBlocks.Add(new SwitchCaseNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+            @switch.CaseBlocks.Add(new SwitchCaseNode(Current().DebugIndex)
             {
                 CaseBlock = block,
                 Condition = condition,
@@ -434,7 +432,7 @@ public class Parser
         }
 
         Logger.Log("CompilationProcess.End: Parsing if");
-        return new IfNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId)) { Condition = condition, ThenBlock = thenBlock, ElseBlock = elseBlock };
+        return new IfNode(Current().DebugIndex) { Condition = condition, ThenBlock = thenBlock, ElseBlock = elseBlock };
     }
 
     private List<ASTNode> ParseBlock()
@@ -485,7 +483,7 @@ public class Parser
         Expect(Tokens.Semicolon);
 
         Logger.Log("CompilationProcess.End: Parsing return");
-        return new ReturnNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId)) { ReturnValue = node };
+        return new ReturnNode(Current().DebugIndex) { ReturnValue = node };
     }
 
     /// <summary>
@@ -512,7 +510,7 @@ public class Parser
             Advance(); // первый |
             Advance(); // второй |
             var right = ParseLogicalAnd();
-            left = new BinaryOperationNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+            left = new BinaryOperationNode(Current().DebugIndex)
             {
                 Left = left,
                 Operator = "||",
@@ -535,7 +533,7 @@ public class Parser
             Advance(); // первый &
             Advance(); // второй &
             var right = ParseEquality();
-            left = new BinaryOperationNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+            left = new BinaryOperationNode(Current().DebugIndex)
             {
                 Left = left,
                 Operator = "&&",
@@ -560,7 +558,7 @@ public class Parser
                 Advance(); // первый =
                 Advance(); // второй =
                 var right = ParseComparison();
-                left = new BinaryOperationNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+                left = new BinaryOperationNode(Current().DebugIndex)
                 {
                     Left = left,
                     Operator = "==",
@@ -572,7 +570,7 @@ public class Parser
                 Advance(); // !
                 Advance(); // =
                 var right = ParseComparison();
-                left = new BinaryOperationNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+                left = new BinaryOperationNode(Current().DebugIndex)
                 {
                     Left = left,
                     Operator = "!=",
@@ -613,7 +611,7 @@ public class Parser
                 }
 
                 var right = ParseAddition();
-                left = new BinaryOperationNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+                left = new BinaryOperationNode(Current().DebugIndex)
                 {
                     Left = left,
                     Operator = op,
@@ -636,7 +634,7 @@ public class Parser
                 }
 
                 var right = ParseAddition();
-                left = new BinaryOperationNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+                left = new BinaryOperationNode(Current().DebugIndex)
                 {
                     Left = left,
                     Operator = op,
@@ -664,7 +662,7 @@ public class Parser
             var op = Check(Tokens.Plus) ? "+" : "-";
             Advance();
             var right = ParseMultiplication();
-            left = new BinaryOperationNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+            left = new BinaryOperationNode(Current().DebugIndex)
             {
                 Left = left,
                 Operator = op,
@@ -693,7 +691,7 @@ public class Parser
             
             Advance();
             var right = ParsePrimary();
-            left = new BinaryOperationNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+            left = new BinaryOperationNode(Current().DebugIndex)
             {
                 Left = left,
                 Operator = op,
@@ -710,21 +708,20 @@ public class Parser
         {
             // Advance 'null'
             Advance();
-            return new KeywordNode(Keywords.NullKeyword, (IsAtEnd() ? 0 : Current().Line + 1),
-                (IsAtEnd() ? -1 : Current().SourceFileId));
+            return new KeywordNode(Keywords.NullKeyword, Current().DebugIndex);
         }
 
         if (Check(Tokens.Keyword) && Current().Value == Keywords.BreakKeyword)
         {
             // Advance 'break'
             Advance();
-            return new KeywordNode(Keywords.BreakKeyword, (IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId));
+            return new KeywordNode(Keywords.BreakKeyword, Current().DebugIndex);
         }
         if (Check(Tokens.Keyword) && Current().Value == Keywords.ContinueKeyword)
         {
             // Advance 'continue'
             Advance();
-            return new KeywordNode(Keywords.ContinueKeyword, (IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId));
+            return new KeywordNode(Keywords.ContinueKeyword, Current().DebugIndex);
         }
 
         // bool return
@@ -732,7 +729,7 @@ public class Parser
         {
             Logger.Log("CompilationProcess.End: Parsing primary");
             // Advance 'true' or 'false'
-            return new BooleanNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+            return new BooleanNode(Current().DebugIndex)
             {
                 Value = isMinus ? !bool.Parse(Advance().Value) : bool.Parse(Advance().Value)
             };
@@ -743,7 +740,7 @@ public class Parser
         {
             Logger.Log("CompilationProcess.End: Parsing primary (StringRef)");
             // Advance '___STRING_*___'
-            return new StringRefNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+            return new StringRefNode(Current().DebugIndex)
             {
                 Index = int.Parse(Advance().Value)
             };
@@ -753,7 +750,7 @@ public class Parser
         {
             Logger.Log("CompilationProcess.End: Parsing primary (NumberRef)");
             // Advance '___NUMBER_*___'
-            return new NumberRefNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+            return new NumberRefNode(Current().DebugIndex)
             {
                 IsNegative = isMinus,
                 Index = int.Parse(Advance().Value)
@@ -773,7 +770,7 @@ public class Parser
             Advance();
             // Advance '('
             Advance();
-            var func = new FunctionNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+            var func = new FunctionNode(Current().DebugIndex)
             {
                 Name = "___function_pointer___"
             };
@@ -805,10 +802,11 @@ public class Parser
         {
             // Advance '{'
             Advance();
-            var @class = new ClassNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+            var @class = new ClassNode(Current().DebugIndex)
             {
                 Name = "___object___",
-                Body = []
+                Body = [],
+                Extends = null
             };
 
             while (!Check(Tokens.RBrace))
@@ -850,7 +848,7 @@ public class Parser
             // Advance ']'
             Advance();
 
-            return new CollectionNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+            return new CollectionNode(Current().DebugIndex)
             {
                 Collection = statements
             };
@@ -885,7 +883,7 @@ public class Parser
             // Advance '___STRING_*___'
             Advance();
             var index = int.Parse(currentIdentifier.Replace("___STRING_", "").Replace("___", ""));
-            return new StringRefNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId)) { Index = index, Line = (IsAtEnd() ? 0 : Current().Line + 1), SourceFileId = (IsAtEnd() ? -1 : Current().SourceFileId) };
+            return new StringRefNode(Current().DebugIndex) { Index = index, };
         }
 
         if (currentIdentifier.StartsWith("___NUMBER_"))
@@ -893,7 +891,7 @@ public class Parser
             // Advance '___NUMBER_*___'
             Advance();
             var index = int.Parse(currentIdentifier.Replace("___NUMBER_", "").Replace("___", ""));
-            return new NumberRefNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+            return new NumberRefNode(Current().DebugIndex)
             {
                 IsNegative = isMinus,
                 Index = index
@@ -904,7 +902,7 @@ public class Parser
         {
             // Advance '1'
             Advance();
-            return new NumberNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+            return new NumberNode(Current().DebugIndex)
             {
                 Value = res
             };
@@ -919,7 +917,7 @@ public class Parser
 
         if (Current().TokenType == Tokens.Keyword && Current().Value == Keywords.ThisKeyword)
         {
-            current = new ObjectPointerNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+            current = new ObjectPointerNode(Current().DebugIndex)
             {
                 Name = Keywords.ThisKeyword
             };
@@ -948,7 +946,7 @@ public class Parser
             // Advance ')'
             Advance();
             
-            current = new FunctionPointerNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+            current = new FunctionPointerNode(Current().DebugIndex)
             {
                 Name = identifier,
                 Arguments = args
@@ -956,7 +954,7 @@ public class Parser
         }
 
         if (current is null)
-            current = new ObjectPointerNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+            current = new ObjectPointerNode(Current().DebugIndex)
             {
                 Name = identifier
             };
@@ -967,9 +965,9 @@ public class Parser
             Logger.Log($"CompilationProcess.End: Parsing primary (PathAssignmentNode - single)");
             // Advance '='
             Advance();
-            current = new AssignmentNode(false, false, false, false, (IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+            current = new AssignmentNode(false, false, false, false, Current().DebugIndex)
             {
-                Path = [new ObjectPointerNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId)) { Name = identifier }],
+                Path = [new ObjectPointerNode(Current().DebugIndex) { Name = identifier }],
                 Value = ParseExpression()
             };
             
@@ -979,7 +977,7 @@ public class Parser
         }
 
         if (Check(Tokens.Colon) && Peek()?.TokenType == Tokens.Colon)
-            current = new NamespacePointerNode(identifier, (IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId));
+            current = new NamespacePointerNode(identifier, Current().DebugIndex);
 
         return current;
     }
@@ -996,15 +994,15 @@ public class Parser
         {
             var returnValue = astNode switch
             {
-                ObjectPointerNode obj => new CallNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+                ObjectPointerNode obj => new CallNode(Current().DebugIndex)
                 {
                     Objects = [obj]
                 },
-                NamespacePointerNode namespacePointer => new CallNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+                NamespacePointerNode namespacePointer => new CallNode(Current().DebugIndex)
                 {
                     Objects = [namespacePointer]
                 },
-                FunctionPointerNode pointerFunction => new CallNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+                FunctionPointerNode pointerFunction => new CallNode(Current().DebugIndex)
                 {
                     Objects = [pointerFunction],
                     Arguments = pointerFunction.Arguments
@@ -1042,8 +1040,8 @@ public class Parser
 
         if (path[^1] is AssignmentNode assignmentNode)
         {
-            path[^1] = new ObjectPointerNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId)) { Name = assignmentNode.GetLastName() };
-            var assignment = new AssignmentNode(false, false, false, false, (IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+            path[^1] = new ObjectPointerNode(Current().DebugIndex) { Name = assignmentNode.GetLastName() };
+            var assignment = new AssignmentNode(false, false, false, false, Current().DebugIndex)
             {
                 Path = path,
                 Value = assignmentNode.Value
@@ -1056,7 +1054,7 @@ public class Parser
 
         var args = path[^1] is FunctionPointerNode ptr ? ptr.Arguments : [];
         
-        var retValue =  new CallNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId))
+        var retValue =  new CallNode(Current().DebugIndex)
         {
             Objects =  path,
             Arguments = args
@@ -1077,24 +1075,24 @@ public class Parser
         var path = ParsePrimaryPath();
         
         if (path is not CallNode callNode)
-            throw new QlangCompileException("Cannot find type to cast", path.Line, "Parser", _sourceFileTable[path.SourceFileId]);
+            throw new QlangCompileException("Cannot find type to cast", GetDebug(path), "Parser");
         
         Expect(Tokens.Greater);
         
         path = ParsePrimaryPath();
 
-        var callPathNode = path as CallNode ?? new CallNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId));
+        var callPathNode = path as CallNode ?? new CallNode(Current().DebugIndex);
 
         if (path is not CallNode)
         {
-            callPathNode = new CallNode((IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId)) { Objects = [path] };
+            callPathNode = new CallNode(Current().DebugIndex) { Objects = [path] };
             _callNodes.Add(callPathNode);
         }
 
         // if (path is not CallNode objCallNode)
             // throw new QlangCompileException("Cannot find object to cast", path.Line, "Parser", path.SourceFile ?? "undefined");
 
-        return new CastNode(callNode, callPathNode, (IsAtEnd() ? 0 : Current().Line + 1), (IsAtEnd() ? -1 : Current().SourceFileId));
+        return new CastNode(callNode, callPathNode, Current().DebugIndex);
     }
 
     
@@ -1144,7 +1142,7 @@ public class Parser
         if (baseExpression is not null)
             return baseExpression;
         
-        throw new QlangCompileException($"Unexpected token in expression: {Current().TokenType} ({(Current().Value == "" ? "Null" : Current().Value)})", (IsAtEnd() ? 0 : Current().Line + 1), "Parser", _sourceFileTable[Current().SourceFileId]);
+        throw new QlangCompileException($"Unexpected token in expression: {Current().TokenType} ({(Current().Value == "" ? "Null" : Current().Value)})", GetDebug(baseExpression), "Parser");
     }
 
     // Support methods
@@ -1164,7 +1162,7 @@ public class Parser
             return token;
         }
 
-        Logger.Log(token.TokenType.ToString() + " " + token.Value, $"Token (Ln:{token.Line})");
+        // Logger.Log(token.TokenType.ToString() + " " + token.Value, $"Token (Ln:{token.Line})");
         _line += $"{Token.TokenToString(token.TokenType)}{token.Value}";
         return token;
     }
@@ -1177,11 +1175,11 @@ public class Parser
             throw new QlangCompileException($"""
                                  Expected {type}, got {current.TokenType} (Value: {(current.Value == "" ? "Null" : current.Value)})
                                         line: '{_line}'
-                                 """, (IsAtEnd() ? 0 : Current().Line + 1), "Parser", _sourceFileTable[Current().SourceFileId]);
+                                 """, (IsAtEnd() ? 0 : _debugTable.GetLineIndex(Current().DebugIndex) + 1), "Parser", _sourceFileTable[_debugTable.GetFileId(Current().DebugIndex)]);
         }
 
         if (value != null && Current().Value != value)
-            throw new QlangCompileException($"Expected '{value}', got '{Current().Value}'", (IsAtEnd() ? 0 : Current().Line + 1), "Parser", _sourceFileTable[Current().SourceFileId]);
+            throw new QlangCompileException($"Expected '{value}', got '{Current().Value}'", (IsAtEnd() ? 0 : _debugTable.GetLineIndex(Current().DebugIndex) + 1), "Parser", _sourceFileTable[_debugTable.GetFileId(Current().DebugIndex)]);
 
         return Advance();
     }
@@ -1195,4 +1193,11 @@ public class Parser
         
         return list;
     }
+
+    private (int, string) GetDebug(ASTNode node)
+    {
+        return (_debugTable.GetLineIndex(node.DebugIndex) + 1, _sourceFileTable[_debugTable.GetFileId(node.DebugIndex)]);
+    }
+    
+    
 }

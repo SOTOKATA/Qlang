@@ -2,12 +2,12 @@
 
 namespace Core.AST;
 
-public class NumberNode(int line, int sfId) : ASTNode(line, sfId)
+public class NumberNode(int line) : ASTNode(line)
 {
     [JsonProperty("a")]
     public double Value { get; set; }
 
-    public override ASTNode Clone() => new NumberNode(line,  SourceFileId)
+    public override ASTNode Clone() => new NumberNode(DebugIndex)
     {
         Value = Value
     };

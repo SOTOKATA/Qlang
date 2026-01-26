@@ -10,8 +10,8 @@ namespace std:  {
         }
 
         // Thow exception if function is not implement
-        function nonImplementException(): {
-            exception("This function or object is not implement");
+        function notImplementedException(): {
+            exception("This function is not implement");
         }
 
         // Thow exception when parse error

@@ -2,14 +2,14 @@
 
 namespace Core.AST;
 
-public class NumberRefNode(int line, int sfId) : ASTNode(line, sfId)
+public class NumberRefNode(int line) : ASTNode(line)
 {
     [JsonProperty("a")]
     public bool IsNegative { get; set; }
     [JsonProperty("b")]
     public int Index { get; set; }
 
-    public override ASTNode Clone() => new NumberRefNode(Line,  SourceFileId)
+    public override ASTNode Clone() => new NumberRefNode(DebugIndex)
     {
         Index = Index, 
         IsNegative = IsNegative

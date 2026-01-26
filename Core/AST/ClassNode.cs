@@ -2,18 +2,18 @@
 
 namespace Core.AST;
 
-public class ClassNode(int line, int sfId) : ASTNode(line, sfId)
+public class ClassNode(int line) : ASTNode(line)
 {
     [JsonProperty("a")]
-    public string Name { get; set; }
+    public required string Name { get; set; }
     [JsonProperty("b")]
-    public string Extends { get; set; }
+    public required string Extends { get; set; }
     [JsonProperty("c")]
-    public List<ASTNode> Body { get; set; }
+    public required List<ASTNode> Body { get; set; }
 
     public override ASTNode Clone()
     {
-        return new ClassNode(Line, SourceFileId)
+        return new ClassNode(DebugIndex)
         {
             Name = Name, 
             Extends = Extends,
@@ -22,11 +22,10 @@ public class ClassNode(int line, int sfId) : ASTNode(line, sfId)
     }
 
     public override string GetTree(string indent = "")
-    {
+    {//Extends: {string.Join(", ", Extends?.Objects.Select(x => x.GetTree("\t\t")) ?? ["<not_exists>"])}
         return DebugIndent($"""
                 ClassNode:
                     Name: {Name}
-                    Extends: {(Extends == "" ? "<not_exists>" : Extends)}
                     Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t\t")))}]
                 """, indent);
     }

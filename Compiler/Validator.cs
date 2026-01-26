@@ -4,9 +4,10 @@ using Core.Exceptions;
 
 namespace Compiler;
 
-public class Validator(SourceFileTable sourceFileTable)
+public class Validator(SourceFileTable sourceFileTable, DebugTable debugTable)
 {
-    private SourceFileTable _sourceFileTable = sourceFileTable;
+    private readonly SourceFileTable _sourceFileTable = sourceFileTable;
+    private readonly DebugTable _debugTable = debugTable;
     
     public void CheckValidate(ProgramNode program)
     {
@@ -41,7 +42,7 @@ public class Validator(SourceFileTable sourceFileTable)
             .Where(g => g.Count() > 1);
 
         foreach (var group in duplicateGroups)
-            throw new QlangCompileException($"Duplicate class found: '{group.Key.Name}'", group.First().Line, "Validator",  _sourceFileTable[group.First().SourceFileId]);
+            throw new QlangCompileException($"Duplicate class found: '{group.Key.Name}'", GetDebug(group.First()), "Validator");
     }
 
     private void CheckDuplicateFunctions(ClassNode @class)
@@ -60,9 +61,8 @@ public class Validator(SourceFileTable sourceFileTable)
         foreach (var group in duplicateGroups)
             throw new QlangCompileException(
                 $"Duplicate function found: '{group.Key.Name}' in class '{@class.Name}'",
-                group.First().Line,
-                "Validator",
-                _sourceFileTable[group.First().SourceFileId]
+                GetDebug(group.First()),
+                "Validator"
             );
     }
     
@@ -79,6 +79,11 @@ public class Validator(SourceFileTable sourceFileTable)
             .Where(g => g.Count() > 1);
 
         foreach (var group in duplicateGroups)
-            throw new QlangCompileException($"Duplicate assignment found: '{group.Key.VariableName}' in class '{@class.Name}'", group.First().Line, "Validator", _sourceFileTable[group.First().SourceFileId]);
+            throw new QlangCompileException($"Duplicate assignment found: '{group.Key.VariableName}' in class '{@class.Name}'", GetDebug(group.First()), "Validator");
+    }
+    
+    private (int, string) GetDebug(ASTNode node)
+    {
+        return (_debugTable.GetLineIndex(node.DebugIndex) + 1, _sourceFileTable[_debugTable.GetFileId(node.DebugIndex)]);
     }
 }

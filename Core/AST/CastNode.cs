@@ -2,7 +2,7 @@
 
 namespace Core.AST;
 
-public class CastNode(CallNode call, CallNode obj, int line, int sfId) : ASTNode(line, sfId)
+public class CastNode(CallNode call, CallNode obj, int line) : ASTNode(line)
 {
     [JsonProperty("a")]
     public CallNode TypeCastPath { get; set; } = call;
@@ -21,6 +21,6 @@ public class CastNode(CallNode call, CallNode obj, int line, int sfId) : ASTNode
 
     public override ASTNode Clone()
     {
-        return new CastNode((CallNode)TypeCastPath.Clone(), (CallNode)ToCastObject.Clone(), Line, SourceFileId);
+        return new CastNode((CallNode)TypeCastPath.Clone(), (CallNode)ToCastObject.Clone(), DebugIndex);
     }
 }

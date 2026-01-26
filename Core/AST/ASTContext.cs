@@ -4,13 +4,13 @@ namespace Core.AST;
 
 public class ASTContext
 {
-    public DynamicClass? Class { get; set; }
+    public DynamicClass? Class { get; init; }
     
-    public DynamicNamespace?  Namespace { get; set; }
+    public DynamicNamespace?  Namespace { get; init; }
     
-    public DynamicFunction? Function { get; set; }
+    public DynamicFunction? Function { get; init; }
 
-    public List<ASTBlock> Blocks { get; set; } = [];
+    public List<ASTBlock> Blocks { get; } = [];
     
     public ASTNode? CurrentNode { get; set; }
 }

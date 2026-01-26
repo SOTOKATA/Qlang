@@ -2,12 +2,12 @@
 
 namespace Core.AST;
 
-public class ProgramNode(int line, int sfId) : ASTNode(line, sfId)
+public class ProgramNode(int line) : ASTNode(line)
 {
     [JsonProperty("a")]
     public List<ASTNode> Statements { get; set; } = [];
 
-    public override ASTNode Clone() => new ProgramNode(Line,  SourceFileId)
+    public override ASTNode Clone() => new ProgramNode(DebugIndex)
     {
         Statements = Statements.Select(node => node.Clone()).ToList()
     };

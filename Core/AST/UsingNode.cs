@@ -1,6 +1,6 @@
 ﻿namespace Core.AST;
 
-public class UsingNode(int line, int sfId) : ASTNode(line, sfId)
+public class UsingNode(int line) : ASTNode(line)
 {
     public required CallNode CallPath { get; set; }
     
@@ -14,7 +14,7 @@ public class UsingNode(int line, int sfId) : ASTNode(line, sfId)
 
     public override ASTNode Clone()
     {
-        return new UsingNode(line, SourceFileId)
+        return new UsingNode(DebugIndex)
         {
             CallPath = CallPath
         };

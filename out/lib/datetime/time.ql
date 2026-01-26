@@ -1,4 +1,3 @@
-import "$lib/core"
 import "$lib/standard"
 
 namespace dt:  {
@@ -8,7 +7,7 @@ namespace dt:  {
                 std::Throw.parseException("argument 'milliseconds' is not a number");
             }
 
-            millisec = Parser.asInt(millisec);
+            millisec = std::Parser.asInt(millisec);
 
             _native("std.datetime.wait", millisec);
         }

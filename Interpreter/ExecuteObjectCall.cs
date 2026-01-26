@@ -8,6 +8,7 @@ namespace Interpreter;
 
 public partial class Interpreter
 {
+    private bool _allowPrivateCall = false;
     private object? PrimitiveToDynamicClass(object? primitive)
     {
         switch (primitive)
@@ -105,8 +106,8 @@ public partial class Interpreter
                     catch (Exception ex)
                     {
                         if (ex is QlangRuntimeException)
-                            throw new QlangRuntimeException(ex.Message, fn.Line, _sourceFileTable[fn.SourceFileId], GetStackTrace(1));
-                        throw new QlangRuntimeException(ex.Message, fn.Line, _sourceFileTable[fn.SourceFileId], GetStackTrace());
+                            throw new QlangRuntimeException(ex.Message, GetDebug(fn), GetStackTrace(1));
+                        throw new QlangRuntimeException(ex.Message, GetDebug(fn), GetStackTrace());
                     }
 
                     Logger.Log($"Native call return: value='{returnValue}' type='{returnValue?.GetType().Name}'");
@@ -144,7 +145,8 @@ public partial class Interpreter
                     return GetNewClass(@class, fn.Arguments.ConvertAll(EvaluateExpression));
              
                 var function = FindFunction(fn, lastReturnValue, isPathStart);
-                
+
+                _allowPrivateCall = false;
                 return ExecuteFunction(function.function, function.args ?? [], function.@class, function.@namespace);
             }
             case ObjectPointerNode objCall:
@@ -206,7 +208,7 @@ public partial class Interpreter
                 return (ToDynamicFunction(funcPair.function), funcPair.args, null, null);
             
             throw new QlangRuntimeException($"Function '{node.Name}' is not found in current context ('{lastObject}')",
-                node.Line, _sourceFileTable[node.SourceFileId], GetStackTrace());
+                GetDebug(node), GetStackTrace());
         }
 
             // Try to get function from function variables
@@ -226,8 +228,8 @@ public partial class Interpreter
             
             if (pair.function is not null)
             {
-                if (pair.function.IsPrivate)
-                    throw new QlangRuntimeException($"Cannot get access to private function '{pair.function.Name}' from class '{dClass.ClassName}'", node.Line, _sourceFileTable[node.SourceFileId], GetStackTrace());
+                if (pair.function.IsPrivate && !_allowPrivateCall)
+                    throw new QlangRuntimeException($"Cannot get access to private function '{pair.function.Name}' from class '{dClass.ClassName}'",GetDebug(node), GetStackTrace());
                 
                 return (pair.function, pair.args, dClass, @namespace);
             }
@@ -240,27 +242,33 @@ public partial class Interpreter
             if (pair.function is not null)
             {
                 if (pair.function.IsPrivate)
-                    throw new QlangRuntimeException($"Cannot get access to private function '{pair.function.Name}' from namespace '{dNamespace.Name}'", node.Line, _sourceFileTable[node.SourceFileId], GetStackTrace());
+                    throw new QlangRuntimeException($"Cannot get access to private function '{pair.function.Name}' from namespace '{dNamespace.Name}'", GetDebug(node), GetStackTrace());
                 
                 return (pair.function, pair.args, null, dNamespace);
             }
         }
         
         throw new QlangRuntimeException($"Function '{node.Name}' is not found in current context ('{lastObject}')",
-            node.Line, _sourceFileTable[node.SourceFileId], GetStackTrace());
+            GetDebug(node), GetStackTrace());
     }
 
     private (object? @object, DynamicNamespace? @namespace) FindObject(ObjectPointerNode node, object? lastObject, bool isPathStart)
     {
         if (node.Name is null)
-            throw new QlangRuntimeException("Part of path is null.", node.Line, _sourceFileTable[node.SourceFileId], GetStackTrace());
+            throw new QlangRuntimeException("Part of path is null.", GetDebug(node), GetStackTrace());
             
         if (isPathStart)
         {
             // Get 'this'
             if (node.Name == Keywords.ThisKeyword && HasContext)
+            {
+                _allowPrivateCall = true;
                 return (CurrentContext.Class, CurrentContext.Namespace);
-            
+            }
+
+            _allowPrivateCall = false;
+
+
             // Try to get VAR from current (class or namespace or function or blocks) context;
             if (HasContext)
             {
@@ -329,7 +337,7 @@ public partial class Interpreter
         if (lastObject is null)
         {
             throw new QlangRuntimeException($"Object '{node.Name}' is not found in current context.",
-                node.Line, _sourceFileTable[node.SourceFileId], GetStackTrace());
+                GetDebug(node), GetStackTrace());
         }
         
         switch (lastObject)
@@ -338,9 +346,9 @@ public partial class Interpreter
                 // Try to get VAR from class
                 if (dynamicClass.Variables.TryGetValue(node.Name, out var var))
                 {
-                    if (var.IsPrivate)
+                    if (var.IsPrivate && !_allowPrivateCall)
                         throw new QlangRuntimeException($"Cannot get access to private variable '{var.Name}' from class '{dynamicClass.ClassName}'.",
-                            node.Line, _sourceFileTable[node.SourceFileId], GetStackTrace());
+                            GetDebug(node), GetStackTrace());
                         
                     return (var, null);
                 }
@@ -351,7 +359,7 @@ public partial class Interpreter
                 {
                     if (var.IsPrivate)
                         throw new QlangRuntimeException($"Cannot get access to private variable '{var.Name}' from namespace '{dynamicNamespace.Name}'.",
-                            node.Line, _sourceFileTable[node.SourceFileId], GetStackTrace());
+                            GetDebug(node), GetStackTrace());
                     
                     return (var, null);
                 }
@@ -363,7 +371,7 @@ public partial class Interpreter
                 break;
         }
         throw new QlangRuntimeException($"Object '{node.Name}' is not found in current context" + (HasContext ? $"\nCurrent function: '{CurrentContext.Function?.Name}'; Current class: '{CurrentContext.Class?.ClassName}'; Current namespace: '{CurrentContext.Namespace?.Name}'" : "\nNo context found."),
-            node.Line, _sourceFileTable[node.SourceFileId], GetStackTrace());
+            GetDebug(node), GetStackTrace());
     }
 
     private DynamicNamespace FindNamespace(NamespacePointerNode node, object? lastObject, bool isPathStart)
@@ -384,12 +392,12 @@ public partial class Interpreter
             var ns = dynamicNamespace.Namespaces.FirstOrDefault(ns => ns.Name == node.Name);
 
             if (ns is not null)
-                return ns.IsPrivate ? throw new QlangRuntimeException($"Cannot get access to private namespace from namespace '{dynamicNamespace.Name}'", node.Line, _sourceFileTable[node.SourceFileId], GetStackTrace()) : ns;
+                return ns.IsPrivate ? throw new QlangRuntimeException($"Cannot get access to private namespace from namespace '{dynamicNamespace.Name}'", GetDebug(node), GetStackTrace()) : ns;
         }
 
         // TODO: Add 'namespace' to 'namespace'
         // if (lastObject is DynamicNamespace dynamicNamespace)
-        throw new QlangRuntimeException($"Namespace '{node.Name}' is not found in current context", node.Line, _sourceFileTable[node.SourceFileId], GetStackTrace());
+        throw new QlangRuntimeException($"Namespace '{node.Name}' is not found in current context", GetDebug(node), GetStackTrace());
         
     }
     

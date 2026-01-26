@@ -4,9 +4,10 @@ using Core.Exceptions;
 
 namespace Compiler;
 
-public class PostParser(SourceFileTable table)
+public class PostParser(SourceFileTable table, DebugTable debugTable)
 {
     private readonly SourceFileTable _sourceFileTable = table;
+    private readonly DebugTable _debugTable = debugTable;
     /// <summary>
     /// Creates global namespace for global scopes
     /// </summary>
@@ -20,7 +21,7 @@ public class PostParser(SourceFileTable table)
         // Remove all global scopes
         program.Statements.RemoveAll(x => x is ClassNode or FunctionNode or AssignmentNode);
 
-        var globalNamespace = new NamespaceNode(0, globalScopes.FirstOrDefault()?.SourceFileId ?? -1)
+        var globalNamespace = new NamespaceNode(globalScopes.FirstOrDefault()?.DebugIndex ?? -1)
         {
             Name = "0global",
             IsPrivate = false
@@ -50,7 +51,7 @@ public class PostParser(SourceFileTable table)
                 continue;
             }
 
-            var merged = new NamespaceNode(group.First().Line, group.First().SourceFileId)
+            var merged = new NamespaceNode(group.First().DebugIndex)
             {
                 Name = group.Key,
                 Body = [],
@@ -71,24 +72,6 @@ public class PostParser(SourceFileTable table)
         }
     }
 
-    private static string decript(List<ASTNode> nodes)
-    {
-        var output = "";
-        foreach (var node in nodes)
-        {
-            output += node switch
-            {
-                NamespacePointerNode np => np.Name,
-                ObjectPointerNode op => op.Name,
-                FunctionPointerNode fp => fp.Name + "(" + string.Join(", ", fp.Arguments) + ")",
-
-            };
-            output += ".";
-        }
-
-        return output[..(output.Length - 1)];
-    }
-
     /// <summary>
     /// Find all usings and include to paths
     /// </summary>
@@ -99,7 +82,7 @@ public class PostParser(SourceFileTable table)
     /// <exception cref="QlangCompileException">Will throw exception if using was not found in namespaces</exception>
     public ProgramNode IncludeUsings(ProgramNode program, List<CallNode> calls, List<AssignmentNode> assignments)
     {
-        calls.AddRange(assignments.Where(x => x is { IsNew: false, IsPrivate: false }).Select(x => new CallNode(x.Line, x.SourceFileId)
+        calls.AddRange(assignments.Where(x => x is { IsNew: false, IsPrivate: false }).Select(x => new CallNode(x.DebugIndex)
         {
             Objects = x.Path
         }));
@@ -162,7 +145,7 @@ public class PostParser(SourceFileTable table)
                     lastNamespace.Body.OfType<NamespaceNode>().FirstOrDefault(x => x.Name == element?.Name);
                 
                 if (foundedNamespace is null)
-                    throw new QlangCompileException($"Namespace '{element.Name}' was not found", element.Line, "PostParser", _sourceFileTable[element.SourceFileId]);
+                    throw new QlangCompileException($"Namespace '{element?.Name}' was not found", GetDebug(element), "PostParser");
                 
                 lastNamespace = foundedNamespace;
             }
@@ -281,18 +264,16 @@ public class PostParser(SourceFileTable table)
         if (!resolving.Add(cls.Name))
             throw new QlangCompileException(
                 $"Cyclic inheritance detected: {cls.Name}",
-                cls.Line,
-                "PostParser",
-                _sourceFileTable[cls.SourceFileId]);
+                GetDebug(cls),
+                "PostParser");
 
         var parent = allClasses.FirstOrDefault(c => c.Name == cls.Extends);
 
         if (parent == null)
             throw new QlangCompileException(
                 $"Extended class '{cls.Extends}' is not found",
-                cls.Line,
-                "PostParser",
-                _sourceFileTable[cls.SourceFileId]);
+                GetDebug(cls),
+                "PostParser");
 
         ResolveClass(parent, allClasses, resolving);
 
@@ -317,5 +298,10 @@ public class PostParser(SourceFileTable table)
             map[GetNodeKey(node)] = node;
 
         return map.Values.ToList();
+    }
+    
+    private (int, string) GetDebug(ASTNode node)
+    {
+        return (_debugTable.GetLineIndex(node.DebugIndex) + 1, _sourceFileTable[_debugTable.GetFileId(node.DebugIndex)]);
     }
 }

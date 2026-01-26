@@ -18,6 +18,15 @@ public class QlangCompileException : Exception
         Source = source;
         SourceFile = sourceFile;
     }
+    
+    public QlangCompileException(
+        string message, (int line, string sourceFile) debugInfo, string source) 
+        : base(message)
+    {
+        Line = debugInfo.line;
+        Source = source;
+        SourceFile = debugInfo.sourceFile;
+    }
 
     public override string ToString()
     {

@@ -2,16 +2,16 @@
 
 namespace Core.AST;
 
-public class FunctionNode(int line, int sfId) : ASTNode(line, sfId)
+public class FunctionNode(int line) : ASTNode(line)
 {
     [JsonProperty("a")]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     [JsonProperty("b")]
     public bool IsStatic { get; set; } = true;
     
     [JsonProperty("c")]
-    public bool IsPrivate { get; set; } = false;
+    public bool IsPrivate { get; set; }
     [JsonProperty("d")]
     public List<AssignmentNode> Parameters { get; set; } = [];
     [JsonProperty("e")]
@@ -19,7 +19,7 @@ public class FunctionNode(int line, int sfId) : ASTNode(line, sfId)
 
     public override ASTNode Clone()
     {
-        return new FunctionNode(Line, SourceFileId)
+        return new FunctionNode(DebugIndex)
         {
             IsStatic = IsStatic,
             IsPrivate = IsPrivate,

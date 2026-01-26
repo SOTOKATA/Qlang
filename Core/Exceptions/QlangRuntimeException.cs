@@ -31,6 +31,16 @@ public class QlangRuntimeException : Exception
 
         StackTrace = stackTrace ?? [];
     }
+    
+    public QlangRuntimeException(
+        string message, (int line, string file) debugInfo,  List<string>? stackTrace = null) 
+        : base(message)
+    {
+        Line = debugInfo.line;
+        SourceFile = debugInfo.file;
+
+        StackTrace = stackTrace ?? [];
+    }
 
     public override string ToString()
     {

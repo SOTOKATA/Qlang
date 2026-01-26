@@ -2,10 +2,10 @@
 
 namespace Core.AST;
 
-public class SwitchCaseNode(int line, int sfId) : ASTNode(line, sfId)
+public class SwitchCaseNode(int line) : ASTNode(line)
 {
     [JsonProperty("a")]
-    public ASTNode Condition { get; set; }
+    public required ASTNode Condition { get; set; }
     [JsonProperty("b")]
     public List<ASTNode> CaseBlock { get; set; } = [];
     
@@ -22,7 +22,7 @@ public class SwitchCaseNode(int line, int sfId) : ASTNode(line, sfId)
 
     public override ASTNode Clone()
     {
-        return new SwitchCaseNode(Line,  SourceFileId)
+        return new SwitchCaseNode(DebugIndex)
         {
             Condition = Condition.Clone(),
             CaseBlock = CaseBlock.Select(node => node.Clone()).ToList()

@@ -28,8 +28,8 @@ public static class Keywords
     public static string TrueKeyword => "true";
     public static string FalseKeyword => "false";
 
-    public static string IncludeKeyword => "import"; // Old: include
-    public static string IncludeNativeKeyword => "native";
+    public static string ImportKeyword => "import";
+    public static string ImportNativeKeyword => "native";
     public static string UsingKeyword => "using";
     
     public static string CreateClassInstanceKeyword => "new";
@@ -43,7 +43,7 @@ public static class Keywords
     public static List<string> GetKeywords() =>
     [
         FunctionDeclaration, ClassDeclaration, VariableDeclaration, IfBlock, ElseBlock, WhileBlock, DoWhileBlock, 
-        ForBlock, ReturnKeyword, TrueKeyword, FalseKeyword, IncludeKeyword, PrivateModificator, 
+        ForBlock, ReturnKeyword, TrueKeyword, FalseKeyword, ImportKeyword, PrivateModificator, 
         StaticModificator, ConstVariableDeclaration, ContinueKeyword, BreakKeyword, NullKeyword, ThisKeyword, ExtendsKeyword, SwitchBlock, CaseKeyword, DefaultKeyword, NamespaceDeclaration,
         UsingKeyword
     ];

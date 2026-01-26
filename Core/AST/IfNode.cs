@@ -2,10 +2,10 @@
 
 namespace Core.AST;
 
-public class IfNode(int line, int sfId) : ASTBlock(line, sfId)
+public class IfNode(int line) : ASTBlock(line)
 {
     [JsonProperty("a")]
-    public ASTNode Condition { get; set; }
+    public required ASTNode Condition { get; set; }
     [JsonProperty("b")]
     public List<ASTNode> ThenBlock { get; set; } = [];
     [JsonProperty("c")]
@@ -13,7 +13,7 @@ public class IfNode(int line, int sfId) : ASTBlock(line, sfId)
 
     public override ASTNode Clone()
     {
-        return new IfNode(Line,  SourceFileId)
+        return new IfNode(DebugIndex)
         {
             Condition = Condition.Clone(), 
             ThenBlock = ThenBlock.Select(node => node.Clone()).ToList(), 

@@ -3,12 +3,21 @@ using Core.Exceptions;
 
 namespace Compiler;
 
+/*
+ * First stage of project compilation
+ * Translation of code into special characters
+ * Example:
+ *      Code: print(1);
+ *      Translated code: Identificator(print) LParen NumberRef(___NUMBER_0___) RParen SemiColon
+ * This process also saves debug data (line number and file index) and creates a file table.
+ */
 public static class Lexer
 {
-    public static (List<Token> tokens, SourceFileTable sourceFileTable) Lex(string fileName, string script)
+    public static (List<Token> tokens, SourceFileTable sourceFileTable, DebugTable debugTable) Lex(string fileName, string script)
     {
         List<Token> tokens = [];
-        SourceFileTable table = new();
+        SourceFileTable sourceFileTable = new();
+        DebugTable debugTable = new();
         
         var scriptLines = script.Split('\n').ToList();
 
@@ -39,8 +48,7 @@ public static class Lexer
 
                 if (TryCharToToken(line[pos], out var charToken))
                 {
-                    charToken.Line = lineIndex;
-                    charToken.SourceFileId = table.GetOrAdd(fileName);
+                    charToken!.DebugIndex = debugTable.Add(lineIndex, sourceFileTable.GetOrAdd(fileName));
                     
                     tokens.Add(charToken);
                     pos++;
@@ -57,8 +65,7 @@ public static class Lexer
                     var word = line[startPos..pos];
                     if (TryWordToToken(word, out var wordToken))
                     {
-                        wordToken.Line = lineIndex;
-                        wordToken.SourceFileId = table.GetOrAdd(fileName);
+                        wordToken!.DebugIndex = debugTable.Add(lineIndex, sourceFileTable.GetOrAdd(fileName));
                         
                         tokens.Add(wordToken);
                         continue;
@@ -70,7 +77,7 @@ public static class Lexer
             lineIndex++;
         }
 
-        return (tokens, table);
+        return (tokens, sourceFileTable, debugTable);
     }
 
     private static bool IsIdentifierStart(char c)
@@ -88,7 +95,7 @@ public static class Lexer
         if (IsKeyword(word, out token))
             return true;
         
-        token = new Token(Tokens.Identifier, -1, word);
+        token = new Token(Tokens.Identifier, word);
         return true;
     }
  
@@ -99,7 +106,7 @@ public static class Lexer
         
         if (keywords.Contains(word.ToLower()))
         {
-            token = new Token(Tokens.Keyword, -1, word);
+            token = new Token(Tokens.Keyword, word);
             return true;
         }
         
@@ -111,28 +118,28 @@ public static class Lexer
     {
         token = keychar switch
         {
-            '[' => new Token(Tokens.LSquareParen, -1),
-            ']' => new Token(Tokens.RSquareParen, -1),
-            '{' => new Token(Tokens.LBrace, -1),
-            '}' => new Token(Tokens.RBrace, -1),
-            ';' => new Token(Tokens.Semicolon, -1),
-            '=' => new Token(Tokens.Equals, -1),
-            '+' => new Token(Tokens.Plus, -1),
-            '-' => new Token(Tokens.Minus, -1),
-            '*' => new Token(Tokens.Star, -1),
-            '/' => new Token(Tokens.Slash, -1),
-            '%' => new Token(Tokens.Percent, -1),
-            '(' => new Token(Tokens.LParen, -1),
-            ')' => new Token(Tokens.RParen, -1),
-            ':' => new Token(Tokens.Colon, -1),
-            ',' => new Token(Tokens.Comma, -1),
-            '.' => new Token(Tokens.Dot, -1),
-            '!' => new Token(Tokens.Not, -1),
-            '>' => new Token(Tokens.Greater, -1),
-            '<' => new Token(Tokens.Less, -1),
-            '|' => new Token(Tokens.Or, -1),
-            '&' => new Token(Tokens.And, -1),
-            '?' => new  Token(Tokens.Question, -1),
+            '[' => new Token(Tokens.LSquareParen),
+            ']' => new Token(Tokens.RSquareParen),
+            '{' => new Token(Tokens.LBrace),
+            '}' => new Token(Tokens.RBrace),
+            ';' => new Token(Tokens.Semicolon),
+            '=' => new Token(Tokens.Equals),
+            '+' => new Token(Tokens.Plus),
+            '-' => new Token(Tokens.Minus),
+            '*' => new Token(Tokens.Star),
+            '/' => new Token(Tokens.Slash),
+            '%' => new Token(Tokens.Percent),
+            '(' => new Token(Tokens.LParen),
+            ')' => new Token(Tokens.RParen),
+            ':' => new Token(Tokens.Colon),
+            ',' => new Token(Tokens.Comma),
+            '.' => new Token(Tokens.Dot),
+            '!' => new Token(Tokens.Not),
+            '>' => new Token(Tokens.Greater),
+            '<' => new Token(Tokens.Less),
+            '|' => new Token(Tokens.Or),
+            '&' => new Token(Tokens.And),
+            '?' => new  Token(Tokens.Question),
             var _ => null
         };
         

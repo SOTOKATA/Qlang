@@ -6,7 +6,7 @@ public static class Logger
 {
     public static bool Debug;
 
-    private static FileLogger FileLogger;
+    private static FileLogger _fileLogger = null!;
 
     public static void Initialize(bool debug)
     {
@@ -16,7 +16,7 @@ public static class Logger
     
     public static void SetLoggerPath(string path)
     {
-        FileLogger = new FileLogger(path);
+        _fileLogger = new FileLogger(path);
     }
 
     private static void _Log(string message, bool isInternal = false, string prefix = "", string type = "")
@@ -25,17 +25,12 @@ public static class Logger
             return;
         
         message = GetStackPath(prefix, type, isInternal ? 4 : 3) + message;
-        FileLogger.Log(message);
+        _fileLogger.Log(message);
     }
     
     public static void Log(string message, string prefix = "")
     {
         _Log(message, false, prefix, "LOG");
-    }
-
-    public static void Error(string message, string msg = "")
-    {
-        _Log(message, true, msg, "ERR");
     }
 
     private static string GetStackPath(string msg = "", string type = "", int depth = 3)

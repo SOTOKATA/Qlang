@@ -1,7 +1,7 @@
 import "$lib/core"
 
 // Class to make string operations
-class String: {
+class String extends DataType: {
     private let _value = "";
 
     // overriding functions 
@@ -9,8 +9,6 @@ class String: {
         return Object.toString(_value);
     }
 
-    function getValue(): return _value;
-    
     // Parse object to String
     function _createFrom(const obj):
         return String.new(obj);
@@ -65,6 +63,10 @@ class String: {
     // Parse '<' operations
     function _operatorLess(const obj1, const obj2): 
         return obj1.length() < obj2.length();
+
+    function _cast(const obj): {
+
+    }
 
     function new(const input): {
         if String.isString(input):

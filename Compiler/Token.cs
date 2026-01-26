@@ -1,13 +1,12 @@
 ﻿namespace Compiler;
 
-public class Token(Tokens token, int line, string value = "")
+public class Token(Tokens token, string value = "")
 {
     public readonly Tokens TokenType = token;
     public readonly string Value = value;
     
     // Debug variables
-    public int Line = line;
-    public int SourceFileId = -12;
+    public int DebugIndex = -1;
 
     public static string TokenToString(Tokens token)
     {

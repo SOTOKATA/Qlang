@@ -2,12 +2,12 @@
 
 namespace Core.AST;
 
-public class BooleanNode(int line, int sfId) : ASTNode(line, sfId)
+public class BooleanNode(int line) : ASTNode(line)
 {
     [JsonProperty("a")]
     public bool Value { get; set; }
 
-    public override ASTNode Clone() => new BooleanNode(Line, SourceFileId) { 
+    public override ASTNode Clone() => new BooleanNode(DebugIndex) { 
             Value = Value
     };
 

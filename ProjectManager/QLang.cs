@@ -8,19 +8,12 @@ namespace ProjectManager;
 
 public class QLang
 {
-    private ProgramNode? _programNode;
-    private List<string> _stringList = [];
-    private List<double> _numberList = [];
-
-    public bool Compile(string path, string? filename = null, bool useGZipCompress = false)
+    public bool Compile(string path, string? filename = null, bool useGZipCompress = false, bool jsonIndented = false)
     {
         var code = File.ReadAllText(path);
         Compiler.Compiler c = new();
 
-        _programNode = c.Compile(path, code);
-
-        _stringList = c.StringList;
-        _numberList = c.NumberList;
+        var programNode = c.Compile(path, code);
         
         var dirName = Path.GetDirectoryName(path);
         if (filename != null)
@@ -28,12 +21,13 @@ public class QLang
         
         SaveProgram(new QLIProgram
         {
-            ProgramNode = _programNode,
-            StringList = _stringList,
-            NumberList = _numberList,
+            ProgramNode = programNode,
+            StringList = c.StringList,
+            NumberList = c.NumberList,
             ExternalLibraries = c.DllDependencies,
             SourceFileTable = c.SourceFileTable,
-        }, path, useGZipCompress);
+            DebugTable = c.DebugTable
+        }, path, useGZipCompress, jsonIndented);
 
         return true;
     }
@@ -44,27 +38,31 @@ public class QLang
             return;
         
         var dirPath =  Path.Combine(path, filename + ".external.qli");
-        var dirDepsPath = Path.Combine(dirPath, "dependents");
         
         if (Directory.Exists(dirPath))
             Directory.Delete(dirPath, true);
         
         Directory.CreateDirectory(dirPath);
-        Directory.CreateDirectory(dirDepsPath);
 
         var externalLibs = qliProgram.ExternalLibraries;
         qliProgram.ExternalLibraries = [];
 
         foreach (var lib in externalLibs)
         {
+            var currentLibPath = Path.Combine(dirPath, lib.Name);
+            var currentLibDepsPath =  Path.Combine(currentLibPath, "deps");
+            
+            Directory.CreateDirectory(currentLibPath);
+            Directory.CreateDirectory(currentLibDepsPath);
+            
             foreach (var depsFile in lib.DependenciesFilePaths)
-                File.Copy(depsFile, Path.Combine(dirDepsPath, Path.GetFileName(depsFile)), true);
+                File.Copy(depsFile, Path.Combine(currentLibDepsPath, Path.GetFileName(depsFile)), true);
             foreach (var mainFile in lib.MainFilePaths)
-                File.Copy(mainFile, Path.Combine(dirPath, Path.GetFileName(mainFile)), true);  
+                File.Copy(mainFile, Path.Combine(currentLibPath, Path.GetFileName(mainFile)), true);  
         }
     }
 
-    private static void SaveProgram(QLIProgram qliProgram, string filePath, bool useGZipCompress)
+    private static void SaveProgram(QLIProgram qliProgram, string filePath, bool useGZipCompress, bool jsonIndented)
     {
         var pathToFile = Path.GetDirectoryName(filePath);
         
@@ -81,8 +79,8 @@ public class QLang
         File.Copy(Path.Combine(Path.GetDirectoryName(Environment.ProcessPath), "qli" + OS.GetExecutableExtension()), Path.Combine(pathToFile ?? "", "build", Path.GetFileNameWithoutExtension(filePath) + OS.GetExecutableExtension()), true);
         
         if (useGZipCompress)
-            File.WriteAllBytes(path, GZip.Compress(Json.Serialize(qliProgram)));
-        else File.WriteAllText(path, Json.Serialize(qliProgram));
+            File.WriteAllBytes(path, GZip.Compress(Json.Serialize(qliProgram, jsonIndented)));
+        else File.WriteAllText(path, Json.Serialize(qliProgram, jsonIndented));
         
     }
 

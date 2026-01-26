@@ -9,12 +9,11 @@ public class Compiler
     public List<double> NumberList = [];
     public List<QLIProgramLib> DllDependencies = [];
     public SourceFileTable SourceFileTable = new();
+    public DebugTable DebugTable = new();
 
     public ProgramNode Compile(string fileName, string script)
     {
-        string outputScript = PreCompile.IncludeFiles(script, fileName);
-        
-        (DllDependencies, outputScript) = PreCompile.IncludeNativeFolders(outputScript, fileName, []);
+        (var outputScript, DllDependencies) = PreCompile.IncludeFiles(script, fileName, []);
         
         outputScript = PreCompile.ClearComments(outputScript);
         
@@ -29,8 +28,9 @@ public class Compiler
         var output = Lexer.Lex(fileName, outputScript);
 
         SourceFileTable = output.sourceFileTable;
+        DebugTable = output.debugTable;
 
-        var programNode = new Parser().Parse(output.tokens, output.sourceFileTable);
+        var programNode = new Parser().Parse(output.tokens, output.sourceFileTable, output.debugTable);
         
         return programNode;
     }

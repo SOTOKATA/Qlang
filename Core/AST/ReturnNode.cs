@@ -2,12 +2,12 @@
 
 namespace Core.AST;
 
-public class ReturnNode(int line, int sfId) : ASTNode(line, sfId)
+public class ReturnNode(int line) : ASTNode(line)
 {
     [JsonProperty("a")]
     public ASTNode? ReturnValue { get; set; }
 
-    public override ASTNode Clone() => new ReturnNode(line, SourceFileId)
+    public override ASTNode Clone() => new ReturnNode(DebugIndex)
     {
         ReturnValue = ReturnValue?.Clone() 
     };

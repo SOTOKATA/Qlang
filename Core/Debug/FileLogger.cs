@@ -15,15 +15,16 @@ public class FileLogger
             SetPath(filePath, append);
     }
 
-    public void SetPath(string path, bool append = false)
+    private void SetPath(string path, bool append = false)
     {
         if (!Debug)
             return;
         
         _filePath = path;
         
-        if (!Directory.Exists(Path.GetDirectoryName(path))) 
-            Directory.CreateDirectory(Path.GetDirectoryName(path));
+        var dirPath  = Path.GetDirectoryName(path);
+        if (!Directory.Exists(dirPath) && dirPath is not null) 
+            Directory.CreateDirectory(dirPath);
         if (!File.Exists(path))
             File.Create(_filePath).Close();
         

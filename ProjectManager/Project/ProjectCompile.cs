@@ -25,14 +25,23 @@ public partial class Project
         return _compileSettings.Get(param);
     }
 
-    public void Compile()
+    public bool Compile()
     {
-        _qlang.Compile(Path.Combine(_settings.GetString(ProjectSettings.RootPath), _settings.GetString(ProjectSettings.MainFilePath)), _compileSettings.GetString(CompileSettings.OutputFilename), _compileSettings.GetBool(CompileSettings.GZipCompress));
+        var rootPath = Path.Combine(_settings.GetString(ProjectSettings.RootPath),
+            _settings.GetString(ProjectSettings.MainFilePath));
+
+        var outputName = _compileSettings.GetString(CompileSettings.OutputFilename);
+
+        var useCompress = _compileSettings.GetBool(CompileSettings.GZipCompress);
+        
+        var jsonIndented = _compileSettings.GetBool(CompileSettings.JsonIndented);
+        
+        return _qlang.Compile(rootPath, outputName, useCompress, jsonIndented);
     }
 
     public void Run(List<string?>? args)
     {
-        if (_qlang.Compile(Path.Combine(_settings.GetString(ProjectSettings.RootPath), _settings.GetString(ProjectSettings.MainFilePath)), _compileSettings.GetString(CompileSettings.OutputFilename), _compileSettings.GetBool(CompileSettings.GZipCompress)))
+        if (Compile())
             _qlang.Run(args, _compileSettings.GetString(CompileSettings.OutputFilename));
     }
 }

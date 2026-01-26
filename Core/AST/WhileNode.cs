@@ -2,10 +2,10 @@
 
 namespace Core.AST;
 
-public class WhileNode(int line, int sfId) : ASTBlock(line, sfId)
+public class WhileNode(int line) : ASTBlock(line)
 {
     [JsonProperty("a")]
-    public ASTNode Condition { get; set; }
+    public required ASTNode Condition { get; set; }
 
     [JsonProperty("b")]
     public List<ASTNode> Body { get; set; } = [];
@@ -15,7 +15,7 @@ public class WhileNode(int line, int sfId) : ASTBlock(line, sfId)
 
     public override ASTNode Clone()
     {
-        return new WhileNode(Line,  SourceFileId)
+        return new WhileNode(DebugIndex)
         {
             Condition = Condition.Clone(), 
             Body = Body.Select(node => node.Clone()).ToList(),

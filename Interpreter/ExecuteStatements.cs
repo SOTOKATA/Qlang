@@ -142,7 +142,7 @@ public partial class Interpreter
         AddBlockToContext(switchNode);
 
         var block = switchNode.DefaultBlock;
-        foreach (var pair in from pair in switchNode.CaseBlocks let binOp = new BinaryOperationNode(pair.Line, pair.SourceFileId)
+        foreach (var pair in from pair in switchNode.CaseBlocks let binOp = new BinaryOperationNode(pair.DebugIndex)
                  {
                      Left = pair.Condition,
                      Right = switchNode.Condition,
