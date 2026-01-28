@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\Console\\Qlang\\NumericLib\\NumericLib.csproj": {}
+    "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\NumericLib\\NumericLib.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\Console\\Qlang\\Core\\Core.csproj": {
+    "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Console\\Qlang\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "D:\\Projects\\Console\\Qlang\\Core\\Core.csproj",
+        "projectPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\sotok\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Console\\Qlang\\Core\\obj\\",
+        "outputPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -45,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net9.0": {
@@ -54,7 +53,7 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.12, )",
+              "version": "[9.0.0, )",
               "autoReferenced": true
             },
             "Newtonsoft.Json": {
@@ -75,32 +74,20 @@
           "warn": true,
           "downloadDependencies": [
             {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[9.0.12, 9.0.12]"
-            },
-            {
               "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-              "version": "[9.0.12, 9.0.12]"
+              "version": "[9.0.0, 9.0.0]"
             },
             {
               "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
-              "version": "[9.0.12, 9.0.12]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[9.0.12, 9.0.12]"
+              "version": "[9.0.0, 9.0.0]"
             },
             {
               "name": "Microsoft.NETCore.App.Runtime.win-x64",
-              "version": "[9.0.12, 9.0.12]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[9.0.12, 9.0.12]"
+              "version": "[9.0.0, 9.0.0]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-              "version": "[9.0.12, 9.0.12]"
+              "version": "[9.0.0, 9.0.0]"
             }
           ],
           "frameworkReferences": {
@@ -108,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
@@ -117,14 +104,14 @@
         }
       }
     },
-    "D:\\Projects\\Console\\Qlang\\NumericLib\\NumericLib.csproj": {
+    "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\NumericLib\\NumericLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Console\\Qlang\\NumericLib\\NumericLib.csproj",
+        "projectUniqueName": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\NumericLib\\NumericLib.csproj",
         "projectName": "NumericLib",
-        "projectPath": "D:\\Projects\\Console\\Qlang\\NumericLib\\NumericLib.csproj",
+        "projectPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\NumericLib\\NumericLib.csproj",
         "packagesPath": "C:\\Users\\sotok\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Console\\Qlang\\NumericLib\\obj\\",
+        "outputPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\NumericLib\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -139,15 +126,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "D:\\Projects\\Console\\Qlang\\Core\\Core.csproj": {
-                "projectPath": "D:\\Projects\\Console\\Qlang\\Core\\Core.csproj"
+              "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Core\\Core.csproj"
               }
             }
           }
@@ -162,7 +148,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net9.0": {
@@ -171,7 +157,7 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.12, )",
+              "version": "[9.0.0, )",
               "autoReferenced": true
             }
           },
@@ -188,32 +174,20 @@
           "warn": true,
           "downloadDependencies": [
             {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[9.0.12, 9.0.12]"
-            },
-            {
               "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-              "version": "[9.0.12, 9.0.12]"
+              "version": "[9.0.0, 9.0.0]"
             },
             {
               "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
-              "version": "[9.0.12, 9.0.12]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[9.0.12, 9.0.12]"
+              "version": "[9.0.0, 9.0.0]"
             },
             {
               "name": "Microsoft.NETCore.App.Runtime.win-x64",
-              "version": "[9.0.12, 9.0.12]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[9.0.12, 9.0.12]"
+              "version": "[9.0.0, 9.0.0]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-              "version": "[9.0.12, 9.0.12]"
+              "version": "[9.0.0, 9.0.0]"
             }
           ],
           "frameworkReferences": {
@@ -221,7 +195,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {

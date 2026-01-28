@@ -8,6 +8,13 @@ public class PostParser(SourceFileTable table, DebugTable debugTable)
 {
     private readonly SourceFileTable _sourceFileTable = table;
     private readonly DebugTable _debugTable = debugTable;
+
+    private ProgramNode OptimizeProgram(ProgramNode program)
+    {
+        
+        return program;
+    }
+    
     /// <summary>
     /// Creates global namespace for global scopes
     /// </summary>

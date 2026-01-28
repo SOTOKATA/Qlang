@@ -6,59 +6,73 @@ namespace Core;
 public class DebugTable
 {
     [JsonProperty("l")]
-    private List<int> LineIndexes { get; set; } = [];
+    private List<NumberCount> LineIndexes { get; set; } = [];
     
     [JsonProperty("f")]
     private List<NumberCount> FileIds { get; set; }  = [];
+
+    [JsonIgnore] 
+    private int _index = 0;
     
     public int Add(int lineIndex, int fileId)
     {
-        // Добавляем номер строки в обычный список
-        // if (!LineIndexes.Contains(lineIndex))
-            LineIndexes.Add(lineIndex);
-        
-        // Проверяем, есть ли уже такой fileId в последнем элементе
-        if (FileIds.Count > 0 && FileIds[^1].Number == fileId)
+        var lineExists = LineIndexes.Count > 0 && LineIndexes[^1].Number == lineIndex;
+        var fileExists = FileIds.Count > 0 && FileIds[^1].Number == fileId;
+        switch (lineExists)
         {
-            // Увеличиваем count последнего элемента
-            var last = FileIds[^1];
-            FileIds[^1] = new NumberCount(last.Number, last.Count + 1);
+            case true when fileExists:
+                LineIndexes[^1].Count++;
+                FileIds[^1].Count++;
+                _index++;
+                break;
+            case true when !fileExists:
+                LineIndexes[^1].Count++;
+                FileIds.Add(new NumberCount(fileId, 1));
+                _index++;
+                break;
+            case false when fileExists:
+                LineIndexes.Add(new NumberCount(lineIndex, 1));
+                FileIds[^1].Count++;
+                _index++;
+                break;
+            default:
+                LineIndexes.Add(new NumberCount(lineIndex, 1));
+                FileIds.Add(new NumberCount(fileId, 1));
+                _index++;
+                break;
         }
-        else
-        {
-            // Добавляем новый fileId с count = 1
-            FileIds.Add(new NumberCount(fileId, 1));
-        }
-        
-        return LineIndexes.Count - 1;
+
+        return _index;
     }
 
     public int GetLineIndex(int index)
     {
-        return LineIndexes[index];
+        var virtualIndex = GetListIndex(LineIndexes, index).listIndex;
+        
+        return LineIndexes[virtualIndex].Number;
     }
     
     public int GetFileId(int index)
     {
         // Получаем виртуальный индекс
-        var virtualIndex = GetListIndex(index).listIndex;
+        var virtualIndex = GetListIndex(FileIds, index).listIndex;
         
         return FileIds[virtualIndex].Number;
     }
 
-    private (int listIndex, int localIndex) GetListIndex(int expandedIndex)
+    private (int listIndex, int localIndex) GetListIndex(List<NumberCount> list, int expandedIndex)
     {
         var currentIndex = 0;
     
-        for (var i = 0; i < FileIds.Count; i++)
+        for (var i = 0; i < list.Count; i++)
         {
-            if (currentIndex + FileIds[i].Count > expandedIndex)
+            if (currentIndex + list[i].Count > expandedIndex)
                 return (i, expandedIndex - currentIndex);
-            currentIndex += FileIds[i].Count;
+            currentIndex += list[i].Count;
         }
     
         Console.WriteLine("ExpandedIndex: " + expandedIndex);
-        Console.WriteLine(string.Join(", ", FileIds));
+        Console.WriteLine(string.Join(", ", list));
         throw new ArgumentOutOfRangeException(nameof(expandedIndex));
     }
 }
@@ -71,53 +85,3 @@ public class NumberCount(int number, int count)
     [JsonProperty("c")]
     public int Count { get; set; } =  count;
 }
-
-// public class DebugTable
-// {
-//     [JsonProperty("l")]
-//     public List<int> LineIndexes { get; set; } = [];
-//     
-//     [JsonProperty("f")]
-//     public List<(int n, int c)> FileIds { get; set; }  = [];
-//     
-//     public int Add(int lineIndex, int fileId)
-//     {
-//         for (var i = 0; i < LineIndexes.Count; i++)
-//             if (LineIndexes[i] == lineIndex && FileIds[i] == fileId)
-//                 return i;
-//     
-//         LineIndexes.Add(lineIndex);
-//         FileIds.Add(fileId);
-//     
-//         return LineIndexes.Count - 1;
-//     }
-//
-//
-//     public int GetLineIndex(int index)
-//     {
-//         return LineIndexes[index];
-//     }
-//     
-//     public int GetFileId(int index)
-//     {
-//         // Get virtual index
-//         var virtualIndex = GetListIndex(index).listIndex;
-//         
-//         return FileIds[virtualIndex].n;
-//     }
-//
-//     private (int listIndex, int localIndex) GetListIndex(int expandedIndex)
-//     {
-//         var currentIndex = 0;
-//     
-//         for (var i = 0; i < FileIds.Count; i++)
-//         {
-//             if (currentIndex + FileIds[i].c > expandedIndex)
-//                 return (i, expandedIndex - currentIndex);
-//             currentIndex += FileIds[i].c;
-//         }
-//     
-//         throw new ArgumentOutOfRangeException(nameof(expandedIndex));
-//     }
-//
-// }

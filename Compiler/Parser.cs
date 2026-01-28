@@ -34,7 +34,7 @@ public class Parser
 
         Logger.SetLoggerPath(Path.Combine("Logs", "Debug", "debug_parser.log"));
         Logger.Log("----------- Parser -----------");
-
+        
         while (!IsAtEnd())
         {
             if (Check(Tokens.Semicolon))
@@ -52,6 +52,7 @@ public class Parser
         postParser.MergeNamespaces(program.Statements);
         program = postParser.IncludeUsings(program, _callNodes, _assignmentNodes);
         program = postParser.IncludeExtends(program);
+        program = new Optimizer().Optimize(program);
 
         new Validator(_sourceFileTable, _debugTable).CheckValidate(program);
 
