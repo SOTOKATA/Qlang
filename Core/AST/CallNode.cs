@@ -1,11 +1,15 @@
-﻿using Newtonsoft.Json;
+﻿using MessagePack;
+using Newtonsoft.Json;
 
 namespace Core.AST;
 
+[MessagePackObject]
 public class CallNode(int line) : ASTNode(line)
 {
+    [Key(1)]
     [JsonProperty("a")]
     public List<ASTNode> Objects = [];
+    [Key(2)]
     [JsonProperty("b")]
     public List<ASTNode> Arguments { get; set; } = [];
 

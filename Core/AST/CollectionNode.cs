@@ -1,9 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using MessagePack;
+using Newtonsoft.Json;
 
 namespace Core.AST;
-
+[MessagePackObject]
 public class CollectionNode(int line) : ASTNode(line)
 {
+    [Key(1)]
     [JsonProperty("a")]
     public required List<ASTNode> Collection { get; set; }
     public override string GetTree(string indent = "")

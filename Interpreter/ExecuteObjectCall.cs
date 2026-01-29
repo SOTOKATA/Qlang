@@ -1,6 +1,5 @@
 ﻿using Core;
 using Core.AST;
-using Core.Debug;
 using Core.Dynamic;
 using Core.Exceptions;
 
@@ -77,11 +76,6 @@ public partial class Interpreter
     
     private object? ExecuteObjectCalls(CallNode call)
     {
-        Logger.Log($"Objects: " + string.Join(".", call.Objects));
-        
-        if (HasContext)
-            Logger.Log($"CurrentContext: class = '{CurrentContext.Class?.Name}', function = '{CurrentContext.Function?.Name}'");
-
         // overriding system calls
         if (call.Objects.Count > 0 && call.Objects[0] is FunctionPointerNode fn)
         {
@@ -96,8 +90,6 @@ public partial class Interpreter
                 
                     args = args.Skip(1).ToArray();
                 
-                    Logger.Log("_native: " + string.Join(", ", args));
-
                     object? returnValue;
                     try
                     {
@@ -110,8 +102,6 @@ public partial class Interpreter
                         throw new QlangRuntimeException(ex.Message, GetDebug(fn), GetStackTrace());
                     }
 
-                    Logger.Log($"Native call return: value='{returnValue}' type='{returnValue?.GetType().Name}'");
-            
                     return returnValue;
                 case "typeof":
                     return Typeof(args[0]);
@@ -152,8 +142,6 @@ public partial class Interpreter
             case ObjectPointerNode objCall:
                 if (!isPathStart)
                     lastReturnValue = PrimitiveToDynamicClass(lastReturnValue);
-                
-                Logger.Log($"Detected object pointer: {objCall.Name}");
                 
                 var objectAndNamespace = FindObject(objCall, lastReturnValue, isPathStart);
 

@@ -1,15 +1,22 @@
 {
   "version": 2,
-  "dgSpecHash": "ArhwSOjCgN4=",
+  "dgSpecHash": "R8mGjZGzKWo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Core\\Core.csproj",
+  "projectFilePath": "D:\\Projects\\Console\\Qlang\\Core\\Core.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.net.illink.tasks\\9.0.0\\microsoft.net.illink.tasks.9.0.0.nupkg.sha512",
+    "C:\\Users\\sotok\\.nuget\\packages\\messagepack\\3.1.4\\messagepack.3.1.4.nupkg.sha512",
+    "C:\\Users\\sotok\\.nuget\\packages\\messagepack.annotations\\3.1.4\\messagepack.annotations.3.1.4.nupkg.sha512",
+    "C:\\Users\\sotok\\.nuget\\packages\\messagepackanalyzer\\3.1.4\\messagepackanalyzer.3.1.4.nupkg.sha512",
+    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.net.illink.tasks\\9.0.12\\microsoft.net.illink.tasks.9.0.12.nupkg.sha512",
+    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.net.stringtools\\17.11.4\\microsoft.net.stringtools.17.11.4.nupkg.sha512",
     "C:\\Users\\sotok\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512",
-    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\9.0.0\\microsoft.netcore.app.runtime.win-x64.9.0.0.nupkg.sha512",
-    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\9.0.0\\microsoft.windowsdesktop.app.runtime.win-x64.9.0.0.nupkg.sha512",
-    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\9.0.0\\microsoft.aspnetcore.app.runtime.win-x64.9.0.0.nupkg.sha512",
-    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\9.0.0\\microsoft.netcore.app.crossgen2.win-x64.9.0.0.nupkg.sha512"
+    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.12\\microsoft.netcore.app.ref.9.0.12.nupkg.sha512",
+    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\9.0.12\\microsoft.netcore.app.runtime.win-x64.9.0.12.nupkg.sha512",
+    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.12\\microsoft.windowsdesktop.app.ref.9.0.12.nupkg.sha512",
+    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\9.0.12\\microsoft.windowsdesktop.app.runtime.win-x64.9.0.12.nupkg.sha512",
+    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\9.0.12\\microsoft.aspnetcore.app.ref.9.0.12.nupkg.sha512",
+    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\9.0.12\\microsoft.aspnetcore.app.runtime.win-x64.9.0.12.nupkg.sha512",
+    "C:\\Users\\sotok\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\9.0.12\\microsoft.netcore.app.crossgen2.win-x64.9.0.12.nupkg.sha512"
   ],
   "logs": []
 }

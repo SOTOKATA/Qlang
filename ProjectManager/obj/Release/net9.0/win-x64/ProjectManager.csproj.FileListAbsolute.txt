@@ -46,3 +46,6 @@ C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\ob
 C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\obj\Release\net9.0\win-x64\ql.pdb
 C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\obj\Release\net9.0\win-x64\ProjectManager.genruntimeconfig.cache
 C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\ProjectManager\obj\Release\net9.0\win-x64\ref\ql.dll
+D:\Projects\Console\Qlang\ProjectManager\bin\Release\net9.0\win-x64\MessagePack.dll
+D:\Projects\Console\Qlang\ProjectManager\bin\Release\net9.0\win-x64\MessagePack.Annotations.dll
+D:\Projects\Console\Qlang\ProjectManager\bin\Release\net9.0\win-x64\Microsoft.NET.StringTools.dll

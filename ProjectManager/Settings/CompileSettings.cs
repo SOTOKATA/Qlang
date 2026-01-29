@@ -2,14 +2,14 @@
 
 public class CompileSettings : Settings
 {
-    public CompileSettings(string path, Dictionary<string, (object? @object, Type type)>? dict) : base(path, dict)
+    public CompileSettings(string path, Dictionary<string, SettingsItem>? dict) : base(path, dict)
     {
-        Dictionary ??= new Dictionary<string, (object? @object, Type type)>
+        Dictionary ??= new Dictionary<string, SettingsItem>
         {
-            { OutputFilename, ("program", typeof(string)) },
-            { DebugMode, (false, typeof(bool)) },
-            { GZipCompress, (true, typeof(bool)) },
-            { JsonIndented, (false, typeof(bool)) },
+            { OutputFilename, new("program", typeof(string)) },
+            { DebugMode, new(false, typeof(bool)) },
+            { GZipCompress, new(true, typeof(bool)) },
+            { JsonIndented, new(false, typeof(bool)) },
         };
     }
 

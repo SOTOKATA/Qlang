@@ -2,10 +2,60 @@
   "version": 3,
   "targets": {
     "net9.0": {
-      "Microsoft.NET.ILLink.Tasks/9.0.0": {
+      "MessagePack/3.1.4": {
+        "type": "package",
+        "dependencies": {
+          "MessagePack.Annotations": "3.1.4",
+          "MessagePackAnalyzer": "3.1.4",
+          "Microsoft.NET.StringTools": "17.11.4"
+        },
+        "compile": {
+          "lib/net9.0/MessagePack.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/MessagePack.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MessagePack.Annotations/3.1.4": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/MessagePack.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MessagePack.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MessagePackAnalyzer/3.1.4": {
+        "type": "package",
+        "build": {
+          "build/_._": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/9.0.12": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
+        }
+      },
+      "Microsoft.NET.StringTools/17.11.4": {
+        "type": "package",
+        "compile": {
+          "ref/net8.0/_._": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.NET.StringTools.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Newtonsoft.Json/13.0.4": {
@@ -25,6 +75,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "MessagePack": "3.1.4",
           "Newtonsoft.Json": "13.0.4"
         },
         "compile": {
@@ -36,10 +87,60 @@
       }
     },
     "net9.0/win-x64": {
-      "Microsoft.NET.ILLink.Tasks/9.0.0": {
+      "MessagePack/3.1.4": {
+        "type": "package",
+        "dependencies": {
+          "MessagePack.Annotations": "3.1.4",
+          "MessagePackAnalyzer": "3.1.4",
+          "Microsoft.NET.StringTools": "17.11.4"
+        },
+        "compile": {
+          "lib/net9.0/MessagePack.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/MessagePack.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MessagePack.Annotations/3.1.4": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/MessagePack.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MessagePack.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MessagePackAnalyzer/3.1.4": {
+        "type": "package",
+        "build": {
+          "build/_._": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/9.0.12": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
+        }
+      },
+      "Microsoft.NET.StringTools/17.11.4": {
+        "type": "package",
+        "compile": {
+          "ref/net8.0/_._": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.NET.StringTools.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "Newtonsoft.Json/13.0.4": {
@@ -59,6 +160,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "MessagePack": "3.1.4",
           "Newtonsoft.Json": "13.0.4"
         },
         "compile": {
@@ -71,10 +173,58 @@
     }
   },
   "libraries": {
-    "Microsoft.NET.ILLink.Tasks/9.0.0": {
-      "sha512": "zAwp213evC3UkimtVXRb+Dlgc/40QG145nmZDtp2LO9zJJMfrp+i/87BnXN7tRXEA4liyzdFkjqG1HE8/RPb4A==",
+    "MessagePack/3.1.4": {
+      "sha512": "BH0wlHWmVoZpbAPyyt2Awbq30C+ZsS3eHSkYdnyUAbqVJ22fAJDzn2xTieBeoT5QlcBzp61vHcv878YJGfi3mg==",
       "type": "package",
-      "path": "microsoft.net.illink.tasks/9.0.0",
+      "path": "messagepack/3.1.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net472/MessagePack.dll",
+        "lib/net472/MessagePack.xml",
+        "lib/net8.0/MessagePack.dll",
+        "lib/net8.0/MessagePack.xml",
+        "lib/net9.0/MessagePack.dll",
+        "lib/net9.0/MessagePack.xml",
+        "lib/netstandard2.0/MessagePack.dll",
+        "lib/netstandard2.0/MessagePack.xml",
+        "lib/netstandard2.1/MessagePack.dll",
+        "lib/netstandard2.1/MessagePack.xml",
+        "messagepack.3.1.4.nupkg.sha512",
+        "messagepack.nuspec"
+      ]
+    },
+    "MessagePack.Annotations/3.1.4": {
+      "sha512": "aVWrDAkCdqxwQsz/q0ldPh2EFn48M99YUzE9OvZjMq2RNLKz4o2z88iGFvSvbMqOWRweRvKPHBJZe22PRqzslQ==",
+      "type": "package",
+      "path": "messagepack.annotations/3.1.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/MessagePack.Annotations.dll",
+        "lib/netstandard2.0/MessagePack.Annotations.xml",
+        "messagepack.annotations.3.1.4.nupkg.sha512",
+        "messagepack.annotations.nuspec"
+      ]
+    },
+    "MessagePackAnalyzer/3.1.4": {
+      "sha512": "CTaSsN/liJ7MhLCAB7Z4ZLBNuVGCq9lt2BT/cbrc9vzGv89yK3CqIA+z9T19a11eQYl9etZHL6MQJgCqECRVpg==",
+      "type": "package",
+      "path": "messagepackanalyzer/3.1.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/roslyn4.3/cs/MessagePack.Analyzers.CodeFixes.dll",
+        "analyzers/roslyn4.3/cs/MessagePack.SourceGenerator.dll",
+        "build/MessagePackAnalyzer.targets",
+        "messagepackanalyzer.3.1.4.nupkg.sha512",
+        "messagepackanalyzer.nuspec"
+      ]
+    },
+    "Microsoft.NET.ILLink.Tasks/9.0.12": {
+      "sha512": "StA3kyImQHqDo8A8ZHaSxgASbEuT5UIqgeCvK5SzUPj//xE1QSys421J9pEs4cYuIVwq7CJvWSKxtyH7aPr1LA==",
+      "type": "package",
+      "path": "microsoft.net.illink.tasks/9.0.12",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -88,7 +238,7 @@
         "build/Microsoft.NET.ILLink.Analyzers.props",
         "build/Microsoft.NET.ILLink.Tasks.props",
         "build/Microsoft.NET.ILLink.targets",
-        "microsoft.net.illink.tasks.9.0.0.nupkg.sha512",
+        "microsoft.net.illink.tasks.9.0.12.nupkg.sha512",
         "microsoft.net.illink.tasks.nuspec",
         "tools/net472/ILLink.Tasks.dll",
         "tools/net472/ILLink.Tasks.dll.config",
@@ -120,6 +270,35 @@
         "tools/net9.0/illink.dll",
         "tools/net9.0/illink.runtimeconfig.json",
         "useSharedDesignerContext.txt"
+      ]
+    },
+    "Microsoft.NET.StringTools/17.11.4": {
+      "sha512": "mudqUHhNpeqIdJoUx2YDWZO/I9uEDYVowan89R6wsomfnUJQk6HteoQTlNjZDixhT2B4IXMkMtgZtoceIjLRmA==",
+      "type": "package",
+      "path": "microsoft.net.stringtools/17.11.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "MSBuild-NuGet-Icon.png",
+        "README.md",
+        "lib/net472/Microsoft.NET.StringTools.dll",
+        "lib/net472/Microsoft.NET.StringTools.pdb",
+        "lib/net472/Microsoft.NET.StringTools.xml",
+        "lib/net8.0/Microsoft.NET.StringTools.dll",
+        "lib/net8.0/Microsoft.NET.StringTools.pdb",
+        "lib/net8.0/Microsoft.NET.StringTools.xml",
+        "lib/netstandard2.0/Microsoft.NET.StringTools.dll",
+        "lib/netstandard2.0/Microsoft.NET.StringTools.pdb",
+        "lib/netstandard2.0/Microsoft.NET.StringTools.xml",
+        "microsoft.net.stringtools.17.11.4.nupkg.sha512",
+        "microsoft.net.stringtools.nuspec",
+        "notices/THIRDPARTYNOTICES.txt",
+        "ref/net472/Microsoft.NET.StringTools.dll",
+        "ref/net472/Microsoft.NET.StringTools.xml",
+        "ref/net8.0/Microsoft.NET.StringTools.dll",
+        "ref/net8.0/Microsoft.NET.StringTools.xml",
+        "ref/netstandard2.0/Microsoft.NET.StringTools.dll",
+        "ref/netstandard2.0/Microsoft.NET.StringTools.xml"
       ]
     },
     "Newtonsoft.Json/13.0.4": {
@@ -161,7 +340,7 @@
   "projectFileDependencyGroups": {
     "net9.0": [
       "Core >= 1.0.0",
-      "Microsoft.NET.ILLink.Tasks >= 9.0.0"
+      "Microsoft.NET.ILLink.Tasks >= 9.0.12"
     ]
   },
   "packageFolders": {
@@ -171,11 +350,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Interpreter\\Interpreter.csproj",
+      "projectUniqueName": "D:\\Projects\\Console\\Qlang\\Interpreter\\Interpreter.csproj",
       "projectName": "Interpreter",
-      "projectPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Interpreter\\Interpreter.csproj",
+      "projectPath": "D:\\Projects\\Console\\Qlang\\Interpreter\\Interpreter.csproj",
       "packagesPath": "C:\\Users\\sotok\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Interpreter\\obj\\",
+      "outputPath": "D:\\Projects\\Console\\Qlang\\Interpreter\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -190,14 +369,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\sotok\\Documents\\Робочий Стіл\\Estagio\\Qlang\\Core\\Core.csproj"
+            "D:\\Projects\\Console\\Qlang\\Core\\Core.csproj": {
+              "projectPath": "D:\\Projects\\Console\\Qlang\\Core\\Core.csproj"
             }
           }
         }
@@ -212,7 +392,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -221,7 +401,7 @@
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[9.0.0, )",
+            "version": "[9.0.12, )",
             "autoReferenced": true
           }
         },
@@ -238,20 +418,32 @@
         "warn": true,
         "downloadDependencies": [
           {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[9.0.12, 9.0.12]"
+          },
+          {
             "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-            "version": "[9.0.0, 9.0.0]"
+            "version": "[9.0.12, 9.0.12]"
           },
           {
             "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
-            "version": "[9.0.0, 9.0.0]"
+            "version": "[9.0.12, 9.0.12]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[9.0.12, 9.0.12]"
           },
           {
             "name": "Microsoft.NETCore.App.Runtime.win-x64",
-            "version": "[9.0.0, 9.0.0]"
+            "version": "[9.0.12, 9.0.12]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[9.0.12, 9.0.12]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-            "version": "[9.0.0, 9.0.0]"
+            "version": "[9.0.12, 9.0.12]"
           }
         ],
         "frameworkReferences": {
@@ -259,7 +451,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {

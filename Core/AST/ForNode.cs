@@ -1,16 +1,23 @@
-﻿using Newtonsoft.Json;
+﻿using MessagePack;
+using Newtonsoft.Json;
 
 namespace Core.AST;
-
+[MessagePackObject]
 public class ForNode(int line) : ASTBlock(line)
 {
+    public ForNode() : this(-1) {}
+    
+    [Key(1)]
     [JsonProperty("a")]
     public required AssignmentNode Assignment { get; set; }
+    [Key(2)]
     [JsonProperty("b")]
     public required ASTNode Condition { get; set; }
+    [Key(3)]
     [JsonProperty("c")]
     public required ASTNode Statement { get; set; }
 
+    [Key(4)]
     [JsonProperty("d")]
     public List<ASTNode> Body { get; set; } = [];
 

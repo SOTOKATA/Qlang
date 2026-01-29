@@ -53,7 +53,7 @@ class Snake: {
 
         _position = Vector2.new(_width / 2, _height / 2);
 
-        _fruitPos = Vector2.new(Number.randInt(1, _width), Number.randInt(1, _height));
+        _fruitPos = Vector2.new(Math.rand(1, _width), Math.rand(1, _height));
 
         _toWait = 100;
     }
@@ -106,7 +106,7 @@ class Snake: {
 
             _tailLength = _tailLength + 1;
 
-            _fruitPos = Vector2.new(Number.randInt(1, _width), Number.randInt(1, _height));
+            _fruitPos = Vector2.new(Math.rand(1, _width), Math.rand(1, _height));
         }
 
         for let i = 0; i < _tail.length(); i = i + 1: {

@@ -80,7 +80,7 @@ class LanguageDemo: {
         }
 
         if num1 < num2: {
-            Console.println("Random number (range: " + num1 + "-" + num2 + "): " + Number.randInt(num1, num2));
+            Console.println("Random number (range: " + num1 + "-" + num2 + "): " + Math.rand(num1, num2));
         }
         else: {
             printException("Random number: Error, first number can't be more than or equal second");
@@ -110,7 +110,7 @@ class LanguageDemo: {
         let randNum = 0-1;
         
         while randNum != 0: {
-            randNum = Number.randInt(0, 3);
+            randNum = Math.rand(0, 3);
             Console.print(randNum + ", ");
         }
 

@@ -1,7 +1,6 @@
 using System.Text;
 using Core;
 using Core.AST;
-using Core.Debug;
 using Core.Dynamic;
 using Core.Exceptions;
 using Core.Native;
@@ -40,10 +39,6 @@ public partial class Interpreter
 
     public void Execute(ProgramNode program, List<string?>? args = null)
     {
-        // Debug initialize
-        Logger.Initialize(false);
-        Logger.SetLoggerPath(Path.Combine("debug_log_interpreter.txt"));
-
         // Load namespaces
         foreach (var statement in program.Statements)
         {
@@ -88,9 +83,6 @@ public partial class Interpreter
     {
         if (function is null)
             return null;
-
-        Logger.Log($"EXECF'{function.Name}'({string.Join(", ", arguments)})");
-        Logger.Log($"Function:\nName={function.Name}\nArguments={string.Join(", ", arguments)}");
 
         var contextClass = ownerClass ?? (HasContext ? CurrentContext.Class : null);
         var contextNamespace = ownerNamespace ?? (HasContext ? CurrentContext.Namespace : null);
@@ -138,7 +130,6 @@ public partial class Interpreter
             _return = false;
             _isBreakKeyword = false;
             _isContinueKeyword = false;
-            Logger.Log($"({function.Name}) Return:\nValue=" + _returnValue);
             return _returnValue;
         }
         finally
@@ -149,8 +140,6 @@ public partial class Interpreter
 
     private void ExecuteStatement(ASTNode statement)
     {
-        Logger.Log("Statement: " + statement.GetTree(), "ExecuteStatement");
-        
         if (HasContext)
             CurrentContext.CurrentNode = statement;
         
@@ -327,8 +316,6 @@ public partial class Interpreter
 
         if (HasContext)
             CurrentContext.CurrentNode = expr;
-
-        Logger.Log("Expression: " + expr.GetTree(), "EvaluateExpression");
 
         try
         {
@@ -555,12 +542,8 @@ public partial class Interpreter
 
     private object? EvaluateBinaryOperation(BinaryOperationNode binOp)
     {
-        Logger.Log("Detected binary operation");
-        Logger.Log($"Params: {binOp.Left} {binOp.Operator} {binOp.Right}");
         var left = EvaluateExpression(binOp.Left);
         var right = EvaluateExpression(binOp.Right);
-        Logger.Log($"ExpressionParams: {left}: {left?.GetType().Name}; {right}: {right?.GetType().Name}");
-
 
         if (left is null || right is null)
         {
@@ -591,17 +574,13 @@ public partial class Interpreter
 
                     // Short-circuit: если левая часть false, правую не вычисляем
                     if (!leftBool)
-                    {
-                        Logger.Log($"Short-circuit &&: left is false, returning false");
                         return false;
-                    }
 
                     if (!bool.TryParse(right.ToString(), out rightBool))
                         throw new QlangRuntimeException(
                             $"Type error: Right operand of '&&' must be boolean, got '{right}'",
                             GetDebug(binOp), GetStackTrace());
 
-                    Logger.Log($"Operation &&: {leftBool} && {rightBool} = {rightBool}");
                     return rightBool;
                 }
             case "||":
@@ -613,20 +592,13 @@ public partial class Interpreter
 
                     // Short-circuit: если левая часть true, правую не вычисляем
                     if (leftBool)
-                    {
-                        Logger.Log("LeftRight: " + binOp.Left?.GetTree() + " and " + binOp.Right?.GetTree());
-                        Logger.Log($"Short-circuit ||: left is true, returning true");
                         return true;
-                    }
-
-                    Logger.Log($"Short-circuit ||: left not is true, continue");
 
                     if (!bool.TryParse(right.ToString(), out rightBool))
                         throw new QlangRuntimeException(
                             $"Type error: Right operand of '||' must be boolean, got '{right}'",
                             GetDebug(binOp), GetStackTrace());
 
-                    Logger.Log($"Operation ||: {leftBool} || {rightBool} = {rightBool}");
                     return rightBool;
                 }
         }
@@ -634,7 +606,6 @@ public partial class Interpreter
         // If it's bool condition
         if (bool.TryParse(left.ToString(), out leftBool) && bool.TryParse(right.ToString(), out rightBool))
         {
-            Logger.Log($"IsBooleanOperation: {left}{binOp.Operator}{right}");
             return binOp.Operator switch
             {
                 "==" => Equals(leftBool, rightBool),
@@ -688,7 +659,6 @@ public partial class Interpreter
         {
             var leftNum = Convert.ToDouble(left);
             var rightNum = Convert.ToDouble(right);
-            Logger.Log($"Operation: {left}{binOp.Operator}{right}");
             return binOp.Operator switch
             {
                 "==" => Equals(leftNum, rightNum),

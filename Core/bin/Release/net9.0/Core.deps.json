@@ -8,14 +8,41 @@
     ".NETCoreApp,Version=v9.0": {
       "Core/1.0.0": {
         "dependencies": {
-          "Microsoft.NET.ILLink.Tasks": "9.0.0",
+          "MessagePack": "3.1.4",
           "Newtonsoft.Json": "13.0.4"
         },
         "runtime": {
           "Core.dll": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/9.0.0": {},
+      "MessagePack/3.1.4": {
+        "dependencies": {
+          "MessagePack.Annotations": "3.1.4",
+          "Microsoft.NET.StringTools": "17.11.4"
+        },
+        "runtime": {
+          "lib/net9.0/MessagePack.dll": {
+            "assemblyVersion": "3.1.4.0",
+            "fileVersion": "3.1.4.0"
+          }
+        }
+      },
+      "MessagePack.Annotations/3.1.4": {
+        "runtime": {
+          "lib/netstandard2.0/MessagePack.Annotations.dll": {
+            "assemblyVersion": "3.1.4.0",
+            "fileVersion": "3.1.4.0"
+          }
+        }
+      },
+      "Microsoft.NET.StringTools/17.11.4": {
+        "runtime": {
+          "lib/net8.0/Microsoft.NET.StringTools.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "17.11.4.40609"
+          }
+        }
+      },
       "Newtonsoft.Json/13.0.4": {
         "runtime": {
           "lib/net6.0/Newtonsoft.Json.dll": {
@@ -32,12 +59,26 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Microsoft.NET.ILLink.Tasks/9.0.0": {
+    "MessagePack/3.1.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-zAwp213evC3UkimtVXRb+Dlgc/40QG145nmZDtp2LO9zJJMfrp+i/87BnXN7tRXEA4liyzdFkjqG1HE8/RPb4A==",
-      "path": "microsoft.net.illink.tasks/9.0.0",
-      "hashPath": "microsoft.net.illink.tasks.9.0.0.nupkg.sha512"
+      "sha512": "sha512-BH0wlHWmVoZpbAPyyt2Awbq30C+ZsS3eHSkYdnyUAbqVJ22fAJDzn2xTieBeoT5QlcBzp61vHcv878YJGfi3mg==",
+      "path": "messagepack/3.1.4",
+      "hashPath": "messagepack.3.1.4.nupkg.sha512"
+    },
+    "MessagePack.Annotations/3.1.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-aVWrDAkCdqxwQsz/q0ldPh2EFn48M99YUzE9OvZjMq2RNLKz4o2z88iGFvSvbMqOWRweRvKPHBJZe22PRqzslQ==",
+      "path": "messagepack.annotations/3.1.4",
+      "hashPath": "messagepack.annotations.3.1.4.nupkg.sha512"
+    },
+    "Microsoft.NET.StringTools/17.11.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mudqUHhNpeqIdJoUx2YDWZO/I9uEDYVowan89R6wsomfnUJQk6HteoQTlNjZDixhT2B4IXMkMtgZtoceIjLRmA==",
+      "path": "microsoft.net.stringtools/17.11.4",
+      "hashPath": "microsoft.net.stringtools.17.11.4.nupkg.sha512"
     },
     "Newtonsoft.Json/13.0.4": {
       "type": "package",

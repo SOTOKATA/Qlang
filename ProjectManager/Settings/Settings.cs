@@ -3,9 +3,9 @@ using ProjectManager.Project;
 
 namespace ProjectManager.Settings;
 
-public abstract class Settings(string path, Dictionary<string, (object? @object, Type type)>? dict)
+public abstract class Settings(string path, Dictionary<string, SettingsItem>? dict)
 {
-    public Dictionary<string, (object? @object, Type type)>? GetDictionary() => Dictionary;
+    public Dictionary<string, SettingsItem>? GetDictionary() => Dictionary;
     public string GetPath() => path;
 
     public void Save()
@@ -21,12 +21,12 @@ public abstract class Settings(string path, Dictionary<string, (object? @object,
         File.WriteAllText(path, serialized);
     }
 
-    public static Dictionary<string, (object? @object, Type type)> LoadDictionary<T>(string p) where T : Settings
+    public static Dictionary<string, SettingsItem> LoadDictionary<T>(string p) where T : Settings
     {
         if (!File.Exists(p))
             throw new FileNotFoundException($"Settings file '{p}' does not exist.");
 
-        var dict = Json.Deserialize<Dictionary<string, (object? @object, Type type)>?>(File.ReadAllText(p));
+        var dict = Json.Deserialize<Dictionary<string, SettingsItem>?>(File.ReadAllText(p));
 
         return dict ?? throw new ProjectException("Cannot load dictionary from file.");
     }
@@ -39,19 +39,19 @@ public abstract class Settings(string path, Dictionary<string, (object? @object,
         if (!Dictionary.TryGetValue(param, out var dictValue))
             throw new ProjectException($"Key '{param}' did not exist.\nPath: {path}");
 
-        if (dictValue.type != value?.GetType())
+        if (dictValue.Type != value?.GetType())
         {
-            value = dictValue.@object switch
+            value = dictValue.Value switch
             {
                 bool when bool.TryParse(value?.ToString(), out var boolValue) => boolValue,
                 
                 double when (value ?? "").ToString().TryParseNumber(out var num) => num,
                 
-                _ => throw new ProjectException($"Type of key '{param}' ({(dictValue.@object is null ? "Null" : dictValue.type)}) is not equal to type of '{value}' ({(value is null ? "Null" : value.GetType())})")
+                _ => throw new ProjectException($"Type of key '{param}' ({(dictValue.Value is null ? "Null" : dictValue.Type)}) is not equal to type of '{value}' ({(value is null ? "Null" : value.GetType())})")
             };
         }
         
-        Dictionary[param] = (value, value.GetType());
+        Dictionary[param] = new SettingsItem(value, value!.GetType());
     }
 
     public object? Get(string param)
@@ -62,7 +62,7 @@ public abstract class Settings(string path, Dictionary<string, (object? @object,
         if (!Dictionary.TryGetValue(param, out var value))
             throw new ProjectException($"Key '{param}' did not exist.\nPath: {path}");
         
-        return value.@object;
+        return value.Value;
     }
     
     public string GetString(string param)
@@ -73,10 +73,10 @@ public abstract class Settings(string path, Dictionary<string, (object? @object,
         if (!Dictionary.TryGetValue(param, out var value))
             throw new ProjectException($"Key '{param}' did not exist.\nPath: {path}");
         
-        if (value.type != typeof(string))
-            throw new ProjectException($"Type of key '{param}' is not equal to type of '{(value.@object ?? "null")}'");
+        if (value.Value?.GetType() != typeof(string))
+            throw new ProjectException($"Type of key '{param}' is not equal to type of '{(value.Value ?? "null")}'");
         
-        return (string)value.@object!;
+        return (string)value.Value!;
     }
     
     public bool GetBool(string param)
@@ -87,11 +87,11 @@ public abstract class Settings(string path, Dictionary<string, (object? @object,
         if (!Dictionary.TryGetValue(param, out var value))
             throw new ProjectException($"Key '{param}' did not exist.\nPath: {path}");
         
-        if (value.type != typeof(bool))
-            throw new ProjectException($"Type of key '{param}' is not equal to type of '{(value.@object ?? "null")}'");
+        if (value.Value?.GetType() != typeof(bool))
+            throw new ProjectException($"Type of key '{param}' is not equal to type of '{(value.Value ?? "null")}'");
         
-        return (bool)value.@object!;
+        return (bool)value.Value;
     }
 
-    protected Dictionary<string, (object? @object, Type type)>? Dictionary = dict;
+    protected Dictionary<string, SettingsItem>? Dictionary = dict;
 }

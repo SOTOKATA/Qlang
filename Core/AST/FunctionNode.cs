@@ -1,19 +1,25 @@
-﻿using Newtonsoft.Json;
+﻿using MessagePack;
+using Newtonsoft.Json;
 
 namespace Core.AST;
-
+[MessagePackObject]
 public class FunctionNode(int line) : ASTNode(line)
 {
+    [Key(1)]
     [JsonProperty("a")]
     public required string Name { get; set; }
 
+    [Key(2)]
     [JsonProperty("b")]
     public bool IsStatic { get; set; } = true;
     
+    [Key(3)]
     [JsonProperty("c")]
     public bool IsPrivate { get; set; }
+    [Key(4)]
     [JsonProperty("d")]
     public List<AssignmentNode> Parameters { get; set; } = [];
+    [Key(5)]
     [JsonProperty("e")]
     public List<ASTNode> Body { get; set; } = [];
 

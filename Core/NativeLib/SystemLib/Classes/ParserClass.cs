@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using Core.Debug;
 
 namespace Core.NativeLib.SystemLib.Classes;
 
@@ -33,9 +32,8 @@ public class ParserClass : IQlangClass
                 _ => throw new SwitchExpressionException($"Undefined parse: '{toParse}'")
             };
         }
-        catch (Exception e)
+        catch
         {
-            
             return null;
         }
     }

@@ -1,5 +1,4 @@
-﻿using Core.Debug;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using ProjectManager.Settings;
 
 namespace ProjectManager.Project;
@@ -83,15 +82,10 @@ public partial class Project(ProjectSettings projectSettings, CompileSettings co
             throw new FileNotFoundException($"Project is corrupted or not created.\nPath to project settings: '{path}'.", path);
         
         var settingsPath = Path.Combine(projectPath, CompileSettings.JsonFileName);
-        var dict =  JsonConvert.DeserializeObject<Dictionary<string, (object? @object, Type type)>>(File.ReadAllText(settingsPath));
+        var dict =  JsonConvert.DeserializeObject<Dictionary<string, SettingsItem>>(File.ReadAllText(settingsPath));
         var compileSettings = new CompileSettings(settingsPath, dict);
 
         var proj = new Project(settings, compileSettings);
-        
-
-        var isDebug = (bool)compileSettings.Get(CompileSettings.DebugMode)!;
-        Logger.Debug = isDebug;
-        FileLogger.Debug = isDebug;
         
         return proj;
     }

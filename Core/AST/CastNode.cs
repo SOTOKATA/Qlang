@@ -1,12 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using MessagePack;
+using Newtonsoft.Json;
 
 namespace Core.AST;
-
+[MessagePackObject]
 public class CastNode(CallNode call, CallNode obj, int line) : ASTNode(line)
 {
+    public CastNode() : this(null, null, -1) {}
+    
+    [Key(1)]
     [JsonProperty("a")]
     public CallNode TypeCastPath { get; set; } = call;
 
+    [Key(2)]
     [JsonProperty("b")]
     public CallNode ToCastObject { get; set; } = obj;
     

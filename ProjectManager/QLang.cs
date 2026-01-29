@@ -78,10 +78,10 @@ public class QLang
         
         File.Copy(Path.Combine(Path.GetDirectoryName(Environment.ProcessPath), "qli" + OS.GetExecutableExtension()), Path.Combine(pathToFile ?? "", "build", Path.GetFileNameWithoutExtension(filePath) + OS.GetExecutableExtension()), true);
         
-        if (useGZipCompress)
-            File.WriteAllBytes(path, GZip.Compress(Json.Serialize(qliProgram, jsonIndented)));
-        else File.WriteAllText(path, Json.Serialize(qliProgram, jsonIndented));
-        
+        // if (useGZipCompress)
+            // File.WriteAllBytes(path, GZip.Compress(Json.Serialize(qliProgram, jsonIndented)));
+        // else File.WriteAllText(path, Json.Serialize(qliProgram, jsonIndented));
+        File.WriteAllBytes(path, Brotli.Compress(Core.MessagePack.Serialize(qliProgram)));
     }
 
     public void Run(List<string?>? args, string filename)

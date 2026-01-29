@@ -6,7 +6,6 @@ D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\qli.pdb
 D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\Newtonsoft.Json.dll
 D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\Core.dll
 D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\Interpreter.dll
-D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\Interpreter.pdb
 D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\Core.pdb
 D:\Projects\Console\Qlang\Runtime\obj\Release\net9.0\win-x64\Runtime.csproj.AssemblyReference.cache
 D:\Projects\Console\Qlang\Runtime\obj\Release\net9.0\win-x64\Runtime.GeneratedMSBuildEditorConfig.editorconfig
@@ -42,3 +41,7 @@ C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Relea
 C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Release\net9.0\win-x64\qli.pdb
 C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Release\net9.0\win-x64\Runtime.genruntimeconfig.cache
 C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\obj\Release\net9.0\win-x64\ref\qli.dll
+D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\MessagePack.dll
+D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\MessagePack.Annotations.dll
+D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\Microsoft.NET.StringTools.dll
+D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\Interpreter.pdb

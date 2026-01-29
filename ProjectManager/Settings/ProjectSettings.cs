@@ -2,13 +2,13 @@
 
 public class ProjectSettings : Settings
 {
-    public ProjectSettings(string path, Dictionary<string, (object? @object, Type type)>? dict) : base(path, dict)
+    public ProjectSettings(string path, Dictionary<string, SettingsItem>? dict) : base(path, dict)
     {
-        Dictionary ??= new Dictionary<string, (object? @object, Type type)>
+        Dictionary ??= new Dictionary<string, SettingsItem>
         {
-            { RootPath, ("", typeof(string)) },
-            { ProjectName, ("", typeof(string)) },
-            { MainFilePath, ("", typeof(string)) }
+            { RootPath, new("", typeof(string)) },
+            { ProjectName, new("", typeof(string)) },
+            { MainFilePath, new("", typeof(string)) }
         };
     }
 

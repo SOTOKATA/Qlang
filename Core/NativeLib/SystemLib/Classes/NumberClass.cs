@@ -7,7 +7,6 @@ public class NumberClass : IQlangClass
     {
         return [
             ("try_parse", (Func<object, bool>)(number => number.ToString().TryParseNumber(out _))),
-            ("random", (Func<int, int, int>)((num1, num2) => new Random().Next(num1, num2))),
             ("to_string", (Func<double, string, string>)((o, pattern) => o.ToString(pattern)))
         ];
     }

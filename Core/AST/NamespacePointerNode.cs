@@ -1,9 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using MessagePack;
+using Newtonsoft.Json;
 
 namespace Core.AST;
-
+[MessagePackObject]
 public class NamespacePointerNode(string name, int line) : ASTNode(line)
 {
+    public NamespacePointerNode() : this("", -1)
+    {}
+    
+    [Key(1)]
     [JsonProperty("a")]
     public string Name { get; set; } = name;
     

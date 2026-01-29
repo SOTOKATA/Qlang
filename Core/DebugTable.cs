@@ -1,42 +1,49 @@
-﻿using Newtonsoft.Json;
+﻿using MessagePack;
+using Newtonsoft.Json;
 
 namespace Core;
 
 [JsonObject(MemberSerialization.OptOut)]
+[MessagePackObject]
 public class DebugTable
 {
+    [Key(1)]
     [JsonProperty("l")]
-    private List<NumberCount> LineIndexes { get; set; } = [];
+    public List<int> LineIndexes { get; set; } = [];
     
+    [Key(2)]
     [JsonProperty("f")]
-    private List<NumberCount> FileIds { get; set; }  = [];
+    public List<NumberCount> FileIds { get; set; }  = [];
 
     [JsonIgnore] 
+    [IgnoreMember]
     private int _index = 0;
     
     public int Add(int lineIndex, int fileId)
     {
-        var lineExists = LineIndexes.Count > 0 && LineIndexes[^1].Number == lineIndex;
+        var lineExists = LineIndexes.Count > 0 && LineIndexes[^1] == lineIndex; //.Number
         var fileExists = FileIds.Count > 0 && FileIds[^1].Number == fileId;
         switch (lineExists)
         {
             case true when fileExists:
-                LineIndexes[^1].Count++;
-                FileIds[^1].Count++;
-                _index++;
+                // LineIndexes[^1].Count++;
+                // FileIds[^1].Count++;
+                // _index++;
                 break;
             case true when !fileExists:
-                LineIndexes[^1].Count++;
+                // LineIndexes[^1].Count++;
                 FileIds.Add(new NumberCount(fileId, 1));
                 _index++;
                 break;
             case false when fileExists:
-                LineIndexes.Add(new NumberCount(lineIndex, 1));
+                LineIndexes.Add(lineIndex);
+                // LineIndexes.Add(new NumberCount(lineIndex, 1));
                 FileIds[^1].Count++;
                 _index++;
                 break;
             default:
-                LineIndexes.Add(new NumberCount(lineIndex, 1));
+                LineIndexes.Add(lineIndex);
+                // LineIndexes.Add(new NumberCount(lineIndex, 1));
                 FileIds.Add(new NumberCount(fileId, 1));
                 _index++;
                 break;
@@ -47,9 +54,10 @@ public class DebugTable
 
     public int GetLineIndex(int index)
     {
-        var virtualIndex = GetListIndex(LineIndexes, index).listIndex;
+        // var virtualIndex = GetListIndex(LineIndexes, index).listIndex;
         
-        return LineIndexes[virtualIndex].Number;
+        // return LineIndexes[virtualIndex].Number;
+        return LineIndexes[index];
     }
     
     public int GetFileId(int index)
@@ -77,11 +85,14 @@ public class DebugTable
     }
 }
 
+[MessagePackObject]
 public class NumberCount(int number, int count)
 {
+    [Key(1)]
     [JsonProperty("n")]
     public int Number { get; set; } = number;
 
+    [Key(2)]
     [JsonProperty("c")]
     public int Count { get; set; } =  count;
 }

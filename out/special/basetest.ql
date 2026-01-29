@@ -119,7 +119,7 @@ class BaseTest: {
         Console.println("\nMin value: " + Number.MIN_VALUE);
         Console.println("Max value: " + Number.MAX_VALUE);
 
-        Console.println("\nrandInt (" + a + "-" + b + "): " + Number.randInt(a, b));
+        Console.println("\nrandInt (" + a + "-" + b + "): " + Math.rand(a, b));
 
         Console.println("\ntoFixed (" + b + ", pattern: 00.000): " + Number.toFixed(b, "00.000"));
         Console.println("toFixedInt (" + a + "): " + Number.toFixedInt(a));

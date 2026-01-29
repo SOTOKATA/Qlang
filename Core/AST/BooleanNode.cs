@@ -1,9 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using MessagePack;
+using Newtonsoft.Json;
 
 namespace Core.AST;
 
+[MessagePackObject]
 public class BooleanNode(int line) : ASTNode(line)
 {
+    [Key(1)]
     [JsonProperty("a")]
     public bool Value { get; set; }
 

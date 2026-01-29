@@ -1,6 +1,5 @@
 using Core;
 using Core.AST;
-using Core.Debug;
 using Core.Exceptions;
 
 namespace Compiler;
@@ -32,8 +31,6 @@ public class Parser
 
         ProgramNode program = new(-1);
 
-        Logger.SetLoggerPath(Path.Combine("Logs", "Debug", "debug_parser.log"));
-        Logger.Log("----------- Parser -----------");
         
         while (!IsAtEnd())
         {
@@ -61,20 +58,16 @@ public class Parser
 
     private ASTNode ParseStatement()
     {
-        Logger.Log($"Parsing statement ({Current().TokenType}, {Current().Value})", "CompilationProcess");
-
         var isStatic = false;
         var isPrivate = false;
 
         if (Check(Tokens.Keyword) && Current().Value == Keywords.StaticModificator)
         {
-            Logger.Log("IsStatic = true");
             isStatic = true;
             Advance();
         }
         if (Check(Tokens.Keyword) && Current().Value == Keywords.PrivateModificator)
         {
-            Logger.Log("IsPrivate = true");
             isPrivate = true;
             Advance();
         }
@@ -136,7 +129,6 @@ public class Parser
         {
             var expr = ParseExpression();
             Expect(Tokens.Semicolon);
-            Logger.Log("Ended parsing statement (identifier)", "CompilationProcess");
             return expr;
         }
         
@@ -144,7 +136,6 @@ public class Parser
         {
             var expr = ParseExpression();
             Expect(Tokens.Semicolon);
-            Logger.Log("Ended parsing statement (LParen)", "CompilationProcess");
             return expr;
         }
         
@@ -152,7 +143,6 @@ public class Parser
         {
             var expr = ParseExpression();
             Expect(Tokens.Semicolon);
-            Logger.Log("Ended parsing statement (LSquareParen)", "CompilationProcess");
             return expr;
         }
 
@@ -161,7 +151,6 @@ public class Parser
 
     private AssignmentNode ParseVariableDeclaration(bool canUseType, bool isStatic = false, bool isPrivate = false, bool isConst = false, bool isNew = false)
     {
-        Logger.Log("Parsing variable declaration", "CompilationProcess");
         if (!Check(Tokens.Keyword) ||
             (Current().Value != Keywords.VariableDeclaration &&
              Current().Value != Keywords.ConstVariableDeclaration))
@@ -200,7 +189,6 @@ public class Parser
             value = ParseExpression();
         }
 
-        Logger.Log($"CompilationProcess.End: Parsing Variable declaration (Name: {name} Value: {value?.GetType().Name ?? "<null>"})");
         var assignmentNode = new AssignmentNode(isStatic, isPrivate, isConst, isNew, Current().DebugIndex)
         {
             Path = [new ObjectPointerNode(Current().DebugIndex) { Name = name }],
@@ -249,7 +237,6 @@ public class Parser
 
     private NamespaceNode ParseNamespace(bool isPrivate)
     {
-        Logger.Log("CompilationProcess: Parsing namespace");
 
         // skip 'namespace'
         Expect(Tokens.Keyword, Keywords.NamespaceDeclaration);
@@ -273,7 +260,6 @@ public class Parser
 
     private FunctionNode ParseFunction(bool isStatic = false, bool isPrivate = false)
     {
-        Logger.Log("CompilationProcess: Parsing function");
 
         Expect(Tokens.Keyword, Keywords.FunctionDeclaration);
         var nameToken = Expect(Tokens.Identifier);
@@ -293,7 +279,6 @@ public class Parser
 
         var body = ParseBlock();
 
-        Logger.Log("CompilationProcess.End: Parsing function");
         return new FunctionNode(nameToken.DebugIndex)
         {
             Name = nameToken.Value,
@@ -306,7 +291,6 @@ public class Parser
 
     private ClassNode ParseClass()
     {
-        Logger.Log("CompilationProcess: Parsing class");
         Expect(Tokens.Keyword, Keywords.ClassDeclaration);
         var nameToken = Expect(Tokens.Identifier);
 
@@ -327,13 +311,11 @@ public class Parser
 
         var body = ParseBlock();
 
-        Logger.Log("CompilationProcess.End: Parsing class");
         return new ClassNode(nameToken.DebugIndex) { Name = nameToken.Value, Body = body, Extends = extends };
     }
 
     private ForNode ParseFor()
     {
-        Logger.Log("CompilationProcess: Parsing for");
         Expect(Tokens.Keyword, Keywords.ForBlock);
 
         var assignment = ParseVariableDeclaration(false, false, false,
@@ -350,13 +332,11 @@ public class Parser
         var forBlock = ParseBlock();
 
 
-        Logger.Log("CompilationProcess.End: Parsing for");
         return new ForNode(Current().DebugIndex) { Assignment = assignment, Statement = statement, Condition = condition, Body = forBlock };
     }
 
     private WhileNode ParseWhile(bool isDoWhile = false)
     {
-        Logger.Log("CompilationProcess: Parsing while");
         Expect(Tokens.Keyword, isDoWhile ? Keywords.DoWhileBlock : Keywords.WhileBlock);
         var condition = ParseExpression();
         Expect(Tokens.Colon);
@@ -364,13 +344,11 @@ public class Parser
 
         var whileBlock = ParseBlock();
 
-        Logger.Log("CompilationProcess.End: Parsing while");
         return new WhileNode(Current().DebugIndex) { Condition = condition, Body = whileBlock, IsDoWhile = isDoWhile };
     }
 
     private SwitchNode ParseSwitch()
     {
-        Logger.Log("CompilationProcess: Parsing switch");
         Expect(Tokens.Keyword, Keywords.SwitchBlock);
         var condition = ParseExpression();
         Expect(Tokens.Colon);
@@ -405,7 +383,6 @@ public class Parser
 
     private IfNode ParseIf()
     {
-        Logger.Log("CompilationProcess: Parsing if");
         Expect(Tokens.Keyword, Keywords.IfBlock);
         var condition = ParseExpression();
         Expect(Tokens.Colon);
@@ -416,8 +393,6 @@ public class Parser
 
         List<ASTNode> elseBlock = [];
 
-        Logger.Log(Current().TokenType.ToString());
-        Logger.Log(Current().Value);
         if (Check(Tokens.Keyword) && Current().Value == Keywords.ElseBlock)
         {
             Advance();
@@ -432,14 +407,12 @@ public class Parser
             }
         }
 
-        Logger.Log("CompilationProcess.End: Parsing if");
         return new IfNode(Current().DebugIndex) { Condition = condition, ThenBlock = thenBlock, ElseBlock = elseBlock };
     }
 
     private List<ASTNode> ParseBlock()
     {
         List<ASTNode> statements = [];
-        Logger.Log("CompilationProcess: Parsing block");
 
         if (Check(Tokens.LBrace) && Peek()?.TokenType == Tokens.RBrace)
         {
@@ -468,13 +441,11 @@ public class Parser
             Expect(Tokens.RBrace);
         }
 
-        Logger.Log("CompilationProcess.End: Parsing block");
         return statements;
     }
 
     private ReturnNode ParseReturn()
     {
-        Logger.Log("CompilationProcess: Parsing return");
         Expect(Tokens.Keyword);
 
         ASTNode? node = null;
@@ -483,7 +454,6 @@ public class Parser
 
         Expect(Tokens.Semicolon);
 
-        Logger.Log("CompilationProcess.End: Parsing return");
         return new ReturnNode(Current().DebugIndex) { ReturnValue = node };
     }
 
@@ -493,9 +463,7 @@ public class Parser
     /// </summary>
     private ASTNode ParseExpression()
     {
-        Logger.Log("CompilationProcess: Parsing expression");
         var result = ParseLogicalOr();
-        Logger.Log("CompilationProcess.End: Parsing expression");
         return result;
     }
 
@@ -728,7 +696,6 @@ public class Parser
         // bool return
         if (Check(Tokens.Keyword) && (Current().Value == Keywords.FalseKeyword || Current().Value == Keywords.TrueKeyword))
         {
-            Logger.Log("CompilationProcess.End: Parsing primary");
             // Advance 'true' or 'false'
             return new BooleanNode(Current().DebugIndex)
             {
@@ -739,7 +706,6 @@ public class Parser
         // String reference
         if (Check(Tokens.StringRef))
         {
-            Logger.Log("CompilationProcess.End: Parsing primary (StringRef)");
             // Advance '___STRING_*___'
             return new StringRefNode(Current().DebugIndex)
             {
@@ -749,7 +715,6 @@ public class Parser
 
         if (Check(Tokens.NumberRef))
         {
-            Logger.Log("CompilationProcess.End: Parsing primary (NumberRef)");
             // Advance '___NUMBER_*___'
             return new NumberRefNode(Current().DebugIndex)
             {
@@ -858,7 +823,6 @@ public class Parser
         // parse: '('expression')'
         if (Check(Tokens.LParen))
         {
-            Logger.Log("Parsing parents");
             // Advance '('
             Expect(Tokens.LParen);
             var parsed = ParseExpression();
@@ -963,7 +927,6 @@ public class Parser
         // Parse assign path 
         if (Check(Tokens.Equals) && Peek()?.TokenType != Tokens.Equals)
         {
-            Logger.Log($"CompilationProcess.End: Parsing primary (PathAssignmentNode - single)");
             // Advance '='
             Advance();
             current = new AssignmentNode(false, false, false, false, Current().DebugIndex)
@@ -1099,7 +1062,6 @@ public class Parser
     
     private ASTNode ParsePrimary(bool isLoop = false)
     {
-        Logger.Log("CompilationProcess: Parsing primary");
 
         var isMinus = false;
         if (Check(Tokens.Minus))

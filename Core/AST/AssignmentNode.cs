@@ -1,27 +1,38 @@
+using MessagePack;
 using Newtonsoft.Json;
 
 namespace Core.AST;
 
+[MessagePackObject]
 public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool isNew, int line) : ASTNode(line)
 {
+    public AssignmentNode() : this(false, false, false, false, -1) {}
+    
+    [Key(1)]
     [JsonProperty("a")]
     public bool IsNew { get; set; } = isNew;
 
+    [Key(2)]
     [JsonProperty("b")]
     public required List<ASTNode> Path { get; set; }
 
+    [Key(3)]
     [JsonProperty("c")]
     public ASTNode? Value { get; set; }
     
+    [Key(4)]
     [JsonProperty("d")]
     public CallNode? Type { get; set; }
 
+    [Key(5)]
     [JsonProperty("e")]
     public bool IsStatic { get; set; } = isStatic;
 
+    [Key(6)]
     [JsonProperty("f")]
     public bool IsPrivate { get; set; } = isPrivate;
 
+    [Key(7)]
     [JsonProperty("g")]
     public bool IsConst { get; set; } = isConst;
 

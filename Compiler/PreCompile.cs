@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
 using Core;
-using Core.Debug;
 using Core.Exceptions;
 using Core.Native;
 
@@ -160,16 +159,8 @@ public static class PreCompile
 
             files = Directory.GetFiles(fullPath, "*.dll", SearchOption.TopDirectoryOnly).ToList();
             
-            foreach (var file in files)
-            {
-                if (lib.MainFilePaths.Contains(file))
-                {
-                    Logger.Log($"{file}", "Skipped (already included)");
-                    continue;
-                }
-                
+            foreach (var file in files.Where(file => !lib.MainFilePaths.Contains(file)))
                 lib.MainFilePaths.Add(file);
-            }
             
             libs.Add(lib);
         }
@@ -179,8 +170,6 @@ public static class PreCompile
 
     public static (string outScript, List<double> list) ExtractNumbers(string script)
     {
-        Logger.Log($"Extract Numbers");
-
         List<double> numberList = [];
 
         const string pattern =
@@ -201,14 +190,12 @@ public static class PreCompile
             return $"___NUMBER_{numberList.Count - 1}___";
         });
 
-        Logger.Log("Numbers extracted successfully");
         return (result, numberList);
     }
 
     
     public static (string outScript, List<string> list) ExtractStrings(string script, List<string> list)
     {
-        Logger.Log($"Extract Strings");
         List<string> stringList = list;
         
         var stringCounter = stringList.Count;
@@ -230,7 +217,6 @@ public static class PreCompile
             {
                 var existedKey = stringList.IndexOf(value);
 
-                Logger.Log($"key='{existedKey}', value='{value}'");
                 return $"___STRING_{existedKey}___";
             }
             
@@ -238,19 +224,14 @@ public static class PreCompile
             
             stringCounter++;
             
-            Logger.Log($"key='{key}', value='{value}'");
-            
             return $"___STRING_{key}___";
         });
         
-        Logger.Log("Strings extracted successfully");
         return (result, stringList);
     }
     
     public static string ReturnFileStrings(string script, List<string> stringList)
     {
-        Logger.Log("Return File Strings");
-    
         var result = Regex.Replace(script, @"^#FILE\s+(___STRING_\d+___)", match =>
         {
             var key = match.Groups[1].Value; // #FILE ___STRING_124___
@@ -266,25 +247,15 @@ public static class PreCompile
                 : match.Value;
         }, RegexOptions.Multiline);
     
-        Logger.Log("Strings file returned successfully");
         return result;
     }
 
     public static string ClearComments(string script)
     {
-        Logger.Log("Clear Comments");
         const string pattern = @"//[^\r\n]*|/\*[\s\S]*?\*/";
         
-        var result = Regex.Replace(script, pattern, match =>
-        {
-            var comment = match.Value;
+        var result = Regex.Replace(script, pattern, _ => "");
         
-            Logger.Log($"comment='{comment}'");
-
-            return "";
-        });
-        
-        Logger.Log("Comments cleared successfully");
         return result;
     }
 

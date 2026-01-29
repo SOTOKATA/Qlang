@@ -13,6 +13,13 @@ namespace std:  {
         function min(const<Number> a, const<Number> b):
             return boolCase(a < b, a, b);
 
+        function rand(const<Number> min, const<Number> max): {
+            if min >= max:
+                Throw.exception("Min cannot be more than or equal to max.");
+
+            return _native("std.Math.random", min, max);
+        }
+
         function abs(const<Number> n): {
             return 0-n;
         }

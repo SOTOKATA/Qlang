@@ -1,9 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using MessagePack;
+using Newtonsoft.Json;
 
 namespace Core.AST;
-
+[MessagePackObject]
 public class ParensNode(int line) : ASTNode(line)
 {
+    [Key(1)]
     [JsonProperty("a")]
     public ASTNode? Statement { get; set; }
     

@@ -11,6 +11,7 @@ public static class Program
 {
     public static void Main(string[] args)
     {
+        
         Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 
         var programPath = Path.Combine(Path.GetDirectoryName(Environment.ProcessPath) ?? "", $"{Path.GetFileNameWithoutExtension(Environment.ProcessPath)}.resource.qli");
@@ -21,17 +22,7 @@ public static class Program
             return;
         }
 
-        QLIProgram? qliProgram;
-
-        // If trying to read .qli file as JSON will throw exception, will use GZip decompress
-        try
-        {
-            qliProgram = Json.Deserialize<QLIProgram>(File.ReadAllText(programPath));
-        }
-        catch
-        {
-            qliProgram = Json.Deserialize<QLIProgram>(GZip.Decompress(File.ReadAllBytes(programPath)));
-        }
+        var qliProgram = Core.MessagePack.Deserialize<QLIProgram>(Brotli.Decompress(File.ReadAllBytes(programPath)));
 
         if (qliProgram is null)
         {

@@ -116,14 +116,14 @@ public static class CommandManager
 
         if (props is not null)
         {
-            values.AddRange(props.Values.Select(var => var.@object is null ? "<null>" : var.@object.ToString()).ToList()!);
+            values.AddRange(props.Values.Select(var => var.Value is null ? "<null>" : var.Value.ToString()).ToList()!);
             names.AddRange(props.Keys.ToList());
         }
 
         if (compileProps is not null)
         {
             names.AddRange(compileProps.Keys.ToList());
-            values.AddRange(compileProps.Values.Select(var => var.@object is null ? "<null>" : var.@object.ToString()).ToList()!);
+            values.AddRange(compileProps.Values.Select(var => var.Value is null ? "<null>" : var.Value.ToString()).ToList()!);
         }
 
         if (names.Count != values.Count)

@@ -12,23 +12,6 @@ class Number: {
         return _native("std.number.try_parse", var);
     }
 
-    // get random number with range 'min' to 'max'
-    function randInt(let min, let max): {
-        if (isNumber(min) == false) || (isNumber(max) == false): {
-            std::Throw.exception("One or two input is not a number");
-        }
-
-        // Convert '3.42...' to '3'
-        min = Parser.asInt(min);
-        max = Parser.asInt(max);
-
-        if min >= max: {
-            std::Throw.exception("Minimum can't be more than maximum");
-        }
-
-        return std::Parser.asNumber(_native("std.number.random", min, max));
-    }
-
     // Get int styled number ('3.421' to '3')
     function toFixedInt(let float): {
         return toFixed(float, "0");
