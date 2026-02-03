@@ -1,5 +1,5 @@
 ﻿using MessagePack;
-using Newtonsoft.Json;
+
 
 namespace Core.AST;
 
@@ -30,12 +30,11 @@ namespace Core.AST;
 [Union(23, typeof(UsingNode))]
 [Union(24, typeof(WhileNode))]
 [Union(25, typeof(ASTBlock))]
-[JsonObject(MemberSerialization.OptOut)]
 // ReSharper disable once InconsistentNaming
 public abstract class ASTNode(int debugIndex = -1)
 {
     [Key(0)]
-    [JsonProperty("z")] 
+     
     public int DebugIndex { get; set; } = debugIndex;
     
     public abstract string GetTree(string indent = "");

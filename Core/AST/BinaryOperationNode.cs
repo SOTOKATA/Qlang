@@ -1,5 +1,5 @@
 ﻿using MessagePack;
-using Newtonsoft.Json;
+
 
 namespace Core.AST;
 
@@ -7,14 +7,14 @@ namespace Core.AST;
 public class BinaryOperationNode(int line) : ASTNode(line)
 {
     [Key(1)]
-    [JsonProperty("a")]
+    
     public ASTNode? Left { get; set; }
 
     [Key(2)]
-    [JsonProperty("b")]
+    
     public string? Operator { get; set; } // "==", "+", "-", etc.
     [Key(3)]
-    [JsonProperty("c")]
+    
     public ASTNode? Right { get; set; }
 
     public override ASTNode Clone()

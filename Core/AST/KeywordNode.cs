@@ -1,5 +1,5 @@
 ﻿using MessagePack;
-using Newtonsoft.Json;
+
 
 namespace Core.AST;
 [MessagePackObject]
@@ -9,7 +9,7 @@ public class KeywordNode(string keyword, int line) : ASTNode(line)
     {}
     
     [Key(1)]
-    [JsonProperty("a")]
+    
     public string Value { get; set; } = keyword;
     
     public override string GetTree(string indent = "")

@@ -1,5 +1,5 @@
 ﻿using MessagePack;
-using Newtonsoft.Json;
+
 
 namespace Core.AST;
 [MessagePackObject]
@@ -7,14 +7,14 @@ public class SwitchNode(int line) : ASTBlock(line)
 {
     public SwitchNode() : this(-1) {}
     [Key(1)]
-    [JsonProperty("a")]
+    
     public required ASTNode Condition { get; set; }
     [Key(2)]
-    [JsonProperty("b")]
+    
     public List<SwitchCaseNode> CaseBlocks { get; set; } = [];
     
     [Key(3)]
-    [JsonProperty("c")]
+    
     public List<ASTNode>? DefaultBlock { get; set; }
 
     public override ASTNode Clone()

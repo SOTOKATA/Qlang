@@ -1,5 +1,5 @@
 ﻿using MessagePack;
-using Newtonsoft.Json;
+
 
 namespace Core.AST;
 
@@ -7,10 +7,10 @@ namespace Core.AST;
 public class CallNode(int line) : ASTNode(line)
 {
     [Key(1)]
-    [JsonProperty("a")]
+    
     public List<ASTNode> Objects = [];
     [Key(2)]
-    [JsonProperty("b")]
+    
     public List<ASTNode> Arguments { get; set; } = [];
 
     public override ASTNode Clone()

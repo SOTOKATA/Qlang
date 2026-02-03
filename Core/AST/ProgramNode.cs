@@ -1,12 +1,12 @@
 ﻿using MessagePack;
-using Newtonsoft.Json;
+
 
 namespace Core.AST;
 [MessagePackObject]
 public class ProgramNode(int line) : ASTNode(line)
 {
     [Key(1)]
-    [JsonProperty("a")]
+    
     public List<ASTNode> Statements { get; set; } = [];
 
     public override ASTNode Clone() => new ProgramNode(DebugIndex)

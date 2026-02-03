@@ -1,5 +1,5 @@
 ﻿using MessagePack;
-using Newtonsoft.Json;
+
 
 namespace Core;
 
@@ -7,10 +7,10 @@ namespace Core;
 public class SourceFileTable
 {
     [Key(1)]
-    [JsonProperty("a")]
+    
     public List<string> Index { get; set; } = [];
     
-    [JsonIgnore]
+    
     [IgnoreMember]
     private Dictionary<string, int> _cache = new();
 

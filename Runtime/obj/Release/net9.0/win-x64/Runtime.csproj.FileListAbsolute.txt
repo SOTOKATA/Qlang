@@ -3,7 +3,6 @@ D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\qli.deps.json
 D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\qli.runtimeconfig.json
 D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\qli.dll
 D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\qli.pdb
-D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\Newtonsoft.Json.dll
 D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\Core.dll
 D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\Interpreter.dll
 D:\Projects\Console\Qlang\Runtime\bin\Release\net9.0\win-x64\Core.pdb

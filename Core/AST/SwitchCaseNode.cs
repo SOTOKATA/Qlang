@@ -1,15 +1,15 @@
 ﻿using MessagePack;
-using Newtonsoft.Json;
+
 
 namespace Core.AST;
 [MessagePackObject]
 public class SwitchCaseNode(int line) : ASTNode(line)
 {
     [Key(1)]
-    [JsonProperty("a")]
+    
     public required ASTNode Condition { get; set; }
     [Key(2)]
-    [JsonProperty("b")]
+    
     public List<ASTNode> CaseBlock { get; set; } = [];
     
     public override string GetTree(string indent = "")
