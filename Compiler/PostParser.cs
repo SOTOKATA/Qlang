@@ -309,6 +309,15 @@ public class PostParser(SourceFileTable table, DebugTable debugTable)
     
     private (int, string) GetDebug(ASTNode node)
     {
-        return (_debugTable.GetLineIndex(node.DebugIndex) + 1, _sourceFileTable[_debugTable.GetFileId(node.DebugIndex)]);
+        try
+        {
+            return (_debugTable.GetLineIndex(node.DebugIndex) + 1,
+                _sourceFileTable[_debugTable.GetFileId(node.DebugIndex)]);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            return (-1, "");
+        }
     }
 }

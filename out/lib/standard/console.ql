@@ -89,10 +89,8 @@ namespace std:  {
         function resetColors():
             _native("std.console.reset_color");
 
-        function width(): 
-            return _native("std.console.width");
+        const width = _native("std.console.width");
 
-        function height(): 
-            return _native("std.console.height");
+        const height = _native("std.console.height");
     }
 }

@@ -25,6 +25,8 @@ public class Compiler
 
         outputScript = PreCompile.ReturnFileStrings(outputScript, StringList);
 
+        outputScript = PreCompile.UseBindings(outputScript);
+
         var output = Lexer.Lex(fileName, outputScript);
 
         SourceFileTable = output.sourceFileTable;

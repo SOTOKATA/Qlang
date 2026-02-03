@@ -454,7 +454,7 @@ public class Parser
 
         Expect(Tokens.Semicolon);
 
-        return new ReturnNode(Current().DebugIndex) { ReturnValue = node };
+        return new ReturnNode(node?.DebugIndex ?? Current().DebugIndex) { ReturnValue = node };
     }
 
     /// <summary>
@@ -1105,7 +1105,7 @@ public class Parser
         if (baseExpression is not null)
             return baseExpression;
         
-        throw new QlangCompileException($"Unexpected token in expression: {Current().TokenType} ({(Current().Value == "" ? "Null" : Current().Value)})", GetDebug(baseExpression), "Parser");
+        throw new QlangCompileException($"Unexpected token in expression: {Current().TokenType} ({(Current().Value == "" ? "Null" : Current().Value)})", GetDebug(Current()), "Parser");
     }
 
     // Support methods
@@ -1157,9 +1157,22 @@ public class Parser
         return list;
     }
 
-    private (int, string) GetDebug(ASTNode node)
+    private (int, string) GetDebug(ASTNode? node)
     {
-        return (_debugTable.GetLineIndex(node.DebugIndex) + 1, _sourceFileTable[_debugTable.GetFileId(node.DebugIndex)]);
+        if (node is null)
+            return (-1, "undefined");
+        
+        return (_debugTable.GetLineIndex(node.DebugIndex) + 1,
+                _sourceFileTable[_debugTable.GetFileId(node.DebugIndex)]);
+    }
+    
+    private (int, string) GetDebug(Token? token)
+    {
+        if (token is null)
+            return (-1, "undefined");
+        
+        return (_debugTable.GetLineIndex(token.DebugIndex) + 1,
+            _sourceFileTable[_debugTable.GetFileId(token.DebugIndex)]);
     }
     
     
