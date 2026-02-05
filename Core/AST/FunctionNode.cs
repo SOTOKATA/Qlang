@@ -26,6 +26,11 @@ public class FunctionNode(int line) : ASTNode(line)
     [IgnoreMember] 
     public ASTContext? Context;
 
+    public override string ToString()
+    {
+        return Name;
+    }
+
     public override ASTNode Clone()
     {
         return new FunctionNode(DebugIndex)

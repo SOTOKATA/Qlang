@@ -769,7 +769,7 @@ public class Parser
             Advance();
             var @class = new ClassNode(Current().DebugIndex)
             {
-                Name = "~class___",
+                Name = "~class",
                 Body = [],
                 Extends = null
             };

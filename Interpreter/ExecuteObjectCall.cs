@@ -44,7 +44,9 @@ public partial class Interpreter
         switch (arg)
         {
             case DynamicClass @class:
-                return @class.ClassName;
+                return @class.ToString();
+            case FunctionNode fn:
+                return fn.ToString();
             case List<object?>:
                 return "Collection";
             case int or long or double or float:
