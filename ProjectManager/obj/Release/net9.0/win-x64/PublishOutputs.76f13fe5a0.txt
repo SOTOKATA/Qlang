@@ -1,5 +1,0 @@
-D:\Projects\Console\Qlang\out\ql.pdb
-D:\Projects\Console\Qlang\out\Compiler.pdb
-D:\Projects\Console\Qlang\out\Interpreter.pdb
-D:\Projects\Console\Qlang\out\Core.pdb
-D:\Projects\Console\Qlang\out\ql.exe
