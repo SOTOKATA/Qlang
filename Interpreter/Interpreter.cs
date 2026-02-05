@@ -10,18 +10,18 @@ namespace Interpreter;
 
 public partial class Interpreter
 {
-    public Interpreter(List<string> stringList, List<double> numberList, NativeFunctionRegistry nativeFunctions, SourceFileTable sourceFileTable, DebugTable debugTable)
+    public Interpreter(List<string> stringList, List<double> numberList, NativeFunctionRegistry nativeFunctions, SourceFileTable? sourceFileTable, DebugTable? debugTable)
     {
         _stringList = stringList;
         _numberList = numberList;
         _nativeFunctions = nativeFunctions;
         _sourceFileTable = sourceFileTable;
-        _sourceFileTable.RebuildCache();
+        _sourceFileTable?.RebuildCache();
         _debugTable = debugTable;
     }
 
-    private readonly SourceFileTable _sourceFileTable;
-    private readonly DebugTable _debugTable;
+    private readonly SourceFileTable? _sourceFileTable;
+    private readonly DebugTable? _debugTable;
 
     private readonly NativeFunctionRegistry _nativeFunctions;
 
@@ -34,8 +34,8 @@ public partial class Interpreter
     private readonly Stack<ASTContext> _contextStack = new();
     private bool HasContext => _contextStack.Count > 0;
     private ASTContext CurrentContext => HasContext ? _contextStack.Peek() : null;
-    
-    public const string GlobalNamespaceName = "~global";
+
+    private const string GlobalNamespaceName = "~global";
 
     public void Execute(ProgramNode program, List<string?>? args = null)
     {
@@ -86,7 +86,7 @@ public partial class Interpreter
         
         var contextClass = function.Context?.Class ?? ownerClass ?? (HasContext ? CurrentContext.Class : null);
         var contextNamespace = function.Context?.Namespace ?? ownerNamespace ?? (HasContext ? CurrentContext.Namespace : null);
-        ASTContext newContext = new() { Function = function, Class = contextClass, Namespace = contextNamespace};
+        ASTContext newContext = new() { Function = function, ParentFunction = function.Context?.Function, Class = contextClass, Namespace = contextNamespace};
 
         AddContext(newContext);
 
@@ -432,7 +432,7 @@ public partial class Interpreter
         return numberRef.IsNegative ? -number : number;
     }
 
-    private DynamicClass? CreateClassFrom(object? obj, DynamicClass copy, ASTNode context)
+    private DynamicClass CreateClassFrom(object? obj, DynamicClass copy, ASTNode context)
     {
         if (obj is DynamicClass dynamic && dynamic.ClassName == copy.ClassName)
             return dynamic;
@@ -480,7 +480,7 @@ public partial class Interpreter
         // Console.WriteLine($"First operand: '{leftClass.Variables["_value"].Value}'");
         // Console.WriteLine($"Second operand: '{rightClass.Variables["_value"].Value}'");
 
-        if (binOp.Operator.Any(c => c is '=' or '>' or '<' or '!' or '*' or '/' or '%' or '+' or '-'))
+        if (binOp.Operator != null && binOp.Operator.Any(c => c is '=' or '>' or '<' or '!' or '*' or '/' or '%' or '+' or '-'))
         {
             var @operator = "";
             for (var i = 0; i < binOp.Operator.Length; i++)
@@ -656,7 +656,7 @@ public partial class Interpreter
 
             throw new QlangRuntimeException(
                 $"Type error: Cannot apply operator '{binOp.Operator}' to " +
-                $"'{left?.ToString() ?? "null"}' ({left?.GetType().Name}) and '{right?.ToString() ?? "null"}' ({right?.GetType().Name})",
+                $"'{left.ToString() ?? "null"}' ({left.GetType().Name}) and '{right.ToString() ?? "null"}' ({right.GetType().Name})",
                 GetDebug(binOp),
                 GetStackTrace());
         }
@@ -707,7 +707,7 @@ public partial class Interpreter
             if (TryMatchFunction(function, args, out var finalArgs))
                 return (function, finalArgs);
 
-        return (null, null);
+        return (null, null)!;
     }
         
     private (FunctionNode? function, List<object?> Args) GetFunctionFromFunctionVariables
@@ -724,7 +724,7 @@ public partial class Interpreter
             if (TryMatchFunction(function, args, out var finalArgs))
                 return (function, finalArgs);
 
-        return (null, null);
+        return (null, null)!;
     }
     
     private (FunctionNode? function, List<object?> Args) GetFunctionFromClass
@@ -744,7 +744,7 @@ public partial class Interpreter
             if (TryMatchFunction(function, args, out var finalArgs))
                 return (function, finalArgs);
 
-        return (null, null);
+        return (null, null)!;
     }
     
     private (FunctionNode? function, List<object?> Args) GetFunctionFromNamespace
@@ -797,6 +797,9 @@ public partial class Interpreter
 
     private (int, string) GetDebug(ASTNode node)
     {
+        if (_debugTable is null || _sourceFileTable is null)
+            return (-1, "Debug file reference is not found.");
+        
         return (_debugTable.GetLineIndex(node.DebugIndex) + 1, _sourceFileTable[_debugTable.GetFileId(node.DebugIndex)]);
     }
 }

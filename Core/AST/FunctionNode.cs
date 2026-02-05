@@ -38,6 +38,7 @@ public class FunctionNode(int line) : ASTNode(line)
             IsStatic = IsStatic,
             IsPrivate = IsPrivate,
             Parameters = Parameters.Select(node => node.Clone()).Cast<AssignmentNode>().ToList(),
+            Context = Context,
             Name = Name, 
             Body = Body.Select(node => node.Clone()).ToList() 
         };

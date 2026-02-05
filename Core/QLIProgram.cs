@@ -19,14 +19,6 @@ public class QLIProgram
     
     public required List<double> NumberList { get; init; }
     
-    [Key(4)]
-    
-    public required SourceFileTable SourceFileTable { get; init; }
-    
-    [Key(5)]
-    
-    public required DebugTable DebugTable { get; init; }
-    
     [IgnoreMember]
     public List<QLIProgramLib> ExternalLibraries { get; set; }
 }

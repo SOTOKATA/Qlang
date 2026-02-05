@@ -31,12 +31,8 @@ public partial class Project
             _settings.GetString(ProjectSettings.MainFilePath));
 
         var outputName = _compileSettings.GetString(CompileSettings.OutputFilename);
-
-        var useCompress = _compileSettings.GetBool(CompileSettings.GZipCompress);
         
-        var jsonIndented = _compileSettings.GetBool(CompileSettings.JsonIndented);
-        
-        return _qlang.Compile(rootPath, outputName, useCompress, jsonIndented);
+        return _qlang.Compile(rootPath, outputName);
     }
 
     public void Run(List<string?>? args)

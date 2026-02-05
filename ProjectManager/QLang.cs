@@ -8,7 +8,7 @@ namespace ProjectManager;
 
 public class QLang
 {
-    public bool Compile(string path, string? filename = null, bool useGZipCompress = false, bool jsonIndented = false)
+    public bool Compile(string path, string? filename = null)
     {
         var code = File.ReadAllText(path);
         Compiler.Compiler c = new();
@@ -24,10 +24,12 @@ public class QLang
             ProgramNode = programNode,
             StringList = c.StringList,
             NumberList = c.NumberList,
-            ExternalLibraries = c.DllDependencies,
+            ExternalLibraries = c.DllDependencies
+        }, new QLIDebug
+        {
             SourceFileTable = c.SourceFileTable,
             DebugTable = c.DebugTable
-        }, path, useGZipCompress, jsonIndented);
+        }, path);
 
         return true;
     }
@@ -62,7 +64,7 @@ public class QLang
         }
     }
 
-    private static void SaveProgram(QLIProgram qliProgram, string filePath, bool useGZipCompress, bool jsonIndented)
+    private static void SaveProgram(QLIProgram qliProgram, QLIDebug qliDebug, string filePath)
     {
         var pathToFile = Path.GetDirectoryName(filePath);
         
@@ -71,17 +73,20 @@ public class QLang
 
         SaveDependencies(qliProgram, Path.Combine(pathToFile ?? "", "build"), Path.GetFileNameWithoutExtension(filePath));
         
-        var path = Path.Combine(pathToFile ?? "", "build", Path.GetFileNameWithoutExtension(filePath) + ".resource.qli");
+        var basePath = Path.Combine(pathToFile ?? "", "build", Path.GetFileNameWithoutExtension(filePath));
+        var path = basePath + ".resource.qli";
+        var debugPath = basePath + ".debug.qli";
         
         if (!File.Exists(path))
             File.Create(path).Close();
+
+        if (!File.Exists(debugPath))
+            File.Create(debugPath).Close();
         
         File.Copy(Path.Combine(Path.GetDirectoryName(Environment.ProcessPath), "qli" + OS.GetExecutableExtension()), Path.Combine(pathToFile ?? "", "build", Path.GetFileNameWithoutExtension(filePath) + OS.GetExecutableExtension()), true);
         
-        // if (useGZipCompress)
-            // File.WriteAllBytes(path, GZip.Compress(Json.Serialize(qliProgram, jsonIndented)));
-        // else File.WriteAllText(path, Json.Serialize(qliProgram, jsonIndented));
         File.WriteAllBytes(path, Brotli.Compress(Core.MessagePack.Serialize(qliProgram)));
+        File.WriteAllBytes(debugPath, Brotli.Compress(Core.MessagePack.Serialize(qliDebug)));
     }
 
     public void Run(List<string?>? args, string filename)

@@ -9,6 +9,8 @@ public class ASTContext
     public DynamicNamespace?  Namespace { get; init; }
     
     public DynamicFunction? Function { get; init; }
+    
+    public DynamicFunction? ParentFunction { get; init; }
 
     public List<ASTBlock> Blocks { get; } = [];
     

@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Reflection;
 using Core;
+using Core.AST;
 using Core.Exceptions;
 using Core.Native;
 using Core.NativeLib;
@@ -14,7 +15,9 @@ public static class Program
         
         Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 
-        var programPath = Path.Combine(Path.GetDirectoryName(Environment.ProcessPath) ?? "", $"{Path.GetFileNameWithoutExtension(Environment.ProcessPath)}.resource.qli");
+        var processDir = Path.GetDirectoryName(Environment.ProcessPath);
+        var programPath = Path.Combine(processDir ?? "", $"{Path.GetFileNameWithoutExtension(Environment.ProcessPath)}.resource.qli");
+        var debugPath = Path.Combine(processDir ?? "", $"{Path.GetFileNameWithoutExtension(Environment.ProcessPath)}.debug.qli");
         
         if (!File.Exists(programPath))
         {
@@ -23,6 +26,15 @@ public static class Program
         }
 
         var qliProgram = Core.MessagePack.Deserialize<QLIProgram>(Brotli.Decompress(File.ReadAllBytes(programPath)));
+        
+        var qliDebug = new QLIDebug()
+        {
+            SourceFileTable = null,
+            DebugTable = null
+        };
+
+        if (File.Exists(debugPath))
+            qliDebug = Core.MessagePack.Deserialize<QLIDebug>(Brotli.Decompress(File.ReadAllBytes(debugPath)));
 
         if (qliProgram is null)
         {
@@ -34,7 +46,7 @@ public static class Program
         {
             new Interpreter.Interpreter(qliProgram.StringList,
                 qliProgram.NumberList,
-                LoadDependencies(), qliProgram.SourceFileTable, qliProgram.DebugTable).Execute(qliProgram.ProgramNode, args.ToList()!);
+                LoadDependencies(), qliDebug.SourceFileTable, qliDebug.DebugTable).Execute(qliProgram.ProgramNode, args.ToList()!);
         }
         catch (QlangRuntimeException runtime)
         {

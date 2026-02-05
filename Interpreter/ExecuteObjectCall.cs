@@ -267,6 +267,7 @@ public partial class Interpreter
                 
                 var classIsNull = CurrentContext.Class is null;
                 var functionIsNull = CurrentContext.Function is null;
+                var parentFunctionIsNull = CurrentContext.ParentFunction is null;
                 var namespaceIsNull = CurrentContext.Namespace is null;
 
                 Variable? var;
@@ -279,6 +280,16 @@ public partial class Interpreter
                     if (var is not null)
                         return (var, CurrentContext.Namespace);
                 }
+                
+                // Get from parent function
+                if (!parentFunctionIsNull)
+                {
+                    var = CurrentContext.ParentFunction?.Variables.FirstOrDefault(funcVar => funcVar.Key == node.Name).Value;
+
+                    if (var is not null)
+                        return (var, CurrentContext.Namespace);
+                }
+
 
                 // Get from class
                 if (!classIsNull)
