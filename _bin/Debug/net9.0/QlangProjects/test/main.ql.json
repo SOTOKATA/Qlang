@@ -18839,7 +18839,7 @@
           "Path": null,
           "Value": {
             "$type": "Qlang.Core.Lang.AST.FunctionNode, ql",
-            "Name": "___function_pointer___",
+            "Name": "~function",
             "IsStatic": true,
             "IsPrivate": false,
             "Parameters": [],

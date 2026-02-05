@@ -75,7 +75,10 @@ public partial class Interpreter
     private DynamicFunction ToDynamicFunction(FunctionNode functionNode)
     {
         // Create dynamic instance
-        DynamicFunction dynamicFunction = new(functionNode.Name);
+        DynamicFunction dynamicFunction = new(functionNode.Name)
+        {
+            Context = functionNode.Context
+        };
 
         // Add and convert all parameters
         foreach (var node in functionNode.Parameters)

@@ -23,7 +23,6 @@ C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Relea
 C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Release\net9.0\win-x64\qli.runtimeconfig.json
 C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Release\net9.0\win-x64\qli.dll
 C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Release\net9.0\win-x64\qli.pdb
-C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Release\net9.0\win-x64\Newtonsoft.Json.dll
 C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Release\net9.0\win-x64\Core.dll
 C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Release\net9.0\win-x64\Interpreter.dll
 C:\Users\sotok\Documents\Робочий Стіл\Estagio\Qlang\Runtime\bin\Release\net9.0\win-x64\Interpreter.pdb

@@ -1,7 +1,7 @@
 Keyword(function) Identifier(main) LParen RParen Colon 
 	LBrace 
-	Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_0___) Plus LParen Identifier(___NUMBER_0___) Star Identifier(___NUMBER_1___) Plus Identifier(___NUMBER_2___) RParen RParen Semicolon 
-	Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_1___) Plus LParen Identifier(___NUMBER_3___) Star LParen Identifier(___NUMBER_4___) Plus Identifier(___NUMBER_5___) RParen RParen RParen Semicolon 
+	Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_0___) Plus LParen Identifier(___N0___) Star Identifier(___N1___) Plus Identifier(___N2___) RParen RParen Semicolon 
+	Identifier(Console) Dot Identifier(println) LParen Identifier(___STRING_1___) Plus LParen Identifier(___N3___) Star LParen Identifier(___N4___) Plus Identifier(___N5___) RParen RParen RParen Semicolon 
 RBrace 
 Keyword(class) Identifier(Console) Colon 
 	LBrace 
@@ -265,9 +265,9 @@ Keyword(class) Identifier(String) Colon
 		RBrace 
 		Keyword(let) Identifier(result) Equals Identifier(___STRING_49___) Semicolon 
 		Keyword(let) Identifier(arr) Equals Identifier(Array) Dot Identifier(new) LParen Identifier(collection) RParen Semicolon 
-		Keyword(for) Keyword(let) Identifier(i) Equals Identifier(___NUMBER_6___) Semicolon 
+		Keyword(for) Keyword(let) Identifier(i) Equals Identifier(___N6___) Semicolon 
 		Identifier(i) Less Identifier(arr) Dot Identifier(length) LParen RParen Semicolon 
-		Identifier(i) Equals Identifier(i) Plus Identifier(___NUMBER_7___) Colon 
+		Identifier(i) Equals Identifier(i) Plus Identifier(___N7___) Colon 
 			LBrace 
 			Identifier(result) Equals Identifier(result) Plus Identifier(arr) Dot Identifier(at) LParen Identifier(i) RParen Semicolon 
 		RBrace 

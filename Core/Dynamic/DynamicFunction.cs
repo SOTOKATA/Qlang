@@ -14,4 +14,6 @@ public class DynamicFunction(string name)
     public readonly Dictionary<string, Variable> Variables = [];
 
     public List<ASTNode> Body = [];
+
+    public ASTContext? Context;
 }

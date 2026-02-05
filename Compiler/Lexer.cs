@@ -8,7 +8,7 @@ namespace Compiler;
  * Translation of code into special characters
  * Example:
  *      Code: print(1);
- *      Translated code: Identificator(print) LParen NumberRef(___NUMBER_0___) RParen SemiColon
+ *      Translated code: Identificator(print) LParen NumberRef(___N0___) RParen SemiColon
  * This process also saves debug data (line number and file index) and creates a file table.
  */
 public static class Lexer

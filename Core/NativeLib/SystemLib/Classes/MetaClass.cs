@@ -39,7 +39,7 @@ public class MetaClass : IQlangClass
             
             ("is_dynamic_class", (Func<object?, bool>)(@class => @class is DynamicClass)),
             
-            ("is_function", (Func<object?, bool>)(@class => @class is DynamicClass { Name: "___function_pointer___" }))
+            ("is_function", (Func<object?, bool>)(@class => @class is DynamicClass { Name: "~function" }))
         ];
     }
 }

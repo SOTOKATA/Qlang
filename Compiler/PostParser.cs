@@ -30,7 +30,7 @@ public class PostParser(SourceFileTable table, DebugTable debugTable)
 
         var globalNamespace = new NamespaceNode(globalScopes.FirstOrDefault()?.DebugIndex ?? -1)
         {
-            Name = "0global",
+            Name = "~global",
             IsPrivate = false
         };
             

@@ -6,6 +6,7 @@ public static class Keywords
     public static string ClassDeclaration => "class";
     public static string NamespaceDeclaration => "namespace";
     public static string VariableDeclaration => "let";
+    public static string ConstVariableDeclaration => "const";
     
     public static string ThisKeyword => "this";
     
@@ -38,7 +39,6 @@ public static class Keywords
   
     public static string PrivateModificator => "private";
     public static string StaticModificator => "static";
-    public static string ConstVariableDeclaration => "const";
     
     public static List<string> GetKeywords() =>
     [

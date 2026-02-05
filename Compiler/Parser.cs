@@ -706,7 +706,7 @@ public class Parser
         // String reference
         if (Check(Tokens.StringRef))
         {
-            // Advance '___STRING_*___'
+            // Advance '___S*___'
             return new StringRefNode(Current().DebugIndex)
             {
                 Index = int.Parse(Advance().Value)
@@ -715,7 +715,7 @@ public class Parser
 
         if (Check(Tokens.NumberRef))
         {
-            // Advance '___NUMBER_*___'
+            // Advance '___N*___'
             return new NumberRefNode(Current().DebugIndex)
             {
                 IsNegative = isMinus,
@@ -738,7 +738,7 @@ public class Parser
             Advance();
             var func = new FunctionNode(Current().DebugIndex)
             {
-                Name = "___function_pointer___"
+                Name = "~function"
             };
 
             List<AssignmentNode> parameters = [];
@@ -754,9 +754,8 @@ public class Parser
 
             func.Parameters = parameters;
 
-            // Advance '=>'
-            Expect(Tokens.Equals);
-            Expect(Tokens.Greater);
+            // Advance ':'
+            Expect(Tokens.Colon);
 
             func.Body = ParseBlock();
 
@@ -770,7 +769,7 @@ public class Parser
             Advance();
             var @class = new ClassNode(Current().DebugIndex)
             {
-                Name = "___object___",
+                Name = "~class___",
                 Body = [],
                 Extends = null
             };
@@ -843,19 +842,19 @@ public class Parser
         var currentIdentifier = Current().Value;
 
         // Проверяем на специальные строковые константы
-        if (currentIdentifier.StartsWith("___STRING_"))
+        if (currentIdentifier.StartsWith("___S"))
         {
-            // Advance '___STRING_*___'
+            // Advance '___S*___'
             Advance();
-            var index = int.Parse(currentIdentifier.Replace("___STRING_", "").Replace("___", ""));
+            var index = int.Parse(currentIdentifier.Replace("___S", "").Replace("___", ""));
             return new StringRefNode(Current().DebugIndex) { Index = index, };
         }
 
-        if (currentIdentifier.StartsWith("___NUMBER_"))
+        if (currentIdentifier.StartsWith("___N"))
         {
-            // Advance '___NUMBER_*___'
+            // Advance '___N*___'
             Advance();
-            var index = int.Parse(currentIdentifier.Replace("___NUMBER_", "").Replace("___", ""));
+            var index = int.Parse(currentIdentifier.Replace("___N", "").Replace("___", ""));
             return new NumberRefNode(Current().DebugIndex)
             {
                 IsNegative = isMinus,
@@ -1053,9 +1052,6 @@ public class Parser
             _callNodes.Add(callPathNode);
         }
 
-        // if (path is not CallNode objCallNode)
-            // throw new QlangCompileException("Cannot find object to cast", path.Line, "Parser", path.SourceFile ?? "undefined");
-
         return new CastNode(callNode, callPathNode, Current().DebugIndex);
     }
 
@@ -1077,7 +1073,7 @@ public class Parser
             baseExpression = ParsePrimaryPath();
             return baseExpression;
         }
-
+        
         baseExpression = ParseCast();
         if (baseExpression is not null)
             return baseExpression;
@@ -1091,7 +1087,7 @@ public class Parser
         if (baseExpression is not null)
             return baseExpression;
 
-        // Try extracted identifiers (___STRING_*___, ___NUMBER_*___, numbers)
+        // Try extracted identifiers (___S*___, ___N*___, numbers)
         baseExpression = ParsePrimaryExtracted(isMinus);
         if (baseExpression is not null)
             return baseExpression;

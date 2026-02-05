@@ -8,7 +8,7 @@ class Snake: {
         const right = "d",
         const up = "w",
         const down = "s",
-        const isAnyDir = function (const char) => {
+        const isAnyDir = function (const char): {
             return char == this.left || char == this.right || char == this.down || char == this.up;   
         }
     };

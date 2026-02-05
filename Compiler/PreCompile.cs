@@ -183,11 +183,11 @@ public static class PreCompile
                 throw new Exception($"Undefined type of value '{numberValue}'");
 
             if (numberList.IndexOf(@double) != -1)
-                return $"___NUMBER_{numberList.IndexOf(@double)}___";
+                return $"___N{numberList.IndexOf(@double)}___";
 
             numberList.Add(@double);
 
-            return $"___NUMBER_{numberList.Count - 1}___";
+            return $"___N{numberList.Count - 1}___";
         });
 
         return (result, numberList);
@@ -217,14 +217,14 @@ public static class PreCompile
             {
                 var existedKey = stringList.IndexOf(value);
 
-                return $"___STRING_{existedKey}___";
+                return $"___S{existedKey}___";
             }
             
             stringList.Add(value);
             
             stringCounter++;
             
-            return $"___STRING_{key}___";
+            return $"___S{key}___";
         });
         
         return (result, stringList);
@@ -232,9 +232,9 @@ public static class PreCompile
     
     public static string ReturnFileStrings(string script, List<string> stringList)
     {
-        var result = Regex.Replace(script, @"^#FILE\s+(___STRING_\d+___)", match =>
+        var result = Regex.Replace(script, @"^#FILE\s+(___S\d+___)", match =>
         {
-            var key = match.Groups[1].Value; // #FILE ___STRING_124___
+            var key = match.Groups[1].Value; // #FILE ___S124___
             
             var smatch = Regex.Match(key, @"\d+");
             if (!smatch.Success)
@@ -261,7 +261,7 @@ public static class PreCompile
 
     public static (string script, List<string> stringList) AddStringInterpolation(string script, List<string> stringList)
     {
-        var result = Regex.Replace(script, @"\$___STRING_\d+___", match =>
+        var result = Regex.Replace(script, @"\$___S\d+___", match =>
         {
             var founded = match.Value[1..];
             

@@ -1,8 +1,8 @@
 
 
 function main(): {
-    Console.println(___STRING_0___ + (___NUMBER_0___ * ___NUMBER_1___ + ___NUMBER_2___));
-    Console.println(___STRING_1___ + (___NUMBER_3___ * (___NUMBER_4___ + ___NUMBER_5___)));
+    Console.println(___STRING_0___ + (___N0___ * ___N1___ + ___N2___));
+    Console.println(___STRING_1___ + (___N3___ * (___N4___ + ___N5___)));
 }
 
 class Console: {
@@ -298,7 +298,7 @@ class String: {
 
         let arr = Array.new(collection);
 
-        for let i = ___NUMBER_6___; i < arr.length(); i = i + ___NUMBER_7___: {
+        for let i = ___N6___; i < arr.length(); i = i + ___N7___: {
             result = result + arr.at(i);
         }
 

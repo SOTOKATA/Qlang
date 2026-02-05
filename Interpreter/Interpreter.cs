@@ -35,7 +35,7 @@ public partial class Interpreter
     private bool HasContext => _contextStack.Count > 0;
     private ASTContext CurrentContext => HasContext ? _contextStack.Peek() : null;
     
-    public const string GlobalNamespaceName = "0global";
+    public const string GlobalNamespaceName = "~global";
 
     public void Execute(ProgramNode program, List<string?>? args = null)
     {
@@ -83,9 +83,9 @@ public partial class Interpreter
     {
         if (function is null)
             return null;
-
-        var contextClass = ownerClass ?? (HasContext ? CurrentContext.Class : null);
-        var contextNamespace = ownerNamespace ?? (HasContext ? CurrentContext.Namespace : null);
+        
+        var contextClass = function.Context?.Class ?? ownerClass ?? (HasContext ? CurrentContext.Class : null);
+        var contextNamespace = function.Context?.Namespace ?? ownerNamespace ?? (HasContext ? CurrentContext.Namespace : null);
         ASTContext newContext = new() { Function = function, Class = contextClass, Namespace = contextNamespace};
 
         AddContext(newContext);
@@ -309,6 +309,12 @@ public partial class Interpreter
         return csharpString ? $"{processed}" : processed;
     }
 
+    private FunctionNode PrepareFunctionNodePointer(FunctionNode node)
+    {
+        node.Context = CurrentContext;
+        return node;
+    }
+
     private object? EvaluateExpression(ASTNode? expr)
     {
         if (expr is null)
@@ -331,7 +337,7 @@ public partial class Interpreter
                 CollectionNode collection => collection.Collection.ConvertAll(EvaluateExpression),
                 KeywordNode node when node.Value == Keywords.NullKeyword => null,
                 CallNode call => ExecuteObjectCalls(call),
-                FunctionNode => expr,
+                FunctionNode fn => PrepareFunctionNodePointer(fn),
                 _ => throw new QlangRuntimeException(
                     $"Unknown expression type: {expr.GetType().Name}",
                     GetDebug(expr),
@@ -655,6 +661,7 @@ public partial class Interpreter
                 GetStackTrace());
         }
 
+        // Double operations
         try
         {
             var leftNum = Convert.ToDouble(left);
@@ -714,7 +721,6 @@ public partial class Interpreter
         var functions = func.Variables.Where(f => f.Key == name).Select(var => var.Value.Value).OfType<FunctionNode>();
         
         foreach (var function in functions)
-            // Проверяем, можно ли вызвать эту функцию с данными аргументами
             if (TryMatchFunction(function, args, out var finalArgs))
                 return (function, finalArgs);
 
@@ -735,7 +741,6 @@ public partial class Interpreter
         functions.AddRange(values.OfType<FunctionNode>());
         
         foreach (var function in functions)
-            // Проверяем, можно ли вызвать эту функцию с данными аргументами
             if (TryMatchFunction(function, args, out var finalArgs))
                 return (function, finalArgs);
 
@@ -764,28 +769,17 @@ public partial class Interpreter
     private bool TryMatchFunction(FunctionNode function, List<object?> args, out List<object?> finalArgs)
     {
         finalArgs = [];
-    
-        var requiredParamsCount = 0;
+
         var totalParamsCount = function.Parameters.Count;
     
-        // Подсчет обязательных параметров (без значения по умолчанию)
-        foreach (var param in function.Parameters)
-        {
-            if (param.Value == null)
-                requiredParamsCount++;
-        }
-    
-        // Проверка количества аргументов
+        var requiredParamsCount = function.Parameters.Count(param => param.Value == null);
+
         if (args.Count < requiredParamsCount || args.Count > totalParamsCount)
             return false;
     
-        // Заполнение финального списка аргументов
         for (var i = 0; i < totalParamsCount; i++)
-        {
             if (i < args.Count)
-            {
                 finalArgs.Add(args[i]);
-            }
             else
             {
                 var param = function.Parameters[i];
@@ -795,11 +789,8 @@ public partial class Interpreter
                     finalArgs.Add(defaultValue);
                 }
                 else
-                {
-                    return false; // Обязательный параметр не предоставлен
-                }
+                    return false;
             }
-        }
     
         return true;
     }

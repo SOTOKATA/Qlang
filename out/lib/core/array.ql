@@ -81,11 +81,32 @@ class Array extends DataType: {
     // Get length
     function length():
         return _native("std.array.count", _value);
+    function count(): return length();
 
     function forEach(const func): {
         const length = length();
         for let i = 0; i < length; i = i + 1:
             func(at(i));
+    }
+
+    function skip(const<Number> count): {
+        if count <= 0:
+            Throw.exception("Count must be more than 0");
+        else if count > length():
+            Throw.exception("Count must be less than array length");
+
+        const length = length();
+
+        const newArray = Array.new([]);
+
+        for let i = count; i < length; i = i + 1:
+            newArray.push(at(i));
+
+        return newArray;
+    }
+
+    function last(): {
+        return at(length() - 1);
     }
 
     function where(const func): {

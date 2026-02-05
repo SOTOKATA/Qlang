@@ -7,7 +7,7 @@ public static class Bindings
 {
     public static string UseBindings(string script)
     {
-        Console.WriteLine(script);
+        // Console.WriteLine(script);
         const string pattern = @"^bind\s+`([^`]*)`\s+`([^`]*)`";
 
         var bindings = new List<Binding>();

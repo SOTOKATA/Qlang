@@ -28,15 +28,15 @@ WARN [Parser/ParseExpression]: Parsing parents
 LOG [Parser/Advance Token (Ln:3 Idx:33)]: LParen 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:3 Idx:48)]: Identifier ___NUMBER_0___
+LOG [Parser/Advance Token (Ln:3 Idx:48)]: Identifier ___N0___
 LOG [Parser/Advance Token (Ln:3 Idx:49)]: Star 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:3 Idx:65)]: Identifier ___NUMBER_1___
+LOG [Parser/Advance Token (Ln:3 Idx:65)]: Identifier ___N1___
 LOG [Parser/Advance Token (Ln:3 Idx:66)]: Plus 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:3 Idx:82)]: Identifier ___NUMBER_2___
+LOG [Parser/Advance Token (Ln:3 Idx:82)]: Identifier ___N2___
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/Advance Token (Ln:3 Idx:82)]: RParen 
@@ -67,7 +67,7 @@ WARN [Parser/ParseExpression]: Parsing parents
 LOG [Parser/Advance Token (Ln:4 Idx:33)]: LParen 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:4 Idx:48)]: Identifier ___NUMBER_3___
+LOG [Parser/Advance Token (Ln:4 Idx:48)]: Identifier ___N3___
 LOG [Parser/Advance Token (Ln:4 Idx:49)]: Star 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
@@ -75,11 +75,11 @@ WARN [Parser/ParseExpression]: Parsing parents
 LOG [Parser/Advance Token (Ln:4 Idx:51)]: LParen 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:4 Idx:66)]: Identifier ___NUMBER_4___
+LOG [Parser/Advance Token (Ln:4 Idx:66)]: Identifier ___N4___
 LOG [Parser/Advance Token (Ln:4 Idx:67)]: Plus 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:4 Idx:83)]: Identifier ___NUMBER_5___
+LOG [Parser/Advance Token (Ln:4 Idx:83)]: Identifier ___N5___
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/Advance Token (Ln:4 Idx:83)]: RParen 
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
@@ -2651,7 +2651,7 @@ LOG [Parser/Advance Token (Ln:300 Idx:9)]: Identifier i
 LOG [Parser/Advance Token (Ln:300 Idx:10)]: Equals 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:300 Idx:26)]: Identifier ___NUMBER_6___
+LOG [Parser/Advance Token (Ln:300 Idx:26)]: Identifier ___N6___
 LOG [Parser/ParseVariableDeclaration]: CompilationProcess.End: Parsing Variable declaration (Name: i Value: NumberRefNode)
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
@@ -2684,7 +2684,7 @@ LOG [Parser/ParsePrimary]: CompilationProcess.End: Parsing primary (VariableNode
 LOG [Parser/Advance Token (Ln:300 Idx:52)]: Plus 
 LOG [Parser/ParseExpression]: CompilationProcess: Parsing expression
 LOG [Parser/ParsePrimary]: CompilationProcess: Parsing primary
-LOG [Parser/Advance Token (Ln:300 Idx:68)]: Identifier ___NUMBER_7___
+LOG [Parser/Advance Token (Ln:300 Idx:68)]: Identifier ___N7___
 LOG [Parser/ParseExpression]: CompilationProcess.End: Parsing expression
 LOG [Parser/Advance Token (Ln:300 Idx:68)]: Colon 
 LOG [Parser/ParseBlock]: CompilationProcess: Parsing block

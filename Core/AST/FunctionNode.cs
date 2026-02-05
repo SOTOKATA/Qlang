@@ -23,6 +23,9 @@ public class FunctionNode(int line) : ASTNode(line)
     
     public List<ASTNode> Body { get; set; } = [];
 
+    [IgnoreMember] 
+    public ASTContext? Context;
+
     public override ASTNode Clone()
     {
         return new FunctionNode(DebugIndex)

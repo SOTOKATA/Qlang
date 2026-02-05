@@ -127,12 +127,12 @@ LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_61___', value='a
 LOG [<>c__DisplayClass3_0/<ExtractStrings>b__0]: key='___STRING_62___', value='time_wait'
 SUCC [Compiler/Compile]: Strings extracted successfully
 WARN [Compiler/Compile]: Extract Numbers
-WARN [<>c/<Replace>b__99_0]: key='___NUMBER_0___', value='5'
-WARN [<>c/<Replace>b__99_0]: key='___NUMBER_1___', value='5'
-WARN [<>c/<Replace>b__99_0]: key='___NUMBER_2___', value='5'
-WARN [<>c/<Replace>b__99_0]: key='___NUMBER_3___', value='5'
-WARN [<>c/<Replace>b__99_0]: key='___NUMBER_4___', value='5'
-WARN [<>c/<Replace>b__99_0]: key='___NUMBER_5___', value='5'
-WARN [<>c/<Replace>b__99_0]: key='___NUMBER_6___', value='0'
-WARN [<>c/<Replace>b__99_0]: key='___NUMBER_7___', value='1'
+WARN [<>c/<Replace>b__99_0]: key='___N0___', value='5'
+WARN [<>c/<Replace>b__99_0]: key='___N1___', value='5'
+WARN [<>c/<Replace>b__99_0]: key='___N2___', value='5'
+WARN [<>c/<Replace>b__99_0]: key='___N3___', value='5'
+WARN [<>c/<Replace>b__99_0]: key='___N4___', value='5'
+WARN [<>c/<Replace>b__99_0]: key='___N5___', value='5'
+WARN [<>c/<Replace>b__99_0]: key='___N6___', value='0'
+WARN [<>c/<Replace>b__99_0]: key='___N7___', value='1'
 WARN [Compiler/Compile]: Numbers extracted successfully
