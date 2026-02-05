@@ -10,7 +10,7 @@ class Array extends DataType: {
         let str = "[";
 
         if length() > 0: {
-            for let i = 0; i < length(); i = i + 1:
+            for let i = 0; i < length(); i++:
                 str = str + "'" + at(i) + "',";
 
             str = str.subString(0, str.length() - 1);
@@ -85,7 +85,7 @@ class Array extends DataType: {
 
     function forEach(const func): {
         const length = length();
-        for let i = 0; i < length; i = i + 1:
+        for let i = 0; i < length; i++:
             func(at(i));
     }
 
@@ -99,7 +99,7 @@ class Array extends DataType: {
 
         const newArray = Array.new([]);
 
-        for let i = count; i < length; i = i + 1:
+        for let i = count; i < length; i++:
             newArray.push(at(i));
 
         return newArray;
@@ -114,7 +114,7 @@ class Array extends DataType: {
 
         const arr = Array.new([]);
 
-        for let i = 0; i < length; i = i + 1: {
+        for let i = 0; i < length; i++: {
             if func(at(i)):
                 arr.push(at(i));
         }
@@ -127,7 +127,7 @@ class Array extends DataType: {
 
         const arr = Array.new([]);
 
-        for let i = 0; i < length; i = i + 1:
+        for let i = 0; i < length; i++:
             arr.push(func(at(i)));
 
         return arr;
@@ -137,7 +137,7 @@ class Array extends DataType: {
         const length = length();
         let count = 0;
 
-        for let i = 0; i < length; i = i + 1:
+        for let i = 0; i < length; i++:
             if func(at(i)):
                 count = count + 1;
 
@@ -147,7 +147,7 @@ class Array extends DataType: {
     function firstOrDefault(const func): {
         const length = length();
 
-        for let i = 0; i < length; i = i + 1: {
+        for let i = 0; i < length; i++: {
             const boolResult = func(at(i));
 
             if boolResult:

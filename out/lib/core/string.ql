@@ -22,7 +22,7 @@ class String extends DataType: {
     function _operatorMultiplication(const obj1, const obj2): {
         let val = "";
 
-        for let i = 0; i < <Number>obj2.getValue(); i = i + 1:
+        for let i = 0; i < <Number>obj2.getValue(); i++:
             val = val + obj1;
 
         return String.new(val);
@@ -34,7 +34,7 @@ class String extends DataType: {
 
         const index = obj1.length() / obj2.getValue();
 
-        for let i = 0; i < index; i = i + 1:
+        for let i = 0; i < index; i++:
             val = val + obj1.charAt(i);
 
         return String.new(val);
@@ -128,7 +128,7 @@ class String extends DataType: {
 
         let arr = Array.new(collection);
 
-        for let i = 0; i < arr.length(); i = i + 1: {
+        for let i = 0; i < arr.length(); i++: {
             result = result + arr.at(i);
         }
 

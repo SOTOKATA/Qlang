@@ -834,6 +834,24 @@ public class Parser
         return null;
     }
 
+    // Allows += -= /= *= %= = ++ --
+    private bool CanBeAssignmentNode()
+    {
+        return (Check(Tokens.Equals) && Peek()?.TokenType != Tokens.Equals) ||
+               (
+                (
+                    Check(Tokens.Plus) || 
+                    Check(Tokens.Minus) || 
+                    Check(Tokens.Star) || 
+                    Check(Tokens.Slash) ||
+                    Check(Tokens.Percent)
+                ) && 
+                Peek()?.TokenType == Tokens.Equals
+               ) || 
+               (Check(Tokens.Plus) && Peek()?.TokenType == Tokens.Plus) ||
+               (Check(Tokens.Minus) && Peek()?.TokenType == Tokens.Minus);
+    }
+
     private ASTNode? ParsePrimaryExtracted(bool isMinus)
     {
         if (Current().TokenType != Tokens.Identifier)
@@ -924,15 +942,64 @@ public class Parser
             };
 
         // Parse assign path 
-        if (Check(Tokens.Equals) && Peek()?.TokenType != Tokens.Equals)
+        if (CanBeAssignmentNode())
         {
-            // Advance '='
+            var @operator = Current().TokenType switch
+            {
+                Tokens.Plus when Peek()?.TokenType == Tokens.Plus => "++",
+                Tokens.Plus => "+",
+                Tokens.Minus when Peek()?.TokenType == Tokens.Minus => "--",
+                Tokens.Minus => "-",
+                Tokens.Star => "*",
+                Tokens.Slash => "/",
+                Tokens.Percent => "%",
+                _ => ""
+            };
+
+            if (@operator != "")
+                Advance();
             Advance();
+            
+            
             current = new AssignmentNode(false, false, false, false, Current().DebugIndex)
             {
-                Path = [new ObjectPointerNode(Current().DebugIndex) { Name = identifier }],
-                Value = ParseExpression()
+                Path = [new ObjectPointerNode(Current().DebugIndex) { Name = identifier }]
             };
+
+            var value = @operator switch
+            {
+                "++" => new BinaryOperationNode(Current().DebugIndex)
+                {
+                    Left = new CallNode(Current().DebugIndex)
+                    {
+                        Objects = [new ObjectPointerNode(Current().DebugIndex) { Name = identifier }]
+                    },
+                    Right = new NumberNode(Current().DebugIndex) { Value = 1 },
+                    Operator = "+"
+                },
+                "--" => new BinaryOperationNode(Current().DebugIndex)
+                {
+                    Left = new CallNode(Current().DebugIndex)
+                    {
+                        Objects = [new ObjectPointerNode(Current().DebugIndex) { Name = identifier }]
+                    },
+                    Right = new NumberNode(Current().DebugIndex) { Value = 1 },
+                    Operator = "-"
+                },
+                _ => @operator == ""
+                    ? ParseExpression()
+                    : new BinaryOperationNode(Current().DebugIndex)
+                    {
+                        Left = new CallNode(Current().DebugIndex)
+                        {
+                            Objects = [new ObjectPointerNode(Current().DebugIndex) { Name = identifier }]
+                        },
+                        Right = ParseExpression(),
+                        Operator = @operator
+                    }
+            };
+
+            ((AssignmentNode)current).Value = value;
             
             _assignmentNodes.Add((AssignmentNode)current);
 
