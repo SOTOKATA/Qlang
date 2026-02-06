@@ -34,7 +34,6 @@ namespace Core.AST;
 public abstract class ASTNode(int debugIndex = -1)
 {
     [Key(0)]
-     
     public int DebugIndex { get; set; } = debugIndex;
     
     public abstract string GetTree(string indent = "");

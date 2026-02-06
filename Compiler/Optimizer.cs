@@ -6,7 +6,7 @@ public class Optimizer
 {
     public ProgramNode Optimize(ProgramNode program)
     {
-        program.DebugIndex = -1;
+        program.DebugIndex = 0;
         
         program.Statements.RemoveAll(x => x is not NamespaceNode);
         

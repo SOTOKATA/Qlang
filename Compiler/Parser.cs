@@ -18,11 +18,11 @@ public class Parser
     private List<CallNode> _callNodes = [];
     private List<AssignmentNode> _assignmentNodes = [];
     
-    private SourceFileTable _sourceFileTable;
+    private SourceFileTable? _sourceFileTable;
 
-    private DebugTable _debugTable;
+    private DebugTable? _debugTable;
 
-    public ProgramNode Parse(List<Token> tokens, SourceFileTable table, DebugTable debugTable)
+    public ProgramNode Parse(List<Token> tokens, SourceFileTable? table, DebugTable? debugTable)
     {
         _sourceFileTable = table;
         _debugTable = debugTable;
@@ -911,6 +911,7 @@ public class Parser
             return current;
 
         var identifier = Current().Value;
+        var identifierIndex = Current().DebugIndex;
         // Advance 'identifier'
         Advance();
 
@@ -928,7 +929,7 @@ public class Parser
             // Advance ')'
             Advance();
             
-            current = new FunctionPointerNode(Current().DebugIndex)
+            current = new FunctionPointerNode(identifierIndex)
             {
                 Name = identifier,
                 Arguments = args
@@ -936,7 +937,7 @@ public class Parser
         }
 
         if (current is null)
-            current = new ObjectPointerNode(Current().DebugIndex)
+            current = new ObjectPointerNode(identifierIndex)
             {
                 Name = identifier
             };
@@ -963,36 +964,36 @@ public class Parser
             
             current = new AssignmentNode(false, false, false, false, Current().DebugIndex)
             {
-                Path = [new ObjectPointerNode(Current().DebugIndex) { Name = identifier }]
+                Path = [new ObjectPointerNode(identifierIndex) { Name = identifier }]
             };
 
             var value = @operator switch
             {
-                "++" => new BinaryOperationNode(Current().DebugIndex)
+                "++" => new BinaryOperationNode(identifierIndex)
                 {
-                    Left = new CallNode(Current().DebugIndex)
+                    Left = new CallNode(identifierIndex)
                     {
-                        Objects = [new ObjectPointerNode(Current().DebugIndex) { Name = identifier }]
+                        Objects = [new ObjectPointerNode(identifierIndex) { Name = identifier }]
                     },
-                    Right = new NumberNode(Current().DebugIndex) { Value = 1 },
+                    Right = new NumberNode(identifierIndex) { Value = 1 },
                     Operator = "+"
                 },
-                "--" => new BinaryOperationNode(Current().DebugIndex)
+                "--" => new BinaryOperationNode(identifierIndex)
                 {
-                    Left = new CallNode(Current().DebugIndex)
+                    Left = new CallNode(identifierIndex)
                     {
-                        Objects = [new ObjectPointerNode(Current().DebugIndex) { Name = identifier }]
+                        Objects = [new ObjectPointerNode(identifierIndex) { Name = identifier }]
                     },
-                    Right = new NumberNode(Current().DebugIndex) { Value = 1 },
+                    Right = new NumberNode(identifierIndex) { Value = 1 },
                     Operator = "-"
                 },
                 _ => @operator == ""
                     ? ParseExpression()
-                    : new BinaryOperationNode(Current().DebugIndex)
+                    : new BinaryOperationNode(identifierIndex)
                     {
-                        Left = new CallNode(Current().DebugIndex)
+                        Left = new CallNode(identifierIndex)
                         {
-                            Objects = [new ObjectPointerNode(Current().DebugIndex) { Name = identifier }]
+                            Objects = [new ObjectPointerNode(identifierIndex) { Name = identifier }]
                         },
                         Right = ParseExpression(),
                         Operator = @operator
@@ -1007,7 +1008,7 @@ public class Parser
         }
 
         if (Check(Tokens.Colon) && Peek()?.TokenType == Tokens.Colon)
-            current = new NamespacePointerNode(identifier, Current().DebugIndex);
+            current = new NamespacePointerNode(identifier, identifierIndex);
 
         return current;
     }

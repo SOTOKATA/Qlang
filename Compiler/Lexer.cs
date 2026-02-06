@@ -13,7 +13,7 @@ namespace Compiler;
  */
 public static class Lexer
 {
-    public static (List<Token> tokens, SourceFileTable sourceFileTable, DebugTable debugTable) Lex(string fileName, string script)
+    public static (List<Token> tokens, SourceFileTable? sourceFileTable, DebugTable? debugTable) Lex(string fileName, string script, bool isPublish)
     {
         List<Token> tokens = [];
         SourceFileTable sourceFileTable = new();
@@ -48,7 +48,8 @@ public static class Lexer
 
                 if (TryCharToToken(line[pos], out var charToken))
                 {
-                    charToken!.DebugIndex = debugTable.Add(lineIndex, sourceFileTable.GetOrAdd(fileName));
+                    if (!isPublish)
+                        charToken!.DebugIndex = debugTable.Add(lineIndex, sourceFileTable.GetOrAdd(fileName));
                     
                     tokens.Add(charToken);
                     pos++;
@@ -65,7 +66,8 @@ public static class Lexer
                     var word = line[startPos..pos];
                     if (TryWordToToken(word, out var wordToken))
                     {
-                        wordToken!.DebugIndex = debugTable.Add(lineIndex, sourceFileTable.GetOrAdd(fileName));
+                        if (!isPublish)
+                            wordToken!.DebugIndex = debugTable.Add(lineIndex, sourceFileTable.GetOrAdd(fileName));
                         
                         tokens.Add(wordToken);
                         continue;
@@ -77,7 +79,7 @@ public static class Lexer
             lineIndex++;
         }
 
-        return (tokens, sourceFileTable, debugTable);
+        return (tokens, isPublish ? null : sourceFileTable, isPublish ? null :debugTable);
     }
 
     private static bool IsIdentifierStart(char c)

@@ -307,9 +307,4 @@ public static class PreCompile
 
         return result;
     }
-
-    public static string UseBindings(string script)
-    {
-        return Bindings.UseBindings(script);
-    }
 }

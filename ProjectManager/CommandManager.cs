@@ -19,6 +19,9 @@ public static class CommandManager
                 case ["run", ..]:
                     Run(args.Skip(1).ToList()!);
                     return;
+                case ["publish"]:
+                    Publish();
+                    return;
                 case ["update"]:
                     ConsoleLogger.Info("Now, this function is not supported");
                     return;
@@ -159,10 +162,16 @@ public static class CommandManager
         LoadProject().Run(args);
     }
 
-    private static void Build()
+    private static void Publish()
+    {
+        Build(true);
+
+    }
+
+    private static void Build(bool isPublish = false)
     {
         var project = LoadProject();
-        if (!project.Compile())
+        if (!project.Compile(isPublish))
         {
             ConsoleLogger.Error("Cannot build current project.");
             return;

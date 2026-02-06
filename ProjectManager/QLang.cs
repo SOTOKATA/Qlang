@@ -2,18 +2,17 @@
 using Core;
 using Core.AST;
 using ProjectManager.Project;
-using ProjectManager.Settings;
 
 namespace ProjectManager;
 
 public class QLang
 {
-    public bool Compile(string path, string? filename = null)
+    public bool Compile(string path, string? filename = null, bool isPublish = false)
     {
         var code = File.ReadAllText(path);
         Compiler.Compiler c = new();
 
-        var programNode = c.Compile(path, code);
+        var programNode = c.Compile(path, code, isPublish);
         
         var dirName = Path.GetDirectoryName(path);
         if (filename != null)
@@ -29,7 +28,7 @@ public class QLang
         {
             SourceFileTable = c.SourceFileTable,
             DebugTable = c.DebugTable
-        }, path);
+        }, path, isPublish);
 
         return true;
     }
@@ -64,7 +63,7 @@ public class QLang
         }
     }
 
-    private static void SaveProgram(QLIProgram qliProgram, QLIDebug qliDebug, string filePath)
+    private static void SaveProgram(QLIProgram qliProgram, QLIDebug qliDebug, string filePath, bool isPublish)
     {
         var pathToFile = Path.GetDirectoryName(filePath);
         
@@ -80,30 +79,55 @@ public class QLang
         if (!File.Exists(path))
             File.Create(path).Close();
 
-        if (!File.Exists(debugPath))
+        if (!File.Exists(debugPath) && !isPublish)
             File.Create(debugPath).Close();
         
         File.Copy(Path.Combine(Path.GetDirectoryName(Environment.ProcessPath), "qli" + OS.GetExecutableExtension()), Path.Combine(pathToFile ?? "", "build", Path.GetFileNameWithoutExtension(filePath) + OS.GetExecutableExtension()), true);
         
         File.WriteAllBytes(path, Brotli.Compress(Core.MessagePack.Serialize(qliProgram)));
-        File.WriteAllBytes(debugPath, Brotli.Compress(Core.MessagePack.Serialize(qliDebug)));
+        
+        if (!isPublish)
+            File.WriteAllBytes(debugPath, Brotli.Compress(Core.MessagePack.Serialize(qliDebug)));
     }
 
+    // public void Run(List<string?>? args, string filename)
+    // {
+    //     // TODO: Runtime execution (by build/program.exe)
+    //
+    //     var exePath = Path.Combine("build", filename + OS.GetExecutableExtension());
+    //     var resourcePath = Path.Combine("build", filename + ".resource.qli");
+    //
+    //     if (!File.Exists(exePath) || !File.Exists(resourcePath))
+    //         throw new ProjectException($"Files '{Path.GetFileName(exePath)}' and '{Path.GetFileName(resourcePath)}' is not found.\nProject is not compiled");
+    //
+    //     Process.Start(new ProcessStartInfo
+    //     {
+    //         FileName = "cmd.exe",
+    //         Arguments = $"/c \"{exePath}\" {args}",
+    //     });
+    //
+    // }
+    
     public void Run(List<string?>? args, string filename)
     {
-        // TODO: Runtime execution (by build/program.exe)
-
         var exePath = Path.Combine("build", filename + OS.GetExecutableExtension());
         var resourcePath = Path.Combine("build", filename + ".resource.qli");
 
         if (!File.Exists(exePath) || !File.Exists(resourcePath))
-            throw new ProjectException($"Files '{Path.GetFileName(exePath)}' and '{Path.GetFileName(resourcePath)}' is not found.\nProject is not compiled");
+            throw new ProjectException(
+                $"Files '{Path.GetFileName(exePath)}' and '{Path.GetFileName(resourcePath)}' is not found.\nProject is not compiled");
 
-        Process.Start(new ProcessStartInfo
+        var startInfo = new ProcessStartInfo
         {
-            FileName = "cmd.exe",
-            Arguments = $"/c \"{exePath}\" {args}",
-        });
+            FileName = exePath,
+            UseShellExecute = false
+        };
 
+        if (args != null)
+            foreach (var arg in args.OfType<string>())
+                startInfo.ArgumentList.Add(arg);
+
+        Process.Start(startInfo);
     }
+
 }

@@ -8,10 +8,10 @@ public class Compiler
     public List<string> StringList = [];
     public List<double> NumberList = [];
     public List<QLIProgramLib> DllDependencies = [];
-    public SourceFileTable SourceFileTable = new();
-    public DebugTable DebugTable = new();
+    public SourceFileTable? SourceFileTable = new();
+    public DebugTable? DebugTable = new();
 
-    public ProgramNode Compile(string fileName, string script)
+    public ProgramNode Compile(string fileName, string script, bool isPublish)
     {
         (var outputScript, DllDependencies) = PreCompile.IncludeFiles(script, fileName, []);
         
@@ -25,9 +25,7 @@ public class Compiler
 
         outputScript = PreCompile.ReturnFileStrings(outputScript, StringList);
 
-        outputScript = PreCompile.UseBindings(outputScript);
-
-        var output = Lexer.Lex(fileName, outputScript);
+        var output = Lexer.Lex(fileName, outputScript, isPublish);
 
         SourceFileTable = output.sourceFileTable;
         DebugTable = output.debugTable;

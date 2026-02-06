@@ -10,26 +10,29 @@ public partial class Interpreter
     /// </summary>
     /// <param name="namespaceNode">namespace to convert</param>
     /// <returns>DynamicNamespace</returns>
-    private DynamicNamespace ToDynamicNamespace(NamespaceNode namespaceNode)
+    private DynamicNamespace ToDynamicNamespace(NamespaceNode namespaceNode, DynamicNamespace? dNamespace = null)
     {
         // Create dynamic instance
         var dynamicNamespace = new DynamicNamespace(namespaceNode.Name)
         {
             IsPrivate = namespaceNode.IsPrivate
         };
-
+        
+        dNamespace?.Namespaces.Add(dynamicNamespace);
+        
         // Add and convert all classes
         dynamicNamespace.Classes.AddRange(
             namespaceNode.Body
                 .OfType<ClassNode>()
-                .Select(ToDynamicClass)
+                .Select(x => ToDynamicClass(x, dNamespace))
         );
         
         // Add and convert all namespaces
         dynamicNamespace.Namespaces.AddRange(
             namespaceNode.Body.OfType<NamespaceNode>()
-                .Select(ToDynamicNamespace)
+                .Select(x => ToDynamicNamespace(x, dNamespace))
             );
+        
 
         // Add all functions
         dynamicNamespace.Functions.AddRange(namespaceNode.Body.OfType<FunctionNode>());
@@ -47,11 +50,13 @@ public partial class Interpreter
     /// Convert static class to dynamic
     /// </summary>
     /// <param name="classNode">class to convert</param>
+    /// <param name="dynamicNamespace"></param>
     /// <returns>DynamicClass</returns>
-    private DynamicClass ToDynamicClass(ClassNode classNode)
+    private DynamicClass ToDynamicClass(ClassNode classNode, DynamicNamespace? dynamicNamespace = null)
     {
         // Create dynamic instance
         DynamicClass dynamicClass = new(classNode.Name);
+        dynamicNamespace?.Classes.Add(dynamicClass);
 
         // Add and convert all assignments
         foreach (var assignmentNode in classNode.Body.OfType<AssignmentNode>())

@@ -39,14 +39,23 @@ public partial class Interpreter
 
     public void Execute(ProgramNode program, List<string?>? args = null)
     {
-        // Load namespaces
-        foreach (var statement in program.Statements)
+        // First is load global namespace with core classes
+        var globalNamespace = program.Statements.OfType<NamespaceNode>().FirstOrDefault(x => x.Name == GlobalNamespaceName);
+
+        if (globalNamespace is not null)
         {
-            if (statement is not NamespaceNode namespaceNode)
-                    throw new QlangRuntimeException("Undefined structure." + statement, GetDebug(statement), GetStackTrace());
+            var dynamicNamespace = new DynamicNamespace(GlobalNamespaceName);
+            _dynamicNamespaces[GlobalNamespaceName] = dynamicNamespace;
             
-            _dynamicNamespaces[namespaceNode.Name] = ToDynamicNamespace(namespaceNode);
+            _dynamicNamespaces[GlobalNamespaceName] = 
+                ToDynamicNamespace(globalNamespace, dynamicNamespace);
+            program.Statements.Remove(globalNamespace);
         }
+
+        // Load namespaces
+        foreach (var namespaceNode in program.Statements.OfType<NamespaceNode>().Where(x => x.Name != GlobalNamespaceName))
+            _dynamicNamespaces[namespaceNode.Name] = ToDynamicNamespace(namespaceNode);
+        
 
         // Search main function
         var function = _dynamicNamespaces[GlobalNamespaceName].Functions.FirstOrDefault(f => f.Name == "main");
