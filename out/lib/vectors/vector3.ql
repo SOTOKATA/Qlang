@@ -19,13 +19,13 @@ namespace vector:  {
         }
 
         function _createFrom(const object): {
-            if (Number.isNumber(object)):
+            if Number.isNumber(object):
                 return Vector2.new(object, object);
 
-            if (typeof(object) == typeof(Vector3)):
+            if typeof(object) == typeof(Vector3):
                 return object;
 
-            std::Throw.exception("Undefined object");
+            std::Throw.message("Undefined object");
         }
 
         function _operatorAddition(const obj1, const obj2): {

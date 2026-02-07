@@ -18,14 +18,13 @@ namespace vector:  {
         }
 
         function _createFrom(const object): {
-            _native("std.console.write", str("type = " + object.toString()));
-            if (Number.isNumber(object)):
+            if typeof(object) == "Number":
                 return Vector2.new(object, object);
 
-            if (typeof(object) == typeof(Vector2)):
+            if typeof(object) == typeof(Vector2):
                 return object;
 
-            std::Throw.exception("Undefined object");
+            std::Throw.message("Undefined object");
         }
 
         function _operatorAddition(const obj1, const obj2): {

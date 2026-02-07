@@ -76,36 +76,29 @@ class String extends DataType: {
     }
 
     function new(const<String> char, const<Number> count): {
-        if (Number.isNumber(count) == false):
-            std::Throw.exception("Param 'count' must be number");
-
         if count < 0: 
-            std::Throw.exception("Param 'count' must be more than 0");
+            std::Throw.message("Param 'count' must be more than 0");
 
         if String.new(char).length() < 0:
-            std::Throw.exception("Length of string must be more than 0");
+            std::Throw.message("Length of string must be more than 0");
 
         _value = _native("std.string.create", char, count);
     }
 
     function getPrimitive(const strOrPrimite, let allowOther = false): {
-        if (Object.isNull(strOrPrimite)): {
-            std::Throw.exception("Object is null");
-        }
+        if Object.isNull(strOrPrimite):
+            std::Throw.message("Object is null");
 
-        if (String.isString(strOrPrimite)): {
+        if String.isString(strOrPrimite):
             return strOrPrimite.toString();
-        }
 
-        if (String.isPrimitive(strOrPrimite)): {
+        if String.isPrimitive(strOrPrimite):
             return strOrPrimite;
-        }
 
-        if allowOther: {
+        if allowOther:
             return strOrPrimite;
-        }
 
-        std::Throw.exception("Object is not string or primitive");
+        std::Throw.message("Object is not string or primitive");
     }
 
     private function _checkIsCollection(let value): {
@@ -158,21 +151,21 @@ class String extends DataType: {
 
     function charAt(const<Number> index): {
         if length() <= index:
-            std::Throw.exception("The index must be less than the length of the string.");
+            std::Throw.message("The index must be less than the length of the string.");
 
         return _native("std.string.at", _str(_value), index);
     }
 
     function setAt(const<Number> index, const<String> replaceValue): {
         if length() <= index:
-            std::Throw.exception("The index must be less than the length of the string.");
+            std::Throw.message("The index must be less than the length of the string.");
 
         _value = _native("std.string.set_at", _str(_value), _str(replaceValue), index);
     }
 
     function join(let strArr, let<String> pattern): {
         if (Array.isCollection(strArr) == false) && (Array.isArray(strArr) == false):
-            std::Throw.exception("argument is not collection or array");
+            std::Throw.message("argument is not collection or array");
 
         if Array.isArray(strArr):
             strArr = strArr.getCollection();
@@ -190,7 +183,7 @@ class String extends DataType: {
             return true;
 
         if (String.isPrimitive(str) == false) && (String.isString(str) == false):
-            std::Throw.exception("Param must be string class or primitive");
+            std::Throw.message("Param must be string class or primitive");
 
         if String.isString(str):
             str = str.toString();
@@ -204,7 +197,7 @@ class String extends DataType: {
             return true;
 
         if (String.isPrimitive(str) == false) && (String.isString(str) == false):
-            std::Throw.exception("Param must be string class or primitive");
+            std::Throw.message("Param must be string class or primitive");
 
         if String.isString(str): 
             str = str.toString();
@@ -227,7 +220,7 @@ class String extends DataType: {
     // Cut string by 'startPos' and 'length'
     function subString(let<Number> startPos, let<Number> length): {
         if length() <= length:
-            std::Throw.exception("Value 'length' can't be more than string length");
+            std::Throw.message("Value 'length' can't be more than string length");
 
         return String.new(_native("std.string.substring", _str(_value), startPos, length));
     }

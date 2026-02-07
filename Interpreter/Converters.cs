@@ -9,6 +9,7 @@ public partial class Interpreter
     /// Convert static namespace to dynamic
     /// </summary>
     /// <param name="namespaceNode">namespace to convert</param>
+    /// <param name="dNamespace">subnamespace</param>
     /// <returns>DynamicNamespace</returns>
     private DynamicNamespace ToDynamicNamespace(NamespaceNode namespaceNode, DynamicNamespace? dNamespace = null)
     {

@@ -91,9 +91,9 @@ class Array extends DataType: {
 
     function skip(const<Number> count): {
         if count <= 0:
-            Throw.exception("Count must be more than 0");
+            Throw.message("Count must be more than 0");
         else if count > length():
-            Throw.exception("Count must be less than array length");
+            Throw.message("Count must be less than array length");
 
         const length = length();
 
@@ -158,7 +158,7 @@ class Array extends DataType: {
     }
 
     private function checkIndex(const<Number> index): {
-        if (index < 0 || index >= length()):
-            std::Throw.exception("Index is out of range.");
+        if index < 0 || index >= length():
+            std::Throw.message("Index is out of range.");
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Core.AST;
+using Core.Tables;
 using MessagePack;
 
 
@@ -19,6 +20,9 @@ public class QLIProgram
     
     public required List<double> NumberList { get; init; }
     
+    [Key(4)]
+    public required StringPoolTable StringPoolTable { get; init; }
+    
     [IgnoreMember]
-    public List<QLIProgramLib> ExternalLibraries { get; set; }
+    public List<QLIProgramLib>? ExternalLibraries { get; set; }
 }

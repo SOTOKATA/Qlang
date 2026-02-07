@@ -1,5 +1,6 @@
 ﻿using Core;
 using Core.AST;
+using Core.Tables;
 
 namespace Compiler;
 

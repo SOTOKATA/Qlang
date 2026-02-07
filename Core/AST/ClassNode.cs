@@ -8,6 +8,7 @@ public class ClassNode(int line) : ASTNode(line)
     [Key(1)]
     
     public required string Name { get; set; }
+    
     [Key(2)]
     
     public required string Extends { get; set; }

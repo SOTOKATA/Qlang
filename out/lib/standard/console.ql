@@ -6,11 +6,11 @@ import "$lib/meta"
 namespace std:  {
     class Console: {
         private function getStr(const message): {
-            if (Object.isNull(message)):
+            if Object.isNull(message):
                 return "null";
                 
-            if (Object.isSimplify(message) == false): {
-                if (meta::Meta.getFunctionListOf(message).contains("toString")): 
+            if Object.isSimplify(message) == false: {
+                if meta::Meta.getFunctionListOf(message).contains("toString"): 
                     return message.toString();
                 else: 
                     return str(message);

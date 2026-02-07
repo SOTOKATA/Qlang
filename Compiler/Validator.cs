@@ -1,6 +1,7 @@
 ﻿using Core;
 using Core.AST;
 using Core.Exceptions;
+using Core.Tables;
 
 namespace Compiler;
 

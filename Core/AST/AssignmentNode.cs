@@ -14,7 +14,7 @@ public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool is
 
     [Key(2)]
     
-    public required List<ASTNode> Path { get; set; }
+    public required List<ASTNode> Path { get; init; }
 
     [Key(3)]
     

@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using System.Reflection;
 using Core;
 using Core.AST;
 using Core.Exceptions;
@@ -36,12 +35,6 @@ public static class Program
         if (File.Exists(debugPath))
             qliDebug = Core.MessagePack.Deserialize<QLIDebug>(Brotli.Decompress(File.ReadAllBytes(debugPath)));
 
-        if (qliProgram is null)
-        {
-            Console.WriteLine("Program is corrupted or not valid");
-            return;
-        }
-
         try
         {
             new Interpreter.Interpreter(qliProgram.StringList,
@@ -50,12 +43,14 @@ public static class Program
         }
         catch (QlangRuntimeException runtime)
         {
-            Console.WriteLine("Runtime handled exception:");
             Console.WriteLine(runtime);
+        }
+        catch (QlangProgramException e)
+        {
+            Console.WriteLine(e.Message);
         }
         catch (Exception e)
         {
-            Console.WriteLine("Runtime unhandled exception:");
             Console.WriteLine(e);
         }
     }

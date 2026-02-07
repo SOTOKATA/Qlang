@@ -11,10 +11,10 @@ public static class UniversalParser
     
     public static double ParseNumber(this string? number)
     {
-        if (number != null)
-            return double.Parse(number, NumberStyles.Float, CultureInfo.InvariantCulture);
-        
-        throw new Exception("Parse exception: string is null");
+        return number != null ? 
+            double.Parse(number, NumberStyles.Float, CultureInfo.InvariantCulture) 
+            : 
+            throw new Exception("Parse exception: string is null");
     }
 
     public static bool IsNumber(this string? number)

@@ -1,5 +1,6 @@
 // Base class for types like String, Array
 // This class adds value and basic functions for aritmetic and rational operations
+// For primitive values only
 class DataType extends Object: {
     // '_value' means primitive value
     private let _value;

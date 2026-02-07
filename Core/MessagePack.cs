@@ -2,7 +2,7 @@
 
 namespace Core;
 
-public class MessagePack
+public static class MessagePack
 {
     public static byte[] Serialize(object obj)
     {

@@ -12,7 +12,7 @@ public class BinaryOperationNode(int line) : ASTNode(line)
 
     [Key(2)]
     
-    public string? Operator { get; set; } // "==", "+", "-", etc.
+    public string? Operator { get; set; }
     [Key(3)]
     
     public ASTNode? Right { get; set; }

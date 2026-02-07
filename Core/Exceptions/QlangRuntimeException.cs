@@ -46,7 +46,8 @@ public class QlangRuntimeException : Exception
     {
         StringBuilder sb = new();
         sb.AppendLine($"{Message}");
-        sb.AppendLine($"  at {(SourceFile == "" ? "(undefined file)" : SourceFile)}:{Line}:{Column}");
+        if (Line != -1 && SourceFile != "undefined")
+            sb.AppendLine($"  at {(SourceFile == "" ? "(undefined file)" : SourceFile)}:{Line}:{Column}");
 
         if (StackTrace.Count <= 0) 
             return sb.ToString();

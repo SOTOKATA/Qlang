@@ -12,7 +12,7 @@ namespace fs: {
         // Create if not exists directory
         function create(const<String> path): {
             if exists(path) == true:
-                std::Throw.exception("Directory already created.");
+                std::Throw.message("Directory already created.");
 
             _native("std.filesystem.directory_create", path);
         }
@@ -20,7 +20,7 @@ namespace fs: {
         // Remove if exists directory (recursive)
         function remove(const<String> path): {
             if exists(path) == false:
-                std::Throw.exception("Directory is not exists.");
+                std::Throw.message("Directory is not exists.");
             
             _native("std.filesystem.directory_remove", path, true);
         }

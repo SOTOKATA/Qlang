@@ -48,7 +48,7 @@ public static class CommandManager
 
                     if (!Directory.Exists(dir))
                         throw new ProjectException("System library directory is not found.");
-                    
+
                     ConsoleLogger.Info("System library directory: " + dir);
                     return;
                 case []:
@@ -69,6 +69,10 @@ public static class CommandManager
         //     Console.ResetColor();
         //     Console.WriteLine(e);
         // }
+        catch (QlangProgramException e)
+        {
+            WriteErrorMessageWithDelay(e.Message);
+        }
         catch (QlangRuntimeException e)
         {
             ConsoleLogger.Log("Runtime error: ", e.ToString(), ConsoleColor.Red);
@@ -88,7 +92,6 @@ public static class CommandManager
         }
         catch (Exception e)
         {
-            ConsoleLogger.Info("UNHANDLED ERROR:");
             ExceptionManager.Throw(e, true);
             Thread.Sleep(2000);
         }

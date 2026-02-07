@@ -7,7 +7,7 @@ namespace Interpreter;
 
 public partial class Interpreter
 {
-    private bool _allowPrivateCall = false;
+    private bool _allowPrivateCall;
     private object? PrimitiveToDynamicClass(object? primitive)
     {
         switch (primitive)
@@ -99,9 +99,19 @@ public partial class Interpreter
                     }
                     catch (Exception ex)
                     {
-                        if (ex is QlangRuntimeException)
-                            throw new QlangRuntimeException(ex.Message, GetDebug(fn), GetStackTrace(1));
-                        throw new QlangRuntimeException(ex.Message, GetDebug(fn), GetStackTrace());
+                        switch (ex)
+                        {
+                            case QlangRuntimeException:
+                                throw new QlangRuntimeException(ex.Message, GetDebug(fn), GetStackTrace(1));
+                            case QlangProgramException exp:
+                            {
+                                var debug = exp.WriteStackTrace ? GetDebug(fn) : (-1, "undefined");
+                                var stackTrace = exp.WriteStackTrace ? GetStackTrace(1) : [];
+                                throw new QlangRuntimeException(ex.Message, debug, stackTrace);
+                            }
+                            default:
+                                throw new QlangRuntimeException(ex.Message, GetDebug(fn), GetStackTrace());
+                        }
                     }
 
                     return returnValue;

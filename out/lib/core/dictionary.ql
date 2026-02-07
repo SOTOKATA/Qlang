@@ -1,6 +1,6 @@
 import "$lib/core"
 
-class Dictionary extends DataType: {
+class Dictionary: {
     private let _keys;
     private let _values;
 
@@ -17,30 +17,25 @@ class Dictionary extends DataType: {
     }
 
     function set(let key, let item): {
-        if (_keys.contains(key) == true): {
+        if _keys.contains(key) == true:
             _values.setAt(get(key), item);
-        }
         else: {
             _keys.push(key);
             _values.push(item);
         }
     }
 
-    function containsKey(let key): {
+    function containsKey(let key):
         return _keys.contains(key);
-    }
 
-    function containsValue(let item): {
+    function containsValue(let item):
         return _values.contains(item);
-    }
 
-    function getKeys(): {
+    function getKeys():
         return _keys;
-    }
 
-    function getValues(): {
+    function getValues():
         return _values;
-    }
 
     function clear(): {
         _keys.clear();
@@ -48,9 +43,8 @@ class Dictionary extends DataType: {
     }
 
     function get(let key): {
-        if (_keys.contains(key) == false): {
-            std::Throw.exception("Key is not existent in dictionary");
-        }
+        if _keys.contains(key) == false:
+            std::Throw.message("Key is not existent in dictionary");
 
         let index = _keys.indexOf(key);
 

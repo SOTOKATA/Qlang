@@ -11,7 +11,7 @@ class Object: {
         return _native("std.object.is_simplify", val);
 
     function toString(const obj): {
-        if (isNull(obj)):
+        if isNull(obj):
             return "<null>";
             
         return _native("std.string.to_string", obj);

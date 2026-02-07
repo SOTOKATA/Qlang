@@ -4,6 +4,7 @@ using Core.AST;
 using Core.Dynamic;
 using Core.Exceptions;
 using Core.Native;
+using Core.Tables;
 using Math = System.Math;
 
 namespace Interpreter;
@@ -33,7 +34,7 @@ public partial class Interpreter
 
     private readonly Stack<ASTContext> _contextStack = new();
     private bool HasContext => _contextStack.Count > 0;
-    private ASTContext CurrentContext => HasContext ? _contextStack.Peek() : null;
+    private ASTContext CurrentContext => HasContext ? _contextStack.Peek() : null!;
 
     private const string GlobalNamespaceName = "~global";
 
@@ -87,7 +88,7 @@ public partial class Interpreter
     /// <param name="ownerClass">owner class if exists (required for context)</param>
     /// <param name="ownerNamespace">owner namespace if exists (required for context)</param>
     /// <returns></returns>
-    /// <exception cref="QlangRuntimeException">will call exception if arguments is not valid or during execution function expcetion will occur</exception>
+    /// <exception cref="QlangRuntimeException">will call exception if arguments is not valid or during execution function exception will occur</exception>
     private object? ExecuteFunction(DynamicFunction? function, List<object?> arguments, DynamicClass? ownerClass, DynamicNamespace? ownerNamespace)
     {
         if (function is null)
@@ -204,7 +205,7 @@ public partial class Interpreter
             var callNode = new CallNode(lastNode.DebugIndex)
             {
                 Objects = path.SkipLast(1).ToList(),
-                Arguments = path.SkipLast(1).ElementAt(^1) is FunctionPointerNode ptr ? ptr.Arguments : default
+                Arguments = (path.SkipLast(1).ElementAt(^1) is FunctionPointerNode ptr ? ptr.Arguments : null)!
             };
 
             currentObject = ExecuteObjectCalls(callNode);
@@ -482,7 +483,7 @@ public partial class Interpreter
         else
             rightClass = (DynamicClass)right;
 
-        leftClass ??= CreateClassFrom(left, rightClass, binOp);
+        leftClass ??= CreateClassFrom(left, rightClass!, binOp);
         rightClass ??= CreateClassFrom(right, leftClass, binOp);
         
         // Console.WriteLine("\nOperator: " + binOp.Operator);
@@ -505,6 +506,8 @@ public partial class Interpreter
                     '/' => "Division",
                     '*' => "Multiplication",
                     '%' => "Percent",
+                    _ => throw new QlangRuntimeException("Undefined operator: " + binOp.Operator[i], GetStackTrace())
+                    
                 };
 
                 if (i == 0 && binOp.Operator.Length == 2 && binOp.Operator[i] == '=' && binOp.Operator[i + 1] == '=')
@@ -538,20 +541,21 @@ public partial class Interpreter
             [leftClass, rightClass],
             leftClass, null);
 
-        if ((result is not DynamicClass dynamicClass || dynamicClass.ClassName != leftClass.ClassName) && 
+        if ((result is not DynamicClass dynamicClass || dynamicClass.ClassName != leftClass.ClassName) &&
+            binOp.Operator != null &&
             (binOp.Operator.Contains("Division") ||binOp.Operator.Contains("Subtraction") || binOp.Operator.Contains("Multiplication") || binOp.Operator.Contains("Addition")))
             throw new QlangRuntimeException(
                 $"Return value of '_operator{binOp.Operator.ToLower()}' must be equal to type '{leftClass.ClassName}'", GetDebug(binOp),
                 GetStackTrace()); 
         
-        if (result is not bool && 
+        if (result is not bool &&
+            binOp.Operator != null &&
             (binOp.Operator.Contains("Equal") ||  binOp.Operator.Contains("Greater") || 
              binOp.Operator.Contains("Less")))
             throw new QlangRuntimeException(
                 $"Return value of '_operator{binOp.Operator.ToLower()}' must be equal to type 'bool'", GetDebug(binOp),
                 GetStackTrace()); 
         
-        // Console.WriteLine("Result: " + (result as DynamicClass)?.Variables["_value"]);
         return result;
     }
 
@@ -579,7 +583,6 @@ public partial class Interpreter
         switch (binOp.Operator)
         {
 
-            // Обработка логических операторов с ленивой оценкой
             case "&&":
                 {
                     if (!bool.TryParse(left.ToString(), out leftBool))
@@ -587,7 +590,6 @@ public partial class Interpreter
                             $"Type error: Left operand of '&&' must be boolean, got '{left}'",
                             GetDebug(binOp), GetStackTrace());
 
-                    // Short-circuit: если левая часть false, правую не вычисляем
                     if (!leftBool)
                         return false;
 
@@ -605,7 +607,6 @@ public partial class Interpreter
                             $"Type error: Left operand of '||' must be boolean, got '{left}'",
                             GetDebug(binOp), GetStackTrace());
 
-                    // Short-circuit: если левая часть true, правую не вычисляем
                     if (leftBool)
                         return true;
 
@@ -650,7 +651,7 @@ public partial class Interpreter
                     right = ExecuteFunction(ToDynamicFunction(rightToString), [right], rightClassStr, null);
             }
             
-            return left.ToString() + right.ToString();
+            return left?.ToString() + right;
         }
 
         if (!left.ToString().IsNumber() || !right.ToString().IsNumber())

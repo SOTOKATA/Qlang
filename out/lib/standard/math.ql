@@ -15,7 +15,7 @@ namespace std:  {
 
         function rand(const<Number> min, const<Number> max): {
             if min >= max:
-                Throw.exception("Min cannot be more than or equal to max.");
+                Throw.message("Min cannot be more than or equal to max.");
 
             return _native("std.Math.random", min, max);
         }
@@ -37,7 +37,7 @@ namespace std:  {
             const cos = cos(radians);
 
             if cos == 0:
-                std::Throw.exception("Cos value cannot be zero!");
+                std::Throw.message("Cos value cannot be zero!");
 
             return sin(radians) / cos;
         }
@@ -46,7 +46,7 @@ namespace std:  {
             const sin = sin(radians);
 
             if sin == 0:
-                std::Throw.exception("Sin value cannot be zero!");
+                std::Throw.message("Sin value cannot be zero!");
         
             return cos(radians) / sin;
         }

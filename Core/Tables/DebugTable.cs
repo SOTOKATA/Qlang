@@ -1,6 +1,6 @@
 ﻿using MessagePack;
 
-namespace Core;
+namespace Core.Tables;
 
 [MessagePackObject]
 public class DebugTable
@@ -12,10 +12,8 @@ public class DebugTable
     [Key(2)]
     
     public List<NumberCount> FileIds { get; set; }  = [];
-
      
-    [IgnoreMember]
-    private int _index = 0;
+    private int _index;
     
     public int Add(int lineIndex, int fileId)
     {

@@ -13,9 +13,8 @@ public class NamespaceNode(int line) : ASTNode(line)
     
     public List<ASTNode> Body { get; set; } = [];
 
-    [Key(3)]
-    
-    public bool IsPrivate;
+    [Key(3)] 
+    public bool IsPrivate { get; set; }
 
     public override ASTNode Clone()
     {

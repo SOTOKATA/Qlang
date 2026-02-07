@@ -1,6 +1,7 @@
 using Core;
 using Core.AST;
 using Core.Exceptions;
+using Core.Tables;
 
 namespace Compiler;
 
@@ -12,6 +13,8 @@ public class Parser
 {
     private List<Token> _tokens = [];
     private int _position;
+    
+    private StringPoolTable _stringPoolTable = new();
 
     private string _line = "";
 
@@ -61,71 +64,72 @@ public class Parser
         var isStatic = false;
         var isPrivate = false;
 
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.StaticModificator)
+        if (Check(Tokens.Keyword, Keywords.StaticModificator))
         {
             isStatic = true;
             Advance();
         }
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.PrivateModificator)
+        if (Check(Tokens.Keyword, Keywords.PrivateModificator))
         {
             isPrivate = true;
             Advance();
         }
 
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.BreakKeyword)
+        if (Check(Tokens.Keyword, Keywords.BreakKeyword))
             return new KeywordNode(Keywords.BreakKeyword, Advance().DebugIndex);
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.ContinueKeyword)
+        if (Check(Tokens.Keyword, Keywords.ContinueKeyword))
             return new KeywordNode(Keywords.ContinueKeyword, Advance().DebugIndex);
         
         // using declaration
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.UsingKeyword)
+        if (Check(Tokens.Keyword ,Keywords.UsingKeyword))
             return ParseUsing();
         
         // namespace declaration
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.NamespaceDeclaration)
+        if (Check(Tokens.Keyword, Keywords.NamespaceDeclaration))
             return ParseNamespace(isPrivate);
 
         // function declaration
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.FunctionDeclaration)
+        if (Check(Tokens.Keyword, Keywords.FunctionDeclaration))
             return ParseFunction(isStatic, isPrivate);
 
         // class declaration
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.ClassDeclaration)
+        if (Check(Tokens.Keyword, Keywords.ClassDeclaration))
             return ParseClass();
 
         // for statement
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.ForBlock)
+        if (Check(Tokens.Keyword, Keywords.ForBlock))
             return ParseFor();
 
         // if statement
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.IfBlock)
+        if (Check(Tokens.Keyword, Keywords.IfBlock))
             return ParseIf();
         
         // switch statement
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.SwitchBlock)
+        if (Check(Tokens.Keyword, Keywords.SwitchBlock))
             return ParseSwitch();
 
         // while statement
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.WhileBlock)
+        if (Check(Tokens.Keyword, Keywords.WhileBlock))
             return ParseWhile();
 
         // do-while statement
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.DoWhileBlock)
+        if (Check(Tokens.Keyword, Keywords.DoWhileBlock))
             return ParseWhile(true);
 
         // return statement
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.ReturnKeyword)
+        if (Check(Tokens.Keyword, Keywords.ReturnKeyword))
             return ParseReturn();
 
         // assignment
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.VariableDeclaration)
-            return ParseVariableDeclaration(false, isStatic, isPrivate, false, true);
-
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.ConstVariableDeclaration)
-            return ParseVariableDeclaration(false, isStatic, isPrivate, true, true);
+        if (Check(Tokens.Keyword, Keywords.VariableDeclaration) || Check(Tokens.Keyword, Keywords.ConstVariableDeclaration))
+        {
+            var var = ParseVariableDeclaration(false, isStatic, isPrivate, Check(Tokens.Keyword, Keywords.ConstVariableDeclaration), true);
+            Expect(Tokens.Semicolon);
+            return var;
+        }
 
         // method call statement (Object.method(...)) || Call method from class pointer
-        if (Check(Tokens.Identifier) || (Check(Tokens.Keyword) && Current().Value == Keywords.ThisKeyword))
+        if (Check(Tokens.Identifier) || (Check(Tokens.Keyword, Keywords.ThisKeyword)))
         {
             var expr = ParseExpression();
             Expect(Tokens.Semicolon);
@@ -146,7 +150,7 @@ public class Parser
             return expr;
         }
 
-        throw new QlangCompileException($"Unexpected token: {Current().TokenType} '{Current().Value}'", (IsAtEnd() ? 0 : _debugTable.GetLineIndex(Current().DebugIndex) + 1), "Parser", _sourceFileTable[_debugTable.GetFileId(Current().DebugIndex)]);
+        throw new QlangCompileException($"Unexpected token: {Current().TokenType} '{Current().Value}'", GetDebug(Current()), "Parser");
     }
 
     private AssignmentNode ParseVariableDeclaration(bool canUseType, bool isStatic = false, bool isPrivate = false, bool isConst = false, bool isNew = false)
@@ -154,8 +158,9 @@ public class Parser
         if (!Check(Tokens.Keyword) ||
             (Current().Value != Keywords.VariableDeclaration &&
              Current().Value != Keywords.ConstVariableDeclaration))
-            throw new QlangCompileException($"(ParseVariableDeclaration) Unexpected token: {Current().TokenType}", (IsAtEnd() ? 0 : _debugTable.GetLineIndex(Current().DebugIndex) + 1), "Parser", _sourceFileTable[_debugTable.GetFileId(Current().DebugIndex)]);
+            throw new QlangCompileException($"(ParseVariableDeclaration) Unexpected token: {Current().TokenType}", GetDebug(Current()),"Parser");
 
+        // Skip const or let
         Advance();
 
         CallNode? type = null;
@@ -165,24 +170,29 @@ public class Parser
             {
                 var token = Current();
                 throw new QlangCompileException(
-                    "Using variables with types is only possible with function arguments", _debugTable.GetLineIndex(token.DebugIndex), "Parser", _sourceFileTable[_debugTable.GetFileId(token.DebugIndex)]);
+                    "Using variables with types is only possible with function arguments", GetDebug(token), "Parser");
             }
-            Advance();
+            // Skip <
+            Expect(Tokens.Less);
             var returnValue  = ParsePrimaryPath();
 
             if (returnValue is not CallNode node)
             {
                 var token = Current();
-                throw new QlangCompileException("Cannot use follow node as path to class", (_debugTable.GetLineIndex(token.DebugIndex) + 1), "Parser", _sourceFileTable[_debugTable.GetFileId(token.DebugIndex)]);
+                throw new QlangCompileException("Cannot use follow node as path to class", GetDebug(token), "Parser");
             }
 
             type = node;
+            
+            // Skip >
             Expect(Tokens.Greater);
         }
 
+        // Except var name
         var name = Expect(Tokens.Identifier).Value;
 
         ASTNode? value = null;
+        // Set if exists value
         if (Current().TokenType == Tokens.Equals)
         {
             Advance();
@@ -195,7 +205,7 @@ public class Parser
             Value = value,
             Type = type
         };
-        
+
         _assignmentNodes.Add(assignmentNode);
         
         return assignmentNode;
@@ -269,9 +279,19 @@ public class Parser
         while (!Check(Tokens.RParen))
         {
             if (Check(Tokens.Keyword))
+            {
                 parameters.Add(ParseVariableDeclaration(true));
+                continue;
+            }
+
             if (Check(Tokens.Comma))
+            {
                 Advance();
+                continue;
+            }
+
+            if (!Check(Tokens.RParen))
+                throw new QlangCompileException("Undefined parameter", GetDebug(Current()), "Parser");
         }
 
         Expect(Tokens.RParen);
@@ -459,7 +479,6 @@ public class Parser
 
     /// <summary>
     /// Parsing expression (ex.: 5 + 5)
-    /// Приоритет (от низкого к высокому): ||, &&, ==, !=, <, >, <=, >=, +, -, *, /, %
     /// </summary>
     private ASTNode ParseExpression()
     {
@@ -726,7 +745,7 @@ public class Parser
         return null;
     }
 
-    private ASTNode? ParsePrimaryPointers()
+    private ASTNode? ParsePrimaryCallable()
     {
         // Function pointer
         if (Check(Tokens.Keyword) && Current().Value == Keywords.FunctionDeclaration &&
@@ -744,10 +763,20 @@ public class Parser
             List<AssignmentNode> parameters = [];
             while (!Check(Tokens.RParen))
             {
-                if (Check(Tokens.Keyword))
-                    parameters.Add(ParseVariableDeclaration(false));
+                if (Check(Tokens.Keyword, Keywords.ConstVariableDeclaration) ||
+                    Check(Tokens.Keyword, Keywords.VariableDeclaration))
+                {
+                    parameters.Add(ParseVariableDeclaration(true));
+                    continue;
+                }
                 if (Check(Tokens.Comma))
+                {
                     Advance();
+                    continue;
+                }
+                
+                if (!Check(Tokens.RParen))
+                    throw new QlangCompileException("Undefined parameter: " + Current().TokenType + " " + Current().Value, GetDebug(Current()), "Parser");
             }
             // Advance ')'
             Advance();
@@ -769,22 +798,32 @@ public class Parser
             Advance();
             var @class = new ClassNode(Current().DebugIndex)
             {
-                Name = "~class",
+                Name = "~object",
                 Body = [],
                 Extends = null
             };
 
+            // While current token is not RBrace ('}')
             while (!Check(Tokens.RBrace))
             {
-                if (Check(Tokens.Keyword))
-                    @class.Body.Add(ParseVariableDeclaration(false));
+                if (Check(Tokens.Keyword, Keywords.ConstVariableDeclaration) ||
+                    Check(Tokens.Keyword, Keywords.VariableDeclaration))
+                {
+                    @class.Body.Add(ParseVariableDeclaration(true));
+                    continue;
+                }
                 if (Check(Tokens.Comma))
+                {
                     Advance();
+                    continue;
+                }
+                
+                if (!Check(Tokens.RParen))
+                    throw new QlangCompileException("Undefined variable: " + Current().TokenType + " " + Current().Value, GetDebug(Current()), "Parser");
             }
 
-            // Advance '};'
+            // Advance '}'
             Expect(Tokens.RBrace);
-            Expect(Tokens.Semicolon);
 
             return @class;
         }
@@ -1146,7 +1185,7 @@ public class Parser
         if (baseExpression is not null)
             return baseExpression;
 
-        baseExpression = ParsePrimaryPointers();
+        baseExpression = ParsePrimaryCallable();
         if (baseExpression is not null)
             return baseExpression;
 
@@ -1177,6 +1216,7 @@ public class Parser
     private Token? Peek() => _position + 1 < _tokens.Count ? _tokens[_position + 1] : null;
     private bool IsAtEnd() => _position >= _tokens.Count;
     private bool Check(Tokens type) => !IsAtEnd() && Current().TokenType == type;
+    private bool Check(Tokens type, string? value) => !IsAtEnd() && (Current().TokenType == type && Current().Value == value);
 
     private Token Advance()
     {
@@ -1189,7 +1229,6 @@ public class Parser
             return token;
         }
 
-        // Logger.Log(token.TokenType.ToString() + " " + token.Value, $"Token (Ln:{token.Line})");
         _line += $"{Token.TokenToString(token.TokenType)}{token.Value}";
         return token;
     }
@@ -1202,11 +1241,11 @@ public class Parser
             throw new QlangCompileException($"""
                                  Expected {type}, got {current.TokenType} (Value: {(current.Value == "" ? "Null" : current.Value)})
                                         line: '{_line}'
-                                 """, (IsAtEnd() ? 0 : _debugTable.GetLineIndex(Current().DebugIndex) + 1), "Parser", _sourceFileTable[_debugTable.GetFileId(Current().DebugIndex)]);
+                                 """, GetDebug(current), "Parser");
         }
 
         if (value != null && Current().Value != value)
-            throw new QlangCompileException($"Expected '{value}', got '{Current().Value}'", (IsAtEnd() ? 0 : _debugTable.GetLineIndex(Current().DebugIndex) + 1), "Parser", _sourceFileTable[_debugTable.GetFileId(Current().DebugIndex)]);
+            throw new QlangCompileException($"Expected '{value}', got '{Current().Value}'", GetDebug(Current()), "Parser");
 
         return Advance();
     }

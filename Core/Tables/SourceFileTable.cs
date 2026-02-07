@@ -1,7 +1,6 @@
 ﻿using MessagePack;
 
-
-namespace Core;
+namespace Core.Tables;
 
 [MessagePackObject]
 public class SourceFileTable
@@ -10,8 +9,6 @@ public class SourceFileTable
     
     public List<string> Index { get; set; } = [];
     
-    
-    [IgnoreMember]
     private Dictionary<string, int> _cache = new();
 
     public int GetOrAdd(string path)

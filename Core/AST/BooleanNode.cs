@@ -7,7 +7,7 @@ namespace Core.AST;
 public class BooleanNode(int line) : ASTNode(line)
 {
     [Key(1)] 
-    public bool Value { get; set; } = false;
+    public bool Value { get; set; }
 
     public override ASTNode Clone() => new BooleanNode(DebugIndex) { 
             Value = Value
