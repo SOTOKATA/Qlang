@@ -1,4 +1,5 @@
 ﻿using Core.AST;
+using Core.Tables;
 using MessagePack;
 
 namespace Core.Dynamic;
@@ -6,15 +7,15 @@ namespace Core.Dynamic;
 [MessagePackObject]
 public class Variable(string name, object? value, bool isStatic, bool isPrivate, bool isConst, CallNode? type = null)
 {
-    public Variable() : this("", null, false, false, false, null) {}
+    public Variable() : this("", null, false, false, false) {}
     public override string? ToString()
     {
         return Value?.ToString();       
     }
 
-    public static Variable FromAssignmentNode(AssignmentNode assignNode, object? value)
+    public static Variable FromAssignmentNode(AssignmentNode assignNode, object? value, StringPoolTable stringPoolTable)
     {
-        return new Variable(assignNode.GetLastName(), value, assignNode.IsStatic, assignNode.IsPrivate, assignNode.IsConst, assignNode.Type);
+        return new Variable(stringPoolTable[assignNode.GetLastNameId()], value, assignNode.IsStatic, assignNode.IsPrivate, assignNode.IsConst, assignNode.Type);
     }
 
     [Key(1)]

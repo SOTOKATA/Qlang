@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using Core;
 using Core.Exceptions;
-using Core.Native;
+using Core.Tables;
 
 namespace Compiler;
 
@@ -194,11 +194,11 @@ public static class PreCompile
     }
 
     
-    public static (string outScript, List<string> list) ExtractStrings(string script, List<string> list)
+    public static (string outScript, StringPoolTable list) ExtractStrings(string script, StringPoolTable list)
     {
-        List<string> stringList = list;
+        var stringList = list;
         
-        var stringCounter = stringList.Count;
+        var stringCounter = stringList.StringPool.Count;
         
         const string pattern = """
                                "(?:[^"\\]|\\.)*"
@@ -213,9 +213,9 @@ public static class PreCompile
             
             value = value.Replace("\"", "\"\"");
 
-            if (stringList.IndexOf(value) != -1)
+            if (stringList.StringPool.IndexOf(value) != -1)
             {
-                var existedKey = stringList.IndexOf(value);
+                var existedKey = stringList.Add(value);
 
                 return $"___S{existedKey}___";
             }
@@ -230,7 +230,7 @@ public static class PreCompile
         return (result, stringList);
     }
     
-    public static string ReturnFileStrings(string script, List<string> stringList)
+    public static string ReturnFileStrings(string script, StringPoolTable stringList)
     {
         var result = Regex.Replace(script, @"^#FILE\s+(___S\d+___)", match =>
         {
@@ -242,7 +242,7 @@ public static class PreCompile
             
             var number = int.Parse(smatch.Value);
             
-            return number < stringList.Count  
+            return number < stringList.StringPool.Count  
                 ? $"#FILE {stringList[number]}" 
                 : match.Value;
         }, RegexOptions.Multiline);
@@ -259,7 +259,7 @@ public static class PreCompile
         return result;
     }
 
-    public static (string script, List<string> stringList) AddStringInterpolation(string script, List<string> stringList)
+    public static (string script, StringPoolTable stringList) AddStringInterpolation(string script, StringPoolTable stringList)
     {
         var result = Regex.Replace(script, @"\$___S\d+___", match =>
         {
@@ -273,7 +273,7 @@ public static class PreCompile
             
             var outString = stringList[index];
 
-            stringList[index] = ReplaceFormatting(outString);
+            stringList.StringPool[index] = ReplaceFormatting(outString);
             
             var result = $"String.new({founded}).format([{string.Join(", ", GetFormatting(outString))}])";
 

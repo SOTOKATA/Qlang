@@ -18,6 +18,7 @@ public class ReturnNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             ReturnNode:
+                                DebugIndex: {DebugIndex}
                                 ReturnValue: {(ReturnValue is null ? "<nothing>" : ReturnValue.GetTree("\t\t"))}
                             """, indent);
     }

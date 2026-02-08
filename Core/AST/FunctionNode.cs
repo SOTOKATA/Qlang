@@ -7,7 +7,7 @@ public class FunctionNode(int line) : ASTNode(line)
 {
     [Key(1)]
     
-    public required string Name { get; set; }
+    public required int NameId { get; set; }
 
     [Key(2)]
     
@@ -26,11 +26,6 @@ public class FunctionNode(int line) : ASTNode(line)
     [IgnoreMember] 
     public ASTContext? Context;
 
-    public override string ToString()
-    {
-        return Name;
-    }
-
     public override ASTNode Clone()
     {
         return new FunctionNode(DebugIndex)
@@ -39,7 +34,7 @@ public class FunctionNode(int line) : ASTNode(line)
             IsPrivate = IsPrivate,
             Parameters = Parameters.Select(node => node.Clone()).Cast<AssignmentNode>().ToList(),
             Context = Context,
-            Name = Name, 
+            NameId = NameId, 
             Body = Body.Select(node => node.Clone()).ToList() 
         };
     }
@@ -48,7 +43,8 @@ public class FunctionNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             FunctionNode:
-                                Name: {Name}
+                                DebugIndex: {DebugIndex}
+                                Name: {NameId}
                                 IsStatic: {IsStatic}
                                 IsPrivate: {IsPrivate}
                                 Parameters: [{string.Join(",\n", Parameters.Select(x => x.GetTree("\t\t")))}]

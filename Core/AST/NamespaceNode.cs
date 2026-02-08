@@ -7,7 +7,7 @@ public class NamespaceNode(int line) : ASTNode(line)
 {
     [Key(1)]
     
-    public required string Name { get; set; }
+    public required int NameId { get; set; }
 
     [Key(2)]
     
@@ -18,14 +18,15 @@ public class NamespaceNode(int line) : ASTNode(line)
 
     public override ASTNode Clone()
     {
-        return new NamespaceNode(DebugIndex) { Name = Name, Body = Body.Select(node => node.Clone()).ToList() };
+        return new NamespaceNode(DebugIndex) { NameId = NameId, Body = Body.Select(node => node.Clone()).ToList() };
     }
 
     public override string GetTree(string indent = "")
     {
         return DebugIndent($"""
                             NamespaceNode:
-                                Name: {Name}
+                                DebugIndex: {DebugIndex}
+                                Name: {NameId}
                                 IsPrivate: {IsPrivate}
                                 Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t\t")))}]
                             """, indent);

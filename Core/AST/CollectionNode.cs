@@ -12,6 +12,7 @@ public class CollectionNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             CollectionNode:
+                                DebugIndex: {DebugIndex}
                                 Collection: [{string.Join(",\n", Collection.Select(x => x.GetTree("\t\t")))}]
                             """, indent);
     }

@@ -17,6 +17,7 @@ public class BooleanNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             BreakNode:
+                                DebugIndex: {DebugIndex}
                                 Value: {Value}
                             """, indent);
     }

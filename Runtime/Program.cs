@@ -34,12 +34,16 @@ public static class Program
 
         if (File.Exists(debugPath))
             qliDebug = Core.MessagePack.Deserialize<QLIDebug>(Brotli.Decompress(File.ReadAllBytes(debugPath)));
-
+        
         try
         {
-            new Interpreter.Interpreter(qliProgram.StringList,
+            new Interpreter.Interpreter(
                 qliProgram.NumberList,
-                LoadDependencies(), qliDebug.SourceFileTable, qliDebug.DebugTable).Execute(qliProgram.ProgramNode, args.ToList()!);
+                LoadDependencies(), 
+                qliDebug.SourceFileTable, 
+                qliDebug.DebugTable, 
+                qliProgram.StringPoolTable)
+                    .Execute(qliProgram.ProgramNode, args.ToList()!);
         }
         catch (QlangRuntimeException runtime)
         {

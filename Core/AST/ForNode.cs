@@ -35,6 +35,7 @@ public class ForNode(int line) : ASTBlock(line)
     {
         return DebugIndent($"""
                             ForNode:
+                                DebugIndex: {DebugIndex}
                                 Assignment: {Assignment.GetTree("\t\t")}
                                 Condition: {Condition.GetTree("\t\t")}
                                 Statement: {Condition.GetTree("\t\t")}

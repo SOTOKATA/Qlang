@@ -19,6 +19,7 @@ public class CastNode(CallNode call, CallNode obj, int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             CastNode:
+                                DebugIndex: {DebugIndex}
                                 TypeCastPath: {TypeCastPath.GetTree()}
                                 ToCastObject: {ToCastObject.GetTree()}
                             """, indent);

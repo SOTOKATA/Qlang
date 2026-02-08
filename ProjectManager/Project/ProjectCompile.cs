@@ -1,4 +1,5 @@
-﻿using ProjectManager.Settings;
+﻿using System.Diagnostics;
+using ProjectManager.Settings;
 
 namespace ProjectManager.Project;
 

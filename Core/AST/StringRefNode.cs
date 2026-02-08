@@ -18,6 +18,7 @@ public class StringRefNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             StringRefNode:
+                                DebugIndex: {DebugIndex}
                                 Ref: {Index}
                             """, indent);
     }

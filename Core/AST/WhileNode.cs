@@ -31,6 +31,7 @@ public class WhileNode(int line) : ASTBlock(line)
     {
         return DebugIndent($"""
                             WhileNode:
+                                DebugIndex: {DebugIndex}
                                 Condition: {Condition.GetTree("\t\t")}
                                 IsDoWhile: {IsDoWhile}
                                 Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t\t")))}]

@@ -14,7 +14,7 @@ public partial class Interpreter
     private DynamicNamespace ToDynamicNamespace(NamespaceNode namespaceNode, DynamicNamespace? dNamespace = null)
     {
         // Create dynamic instance
-        var dynamicNamespace = new DynamicNamespace(namespaceNode.Name)
+        var dynamicNamespace = new DynamicNamespace(_stringPoolTable[namespaceNode.NameId])
         {
             IsPrivate = namespaceNode.IsPrivate
         };
@@ -40,7 +40,7 @@ public partial class Interpreter
         
         // Add and convert all assignments
         foreach (var assignmentNode in namespaceNode.Body.OfType<AssignmentNode>())
-                dynamicNamespace.Variables[assignmentNode.GetLastName()] = new Variable(assignmentNode.GetLastName(),
+                dynamicNamespace.Variables[_stringPoolTable[assignmentNode.GetLastNameId()]] = new Variable(_stringPoolTable[assignmentNode.GetLastNameId()],
                     EvaluateExpression(assignmentNode.Value), assignmentNode.IsStatic, assignmentNode
                         .IsPrivate, assignmentNode.IsConst);
         
@@ -56,12 +56,12 @@ public partial class Interpreter
     private DynamicClass ToDynamicClass(ClassNode classNode, DynamicNamespace? dynamicNamespace = null)
     {
         // Create dynamic instance
-        DynamicClass dynamicClass = new(classNode.Name);
+        DynamicClass dynamicClass = new(_stringPoolTable[classNode.NameId]);
         dynamicNamespace?.Classes.Add(dynamicClass);
 
         // Add and convert all assignments
         foreach (var assignmentNode in classNode.Body.OfType<AssignmentNode>())
-                dynamicClass.Variables[assignmentNode.GetLastName()] = new Variable(assignmentNode.GetLastName(),
+                dynamicClass.Variables[_stringPoolTable[assignmentNode.GetLastNameId()]] = new Variable(_stringPoolTable[assignmentNode.GetLastNameId()],
                     EvaluateExpression(assignmentNode.Value), assignmentNode.IsStatic, assignmentNode
                     .IsPrivate, assignmentNode.IsConst);
         
@@ -81,7 +81,7 @@ public partial class Interpreter
     private DynamicFunction ToDynamicFunction(FunctionNode functionNode)
     {
         // Create dynamic instance
-        DynamicFunction dynamicFunction = new(functionNode.Name)
+        DynamicFunction dynamicFunction = new(_stringPoolTable[functionNode.NameId])
         {
             Context = functionNode.Context
         };
@@ -89,15 +89,16 @@ public partial class Interpreter
         // Add and convert all parameters
         foreach (var node in functionNode.Parameters)
         {
-            dynamicFunction.Variables[node.GetLastName()] = new Variable(
-                node.GetLastName(),
+            var nodeName = _stringPoolTable[node.GetLastNameId()];
+            dynamicFunction.Variables[nodeName] = new Variable(
+                nodeName,
                 EvaluateExpression(node.Value),
                 node.IsStatic,
                 node.IsPrivate,
                 node.IsConst,
                 node.Type);
 
-            dynamicFunction.Parameters.Add(node.GetLastName());
+            dynamicFunction.Parameters.Add(nodeName);
         }
 
         // Add body and modificators

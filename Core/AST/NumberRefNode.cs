@@ -22,6 +22,7 @@ public class NumberRefNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             NumberRefNode:
+                                DebugIndex: {DebugIndex}
                                 Ref: {Index}
                                 IsNegative: {IsNegative}
                             """, indent);

@@ -16,6 +16,7 @@ public class SwitchCaseNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             SwitchCaseNode:
+                                DebugIndex: {DebugIndex}
                                 Condition: {Condition.GetTree("\t\t")}
                                 CaseBlock: [{string.Join(",\n", CaseBlock.Select(x => x.GetTree("\t\t")))}]
                             """,

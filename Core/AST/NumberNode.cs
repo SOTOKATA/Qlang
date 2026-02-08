@@ -18,6 +18,7 @@ public class NumberNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             NumberNode:
+                                DebugIndex: {DebugIndex}
                                 Value: {Value}
                             """, indent);
     }

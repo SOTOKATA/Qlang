@@ -21,9 +21,9 @@ public class QLang
         SaveProgram(new QLIProgram
         {
             ProgramNode = programNode,
-            StringList = c.StringList,
             NumberList = c.NumberList,
-            ExternalLibraries = c.DllDependencies
+            ExternalLibraries = c.DllDependencies,
+            StringPoolTable =  c.StringPoolTable,
         }, new QLIDebug
         {
             SourceFileTable = c.SourceFileTable,
@@ -127,7 +127,12 @@ public class QLang
             foreach (var arg in args.OfType<string>())
                 startInfo.ArgumentList.Add(arg);
 
-        Process.Start(startInfo);
+        var proc = new Process();
+        
+        proc.StartInfo = startInfo;
+        
+        proc.Start();
+        proc.WaitForExit();
     }
 
 }

@@ -11,22 +11,21 @@ namespace Interpreter;
 
 public partial class Interpreter
 {
-    public Interpreter(List<string> stringList, List<double> numberList, NativeFunctionRegistry nativeFunctions, SourceFileTable? sourceFileTable, DebugTable? debugTable)
+    public Interpreter(List<double> numberList, NativeFunctionRegistry nativeFunctions, SourceFileTable? sourceFileTable, DebugTable? debugTable, StringPoolTable stringPoolTable)
     {
-        _stringList = stringList;
         _numberList = numberList;
         _nativeFunctions = nativeFunctions;
         _sourceFileTable = sourceFileTable;
         _sourceFileTable?.RebuildCache();
         _debugTable = debugTable;
+        _stringPoolTable = stringPoolTable;
     }
 
     private readonly SourceFileTable? _sourceFileTable;
     private readonly DebugTable? _debugTable;
+    private readonly StringPoolTable _stringPoolTable;
 
     private readonly NativeFunctionRegistry _nativeFunctions;
-
-    private readonly List<string> _stringList;
 
     private readonly List<double> _numberList;
 
@@ -41,7 +40,7 @@ public partial class Interpreter
     public void Execute(ProgramNode program, List<string?>? args = null)
     {
         // First is load global namespace with core classes
-        var globalNamespace = program.Statements.OfType<NamespaceNode>().FirstOrDefault(x => x.Name == GlobalNamespaceName);
+        var globalNamespace = program.Statements.OfType<NamespaceNode>().FirstOrDefault(x => _stringPoolTable[x.NameId] == GlobalNamespaceName);
 
         if (globalNamespace is not null)
         {
@@ -54,12 +53,12 @@ public partial class Interpreter
         }
 
         // Load namespaces
-        foreach (var namespaceNode in program.Statements.OfType<NamespaceNode>().Where(x => x.Name != GlobalNamespaceName))
-            _dynamicNamespaces[namespaceNode.Name] = ToDynamicNamespace(namespaceNode);
+        foreach (var namespaceNode in program.Statements.OfType<NamespaceNode>().Where(x => _stringPoolTable[x.NameId] != GlobalNamespaceName))
+            _dynamicNamespaces[_stringPoolTable[namespaceNode.NameId]] = ToDynamicNamespace(namespaceNode);
         
 
         // Search main function
-        var function = _dynamicNamespaces[GlobalNamespaceName].Functions.FirstOrDefault(f => f.Name == "main");
+        var function = _dynamicNamespaces[GlobalNamespaceName].Functions.FirstOrDefault(f => _stringPoolTable[f.NameId] == "main");
         if (function is null)
         {
             throw new QlangRuntimeException(
@@ -205,11 +204,12 @@ public partial class Interpreter
             var callNode = new CallNode(lastNode.DebugIndex)
             {
                 Objects = path.SkipLast(1).ToList(),
-                Arguments = (path.SkipLast(1).ElementAt(^1) is FunctionPointerNode ptr ? ptr.Arguments : null)!
             };
 
             currentObject = ExecuteObjectCalls(callNode);
         }
+        
+        var assignName = _stringPoolTable[assignNode.GetLastNameId()];
 
         // Change value
         if (!assignNode.IsNew)
@@ -219,7 +219,7 @@ public partial class Interpreter
             if (obj.@object is Variable var)
             {
                 if (var.IsConst && !assignNode.IsNew)
-                    throw new QlangRuntimeException($"Cannot re-assign const property '{lastNode.Name}'", GetDebug(assignNode),
+                    throw new QlangRuntimeException($"Cannot re-assign const property '{_stringPoolTable[lastNode.NameId]}'", GetDebug(assignNode),
                         GetStackTrace());
 
                 if (currentObject is not null && var.IsPrivate && !_allowPrivateCall)
@@ -238,41 +238,39 @@ public partial class Interpreter
         {
             if (CurrentContext.Function is not null)
             {
-                CurrentContext.Function.Variables[assignNode.GetLastName()] =
-                    Variable.FromAssignmentNode(assignNode, value);
+                CurrentContext.Function.Variables[assignName] =
+                    Variable.FromAssignmentNode(assignNode, value, _stringPoolTable);
                 return;
             }
 
             if (CurrentContext.Class is not null)
             {
-                CurrentContext.Class.Variables[assignNode.GetLastName()] =
-                    Variable.FromAssignmentNode(assignNode, value);
+                CurrentContext.Class.Variables[assignName] =
+                    Variable.FromAssignmentNode(assignNode, value, _stringPoolTable);
                 return;
             }
 
             if (CurrentContext.Namespace is not null)
             {
-                CurrentContext.Namespace.Variables[assignNode.GetLastName()] =
-                    Variable.FromAssignmentNode(assignNode, value);
+                CurrentContext.Namespace.Variables[assignName] =
+                    Variable.FromAssignmentNode(assignNode, value, _stringPoolTable);
                 return;
             }
         }
 
-        _dynamicNamespaces[GlobalNamespaceName].Variables[assignNode.GetLastName()] = Variable.FromAssignmentNode(assignNode, value);
+        _dynamicNamespaces[GlobalNamespaceName].Variables[assignName] = Variable.FromAssignmentNode(assignNode, value, _stringPoolTable);
     }
 
     private DynamicClass GetNewClass(DynamicClass dynamicClass, List<object?> args)
     {
         var dClass = dynamicClass.Clone();
 
-        var fromClass = GetFunctionFromClass(dClass, Keywords.CreateClassInstanceKeyword, args);
+        var fromClass = GetFunctionFromClass(dClass, _stringPoolTable.Add(Keywords.CreateClassInstanceKeyword), args);
 
-        if (dClass.Body.OfType<FunctionNode>().Any(f => f.Name == Keywords.CreateClassInstanceKeyword) &&
+        var indexOfNewClass = _stringPoolTable.Add(Keywords.CreateClassInstanceKeyword);
+        if (dClass.Body.OfType<FunctionNode>().Any(f => f.NameId == indexOfNewClass) &&
             fromClass.function == null)
-        {
-            // Console.WriteLine("Functions: " + string.Join(", ", dClass.Body.OfType<FunctionNode>().Where(x => x.Name == "new").Select(f => $"{f.Name}({string.Join(", ", f.Parameters.Select(x => x.Path))})")));
             throw new QlangRuntimeException($"Can't initialize class '{dynamicClass.ClassName}' with this parameters.", GetStackTrace());
-        }
 
         if (fromClass.function != null)
             ExecuteFunction(ToDynamicFunction(fromClass.function), fromClass.Args, dClass, null);
@@ -345,7 +343,7 @@ public partial class Interpreter
                 NumberNode num => num.Value,
                 BinaryOperationNode binOp => EvaluateBinaryOperation(binOp),
                 CollectionNode collection => collection.Collection.ConvertAll(EvaluateExpression),
-                KeywordNode node when node.Value == Keywords.NullKeyword => null,
+                KeywordNode node when _stringPoolTable[node.KeywordId] == Keywords.NullKeyword => null,
                 CallNode call => ExecuteObjectCalls(call),
                 FunctionNode fn => PrepareFunctionNodePointer(fn),
                 _ => throw new QlangRuntimeException(
@@ -417,14 +415,7 @@ public partial class Interpreter
 
     private string GetStringRef(StringRefNode strStringRef)
     {
-        if (strStringRef.Index >= _stringList.Count || strStringRef.Index < 0)
-        {
-            throw new QlangRuntimeException(
-                $"Undefined string reference: {strStringRef.Index}",
-                GetDebug(strStringRef),
-                GetStackTrace());
-        }
-        return _stringList[strStringRef.Index];
+        return _stringPoolTable[strStringRef.Index];
     }
 
     private double GetNumberRef(NumberRefNode numberRef)
@@ -449,7 +440,7 @@ public partial class Interpreter
         
         var createFunction = copy.Body
             .OfType<FunctionNode>()
-            .FirstOrDefault(f => f.Name == "_createFrom");
+            .FirstOrDefault(f => _stringPoolTable[f.NameId] == "_createFrom");
 
         if (createFunction is null)
             throw new QlangRuntimeException(
@@ -490,12 +481,13 @@ public partial class Interpreter
         // Console.WriteLine($"First operand: '{leftClass.Variables["_value"].Value}'");
         // Console.WriteLine($"Second operand: '{rightClass.Variables["_value"].Value}'");
 
-        if (binOp.Operator != null && binOp.Operator.Any(c => c is '=' or '>' or '<' or '!' or '*' or '/' or '%' or '+' or '-'))
+        var originalOperator = _stringPoolTable[binOp.OperatorId];
+        if (originalOperator.Any(c => c is '=' or '>' or '<' or '!' or '*' or '/' or '%' or '+' or '-'))
         {
             var @operator = "";
-            for (var i = 0; i < binOp.Operator.Length; i++)
+            for (var i = 0; i < originalOperator.Length; i++)
             {
-                @operator += binOp.Operator[i] switch
+                @operator += originalOperator[i] switch
                 {
                     '=' => "Equal",
                     '>' => "Greater",
@@ -506,33 +498,35 @@ public partial class Interpreter
                     '/' => "Division",
                     '*' => "Multiplication",
                     '%' => "Percent",
-                    _ => throw new QlangRuntimeException("Undefined operator: " + binOp.Operator[i], GetStackTrace())
+                    _ => throw new QlangRuntimeException("Undefined operator: " + originalOperator[i], GetStackTrace())
                     
                 };
 
-                if (i == 0 && binOp.Operator.Length == 2 && binOp.Operator[i] == '=' && binOp.Operator[i + 1] == '=')
+                if (i == 0 && originalOperator.Length == 2 && originalOperator[i] == '=' && originalOperator[i + 1] == '=')
                     break;
 
-                if (i == 0 && binOp.Operator.Length == 2 && binOp.Operator[i] == '!' && binOp.Operator[i + 1] == '=')
+                if (i == 0 && originalOperator.Length == 2 && originalOperator[i] == '!' && originalOperator[i + 1] == '=')
                 {
                     @operator += "Equal";
                     break;
                 }
                 
-                if (i !=  binOp.Operator.Length - 1)
+                if (i !=  originalOperator.Length - 1)
                     @operator += "Or";
             }
-            binOp.Operator = @operator;
+
+            binOp.OperatorId = _stringPoolTable.Add(@operator);
+            originalOperator = @operator;
         }
         
         var opFunction = leftClass.Body
             .OfType<FunctionNode>()
             .FirstOrDefault(f =>
-                f.Name == $"_operator{binOp.Operator}" && f.Parameters.Count == 2);
+                _stringPoolTable[f.NameId] == $"_operator{originalOperator}" && f.Parameters.Count == 2);
 
         if (opFunction is null)
             throw new QlangRuntimeException(
-                $"Class '{leftClass.ClassName}' is incompatible for operator '{binOp.Operator}'",
+                $"Class '{leftClass.ClassName}' is incompatible for operator '{originalOperator}'",
                 GetDebug(binOp),
                 GetStackTrace());
 
@@ -542,18 +536,16 @@ public partial class Interpreter
             leftClass, null);
 
         if ((result is not DynamicClass dynamicClass || dynamicClass.ClassName != leftClass.ClassName) &&
-            binOp.Operator != null &&
-            (binOp.Operator.Contains("Division") ||binOp.Operator.Contains("Subtraction") || binOp.Operator.Contains("Multiplication") || binOp.Operator.Contains("Addition")))
+            (originalOperator.Contains("Division") || originalOperator.Contains("Subtraction") || originalOperator.Contains("Multiplication") || originalOperator.Contains("Addition")))
             throw new QlangRuntimeException(
-                $"Return value of '_operator{binOp.Operator.ToLower()}' must be equal to type '{leftClass.ClassName}'", GetDebug(binOp),
+                $"Return value of '_operator{originalOperator.ToLower()}' must be equal to type '{leftClass.ClassName}'", GetDebug(binOp),
                 GetStackTrace()); 
         
         if (result is not bool &&
-            binOp.Operator != null &&
-            (binOp.Operator.Contains("Equal") ||  binOp.Operator.Contains("Greater") || 
-             binOp.Operator.Contains("Less")))
+            (originalOperator.Contains("Equal") ||  originalOperator.Contains("Greater") || 
+             originalOperator.Contains("Less")))
             throw new QlangRuntimeException(
-                $"Return value of '_operator{binOp.Operator.ToLower()}' must be equal to type 'bool'", GetDebug(binOp),
+                $"Return value of '_operator{originalOperator.ToLower()}' must be equal to type 'bool'", GetDebug(binOp),
                 GetStackTrace()); 
         
         return result;
@@ -564,9 +556,10 @@ public partial class Interpreter
         var left = EvaluateExpression(binOp.Left);
         var right = EvaluateExpression(binOp.Right);
 
+        var @operator = _stringPoolTable[binOp.OperatorId];
         if (left is null || right is null)
         {
-            return binOp.Operator switch
+            return @operator switch
             {
                 "==" => left == right,
                 "!=" => left != right,
@@ -580,7 +573,7 @@ public partial class Interpreter
         
         bool leftBool;
         bool rightBool;
-        switch (binOp.Operator)
+        switch (@operator)
         {
 
             case "&&":
@@ -622,22 +615,22 @@ public partial class Interpreter
         // If it's bool condition
         if (bool.TryParse(left.ToString(), out leftBool) && bool.TryParse(right.ToString(), out rightBool))
         {
-            return binOp.Operator switch
+            return @operator switch
             {
                 "==" => Equals(leftBool, rightBool),
                 "!=" => !Equals(leftBool, rightBool),
                 _ => throw new QlangRuntimeException(
-                    $"Unknown operator for boolean: {binOp.Operator}",
+                    $"Unknown operator for boolean: {@operator}",
                     GetDebug(binOp),
                     GetStackTrace())
             };
         }
 
-        if (binOp.Operator == "+" && (left is string || right is string))
+        if (@operator == "+" && (left is string || right is string))
         {
             if (left is DynamicClass leftClassStr)
             {
-                var leftToString = leftClassStr.Body.OfType<FunctionNode>().FirstOrDefault(f => f.Name == "toString");
+                var leftToString = leftClassStr.Body.OfType<FunctionNode>().FirstOrDefault(f => _stringPoolTable[f.NameId] == "toString");
 
                 if (leftToString is not null)
                     left = ExecuteFunction(ToDynamicFunction(leftToString), [left], leftClassStr, null);
@@ -645,7 +638,7 @@ public partial class Interpreter
             
             if (right is DynamicClass rightClassStr)
             {
-                var rightToString = rightClassStr.Body.OfType<FunctionNode>().FirstOrDefault(f => f.Name == "toString");
+                var rightToString = rightClassStr.Body.OfType<FunctionNode>().FirstOrDefault(f => _stringPoolTable[f.NameId] == "toString");
 
                 if (rightToString is not null)
                     right = ExecuteFunction(ToDynamicFunction(rightToString), [right], rightClassStr, null);
@@ -656,8 +649,8 @@ public partial class Interpreter
 
         if (!left.ToString().IsNumber() || !right.ToString().IsNumber())
         {
-            if (binOp.Operator is "==" or "!=")
-                return binOp.Operator switch
+            if (@operator is "==" or "!=")
+                return @operator switch
                 {
                     "==" => Equals(left, right),
                     "!=" => !Equals(left, right),
@@ -665,7 +658,7 @@ public partial class Interpreter
                 };
 
             throw new QlangRuntimeException(
-                $"Type error: Cannot apply operator '{binOp.Operator}' to " +
+                $"Type error: Cannot apply operator '{@operator}' to " +
                 $"'{left.ToString() ?? "null"}' ({left.GetType().Name}) and '{right.ToString() ?? "null"}' ({right.GetType().Name})",
                 GetDebug(binOp),
                 GetStackTrace());
@@ -676,7 +669,7 @@ public partial class Interpreter
         {
             var leftNum = Convert.ToDouble(left);
             var rightNum = Convert.ToDouble(right);
-            return binOp.Operator switch
+            return @operator switch
             {
                 "==" => Equals(leftNum, rightNum),
                 "!=" => !Equals(leftNum, rightNum),
@@ -690,7 +683,7 @@ public partial class Interpreter
                 "/" => DivideWithCheck(leftNum, rightNum, binOp),
                 "%" => leftNum % rightNum,
                 _ => throw new QlangRuntimeException(
-                    $"Unknown operator: {binOp.Operator}",
+                    $"Unknown operator: {@operator}",
                     GetDebug(binOp),
                     GetStackTrace())
             };
@@ -709,11 +702,11 @@ public partial class Interpreter
     }
     
     private (FunctionNode? function, List<object?> args) GetFunctionFromGlobal
-        (string name, List<object?>? args = null)
+        (int nameId, List<object?>? args = null)
     {
         args ??= [];
-        
-        foreach (var function in _dynamicNamespaces[GlobalNamespaceName].Functions.Where(f => f.Name == name))
+
+        foreach (var function in _dynamicNamespaces[GlobalNamespaceName].Functions.Where(f => f.NameId == nameId))
             if (TryMatchFunction(function, args, out var finalArgs))
                 return (function, finalArgs);
 
@@ -721,13 +714,14 @@ public partial class Interpreter
     }
         
     private (FunctionNode? function, List<object?> Args) GetFunctionFromFunctionVariables
-        (DynamicFunction? func, string name, List<object?>? args = null)
+        (DynamicFunction? func, int nameId, List<object?>? args = null)
     {
         if (func is null)
             return (null, null)!;
         
         args ??= [];
         
+        var name = _stringPoolTable[nameId];
         var functions = func.Variables.Where(f => f.Key == name).Select(var => var.Value.Value).OfType<FunctionNode>();
         
         foreach (var function in functions)
@@ -738,14 +732,15 @@ public partial class Interpreter
     }
     
     private (FunctionNode? function, List<object?> Args) GetFunctionFromClass
-        (DynamicClass? @class, string name, List<object?>? args = null)
+        (DynamicClass? @class, int nameId, List<object?>? args = null)
     {
         if (@class is null)
             return (null, null)!;
         
         args ??= [];
-        
-        var functions = @class.Body.OfType<FunctionNode>().Where(f => f.Name == name).ToList();
+
+        var name = _stringPoolTable[nameId];
+        var functions = @class.Body.OfType<FunctionNode>().Where(f => f.NameId == nameId).ToList();
         var values = @class.Variables.Where(f => f.Key == name).Select(var => var.Value.Value);
         
         functions.AddRange(values.OfType<FunctionNode>());
@@ -758,14 +753,15 @@ public partial class Interpreter
     }
     
     private (FunctionNode? function, List<object?> Args) GetFunctionFromNamespace
-        (DynamicNamespace? @namespace, string name, List<object?>? args = null)
+        (DynamicNamespace? @namespace, int nameId, List<object?>? args = null)
     {
         if (@namespace is null)
             return (null, null)!;
         
         args ??= [];
 
-        var functions = @namespace.Functions.Where(f => f.Name == name).ToList();
+        var name = _stringPoolTable[nameId];
+        var functions = @namespace.Functions.Where(f => f.NameId == nameId).ToList();
         var values = @namespace.Variables.Where(f => f.Key == name).Select(var => var.Value.Value);
         
         functions.AddRange(values.OfType<FunctionNode>());

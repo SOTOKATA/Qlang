@@ -1,6 +1,5 @@
 import "$lib/standard"
 import "$lib/core"
-import "$lib/meta"
 
 // Class to make operations with console
 namespace std:  {
@@ -9,12 +8,8 @@ namespace std:  {
             if Object.isNull(message):
                 return "null";
                 
-            if Object.isSimplify(message) == false: {
-                if meta::Meta.getFunctionListOf(message).contains("toString"): 
-                    return message.toString();
-                else: 
-                    return str(message);
-            }
+            if Object.isSimplify(message) == false:
+                return message.toString();
 
             return message;
         }

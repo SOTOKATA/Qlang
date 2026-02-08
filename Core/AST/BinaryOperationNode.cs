@@ -12,7 +12,7 @@ public class BinaryOperationNode(int line) : ASTNode(line)
 
     [Key(2)]
     
-    public string? Operator { get; set; }
+    public int OperatorId { get; set; }
     [Key(3)]
     
     public ASTNode? Right { get; set; }
@@ -22,7 +22,7 @@ public class BinaryOperationNode(int line) : ASTNode(line)
         return new BinaryOperationNode(DebugIndex)
         {
             Left = Left?.Clone(),
-            Operator = Operator,
+            OperatorId = OperatorId,
             Right = Right?.Clone()
         };
     }
@@ -31,7 +31,8 @@ public class BinaryOperationNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             BinaryOperationNode:
-                                Operator: {Operator ?? "<undefined>"}
+                                DebugIndex: {DebugIndex}
+                                Operator: {OperatorId}
                                 Left: {Left?.GetTree("\t\t") ??  "<undefined>"}
                                 Left: {Right?.GetTree("\t\t") ??  "<undefined>"}
                             """, indent);

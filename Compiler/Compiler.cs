@@ -1,4 +1,5 @@
-﻿using Core;
+﻿using System.Diagnostics;
+using Core;
 using Core.AST;
 using Core.Tables;
 
@@ -6,32 +7,44 @@ namespace Compiler;
 
 public class Compiler
 {
-    public List<string> StringList = [];
     public List<double> NumberList = [];
     public List<QLIProgramLib> DllDependencies = [];
     public SourceFileTable? SourceFileTable = new();
     public DebugTable? DebugTable = new();
+    public StringPoolTable StringPoolTable = new();
 
     public ProgramNode Compile(string fileName, string script, bool isPublish)
     {
+        var stopWatch = Stopwatch.StartNew();
+        Console.Write("Importing...");
         (var outputScript, DllDependencies) = PreCompile.IncludeFiles(script, fileName, []);
+        Console.WriteLine(" success.");
         
         outputScript = PreCompile.ClearComments(outputScript);
         
-        (outputScript, StringList) = PreCompile.ExtractStrings(outputScript, []);
-        (outputScript, StringList) = PreCompile.AddStringInterpolation(outputScript, StringList);
-        (outputScript, StringList) = PreCompile.ExtractStrings(outputScript, StringList);
+        (outputScript, StringPoolTable) = PreCompile.ExtractStrings(outputScript, new StringPoolTable());
+        (outputScript, StringPoolTable) = PreCompile.AddStringInterpolation(outputScript, StringPoolTable);
+        (outputScript, StringPoolTable) = PreCompile.ExtractStrings(outputScript, StringPoolTable);
         
         (outputScript, NumberList) = PreCompile.ExtractNumbers(outputScript);
 
-        outputScript = PreCompile.ReturnFileStrings(outputScript, StringList);
+        outputScript = PreCompile.ReturnFileStrings(outputScript, StringPoolTable);
+        Console.WriteLine("Compiling " + outputScript.Split('\n').Length + " lines.");
 
+        Console.Write("Lexing...");
         var output = Lexer.Lex(fileName, outputScript, isPublish);
+        Console.WriteLine(" success.");
 
         SourceFileTable = output.sourceFileTable;
         DebugTable = output.debugTable;
 
-        var programNode = new Parser().Parse(output.tokens, output.sourceFileTable, output.debugTable);
+        Console.Write("Parsing...");
+        (var programNode, StringPoolTable) = new Parser().Parse(output.tokens, output.sourceFileTable, output.debugTable, StringPoolTable);
+        Console.WriteLine(" success.");
+        
+        stopWatch.Stop();
+        
+        Console.WriteLine("Compiling time: " + stopWatch.Elapsed.Milliseconds + " ms.");
         
         return programNode;
     }

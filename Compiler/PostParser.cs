@@ -5,17 +5,8 @@ using Core.Tables;
 
 namespace Compiler;
 
-public class PostParser(SourceFileTable table, DebugTable debugTable)
+public class PostParser(SourceFileTable table, DebugTable debugTable, StringPoolTable stringPoolTable)
 {
-    private readonly SourceFileTable _sourceFileTable = table;
-    private readonly DebugTable _debugTable = debugTable;
-
-    private ProgramNode OptimizeProgram(ProgramNode program)
-    {
-        
-        return program;
-    }
-    
     /// <summary>
     /// Creates global namespace for global scopes
     /// </summary>
@@ -31,7 +22,7 @@ public class PostParser(SourceFileTable table, DebugTable debugTable)
 
         var globalNamespace = new NamespaceNode(globalScopes.FirstOrDefault()?.DebugIndex ?? -1)
         {
-            Name = "~global",
+            NameId = stringPoolTable.Add("~global"),
             IsPrivate = false
         };
             
@@ -46,7 +37,7 @@ public class PostParser(SourceFileTable table, DebugTable debugTable)
     public void MergeNamespaces(List<ASTNode> body)
     {
         var namespaces = body.OfType<NamespaceNode>()
-            .GroupBy(n => n.Name)
+            .GroupBy(n => n.NameId)
             .ToList();
 
         foreach (var group in namespaces)
@@ -61,7 +52,7 @@ public class PostParser(SourceFileTable table, DebugTable debugTable)
 
             var merged = new NamespaceNode(group.First().DebugIndex)
             {
-                Name = group.Key,
+                NameId = group.Key,
                 Body = [],
                 IsPrivate = group.First().IsPrivate
             };
@@ -70,7 +61,7 @@ public class PostParser(SourceFileTable table, DebugTable debugTable)
                 merged.Body.AddRange(ns.Body);
 
             // удалить старые
-            body.RemoveAll(n => n is NamespaceNode ns && ns.Name == group.Key);
+            body.RemoveAll(n => n is NamespaceNode ns && ns.NameId == group.Key);
 
             // добавить новый
             body.Add(merged);
@@ -109,9 +100,9 @@ public class PostParser(SourceFileTable table, DebugTable debugTable)
                 {
                     return x switch
                     {
-                        NamespacePointerNode p => p.Name,
-                        ObjectPointerNode p => p.Name,
-                        FunctionPointerNode p => p.Name,
+                        NamespacePointerNode p => p.NameId,
+                        ObjectPointerNode p => p.NameId,
+                        FunctionPointerNode p => p.NameId,
                     };
                 }).ToList();
                 
@@ -119,9 +110,9 @@ public class PostParser(SourceFileTable table, DebugTable debugTable)
                 {
                     return x switch
                     {
-                        NamespacePointerNode p => p.Name,
-                        ObjectPointerNode p => p.Name,
-                        FunctionPointerNode p => p.Name,
+                        NamespacePointerNode p => p.NameId,
+                        ObjectPointerNode p => p.NameId,
+                        FunctionPointerNode p => p.NameId,
                     };
                 }).ToList();
 
@@ -148,12 +139,12 @@ public class PostParser(SourceFileTable table, DebugTable debugTable)
             {
                 var foundedNamespace =
                     // Found in global list
-                    lastNamespace is null ? globalNamespaces.FirstOrDefault(x => x.Name == element?.Name) :
+                    lastNamespace is null ? globalNamespaces.FirstOrDefault(x => x.NameId == element?.NameId) :
                     // Found in subnamespaces
-                    lastNamespace.Body.OfType<NamespaceNode>().FirstOrDefault(x => x.Name == element?.Name);
+                    lastNamespace.Body.OfType<NamespaceNode>().FirstOrDefault(x => x.NameId == element?.NameId);
                 
                 if (foundedNamespace is null)
-                    throw new QlangCompileException($"Namespace '{element?.Name}' was not found", GetDebug(element), "PostParser");
+                    throw new QlangCompileException($"Namespace '{element?.NameId}' was not found", GetDebug(element), "PostParser");
                 
                 lastNamespace = foundedNamespace;
             }
@@ -173,7 +164,7 @@ public class PostParser(SourceFileTable table, DebugTable debugTable)
                 switch (firstPathPart)
                 {
                     case NamespacePointerNode pointer:
-                        var found = usingNamespaces.FirstOrDefault(p => p.Name == pointer.Name);
+                        var found = usingNamespaces.FirstOrDefault(p => p.NameId == pointer.NameId);
                         
                         if (found is null)
                             break;
@@ -184,14 +175,14 @@ public class PostParser(SourceFileTable table, DebugTable debugTable)
                         break;
                     case ObjectPointerNode pointer:
                         // Find or class or assignment (var)
-                        var foundObject = usingClasses.FirstOrDefault(p => p.Name == pointer.Name) ?? 
+                        var foundObject = usingClasses.FirstOrDefault(p => p.NameId == pointer.NameId) ?? 
                                           (ASTNode?)usingAssignments.FirstOrDefault(a => a.Path.Exists(pathPart =>
                                           {
                                               return pathPart switch
                                               {
-                                                  NamespacePointerNode p => p.Name == pointer.Name,
-                                                  ObjectPointerNode p => p.Name == pointer.Name,
-                                                  FunctionPointerNode p => p.Name == pointer.Name,
+                                                  NamespacePointerNode p => p.NameId == pointer.NameId,
+                                                  ObjectPointerNode p => p.NameId == pointer.NameId,
+                                                  FunctionPointerNode p => p.NameId == pointer.NameId,
                                               };
                                           }));
 
@@ -203,7 +194,7 @@ public class PostParser(SourceFileTable table, DebugTable debugTable)
                         break;
                     case FunctionNode pointer:
                         // Find or function
-                        var foundFunction = usingFunctions.FirstOrDefault(p => p.Name == pointer.Name && p.Parameters.Count == pointer.Parameters.Count);
+                        var foundFunction = usingFunctions.FirstOrDefault(p => p.NameId == pointer.NameId && p.Parameters.Count == pointer.Parameters.Count);
 
                         if (foundFunction is null)
                             break;
@@ -230,10 +221,11 @@ public class PostParser(SourceFileTable table, DebugTable debugTable)
         foreach (var @namespace in program.Statements.OfType<NamespaceNode>())
             classNodes.AddRange(Parser.GetClassesFromNamespaceRecursively(@namespace));
 
+        var objIndex = stringPoolTable.Add(QlSystemClasses.ObjectClassName);
         classNodes.ForEach(c =>
         {
-            if (string.IsNullOrEmpty(c.Extends) && c.Name != QlSystemClasses.ObjectClassName)
-                c.Extends = QlSystemClasses.ObjectClassName;
+            if (string.IsNullOrEmpty(stringPoolTable[c.ExtendsId]) && c.ExtendsId != objIndex && c.NameId != objIndex)
+                c.ExtendsId = objIndex;
         });
             
 
@@ -253,8 +245,8 @@ public class PostParser(SourceFileTable table, DebugTable debugTable)
     {
         return node switch
         {
-            FunctionNode fn => $"fn:{fn.Name}_{fn.Parameters.Count}",
-            AssignmentNode an when an.GetLastName() != "" => $"var:{an.GetLastName()}",
+            FunctionNode fn => $"fn:{fn.NameId}_{fn.Parameters.Count}",
+            // AssignmentNode an when an.GetLastNameId() != -1 => $"var:{an.GetLastNameId()}",
             AssignmentNode an => $"var:{an.Path}",
             CallNode call =>$"call:{string.Join(".", call.Objects)}",
             _ => throw new Exception($"Unsupported AST node: {node.GetType().Name}")
@@ -264,22 +256,22 @@ public class PostParser(SourceFileTable table, DebugTable debugTable)
     private void ResolveClass(
         ClassNode cls,
         List<ClassNode> allClasses,
-        HashSet<string> resolving)
+        HashSet<int> resolving)
     {
-        if (cls.Extends == "")
+        if (stringPoolTable[cls.ExtendsId] == "")
             return;
 
-        if (!resolving.Add(cls.Name))
+        if (!resolving.Add(cls.NameId))
             throw new QlangCompileException(
-                $"Cyclic inheritance detected: {cls.Name}",
+                $"Cyclic inheritance detected: {stringPoolTable[cls.NameId]}",
                 GetDebug(cls),
                 "PostParser");
 
-        var parent = allClasses.FirstOrDefault(c => c.Name == cls.Extends);
+        var parent = allClasses.FirstOrDefault(c => c.NameId == cls.ExtendsId);
 
         if (parent == null)
             throw new QlangCompileException(
-                $"Extended class '{cls.Extends}' is not found",
+                $"Extended class '{stringPoolTable[cls.ExtendsId]}' is not found",
                 GetDebug(cls),
                 "PostParser");
 
@@ -287,9 +279,9 @@ public class PostParser(SourceFileTable table, DebugTable debugTable)
 
         cls.Body = MergeBodies(parent.Body, cls.Body);
 
-        cls.Extends = "";
+        cls.ExtendsId = stringPoolTable.Add("");
 
-        resolving.Remove(cls.Name);
+        resolving.Remove(cls.NameId);
     }
 
     
@@ -312,12 +304,12 @@ public class PostParser(SourceFileTable table, DebugTable debugTable)
     {
         try
         {
-            return (_debugTable.GetLineIndex(node.DebugIndex) + 1,
-                _sourceFileTable[_debugTable.GetFileId(node.DebugIndex)]);
+            return (debugTable.GetLineIndex(node.DebugIndex),
+                table[debugTable.GetFileId(node.DebugIndex)]);
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex);
+            // Console.WriteLine(ex);
             return (-1, "");
         }
     }

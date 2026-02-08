@@ -58,28 +58,31 @@ public partial class Interpreter
 
             if (isLoop)
             {
-                if ((statement is KeywordNode knode && knode.Value == Keywords.ContinueKeyword) || _isContinueKeyword)
+                if (statement is KeywordNode kNode)
                 {
-                    _isContinueKeyword = false;
-                    return false;
-                }
-
-                if ((statement is KeywordNode node && node.Value == Keywords.BreakKeyword) || _isBreakKeyword)
-                {
-                    _isBreakKeyword = false;
-                    return true;
+                    var nodeName = _stringPoolTable[kNode.KeywordId];
+                    if (nodeName == Keywords.ContinueKeyword || _isContinueKeyword)
+                    {
+                        _isContinueKeyword = false;
+                        return false;
+                    }
+                    
+                    if (nodeName == Keywords.BreakKeyword || _isBreakKeyword)
+                    {
+                        _isBreakKeyword = false;
+                        return true;
+                    }
                 }
             }
             else
             {
-                switch (statement)
+                if (statement is KeywordNode kNode)
                 {
-                    case KeywordNode node when node.Value == Keywords.BreakKeyword:
-                        _isBreakKeyword = true;
-                        return true;
-                    case KeywordNode node when node.Value == Keywords.ContinueKeyword:
+                    var nodeName = _stringPoolTable[kNode.KeywordId];
+                    if (nodeName == Keywords.ContinueKeyword)
                         _isContinueKeyword = true;
-                        return true;
+                    else if (nodeName == Keywords.BreakKeyword)
+                        _isBreakKeyword = true;
                 }
             }
 
@@ -138,7 +141,7 @@ public partial class Interpreter
                  {
                      Left = pair.Condition,
                      Right = switchNode.Condition,
-                     Operator = "=="
+                     OperatorId = _stringPoolTable.Add("==")
                  } let obj = (bool)EvaluateBinaryOperation(binOp)! where obj select pair)
         {
             block = pair.CaseBlock;

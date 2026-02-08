@@ -31,6 +31,7 @@ public class SwitchNode(int line) : ASTBlock(line)
     {
         return DebugIndent($"""
                             SwitchNode:
+                                DebugIndex: {DebugIndex}
                                 Condition: {Condition.GetTree("\t\t")}
                                 DefaultBlock: [{string.Join(",\n", DefaultBlock?.Select(x => x.GetTree("\t\t")) ?? ["<not_exists>"])}]
                                 CaseBlocks: [{string.Join(",\n", CaseBlocks.Select(x => x.GetTree("\t\t")))}]

@@ -31,6 +31,7 @@ public class IfNode(int line) : ASTBlock(line)
     {
         return DebugIndent($"""
                             IfNode:
+                                DebugIndex: {DebugIndex}
                                 Condition: {Condition.GetTree("\t\t")}
                                 ThenBlock: [{string.Join(",\n", ThenBlock.Select(x => x.GetTree("\t\t")))}]
                                 ElseBlock: [{string.Join(",\n", ElseBlock.Select(x => x.GetTree("\t\t")))}]

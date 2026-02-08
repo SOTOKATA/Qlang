@@ -7,11 +7,11 @@ public class ClassNode(int line) : ASTNode(line)
 {
     [Key(1)]
     
-    public required string Name { get; set; }
+    public required int NameId { get; set; }
     
     [Key(2)]
     
-    public required string Extends { get; set; }
+    public required int ExtendsId { get; set; }
     [Key(3)]
     
     public required List<ASTNode> Body { get; set; }
@@ -20,8 +20,8 @@ public class ClassNode(int line) : ASTNode(line)
     {
         return new ClassNode(DebugIndex)
         {
-            Name = Name, 
-            Extends = Extends,
+            NameId = NameId, 
+            ExtendsId = ExtendsId,
             Body = Body.Select(node => node.Clone()).ToList()
         };
     }
@@ -30,7 +30,8 @@ public class ClassNode(int line) : ASTNode(line)
     {//Extends: {string.Join(", ", Extends?.Objects.Select(x => x.GetTree("\t\t")) ?? ["<not_exists>"])}
         return DebugIndent($"""
                 ClassNode:
-                    Name: {Name}
+                    DebugIndex: {DebugIndex}
+                    Name: {NameId}
                     Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t\t")))}]
                 """, indent);
     }

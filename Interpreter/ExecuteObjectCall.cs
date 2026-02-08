@@ -46,7 +46,7 @@ public partial class Interpreter
             case DynamicClass @class:
                 return @class.ToString();
             case FunctionNode fn:
-                return fn.ToString();
+                return _stringPoolTable[fn.NameId];
             case List<object?>:
                 return "Collection";
             case int or long or double or float:
@@ -58,8 +58,9 @@ public partial class Interpreter
                 if (arg is CallNode call)
                 {
                     var first = call.Objects.FirstOrDefault();
-                    if (first is ObjectPointerNode { Name: "Collection" or "Number" or "Boolean" } obj) 
-                        return obj.Name;
+                    if (first is ObjectPointerNode pointer &&
+                        _stringPoolTable[pointer.NameId] is "Collection" or "Number" or "Boolean")
+                        return _stringPoolTable[pointer.NameId];
 
                     var result = ExecuteObjectCalls(call);
 
@@ -83,7 +84,7 @@ public partial class Interpreter
         {
             var args = fn.Arguments.ConvertAll(EvaluateExpression).ToArray();
             
-            switch (fn.Name)
+            switch (_stringPoolTable[fn.NameId])
             {
                 case "_str":
                     return ParseString(string.Join("", args.Select(a => a is null ? "" : a.ToString())));
@@ -143,7 +144,7 @@ public partial class Interpreter
                 if (!isPathStart)
                     lastReturnValue = PrimitiveToDynamicClass(lastReturnValue);
                 
-                if (fn.Name == Keywords.CreateClassInstanceKeyword && lastReturnValue is DynamicClass @class)
+                if (_stringPoolTable[fn.NameId] == Keywords.CreateClassInstanceKeyword && lastReturnValue is DynamicClass @class)
                     return GetNewClass(@class, fn.Arguments.ConvertAll(EvaluateExpression));
              
                 var function = FindFunction(fn, lastReturnValue, isPathStart);
@@ -179,7 +180,7 @@ public partial class Interpreter
                 // Try to get function from function variables
                 if (CurrentContext.Function is not null)
                 {
-                    pair = TryGetFunctionFromFunctionVariables(CurrentContext.Function, node.Name, args);
+                    pair = TryGetFunctionFromFunctionVariables(CurrentContext.Function, node.NameId, args);
                     if (pair.function is not null)
                         return (pair.function, pair.args, CurrentContext.Class, CurrentContext.Namespace);
                 }
@@ -187,7 +188,7 @@ public partial class Interpreter
                 // Try to get function from class context;
                 if (CurrentContext.Class is not null)
                 {
-                    pair = TryGetFunctionFromClass(CurrentContext.Class, node.Name, args);
+                    pair = TryGetFunctionFromClass(CurrentContext.Class, node.NameId, args);
                     if (pair.function is not null)
                         return (pair.function, pair.args, CurrentContext.Class, CurrentContext.Namespace);
                 }
@@ -195,7 +196,7 @@ public partial class Interpreter
                 // Try to get function from namespace context;
                 if (CurrentContext.Namespace is not null)
                 {
-                    pair = TryGetFunctionFromNamespace(CurrentContext.Namespace, node.Name, args);
+                    pair = TryGetFunctionFromNamespace(CurrentContext.Namespace, node.NameId, args);
                     if (pair.function is not null)
                         return (pair.function, pair.args, null, CurrentContext.Namespace);
                 }
@@ -203,18 +204,18 @@ public partial class Interpreter
             
 
             // Try to get function from global list
-            var funcPair = GetFunctionFromGlobal(node.Name, args);
+            var funcPair = GetFunctionFromGlobal(node.NameId, args);
             if (funcPair.function is not null)
                 return (ToDynamicFunction(funcPair.function), funcPair.args, null, null);
             
-            throw new QlangRuntimeException($"Function '{node.Name}' is not found in current context ('{lastObject}')",
+            throw new QlangRuntimeException($"Function '{_stringPoolTable[node.NameId]}' is not found in current context ('{lastObject}')",
                 GetDebug(node), GetStackTrace());
         }
 
             // Try to get function from function variables
         if (lastObject is DynamicFunction function)
         {
-            pair = TryGetFunctionFromFunctionVariables(function, node.Name, args);
+            pair = TryGetFunctionFromFunctionVariables(function, node.NameId, args);
             if (pair.function is not null)
                 return (pair.function, pair.args, CurrentContext.Class, CurrentContext.Namespace);
         }
@@ -222,7 +223,7 @@ public partial class Interpreter
         // Try to get function from class function list;
         if (lastObject is DynamicClass dClass)
         {
-            pair = TryGetFunctionFromClass(dClass, node.Name, args);
+            pair = TryGetFunctionFromClass(dClass, node.NameId, args);
             // Find class in namespaces
             var @namespace = _dynamicNamespaces.FirstOrDefault(n => n.Value.Classes.Contains(dClass)).Value;
             
@@ -238,7 +239,7 @@ public partial class Interpreter
         // Try to get function from namespace function list;
         if (lastObject is DynamicNamespace dNamespace)
         {
-            pair = TryGetFunctionFromNamespace(dNamespace, node.Name, args);
+            pair = TryGetFunctionFromNamespace(dNamespace, node.NameId, args);
             if (pair.function is not null)
             {
                 if (pair.function.IsPrivate)
@@ -248,19 +249,21 @@ public partial class Interpreter
             }
         }
         
-        throw new QlangRuntimeException($"Function '{node.Name}' is not found in current context ('{lastObject}')",
+        throw new QlangRuntimeException($"Function '{_stringPoolTable[node.NameId]}' is not found in current context ('{lastObject}')",
             GetDebug(node), GetStackTrace());
     }
 
     private (object? @object, DynamicNamespace? @namespace) FindObject(ObjectPointerNode node, object? lastObject, bool isPathStart)
     {
-        if (node.Name is null)
+        if (node.NameId == -1)
             throw new QlangRuntimeException("Part of path is null.", GetDebug(node), GetStackTrace());
+        
+        var nodeName = _stringPoolTable[node.NameId];
             
         if (isPathStart)
         {
             // Get 'this'
-            if (node.Name == Keywords.ThisKeyword && HasContext)
+            if (node.NameId == _stringPoolTable.Add(Keywords.ThisKeyword) && HasContext)
             {
                 _allowPrivateCall = true;
                 return (CurrentContext.Class, CurrentContext.Namespace);
@@ -273,7 +276,7 @@ public partial class Interpreter
             if (HasContext)
             {
                 var block = CurrentContext.Blocks
-                    .FirstOrDefault(b => b.Variables.ContainsKey(node.Name));
+                    .FirstOrDefault(b => b.Variables.ContainsKey(nodeName));
                 
                 var classIsNull = CurrentContext.Class is null;
                 var functionIsNull = CurrentContext.Function is null;
@@ -285,7 +288,7 @@ public partial class Interpreter
                 // Get from function
                 if (!functionIsNull)
                 {
-                    var = CurrentContext.Function?.Variables.FirstOrDefault(funcVar => funcVar.Key == node.Name).Value;
+                    var = CurrentContext.Function?.Variables.FirstOrDefault(funcVar => funcVar.Key == nodeName).Value;
 
                     if (var is not null)
                         return (var, CurrentContext.Namespace);
@@ -294,7 +297,7 @@ public partial class Interpreter
                 // Get from parent function
                 if (!parentFunctionIsNull)
                 {
-                    var = CurrentContext.ParentFunction?.Variables.FirstOrDefault(funcVar => funcVar.Key == node.Name).Value;
+                    var = CurrentContext.ParentFunction?.Variables.FirstOrDefault(funcVar => funcVar.Key == nodeName).Value;
 
                     if (var is not null)
                         return (var, CurrentContext.Namespace);
@@ -304,7 +307,7 @@ public partial class Interpreter
                 // Get from class
                 if (!classIsNull)
                 {
-                    var = CurrentContext.Class?.Variables.FirstOrDefault(classVar => classVar.Key == node.Name).Value;
+                    var = CurrentContext.Class?.Variables.FirstOrDefault(classVar => classVar.Key == nodeName).Value;
                     
                     if (var is not null)
                         return (var, CurrentContext.Namespace);
@@ -314,40 +317,40 @@ public partial class Interpreter
                 if (!namespaceIsNull)
                 {
                     var = CurrentContext.Namespace?.Variables.FirstOrDefault(namespaceVar =>
-                        namespaceVar.Key == node.Name).Value;
+                        namespaceVar.Key == nodeName).Value;
                     
                     if (var is not null)
                         return (var, CurrentContext.Namespace);
                 }
                 
                 // Get from blocks
-                if (block != null && block.Variables.TryGetValue(node.Name, out var v))
+                if (block != null && block.Variables.TryGetValue(nodeName, out var v))
                     return (v, CurrentContext.Namespace);
             }
 
             // Try to get VAR from global variable list;
-            var variable = _dynamicNamespaces[GlobalNamespaceName].Variables.FirstOrDefault(var => var.Value.Name == node.Name).Value;
+            var variable = _dynamicNamespaces[GlobalNamespaceName].Variables.FirstOrDefault(var => var.Value.Name == nodeName).Value;
             if (variable is not null)
                 return (variable, null);
             
             // Try to get CLASS from context namespace
             if (HasContext)
             {
-                var @class = CurrentContext.Namespace?.Classes.FirstOrDefault(@class => @class.ClassName == node.Name);
+                var @class = CurrentContext.Namespace?.Classes.FirstOrDefault(@class => @class.ClassName == nodeName);
                 if (@class is not null)
                     return (@class, CurrentContext.Namespace);
             }
             
             // Try to get CLASS from global class list;
             var dynamicClass = _dynamicNamespaces[GlobalNamespaceName].Classes
-                .FirstOrDefault(x => x.ClassName == node.Name);
+                .FirstOrDefault(x => x.ClassName == nodeName);
             if (dynamicClass is not null)
                 return (dynamicClass, null);
         }
 
         if (lastObject is null)
         {
-            throw new QlangRuntimeException($"Object '{node.Name}' is not found in current context.",
+            throw new QlangRuntimeException($"Object '{nodeName}' is not found in current context.",
                 GetDebug(node), GetStackTrace());
         }
         
@@ -355,7 +358,7 @@ public partial class Interpreter
         {
             case DynamicClass dynamicClass:
                 // Try to get VAR from class
-                if (dynamicClass.Variables.TryGetValue(node.Name, out var var))
+                if (dynamicClass.Variables.TryGetValue(nodeName, out var var))
                 {
                     if (var.IsPrivate && !_allowPrivateCall)
                         throw new QlangRuntimeException($"Cannot get access to private variable '{var.Name}' from class '{dynamicClass.ClassName}'.",
@@ -366,7 +369,7 @@ public partial class Interpreter
                 break;
             case DynamicNamespace dynamicNamespace:
                 // Try to get VAR from namespace
-                if (dynamicNamespace.Variables.TryGetValue(node.Name, out var))
+                if (dynamicNamespace.Variables.TryGetValue(nodeName, out var))
                 {
                     if (var.IsPrivate)
                         throw new QlangRuntimeException($"Cannot get access to private variable '{var.Name}' from namespace '{dynamicNamespace.Name}'.",
@@ -376,23 +379,24 @@ public partial class Interpreter
                 }
             
                 // Try to get CLASS from namespace
-                var @class = dynamicNamespace.Classes.FirstOrDefault(@class => @class.ClassName == node.Name);
+                var @class = dynamicNamespace.Classes.FirstOrDefault(@class => @class.ClassName == nodeName);
                 if (@class is not null)
                     return (@class, null);
                 break;
         }
-        throw new QlangRuntimeException($"Object '{node.Name}' is not found in current context" + (HasContext ? $"\nCurrent function: '{CurrentContext.Function?.Name}'; Current class: '{CurrentContext.Class?.ClassName}'; Current namespace: '{CurrentContext.Namespace?.Name}'" : "\nNo context found."),
+        throw new QlangRuntimeException($"Object '{nodeName}' is not found in current context" + (HasContext ? $"\nCurrent function: '{CurrentContext.Function?.Name}'; Current class: '{CurrentContext.Class?.ClassName}'; Current namespace: '{CurrentContext.Namespace?.Name}'" : "\nNo context found."),
             GetDebug(node), GetStackTrace());
     }
 
     private DynamicNamespace FindNamespace(NamespacePointerNode node, object? lastObject, bool isPathStart)
     {
-        if (_dynamicNamespaces.TryGetValue(node.Name, out var @namespace) && isPathStart)
+        var nodeName = _stringPoolTable[node.NameId];
+        if (_dynamicNamespaces.TryGetValue(nodeName, out var @namespace) && isPathStart)
             return @namespace;
         
         if (CurrentContext.Namespace is not null && isPathStart)
         {
-            var ns = CurrentContext.Namespace.Namespaces.FirstOrDefault(ns => ns.Name == node.Name);
+            var ns = CurrentContext.Namespace.Namespaces.FirstOrDefault(ns => ns.Name == nodeName);
 
             if (ns is not null)
                 return ns;
@@ -400,7 +404,7 @@ public partial class Interpreter
         
         if (lastObject is DynamicNamespace dynamicNamespace)
         {
-            var ns = dynamicNamespace.Namespaces.FirstOrDefault(ns => ns.Name == node.Name);
+            var ns = dynamicNamespace.Namespaces.FirstOrDefault(ns => ns.Name == nodeName);
 
             if (ns is not null)
                 return ns.IsPrivate ? throw new QlangRuntimeException($"Cannot get access to private namespace from namespace '{dynamicNamespace.Name}'", GetDebug(node), GetStackTrace()) : ns;
@@ -408,18 +412,18 @@ public partial class Interpreter
 
         // TODO: Add 'namespace' to 'namespace'
         // if (lastObject is DynamicNamespace dynamicNamespace)
-        throw new QlangRuntimeException($"Namespace '{node.Name}' is not found in current context", GetDebug(node), GetStackTrace());
+        throw new QlangRuntimeException($"Namespace '{node.NameId}' is not found in current context", GetDebug(node), GetStackTrace());
         
     }
     
-    private (DynamicFunction? function, List<object?>? args) TryGetFunctionFromNamespace(DynamicNamespace source, string functionName, List<object?>? args)
+    private (DynamicFunction? function, List<object?>? args) TryGetFunctionFromNamespace(DynamicNamespace source, int functionName, List<object?>? args)
     {
         var func = GetFunctionFromNamespace(source, functionName, args);
         
         return func.function is null ? (null, null) : (ToDynamicFunction(func.function), finalArgs: func.Args);
     }
     
-    private (DynamicFunction? function, List<object?>? args) TryGetFunctionFromClass(DynamicClass? source, string functionName, List<object?>? args)
+    private (DynamicFunction? function, List<object?>? args) TryGetFunctionFromClass(DynamicClass? source, int functionName, List<object?>? args)
     {
         if (source is null)
             throw new QlangRuntimeException("Source is null", -1, "", GetStackTrace());
@@ -429,7 +433,7 @@ public partial class Interpreter
         return func.function is null ? (null, null) : (ToDynamicFunction(func.function), finalArgs: func.Args);
     }
     
-    private (DynamicFunction? function, List<object?>? args) TryGetFunctionFromFunctionVariables(DynamicFunction? source, string functionName, List<object?>? args)
+    private (DynamicFunction? function, List<object?>? args) TryGetFunctionFromFunctionVariables(DynamicFunction? source, int functionName, List<object?>? args)
     {
         if (source is null)
             throw new QlangRuntimeException("Source is null", -1, "", GetStackTrace());

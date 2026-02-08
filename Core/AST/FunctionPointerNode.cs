@@ -7,7 +7,7 @@ public class FunctionPointerNode(int line) : ASTNode(line)
 {
     [Key(1)]
     
-    public required string Name;
+    public required int NameId;
     [Key(2)]
     
     public required List<ASTNode> Arguments;
@@ -16,7 +16,8 @@ public class FunctionPointerNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             FunctionPointerNode:
-                                Name: {Name}
+                                DebugIndex: {DebugIndex}
+                                Name: {NameId}
                                 Arguments: [{string.Join(",\n", Arguments.Select(x => x.GetTree("\t\t")))}]
                             """, indent);
     }
@@ -25,7 +26,7 @@ public class FunctionPointerNode(int line) : ASTNode(line)
     {
         return new FunctionPointerNode(DebugIndex)
         {
-            Name = Name,
+            NameId = NameId,
             Arguments = [..Arguments.ConvertAll(arg => arg.Clone())]
         };
     }

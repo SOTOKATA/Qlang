@@ -3,25 +3,26 @@
 
 namespace Core.AST;
 [MessagePackObject]
-public class NamespacePointerNode(string name, int line) : ASTNode(line)
+public class NamespacePointerNode(int line) : ASTNode(line)
 {
-    public NamespacePointerNode() : this("", -1)
-    {}
-    
     [Key(1)]
     
-    public string Name { get; set; } = name;
+    public int NameId { get; set; }
     
     public override string GetTree(string indent = "")
     {
         return DebugIndent($"""
                             NamespacePointerNode:
-                                Name: {Name}
+                                DebugIndex: {DebugIndex}
+                                Name: {NameId}.
                             """, indent);
     }
 
     public override ASTNode Clone()
     {
-        return new NamespacePointerNode(Name, DebugIndex);
+        return new NamespacePointerNode(DebugIndex)
+        {
+            NameId = NameId,
+        };
     }
 }

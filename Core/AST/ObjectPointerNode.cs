@@ -7,13 +7,14 @@ public class ObjectPointerNode(int line) : ASTNode(line)
 {
     [Key(1)]
     
-    public string? Name;
+    public int NameId;
     
     public override string GetTree(string indent = "")
     {
         return DebugIndent($"""
                             ObjectPointerNode:
-                                Name: {Name ?? "<undefined>"}
+                                DebugIndex: {DebugIndex}
+                                Name: {NameId}
                             """,
             indent);
     }
@@ -22,7 +23,7 @@ public class ObjectPointerNode(int line) : ASTNode(line)
     {
         return new ObjectPointerNode(DebugIndex)
         {
-            Name = Name
+            NameId = NameId
         };
     }
 }

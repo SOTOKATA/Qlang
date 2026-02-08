@@ -36,7 +36,7 @@ public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool is
     
     public bool IsConst { get; set; } = isConst;
 
-    public string GetLastName() => (Path[^1] as ObjectPointerNode)!.Name!;
+    public int GetLastNameId() => (Path[^1] as ObjectPointerNode)!.NameId;
 
     public override ASTNode Clone()
     {
@@ -52,6 +52,7 @@ public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool is
     {
         return DebugIndent($"""
                             VariableNode:
+                                DebugIndex: {DebugIndex}
                                 Path: [{string.Join(",\n", Path.Select(x => x.GetTree("\t\t")))}]
                                 Value: {Value?.GetTree("\t\t") ?? "<undefined>"}
                                 Type: {Type?.GetTree("\t\t")}
