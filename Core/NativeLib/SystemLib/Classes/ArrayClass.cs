@@ -12,6 +12,7 @@ public class ArrayClass : IQlangClass
         [
             ("create", (Func<List<object>>)(() => [])),
             ("add", (Action<List<object>, object>)((list, item) => list.Add(item))),
+            ("add_range", (Action<List<object>, List<object>>)((list, items) => list.AddRange(items))),
             ("get", (Func<List<object>, int, object?>)((list, idx) => list[idx])),
             ("is", (Func<object?, bool>)(obj => obj is List<object>)),
             ("is_array", (Func<object?, bool>)(obj => obj is DynamicClass { ClassName: "Array" })),

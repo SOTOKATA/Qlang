@@ -38,6 +38,17 @@ class Array extends DataType: {
     function push(const item):
         _native("std", "array", "add", _value, item);
 
+    // Add element
+    function pushMany(const items): {
+        let args = items;
+        if typeof(items) == "Array":
+            args = items.getValue();
+        else if typeof(items) != "Collection":
+            std::Throw.message("Cannot push many of type: " + typeof(items));
+        
+        _native("std", "array", "add_range", _value, args);
+    }
+
     // Clear array
     function clear():
         _value = _native("std", "array", "create");
