@@ -211,7 +211,7 @@ public static class PreCompile
 
             var value = stringValue.Substring(1, stringValue.Length - 2);
             
-            value = value.Replace("\"", "\"\"");
+            value = value.Replace("\"", "\"");
 
             if (stringList.StringPool.IndexOf(value) != -1)
             {

@@ -96,24 +96,6 @@ public class QLang
         if (!isPublish)
             File.WriteAllBytes(debugPath, Brotli.Compress(Core.MessagePack.Serialize(qliDebug)));
     }
-
-    // public void Run(List<string?>? args, string filename)
-    // {
-    //     // TODO: Runtime execution (by build/program.exe)
-    //
-    //     var exePath = Path.Combine("build", filename + OS.GetExecutableExtension());
-    //     var resourcePath = Path.Combine("build", filename + ".resource.qli");
-    //
-    //     if (!File.Exists(exePath) || !File.Exists(resourcePath))
-    //         throw new ProjectException($"Files '{Path.GetFileName(exePath)}' and '{Path.GetFileName(resourcePath)}' is not found.\nProject is not compiled");
-    //
-    //     Process.Start(new ProcessStartInfo
-    //     {
-    //         FileName = "cmd.exe",
-    //         Arguments = $"/c \"{exePath}\" {args}",
-    //     });
-    //
-    // }
     
     public void Run(List<string?>? args, string filename)
     {

@@ -3,16 +3,16 @@
 
 namespace Core.AST;
 [MessagePackObject]
-public class NumberRefNode(int line) : ASTNode(line)
+public class NumberRefNode : ASTNode
 {
-    [Key(1)]
+    [Key(0)]
     
     public bool IsNegative { get; set; }
-    [Key(2)]
+    [Key(1)]
     
     public int Index { get; set; }
 
-    public override ASTNode Clone() => new NumberRefNode(DebugIndex)
+    public override ASTNode Clone() => new NumberRefNode
     {
         Index = Index, 
         IsNegative = IsNegative
@@ -22,7 +22,6 @@ public class NumberRefNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             NumberRefNode:
-                                DebugIndex: {DebugIndex}
                                 Ref: {Index}
                                 IsNegative: {IsNegative}
                             """, indent);

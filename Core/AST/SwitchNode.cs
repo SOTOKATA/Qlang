@@ -3,23 +3,22 @@
 
 namespace Core.AST;
 [MessagePackObject]
-public class SwitchNode(int line) : ASTBlock(line)
+public class SwitchNode : ASTBlock
 {
-    public SwitchNode() : this(-1) {}
-    [Key(1)]
+    [Key(0)]
     
     public required ASTNode Condition { get; set; }
-    [Key(2)]
+    [Key(1)]
     
     public List<SwitchCaseNode> CaseBlocks { get; set; } = [];
     
-    [Key(3)]
+    [Key(2)]
     
     public List<ASTNode>? DefaultBlock { get; set; }
 
     public override ASTNode Clone()
     {
-        return new SwitchNode(DebugIndex)
+        return new SwitchNode
         {
             Condition = Condition.Clone(), 
             CaseBlocks = CaseBlocks.Select(node => node.Clone()).Cast<SwitchCaseNode>().ToList(),
@@ -31,7 +30,6 @@ public class SwitchNode(int line) : ASTBlock(line)
     {
         return DebugIndent($"""
                             SwitchNode:
-                                DebugIndex: {DebugIndex}
                                 Condition: {Condition.GetTree("\t\t")}
                                 DefaultBlock: [{string.Join(",\n", DefaultBlock?.Select(x => x.GetTree("\t\t")) ?? ["<not_exists>"])}]
                                 CaseBlocks: [{string.Join(",\n", CaseBlocks.Select(x => x.GetTree("\t\t")))}]

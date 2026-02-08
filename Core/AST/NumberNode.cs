@@ -3,13 +3,13 @@
 
 namespace Core.AST;
 [MessagePackObject]
-public class NumberNode(int line) : ASTNode(line)
+public class NumberNode : ASTNode
 {
-    [Key(1)]
+    [Key(0)]
     
     public double Value { get; set; }
 
-    public override ASTNode Clone() => new NumberNode(DebugIndex)
+    public override ASTNode Clone() => new NumberNode
     {
         Value = Value
     };
@@ -18,7 +18,6 @@ public class NumberNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             NumberNode:
-                                DebugIndex: {DebugIndex}
                                 Value: {Value}
                             """, indent);
     }

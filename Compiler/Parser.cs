@@ -33,7 +33,7 @@ public class Parser
         _position = 0;
         _stringPoolTable = stringPoolTable;
 
-        ProgramNode program = new(-1);
+        ProgramNode program = new();
 
         
         while (!IsAtEnd())
@@ -48,13 +48,11 @@ public class Parser
         }
         
         var postParser = new PostParser(_sourceFileTable, _debugTable, _stringPoolTable);
-        
         program = postParser.CreateGlobalNamespace(program);
         postParser.MergeNamespaces(program.Statements);
         program = postParser.IncludeUsings(program, _callNodes, _assignmentNodes);
         program = postParser.IncludeExtends(program);
-        program = new Optimizer().Optimize(program);
-        
+
         new Validator(_sourceFileTable, _debugTable, _stringPoolTable).CheckValidate(program);
 
         return (program, _stringPoolTable);
@@ -62,14 +60,11 @@ public class Parser
 
     private ASTNode ParseStatement()
     {
+        var lineNode = new LineNode(Current().DebugIndex);
+
         var isStatic = false;
         var isPrivate = false;
 
-        if (Check(Tokens.Keyword, Keywords.StaticModificator))
-        {
-            isStatic = true;
-            Advance();
-        }
         if (Check(Tokens.Keyword, Keywords.PrivateModificator))
         {
             isPrivate = true;
@@ -77,18 +72,28 @@ public class Parser
         }
 
         if (Check(Tokens.Keyword, Keywords.BreakKeyword))
-            return new KeywordNode(Advance().DebugIndex)
+        {
+            lineNode.Content =  new KeywordNode
             {
                KeywordId = _stringPoolTable.Add(Keywords.BreakKeyword)
             };
+            Expect(Tokens.Keyword);
+            Expect(Tokens.Semicolon);
+            return lineNode;
+        }
         if (Check(Tokens.Keyword, Keywords.ContinueKeyword))
-            return new KeywordNode(Advance().DebugIndex)
+        {
+            lineNode.Content =  new KeywordNode
             {
                 KeywordId = _stringPoolTable.Add(Keywords.ContinueKeyword)
             };
+            Expect(Tokens.Keyword);
+            Expect(Tokens.Semicolon);
+            return lineNode;
+        }
         
         // using declaration
-        if (Check(Tokens.Keyword ,Keywords.UsingKeyword))
+        if (Check(Tokens.Keyword, Keywords.UsingKeyword))
             return ParseUsing();
         
         // namespace declaration
@@ -132,30 +137,19 @@ public class Parser
         {
             var var = ParseVariableDeclaration(false, isStatic, isPrivate, Check(Tokens.Keyword, Keywords.ConstVariableDeclaration), true);
             Expect(Tokens.Semicolon);
-            return var;
+            lineNode.Content = var;
+            return lineNode;
         }
 
-        // method call statement (Object.method(...)) || Call method from class pointer
-        if (Check(Tokens.Identifier) || (Check(Tokens.Keyword, Keywords.ThisKeyword)))
+        // method call statement (Object.method(...)) || Call method from class pointer || [] || ()
+        if (Check(Tokens.Identifier) || (Check(Tokens.Keyword, Keywords.ThisKeyword)) || Check(Tokens.LParen) || Check(Tokens.LSquareParen))
         {
             var expr = ParseExpression();
             Expect(Tokens.Semicolon);
-            return expr;
+            lineNode.Content = expr;
+            return lineNode;
         }
-        
-        if (Check(Tokens.LParen))
-        {
-            var expr = ParseExpression();
-            Expect(Tokens.Semicolon);
-            return expr;
-        }
-        
-        if (Check(Tokens.LSquareParen))
-        {
-            var expr = ParseExpression();
-            Expect(Tokens.Semicolon);
-            return expr;
-        }
+
 
         throw new QlangCompileException($"Unexpected token: {Current().TokenType} '{Current().Value}'", GetDebug(Current()), "Parser");
     }
@@ -206,9 +200,9 @@ public class Parser
             value = ParseExpression();
         }
 
-        var assignmentNode = new AssignmentNode(isStatic, isPrivate, isConst, isNew, Current().DebugIndex)
+        var assignmentNode = new AssignmentNode(isPrivate, isConst, isNew)
         {
-            Path = [new ObjectPointerNode(Current().DebugIndex) { NameId = _stringPoolTable.Add(name) }],
+            Path = [new ObjectPointerNode { NameId = _stringPoolTable.Add(name) }],
             Value = value,
             Type = type
         };
@@ -221,12 +215,12 @@ public class Parser
     private UsingNode ParseUsing()
     {
         // Skip 'using'
-        Expect(Tokens.Keyword, Keywords.UsingKeyword);
+        var token = Expect(Tokens.Keyword, Keywords.UsingKeyword);
 
         var node = ParsePrimary();
 
         if (node is not CallNode callNode)
-            throw new QlangCompileException("Using must be path to namespace.", GetDebug(node), "Parser");
+            throw new QlangCompileException("Using must be path to namespace.", GetDebug(token), "Parser");
 
         var newObjects = new List<NamespacePointerNode>();
 
@@ -235,7 +229,7 @@ public class Parser
             switch (o)
             {
                 case ObjectPointerNode pointer:
-                    newObjects.Add(new NamespacePointerNode(pointer.DebugIndex)
+                    newObjects.Add(new NamespacePointerNode
                     {
                         NameId = pointer.NameId
                     });
@@ -244,12 +238,12 @@ public class Parser
                     newObjects.Add(namespacePointerNode);
                     break;
                 default:
-                    throw new QlangCompileException("Using objects in the path that are not namespaces is not allowed.", GetDebug(o), "Parser");
+                    throw new QlangCompileException("Using objects in the path that are not namespaces is not allowed.", GetDebug(token), "Parser");
             }
         }
 
         callNode.Objects = newObjects.Cast<ASTNode>().ToList();
-        return new UsingNode(Expect(Tokens.Semicolon).DebugIndex)
+        return new UsingNode
         {
             CallPath = callNode
         };
@@ -270,7 +264,7 @@ public class Parser
         
         var body = ParseBlock();
         
-        return new NamespaceNode(nameToken.DebugIndex)
+        return new NamespaceNode
         {
             NameId = _stringPoolTable.Add(nameToken.Value),
             Body = body,
@@ -309,12 +303,11 @@ public class Parser
 
         var body = ParseBlock();
 
-        return new FunctionNode(nameToken.DebugIndex)
+        return new FunctionNode
         {
             NameId = _stringPoolTable.Add(nameToken.Value),
             Parameters = parameters,
             Body = body,
-            IsStatic = isStatic,
             IsPrivate = isPrivate
         };
     }
@@ -346,7 +339,7 @@ public class Parser
 
         var body = ParseBlock();
 
-        return new ClassNode(nameToken.DebugIndex) { NameId = _stringPoolTable.Add(nameToken.Value), Body = body, ExtendsPath = extends };
+        return new ClassNode { NameId = _stringPoolTable.Add(nameToken.Value), Body = body, ExtendsPath = extends };
     }
 
     private ForNode ParseFor()
@@ -367,7 +360,7 @@ public class Parser
         var forBlock = ParseBlock();
 
 
-        return new ForNode(Current().DebugIndex) { Assignment = assignment, Statement = statement, Condition = condition, Body = forBlock };
+        return new ForNode { Assignment = assignment, Statement = statement, Condition = condition, Body = forBlock };
     }
 
     private WhileNode ParseWhile(bool isDoWhile = false)
@@ -379,7 +372,7 @@ public class Parser
 
         var whileBlock = ParseBlock();
 
-        return new WhileNode(Current().DebugIndex) { Condition = condition, Body = whileBlock, IsDoWhile = isDoWhile };
+        return new WhileNode { Condition = condition, Body = whileBlock, IsDoWhile = isDoWhile };
     }
 
     private SwitchNode ParseSwitch()
@@ -389,7 +382,7 @@ public class Parser
         Expect(Tokens.Colon);
         Expect(Tokens.LBrace);
 
-        var @switch = new SwitchNode(Current().DebugIndex) { Condition = condition };
+        var @switch = new SwitchNode { Condition = condition };
         
         while (Check(Tokens.Keyword) && Current().Value == Keywords.CaseKeyword)
         {
@@ -398,7 +391,7 @@ public class Parser
             Expect(Tokens.Colon);
             var block = ParseBlock();
 
-            @switch.CaseBlocks.Add(new SwitchCaseNode(Current().DebugIndex)
+            @switch.CaseBlocks.Add(new SwitchCaseNode
             {
                 CaseBlock = block,
                 Condition = condition,
@@ -442,7 +435,7 @@ public class Parser
             }
         }
 
-        return new IfNode(Current().DebugIndex) { Condition = condition, ThenBlock = thenBlock, ElseBlock = elseBlock };
+        return new IfNode { Condition = condition, ThenBlock = thenBlock, ElseBlock = elseBlock };
     }
 
     private List<ASTNode> ParseBlock()
@@ -489,7 +482,7 @@ public class Parser
 
         Expect(Tokens.Semicolon);
 
-        return new ReturnNode(node?.DebugIndex ?? Current().DebugIndex) { ReturnValue = node };
+        return new ReturnNode { ReturnValue = node };
     }
 
     /// <summary>
@@ -513,7 +506,7 @@ public class Parser
             Advance(); // первый |
             Advance(); // второй |
             var right = ParseLogicalAnd();
-            left = new BinaryOperationNode(Current().DebugIndex)
+            left = new BinaryOperationNode
             {
                 Left = left,
                 OperatorId = _stringPoolTable.Add("||"),
@@ -536,7 +529,7 @@ public class Parser
             Advance(); // первый &
             Advance(); // второй &
             var right = ParseEquality();
-            left = new BinaryOperationNode(Current().DebugIndex)
+            left = new BinaryOperationNode
             {
                 Left = left,
                 OperatorId = _stringPoolTable.Add("&&"),
@@ -561,7 +554,7 @@ public class Parser
                 Advance(); // первый =
                 Advance(); // второй =
                 var right = ParseComparison();
-                left = new BinaryOperationNode(Current().DebugIndex)
+                left = new BinaryOperationNode
                 {
                     Left = left,
                     OperatorId = _stringPoolTable.Add("=="),
@@ -573,7 +566,7 @@ public class Parser
                 Advance(); // !
                 Advance(); // =
                 var right = ParseComparison();
-                left = new BinaryOperationNode(Current().DebugIndex)
+                left = new BinaryOperationNode
                 {
                     Left = left,
                     OperatorId = _stringPoolTable.Add("!="),
@@ -614,7 +607,7 @@ public class Parser
                 }
 
                 var right = ParseAddition();
-                left = new BinaryOperationNode(Current().DebugIndex)
+                left = new BinaryOperationNode
                 {
                     Left = left,
                     OperatorId = _stringPoolTable.Add(op),
@@ -637,7 +630,7 @@ public class Parser
                 }
 
                 var right = ParseAddition();
-                left = new BinaryOperationNode(Current().DebugIndex)
+                left = new BinaryOperationNode
                 {
                     Left = left,
                     OperatorId = _stringPoolTable.Add(op),
@@ -665,7 +658,7 @@ public class Parser
             var op = Check(Tokens.Plus) ? "+" : "-";
             Advance();
             var right = ParseMultiplication();
-            left = new BinaryOperationNode(Current().DebugIndex)
+            left = new BinaryOperationNode
             {
                 Left = left,
                 OperatorId = _stringPoolTable.Add(op),
@@ -694,7 +687,7 @@ public class Parser
             
             Advance();
             var right = ParsePrimary();
-            left = new BinaryOperationNode(Current().DebugIndex)
+            left = new BinaryOperationNode
             {
                 Left = left,
                 OperatorId = _stringPoolTable.Add(op),
@@ -711,7 +704,7 @@ public class Parser
         {
             // Advance 'null'
             Advance();
-            return new KeywordNode(Current().DebugIndex)
+            return new KeywordNode
             {
                 KeywordId = _stringPoolTable.Add(Keywords.NullKeyword)
             };
@@ -721,7 +714,7 @@ public class Parser
         {
             // Advance 'break'
             Advance();
-            return new KeywordNode(Current().DebugIndex)
+            return new KeywordNode
             {
                 KeywordId = _stringPoolTable.Add(Keywords.BreakKeyword)
             };
@@ -730,7 +723,7 @@ public class Parser
         {
             // Advance 'continue'
             Advance();
-            return new KeywordNode(Current().DebugIndex)
+            return new KeywordNode
             {
                KeywordId = _stringPoolTable.Add(Keywords.ContinueKeyword)
             };
@@ -740,7 +733,7 @@ public class Parser
         if (Check(Tokens.Keyword) && (Current().Value == Keywords.FalseKeyword || Current().Value == Keywords.TrueKeyword))
         {
             // Advance 'true' or 'false'
-            return new BooleanNode(Current().DebugIndex)
+            return new BooleanNode
             {
                 Value = isMinus ? !bool.Parse(Advance().Value) : bool.Parse(Advance().Value)
             };
@@ -750,7 +743,7 @@ public class Parser
         if (Check(Tokens.StringRef))
         {
             // Advance '___S*___'
-            return new StringRefNode(Current().DebugIndex)
+            return new StringRefNode
             {
                 Index = int.Parse(Advance().Value)
             };
@@ -759,7 +752,7 @@ public class Parser
         if (Check(Tokens.NumberRef))
         {
             // Advance '___N*___'
-            return new NumberRefNode(Current().DebugIndex)
+            return new NumberRefNode
             {
                 IsNegative = isMinus,
                 Index = int.Parse(Advance().Value)
@@ -779,7 +772,7 @@ public class Parser
             Advance();
             // Advance '('
             Advance();
-            var func = new FunctionNode(Current().DebugIndex)
+            var func = new FunctionNode
             {
                 NameId = _stringPoolTable.Add("~function")
             };
@@ -820,7 +813,7 @@ public class Parser
         {
             // Advance '{'
             Advance();
-            var @class = new ClassNode(Current().DebugIndex)
+            var @class = new ClassNode
             {
                 NameId = _stringPoolTable.Add("~object"),
                 Body = []
@@ -875,7 +868,7 @@ public class Parser
             // Advance ']'
             Advance();
 
-            return new CollectionNode(Current().DebugIndex)
+            return new CollectionNode
             {
                 Collection = statements
             };
@@ -927,7 +920,7 @@ public class Parser
             // Advance '___S*___'
             Advance();
             var index = int.Parse(currentIdentifier.Replace("___S", "").Replace("___", ""));
-            return new StringRefNode(Current().DebugIndex) { Index = index, };
+            return new StringRefNode { Index = index, };
         }
 
         if (currentIdentifier.StartsWith("___N"))
@@ -935,7 +928,7 @@ public class Parser
             // Advance '___N*___'
             Advance();
             var index = int.Parse(currentIdentifier.Replace("___N", "").Replace("___", ""));
-            return new NumberRefNode(Current().DebugIndex)
+            return new NumberRefNode
             {
                 IsNegative = isMinus,
                 Index = index
@@ -946,7 +939,7 @@ public class Parser
         {
             // Advance '1'
             Advance();
-            return new NumberNode(Current().DebugIndex)
+            return new NumberNode
             {
                 Value = res
             };
@@ -961,7 +954,7 @@ public class Parser
 
         if (Current().TokenType == Tokens.Keyword && Current().Value == Keywords.ThisKeyword)
         {
-            current = new ObjectPointerNode(Current().DebugIndex)
+            current = new ObjectPointerNode
             {
                 NameId = _stringPoolTable.Add(Keywords.ThisKeyword)
             };
@@ -973,7 +966,6 @@ public class Parser
             return current;
 
         var identifier = Current().Value;
-        var identifierIndex = Current().DebugIndex;
         // Advance 'identifier'
         Advance();
 
@@ -991,7 +983,7 @@ public class Parser
             // Advance ')'
             Advance();
             
-            current = new FunctionPointerNode(identifierIndex)
+            current = new FunctionPointerNode
             {
                 NameId = _stringPoolTable.Add(identifier),
                 Arguments = args
@@ -999,7 +991,7 @@ public class Parser
         }
 
         if (current is null)
-            current = new ObjectPointerNode(identifierIndex)
+            current = new ObjectPointerNode
             {
                 NameId = _stringPoolTable.Add(identifier)
             };
@@ -1024,38 +1016,38 @@ public class Parser
             Advance();
             
             
-            current = new AssignmentNode(false, false, false, false, Current().DebugIndex)
+            current = new AssignmentNode(false, false, false)
             {
-                Path = [new ObjectPointerNode(identifierIndex) { NameId = _stringPoolTable.Add(identifier) }]
+                Path = [new ObjectPointerNode { NameId = _stringPoolTable.Add(identifier) }]
             };
 
             var value = @operator switch
             {
-                "++" => new BinaryOperationNode(identifierIndex)
+                "++" => new BinaryOperationNode
                 {
-                    Left = new CallNode(identifierIndex)
+                    Left = new CallNode
                     {
-                        Objects = [new ObjectPointerNode(identifierIndex) { NameId = _stringPoolTable.Add(identifier) }]
+                        Objects = [new ObjectPointerNode { NameId = _stringPoolTable.Add(identifier) }]
                     },
-                    Right = new NumberNode(identifierIndex) { Value = 1 },
+                    Right = new NumberNode { Value = 1 },
                     OperatorId = _stringPoolTable.Add("+")
                 },
-                "--" => new BinaryOperationNode(identifierIndex)
+                "--" => new BinaryOperationNode
                 {
-                    Left = new CallNode(identifierIndex)
+                    Left = new CallNode
                     {
-                        Objects = [new ObjectPointerNode(identifierIndex) { NameId = _stringPoolTable.Add(identifier) }]
+                        Objects = [new ObjectPointerNode { NameId = _stringPoolTable.Add(identifier) }]
                     },
-                    Right = new NumberNode(identifierIndex) { Value = 1 },
+                    Right = new NumberNode { Value = 1 },
                     OperatorId = _stringPoolTable.Add("-")
                 },
                 _ => @operator == ""
                     ? ParseExpression()
-                    : new BinaryOperationNode(identifierIndex)
+                    : new BinaryOperationNode
                     {
-                        Left = new CallNode(identifierIndex)
+                        Left = new CallNode
                         {
-                            Objects = [new ObjectPointerNode(identifierIndex) { NameId = _stringPoolTable.Add(identifier) }]
+                            Objects = [new ObjectPointerNode { NameId = _stringPoolTable.Add(identifier) }]
                         },
                         Right = ParseExpression(),
                         OperatorId = _stringPoolTable.Add(@operator)
@@ -1070,7 +1062,7 @@ public class Parser
         }
 
         if (Check(Tokens.Colon) && Peek()?.TokenType == Tokens.Colon)
-            current = new NamespacePointerNode(identifierIndex)
+            current = new NamespacePointerNode
             {
                 NameId = _stringPoolTable.Add(identifier)
             };
@@ -1090,15 +1082,15 @@ public class Parser
         {
             var returnValue = astNode switch
             {
-                ObjectPointerNode obj => new CallNode(Current().DebugIndex)
+                ObjectPointerNode obj => new CallNode
                 {
                     Objects = [obj]
                 },
-                NamespacePointerNode namespacePointer => new CallNode(Current().DebugIndex)
+                NamespacePointerNode namespacePointer => new CallNode
                 {
                     Objects = [namespacePointer]
                 },
-                FunctionPointerNode pointerFunction => new CallNode(Current().DebugIndex)
+                FunctionPointerNode pointerFunction => new CallNode
                 {
                     Objects = [pointerFunction],
                 },
@@ -1137,8 +1129,8 @@ public class Parser
 
         if (path[^1] is AssignmentNode assignmentNode)
         {
-            path[^1] = new ObjectPointerNode(Current().DebugIndex) { NameId = assignmentNode.GetLastNameId() };
-            var assignment = new AssignmentNode(false, false, false, false, Current().DebugIndex)
+            path[^1] = new ObjectPointerNode { NameId = assignmentNode.GetLastNameId() };
+            var assignment = new AssignmentNode(false, false, false)
             {
                 Path = path,
                 Value = assignmentNode.Value
@@ -1149,7 +1141,7 @@ public class Parser
             return assignment;
         }
 
-        var retValue =  new CallNode(Current().DebugIndex)
+        var retValue =  new CallNode
         {
             Objects =  path,
         };
@@ -1164,26 +1156,30 @@ public class Parser
         if (!Check(Tokens.Less))
             return null;
 
-        Advance();
+        var token = Advance();
 
         var path = ParsePrimaryPath();
         
         if (path is not CallNode callNode)
-            throw new QlangCompileException("Cannot find type to cast", GetDebug(path), "Parser");
+            throw new QlangCompileException("Cannot find type to cast", GetDebug(token), "Parser");
         
         Expect(Tokens.Greater);
         
         path = ParsePrimaryPath();
 
-        var callPathNode = path as CallNode ?? new CallNode(Current().DebugIndex);
+        var callPathNode = path as CallNode ?? new CallNode();
 
         if (path is not CallNode)
         {
-            callPathNode = new CallNode(Current().DebugIndex) { Objects = [path] };
+            callPathNode = new CallNode { Objects = [path] };
             _callNodes.Add(callPathNode);
         }
 
-        return new CastNode(callNode, callPathNode, Current().DebugIndex);
+        return new CastNode
+        {
+            ToCastObject = callNode,
+            TypeCastPath = callPathNode
+        };
     }
 
     
@@ -1282,15 +1278,6 @@ public class Parser
             list.AddRange(GetClassesFromNamespaceRecursively(subNamespace));
         
         return list;
-    }
-
-    private (int, string) GetDebug(ASTNode? node)
-    {
-        if (node is null)
-            return (-1, "undefined");
-        
-        return (_debugTable.GetLineIndex(node.DebugIndex) + 1,
-                _sourceFileTable[_debugTable.GetFileId(node.DebugIndex)]);
     }
     
     private (int, string) GetDebug(Token? token)

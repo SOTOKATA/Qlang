@@ -39,9 +39,9 @@ public partial class Interpreter
         dynamicNamespace.Functions.AddRange(namespaceNode.Body.OfType<FunctionNode>());
         
         // Add and convert all assignments
-        foreach (var assignmentNode in namespaceNode.Body.OfType<AssignmentNode>())
+        foreach (var assignmentNode in namespaceNode.Body.OfType<LineNode>().Select(x => (AssignmentNode)x.Content!))
                 dynamicNamespace.Variables[_stringPoolTable[assignmentNode.GetLastNameId()]] = new Variable(_stringPoolTable[assignmentNode.GetLastNameId()],
-                    EvaluateExpression(assignmentNode.Value), assignmentNode.IsStatic, assignmentNode
+                    EvaluateExpression(assignmentNode.Value),  assignmentNode
                         .IsPrivate, assignmentNode.IsConst);
         
         return dynamicNamespace;
@@ -60,16 +60,16 @@ public partial class Interpreter
         dynamicNamespace?.Classes.Add(dynamicClass);
 
         // Add and convert all assignments
-        foreach (var assignmentNode in classNode.Body.OfType<AssignmentNode>())
+        foreach (var assignmentNode in classNode.Body.OfType<LineNode>().Select(x => (AssignmentNode)x.Content!))
                 dynamicClass.Variables[_stringPoolTable[assignmentNode.GetLastNameId()]] = new Variable(_stringPoolTable[assignmentNode.GetLastNameId()],
-                    EvaluateExpression(assignmentNode.Value), assignmentNode.IsStatic, assignmentNode
+                    EvaluateExpression(assignmentNode.Value),  assignmentNode
                     .IsPrivate, assignmentNode.IsConst);
-        
+
         // Remove all AssignmentNodes from body
-        classNode.Body.RemoveAll(node => node is AssignmentNode);
+        classNode.Body.RemoveAll(node => node is LineNode);
 
         dynamicClass.Body = classNode.Body;
-
+        
         return dynamicClass;
     }
 
@@ -93,7 +93,6 @@ public partial class Interpreter
             dynamicFunction.Variables[nodeName] = new Variable(
                 nodeName,
                 EvaluateExpression(node.Value),
-                node.IsStatic,
                 node.IsPrivate,
                 node.IsConst,
                 node.Type);
@@ -103,7 +102,6 @@ public partial class Interpreter
 
         // Add body and modificators
         dynamicFunction.Body = functionNode.Body;
-        dynamicFunction.IsStatic = functionNode.IsStatic;
         dynamicFunction.IsPrivate = functionNode.IsPrivate;
 
         return dynamicFunction;

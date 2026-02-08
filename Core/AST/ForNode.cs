@@ -3,27 +3,25 @@
 
 namespace Core.AST;
 [MessagePackObject]
-public class ForNode(int line) : ASTBlock(line)
+public class ForNode : ASTBlock
 {
-    public ForNode() : this(-1) {}
-    
-    [Key(1)]
+    [Key(0)]
     
     public required AssignmentNode Assignment { get; set; }
-    [Key(2)]
+    [Key(1)]
     
     public required ASTNode Condition { get; set; }
-    [Key(3)]
+    [Key(2)]
     
     public required ASTNode Statement { get; set; }
 
-    [Key(4)]
+    [Key(3)]
     
     public List<ASTNode> Body { get; set; } = [];
 
     public override ASTNode Clone()
     {
-        return new ForNode(DebugIndex) { 
+        return new ForNode { 
             Assignment = (Assignment.Clone() as AssignmentNode)!,
             Statement = Statement.Clone(),
             Condition = Condition, 
@@ -35,7 +33,6 @@ public class ForNode(int line) : ASTBlock(line)
     {
         return DebugIndent($"""
                             ForNode:
-                                DebugIndex: {DebugIndex}
                                 Assignment: {Assignment.GetTree("\t\t")}
                                 Condition: {Condition.GetTree("\t\t")}
                                 Statement: {Condition.GetTree("\t\t")}

@@ -3,22 +3,22 @@
 
 namespace Core.AST;
 [MessagePackObject]
-public class ClassNode(int line) : ASTNode(line)
+public class ClassNode : ASTNode
 {
-    [Key(1)]
+    [Key(0)]
     
     public required int NameId { get; init; }
     
-    [Key(2)]
+    [Key(1)]
     
     public CallNode? ExtendsPath { get; set; }
-    [Key(3)]
+    [Key(2)]
     
     public required List<ASTNode> Body { get; set; }
 
     public override ASTNode Clone()
     {
-        return new ClassNode(DebugIndex)
+        return new ClassNode
         {
             NameId = NameId, 
             ExtendsPath = ExtendsPath,
@@ -30,7 +30,6 @@ public class ClassNode(int line) : ASTNode(line)
     {//Extends: {string.Join(", ", Extends?.Objects.Select(x => x.GetTree("\t\t")) ?? ["<not_exists>"])}
         return DebugIndent($"""
                 ClassNode:
-                    DebugIndex: {DebugIndex}
                     Name: {NameId}
                     Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t\t")))}]
                 """, indent);

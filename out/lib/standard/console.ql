@@ -6,8 +6,17 @@ namespace std:  {
     class Console: {
         private function getStr(const message): {
             if Object.isNull(message):
-                return "null";
-                
+                return "<null>";
+
+            switch typeof(message): {
+                case "~function": {
+                    return "function pointer";
+                }
+                case "~object": {
+                    return "class pointer";
+                }
+            }
+
             if Object.isSimplify(message) == false:
                 return message.toString();
 

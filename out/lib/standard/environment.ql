@@ -6,10 +6,10 @@ namespace std: {
 
         const newLine = _native("std", "env", "new_line");
 
-        const userName = _native("std", "env", "user_name");
     
         const machineName = _native("std", "env", "machine_name");
 
         const processPath = _native("std", "env", "process_path");
+        const userName = _native("std", "env", "user_name");
     }
 }

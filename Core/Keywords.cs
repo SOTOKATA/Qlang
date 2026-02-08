@@ -38,13 +38,13 @@ public static class Keywords
     public static string ExtendsKeyword => "extends";
   
     public static string PrivateModificator => "private";
-    public static string StaticModificator => "static";
     
     public static List<string> GetKeywords() =>
     [
         FunctionDeclaration, ClassDeclaration, VariableDeclaration, IfBlock, ElseBlock, WhileBlock, DoWhileBlock, 
         ForBlock, ReturnKeyword, TrueKeyword, FalseKeyword, ImportKeyword, PrivateModificator, 
-        StaticModificator, ConstVariableDeclaration, ContinueKeyword, BreakKeyword, NullKeyword, ThisKeyword, ExtendsKeyword, SwitchBlock, CaseKeyword, DefaultKeyword, NamespaceDeclaration,
+        ConstVariableDeclaration, ContinueKeyword, BreakKeyword, NullKeyword, ThisKeyword, ExtendsKeyword, 
+        SwitchBlock, CaseKeyword, DefaultKeyword, NamespaceDeclaration,
         UsingKeyword
     ];
 }

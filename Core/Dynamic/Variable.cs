@@ -5,9 +5,9 @@ using MessagePack;
 namespace Core.Dynamic;
 
 [MessagePackObject]
-public class Variable(string name, object? value, bool isStatic, bool isPrivate, bool isConst, CallNode? type = null)
+public class Variable(string name, object? value, bool isPrivate, bool isConst, CallNode? type = null)
 {
-    public Variable() : this("", null, false, false, false) {}
+    public Variable() : this("", null, false, false) {}
     public override string? ToString()
     {
         return Value?.ToString();       
@@ -15,7 +15,7 @@ public class Variable(string name, object? value, bool isStatic, bool isPrivate,
 
     public static Variable FromAssignmentNode(AssignmentNode assignNode, object? value, StringPoolTable stringPoolTable)
     {
-        return new Variable(stringPoolTable[assignNode.GetLastNameId()], value, assignNode.IsStatic, assignNode.IsPrivate, assignNode.IsConst, assignNode.Type);
+        return new Variable(stringPoolTable[assignNode.GetLastNameId()], value, assignNode.IsPrivate, assignNode.IsConst, assignNode.Type);
     }
 
     [Key(1)]
@@ -25,9 +25,7 @@ public class Variable(string name, object? value, bool isStatic, bool isPrivate,
     [Key(3)]
     public CallNode? Type { get; set; } = type;
     [Key(4)]
-    public bool IsStatic { get; set; } = isStatic;
-    [Key(5)]
     public bool IsConst { get; set; } = isConst;
-    [Key(6)]
+    [Key(5)]
     public bool IsPrivate { get; set; } = isPrivate;
 }

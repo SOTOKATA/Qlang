@@ -3,13 +3,13 @@
 
 namespace Core.AST;
 [MessagePackObject]
-public class ReturnNode(int line) : ASTNode(line)
+public class ReturnNode : ASTNode
 {
-    [Key(1)]
+    [Key(0)]
     
     public ASTNode? ReturnValue { get; set; }
 
-    public override ASTNode Clone() => new ReturnNode(DebugIndex)
+    public override ASTNode Clone() => new ReturnNode
     {
         ReturnValue = ReturnValue?.Clone() 
     };
@@ -18,7 +18,6 @@ public class ReturnNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             ReturnNode:
-                                DebugIndex: {DebugIndex}
                                 ReturnValue: {(ReturnValue is null ? "<nothing>" : ReturnValue.GetTree("\t\t"))}
                             """, indent);
     }

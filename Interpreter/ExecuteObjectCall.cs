@@ -86,15 +86,20 @@ public partial class Interpreter
             
             switch (_stringPoolTable[fn.NameId])
             {
-                case "_str":
-                    return ParseString(string.Join("", args.Select(a => a is null ? "" : a.ToString())));
+                case "_str" when args.Length == 1:
+                    args[0] = PrimitiveToDynamicClass(args[0]);
+                    args[0] = args[0] is DynamicClass { ClassName: "String" } dc
+                        ? dc.Variables["_value"]
+                        : args[0];
+                    
+                    return ParseString(args[0]!.ToString());
                 case "_native":
                     if (args.Length < 3)
                         throw new QlangRuntimeException(
                             """
                             Undefined call structure of _native system command.
                             Structure is _native(\"<namespace>\", \"<class>\", \"<function>)\", <args>
-                            """, GetDebug(call), GetStackTrace());
+                            """, GetCurrentDebug(), GetStackTrace());
                     
                     var @namespace = args[0]?.ToString();
                     var @class = args[1]?.ToString();
@@ -112,15 +117,15 @@ public partial class Interpreter
                         switch (ex)
                         {
                             case QlangRuntimeException:
-                                throw new QlangRuntimeException(ex.Message, GetDebug(fn), GetStackTrace(1));
+                                throw new QlangRuntimeException(ex.Message, GetCurrentDebug(), GetStackTrace(1));
                             case QlangProgramException exp:
                             {
-                                var debug = exp.WriteStackTrace ? GetDebug(fn) : (-1, "undefined");
+                                var debug = exp.WriteStackTrace ? GetCurrentDebug() : (-1, "undefined");
                                 var stackTrace = exp.WriteStackTrace ? GetStackTrace(1) : [];
                                 throw new QlangRuntimeException(ex.Message, debug, stackTrace);
                             }
                             default:
-                                throw new QlangRuntimeException(ex.Message, GetDebug(fn), GetStackTrace());
+                                throw new QlangRuntimeException(ex.Message, GetCurrentDebug(), GetStackTrace());
                         }
                     }
 
@@ -187,7 +192,7 @@ public partial class Interpreter
             if (HasContext)
             {
                 // Try to get function from function variables
-                if (CurrentContext.Function is not null)
+                if (CurrentContext?.Function is not null)
                 {
                     pair = TryGetFunctionFromFunctionVariables(CurrentContext.Function, node.NameId, args);
                     if (pair.function is not null)
@@ -195,7 +200,7 @@ public partial class Interpreter
                 }
                 
                 // Try to get function from class context;
-                if (CurrentContext.Class is not null)
+                if (CurrentContext?.Class is not null)
                 {
                     pair = TryGetFunctionFromClass(CurrentContext.Class, node.NameId, args);
                     if (pair.function is not null)
@@ -203,7 +208,7 @@ public partial class Interpreter
                 }
                 
                 // Try to get function from namespace context;
-                if (CurrentContext.Namespace is not null)
+                if (CurrentContext?.Namespace is not null)
                 {
                     pair = TryGetFunctionFromNamespace(CurrentContext.Namespace, node.NameId, args);
                     if (pair.function is not null)
@@ -218,7 +223,7 @@ public partial class Interpreter
                 return (ToDynamicFunction(funcPair.function), funcPair.args, null, null);
             
             throw new QlangRuntimeException($"Function '{_stringPoolTable[node.NameId]}' is not found in current context ('{lastObject}')",
-                GetDebug(node), GetStackTrace());
+                GetCurrentDebug(), GetStackTrace());
         }
 
             // Try to get function from function variables
@@ -226,7 +231,7 @@ public partial class Interpreter
         {
             pair = TryGetFunctionFromFunctionVariables(function, node.NameId, args);
             if (pair.function is not null)
-                return (pair.function, pair.args, CurrentContext.Class, CurrentContext.Namespace);
+                return (pair.function, pair.args, CurrentContext?.Class, CurrentContext?.Namespace);
         }
         
         // Try to get function from class function list;
@@ -239,7 +244,7 @@ public partial class Interpreter
             if (pair.function is not null)
             {
                 if (pair.function.IsPrivate && !_allowPrivateCall)
-                    throw new QlangRuntimeException($"Cannot get access to private function '{pair.function.Name}' from class '{dClass.ClassName}'",GetDebug(node), GetStackTrace());
+                    throw new QlangRuntimeException($"Cannot get access to private function '{pair.function.Name}' from class '{dClass.ClassName}'",GetCurrentDebug(), GetStackTrace());
                 
                 return (pair.function, pair.args, dClass, @namespace);
             }
@@ -252,20 +257,20 @@ public partial class Interpreter
             if (pair.function is not null)
             {
                 if (pair.function.IsPrivate)
-                    throw new QlangRuntimeException($"Cannot get access to private function '{pair.function.Name}' from namespace '{dNamespace.Name}'", GetDebug(node), GetStackTrace());
+                    throw new QlangRuntimeException($"Cannot get access to private function '{pair.function.Name}' from namespace '{dNamespace.Name}'", GetCurrentDebug(), GetStackTrace());
                 
                 return (pair.function, pair.args, null, dNamespace);
             }
         }
         
         throw new QlangRuntimeException($"Function '{_stringPoolTable[node.NameId]}' is not found in current context ('{lastObject}')",
-            GetDebug(node), GetStackTrace());
+            GetCurrentDebug(), GetStackTrace());
     }
 
     private (object? @object, DynamicNamespace? @namespace) FindObject(ObjectPointerNode node, object? lastObject, bool isPathStart)
     {
         if (node.NameId == -1)
-            throw new QlangRuntimeException("Part of path is null.", GetDebug(node), GetStackTrace());
+            throw new QlangRuntimeException("Part of path is null.", GetCurrentDebug(), GetStackTrace());
         
         var nodeName = _stringPoolTable[node.NameId];
             
@@ -345,9 +350,9 @@ public partial class Interpreter
             // Try to get CLASS from context namespace
             if (HasContext)
             {
-                var @class = CurrentContext.Namespace?.Classes.FirstOrDefault(@class => @class.ClassName == nodeName);
+                var @class = CurrentContext?.Namespace?.Classes.FirstOrDefault(@class => @class.ClassName == nodeName);
                 if (@class is not null)
-                    return (@class, CurrentContext.Namespace);
+                    return (@class, CurrentContext?.Namespace);
             }
             
             // Try to get CLASS from global class list;
@@ -360,7 +365,7 @@ public partial class Interpreter
         if (lastObject is null)
         {
             throw new QlangRuntimeException($"Object '{nodeName}' is not found in current context.",
-                GetDebug(node), GetStackTrace());
+                GetCurrentDebug(), GetStackTrace());
         }
         
         switch (lastObject)
@@ -371,7 +376,7 @@ public partial class Interpreter
                 {
                     if (var.IsPrivate && !_allowPrivateCall)
                         throw new QlangRuntimeException($"Cannot get access to private variable '{var.Name}' from class '{dynamicClass.ClassName}'.",
-                            GetDebug(node), GetStackTrace());
+                            GetCurrentDebug(), GetStackTrace());
                         
                     return (var, null);
                 }
@@ -382,7 +387,7 @@ public partial class Interpreter
                 {
                     if (var.IsPrivate)
                         throw new QlangRuntimeException($"Cannot get access to private variable '{var.Name}' from namespace '{dynamicNamespace.Name}'.",
-                            GetDebug(node), GetStackTrace());
+                            GetCurrentDebug(), GetStackTrace());
                     
                     return (var, null);
                 }
@@ -393,36 +398,44 @@ public partial class Interpreter
                     return (@class, null);
                 break;
         }
-        throw new QlangRuntimeException($"Object '{nodeName}' is not found in current context" + (HasContext ? $"\nCurrent function: '{CurrentContext.Function?.Name}'; Current class: '{CurrentContext.Class?.ClassName}'; Current namespace: '{CurrentContext.Namespace?.Name}'" : "\nNo context found."),
-            GetDebug(node), GetStackTrace());
+        throw new QlangRuntimeException($"Object '{nodeName}' is not found in current context" + (HasContext ? $"\nCurrent function: '{CurrentContext?.Function?.Name}'; Current class: '{CurrentContext?.Class?.ClassName}'; Current namespace: '{CurrentContext?.Namespace?.Name}'" : "\nNo context found."),
+            GetCurrentDebug(), GetStackTrace());
     }
 
     private DynamicNamespace FindNamespace(NamespacePointerNode node, object? lastObject, bool isPathStart)
     {
         var nodeName = _stringPoolTable[node.NameId];
+
         if (_dynamicNamespaces.TryGetValue(nodeName, out var @namespace) && isPathStart)
             return @namespace;
-        
-        if (CurrentContext.Namespace is not null && isPathStart)
+
+        if (HasContext && CurrentContext?.Namespace is not null && isPathStart)
         {
             var ns = CurrentContext.Namespace.Namespaces.FirstOrDefault(ns => ns.Name == nodeName);
 
             if (ns is not null)
                 return ns;
         }
-        
+
         if (lastObject is DynamicNamespace dynamicNamespace)
         {
             var ns = dynamicNamespace.Namespaces.FirstOrDefault(ns => ns.Name == nodeName);
 
             if (ns is not null)
-                return ns.IsPrivate ? throw new QlangRuntimeException($"Cannot get access to private namespace from namespace '{dynamicNamespace.Name}'", GetDebug(node), GetStackTrace()) : ns;
+                return ns.IsPrivate
+                    ? throw new QlangRuntimeException(
+                        $"Cannot get access to private namespace from namespace '{dynamicNamespace.Name}'",
+                        GetCurrentDebug(), GetStackTrace())
+                    : ns;
         }
+        Console.WriteLine("OK");
 
         // TODO: Add 'namespace' to 'namespace'
         // if (lastObject is DynamicNamespace dynamicNamespace)
-        throw new QlangRuntimeException($"Namespace '{node.NameId}' is not found in current context", GetDebug(node), GetStackTrace());
-        
+
+        throw new QlangRuntimeException(
+            $"Namespace '{_stringPoolTable[node.NameId]}' is not found in current context", GetCurrentDebug(),
+            GetStackTrace());
     }
     
     private (DynamicFunction? function, List<object?>? args) TryGetFunctionFromNamespace(DynamicNamespace source, int functionName, List<object?>? args)
@@ -432,12 +445,12 @@ public partial class Interpreter
         return func.function is null ? (null, null) : (ToDynamicFunction(func.function), finalArgs: func.Args);
     }
     
-    private (DynamicFunction? function, List<object?>? args) TryGetFunctionFromClass(DynamicClass? source, int functionName, List<object?>? args)
+    private (DynamicFunction? function, List<object?>? args) TryGetFunctionFromClass(DynamicClass? source, int nameId, List<object?>? args)
     {
         if (source is null)
             throw new QlangRuntimeException("Source is null", -1, "", GetStackTrace());
         
-        var func = GetFunctionFromClass(source, functionName, args);
+        var func = GetFunctionFromClass(source, nameId, args);
         
         return func.function is null ? (null, null) : (ToDynamicFunction(func.function), finalArgs: func.Args);
     }

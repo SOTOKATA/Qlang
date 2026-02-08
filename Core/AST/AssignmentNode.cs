@@ -4,35 +4,31 @@ using MessagePack;
 namespace Core.AST;
 
 [MessagePackObject]
-public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool isNew, int line) : ASTNode(line)
+public class AssignmentNode(bool isPrivate, bool isConst, bool isNew) : ASTNode
 {
-    public AssignmentNode() : this(false, false, false, false, -1) {}
+    public AssignmentNode() : this(false, false, false) {}
     
-    [Key(1)]
+    [Key(0)]
     
     public bool IsNew { get; set; } = isNew;
 
-    [Key(2)]
+    [Key(1)]
     
     public required List<ASTNode> Path { get; init; }
 
-    [Key(3)]
+    [Key(2)]
     
     public ASTNode? Value { get; set; }
     
-    [Key(4)]
+    [Key(3)]
     
     public CallNode? Type { get; set; }
 
-    [Key(5)]
-    
-    public bool IsStatic { get; set; } = isStatic;
-
-    [Key(6)]
+    [Key(4)]
     
     public bool IsPrivate { get; set; } = isPrivate;
 
-    [Key(7)]
+    [Key(5)]
     
     public bool IsConst { get; set; } = isConst;
 
@@ -40,7 +36,7 @@ public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool is
 
     public override ASTNode Clone()
     {
-        return new AssignmentNode(IsStatic, IsPrivate, IsConst, IsNew, DebugIndex)
+        return new AssignmentNode(IsPrivate, IsConst, IsNew)
         {
             Path = Path.Select(node => node.Clone()).ToList(),
             Value = Value?.Clone(),
@@ -52,11 +48,9 @@ public class AssignmentNode(bool isStatic, bool isPrivate, bool isConst, bool is
     {
         return DebugIndent($"""
                             VariableNode:
-                                DebugIndex: {DebugIndex}
                                 Path: [{string.Join(",\n", Path.Select(x => x.GetTree("\t\t")))}]
                                 Value: {Value?.GetTree("\t\t") ?? "<undefined>"}
                                 Type: {Type?.GetTree("\t\t")}
-                                IsStatic: {IsStatic}
                                 IsPrivate: {IsPrivate}
                                 IsConst: {IsConst}
                                 IsNew: {IsNew}

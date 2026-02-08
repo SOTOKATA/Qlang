@@ -4,12 +4,12 @@
 namespace Core.AST;
 
 [MessagePackObject]
-public class BooleanNode(int line) : ASTNode(line)
+public class BooleanNode : ASTNode
 {
-    [Key(1)] 
+    [Key(0)] 
     public bool Value { get; set; }
 
-    public override ASTNode Clone() => new BooleanNode(DebugIndex) { 
+    public override ASTNode Clone() => new BooleanNode { 
             Value = Value
     };
 
@@ -17,7 +17,6 @@ public class BooleanNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             BreakNode:
-                                DebugIndex: {DebugIndex}
                                 Value: {Value}
                             """, indent);
     }

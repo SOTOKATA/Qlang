@@ -23,5 +23,8 @@ namespace fs: {
 
         function getFullFileName(const<String> path):
             return _native("std", "filesystem", "file_name", path);
+
+        function getDirectory(const<String> path):
+            return _native("std", "filesystem", "get_dir", path);
     }
 }

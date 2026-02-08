@@ -2,23 +2,22 @@
 
 namespace Core.AST;
 [MessagePackObject]
-public class UsingNode(int line) : ASTNode(line)
+public class UsingNode : ASTNode
 {
-    [Key(1)]
+    [Key(0)]
     public required CallNode CallPath { get; set; }
     
     public override string GetTree(string indent = "")
     {
         return DebugIndent($"""
                             UsingNode:
-                                DebugIndex: {DebugIndex}
                                 CallPath: {CallPath.GetTree("\t\t")}
                             """, indent);
     }
 
     public override ASTNode Clone()
     {
-        return new UsingNode(DebugIndex)
+        return new UsingNode
         {
             CallPath = CallPath
         };

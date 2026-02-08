@@ -16,6 +16,9 @@ class Dictionary: {
         return String.new(str);
     }
 
+    function getKeys(): return _keys;
+    function getValues(): return _values;
+
     function set(let key, let item): {
         if _keys.contains(key) == true:
             _values.setAt(get(key), item);
@@ -41,6 +44,8 @@ class Dictionary: {
         _keys.clear();
         _values.clear();
     }
+
+    function length(): _keys.length();
 
     function get(let key): {
         if _keys.contains(key) == false:

@@ -91,9 +91,9 @@ class Array extends DataType: {
 
     function skip(const<Number> count): {
         if count <= 0:
-            Throw.message("Count must be more than 0");
+            std::Throw.message("Count must be more than 0");
         else if count > length():
-            Throw.message("Count must be less than array length");
+            std::Throw.message("Count must be less than array length");
 
         const length = length();
 
@@ -109,7 +109,13 @@ class Array extends DataType: {
         return at(length() - 1);
     }
 
+    private function callExceptionNotFunc(const func):
+        if typeof(func) != "~function":
+            std::Throw.message("Unsupported type of function: " + typeof(func));
+
     function where(const func): {
+        callExceptionNotFunc(func);
+
         const length = length();
 
         const arr = Array.new([]);
@@ -123,6 +129,8 @@ class Array extends DataType: {
     }
 
     function select(const func): {
+        callExceptionNotFunc(func);
+
         const length = length();
 
         const arr = Array.new([]);
@@ -134,6 +142,8 @@ class Array extends DataType: {
     }
 
     function count(const func): {
+        callExceptionNotFunc(func);
+
         const length = length();
         let count = 0;
 
@@ -145,6 +155,8 @@ class Array extends DataType: {
     }
 
     function firstOrDefault(const func): {
+        callExceptionNotFunc(func);
+
         const length = length();
 
         for let i = 0; i < length; i++: {

@@ -3,9 +3,9 @@
 
 namespace Core.AST;
 [MessagePackObject]
-public class NamespacePointerNode(int line) : ASTNode(line)
+public class NamespacePointerNode : ASTNode
 {
-    [Key(1)]
+    [Key(0)]
     
     public int NameId { get; set; }
     
@@ -13,14 +13,13 @@ public class NamespacePointerNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             NamespacePointerNode:
-                                DebugIndex: {DebugIndex}
                                 Name: {NameId}.
                             """, indent);
     }
 
     public override ASTNode Clone()
     {
-        return new NamespacePointerNode(DebugIndex)
+        return new NamespacePointerNode
         {
             NameId = NameId,
         };

@@ -6,8 +6,6 @@ public class Optimizer
 {
     public ProgramNode Optimize(ProgramNode program)
     {
-        program.DebugIndex = 0;
-        
         program.Statements.RemoveAll(x => x is not NamespaceNode);
         
         for (var i = 0; i < program.Statements.Count; i++)
@@ -24,7 +22,7 @@ public class Optimizer
     
     private static ClassNode OptimizeClass(ClassNode @class)
     {
-        @class.Body.RemoveAll(x => x is not FunctionNode && x is not AssignmentNode);    
+        @class.Body.RemoveAll(x => x is not FunctionNode && x is not AssignmentNode && x is not LineNode);    
         
         for (var index = 0; index < @class.Body.Count; index++)
         {
@@ -40,7 +38,7 @@ public class Optimizer
     
     private static NamespaceNode OptimizeNamespace(NamespaceNode @namespace)
     {
-        @namespace.Body.RemoveAll(x => x is not NamespaceNode && x is not AssignmentNode && x is not FunctionNode && x is not ClassNode);
+        @namespace.Body.RemoveAll(x => x is not NamespaceNode && x is not LineNode && x is not AssignmentNode && x is not FunctionNode && x is not ClassNode);
         for (var index = 0; index < @namespace.Body.Count; index++)
         {
             var item = @namespace.Body[index];

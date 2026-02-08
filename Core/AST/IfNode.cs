@@ -3,23 +3,21 @@
 
 namespace Core.AST;
 [MessagePackObject]
-public class IfNode(int line) : ASTBlock(line)
+public class IfNode : ASTBlock
 {
-    public IfNode() : this(-1) {}
-    
-    [Key(1)]
+    [Key(0)]
     
     public required ASTNode Condition { get; set; }
-    [Key(2)]
+    [Key(1)]
     
     public List<ASTNode> ThenBlock { get; set; } = [];
-    [Key(3)]
+    [Key(2)]
     
     public List<ASTNode> ElseBlock { get; set; } = [];
 
     public override ASTNode Clone()
     {
-        return new IfNode(DebugIndex)
+        return new IfNode
         {
             Condition = Condition.Clone(), 
             ThenBlock = ThenBlock.Select(node => node.Clone()).ToList(), 
@@ -31,7 +29,6 @@ public class IfNode(int line) : ASTBlock(line)
     {
         return DebugIndent($"""
                             IfNode:
-                                DebugIndex: {DebugIndex}
                                 Condition: {Condition.GetTree("\t\t")}
                                 ThenBlock: [{string.Join(",\n", ThenBlock.Select(x => x.GetTree("\t\t")))}]
                                 ElseBlock: [{string.Join(",\n", ElseBlock.Select(x => x.GetTree("\t\t")))}]

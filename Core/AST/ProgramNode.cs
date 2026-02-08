@@ -3,13 +3,13 @@
 
 namespace Core.AST;
 [MessagePackObject]
-public class ProgramNode(int line) : ASTNode(line)
+public class ProgramNode : ASTNode
 {
-    [Key(1)]
+    [Key(0)]
     
     public List<ASTNode> Statements { get; set; } = [];
 
-    public override ASTNode Clone() => new ProgramNode(DebugIndex)
+    public override ASTNode Clone() => new ProgramNode
     {
         Statements = Statements.Select(node => node.Clone()).ToList()
     };
@@ -18,7 +18,6 @@ public class ProgramNode(int line) : ASTNode(line)
     {
         return DebugIndent($""" 
                             ProgramNode:
-                                DebugIndex: {DebugIndex}
                                 Statements: [{string.Join(",\n", Statements.Select(x => x.GetTree("\t\t")))}]
                             """, indent);
     }

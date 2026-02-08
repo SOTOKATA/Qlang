@@ -3,13 +3,13 @@
 
 namespace Core.AST;
 [MessagePackObject]
-public class StringRefNode(int line) : ASTNode(line)
+public class StringRefNode : ASTNode
 {
-    [Key(1)]
+    [Key(0)]
     
     public int Index { get; set; }
 
-    public override ASTNode Clone() => new StringRefNode(DebugIndex)
+    public override ASTNode Clone() => new StringRefNode
     {
         Index = Index
     };
@@ -18,7 +18,6 @@ public class StringRefNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             StringRefNode:
-                                DebugIndex: {DebugIndex}
                                 Ref: {Index}
                             """, indent);
     }

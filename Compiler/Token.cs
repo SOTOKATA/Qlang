@@ -5,8 +5,8 @@ public class Token(Tokens token, string value = "")
     public readonly Tokens TokenType = token;
     public readonly string Value = value;
     
-    // Debug variables
-    public int DebugIndex = -1;
+    // Debug variable
+    public int DebugIndex;
 
     public static string TokenToString(Tokens token)
     {

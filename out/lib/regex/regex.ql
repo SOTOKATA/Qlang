@@ -1,4 +1,3 @@
-import "$lib/standard"
 import "$lib/core"
 
 namespace regex: {

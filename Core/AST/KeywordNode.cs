@@ -3,20 +3,20 @@
 
 namespace Core.AST;
 [MessagePackObject]
-public class KeywordNode(int line) : ASTNode(line)
+public class KeywordNode : ASTNode
 {
-    [Key(1)]
+    [Key(0)]
     
     public int KeywordId { get; set; }
     
     public override string GetTree(string indent = "")
     {
-        return $"    DebugIndex: {DebugIndex}";
+        return KeywordId.ToString();
     }
 
     public override ASTNode Clone()
     {
-        return new KeywordNode(DebugIndex)
+        return new KeywordNode
         {
             KeywordId = KeywordId,
         };

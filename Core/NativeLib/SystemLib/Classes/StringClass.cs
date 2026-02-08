@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using Core.Dynamic;
+﻿using Core.Dynamic;
 
 namespace Core.NativeLib.SystemLib.Classes;
 
@@ -27,6 +26,9 @@ public class StringClass : IQlangClass
             ("trim", (Func<string, string>)(msg => msg.Trim())),
             ("trim_start", (Func<string, string>)(msg => msg.TrimStart())),
             ("trim_end", (Func<string, string>)(msg => msg.TrimEnd())),
+            ("trim_b", (Func<string, string, string>)((msg, str) => msg.Trim(str.FirstOrDefault()))),
+            ("trim_start_b", (Func<string, string, string>)((msg, str) => msg.TrimStart(str.FirstOrDefault()))),
+            ("trim_end_b", (Func<string, string, string>)((msg, str) => msg.TrimEnd(str.FirstOrDefault()))),
             ("substring", (Func<string, int, int, string>)((msg, start, length) => msg.Substring(start, length))),
             ("to_lower", (Func<string, string>)((str) => str.ToLower())),
             ("to_upper", (Func<string, string>)((str) => str.ToUpper())),

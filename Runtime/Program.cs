@@ -63,8 +63,6 @@ public static class Program
     {
         var dirPath = Path.Combine(Path.GetDirectoryName(Environment.ProcessPath) ?? "", $"{Path.GetFileNameWithoutExtension(Environment.ProcessPath)}.external.qli");
         
-        // Console.WriteLine("Path to load dependencies: " + dirPath);
-        
         // Case if native libs is not exists
         if (!Directory.Exists(dirPath))
             return new  NativeFunctionRegistry();

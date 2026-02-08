@@ -4,22 +4,22 @@
 namespace Core.AST;
 
 [MessagePackObject]
-public class BinaryOperationNode(int line) : ASTNode(line)
+public class BinaryOperationNode : ASTNode
 {
-    [Key(1)]
+    [Key(0)]
     
     public ASTNode? Left { get; set; }
 
-    [Key(2)]
+    [Key(1)]
     
     public int OperatorId { get; set; }
-    [Key(3)]
+    [Key(2)]
     
     public ASTNode? Right { get; set; }
 
     public override ASTNode Clone()
     {
-        return new BinaryOperationNode(DebugIndex)
+        return new BinaryOperationNode
         {
             Left = Left?.Clone(),
             OperatorId = OperatorId,
@@ -31,7 +31,6 @@ public class BinaryOperationNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             BinaryOperationNode:
-                                DebugIndex: {DebugIndex}
                                 Operator: {OperatorId}
                                 Left: {Left?.GetTree("\t\t") ??  "<undefined>"}
                                 Left: {Right?.GetTree("\t\t") ??  "<undefined>"}

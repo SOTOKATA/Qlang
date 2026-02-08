@@ -16,7 +16,13 @@ class Object: {
             
         return _native("std", "string", "to_string", obj);
     }
-        
+
+    function toString(): {
+        if isNull(this):
+            return "<null>";
+            
+        return _native("std", "string", "to_string", this);
+    } 
 }
 
 function str(const obj):

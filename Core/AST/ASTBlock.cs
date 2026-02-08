@@ -5,10 +5,8 @@ using MessagePack;
 namespace Core.AST;
 
 [MessagePackObject]
-public class ASTBlock(int line) : ASTNode(line)
+public class ASTBlock : ASTNode
 {
-    public ASTBlock() : this(-1) {}
-    
     [Key(-1)]
     
     public Dictionary<string, Variable> Variables { get; set; } = [];

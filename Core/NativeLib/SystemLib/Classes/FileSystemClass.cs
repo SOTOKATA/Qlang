@@ -21,6 +21,7 @@ public class FileSystemClass : IQlangClass
             ("file_name_without_extension", (Func<string, string?>)Path.GetFileNameWithoutExtension),
             ("file_name", (Func<string, string?>)Path.GetFileName),
             ("path_exists", (Func<string, bool>)Path.Exists),
+            ("get_dir", (Func<string, string>)((path) => Path.GetDirectoryName(path) ?? "")),
             
             ("directory_exists", (Func<string, bool>)Directory.Exists),
             ("directory_create", (Action<string>)((path) => Directory.CreateDirectory(path))),

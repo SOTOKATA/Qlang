@@ -24,5 +24,6 @@ namespace fs: {
             
             _native("std", "filesystem", "directory_remove", path, true);
         }
+
     }
 }

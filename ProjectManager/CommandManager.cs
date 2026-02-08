@@ -174,7 +174,7 @@ public static class CommandManager
     private static void Build(bool isPublish = false)
     {
         var project = LoadProject();
-        if (!project.Compile(isPublish))
+        if (!project.Compile(isPublish, (bool)project.GetCompileSetting(CompileSettings.SaveAlsoASTVersion)))
         {
             ConsoleLogger.Error("Cannot build current project.");
             return;
@@ -219,6 +219,10 @@ public static class CommandManager
                 [
                     new TableCell("build", ConsoleColor.Yellow), new TableCell(""),
                     new TableCell("Build's existing project")
+                ],
+                [
+                    new TableCell("publish", ConsoleColor.Yellow), new TableCell(""),
+                    new TableCell("Publish existing project (without debug symbols)")
                 ],
                 [
                     new TableCell("run", ConsoleColor.Yellow), new TableCell(""),

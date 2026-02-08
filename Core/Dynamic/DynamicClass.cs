@@ -30,7 +30,7 @@ public class DynamicClass(string name)
         var clonedVariables = Variables
             .ToDictionary(
                 kv => kv.Key,
-                kv => new Variable(kv.Value.Name, kv.Value.Value, kv.Value.IsStatic, kv.Value.IsPrivate, kv.Value.IsConst)
+                kv => new Variable(kv.Value.Name, kv.Value.Value, kv.Value.IsPrivate, kv.Value.IsConst)
             );
         
         clone.Variables = clonedVariables;

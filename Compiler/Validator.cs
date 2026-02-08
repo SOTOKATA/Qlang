@@ -82,6 +82,8 @@ public class Validator(SourceFileTable sourceFileTable, DebugTable debugTable, S
     
     private (int, string) GetDebug(ASTNode node)
     {
-        return (debugTable.GetLineIndex(node.DebugIndex) + 1, sourceFileTable[debugTable.GetFileId(node.DebugIndex)]);
+        return (-1, "This is not supported");
+        
+        // return (debugTable.GetLineIndex(node.DebugIndex) + 1, sourceFileTable[debugTable.GetFileId(node.DebugIndex)]);
     }
 }

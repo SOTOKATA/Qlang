@@ -4,15 +4,15 @@
 namespace Core.AST;
 
 [MessagePackObject]
-public class CallNode(int line) : ASTNode(line)
+public class CallNode : ASTNode
 {
-    [Key(1)]
+    [Key(0)]
     
     public List<ASTNode> Objects = [];
 
     public override ASTNode Clone()
     {
-        return new CallNode(DebugIndex)
+        return new CallNode
         {
             Objects = Objects.Select(node => node.Clone()).ToList(),
         };
@@ -22,7 +22,6 @@ public class CallNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             CallNode:
-                                DebugIndex: {DebugIndex}
                                 Objects: [{string.Join(" ,\n", Objects.Select(x => x.GetTree("\t\t")))}]
                             """, indent);
     }

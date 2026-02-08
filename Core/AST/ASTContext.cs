@@ -15,4 +15,5 @@ public class ASTContext
     public List<ASTBlock> Blocks { get; } = [];
     
     public ASTNode? CurrentNode { get; set; }
+    public int CurrentDebugIndex { get; set; } = -1;
 }

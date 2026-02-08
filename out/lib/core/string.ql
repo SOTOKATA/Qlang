@@ -206,6 +206,18 @@ class String extends DataType: {
     }
 
     // Trim string
+    function trim(const<String> str):
+        return String.new(_native("std", "string", "trim_b", _str(_value), _str(str)));
+
+    // Trim start string
+    function trimStart(const<String> str):
+        return String.new(_native("std", "string", "trim_start_b", _str(_value), _str(str)));
+
+    // Trim end string
+    function trimEnd(const<String> str):
+        return String.new(_native("std", "string", "trim_end_b", _str(_value), _str(str)));
+
+        // Trim string
     function trim():
         return String.new(_native("std", "string", "trim", _str(_value)));
 

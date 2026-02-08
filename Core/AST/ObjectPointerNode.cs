@@ -3,9 +3,9 @@
 
 namespace Core.AST;
 [MessagePackObject]
-public class ObjectPointerNode(int line) : ASTNode(line)
+public class ObjectPointerNode : ASTNode
 {
-    [Key(1)]
+    [Key(0)]
     
     public int NameId;
     
@@ -13,7 +13,6 @@ public class ObjectPointerNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             ObjectPointerNode:
-                                DebugIndex: {DebugIndex}
                                 Name: {NameId}
                             """,
             indent);
@@ -21,7 +20,7 @@ public class ObjectPointerNode(int line) : ASTNode(line)
 
     public override ASTNode Clone()
     {
-        return new ObjectPointerNode(DebugIndex)
+        return new ObjectPointerNode
         {
             NameId = NameId
         };

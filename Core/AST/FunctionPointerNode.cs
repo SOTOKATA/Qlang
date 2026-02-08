@@ -3,12 +3,12 @@
 
 namespace Core.AST;
 [MessagePackObject]
-public class FunctionPointerNode(int line) : ASTNode(line)
+public class FunctionPointerNode : ASTNode
 {
-    [Key(1)]
+    [Key(0)]
     
     public required int NameId;
-    [Key(2)]
+    [Key(1)]
     
     public required List<ASTNode> Arguments;
     
@@ -16,7 +16,6 @@ public class FunctionPointerNode(int line) : ASTNode(line)
     {
         return DebugIndent($"""
                             FunctionPointerNode:
-                                DebugIndex: {DebugIndex}
                                 Name: {NameId}
                                 Arguments: [{string.Join(",\n", Arguments.Select(x => x.GetTree("\t\t")))}]
                             """, indent);
@@ -24,7 +23,7 @@ public class FunctionPointerNode(int line) : ASTNode(line)
 
     public override ASTNode Clone()
     {
-        return new FunctionPointerNode(DebugIndex)
+        return new FunctionPointerNode
         {
             NameId = NameId,
             Arguments = [..Arguments.ConvertAll(arg => arg.Clone())]

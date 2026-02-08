@@ -6,7 +6,7 @@ public partial class Interpreter
     {
         return (from context in _contextStack.Reverse()
             let location = context.CurrentNode != null
-                ? $"{GetDebug(context.CurrentNode).Item2}:{GetDebug(context.CurrentNode).Item1}"
+                ? $"{GetDebug(context.CurrentDebugIndex).Item2}:{GetDebug(context.CurrentDebugIndex).Item1}"
                 : "unknown"
             let funcName = context.Function?.Name ?? "global"
             let className = context.Class?.Name

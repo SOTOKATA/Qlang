@@ -3,23 +3,22 @@
 
 namespace Core.AST;
 [MessagePackObject]
-public class CollectionNode(int line) : ASTNode(line)
+public class CollectionNode : ASTNode
 {
-    [Key(1)]
+    [Key(0)]
     
     public required List<ASTNode> Collection { get; set; }
     public override string GetTree(string indent = "")
     {
         return DebugIndent($"""
                             CollectionNode:
-                                DebugIndex: {DebugIndex}
                                 Collection: [{string.Join(",\n", Collection.Select(x => x.GetTree("\t\t")))}]
                             """, indent);
     }
 
     public override ASTNode Clone()
     {
-        var node = new CollectionNode(DebugIndex)
+        var node = new CollectionNode
         {
             Collection = Collection.Select(node => node.Clone()).ToList()
         };

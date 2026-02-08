@@ -58,31 +58,48 @@ public partial class Interpreter
 
             if (isLoop)
             {
-                if (statement is KeywordNode kNode)
+                if (statement is LineNode { Content: KeywordNode kNode })
                 {
                     var nodeName = _stringPoolTable[kNode.KeywordId];
-                    if (nodeName == Keywords.ContinueKeyword || _isContinueKeyword)
+                    if (nodeName == Keywords.ContinueKeyword)
                     {
                         _isContinueKeyword = false;
                         return false;
                     }
-                    
-                    if (nodeName == Keywords.BreakKeyword || _isBreakKeyword)
+                
+                    if (nodeName == Keywords.BreakKeyword)
                     {
                         _isBreakKeyword = false;
                         return true;
                     }
                 }
+                if (_isContinueKeyword)
+                {
+                    _isContinueKeyword = false;
+                    return false;
+                }
+                
+                if (_isBreakKeyword)
+                {
+                    _isBreakKeyword = false;
+                    return true;
+                }
             }
             else
             {
-                if (statement is KeywordNode kNode)
+                if (statement is LineNode { Content: KeywordNode kNode })
                 {
                     var nodeName = _stringPoolTable[kNode.KeywordId];
                     if (nodeName == Keywords.ContinueKeyword)
+                    {
                         _isContinueKeyword = true;
-                    else if (nodeName == Keywords.BreakKeyword)
+                        return true;
+                    }
+                    if (nodeName == Keywords.BreakKeyword)
+                    {
                         _isBreakKeyword = true;
+                        return true;
+                    }
                 }
             }
 
@@ -137,7 +154,7 @@ public partial class Interpreter
         AddBlockToContext(switchNode);
 
         var block = switchNode.DefaultBlock;
-        foreach (var pair in from pair in switchNode.CaseBlocks let binOp = new BinaryOperationNode(pair.DebugIndex)
+        foreach (var pair in from pair in switchNode.CaseBlocks let binOp = new BinaryOperationNode
                  {
                      Left = pair.Condition,
                      Right = switchNode.Condition,
