@@ -7,16 +7,12 @@ public class CompileSettings : Settings
         Dictionary ??= new Dictionary<string, SettingsItem>
         {
             { OutputFilename, new("program", typeof(string)) },
-            { DebugMode, new(false, typeof(bool)) },
-            { GZipCompress, new(true, typeof(bool)) },
-            { JsonIndented, new(false, typeof(bool)) },
+            { SaveAlsoASTVersion, new(false, typeof(bool)) },
         };
     }
 
     public static string OutputFilename => "output_filename";
-    public static string DebugMode => "debug_mode";
-    public static string GZipCompress => "gzip_compress";
-    public static string JsonIndented => "json_indented";
+    public static string SaveAlsoASTVersion => "save_also_ast_version";
 
     public static string JsonFileName => "compile.settings.json";
 }

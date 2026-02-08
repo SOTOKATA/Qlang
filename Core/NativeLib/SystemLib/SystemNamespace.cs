@@ -8,7 +8,7 @@ public class SystemNamespace  : IQlangNamespace
     public List<IQlangClass> Classes { get; set; } = [ 
     new ArrayClass(), new ConsoleClass(), new EnvironmentClass(),
     new DateTimeClass(), new ExceptionClass(), new FileSystemClass(),
-    new MetaClass(), new NumberClass(), new ObjectClass(), new ParserClass(),
+    new NumberClass(), new ObjectClass(), new ParserClass(),
     new RegexClass(), new StringClass(), new MathClass()
     ];
 }

@@ -89,14 +89,23 @@ public partial class Interpreter
                 case "_str":
                     return ParseString(string.Join("", args.Select(a => a is null ? "" : a.ToString())));
                 case "_native":
-                    var name = args[0]?.ToString();
+                    if (args.Length < 3)
+                        throw new QlangRuntimeException(
+                            """
+                            Undefined call structure of _native system command.
+                            Structure is _native(\"<namespace>\", \"<class>\", \"<function>)\", <args>
+                            """, GetDebug(call), GetStackTrace());
+                    
+                    var @namespace = args[0]?.ToString();
+                    var @class = args[1]?.ToString();
+                    var function = args[2]?.ToString();
                 
-                    args = args.Skip(1).ToArray();
+                    args = args.Skip(3).ToArray();
                 
                     object? returnValue;
                     try
                     {
-                        returnValue = _nativeFunctions.Call(name!, args);
+                        returnValue = _nativeFunctions.Call($"{@namespace}.{@class}.{function}", args);
                     }
                     catch (Exception ex)
                     {

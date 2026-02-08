@@ -23,31 +23,31 @@ class Array extends DataType: {
     }
 
     function isArray(const var):
-        return _native("std.array.is_array", var);
+        return _native("std", "array", "is_array", var);
 
     function isCollection(const collection):
-        return _native("std.array.is", collection);
+        return _native("std", "array", "is", collection);
 
     function getCollection():
         return _value;
 
     function contains(const item):
-        return _native("std.array.contains", _value, item);
+        return _native("std", "array", "contains", _value, item);
 
     // Add element
     function push(const item):
-        _native("std.array.add", _value, item);
+        _native("std", "array", "add", _value, item);
 
     // Clear array
     function clear():
-        _value = _native("std.array.create");
+        _value = _native("std", "array", "create");
 
     // Get at index
     function at(const<Number> index): {
         checkIndex(index);
 
         index = std::Parser.asInt(index);
-        return _native("std.array.get", _value, index);
+        return _native("std", "array", "get", _value, index);
     }
 
     // Set at index
@@ -56,14 +56,14 @@ class Array extends DataType: {
         
         index = std::Parser.asInt(index);
 
-        _native("std.array.set", _value, index, item);
+        _native("std", "array", "set", _value, index, item);
     }
 
     function insert(const<Number> index, let item): {
         checkIndex(index);
         
         index = std::Parser.asInt(index);
-        _native("std.array.insert", _value, index, item);
+        _native("std", "array", "insert", _value, index, item);
     }
 
     // Remove at index
@@ -71,16 +71,16 @@ class Array extends DataType: {
         checkIndex(index);
 
         index = std::Parser.asInt(index);
-        _native("std.array.remove_at", _value, index);
+        _native("std", "array", "remove_at", _value, index);
     }
 
     // Get index of item
     function indexOf(let item):
-        return _native("std.array.index_of", _value, item);
+        return _native("std", "array", "index_of", _value, item);
 
     // Get length
     function length():
-        return _native("std.array.count", _value);
+        return _native("std", "array", "count", _value);
     function count(): return length();
 
     function forEach(const func): {

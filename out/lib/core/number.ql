@@ -9,7 +9,7 @@ class Number: {
 
     // check if 'var' is number
     function isNumber(let var): {
-        return _native("std.number.try_parse", var);
+        return _native("std", "number", "try_parse", var);
     }
 
     // Get int styled number ('3.421' to '3')
@@ -19,6 +19,6 @@ class Number: {
 
     // Change numeric style (ex.: '3.214' to '3.2' with pattern '0.0')
     function toFixed(let number, let pattern): {
-        return _native("std.number.to_string", number, _str(pattern));
+        return _native("std", "number", "to_string", number, _str(pattern));
     }
 }

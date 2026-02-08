@@ -17,6 +17,7 @@ public class Compiler
     {
         var stopWatch = Stopwatch.StartNew();
         Console.Write("Importing...");
+
         (var outputScript, DllDependencies) = PreCompile.IncludeFiles(script, fileName, []);
         Console.WriteLine(" success.");
         

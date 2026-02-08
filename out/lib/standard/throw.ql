@@ -6,11 +6,11 @@ namespace std:  {
     class Throw: {
         // std::Throw default exception
         function message(const<String> message): {
-            _native("std.exception.throw", _str(message), true);
+            _native("std", "exception", "throw", _str(message), true);
         }
 
         function exception(const exception): 
-            _native("std.exception.throw", _str(exception.toString()), exception.printStackTrace);
+            _native("std", "exception", "throw", _str(exception.toString()), exception.printStackTrace);
 
         // Thow exception if function is not implement
         function notImplementedException(): {

@@ -7,11 +7,11 @@ public class ClassNode(int line) : ASTNode(line)
 {
     [Key(1)]
     
-    public required int NameId { get; set; }
+    public required int NameId { get; init; }
     
     [Key(2)]
     
-    public required int ExtendsId { get; set; }
+    public CallNode? ExtendsPath { get; set; }
     [Key(3)]
     
     public required List<ASTNode> Body { get; set; }
@@ -21,7 +21,7 @@ public class ClassNode(int line) : ASTNode(line)
         return new ClassNode(DebugIndex)
         {
             NameId = NameId, 
-            ExtendsId = ExtendsId,
+            ExtendsPath = ExtendsPath,
             Body = Body.Select(node => node.Clone()).ToList()
         };
     }

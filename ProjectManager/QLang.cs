@@ -7,7 +7,7 @@ namespace ProjectManager;
 
 public class QLang
 {
-    public bool Compile(string path, string? filename = null, bool isPublish = false)
+    public bool Compile(string path, string? filename = null, bool isPublish = false, bool saveAST = false)
     {
         var code = File.ReadAllText(path);
         Compiler.Compiler c = new();
@@ -29,6 +29,13 @@ public class QLang
             SourceFileTable = c.SourceFileTable,
             DebugTable = c.DebugTable
         }, path, isPublish);
+
+        if (saveAST)
+        {
+            File.WriteAllText(path + ".ast.txt", programNode.GetTree());
+            File.WriteAllText(path + ".string_pool.txt", string.Join("\n", c.StringPoolTable.StringPool));
+            File.WriteAllText(path + ".number_list.txt", string.Join("\n", c.NumberList));
+        }
 
         return true;
     }

@@ -3,9 +3,9 @@ import "$lib/core"
 
 namespace std:  {
     class Math: {
-        const PI = _native("std.math.pi");
-        const E = _native("std.math.e");
-        const TAU = _native("std.math.tau");
+        const PI = _native("std", "math", "pi");
+        const E = _native("std", "math", "e");
+        const TAU = _native("std", "math", "tau");
 
         function max(const<Number> a, const<Number> b):
             return boolCase(a > b, a, b);
@@ -17,7 +17,7 @@ namespace std:  {
             if min >= max:
                 Throw.message("Min cannot be more than or equal to max.");
 
-            return _native("std.Math.random", min, max);
+            return _native("std", "Math", "random", min, max);
         }
 
         function abs(const<Number> n): {
@@ -25,13 +25,13 @@ namespace std:  {
         }
         
         function pow(const number, const pow):
-            return _native("std.math.pow", number, pow);
+            return _native("std", "math", "pow", number, pow);
 
         function sin(const<Number> radians):
-            return _native("std.math.sin", radians);
+            return _native("std", "math", "sin", radians);
  
         function cos(const<Number> radians):
-            return _native("std.math.cos", radians);
+            return _native("std", "math", "cos", radians);
 
         function tan(const<Number> radians): {
             const cos = cos(radians);

@@ -1,3 +1,4 @@
+// Base exception
 class Exception extends Object: {
     let message = "";
     let printStackTrace = false;

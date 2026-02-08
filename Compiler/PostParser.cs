@@ -221,11 +221,15 @@ public class PostParser(SourceFileTable table, DebugTable debugTable, StringPool
         foreach (var @namespace in program.Statements.OfType<NamespaceNode>())
             classNodes.AddRange(Parser.GetClassesFromNamespaceRecursively(@namespace));
 
-        var objIndex = stringPoolTable.Add(QlSystemClasses.ObjectClassName);
+        var objPath = new CallNode(-1)
+        {
+            Objects = [new ObjectPointerNode(-1) { NameId = stringPoolTable.Add(QlSystemClasses.ObjectClassName) }]
+        };
+        
         classNodes.ForEach(c =>
         {
-            if (string.IsNullOrEmpty(stringPoolTable[c.ExtendsId]) && c.ExtendsId != objIndex && c.NameId != objIndex)
-                c.ExtendsId = objIndex;
+            if (c.ExtendsPath == null && c.ExtendsPath?.Objects != objPath.Objects && c.NameId != stringPoolTable.Add(QlSystemClasses.ObjectClassName))
+                c.ExtendsPath = objPath;
         });
             
 
@@ -258,7 +262,7 @@ public class PostParser(SourceFileTable table, DebugTable debugTable, StringPool
         List<ClassNode> allClasses,
         HashSet<int> resolving)
     {
-        if (stringPoolTable[cls.ExtendsId] == "")
+        if (cls.ExtendsPath == null)
             return;
 
         if (!resolving.Add(cls.NameId))
@@ -267,11 +271,12 @@ public class PostParser(SourceFileTable table, DebugTable debugTable, StringPool
                 GetDebug(cls),
                 "PostParser");
 
-        var parent = allClasses.FirstOrDefault(c => c.NameId == cls.ExtendsId);
+        var parent = allClasses.FirstOrDefault(c => c.NameId == ((ObjectPointerNode)cls.ExtendsPath.Objects[^1]).NameId);
 
         if (parent == null)
             throw new QlangCompileException(
-                $"Extended class '{stringPoolTable[cls.ExtendsId]}' is not found",
+                $"Extended class '{string.Join(".", cls.ExtendsPath.Objects.Select(x => stringPoolTable[x switch {
+                    ObjectPointerNode p => p.NameId, NamespacePointerNode p => p.NameId, FunctionPointerNode p => p.NameId }]))}' is not found",
                 GetDebug(cls),
                 "PostParser");
 
@@ -279,7 +284,7 @@ public class PostParser(SourceFileTable table, DebugTable debugTable, StringPool
 
         cls.Body = MergeBodies(parent.Body, cls.Body);
 
-        cls.ExtendsId = stringPoolTable.Add("");
+        cls.ExtendsPath = null;
 
         resolving.Remove(cls.NameId);
     }

@@ -324,24 +324,29 @@ public class Parser
         Expect(Tokens.Keyword, Keywords.ClassDeclaration);
         var nameToken = Expect(Tokens.Identifier);
 
-        var extends = "";
+        CallNode? extends = null;
         if (Check(Tokens.Keyword) && Current().Value == Keywords.ExtendsKeyword &&
             Peek()?.TokenType == Tokens.Identifier)
         {
             // Skip extends keyword
             Advance();
 
-            extends = Expect(Tokens.Identifier).Value;
+            var path = ParsePrimaryPath();
+            
+            if (path is not CallNode callNode)
+                throw new QlangCompileException("Undefined path to extends class", GetDebug(nameToken), "Parser");
+
+            extends = callNode;
         }
         
         Expect(Tokens.Colon);
 
         if (!Check(Tokens.LBrace))
-            throw new QlangCompileException("Class's body cannot be one-line", _debugTable.GetLineIndex(Current().DebugIndex), "Parser", _sourceFileTable[_debugTable.GetFileId(Current().DebugIndex)]);
+            throw new QlangCompileException("Class's body cannot be one-line", GetDebug(nameToken), "Parser");
 
         var body = ParseBlock();
 
-        return new ClassNode(nameToken.DebugIndex) { NameId = _stringPoolTable.Add(nameToken.Value), Body = body, ExtendsId = _stringPoolTable.Add(extends) };
+        return new ClassNode(nameToken.DebugIndex) { NameId = _stringPoolTable.Add(nameToken.Value), Body = body, ExtendsPath = extends };
     }
 
     private ForNode ParseFor()
@@ -818,8 +823,7 @@ public class Parser
             var @class = new ClassNode(Current().DebugIndex)
             {
                 NameId = _stringPoolTable.Add("~object"),
-                Body = [],
-                ExtendsId = _stringPoolTable.Add("")
+                Body = []
             };
 
             // While current token is not RBrace ('}')

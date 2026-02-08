@@ -5,7 +5,7 @@ namespace dt:  {
         function wait(let<Number> millisec): {
             millisec = std::Parser.asInt(millisec);
 
-            _native("std.datetime.wait", millisec);
+            _native("std", "datetime", "wait", millisec);
         }
     }
 }
