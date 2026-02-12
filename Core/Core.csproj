@@ -12,6 +12,7 @@
         <Description>Core library for Qlang</Description>
         <PackageTags>qlang;core;sdk</PackageTags>
         <RepositoryUrl>https://github.com/SOTOKATA/Qlang</RepositoryUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 
     <ItemGroup>
