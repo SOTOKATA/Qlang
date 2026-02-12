@@ -4,6 +4,14 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+
+        <PackageId>QlangCore</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>SOTOKATA</Authors>
+        <Company>SOTOKATA</Company>
+        <Description>Core library for Qlang</Description>
+        <PackageTags>qlang;core;sdk</PackageTags>
+        <RepositoryUrl>https://github.com/SOTOKATA/Qlang</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
