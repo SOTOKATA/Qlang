@@ -30,9 +30,9 @@ public class SwitchNode : ASTBlock
     {
         return DebugIndent($"""
                             SwitchNode:
-                                Condition: {Condition.GetTree("\t\t")}
-                                DefaultBlock: [{string.Join(",\n", DefaultBlock?.Select(x => x.GetTree("\t\t")) ?? ["<not_exists>"])}]
-                                CaseBlocks: [{string.Join(",\n", CaseBlocks.Select(x => x.GetTree("\t\t")))}]
+                                Condition: {Condition.GetTree("\t")}
+                                DefaultBlock: [{string.Join(",\n", DefaultBlock?.Select(x => x.GetTree("\t")) ?? ["<not_exists>"])}]
+                                CaseBlocks: [{string.Join(",\n", CaseBlocks.Select(x => x.GetTree("\t")))}]
                             """, indent);
     }
 }

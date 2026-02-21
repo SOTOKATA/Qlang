@@ -18,7 +18,7 @@ public class ProgramNode : ASTNode
     {
         return DebugIndent($""" 
                             ProgramNode:
-                                Statements: [{string.Join(",\n", Statements.Select(x => x.GetTree("\t\t")))}]
+                                Statements: [{string.Join(",\n", Statements.Select(x => x.GetTree("\t")))}]
                             """, indent);
     }
 }

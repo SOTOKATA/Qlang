@@ -54,6 +54,8 @@ public class Parser
         program = postParser.IncludeExtends(program);
 
         new Validator(_sourceFileTable, _debugTable, _stringPoolTable).CheckValidate(program);
+        
+        Console.WriteLine(_stringPoolTable.Add("~object"));
 
         return (program, _stringPoolTable);
     }
@@ -365,8 +367,11 @@ public class Parser
 
     private WhileNode ParseWhile(bool isDoWhile = false)
     {
-        Expect(Tokens.Keyword, isDoWhile ? Keywords.DoWhileBlock : Keywords.WhileBlock);
-        var condition = ParseExpression();
+        var debugIndex = Expect(Tokens.Keyword, isDoWhile ? Keywords.DoWhileBlock : Keywords.WhileBlock).DebugIndex;
+        var condition = new LineNode(debugIndex)
+        {
+            Content = ParseExpression()
+        };
         Expect(Tokens.Colon);
         // Expect(Tokens.Semicolon);
 
@@ -377,8 +382,11 @@ public class Parser
 
     private SwitchNode ParseSwitch()
     {
-        Expect(Tokens.Keyword, Keywords.SwitchBlock);
-        var condition = ParseExpression();
+        var debugIndex = Expect(Tokens.Keyword, Keywords.SwitchBlock).DebugIndex;
+        var condition = new LineNode(debugIndex)
+        {
+            Content = ParseExpression()
+        };
         Expect(Tokens.Colon);
         Expect(Tokens.LBrace);
 
@@ -411,13 +419,14 @@ public class Parser
 
     private IfNode ParseIf()
     {
-        Expect(Tokens.Keyword, Keywords.IfBlock);
-        var condition = ParseExpression();
+        var debugIndex = Expect(Tokens.Keyword, Keywords.IfBlock).DebugIndex;
+        var condition = new LineNode(debugIndex)
+        {
+            Content = ParseExpression()
+        };
         Expect(Tokens.Colon);
-        // Expect(Tokens.Semicolon);
 
         var thenBlock = ParseBlock();
-
 
         List<ASTNode> elseBlock = [];
 
@@ -474,7 +483,7 @@ public class Parser
 
     private ReturnNode ParseReturn()
     {
-        Expect(Tokens.Keyword);
+        var debugIndex = Expect(Tokens.Keyword).DebugIndex;
 
         ASTNode? node = null;
         if (!Check(Tokens.Semicolon))
@@ -482,7 +491,7 @@ public class Parser
 
         Expect(Tokens.Semicolon);
 
-        return new ReturnNode { ReturnValue = node };
+        return new ReturnNode { ReturnValue = node is LineNode ? node : new LineNode(debugIndex) { Content = node } };
     }
 
     /// <summary>
@@ -825,7 +834,8 @@ public class Parser
                 if (Check(Tokens.Keyword, Keywords.ConstVariableDeclaration) ||
                     Check(Tokens.Keyword, Keywords.VariableDeclaration))
                 {
-                    @class.Body.Add(ParseVariableDeclaration(true));
+                    var debugIndex = Current().DebugIndex;
+                    @class.Body.Add(new LineNode(debugIndex) { Content = ParseVariableDeclaration(true) });
                     continue;
                 }
                 if (Check(Tokens.Comma))
@@ -834,7 +844,7 @@ public class Parser
                     continue;
                 }
                 
-                if (!Check(Tokens.RParen))
+                if (!Check(Tokens.RBrace))
                     throw new QlangCompileException("Undefined variable: " + Current().TokenType + " " + Current().Value, GetDebug(Current()), "Parser");
             }
 
@@ -1258,6 +1268,13 @@ public class Parser
         if (!Check(type))
         {
             var current = Current();
+            
+            throw new QlangCompileException(
+                $"""
+                 Incorrect syntax, expected '{Token.TokenToString(type)}', got '{Token.TokenToString(current.TokenType)}'
+                 """,
+                GetDebug(current), "Parser");
+            
             throw new QlangCompileException($"""
                                  Expected {type}, got {current.TokenType} (Value: {(current.Value == "" ? "Null" : current.Value)})
                                         line: '{_line}'
@@ -1285,7 +1302,7 @@ public class Parser
         if (token is null)
             return (-1, "undefined");
         
-        return (_debugTable.GetLineIndex(token.DebugIndex) + 1,
+        return (_debugTable.GetLineIndex(token.DebugIndex),
             _sourceFileTable[_debugTable.GetFileId(token.DebugIndex)]);
     }
     

@@ -16,8 +16,8 @@ public class SwitchCaseNode : ASTNode
     {
         return DebugIndent($"""
                             SwitchCaseNode:
-                                Condition: {Condition.GetTree("\t\t")}
-                                CaseBlock: [{string.Join(",\n", CaseBlock.Select(x => x.GetTree("\t\t")))}]
+                                Condition: {Condition.GetTree("\t")}
+                                CaseBlock: [{string.Join(",\n", CaseBlock.Select(x => x.GetTree("\t")))}]
                             """,
             indent
             );

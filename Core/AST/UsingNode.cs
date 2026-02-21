@@ -11,7 +11,7 @@ public class UsingNode : ASTNode
     {
         return DebugIndent($"""
                             UsingNode:
-                                CallPath: {CallPath.GetTree("\t\t")}
+                                CallPath: {CallPath.GetTree("\t")}
                             """, indent);
     }
 

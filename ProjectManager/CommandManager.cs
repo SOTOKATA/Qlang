@@ -62,16 +62,13 @@ public static class CommandManager
                     return;
             }
         }
-        // catch (QlangCompileException e)
-        // {
-        //     Console.ForegroundColor = ConsoleColor.Red;
-        //     Console.Write("Compile error: ");
-        //     Console.ResetColor();
-        //     Console.WriteLine(e);
-        // }
+        catch (QlangCompileException e)
+        {
+            WriteErrorMessageWithDelay(e.ToString());
+        }
         catch (QlangProgramException e)
         {
-            WriteErrorMessageWithDelay(e.Message);
+            WriteErrorMessageWithDelay(e.ToString());
         }
         catch (QlangRuntimeException e)
         {
@@ -80,7 +77,7 @@ public static class CommandManager
         }
         catch (ProjectException e)
         {
-            WriteErrorMessageWithDelay(e.Message);
+            WriteErrorMessageWithDelay(e.ToString());
         }
         catch (FileNotFoundException e)
         {

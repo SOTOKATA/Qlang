@@ -32,8 +32,8 @@ public class BinaryOperationNode : ASTNode
         return DebugIndent($"""
                             BinaryOperationNode:
                                 Operator: {OperatorId}
-                                Left: {Left?.GetTree("\t\t") ??  "<undefined>"}
-                                Left: {Right?.GetTree("\t\t") ??  "<undefined>"}
+                                Left: {Left?.GetTree("\t") ??  "<undefined>"}
+                                Left: {Right?.GetTree("\t") ??  "<undefined>"}
                             """, indent);
     }
 }

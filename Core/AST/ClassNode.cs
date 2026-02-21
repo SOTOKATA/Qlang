@@ -27,11 +27,11 @@ public class ClassNode : ASTNode
     }
 
     public override string GetTree(string indent = "")
-    {//Extends: {string.Join(", ", Extends?.Objects.Select(x => x.GetTree("\t\t")) ?? ["<not_exists>"])}
+    {//Extends: {string.Join(", ", Extends?.Objects.Select(x => x.GetTree("\t")) ?? ["<not_exists>"])}
         return DebugIndent($"""
                 ClassNode:
                     Name: {NameId}
-                    Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t\t")))}]
+                    Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t")))}]
                 """, indent);
     }
 }

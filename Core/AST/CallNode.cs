@@ -22,7 +22,7 @@ public class CallNode : ASTNode
     {
         return DebugIndent($"""
                             CallNode:
-                                Objects: [{string.Join(" ,\n", Objects.Select(x => x.GetTree("\t\t")))}]
+                                Objects: [{string.Join(" ,\n", Objects.Select(x => x.GetTree("\t")))}]
                             """, indent);
     }
 }

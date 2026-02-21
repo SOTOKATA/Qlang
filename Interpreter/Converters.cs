@@ -66,6 +66,7 @@ public partial class Interpreter
                     .IsPrivate, assignmentNode.IsConst);
 
         // Remove all AssignmentNodes from body
+        classNode = (classNode.Clone() as ClassNode)!;
         classNode.Body.RemoveAll(node => node is LineNode);
 
         dynamicClass.Body = classNode.Body;
@@ -101,7 +102,7 @@ public partial class Interpreter
         }
 
         // Add body and modificators
-        dynamicFunction.Body = functionNode.Body;
+        dynamicFunction.Body.AddRange(functionNode.Body.Select(x => x.Clone()));
         dynamicFunction.IsPrivate = functionNode.IsPrivate;
 
         return dynamicFunction;

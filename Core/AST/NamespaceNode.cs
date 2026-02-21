@@ -27,7 +27,7 @@ public class NamespaceNode : ASTNode
                             NamespaceNode:
                                 Name: {NameId}
                                 IsPrivate: {IsPrivate}
-                                Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t\t")))}]
+                                Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t")))}]
                             """, indent);
     }
 }

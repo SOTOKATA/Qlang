@@ -17,7 +17,7 @@ public class FunctionPointerNode : ASTNode
         return DebugIndent($"""
                             FunctionPointerNode:
                                 Name: {NameId}
-                                Arguments: [{string.Join(",\n", Arguments.Select(x => x.GetTree("\t\t")))}]
+                                Arguments: [{string.Join(",\n", Arguments.Select(x => x.GetTree("\t")))}]
                             """, indent);
     }
 

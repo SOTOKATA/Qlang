@@ -44,6 +44,17 @@ public partial class Interpreter
         switch (arg)
         {
             case DynamicClass @class:
+                if (@class.ClassName == "~object" && @class.Variables.ContainsKey("_objectName"))
+                {
+                    object? className;
+
+                    if (@class.Variables["_objectName"].Value is string or int or long or double or float or bool)
+                        className = @class.Variables["_objectName"].Value;
+                    else className = EvaluateExpression((ASTNode)@class.Variables["_objectName"].Value!);
+
+                    return @class.ToString() + ":" + (className?.ToString() ?? "");
+                }
+                
                 return @class.ToString();
             case FunctionNode fn:
                 return _stringPoolTable[fn.NameId];

@@ -15,7 +15,7 @@ public class LineNode(int debugIndex) : ASTNode
         return DebugIndent($"""
                 LineNode:
                     DebugIndex: {DebugIndex}
-                    Content: {Content?.GetTree("\t\t") ?? "<undefined>"}
+                    Content: {Content?.GetTree("\t") ?? "<undefined>"}
                 """, indent);
     }
 

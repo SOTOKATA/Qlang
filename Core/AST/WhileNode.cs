@@ -29,9 +29,9 @@ public class WhileNode : ASTBlock
     {
         return DebugIndent($"""
                             WhileNode:
-                                Condition: {Condition.GetTree("\t\t")}
+                                Condition: {Condition.GetTree("\t")}
                                 IsDoWhile: {IsDoWhile}
-                                Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t\t")))}]
+                                Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t")))}]
                             """, indent);
     }
 }

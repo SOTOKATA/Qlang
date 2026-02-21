@@ -4,14 +4,15 @@ public static class ConsoleLogger
 {
     private static void _Log(string message, string action = "", ConsoleColor color = default)
     {
+        action = action.ToLower();
         var lines = message.Split('\n');
 
         foreach (var line in lines)
         {
-            if (action != "")
+            if (action != "" && !string.IsNullOrWhiteSpace(line))
             {
                 Console.ForegroundColor = color;
-                Console.Write(action.ToLower() + ": ");
+                Console.Write(action + ": ");
                 Console.ResetColor();
             }
 

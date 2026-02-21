@@ -48,9 +48,9 @@ public class AssignmentNode(bool isPrivate, bool isConst, bool isNew) : ASTNode
     {
         return DebugIndent($"""
                             VariableNode:
-                                Path: [{string.Join(",\n", Path.Select(x => x.GetTree("\t\t")))}]
-                                Value: {Value?.GetTree("\t\t") ?? "<undefined>"}
-                                Type: {Type?.GetTree("\t\t")}
+                                Path: [{string.Join(",\n", Path.Select(x => x.GetTree("\t")))}]
+                                Value: {Value?.GetTree("\t") ?? "<undefined>"}
+                                Type: {Type?.GetTree("\t")}
                                 IsPrivate: {IsPrivate}
                                 IsConst: {IsConst}
                                 IsNew: {IsNew}

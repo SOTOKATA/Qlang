@@ -4,7 +4,7 @@ public partial class Interpreter
 {
     private List<string> GetStackTrace(int skip = 0)
     {
-        return (from context in _contextStack.Reverse()
+        return (from context in _contextStack
             let location = context.CurrentNode != null
                 ? $"{GetDebug(context.CurrentDebugIndex).Item2}:{GetDebug(context.CurrentDebugIndex).Item1}"
                 : "unknown"
@@ -12,6 +12,6 @@ public partial class Interpreter
             let className = context.Class?.Name
             select className != null
                 ? $"at {className}.{funcName} ({location})"
-                : $"at {funcName} ({location})").SkipLast(skip).ToList();
+                : $"at {funcName} ({location})").Skip(skip).ToList();
     }
 }

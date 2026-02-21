@@ -29,9 +29,9 @@ public class IfNode : ASTBlock
     {
         return DebugIndent($"""
                             IfNode:
-                                Condition: {Condition.GetTree("\t\t")}
-                                ThenBlock: [{string.Join(",\n", ThenBlock.Select(x => x.GetTree("\t\t")))}]
-                                ElseBlock: [{string.Join(",\n", ElseBlock.Select(x => x.GetTree("\t\t")))}]
+                                Condition: {Condition.GetTree("\t")}
+                                ThenBlock: [{string.Join(",\n", ThenBlock.Select(x => x.GetTree("\t")))}]
+                                ElseBlock: [{string.Join(",\n", ElseBlock.Select(x => x.GetTree("\t")))}]
                             """, indent);
     }
 }

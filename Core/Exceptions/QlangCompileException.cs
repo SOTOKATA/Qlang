@@ -31,8 +31,8 @@ public class QlangCompileException : Exception
     public override string ToString()
     {
         StringBuilder sb = new();
-        sb.AppendLine($"{Source} Error: {Message}");
-        sb.AppendLine($"\tat: {SourceFile}:{Line}");
+        sb.AppendLine($"\n{Source} Error: {Message}");
+        sb.AppendLine($"\tat: {SourceFile}:{Line}\n");
 
         return sb.ToString();
     }

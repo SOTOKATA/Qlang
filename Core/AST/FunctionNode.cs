@@ -40,8 +40,8 @@ public class FunctionNode : ASTNode
                             FunctionNode:
                                 Name: {NameId}
                                 IsPrivate: {IsPrivate}
-                                Parameters: [{string.Join(",\n", Parameters.Select(x => x.GetTree("\t\t")))}]
-                                Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t\t")))}]
+                                Parameters: [{string.Join(",\n", Parameters.Select(x => x.GetTree("\t")))}]
+                                Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t")))}]
                             """, indent);
     }
 }

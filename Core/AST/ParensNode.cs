@@ -13,7 +13,7 @@ public class ParensNode : ASTNode
     {
         return DebugIndent($"""
                             ParensNode:
-                                Statement: {(Statement is null ? "<null>" : Statement.GetTree("\t\t"))}
+                                Statement: {(Statement is null ? "<null>" : Statement.GetTree("\t"))}
                             """, indent);
     }
 
