@@ -12,6 +12,8 @@ public class DynamicClass(string name)
 
     public List<ASTNode> Body = [];
 
+    public bool IsPrivate = false;
+
     public override string ToString()
     {
         return $"{ClassName}";

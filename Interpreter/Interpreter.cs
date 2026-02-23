@@ -165,7 +165,7 @@ public partial class Interpreter
     private void ExecuteStatement(ASTNode? statement)
     {
         if (HasContext)
-            CurrentContext.CurrentNode = statement;
+            CurrentContext!.CurrentNode = statement;
         
         switch (statement)
         {
@@ -210,7 +210,7 @@ public partial class Interpreter
     /// <exception cref="QlangRuntimeException">
     /// 1. If assignment path is empty.
     /// 2. If assignment try to re-assign const variable
-    /// 3. If assignment try to assign private variable from extenrnal source
+    /// 3. If assignment try to assign private variable from external source
     /// 4. If assignment has invalid assignment part of path
     /// </exception>
     private void AssignmentNode(AssignmentNode assignmentNode)
@@ -269,7 +269,7 @@ public partial class Interpreter
         // Try assign from context
         if (HasContext)
         {
-            if (CurrentContext.Function is not null)
+            if (CurrentContext!.Function is not null)
             {
                 CurrentContext.Function.Variables[assignName] =
                     Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
@@ -340,25 +340,92 @@ public partial class Interpreter
             if (input[i] == '\\' && i + 1 < input.Length)
             {
                 var next = input[i + 1];
-                
-                sb.Append(next switch
-                {
-                    'n' => '\n',
-                    't' => '\t',
-                    '\\' => '\\',
-                    '\"' => "\"",
-                    _ => input.Slice(i, 2).ToString()
-                });
 
-                if (next is 'n' or 't' or '\\' or '\"')
-                    i++;
+                switch (next)
+                {
+                    case 'n':
+                        sb.Append('\n');
+                        i++;
+                        break;
+
+                    case 't':
+                        sb.Append('\t');
+                        i++;
+                        break;
+
+                    case '\\':
+                        sb.Append('\\');
+                        i++;
+                        break;
+
+                    case '\"':
+                        sb.Append('\"');
+                        i++;
+                        break;
+
+                    case 'u':
+                        if (i + 5 < input.Length)
+                        {
+                            var hexSpan = input.Slice(i + 2, 4);
+
+                            if (int.TryParse(hexSpan, 
+                                    System.Globalization.NumberStyles.HexNumber,
+                                    null,
+                                    out int code))
+                            {
+                                sb.Append((char)code);
+                                i += 5;
+                                break;
+                            }
+                        }
+
+                        sb.Append('\\');
+                        break;
+
+                    default:
+                        sb.Append('\\');
+                        break;
+                }
             }
             else
+            {
                 sb.Append(input[i]);
+            }
         }
 
         return sb.ToString();
     }
+    
+    // private static string ParseString(ReadOnlySpan<char> input)
+    // {
+    //     var sb = new StringBuilder(input.Length);
+    //
+    //     for (var i = 0; i < input.Length; i++)
+    //     {
+    //         if (input[i] == '\\' && i + 1 < input.Length)
+    //         {
+    //             var next = input[i + 1];
+    //             
+    //             sb.Append(next switch
+    //             {
+    //                 'n' => '\n',
+    //                 't' => '\t',
+    //                 '\\' => '\\',
+    //                 '\"' => "\"",
+    //                 'u' => "\u",
+    //                 _ => @"\"
+    //                 // _ => input.Slice(i, 2).ToString()
+    //             });
+    //
+    //             if (next is 'n' or 't' or '\\' or '\"')
+    //                 i++;
+    //         }
+    //         else
+    //             sb.Append(input[i]);
+    //     }
+    //
+    //     return sb.ToString();
+    // }
 
     private FunctionNode PrepareFunctionNodePointer(FunctionNode node)
     {
@@ -378,7 +445,7 @@ public partial class Interpreter
             return null;
 
         if (HasContext)
-            CurrentContext.CurrentNode = expr;
+            CurrentContext!.CurrentNode = expr;
 
         try
         {
@@ -420,7 +487,7 @@ public partial class Interpreter
         _currentDebugIndex = ln.DebugIndex;
         
         if (HasContext)
-            CurrentContext.CurrentDebugIndex = _currentDebugIndex;
+            CurrentContext!.CurrentDebugIndex = _currentDebugIndex;
         
         if (ln.Content is AssignmentNode assignment)
         {
@@ -436,14 +503,13 @@ public partial class Interpreter
     /// Casting objects, cannot cast dynamic classes at now
     /// </summary>
     /// <param name="cast">Cast node</param>
-    /// <returns>Casted object</returns>
+    /// <returns>Cast object</returns>
     /// <exception cref="QlangRuntimeException">If casting is impossible (like bool to double)</exception>
     private object? CastObject(CastNode cast)
     {
         var type = ExecuteObjectCalls(cast.TypeCastPath);
-
         var @object = ExecuteObjectCalls(cast.ToCastObject);
-
+        
         if (Typeof(type) == "Number" && @object is DynamicClass { ClassName: QlSystemClasses.StringClassName } @class &&
             @class.Variables["_value"].Value!.ToString().TryParseNumber(out var number))
             return number;
@@ -509,7 +575,7 @@ public partial class Interpreter
         }
 
         var number = _numberList[numberRef.Index];
-        
+
         return numberRef.IsNegative ? -number : number;
     }
 
@@ -519,7 +585,7 @@ public partial class Interpreter
     /// <param name="obj">Object to cast</param>
     /// <param name="copy">Copy of class with function '_createFrom'</param>
     /// <returns>new class instance class</returns>
-    /// <exception cref="QlangRuntimeException">Will throw if values is incopatable</exception>
+    /// <exception cref="QlangRuntimeException">Will throw if values is incompatible</exception>
     private DynamicClass CreateClassFrom(object? obj, DynamicClass copy)
     {
         if (obj is DynamicClass dynamic && dynamic.ClassName == copy.ClassName)
@@ -558,7 +624,7 @@ public partial class Interpreter
     /// <param name="right">Second object</param>
     /// <param name="binOp">Binary process (with operator)</param>
     /// <returns>Output from binary operation</returns>
-    /// <exception cref="QlangRuntimeException">Will throw if values is incopatable or undefined</exception>
+    /// <exception cref="QlangRuntimeException">Will throw if values is incompatible or undefined</exception>
     private object? EvaluateClassBinaryOperation(object left, object right, BinaryOperationNode binOp)
     {
         DynamicClass? rightClass = null;
@@ -767,10 +833,15 @@ public partial class Interpreter
         {
             var leftNum = Convert.ToDouble(left);
             var rightNum = Convert.ToDouble(right);
+
+            if (@operator is "==" or "!=" && (Math.Abs(leftNum - Math.Round(leftNum)) < 1e-10 ||
+                                              Math.Abs(rightNum - Math.Round(rightNum)) < 1e-10))
+                return @operator is "==" ? (int)leftNum == (int)rightNum : (int)leftNum != (int)rightNum;
+            
             return @operator switch
             {
-                "==" => Equals(leftNum, rightNum),
-                "!=" => !Equals(leftNum, rightNum),
+                "==" => leftNum == rightNum,
+                "!=" => leftNum != rightNum,
                 "<" => leftNum < rightNum,
                 ">" => leftNum > rightNum,
                 ">=" => leftNum >= rightNum,
@@ -906,8 +977,8 @@ public partial class Interpreter
         if (_debugTable is null || _sourceFileTable is null)
             return (-1, "Debug file reference is not found.");
 
-        if (index == -1)
-            return (-1, "Debug index is -1");
+        if (index < 0 || index >= _debugTable.LineIndexes.Count)
+            return (-1, "Debug index is " + index);
         
         return (_debugTable.GetLineIndex(index), _sourceFileTable[_debugTable.GetFileId(index)]);
     }

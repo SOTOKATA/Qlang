@@ -1,5 +1,6 @@
 using Core;
 using Core.AST;
+using Core.Exceptions;
 
 namespace Interpreter;
 
@@ -12,13 +13,13 @@ public partial class Interpreter
     private void AddBlockToContext(ASTBlock block)
     {
         if (_contextStack.Count > 0 &&
-            CurrentContext.Blocks.Count > 0)
+            CurrentContext!.Blocks.Count > 0)
             CurrentContext.Blocks.Add(block);
     }
 
     private void RemoveLastBlockFromContext()
     {
-        if (_contextStack.Count > 0 && CurrentContext.Blocks.Count > 0)
+        if (_contextStack.Count > 0 && CurrentContext!.Blocks.Count > 0)
             CurrentContext.Blocks.RemoveAt(CurrentContext.Blocks.Count - 1);
     }
 
@@ -138,8 +139,11 @@ public partial class Interpreter
     private void ExecuteIf(IfNode ifNode)
     {
         AddBlockToContext(ifNode);
+        var returnValue = EvaluateExpression(ifNode.Condition);
 
-        var condition = (bool)EvaluateExpression(ifNode.Condition)!;
+        if (returnValue is not bool condition)
+            throw new QlangRuntimeException("Cannot apply non bool condition in if", GetCurrentDebug(),
+                GetStackTrace());
 
         if (condition)
             ExecuteBlock(ifNode.ThenBlock, false);
@@ -154,12 +158,13 @@ public partial class Interpreter
         AddBlockToContext(switchNode);
 
         var block = switchNode.DefaultBlock;
+
         foreach (var pair in from pair in switchNode.CaseBlocks let binOp = new BinaryOperationNode
                  {
                      Left = pair.Condition,
                      Right = switchNode.Condition,
                      OperatorId = _stringPoolTable.Add("==")
-                 } let obj = (bool)EvaluateBinaryOperation(binOp)! where obj select pair)
+                 } let result = (bool)EvaluateBinaryOperation(binOp)! where result select pair)
         {
             block = pair.CaseBlock;
             break;

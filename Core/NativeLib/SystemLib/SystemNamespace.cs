@@ -9,6 +9,6 @@ public class SystemNamespace  : IQlangNamespace
     new ArrayClass(), new ConsoleClass(), new EnvironmentClass(),
     new DateTimeClass(), new ExceptionClass(), new FileSystemClass(),
     new NumberClass(), new ObjectClass(), new ParserClass(),
-    new RegexClass(), new StringClass(), new MathClass()
+    new RegexClass(), new StringClass(), new MathClass(), new MetaClass()
     ];
 }

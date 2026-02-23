@@ -16,21 +16,26 @@ public class ClassNode : ASTNode
     
     public required List<ASTNode> Body { get; set; }
 
+    [Key(3)] 
+    public bool IsPrivate { get; set; }
+
     public override ASTNode Clone()
     {
         return new ClassNode
         {
             NameId = NameId, 
             ExtendsPath = ExtendsPath,
-            Body = Body.Select(node => node.Clone()).ToList()
+            Body = Body.Select(node => node.Clone()).ToList(),
+            IsPrivate = IsPrivate
         };
     }
 
     public override string GetTree(string indent = "")
-    {//Extends: {string.Join(", ", Extends?.Objects.Select(x => x.GetTree("\t")) ?? ["<not_exists>"])}
+    {
         return DebugIndent($"""
                 ClassNode:
                     Name: {NameId}
+                    IsPrivate: {IsPrivate}
                     Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t")))}]
                 """, indent);
     }

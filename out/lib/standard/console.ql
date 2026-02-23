@@ -1,9 +1,10 @@
 import "$lib/standard"
 import "$lib/core"
+import "$lib/meta"
 
 // Class to make operations with console
 namespace std:  {
-    class Console: {
+    namespace console: {
         private function getStr(const message): {
             if Object.isNull(message):
                 return "<null>";
@@ -12,9 +13,30 @@ namespace std:  {
                 case "~function": {
                     return "function pointer";
                 }
-                case "~object": {
-                    return "class pointer";
+                case "Collection": {
+                    return Array.new(message).toString();
                 }
+            }
+            
+            const typeOfMessage = typeof(message);
+            if typeOfMessage.startsWith("~object"): {
+                let str = "";
+
+                if typeOfMessage.indexOf(":") != -1:
+                    str += typeOfMessage + " = ";
+
+                str += "{\n";
+
+                const vars = meta::getVariableNameList(message);
+                const varValues = meta::getVariableValueList(message);
+
+                const length = vars.length();
+                for let i = 0; i < length; i++:
+                    str += "    " + vars.at(i) + " = " + varValues.at(i) + "\n";
+
+                str += "}";
+
+                return str;
             }
 
             if Object.isSimplify(message) == false:
@@ -89,6 +111,9 @@ namespace std:  {
         function setBackColor(let<String> color):
             _native("std", "console", "background", color);
 
+        // Get all console colors
+        function getColors(): return _native("std", "console", "colors");
+
         // Set default colors for console
         function resetColors():
             _native("std", "console", "reset_color");
@@ -96,5 +121,11 @@ namespace std:  {
         const width = _native("std", "console", "width");
 
         const height = _native("std", "console", "height");
+
+
+        function richPrint(const<String> message):
+           richConsole::richPrint(message);
+
+        function richTest(): richConsole::richTest();
     }
 }

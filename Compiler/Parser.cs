@@ -55,8 +55,6 @@ public class Parser
 
         new Validator(_sourceFileTable, _debugTable, _stringPoolTable).CheckValidate(program);
         
-        Console.WriteLine(_stringPoolTable.Add("~object"));
-
         return (program, _stringPoolTable);
     }
 
@@ -104,11 +102,11 @@ public class Parser
 
         // function declaration
         if (Check(Tokens.Keyword, Keywords.FunctionDeclaration))
-            return ParseFunction(isStatic, isPrivate);
+            return ParseFunction(isPrivate);
 
         // class declaration
         if (Check(Tokens.Keyword, Keywords.ClassDeclaration))
-            return ParseClass();
+            return ParseClass(isPrivate);
 
         // for statement
         if (Check(Tokens.Keyword, Keywords.ForBlock))
@@ -137,7 +135,7 @@ public class Parser
         // assignment
         if (Check(Tokens.Keyword, Keywords.VariableDeclaration) || Check(Tokens.Keyword, Keywords.ConstVariableDeclaration))
         {
-            var var = ParseVariableDeclaration(false, isStatic, isPrivate, Check(Tokens.Keyword, Keywords.ConstVariableDeclaration), true);
+            var var = ParseVariableDeclaration(false, isPrivate, Check(Tokens.Keyword, Keywords.ConstVariableDeclaration), true);
             Expect(Tokens.Semicolon);
             lineNode.Content = var;
             return lineNode;
@@ -156,7 +154,7 @@ public class Parser
         throw new QlangCompileException($"Unexpected token: {Current().TokenType} '{Current().Value}'", GetDebug(Current()), "Parser");
     }
 
-    private AssignmentNode ParseVariableDeclaration(bool canUseType, bool isStatic = false, bool isPrivate = false, bool isConst = false, bool isNew = false)
+    private AssignmentNode ParseVariableDeclaration(bool canUseType, bool isPrivate = false, bool isConst = false, bool isNew = false)
     {
         if (!Check(Tokens.Keyword) ||
             (Current().Value != Keywords.VariableDeclaration &&
@@ -274,7 +272,7 @@ public class Parser
         };
     }
 
-    private FunctionNode ParseFunction(bool isStatic = false, bool isPrivate = false)
+    private FunctionNode ParseFunction(bool isPrivate = false)
     {
 
         Expect(Tokens.Keyword, Keywords.FunctionDeclaration);
@@ -314,7 +312,7 @@ public class Parser
         };
     }
 
-    private ClassNode ParseClass()
+    private ClassNode ParseClass(bool isPrivate)
     {
         Expect(Tokens.Keyword, Keywords.ClassDeclaration);
         var nameToken = Expect(Tokens.Identifier);
@@ -325,6 +323,7 @@ public class Parser
         {
             // Skip extends keyword
             Advance();
+            
 
             var path = ParsePrimaryPath();
             
@@ -341,14 +340,20 @@ public class Parser
 
         var body = ParseBlock();
 
-        return new ClassNode { NameId = _stringPoolTable.Add(nameToken.Value), Body = body, ExtendsPath = extends };
+        return new ClassNode
+        {
+            NameId = _stringPoolTable.Add(nameToken.Value), 
+            Body = body, 
+            ExtendsPath = extends,
+            IsPrivate = isPrivate
+        };
     }
 
     private ForNode ParseFor()
     {
         Expect(Tokens.Keyword, Keywords.ForBlock);
 
-        var assignment = ParseVariableDeclaration(false, false, false,
+        var assignment = ParseVariableDeclaration(false, false,
             (Check(Tokens.Keyword) && Current().Value == Keywords.ConstVariableDeclaration),
             true);
         Expect(Tokens.Semicolon);
@@ -394,8 +399,12 @@ public class Parser
         
         while (Check(Tokens.Keyword) && Current().Value == Keywords.CaseKeyword)
         {
-            Expect(Tokens.Keyword);
-            condition = ParseExpression();
+            debugIndex = Expect(Tokens.Keyword).DebugIndex;
+            condition = new LineNode(debugIndex)
+            {
+                Content = ParseExpression()
+            };
+            
             Expect(Tokens.Colon);
             var block = ParseBlock();
 
@@ -761,6 +770,7 @@ public class Parser
         if (Check(Tokens.NumberRef))
         {
             // Advance '___N*___'
+            
             return new NumberRefNode
             {
                 IsNegative = isMinus,
@@ -937,6 +947,7 @@ public class Parser
         {
             // Advance '___N*___'
             Advance();
+            
             var index = int.Parse(currentIdentifier.Replace("___N", "").Replace("___", ""));
             return new NumberRefNode
             {
@@ -949,6 +960,7 @@ public class Parser
         {
             // Advance '1'
             Advance();
+            
             return new NumberNode
             {
                 Value = res
@@ -1187,22 +1199,14 @@ public class Parser
 
         return new CastNode
         {
-            ToCastObject = callNode,
-            TypeCastPath = callPathNode
+            ToCastObject = callPathNode,
+            TypeCastPath = callNode
         };
     }
 
     
     private ASTNode ParsePrimary(bool isLoop = false)
     {
-
-        var isMinus = false;
-        if (Check(Tokens.Minus))
-        {
-            isMinus = true;
-            Advance();
-        }
-
         ASTNode? baseExpression;
 
         if (!isLoop)
@@ -1218,6 +1222,13 @@ public class Parser
         baseExpression = ParsePrimaryCallable();
         if (baseExpression is not null)
             return baseExpression;
+        
+        var isMinus = false;
+        if (Check(Tokens.Minus))
+        {
+            isMinus = true;
+            Advance();
+        }
 
         // Try keywords (null, true, false, break, continue, string/number refs)
         baseExpression = ParsePrimaryKeywords(isMinus);

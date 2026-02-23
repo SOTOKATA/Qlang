@@ -25,5 +25,11 @@ namespace fs: {
             _native("std", "filesystem", "directory_remove", path, true);
         }
 
+        function getFiles(const<String> path, const<String> extension = ""): {
+            if exists(path) == false:
+                Throw.message("Undefined directory path.");
+
+            return _native("std", "filesystem", "get_files", path, extension);
+        }
     }
 }

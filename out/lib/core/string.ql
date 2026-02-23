@@ -205,6 +205,12 @@ class String extends DataType: {
         return _native("std", "string", "is_null_or_whitespace", _str(str));
     }
 
+    function startsWith(const<String> str):
+        return _native("std", "string", "starts_with", _str(_value), str);
+
+    function endsWith(const<String> str):
+        return _native("std", "string", "ends_with", _str(_value), str);
+
     // Trim string
     function trim(const<String> str):
         return String.new(_native("std", "string", "trim_b", _str(_value), _str(str)));

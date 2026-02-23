@@ -14,7 +14,7 @@ public partial class Interpreter
         {
             case null:
                 return null;
-            case not string or List<object?>:
+            case not (string or List<object?> or List<object>):
                 return primitive;
         }
 
@@ -167,7 +167,9 @@ public partial class Interpreter
             case FunctionPointerNode fn:
             {
                 if (!isPathStart)
+                {
                     lastReturnValue = PrimitiveToDynamicClass(lastReturnValue);
+                }
                 
                 if (_stringPoolTable[fn.NameId] == Keywords.CreateClassInstanceKeyword && lastReturnValue is DynamicClass @class)
                     return GetNewClass(@class, fn.Arguments.ConvertAll(EvaluateExpression));
@@ -406,7 +408,13 @@ public partial class Interpreter
                 // Try to get CLASS from namespace
                 var @class = dynamicNamespace.Classes.FirstOrDefault(@class => @class.ClassName == nodeName);
                 if (@class is not null)
+                {
+                    if (@class.IsPrivate)
+                        throw new QlangRuntimeException($"Cannot get access to private class '{@class.Name}' from namespace '{dynamicNamespace.Name}'.",
+                            GetCurrentDebug(), GetStackTrace());
+                    
                     return (@class, null);
+                }
                 break;
         }
         throw new QlangRuntimeException($"Object '{nodeName}' is not found in current context" + (HasContext ? $"\nCurrent function: '{CurrentContext?.Function?.Name}'; Current class: '{CurrentContext?.Class?.ClassName}'; Current namespace: '{CurrentContext?.Namespace?.Name}'" : "\nNo context found."),
@@ -439,7 +447,6 @@ public partial class Interpreter
                         GetCurrentDebug(), GetStackTrace())
                     : ns;
         }
-        Console.WriteLine("OK");
 
         // TODO: Add 'namespace' to 'namespace'
         // if (lastObject is DynamicNamespace dynamicNamespace)

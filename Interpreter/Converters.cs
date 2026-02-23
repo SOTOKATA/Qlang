@@ -56,7 +56,10 @@ public partial class Interpreter
     private DynamicClass ToDynamicClass(ClassNode classNode, DynamicNamespace? dynamicNamespace = null)
     {
         // Create dynamic instance
-        DynamicClass dynamicClass = new(_stringPoolTable[classNode.NameId]);
+        DynamicClass dynamicClass = new(_stringPoolTable[classNode.NameId])
+        {
+            IsPrivate = classNode.IsPrivate
+        };
         dynamicNamespace?.Classes.Add(dynamicClass);
 
         // Add and convert all assignments

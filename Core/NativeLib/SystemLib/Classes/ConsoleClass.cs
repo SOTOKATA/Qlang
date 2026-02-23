@@ -14,6 +14,17 @@ public class ConsoleClass : IQlangClass
             ("clear", (Action)Console.Clear),
             ("foreground", (Action<string>)SetForegroundColor),
             ("background", (Action<string>)SetBackgroundColor),
+            ("colors", (Func<List<object?>>)(() =>
+                    {
+                        return Enum.GetValues<ConsoleColor>().Select(c =>
+                            {
+                                var name = c.ToString();
+                                return char.ToLowerInvariant(name[0]) + name[1..];
+                            })
+                            .Cast<object?>().ToList();
+
+                    }
+            )),
             ("reset_color", Console.ResetColor),
             ("cursor_position", (Action<int, int>)Console.SetCursorPosition),
             ("read", Console.ReadLine),

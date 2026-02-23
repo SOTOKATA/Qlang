@@ -145,7 +145,7 @@ public class PostParser(SourceFileTable table, DebugTable debugTable, StringPool
                 
                 lastNamespace = foundedNamespace;
             }
-            
+
             var usingNamespaces = lastNamespace.Body.OfType<NamespaceNode>().ToList();
             var usingClasses = lastNamespace.Body.OfType<ClassNode>().ToList();
             var usingFunctions = lastNamespace.Body.OfType<FunctionNode>().ToList();
@@ -155,7 +155,7 @@ public class PostParser(SourceFileTable table, DebugTable debugTable, StringPool
             {
                 if (processedCallNodes.Contains(callNode))
                     continue;
-
+                
                 var firstPathPart = callNode.Objects.First();
                 
                 switch (firstPathPart)
@@ -163,7 +163,7 @@ public class PostParser(SourceFileTable table, DebugTable debugTable, StringPool
                     case NamespacePointerNode pointer:
                         var found = usingNamespaces.FirstOrDefault(p => p.NameId == pointer.NameId);
                         
-                        if (found is null)
+                        if (found is null || found.IsPrivate)
                             break;
                         
                         callNode.Objects.InsertRange(0, @using.CallPath.Objects);
@@ -186,14 +186,20 @@ public class PostParser(SourceFileTable table, DebugTable debugTable, StringPool
                         if (foundObject is null)
                             break;
                         
+                        if (foundObject is ClassNode { IsPrivate: true })
+                            break;
+                        
+                        if (foundObject is AssignmentNode { IsPrivate: true })
+                            break;
+                        
                         callNode.Objects.InsertRange(0, @using.CallPath.Objects);
                         processedCallNodes.Add(callNode); 
                         break;
-                    case FunctionNode pointer:
+                    case FunctionPointerNode pointer:
                         // Find or function
-                        var foundFunction = usingFunctions.FirstOrDefault(p => p.NameId == pointer.NameId && p.Parameters.Count == pointer.Parameters.Count);
+                        var foundFunction = usingFunctions.FirstOrDefault(p => p.NameId == pointer.NameId && p.Parameters.Count == pointer.Arguments.Count);
 
-                        if (foundFunction is null)
+                        if (foundFunction is null || foundFunction.IsPrivate)
                             break;
                         
                         callNode.Objects.InsertRange(0, @using.CallPath.Objects);

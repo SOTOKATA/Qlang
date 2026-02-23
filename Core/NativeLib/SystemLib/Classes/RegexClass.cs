@@ -8,7 +8,8 @@ public class RegexClass : IQlangClass
     public List<(string name, Delegate body)> GetFunctions()
     {
         return [
-            ("replace", (Func<string?, string, string, string?>)Regex.Replace)
+            ("replace", (Func<string?, string, string, string?>)Regex.Replace),
+            ("match", (Func<string?, string, string, string?>)Regex.Replace)
         ];
     }
 }
