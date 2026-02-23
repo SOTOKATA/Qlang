@@ -22,9 +22,6 @@ class Array extends DataType: {
         return str.toString();
     }
 
-    function isArray(const var):
-        return _native("std", "array", "is_array", var);
-
     function isCollection(const collection):
         return _native("std", "array", "is", collection);
 

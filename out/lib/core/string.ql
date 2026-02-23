@@ -108,7 +108,7 @@ class String extends DataType: {
     }
 
     private function _checkIsArray(let value): {
-        if Array.isArray(value) == false: {
+        if typeof(value) != "Array": {
             std::Throw.parceException("argument is not array");
         }
     }
@@ -164,10 +164,10 @@ class String extends DataType: {
     }
 
     function join(let strArr, let<String> pattern): {
-        if (Array.isCollection(strArr) == false) && (Array.isArray(strArr) == false):
+        if (Array.isCollection(strArr) == false) && (typeof(strArr) != "Array"):
             std::Throw.message("argument is not collection or array");
 
-        if Array.isArray(strArr):
+        if typeof(strArr) == "Array":
             strArr = strArr.getCollection();
 
         return String.new(_native("std", "string", "join", strArr, pattern));

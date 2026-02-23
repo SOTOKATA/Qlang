@@ -51,7 +51,7 @@ namespace json: {
             const key = parts.at(0).trim().trim("\"");
             const value = parts.at(1).trim().trim("\"");
 
-            result.set(key, value);
+            result.set(key.toString(), value);
         });
 
         return result;

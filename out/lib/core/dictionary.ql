@@ -48,10 +48,10 @@ class Dictionary: {
     function length(): _keys.length();
 
     function get(let key): {
-        if _keys.contains(key) == false:
-            std::Throw.message("Key is not existent in dictionary");
-
         let index = _keys.indexOf(key);
+
+        if index == -1:
+            std::Throw.message("Key is not existent in dictionary");
 
         return _values.at(index);
     }
