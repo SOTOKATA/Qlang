@@ -18,6 +18,6 @@ public class ASTBlock : ASTNode
 
     public override ASTNode Clone()
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException("Cannot clone this ASTBlock");
     }
 }

@@ -181,6 +181,10 @@ public partial class Interpreter
                 ExecuteIf(ifNode);
                 break;
             
+            case TryCatchNode tryCatchNode:
+                ExecuteTryCatch(tryCatchNode);
+                break;
+            
             case SwitchNode switchNode:
                 ExecuteSwitch(switchNode);
                 break;

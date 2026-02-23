@@ -175,8 +175,12 @@ public partial class Interpreter
                     return GetNewClass(@class, fn.Arguments.ConvertAll(EvaluateExpression));
              
                 var function = FindFunction(fn, lastReturnValue, isPathStart);
-
+                
                 _allowPrivateCall = false;
+
+                if (function.function is null && _stringPoolTable[fn.NameId] == "toString")
+                    return lastReturnValue?.ToString() ?? null;
+                
                 return ExecuteFunction(function.function, function.args ?? [], function.@class, function.@namespace);
             }
             case ObjectPointerNode objCall:
@@ -275,6 +279,9 @@ public partial class Interpreter
                 return (pair.function, pair.args, null, dNamespace);
             }
         }
+
+        if (_stringPoolTable[node.NameId] == "toString" && lastObject is not null)
+            return (null, null, null, null);
         
         throw new QlangRuntimeException($"Function '{_stringPoolTable[node.NameId]}' is not found in current context ('{lastObject}')",
             GetCurrentDebug(), GetStackTrace());

@@ -34,6 +34,11 @@ public class FunctionNode : ASTNode
         };
     }
 
+    public override string ToString()
+    {
+        return "Function";
+    }
+
     public override string GetTree(string indent = "")
     {
         return DebugIndent($"""

@@ -1,5 +1,7 @@
-﻿using Core.AST;
+﻿using Core;
+using Core.AST;
 using Core.Dynamic;
+using Core.Exceptions;
 
 namespace Interpreter;
 
@@ -103,11 +105,20 @@ public partial class Interpreter
 
             dynamicFunction.Parameters.Add(nodeName);
         }
-
+        
         // Add body and modificators
         dynamicFunction.Body.AddRange(functionNode.Body.Select(x => x.Clone()));
         dynamicFunction.IsPrivate = functionNode.IsPrivate;
 
         return dynamicFunction;
+    }
+
+    private DynamicClass ToQlangException(Exception ex)
+    {
+        var @class = _dynamicNamespaces[GlobalNamespaceName].Classes
+            .FirstOrDefault(x => x.ClassName == QlSystemClasses.ExceptionClassName);
+        
+        @class!.Variables["message"].Value = ex.ToString();
+        return @class;
     }
 }

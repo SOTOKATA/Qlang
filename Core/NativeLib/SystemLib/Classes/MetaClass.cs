@@ -13,7 +13,7 @@ public class MetaClass : IQlangClass
             return @class.Body.OfType<FunctionNode>().Select(x => x.NameId).Cast<object?>().ToList();
         })),
         
-        ("var_list", (Func<DynamicClass, List<object?>>)((@class) =>
+        ("var_name_list", (Func<DynamicClass, List<object?>>)((@class) =>
         {
             return @class.Variables.Select(x => x.Value.Name).Cast<object?>().ToList();
         })),
@@ -21,6 +21,11 @@ public class MetaClass : IQlangClass
         ("var_value_list", (Func<DynamicClass, List<object?>>)((@class) =>
         {
             return @class.Variables.Select(x => x.Value.Value).ToList();
+        })),
+        
+        ("var_type_list", (Func<DynamicClass, List<object?>>)((@class) =>
+        {
+            return @class.Variables.Select(x => x.Value.IsConst ? Keywords.ConstVariableDeclaration : Keywords.VariableDeclaration).Cast<object?>().ToList();
         })),
     ];
 }

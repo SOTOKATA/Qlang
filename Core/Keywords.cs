@@ -21,6 +21,9 @@ public static class Keywords
     public static string WhileBlock => "while";
     public static string DoWhileBlock => "do_while";
     public static string ForBlock => "for";
+    public static string TryKeyword => "try";
+    public static string CatchKeyword => "catch";
+    public static string FinallyKeyword => "finally";
     
     public static string ReturnKeyword => "return";
     public static string BreakKeyword => "break";
@@ -45,6 +48,6 @@ public static class Keywords
         ForBlock, ReturnKeyword, TrueKeyword, FalseKeyword, ImportKeyword, PrivateModificator, 
         ConstVariableDeclaration, ContinueKeyword, BreakKeyword, NullKeyword, ThisKeyword, ExtendsKeyword, 
         SwitchBlock, CaseKeyword, DefaultKeyword, NamespaceDeclaration,
-        UsingKeyword
+        UsingKeyword, TryKeyword, CatchKeyword, FinallyKeyword
     ];
 }

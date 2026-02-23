@@ -30,6 +30,7 @@ namespace Core.AST;
 [Union(24, typeof(WhileNode))]
 [Union(25, typeof(ASTBlock))]
 [Union(26, typeof(UsingNode))]
+[Union(27, typeof(TryCatchNode))]
 // ReSharper disable once InconsistentNaming
 public abstract class ASTNode
 {

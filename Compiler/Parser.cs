@@ -16,8 +16,6 @@ public class Parser
     
     private StringPoolTable _stringPoolTable;
 
-    private string _line = "";
-
     private readonly List<CallNode> _callNodes = [];
     private readonly List<AssignmentNode> _assignmentNodes = [];
     
@@ -62,7 +60,6 @@ public class Parser
     {
         var lineNode = new LineNode(Current().DebugIndex);
 
-        var isStatic = false;
         var isPrivate = false;
 
         if (Check(Tokens.Keyword, Keywords.PrivateModificator))
@@ -127,6 +124,10 @@ public class Parser
         // do-while statement
         if (Check(Tokens.Keyword, Keywords.DoWhileBlock))
             return ParseWhile(true);
+        
+        // try-catch statement
+        if (Check(Tokens.Keyword, Keywords.TryKeyword))
+            return ParseTryCatch();
 
         // return statement
         if (Check(Tokens.Keyword, Keywords.ReturnKeyword))
@@ -370,6 +371,47 @@ public class Parser
         return new ForNode { Assignment = assignment, Statement = statement, Condition = condition, Body = forBlock };
     }
 
+    private TryCatchNode ParseTryCatch()
+    {
+        // Expect try:
+        Expect(Tokens.Keyword, Keywords.TryKeyword);
+        Expect(Tokens.Colon);
+        
+        var tryBlock = ParseBlock();
+        
+        var token = Expect(Tokens.Keyword,  Keywords.CatchKeyword);
+        Expect(Tokens.LParen);
+        
+        if (!Check(Tokens.Keyword, Keywords.ConstVariableDeclaration))
+            throw new QlangCompileException("Cannot use not const property for catch block", GetDebug(token), "Parser");
+
+        var assignment = new LineNode(token.DebugIndex)
+        {
+            Content = ParseVariableDeclaration(false, false, true)
+        };
+        
+        Expect(Tokens.RParen);
+        Expect(Tokens.Colon);
+        var catchBlock = ParseBlock();
+
+        List<ASTNode> finallyBlock = [];
+        if (Check(Tokens.Keyword, Keywords.FinallyKeyword))
+        {
+            Advance();
+            Expect(Tokens.Colon);
+            
+            finallyBlock = ParseBlock();
+        }
+
+        return new TryCatchNode
+        {
+            TryBody = tryBlock,
+            CatchAssignment = assignment,
+            CatchBody = catchBlock,
+            FinallyBody = finallyBlock
+        };
+    }
+
     private WhileNode ParseWhile(bool isDoWhile = false)
     {
         var debugIndex = Expect(Tokens.Keyword, isDoWhile ? Keywords.DoWhileBlock : Keywords.WhileBlock).DebugIndex;
@@ -378,7 +420,6 @@ public class Parser
             Content = ParseExpression()
         };
         Expect(Tokens.Colon);
-        // Expect(Tokens.Semicolon);
 
         var whileBlock = ParseBlock();
 
@@ -845,7 +886,7 @@ public class Parser
                     Check(Tokens.Keyword, Keywords.VariableDeclaration))
                 {
                     var debugIndex = Current().DebugIndex;
-                    @class.Body.Add(new LineNode(debugIndex) { Content = ParseVariableDeclaration(true) });
+                    @class.Body.Add(new LineNode(debugIndex) { Content = ParseVariableDeclaration(false, false, Check(Tokens.Keyword, Keywords.ConstVariableDeclaration)) });
                     continue;
                 }
                 if (Check(Tokens.Comma))
@@ -1012,11 +1053,10 @@ public class Parser
             };
         }
 
-        if (current is null)
-            current = new ObjectPointerNode
-            {
-                NameId = _stringPoolTable.Add(identifier)
-            };
+        current ??= new ObjectPointerNode
+        {
+            NameId = _stringPoolTable.Add(identifier)
+        };
 
         // Parse assign path 
         if (CanBeAssignmentNode())
@@ -1264,13 +1304,6 @@ public class Parser
         if (!IsAtEnd()) _position++;
         var token = _tokens[_position - 1];
 
-        if (token.TokenType is Tokens.Semicolon or Tokens.RBrace or Tokens.LBrace)
-        {
-            _line = "";
-            return token;
-        }
-
-        _line += $"{Token.TokenToString(token.TokenType)}{token.Value}";
         return token;
     }
 
@@ -1285,11 +1318,6 @@ public class Parser
                  Incorrect syntax, expected '{Token.TokenToString(type)}', got '{Token.TokenToString(current.TokenType)}'
                  """,
                 GetDebug(current), "Parser");
-            
-            throw new QlangCompileException($"""
-                                 Expected {type}, got {current.TokenType} (Value: {(current.Value == "" ? "Null" : current.Value)})
-                                        line: '{_line}'
-                                 """, GetDebug(current), "Parser");
         }
 
         if (value != null && Current().Value != value)

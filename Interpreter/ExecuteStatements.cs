@@ -1,5 +1,6 @@
 using Core;
 using Core.AST;
+using Core.Dynamic;
 using Core.Exceptions;
 
 namespace Interpreter;
@@ -12,9 +13,8 @@ public partial class Interpreter
     private bool _isContinueKeyword;
     private void AddBlockToContext(ASTBlock block)
     {
-        if (_contextStack.Count > 0 &&
-            CurrentContext!.Blocks.Count > 0)
-            CurrentContext.Blocks.Add(block);
+        if (_contextStack.Count > 0)
+            CurrentContext!.Blocks.Add(block);
     }
 
     private void RemoveLastBlockFromContext()
@@ -149,6 +149,31 @@ public partial class Interpreter
             ExecuteBlock(ifNode.ThenBlock, false);
         else if (ifNode.ElseBlock.Count > 0)
             ExecuteBlock(ifNode.ElseBlock, false);
+
+        RemoveLastBlockFromContext();
+    }
+    
+    private void ExecuteTryCatch(TryCatchNode tryCatchNode)
+    {
+        AddBlockToContext(tryCatchNode);
+
+        try
+        {
+            ExecuteBlock(tryCatchNode.TryBody, false);
+        }
+        catch (Exception ex)
+        {
+            var assignment = (AssignmentNode)tryCatchNode.CatchAssignment.Content!;
+            _currentDebugIndex = tryCatchNode.CatchAssignment.DebugIndex;
+            
+            tryCatchNode.Variables[_stringPoolTable[assignment.GetLastNameId()]] = new Variable(_stringPoolTable[assignment.GetLastNameId()], ToQlangException(ex), false, true);
+            
+            ExecuteBlock(tryCatchNode.CatchBody, false);
+        }
+        finally
+        {
+            ExecuteBlock(tryCatchNode.FinallyBody, false);
+        }
 
         RemoveLastBlockFromContext();
     }

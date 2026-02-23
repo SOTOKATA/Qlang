@@ -10,9 +10,6 @@ namespace std:  {
                 return "<null>";
 
             switch typeof(message): {
-                case "~function": {
-                    return "function pointer";
-                }
                 case "Collection": {
                     return Array.new(message).toString();
                 }
@@ -27,13 +24,23 @@ namespace std:  {
 
                 str += "{\n";
 
-                const vars = meta::getVariableNameList(message);
-                const varValues = meta::getVariableValueList(message);
+                const vars = meta::getVariableList(message);
 
                 const length = vars.length();
-                for let i = 0; i < length; i++:
-                    str += "    " + vars.at(i) + " = " + varValues.at(i) + "\n";
+                for let i = 0; i < length; i++: {
+                    const variable = vars.at(i);
 
+                    const value = variable.value;
+                    let outputValue = value;
+
+                    if typeof(value) == "String":
+                        outputValue  = "\"" + value + "\"";
+                    else if Object.isSimplify(value) == false:
+                        outputValue  = value.toString();
+                
+                    str += "    " + variable.type + " " + variable.name + " = " + outputValue  + "\n";
+                }
+                
                 str += "}";
 
                 return str;
