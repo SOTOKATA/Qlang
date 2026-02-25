@@ -145,6 +145,12 @@ public partial class Interpreter
                     return Typeof(args[0]);
                 case "nameof":
                     return args[0]?.ToString();
+                case "_toFunction":
+                    if (args[0] is not FunctionNode func)
+                        throw new QlangRuntimeException("Argument is not a function", GetCurrentDebug(),
+                            GetStackTrace());
+
+                    return ToDynamicFunction(func);
             }
         }
 
@@ -239,7 +245,7 @@ public partial class Interpreter
             if (funcPair.function is not null)
                 return (ToDynamicFunction(funcPair.function), funcPair.args, null, null);
             
-            throw new QlangRuntimeException($"Function '{_stringPoolTable[node.NameId]}' is not found in current context ('{lastObject}')",
+            throw new QlangRuntimeException($"Function '{_stringPoolTable[node.NameId]}' is not found in current context {(lastObject is null ? "" : $"('{lastObject}')")}",
                 GetCurrentDebug(), GetStackTrace());
         }
 
@@ -283,7 +289,7 @@ public partial class Interpreter
         if (_stringPoolTable[node.NameId] == "toString" && lastObject is not null)
             return (null, null, null, null);
         
-        throw new QlangRuntimeException($"Function '{_stringPoolTable[node.NameId]}' is not found in current context ('{lastObject}')",
+        throw new QlangRuntimeException($"Function '{_stringPoolTable[node.NameId]}' is not found in current context {(lastObject is null ? "" : $"('{lastObject}')")}",
             GetCurrentDebug(), GetStackTrace());
     }
 

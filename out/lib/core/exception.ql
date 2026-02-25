@@ -8,6 +8,6 @@ class Exception extends Object: {
         this.printStackTrace = printStackTrace;
     }
 
-    function toString():
+    function<String> toString():
         return $"Exception: {_str(message)}";
 }

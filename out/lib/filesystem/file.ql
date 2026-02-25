@@ -5,7 +5,7 @@ namespace fs: {
     class File: {
         // Return type: bool
         // Returns true if file found
-        function exists(const<String> path):
+        function<Boolean> exists(const<String> path):
             return _native("std", "filesystem", "file_exists", path);
 
         // Override file content
@@ -26,7 +26,7 @@ namespace fs: {
 
         // Return type: string
         // Get file content
-        function getContent(const<String> path): {
+        function<String> getContent(const<String> path): {
             if exists(path) == false:
                 std::Throw.message("file path '" + path + "' is not found");
 

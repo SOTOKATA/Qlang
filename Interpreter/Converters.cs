@@ -88,7 +88,8 @@ public partial class Interpreter
         // Create dynamic instance
         DynamicFunction dynamicFunction = new(_stringPoolTable[functionNode.NameId])
         {
-            Context = functionNode.Context
+            Context = functionNode.Context,
+            ReturnType = (CallNode?)functionNode.ReturnType?.Clone(),
         };
 
         // Add and convert all parameters

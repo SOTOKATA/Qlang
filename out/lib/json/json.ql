@@ -1,6 +1,6 @@
 // Warning! Can serialize and deserialize primitive types only. Like: Boolean, Number, String
 namespace json: {
-    function serialize(const<Dictionary> dict, const<Boolean> indented = false): {
+    function<String> serialize(const<Dictionary> dict, const<Boolean> indented = false): {
         if dict.length() < 1:
             std::Throw.message("Cannot serialize empty dictionary");
 
@@ -38,7 +38,7 @@ namespace json: {
         return output;
     }
 
-    function deserialize(let content): {
+    function<Dictionary> deserialize(let content): {
         const result = Dictionary.new();
 
         content = content.trim().trim("{").trim("}");

@@ -81,15 +81,15 @@ namespace std:  {
         }
 
         // Read line from console
-        function readln(): {
+        function<String> readln(): {
             return String.new(_native("std", "console", "read"));
         }
 
-        function readkey(const<Boolean> intercept = false): {
+        function<String> readkey(const<Boolean> intercept = false): {
             return String.new(_native("std", "console", "key", intercept));
         }
 
-        function isKeyAvailable(): {
+        function<String> isKeyAvailable(): {
             return _native("std", "console", "key_available");
         }
 
@@ -119,7 +119,7 @@ namespace std:  {
             _native("std", "console", "background", color);
 
         // Get all console colors
-        function getColors(): return _native("std", "console", "colors");
+        function<Collection> getColors(): return _native("std", "console", "colors");
 
         // Set default colors for console
         function resetColors():

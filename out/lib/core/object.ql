@@ -1,23 +1,23 @@
 import "$lib/core"
 
 class Object: {
-    function isNull(let obj):
+    function<Boolean> isNull(let obj):
         return _native("std", "object", "is_null", obj);
 
-    function getType():
+    function<String> getType():
         return _native("std", "object", "get_type", this);
 
-    function isSimplify(const val): 
+    function<Boolean> isSimplify(const val): 
         return _native("std", "object", "is_simplify", val);
 
-    function toString(const obj): {
+    function<String> toString(const obj): {
         if isNull(obj):
             return "<null>";
             
         return _native("std", "string", "to_string", obj);
     }
 
-    function toString(): {
+    function<String> toString(): {
         if isNull(this):
             return "<null>";
             
@@ -25,7 +25,7 @@ class Object: {
     } 
 }
 
-function str(const obj):
+function<String> str(const obj):
     return Object.toString(obj);
 
 function boolCase(const condition, const trueResult, const falseResult):

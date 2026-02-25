@@ -11,11 +11,11 @@ namespace std:  {
             return _native("std", "parser", "float", object);
         }
 
-        function asString(const object): {
+        function<String> asString(const object): {
             return _native("std", "parser", "string", object);
         }
         
-        function asNumber(const object): {
+        function<Number> asNumber(const object): {
             return _native("std", "parser", "number", object);
         }
     }

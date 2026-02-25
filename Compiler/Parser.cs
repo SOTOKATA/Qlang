@@ -274,6 +274,22 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
     {
 
         Expect(Tokens.Keyword, Keywords.FunctionDeclaration);
+
+        // Type
+        CallNode? returnType = null;
+        if (Check(Tokens.Less))
+        {
+            var debugToken = Expect(Tokens.Less);
+            
+            var expr = ParsePrimaryPath();
+            
+            if (expr is not CallNode callNode)
+                throw new QlangCompileException("Undefined function type path", GetDebug(debugToken), "Parser");
+            
+            returnType = callNode;
+            Expect(Tokens.Greater);
+        }
+        
         var nameToken = Expect(Tokens.Identifier);
         Expect(Tokens.LParen);
 
@@ -306,7 +322,8 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             NameId = stringPoolTable.Add(nameToken.Value),
             Parameters = parameters,
             Body = body,
-            IsPrivate = isPrivate
+            IsPrivate = isPrivate,
+            ReturnType = returnType
         };
     }
 

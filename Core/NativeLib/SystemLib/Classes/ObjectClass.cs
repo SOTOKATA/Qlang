@@ -1,4 +1,6 @@
-﻿namespace Core.NativeLib.SystemLib.Classes;
+﻿using Core.Dynamic;
+
+namespace Core.NativeLib.SystemLib.Classes;
 
 public class ObjectClass : IQlangClass
 {

@@ -9,15 +9,15 @@ class Dictionary: {
         _values = Array.new([]);
     }
     
-    function toString(): {
+    function<String> toString(): {
         let str = _keys.toString().toString();
         str = str + _values.toString().toString();
 
         return String.new(str);
     }
 
-    function getKeys(): return _keys;
-    function getValues(): return _values;
+    function<Array> getKeys(): return _keys;
+    function<Array> getValues(): return _values;
 
     function set(let key, let item): {
         if _keys.contains(key) == true:
@@ -28,16 +28,16 @@ class Dictionary: {
         }
     }
 
-    function containsKey(let key):
+    function<Boolean> containsKey(let key):
         return _keys.contains(key);
 
-    function containsValue(let item):
+    function<Boolean> containsValue(let item):
         return _values.contains(item);
 
-    function getKeys():
+    function<Array> getKeys():
         return _keys;
 
-    function getValues():
+    function<Array> getValues():
         return _values;
 
     function clear(): {
@@ -45,7 +45,7 @@ class Dictionary: {
         _values.clear();
     }
 
-    function length(): _keys.length();
+    function<Number> length(): _keys.length();
 
     function get(let key): {
         let index = _keys.indexOf(key);

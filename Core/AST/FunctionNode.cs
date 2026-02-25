@@ -19,6 +19,9 @@ public class FunctionNode : ASTNode
     
     public List<ASTNode> Body { get; set; } = [];
 
+    [Key(4)] 
+    public CallNode? ReturnType { get; set; }
+
     [IgnoreMember] 
     public ASTContext? Context;
 

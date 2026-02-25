@@ -3,28 +3,28 @@ import "$lib/filesystem"
 
 namespace fs: {
     class Path: {
-        function combine(const<Array> arr):
+        function<String> combine(const<Array> arr):
             return String.new(_native("std", "filesystem", "combine", arr.getCollection()));
 
-        function exists(const<String> path):
+        function<Boolean> exists(const<String> path):
             return _native("std", "filesystem", "path_exists", path);
 
-        function getExtension(const<String> path):
+        function<String> getExtension(const<String> path):
             return _native("std", "filesystem", "extension", path);
 
-        function hasExtension(const<String> path):
+        function<Boolean> hasExtension(const<String> path):
             return _native("std", "filesystem", "has_extension", path);
 
-        function changeExtension(const<String> path, const<String> extension):
+        function<String> changeExtension(const<String> path, const<String> extension):
             return _native("std", "filesystem", "change_extension", path, extension);
 
-        function getFileName(const<String> path):
+        function<String> getFileName(const<String> path):
             return _native("std", "filesystem", "file_name_without_extension", path);
 
-        function getFullFileName(const<String> path):
+        function<String> getFullFileName(const<String> path):
             return _native("std", "filesystem", "file_name", path);
 
-        function getDirectory(const<String> path):
+        function<String> getDirectory(const<String> path):
             return _native("std", "filesystem", "get_dir", path);
     }
 }

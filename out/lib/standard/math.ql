@@ -9,33 +9,33 @@ namespace std:  {
         const E = _native("std", "math", "e");
         const TAU = _native("std", "math", "tau");
 
-        function max(const<Number> a, const<Number> b):
+        function<Number> max(const<Number> a, const<Number> b):
             return boolCase(a > b, a, b);
 
-        function min(const<Number> a, const<Number> b):
+        function<Number> min(const<Number> a, const<Number> b):
             return boolCase(a < b, a, b);
 
-        function rand(const<Number> min, const<Number> max): {
+        function<Number> rand(const<Number> min, const<Number> max): {
             if min >= max:
                 Throw.message("Min cannot be more than or equal to max.");
 
             return _native("std", "math", "random", min, max);
         }
 
-        function abs(const<Number> n): {
+        function<Number> abs(const<Number> n): {
             return 0-n;
         }
         
-        function pow(const number, const pow):
+        function<Number> pow(const number, const pow):
             return _native("std", "math", "pow", number, pow);
 
-        function sin(const<Number> radians):
+        function<Number> sin(const<Number> radians):
             return _native("std", "math", "sin", radians);
  
-        function cos(const<Number> radians):
+        function<Number> cos(const<Number> radians):
             return _native("std", "math", "cos", radians);
 
-        function tan(const<Number> radians): {
+        function<Number> tan(const<Number> radians): {
             const cos = cos(radians);
 
             if cos == 0:
@@ -44,7 +44,7 @@ namespace std:  {
             return sin(radians) / cos;
         }
     
-        function ctan(const<Number> radians): {
+        function<Number> ctan(const<Number> radians): {
             const sin = sin(radians);
 
             if sin == 0:

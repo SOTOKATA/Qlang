@@ -6,7 +6,7 @@ class Array extends DataType: {
     function new(const<Collection> collection = []):
         _value = collection;
 
-    function toString(): {
+    function<String> toString(): {
         let str = "[";
 
         if length() > 0: {
@@ -22,13 +22,13 @@ class Array extends DataType: {
         return str.toString();
     }
 
-    function isCollection(const collection):
+    function<Boolean> isCollection(const collection):
         return _native("std", "array", "is", collection);
 
-    function getCollection():
+    function<Collection> getCollection():
         return _value;
 
-    function contains(const item):
+    function<Boolean> contains(const item):
         return _native("std", "array", "contains", _value, item);
 
     // Add element
@@ -83,11 +83,11 @@ class Array extends DataType: {
     }
 
     // Get index of item
-    function indexOf(let item):
+    function<Number> indexOf(let item):
         return _native("std", "array", "index_of", _value, item);
 
     // Get length
-    function length():
+    function<Number> length():
         return _native("std", "array", "count", _value);
     function count(): return length();
 
@@ -176,6 +176,8 @@ class Array extends DataType: {
 
         return null;
     }
+
+
 
     private function checkIndex(const<Number> index): {
         if index < 0 || index >= length():

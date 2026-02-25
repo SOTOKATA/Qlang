@@ -6,7 +6,7 @@ namespace fs: {
 
         // Return type: bool
         // Return true if directory exists
-        function exists(const<String> path):
+        function<Boolean> exists(const<String> path):
             return _native("std", "filesystem", "directory_exists", path);
 
         // Create if not exists directory
@@ -25,7 +25,7 @@ namespace fs: {
             _native("std", "filesystem", "directory_remove", path, true);
         }
 
-        function getFiles(const<String> path, const<String> extension = ""): {
+        function<Array> getFiles(const<String> path, const<String> extension = ""): {
             if exists(path) == false:
                 Throw.message("Undefined directory path.");
 

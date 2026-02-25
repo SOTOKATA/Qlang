@@ -117,7 +117,7 @@ public partial class Interpreter
                     var var = function.Variables[function.Parameters[i]];
 
                     if (var.Type is not null && Typeof(var.Type) != Typeof(arguments[i]))
-                        throw new QlangRuntimeException($"The type of param is '{(Typeof(arguments[i]) ?? "<null>")}' but must be '{Typeof(var.Type)}'", GetStackTrace());
+                        throw new QlangRuntimeException($"The type of param is '{(Typeof(arguments[i]) ?? "<null>")}' but must be '{Typeof(var.Type)}' for function '{function.Name}'", GetStackTrace());
                     
                     function.Variables[function.Parameters[i]] = new Variable(
                         function.Parameters[i],
@@ -149,6 +149,10 @@ public partial class Interpreter
             _return = false;
             _isBreakKeyword = false;
             _isContinueKeyword = false;
+
+            if (function.ReturnType != null && Typeof(_returnValue) != Typeof(function.ReturnType))
+                throw new QlangRuntimeException("Function type and return type is not equals", GetCurrentDebug(),
+                    GetStackTrace());
             return _returnValue;
         }
         finally
@@ -471,7 +475,6 @@ public partial class Interpreter
         return EvaluateExpression(ln.Content);
     }
 
-    // TODO: Finish work with casting (adding casting to DynamicClass)
     /// <summary>
     /// Casting objects, cannot cast dynamic classes at now
     /// </summary>
@@ -498,6 +501,9 @@ public partial class Interpreter
         // cast any object to string
         if (Typeof(type) == "String" && @object is not null)
             return @object.ToString();
+        
+        if (type is DynamicClass dc)
+            return CreateClassFrom(@object, dc);
 
         var typeStr = type switch
         {
