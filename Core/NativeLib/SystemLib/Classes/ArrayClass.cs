@@ -11,6 +11,7 @@ public class ArrayClass : IQlangClass
             ("create", (Func<List<object?>>)(() => [])),
             ("add", (Action<List<object?>, object>)((list, item) => list.Add(item))),
             ("add_range", (Action<List<object?>, List<object?>>)((list, items) => list.AddRange(items))),
+            ("get_indexes", (Func<List<object?>, List<object?>>)((list) => Enumerable.Range(0, list.Count).Cast<object?>().ToList())),
             ("get", (Func<List<object?>, int, object?>)((list, idx) => list[idx])),
             ("is", (Func<object?, bool>)(obj => obj is List<object?>)),
             ("insert", (Action<List<object?>, int, object?>)((list, pos, item) => list.Insert(pos, item))),

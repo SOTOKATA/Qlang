@@ -177,7 +177,8 @@ class Array extends DataType: {
         return null;
     }
 
-
+    function getIndexes():
+        return _native("std", "array", "get_indexes", getCollection());
 
     private function checkIndex(const<Number> index): {
         if index < 0 || index >= length():

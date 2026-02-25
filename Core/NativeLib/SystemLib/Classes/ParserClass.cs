@@ -18,23 +18,14 @@ public class ParserClass : IQlangClass
     private static object? Parse(object? obj, string toParse)
     {
         if (obj is null)
-        {
             return null;
-        }
 
-        try
+        return toParse switch
         {
-            return toParse switch
-            {
-                "int" => Convert.ToInt32(obj),
-                "float" or "double" => Convert.ToDouble(obj),
-                "string" => obj.ToString(),
-                _ => throw new SwitchExpressionException($"Undefined parse: '{toParse}'")
-            };
-        }
-        catch
-        {
-            return null;
-        }
+            "int" => Convert.ToInt32(obj),
+            "float" or "double" => Convert.ToDouble(obj),
+            "string" => obj.ToString(),
+            _ => throw new SwitchExpressionException($"Undefined parse: '{toParse}'")
+        };
     }
 }
