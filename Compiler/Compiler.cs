@@ -40,12 +40,12 @@ public class Compiler
         DebugTable = output.debugTable;
 
         Console.Write("Parsing...");
-        (var programNode, StringPoolTable) = new Parser().Parse(output.tokens, output.sourceFileTable, output.debugTable, StringPoolTable);
+        (var programNode, StringPoolTable) = new Parser(output.sourceFileTable, output.debugTable, StringPoolTable).Parse(output.tokens);
         Console.WriteLine(" success.");
         
         stopWatch.Stop();
         
-        Console.WriteLine("Compiling time: " + stopWatch.Elapsed.Milliseconds + " ms.");
+        Console.WriteLine("\nCompiling time: " + stopWatch.Elapsed.Milliseconds + " ms.\n");
         
         return programNode;
     }

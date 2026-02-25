@@ -42,7 +42,7 @@ public class NativeFunctionRegistry
         var func = _functions.FirstOrDefault(x => x.GetName() == name);
         
         if (func == null)
-            throw new Exception($"Function '{name}' not found");
+            throw new Exception($"Native function '{name}' not found");
 
         if (args is not null)
         {

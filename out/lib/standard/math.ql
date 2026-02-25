@@ -3,8 +3,8 @@ import "$lib/core"
 
 namespace std:  {
     class Math: {
-        const MIN_VALUE = "-1.7976931348623157E+308";
-        const MAX_VALUE = "1.7976931348623157E+308";
+        const MIN_VALUE = _native("std", "math", "min_value");
+        const MAX_VALUE = _native("std", "math", "max_value");
         const PI = _native("std", "math", "pi");
         const E = _native("std", "math", "e");
         const TAU = _native("std", "math", "tau");
@@ -17,9 +17,9 @@ namespace std:  {
 
         function rand(const<Number> min, const<Number> max): {
             if min >= max:
-                std::Throw.message("Min cannot be more than or equal to max.");
+                Throw.message("Min cannot be more than or equal to max.");
 
-            return _native("std", "Math", "random", min, max);
+            return _native("std", "math", "random", min, max);
         }
 
         function abs(const<Number> n): {

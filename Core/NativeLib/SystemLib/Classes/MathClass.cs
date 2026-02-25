@@ -5,6 +5,8 @@ public class MathClass : IQlangClass
     public string Name { get; init; } = "math";
 
     public List<(string name, Delegate body)> GetFunctions() => [
+        ("min_value", (Func<double>)(()=>double.MinValue)),
+        ("max_value", (Func<double>)(()=>double.MaxValue)),
         ("pow", (Func<double, double, double>) Math.Pow),
         ("sin", (Func<double, double>) Math.Sin),
         ("cos", (Func<double, double>) Math.Cos),

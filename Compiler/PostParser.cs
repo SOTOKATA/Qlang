@@ -5,7 +5,7 @@ using Core.Tables;
 
 namespace Compiler;
 
-public class PostParser(SourceFileTable table, DebugTable debugTable, StringPoolTable stringPoolTable)
+public class PostParser(SourceFileTable? table, DebugTable? debugTable, StringPoolTable stringPoolTable)
 {
     /// <summary>
     /// Creates global namespace for global scopes
@@ -14,7 +14,7 @@ public class PostParser(SourceFileTable table, DebugTable debugTable, StringPool
     /// <returns>program with global namespace</returns>
     public ProgramNode CreateGlobalNamespace(ProgramNode program)
     {
-        // Get all global scopes like Class, Function or Assignment
+        // Get all global scopes like Class, Function or Assignment (LineNode)
         var globalScopes = program.Statements.Where(x => x is ClassNode or FunctionNode or LineNode).ToList();
 
         // Remove all global scopes
@@ -44,8 +44,6 @@ public class PostParser(SourceFileTable table, DebugTable debugTable, StringPool
         {
             if (group.Count() == 1)
             {
-                // всё равно надо рекурсивно
-                
                 MergeNamespaces(group.First().Body);
                 continue;
             }
@@ -145,6 +143,9 @@ public class PostParser(SourceFileTable table, DebugTable debugTable, StringPool
                 
                 lastNamespace = foundedNamespace;
             }
+
+            if (lastNamespace is null)
+                throw new QlangCompileException("Undefined using namespace", GetDebug(@using), "PostParser");
 
             var usingNamespaces = lastNamespace.Body.OfType<NamespaceNode>().ToList();
             var usingClasses = lastNamespace.Body.OfType<ClassNode>().ToList();
@@ -348,21 +349,18 @@ public class PostParser(SourceFileTable table, DebugTable debugTable, StringPool
         return @class;
     }
     
-    private static string GetNodeKey(ASTNode node)
+    private string GetNodeKey(ASTNode node)
     {
-        if (node is LineNode ln)
+        if (node is LineNode { Content: AssignmentNode a })
         {
-            if (ln.Content is AssignmentNode a)
+            var hash = "var:" + string.Join("_", a.Path.Select(astNode => astNode switch
             {
-                var hash = "var:" + string.Join("_", a.Path.Select(astNode => astNode switch
-                {
-                    NamespacePointerNode n => "n" + n.NameId,
-                    ObjectPointerNode o => "o" + o.NameId,
-                    FunctionPointerNode f => "f" + f.NameId + "_" + f.Arguments.Count 
-                }));
-                // Console.WriteLine(hash);
-                return hash;
-            }
+                NamespacePointerNode n => "n" + n.NameId,
+                ObjectPointerNode o => "o" + o.NameId,
+                FunctionPointerNode f => "f" + f.NameId + "_" + f.Arguments.Count, 
+                _ => throw new QlangCompileException("Unsupported object: " + astNode.GetType().Name, GetDebug(astNode), "PostParser")
+            }));
+            return hash;
         }
         
         return node switch
@@ -374,7 +372,7 @@ public class PostParser(SourceFileTable table, DebugTable debugTable, StringPool
     }
 
     
-    private static List<ASTNode> MergeBodies(
+    private List<ASTNode> MergeBodies(
         List<ASTNode> parentBody,
         List<ASTNode> childBody)
     {

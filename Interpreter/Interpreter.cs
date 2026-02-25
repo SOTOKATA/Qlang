@@ -399,37 +399,6 @@ public partial class Interpreter
 
         return sb.ToString();
     }
-    
-    // private static string ParseString(ReadOnlySpan<char> input)
-    // {
-    //     var sb = new StringBuilder(input.Length);
-    //
-    //     for (var i = 0; i < input.Length; i++)
-    //     {
-    //         if (input[i] == '\\' && i + 1 < input.Length)
-    //         {
-    //             var next = input[i + 1];
-    //             
-    //             sb.Append(next switch
-    //             {
-    //                 'n' => '\n',
-    //                 't' => '\t',
-    //                 '\\' => '\\',
-    //                 '\"' => "\"",
-    //                 'u' => "\u",
-    //                 _ => @"\"
-    //                 // _ => input.Slice(i, 2).ToString()
-    //             });
-    //
-    //             if (next is 'n' or 't' or '\\' or '\"')
-    //                 i++;
-    //         }
-    //         else
-    //             sb.Append(input[i]);
-    //     }
-    //
-    //     return sb.ToString();
-    // }
 
     private FunctionNode PrepareFunctionNodePointer(FunctionNode node)
     {
@@ -687,7 +656,7 @@ public partial class Interpreter
 
         if (opFunction is null)
             throw new QlangRuntimeException(
-                $"Class '{leftClass.ClassName}' is incompatible for operator '{originalOperator}'",
+                $"Class '{leftClass.ClassName}' is incompatible for operator '{originalOperator}', function prototype '_operator{originalOperator}(const, const)'",
                 GetCurrentDebug(),
                 GetStackTrace());
 
@@ -698,15 +667,16 @@ public partial class Interpreter
 
         if ((result is not DynamicClass dynamicClass || dynamicClass.ClassName != leftClass.ClassName) &&
             (originalOperator.Contains("Division") || originalOperator.Contains("Subtraction") || originalOperator.Contains("Multiplication") || originalOperator.Contains("Addition")))
-            throw new QlangRuntimeException(
-                $"Return value of '_operator{originalOperator.ToLower()}' must be equal to type '{leftClass.ClassName}'", GetCurrentDebug(),
-                GetStackTrace()); 
+            Console.WriteLine($"warning: return value of {leftClass.ClassName} is not equal to self type");
+            // throw new QlangRuntimeException(
+            //     $"Return value of '_operator{originalOperator}' must be equal to type '{leftClass.ClassName}'", GetCurrentDebug(),
+            //     GetStackTrace()); 
         
         if (result is not bool &&
             (originalOperator.Contains("Equal") ||  originalOperator.Contains("Greater") || 
              originalOperator.Contains("Less")))
             throw new QlangRuntimeException(
-                $"Return value of '_operator{originalOperator.ToLower()}' must be equal to type 'bool'", GetCurrentDebug(),
+                $"Return value of '_operator{originalOperator}' must be equal to type 'Boolean'", GetCurrentDebug(),
                 GetStackTrace()); 
         
         return result;

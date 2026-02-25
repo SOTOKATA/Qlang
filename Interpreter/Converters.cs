@@ -1,7 +1,6 @@
 ﻿using Core;
 using Core.AST;
 using Core.Dynamic;
-using Core.Exceptions;
 
 namespace Interpreter;
 

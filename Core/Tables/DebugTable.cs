@@ -13,7 +13,7 @@ public class DebugTable
     
     public List<NumberCount> FileIds { get; set; }  = [];
      
-    private int _index;
+    private int _index = -1;
     
     public int Add(int lineIndex, int fileId)
     {
@@ -25,6 +25,7 @@ public class DebugTable
                 break;
             case true when !fileExists:
                 FileIds.Add(new NumberCount(fileId, 1));
+                // LineIndexes.Add(lineIndex);
                 _index++;
                 break;
             case false when fileExists:
@@ -65,8 +66,6 @@ public class DebugTable
             currentIndex += list[i].Count;
         }
     
-        Console.WriteLine("ExpandedIndex: " + expandedIndex);
-        Console.WriteLine(string.Join(", ", list));
         throw new ArgumentOutOfRangeException(nameof(expandedIndex));
     }
 }

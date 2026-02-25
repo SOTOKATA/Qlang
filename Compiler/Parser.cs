@@ -9,27 +9,19 @@ namespace Compiler;
  * Second stage of compilation
  * Translated code from the lexer is converted into C# classes
  */
-public class Parser
+public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, StringPoolTable stringPoolTable)
 {
     private List<Token> _tokens = [];
     private int _position;
-    
-    private StringPoolTable _stringPoolTable;
 
+    // PostParser
     private readonly List<CallNode> _callNodes = [];
     private readonly List<AssignmentNode> _assignmentNodes = [];
     
-    private SourceFileTable? _sourceFileTable;
-
-    private DebugTable? _debugTable;
-
-    public (ProgramNode programNode, StringPoolTable stringPoolTable) Parse(List<Token> tokens, SourceFileTable? table, DebugTable? debugTable, StringPoolTable stringPoolTable)
+    public (ProgramNode programNode, StringPoolTable stringPoolTable) Parse(List<Token> tokens)
     {
-        _sourceFileTable = table;
-        _debugTable = debugTable;
         _tokens = tokens;
         _position = 0;
-        _stringPoolTable = stringPoolTable;
 
         ProgramNode program = new();
 
@@ -45,20 +37,22 @@ public class Parser
             program.Statements.Add(ParseStatement());
         }
         
-        var postParser = new PostParser(_sourceFileTable, _debugTable, _stringPoolTable);
+        var postParser = new PostParser(sourceFileTable, debugTable, stringPoolTable);
         program = postParser.CreateGlobalNamespace(program);
         postParser.MergeNamespaces(program.Statements);
         program = postParser.IncludeUsings(program, _callNodes, _assignmentNodes);
         program = postParser.IncludeExtends(program);
-
-        new Validator(_sourceFileTable, _debugTable, _stringPoolTable).CheckValidate(program);
         
-        return (program, _stringPoolTable);
+        new Optimizer().Optimize(program);
+
+        new Validator(sourceFileTable, debugTable, stringPoolTable).CheckValidate(program);
+        
+        return (program, stringPoolTable);
     }
 
     private ASTNode ParseStatement()
     {
-        var lineNode = new LineNode(Current().DebugIndex);
+        var lineNode = new LineNode(IsAtEnd() ? -1 : Current().DebugIndex);
 
         var isPrivate = false;
 
@@ -72,7 +66,7 @@ public class Parser
         {
             lineNode.Content =  new KeywordNode
             {
-               KeywordId = _stringPoolTable.Add(Keywords.BreakKeyword)
+               KeywordId = stringPoolTable.Add(Keywords.BreakKeyword)
             };
             Expect(Tokens.Keyword);
             Expect(Tokens.Semicolon);
@@ -82,7 +76,7 @@ public class Parser
         {
             lineNode.Content =  new KeywordNode
             {
-                KeywordId = _stringPoolTable.Add(Keywords.ContinueKeyword)
+                KeywordId = stringPoolTable.Add(Keywords.ContinueKeyword)
             };
             Expect(Tokens.Keyword);
             Expect(Tokens.Semicolon);
@@ -151,16 +145,19 @@ public class Parser
             return lineNode;
         }
 
+        ThrowIfIsEnd();
 
-        throw new QlangCompileException($"Unexpected token: {Current().TokenType} '{Current().Value}'", GetDebug(Current()), "Parser");
+        throw new QlangCompileException($"Undefined keyword: {Current().TokenType} '{Current().Value}'", GetDebug(Current()), "Parser");
     }
 
     private AssignmentNode ParseVariableDeclaration(bool canUseType, bool isPrivate = false, bool isConst = false, bool isNew = false)
     {
+        ThrowIfIsEnd();
+        
         if (!Check(Tokens.Keyword) ||
             (Current().Value != Keywords.VariableDeclaration &&
              Current().Value != Keywords.ConstVariableDeclaration))
-            throw new QlangCompileException($"(ParseVariableDeclaration) Unexpected token: {Current().TokenType}", GetDebug(Current()),"Parser");
+            throw new QlangCompileException($"Undefined keyword for variable: {Current().TokenType}", GetDebug(Current()),"Parser");
 
         // Skip const or let
         Advance();
@@ -203,7 +200,7 @@ public class Parser
 
         var assignmentNode = new AssignmentNode(isPrivate, isConst, isNew)
         {
-            Path = [new ObjectPointerNode { NameId = _stringPoolTable.Add(name) }],
+            Path = [new ObjectPointerNode { NameId = stringPoolTable.Add(name) }],
             Value = value,
             Type = type
         };
@@ -258,16 +255,16 @@ public class Parser
 
         var nameToken = Expect(Tokens.Identifier);
 
-        Expect(Tokens.Colon);
+        var token = Expect(Tokens.Colon);
         
         if (!Check(Tokens.LBrace))
-            throw new QlangCompileException("Namespace's body cannot be one-line", _debugTable.GetLineIndex(Current().DebugIndex), "Parser", _sourceFileTable[_debugTable.GetFileId(Current().DebugIndex)]);
+            throw new QlangCompileException("Namespace's body cannot be one-line", GetDebug(token), "Parser");
         
         var body = ParseBlock();
         
         return new NamespaceNode
         {
-            NameId = _stringPoolTable.Add(nameToken.Value),
+            NameId = stringPoolTable.Add(nameToken.Value),
             Body = body,
             IsPrivate = isPrivate,
         };
@@ -306,7 +303,7 @@ public class Parser
 
         return new FunctionNode
         {
-            NameId = _stringPoolTable.Add(nameToken.Value),
+            NameId = stringPoolTable.Add(nameToken.Value),
             Parameters = parameters,
             Body = body,
             IsPrivate = isPrivate
@@ -343,7 +340,7 @@ public class Parser
 
         return new ClassNode
         {
-            NameId = _stringPoolTable.Add(nameToken.Value), 
+            NameId = stringPoolTable.Add(nameToken.Value), 
             Body = body, 
             ExtendsPath = extends,
             IsPrivate = isPrivate
@@ -355,7 +352,7 @@ public class Parser
         Expect(Tokens.Keyword, Keywords.ForBlock);
 
         var assignment = ParseVariableDeclaration(false, false,
-            (Check(Tokens.Keyword) && Current().Value == Keywords.ConstVariableDeclaration),
+            Check(Tokens.Keyword) && Current().Value == Keywords.ConstVariableDeclaration,
             true);
         Expect(Tokens.Semicolon);
         var condition = ParseExpression();
@@ -568,7 +565,7 @@ public class Parser
             left = new BinaryOperationNode
             {
                 Left = left,
-                OperatorId = _stringPoolTable.Add("||"),
+                OperatorId = stringPoolTable.Add("||"),
                 Right = right
             };
         }
@@ -591,7 +588,7 @@ public class Parser
             left = new BinaryOperationNode
             {
                 Left = left,
-                OperatorId = _stringPoolTable.Add("&&"),
+                OperatorId = stringPoolTable.Add("&&"),
                 Right = right
             };
         }
@@ -616,7 +613,7 @@ public class Parser
                 left = new BinaryOperationNode
                 {
                     Left = left,
-                    OperatorId = _stringPoolTable.Add("=="),
+                    OperatorId = stringPoolTable.Add("=="),
                     Right = right
                 };
             }
@@ -628,7 +625,7 @@ public class Parser
                 left = new BinaryOperationNode
                 {
                     Left = left,
-                    OperatorId = _stringPoolTable.Add("!="),
+                    OperatorId = stringPoolTable.Add("!="),
                     Right = right
                 };
             }
@@ -669,7 +666,7 @@ public class Parser
                 left = new BinaryOperationNode
                 {
                     Left = left,
-                    OperatorId = _stringPoolTable.Add(op),
+                    OperatorId = stringPoolTable.Add(op),
                     Right = right
                 };
             }
@@ -692,7 +689,7 @@ public class Parser
                 left = new BinaryOperationNode
                 {
                     Left = left,
-                    OperatorId = _stringPoolTable.Add(op),
+                    OperatorId = stringPoolTable.Add(op),
                     Right = right
                 };
             }
@@ -720,7 +717,7 @@ public class Parser
             left = new BinaryOperationNode
             {
                 Left = left,
-                OperatorId = _stringPoolTable.Add(op),
+                OperatorId = stringPoolTable.Add(op),
                 Right = right
             };
         }
@@ -749,7 +746,7 @@ public class Parser
             left = new BinaryOperationNode
             {
                 Left = left,
-                OperatorId = _stringPoolTable.Add(op),
+                OperatorId = stringPoolTable.Add(op),
                 Right = right
             };
         }
@@ -765,7 +762,7 @@ public class Parser
             Advance();
             return new KeywordNode
             {
-                KeywordId = _stringPoolTable.Add(Keywords.NullKeyword)
+                KeywordId = stringPoolTable.Add(Keywords.NullKeyword)
             };
         }
 
@@ -775,7 +772,7 @@ public class Parser
             Advance();
             return new KeywordNode
             {
-                KeywordId = _stringPoolTable.Add(Keywords.BreakKeyword)
+                KeywordId = stringPoolTable.Add(Keywords.BreakKeyword)
             };
         }
         if (Check(Tokens.Keyword) && Current().Value == Keywords.ContinueKeyword)
@@ -784,7 +781,7 @@ public class Parser
             Advance();
             return new KeywordNode
             {
-               KeywordId = _stringPoolTable.Add(Keywords.ContinueKeyword)
+               KeywordId = stringPoolTable.Add(Keywords.ContinueKeyword)
             };
         }
 
@@ -834,7 +831,7 @@ public class Parser
             Advance();
             var func = new FunctionNode
             {
-                NameId = _stringPoolTable.Add("~function")
+                NameId = stringPoolTable.Add("~function")
             };
 
             List<AssignmentNode> parameters = [];
@@ -875,7 +872,7 @@ public class Parser
             Advance();
             var @class = new ClassNode
             {
-                NameId = _stringPoolTable.Add("~object"),
+                NameId = stringPoolTable.Add("~object"),
                 Body = []
             };
 
@@ -1019,7 +1016,7 @@ public class Parser
         {
             current = new ObjectPointerNode
             {
-                NameId = _stringPoolTable.Add(Keywords.ThisKeyword)
+                NameId = stringPoolTable.Add(Keywords.ThisKeyword)
             };
             // Advance 'this'
             Expect(Tokens.Keyword);
@@ -1048,14 +1045,14 @@ public class Parser
             
             current = new FunctionPointerNode
             {
-                NameId = _stringPoolTable.Add(identifier),
+                NameId = stringPoolTable.Add(identifier),
                 Arguments = args
             };
         }
 
         current ??= new ObjectPointerNode
         {
-            NameId = _stringPoolTable.Add(identifier)
+            NameId = stringPoolTable.Add(identifier)
         };
 
         // Parse assign path 
@@ -1080,7 +1077,7 @@ public class Parser
             
             current = new AssignmentNode(false, false, false)
             {
-                Path = [new ObjectPointerNode { NameId = _stringPoolTable.Add(identifier) }]
+                Path = [new ObjectPointerNode { NameId = stringPoolTable.Add(identifier) }]
             };
 
             var value = @operator switch
@@ -1089,19 +1086,19 @@ public class Parser
                 {
                     Left = new CallNode
                     {
-                        Objects = [new ObjectPointerNode { NameId = _stringPoolTable.Add(identifier) }]
+                        Objects = [new ObjectPointerNode { NameId = stringPoolTable.Add(identifier) }]
                     },
                     Right = new NumberNode { Value = 1 },
-                    OperatorId = _stringPoolTable.Add("+")
+                    OperatorId = stringPoolTable.Add("+")
                 },
                 "--" => new BinaryOperationNode
                 {
                     Left = new CallNode
                     {
-                        Objects = [new ObjectPointerNode { NameId = _stringPoolTable.Add(identifier) }]
+                        Objects = [new ObjectPointerNode { NameId = stringPoolTable.Add(identifier) }]
                     },
                     Right = new NumberNode { Value = 1 },
-                    OperatorId = _stringPoolTable.Add("-")
+                    OperatorId = stringPoolTable.Add("-")
                 },
                 _ => @operator == ""
                     ? ParseExpression()
@@ -1109,10 +1106,10 @@ public class Parser
                     {
                         Left = new CallNode
                         {
-                            Objects = [new ObjectPointerNode { NameId = _stringPoolTable.Add(identifier) }]
+                            Objects = [new ObjectPointerNode { NameId = stringPoolTable.Add(identifier) }]
                         },
                         Right = ParseExpression(),
-                        OperatorId = _stringPoolTable.Add(@operator)
+                        OperatorId = stringPoolTable.Add(@operator)
                     }
             };
 
@@ -1126,7 +1123,7 @@ public class Parser
         if (Check(Tokens.Colon) && Peek()?.TokenType == Tokens.Colon)
             current = new NamespacePointerNode
             {
-                NameId = _stringPoolTable.Add(identifier)
+                NameId = stringPoolTable.Add(identifier)
             };
 
         return current;
@@ -1289,18 +1286,27 @@ public class Parser
         if (baseExpression is not null)
             return baseExpression;
         
-        throw new QlangCompileException($"Unexpected token in expression: {Current().TokenType} ({(Current().Value == "" ? "Null" : Current().Value)})", GetDebug(Current()), "Parser");
+        throw new QlangCompileException($"Undefined part of expression: {Current().TokenType} ({(Current().Value == "" ? "<null>" : Current().Value)})", GetDebug(Current()), "Parser");
     }
 
     // Support methods
-    private Token Current() => _tokens[_position];
+    private Token Current()
+    {
+        ThrowIfIsEnd();
+        
+        return _tokens[_position];
+    }
+
+    private Token? Previous() => _position - 1 >= _tokens.Count ? null : _tokens[_position - 1];
     private Token? Peek() => _position + 1 < _tokens.Count ? _tokens[_position + 1] : null;
     private bool IsAtEnd() => _position >= _tokens.Count;
     private bool Check(Tokens type) => !IsAtEnd() && Current().TokenType == type;
-    private bool Check(Tokens type, string? value) => !IsAtEnd() && (Current().TokenType == type && Current().Value == value);
+    private bool Check(Tokens type, string? value) => !IsAtEnd() && Current().TokenType == type && Current().Value == value;
 
     private Token Advance()
     {
+        ThrowIfIsEnd();
+        
         if (!IsAtEnd()) _position++;
         var token = _tokens[_position - 1];
 
@@ -1309,6 +1315,8 @@ public class Parser
 
     private Token Expect(Tokens type, string? value = null)
     {
+        ThrowIfIsEnd();
+        
         if (!Check(type))
         {
             var current = Current();
@@ -1335,15 +1343,28 @@ public class Parser
         
         return list;
     }
+
+    private void ThrowIfIsEnd()
+    {
+        if (IsAtEnd())
+            throw new QlangCompileException("Cannot parse code, because file is ended.", GetDebug(Previous()), "Parser");
+    }
     
     private (int, string) GetDebug(Token? token)
     {
         if (token is null)
-            return (-1, "undefined");
+            return (-1, "undefined token");
+
+        if (debugTable is null || sourceFileTable is null)
+            return (-1, "debug is not included");
+
+        if (token.DebugIndex >= debugTable.LineIndexes.Count)
+        {
+            Console.WriteLine("DebugIndex of token: " + token.DebugIndex + " | Debug size: " +  debugTable.LineIndexes.Count);
+            throw new QlangCompileException("Debug index of token is too big", (-1, ""), "Parser");
+        }
         
-        return (_debugTable.GetLineIndex(token.DebugIndex),
-            _sourceFileTable[_debugTable.GetFileId(token.DebugIndex)]);
+        return (debugTable.GetLineIndex(token.DebugIndex),
+            sourceFileTable[debugTable.GetFileId(token.DebugIndex)]);
     }
-    
-    
 }

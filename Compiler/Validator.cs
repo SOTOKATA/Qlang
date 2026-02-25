@@ -4,7 +4,7 @@ using Core.Tables;
 
 namespace Compiler;
 
-public class Validator(SourceFileTable sourceFileTable, DebugTable debugTable, StringPoolTable stringPoolTable)
+public class Validator(SourceFileTable? sourceFileTable, DebugTable? debugTable, StringPoolTable stringPoolTable)
 {
     
     public void CheckValidate(ProgramNode program)
