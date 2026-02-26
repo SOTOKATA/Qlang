@@ -960,6 +960,6 @@ public partial class Interpreter
         if (index < 0 || index >= _debugTable.LineIndexes.Count)
             return (-1, "Debug index is " + index);
         
-        return (_debugTable.GetLineIndex(index), _sourceFileTable[_debugTable.GetFileId(index)]);
+        return (_debugTable.GetLineIndex(index) + 1, _sourceFileTable[_debugTable.GetFileId(index)]);
     }
 }

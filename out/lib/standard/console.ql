@@ -4,7 +4,7 @@ import "$lib/meta"
 
 // Class to make operations with console
 namespace std:  {
-    namespace console: {
+    class Console: {
         private function getStr(const message): {
             if Object.isNull(message):
                 return "<null>";
@@ -104,10 +104,17 @@ namespace std:  {
 
         // Set cursor position in console
         function setCursorPosition(let<Number> x, let<Number> y): {
-            x = Parser.asInt(x);
-            y = Parser.asInt(y);
+            x = Math.round(x);
+            y = Math.round(y);
 
             _native("std", "console", "cursor_position", x, y);
+        }
+
+        function getCursorPosition(): {
+            const x = _native("std", "console", "get_current_x");
+            const y = _native("std", "console", "get_current_y");
+
+            return { const x = x, const y = y };
         }
 
         // Set foreground color for console
@@ -131,8 +138,8 @@ namespace std:  {
 
 
         function richPrint(const<String> message):
-           richConsole::richPrint(message);
+           RichConsole.richPrint(message);
 
-        function richTest(): richConsole::richTest();
+        function richTest(): RichConsole.richTest();
     }
 }

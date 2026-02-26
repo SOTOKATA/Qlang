@@ -52,5 +52,8 @@ namespace std:  {
         
             return cos(radians) / sin;
         }
+
+        function round(const<Number> value, const<Number> afterDot = 0):
+            return _native("std", "math", "round", value, afterDot);
     }
 }

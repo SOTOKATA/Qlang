@@ -27,6 +27,8 @@ public class ConsoleClass : IQlangClass
             )),
             ("reset_color", Console.ResetColor),
             ("cursor_position", (Action<int, int>)Console.SetCursorPosition),
+            ("get_current_x", (Func<int>)(() => Console.GetCursorPosition().Left)),
+            ("get_current_y", (Func<int>)(() => Console.GetCursorPosition().Top)),
             ("read", Console.ReadLine),
             ("width", (Func<double>)(() => Console.WindowWidth)),
             ("height", (Func<double>)(() => Console.WindowHeight))

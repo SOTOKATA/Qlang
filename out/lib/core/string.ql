@@ -75,7 +75,9 @@ class String extends DataType: {
             _value = str(input);
     }
 
-    function new(const<String> char, const<Number> count): {
+    function new(const<String> char, let<Number> count): {
+        count = std::Math.round(count, 0);
+        
         if count < 0: 
             std::Throw.message("Param 'count' must be more than 0");
 

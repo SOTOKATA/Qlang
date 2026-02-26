@@ -13,6 +13,7 @@ public class MathClass : IQlangClass
         ("e", (Func<double>)(() => Math.E)),
         ("pi", (Func<double>)(() => Math.PI)),
         ("tau", (Func<double>)(() => Math.Tau)),
-        ("random", (Func<int, int, int>)((num1, num2) => new Random().Next(num1, num2)))
+        ("random", (Func<int, int, int>)((num1, num2) => new Random().Next(num1, num2))),
+        ("round", (Func<double, int, double>)(Math.Round)),
     ];
 }
