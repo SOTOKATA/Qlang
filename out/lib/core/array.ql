@@ -162,6 +162,23 @@ class Array extends DataType: {
         return count;
     }
 
+    function<Boolean> any(const func): {
+        callExceptionNotFunc(func);
+
+        const length = length();
+        
+        let isAny = false;
+
+        for let i = 0; i < length; i++: {
+            const isAny = func(at(i));
+
+            if isAny:
+                return true;
+        }
+    
+        return false;
+    }
+
     function firstOrDefault(const func): {
         callExceptionNotFunc(func);
 

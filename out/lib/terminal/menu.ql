@@ -4,13 +4,13 @@ namespace terminal: {
             Throw.message("Undefined items object");
 
         if (meta::cls::hasVariable(params, "title")):
-            std::console::println(params.title);
+            std::console::richPrint($"[color=yellow]{params.title}[/color]\n");
 
         const items = params.items;
         const len = items.length();
 
         for let i = 0; i < len; i++:
-            std::console::richPrint($"{i + 1}. {items.at(i).at(0)}\n");
+            std::console::richPrint($"[color=green]{i + 1}.[/color] {items.at(i).at(0)}\n");
 
         const rangeStr = boolCase(len == 1, "1", $"{1} - {len}");
 
