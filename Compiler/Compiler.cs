@@ -23,7 +23,8 @@ public class Compiler
         
         outputScript = PreCompile.ClearComments(outputScript);
         
-        (outputScript, StringPoolTable) = PreCompile.ExtractStrings(outputScript, new StringPoolTable());
+        (outputScript, StringPoolTable) = PreCompile.ExtractStringsInterpolation(outputScript, new StringPoolTable());
+        (outputScript, StringPoolTable) = PreCompile.ExtractStrings(outputScript, StringPoolTable);
         (outputScript, StringPoolTable) = PreCompile.AddStringInterpolation(outputScript, StringPoolTable);
         (outputScript, StringPoolTable) = PreCompile.ExtractStrings(outputScript, StringPoolTable);
         
@@ -31,8 +32,6 @@ public class Compiler
 
         outputScript = PreCompile.ReturnFileStrings(outputScript, StringPoolTable);
         Console.WriteLine("Compiling " + outputScript.Split('\n').Length + " lines.");
-        
-        Console.WriteLine(outputScript);
         
         Console.Write("Lexing...");
         var output = Lexer.Lex(fileName, outputScript, isPublish);

@@ -9,5 +9,5 @@ class Exception extends Object: {
     }
 
     function<String> toString():
-        return $"Exception: {_str(message)}";
+        return `Exception: {_str(message)}`;
 }

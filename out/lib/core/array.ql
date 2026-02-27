@@ -121,6 +121,28 @@ class Array extends DataType: {
         if typeof(func) != "~function":
             std::Throw.message("Unsupported type of function: " + typeof(func));
 
+    function max(): {
+        let max = std::Math.MIN_VALUE;
+
+        const length = length();
+
+        for let i = 0; i < length; i++:
+            max = std::Math.max(max, <Number>at(i));
+
+        return max;
+    }
+
+    function min(): {
+        let min = std::Math.MAX_VALUE;
+
+        const length = length();
+
+        for let i = 0; i < length; i++:
+            min = std::Math.min(min, <Number>at(i));
+
+        return min;
+    }
+
     function where(const func): {
         callExceptionNotFunc(func);
 

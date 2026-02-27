@@ -197,6 +197,72 @@ public static class PreCompile
         return (result, numberList);
     }
 
+    public static (string outScript, StringPoolTable list) ExtractStringsInterpolation(string script, StringPoolTable list)
+    {
+        var stringList = list;
+        var stringCounter = stringList.StringPool.Count;
+
+        const string pattern = @"`(?:[^`\\]|\\.)*`";
+
+        var result = Regex.Replace(script, pattern, match =>
+        {
+            var stringValue = match.Value;
+            var key = stringCounter;
+            var value = stringValue.Substring(1, stringValue.Length - 2);
+
+            value = value.Replace("\\`", "`");
+
+            if (stringList.StringPool.IndexOf(value) != -1)
+            {
+                var existedKey = stringList.Add(value);
+                return $"$___S{existedKey}___";
+            }
+
+            stringList.Add(value);
+            stringCounter++;
+
+            return $"$___S{key}___";
+        });
+
+        return (result, stringList);
+    }
+
+    public static (string script, StringPoolTable stringList) AddStringInterpolation(string script, StringPoolTable stringList)
+    {
+        var result = Regex.Replace(script, @"\$___S\d+___", match =>
+        {
+            var founded = match.Value[1..];
+            
+            var smatch = Regex.Match(founded, @"\d+");
+            if (!smatch.Success)
+                throw new Exception($"Undefined type of value '{founded}'");
+            
+            var index = int.Parse(smatch.Value);
+            
+            var outString = stringList[index];
+
+            stringList.StringPool[index] = ReplaceFormatting(outString);
+            
+            var result = $"String.new({founded}).format([{string.Join(", ", GetFormatting(outString))}])";
+            return result;
+            
+        });
+        return (result, stringList);
+    }
+    
+    private static string ReplaceFormatting(string input)
+    {
+        var counter = 0;
+        return Regex.Replace(input, @"(?<!\{)\{([^\{\}]+)\}(?!\})", _ => $"{{{counter++}}}");
+    }
+
+    private static List<string> GetFormatting(string input)
+    {
+        var result = new List<string>();
+        var matches = Regex.Matches(input, @"(?<!\{)\{([^\{\}]+)\}(?!\})");
+        result.AddRange(matches.Select(m => m.Groups[1].Value));
+        return result;
+    }
     
     public static (string outScript, StringPoolTable list) ExtractStrings(string script, StringPoolTable list)
     {
@@ -260,55 +326,6 @@ public static class PreCompile
         
         var result = Regex.Replace(script, pattern, _ => "");
         
-        return result;
-    }
-
-    public static (string script, StringPoolTable stringList) AddStringInterpolation(string script, StringPoolTable stringList)
-    {
-        var result = Regex.Replace(script, @"\$___S\d+___", match =>
-        {
-            var founded = match.Value[1..];
-            
-            var smatch = Regex.Match(founded, @"\d+");
-            if (!smatch.Success)
-                throw new Exception($"Undefined type of value '{founded}'");
-            
-            var index = int.Parse(smatch.Value);
-            
-            var outString = stringList[index];
-
-            stringList.StringPool[index] = ReplaceFormatting(outString);
-            
-            var result = $"String.new({founded}).format([{string.Join(", ", GetFormatting(outString))}])";
-
-            
-            // Console.WriteLine($"Replaced '{founded}' to '{result}'");
-            return result;
-            
-        });
-        return (result, stringList);
-    }
-    
-    private static string ReplaceFormatting(string input)
-    {
-        var counter = 0;
-        return Regex.Replace(input, @"(?<!\{)\{([^\{\}]+)\}(?!\})", _ =>
-        {
-            var replacement = $"{{{counter}}}";
-            counter++;
-            // Console.WriteLine("Replacement: " + replacement);
-            return replacement;
-        });
-    }
-
-    private static List<string> GetFormatting(string input)
-    {
-        var result = new List<string>();
-
-        var matches = Regex.Matches(input, @"(?<!\{)\{([^\{\}]+)\}(?!\})");
-
-        result.AddRange(matches.Select(match => match.Groups[1].Value.Replace(@"\""", "")));
-
         return result;
     }
 }

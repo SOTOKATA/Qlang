@@ -18,7 +18,7 @@ namespace json: {
 
             const key = dict.getKeys().at(i);
             
-            output += $"\"{key}\":";
+            output += `\"{key}\":`;
            
             if indented: 
                 output += " ";
@@ -26,7 +26,7 @@ namespace json: {
             const value = dict.get(key);
             if typeof(value) == "Number" || typeof(value) == "Boolean":
                 output += String.new(value).toLower();
-            else: output += $"\"{value}\"";
+            else: output += `\"{value}\"`;
 
             first = false;
         }

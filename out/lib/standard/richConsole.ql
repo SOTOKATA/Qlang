@@ -20,7 +20,7 @@ namespace std: {
             keywords.forEach(function(const keyword): {
                 const spaces = String.new(" ") * std::Math.max(0, biggestLength - keyword.length());
 
-                richPrint($"{keyword}:{spaces.toString()} [{keyword}]Hello, World![/{keyword}]\n");
+                richPrint(`{keyword}:{spaces.toString()} [{keyword}]Hello, World![/{keyword}]\n`);
             });
 
             std::Console.println();
@@ -28,7 +28,7 @@ namespace std: {
             colors.forEach(function(const keyword): {
                 const spaces = String.new(" ") * std::Math.max(0, biggestLength - keyword.length());
 
-                richPrint($"{keyword}:{spaces.toString()} [color={keyword}]Hello, World![/color]\n");
+                richPrint(`{keyword}:{spaces.toString()} [color={keyword}]Hello, World![/color]\n`);
             });
 
 
@@ -119,8 +119,8 @@ namespace std: {
                     std::Console.print(boolCase(isClose, "\u001b[0m", "\u001b[9m"));
                 default: {
                     if value != "": 
-                        std::Console.print($"[{keyword}={value}]");
-                    else: std::Console.print("[" + boolCase(isClose, "/", "") + $"{keyword}]");
+                        std::Console.print(`[{keyword}={value}]`);
+                    else: std::Console.print("[" + boolCase(isClose, "/", "") + `{keyword}]`);
                 }
             }
         }

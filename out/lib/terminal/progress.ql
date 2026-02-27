@@ -1,36 +1,58 @@
 import "import"
 
 namespace terminal: {
-    function progress(const progressFunction, let<Number> size = 10): {
-        if typeof(progressFunction) != "~function":
-            std::Throw.message("Cannot use non function type: " + Object.toString(typeof(progressFunc)));
+    class Progress: {
+        private let _currentValue;
+        private let _size;
+        private let _position;
 
-        size = std::Math.max(6, size);
+        function new(const<Number> size): {
+            _currentValue = 0.0;
+            _size = std::Math.max(size, 6);
+            _position = std::Console.getCursorPosition();
+            std::Console.println("Initial Position: " + _position.x + " " + _position.y);
+        }
 
-        let current = 0;
+        private function _progress(): {
+            std::Console.cursorVisible(false);
 
-        const position = std::Console.getCursorPosition();
-
-        std::Console.cursorVisible(false);
-
-        while current < 100.0: {
-            current = std::Math.min(100.0, progressFunction(current));
-            const blockCount = current / 100.0 * size - 2;
-            const semiBlockCount = std::Math.round(blockCount / 2); 
-            
-            const currentPosition = std::Console.getCursorPosition();
+            const blockCount = _currentValue / 100.0 * _size - 2;
+            const semiBlockCount = std::Math.round(blockCount / 2);
 
             let emptyDots = "";
-            if blockCount + 2 < size:
-                const emptyDots = String.new(".", size - blockCount - 2); 
+            if blockCount + 2 < _size:
+                const emptyDots = String.new(".", _size - blockCount - 2); 
 
-            std::Console.setCursorPosition(position.x, position.y);
-//█
+            std::Console.setCursorPosition(_position.x, _position.y);
             if semiBlockCount > 0:
                 std::Console.richPrint("[" + String.new("#", blockCount) + emptyDots + "]");
             else: std::Console.richPrint("[]");
+
+            std::Console.println();
+            std::Console.cursorVisible(true);
         }
 
-        std::Console.cursorVisible(true);
+        private function<Number> _toNormal(const<Number> value): {
+            return std::Math.min(std::Math.max(value, 0.0), 100.0);
+        }
+
+        function add(const<Number> value): {
+            _currentValue += _toNormal(value);
+
+            _progress();
+        }
+
+        function reduce(const<Number> value): {
+            _currentValue -= _toNormal(value);
+
+            _progress();
+        }
+
+        function set(const<Number> value): {
+            _currentValue = _toNormal(value);
+
+            _progress();
+        }
+
     }
 }

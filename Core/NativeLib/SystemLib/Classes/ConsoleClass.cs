@@ -9,7 +9,12 @@ public class ConsoleClass : IQlangClass
         return [
             ("write", (Action<string?>)Console.Write),
             ("cursor_visible", (Action<bool>)(isVisible => Console.CursorVisible = isVisible)),
-            ("key", (Func<bool, string>)(intercept => Console.ReadKey(intercept).KeyChar.ToString())),
+            ("key", (Func<bool, string>)(intercept => {
+                var keyInfo = Console.ReadKey(intercept);
+                return char.IsControl(keyInfo.KeyChar)
+                    ? keyInfo.Key.ToString().ToUpper()
+                    : keyInfo.KeyChar.ToString();
+            })),
             ("key_available", (Func<bool>)(() => Console.KeyAvailable)),
             ("clear", (Action)Console.Clear),
             ("foreground", (Action<string>)SetForegroundColor),

@@ -10,8 +10,9 @@ public partial class Interpreter
                 : "unknown"
             let funcName = context.Function?.Name ?? "global"
             let className = context.Class?.Name
-            select className != null
-                ? $"at {className}.{funcName} ({location})"
-                : $"at {funcName} ({location})").Skip(skip).ToList();
+            let namespaceName = context.Namespace?.Name
+            select (namespaceName is null or "~global")
+                ? $"at {(className is null ? "" : className + ".")}{funcName} ({location})"
+                : $"at {namespaceName}::{(className is null ? "" : className + ".")}{funcName} ({location})").Skip(skip).ToList();
     }
 }
