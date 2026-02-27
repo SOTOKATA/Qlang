@@ -31,7 +31,9 @@ public class Compiler
 
         outputScript = PreCompile.ReturnFileStrings(outputScript, StringPoolTable);
         Console.WriteLine("Compiling " + outputScript.Split('\n').Length + " lines.");
-
+        
+        Console.WriteLine(outputScript);
+        
         Console.Write("Lexing...");
         var output = Lexer.Lex(fileName, outputScript, isPublish);
         Console.WriteLine(" success.");

@@ -3,6 +3,7 @@
 public static class Keywords
 {
     public static string FunctionDeclaration => "function";
+    public static string ShortFunctionDeclaration => "fn";
     public static string ClassDeclaration => "class";
     public static string NamespaceDeclaration => "namespace";
     public static string VariableDeclaration => "let";
@@ -48,6 +49,6 @@ public static class Keywords
         ForBlock, ReturnKeyword, TrueKeyword, FalseKeyword, ImportKeyword, PrivateModificator, 
         ConstVariableDeclaration, ContinueKeyword, BreakKeyword, NullKeyword, ThisKeyword, ExtendsKeyword, 
         SwitchBlock, CaseKeyword, DefaultKeyword, NamespaceDeclaration,
-        UsingKeyword, TryKeyword, CatchKeyword, FinallyKeyword
+        UsingKeyword, TryKeyword, CatchKeyword, FinallyKeyword, ShortFunctionDeclaration
     ];
 }

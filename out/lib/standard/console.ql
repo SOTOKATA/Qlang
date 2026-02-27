@@ -10,9 +10,8 @@ namespace std:  {
                 return "<null>";
 
             switch typeof(message): {
-                case "Collection": {
+                case "Collection":
                     return Array.new(message).toString();
-                }
             }
             
             const typeOfMessage = typeof(message);

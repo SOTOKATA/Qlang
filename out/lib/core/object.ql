@@ -31,5 +31,5 @@ function<String> str(const obj):
 function boolCase(const condition, const trueResult, const falseResult):
     if condition: return trueResult; else: return falseResult;
 
-function valueOrStrNull(const value):
-    if Object.isNull(value): return "<null>"; else: return value;
+function<String> valueOrStrNull(const value):
+    if Object.isNull(value): return "null"; else: return value.toString();

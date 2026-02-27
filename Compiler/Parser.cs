@@ -839,10 +839,11 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
     private ASTNode? ParsePrimaryCallable()
     {
         // Function pointer
-        if (Check(Tokens.Keyword) && Current().Value == Keywords.FunctionDeclaration &&
+        if (Check(Tokens.Keyword) && 
+            (Current().Value == Keywords.ShortFunctionDeclaration || Current().Value == Keywords.FunctionDeclaration) &&
             Peek()?.TokenType == Tokens.LParen)
         {
-            // Advance 'function'
+            // Advance 'function' or 'fn'
             Advance();
             // Advance '('
             Advance();

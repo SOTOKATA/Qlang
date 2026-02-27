@@ -11,8 +11,10 @@ namespace terminal: {
 
         const position = std::Console.getCursorPosition();
 
+        std::Console.cursorVisible(false);
+
         while current < 100.0: {
-            current = progressFunction(current);
+            current = std::Math.min(100.0, progressFunction(current));
             const blockCount = current / 100.0 * size - 2;
             const semiBlockCount = std::Math.round(blockCount / 2); 
             
@@ -28,5 +30,7 @@ namespace terminal: {
                 std::Console.richPrint("[" + String.new("#", blockCount) + emptyDots + "]");
             else: std::Console.richPrint("[]");
         }
+
+        std::Console.cursorVisible(true);
     }
 }

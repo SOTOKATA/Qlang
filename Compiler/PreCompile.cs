@@ -21,7 +21,7 @@ public static class PreCompile
             .ToArray();
 
         if (includeLines.Length < 1)
-            return (script, libs);
+            return ($"#FILE \"{fileName}\"\n{script}", libs);
 
         List<string> includedContents = [];
 
@@ -68,11 +68,13 @@ public static class PreCompile
             {
                 foreach (var filePath in Directory.GetFiles(fullPath, "*.ql", SearchOption.TopDirectoryOnly))
                 {
-                    if (!Included.Add(filePath))
+                    var path = Path.GetFullPath(filePath);
+                   
+                    if (!Included.Add(path))
                         continue;
 
-                    var fileContent = File.ReadAllText(filePath);
-                    (var processedContent, libs) = IncludeFiles(fileContent, filePath, libs);
+                    var fileContent = File.ReadAllText(path);
+                    (var processedContent, libs) = IncludeFiles(fileContent, path, libs);
                     includedContents.Add(processedContent);
                 }
             }
@@ -80,7 +82,9 @@ public static class PreCompile
             {
                 if (!fullPath.EndsWith(".ql"))
                     fullPath += ".ql";
-
+                
+                fullPath = Path.GetFullPath(fullPath);
+                
                 if (!Included.Add(fullPath))
                     continue;
 
