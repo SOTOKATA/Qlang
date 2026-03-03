@@ -6,6 +6,9 @@ namespace meta: {
 
         function<String> getName(const cls): return _native("std", "class", "get_name", cls);
 
+        function getVariableValue(const cls, const varName):
+            return _native("std", "class", "getVariableValue", cls, varName);
+
         function<String> getClassName(const cls): return _native("std", "class", "get_class_name", cls);
     }
 }
