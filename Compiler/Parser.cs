@@ -1365,7 +1365,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
     private void ThrowIfIsEnd()
     {
         if (IsAtEnd())
-            throw new QlangCompileException("Cannot parse code, because file is ended.", GetDebug(Previous()), "Parser");
+            throw new QlangCompileException("Cannot throw identified error, because file is ended. Line is obtained from last defined object.", GetDebug(Previous()), "Parser");
     }
     
     private (int, string) GetDebug(Token? token)

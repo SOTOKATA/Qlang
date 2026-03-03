@@ -22,6 +22,9 @@ class Array extends DataType: {
         return str.toString();
     }
 
+    function join(const<String> char):
+        return String.join(this, char);
+
     function<Boolean> isCollection(const collection):
         return _native("std", "array", "is", collection);
 
