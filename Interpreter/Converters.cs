@@ -7,12 +7,36 @@ namespace Interpreter;
 public partial class Interpreter
 {
     /// <summary>
+    /// Convert variables with ASTNode values to normalized
+    /// </summary>
+    /// <param name="variables">Variables to convert</param>
+    /// <returns>Converted variables</returns>
+    private Dictionary<string, Variable> ToDynamicVariables(Dictionary<string, Variable> variables)
+    {
+        foreach (var pair in variables)
+            if (pair.Value.Value is ASTNode node)
+                pair.Value.Value = EvaluateExpression(node);
+
+        return variables;
+    }
+
+    private DynamicNamespace ToDynamicNamespaceVariables(DynamicNamespace dynamicNamespace)
+    {
+        foreach (var dynamic in dynamicNamespace.Namespaces)
+            ToDynamicNamespaceVariables(dynamic);
+        
+        dynamicNamespace.Variables = ToDynamicVariables(dynamicNamespace.Variables);
+        
+        return dynamicNamespace;
+    }
+    
+    /// <summary>
     /// Convert static namespace to dynamic
     /// </summary>
     /// <param name="namespaceNode">namespace to convert</param>
-    /// <param name="dNamespace">subnamespace</param>
+    /// <param name="globalNamespaceName">name of subnamespace</param>
     /// <returns>DynamicNamespace</returns>
-    private DynamicNamespace ToDynamicNamespace(NamespaceNode namespaceNode, DynamicNamespace? dNamespace = null)
+    private DynamicNamespace ToDynamicNamespace(NamespaceNode namespaceNode, string? globalNamespaceName)
     {
         // Create dynamic instance
         var dynamicNamespace = new DynamicNamespace(_stringPoolTable[namespaceNode.NameId])
@@ -20,19 +44,20 @@ public partial class Interpreter
             IsPrivate = namespaceNode.IsPrivate
         };
         
-        dNamespace?.Namespaces.Add(dynamicNamespace);
+        if (globalNamespaceName is not null)
+            _dynamicNamespaces[globalNamespaceName].Namespaces.Add(dynamicNamespace);
         
         // Add and convert all classes
         dynamicNamespace.Classes.AddRange(
             namespaceNode.Body
                 .OfType<ClassNode>()
-                .Select(x => ToDynamicClass(x, dNamespace))
+                .ToList()
         );
         
         // Add and convert all namespaces
         dynamicNamespace.Namespaces.AddRange(
             namespaceNode.Body.OfType<NamespaceNode>()
-                .Select(x => ToDynamicNamespace(x, dNamespace))
+                .Select(x => ToDynamicNamespace(x, globalNamespaceName))
             );
         
 
@@ -42,7 +67,7 @@ public partial class Interpreter
         // Add and convert all assignments
         foreach (var assignmentNode in namespaceNode.Body.OfType<LineNode>().Select(x => (AssignmentNode)x.Content!))
                 dynamicNamespace.Variables[_stringPoolTable[assignmentNode.GetLastNameId()]] = new Variable(_stringPoolTable[assignmentNode.GetLastNameId()],
-                    EvaluateExpression(assignmentNode.Value),  assignmentNode
+                    assignmentNode.Value,  assignmentNode
                         .IsPrivate, assignmentNode.IsConst);
         
         return dynamicNamespace;
@@ -61,8 +86,7 @@ public partial class Interpreter
         {
             IsPrivate = classNode.IsPrivate
         };
-        dynamicNamespace?.Classes.Add(dynamicClass);
-
+        
         // Add and convert all assignments
         foreach (var assignmentNode in classNode.Body.OfType<LineNode>().Select(x => (AssignmentNode)x.Content!))
                 dynamicClass.Variables[_stringPoolTable[assignmentNode.GetLastNameId()]] = new Variable(_stringPoolTable[assignmentNode.GetLastNameId()],
@@ -115,10 +139,11 @@ public partial class Interpreter
 
     private DynamicClass ToQlangException(Exception ex)
     {
-        var @class = _dynamicNamespaces[GlobalNamespaceName].Classes
-            .FirstOrDefault(x => x.ClassName == QlSystemClasses.ExceptionClassName);
+        var id = _stringPoolTable.Add(QlSystemClasses.ExceptionClassName);
+        var @class = ToDynamicClass(_dynamicNamespaces[GlobalNamespaceName].Classes
+            .FirstOrDefault(x => x.NameId == id)!);
         
-        @class!.Variables["message"].Value = ex.ToString();
+        @class.Variables["message"].Value = ex.ToString();
         return @class;
     }
 }

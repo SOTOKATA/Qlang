@@ -6,9 +6,9 @@ public class DynamicNamespace(string name)
 {
     public readonly string Name = name;
     
-    public readonly Dictionary<string, Variable> Variables = [];
+    public Dictionary<string, Variable> Variables = [];
 
-    public readonly List<DynamicClass> Classes = [];
+    public readonly List<ClassNode> Classes = [];
     
     public readonly List<DynamicNamespace> Namespaces = [];
 

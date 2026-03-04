@@ -52,18 +52,24 @@ public partial class Interpreter
 
         if (globalNamespace is not null)
         {
+            
             var dynamicNamespace = new DynamicNamespace(GlobalNamespaceName);
             _dynamicNamespaces[GlobalNamespaceName] = dynamicNamespace;
             
             _dynamicNamespaces[GlobalNamespaceName] = 
-                ToDynamicNamespace(globalNamespace, dynamicNamespace);
+                ToDynamicNamespace(globalNamespace, GlobalNamespaceName);
+
             program.Statements.Remove(globalNamespace);
         }
-
-        // Load namespaces
-        foreach (var namespaceNode in program.Statements.OfType<NamespaceNode>().Where(x => _stringPoolTable[x.NameId] != GlobalNamespaceName))
-            _dynamicNamespaces[_stringPoolTable[namespaceNode.NameId]] = ToDynamicNamespace(namespaceNode);
         
+       
+            // Load namespaces
+        foreach (var namespaceNode in program.Statements.OfType<NamespaceNode>().Where(x => _stringPoolTable[x.NameId] != GlobalNamespaceName))
+            _dynamicNamespaces[_stringPoolTable[namespaceNode.NameId]] = ToDynamicNamespace(namespaceNode, null);
+
+        // Convert variable values
+        foreach (var pair in _dynamicNamespaces)
+            pair.Value = ToDynamicNamespaceVariables(pair.Value);
 
         // Search main function
         var function = _dynamicNamespaces[GlobalNamespaceName].Functions.FirstOrDefault(f => _stringPoolTable[f.NameId] == "main");
@@ -305,20 +311,20 @@ public partial class Interpreter
     /// <summary>
     /// Creates new class instance of sent class
     /// </summary>
-    /// <param name="dynamicClass">Copy of class to create</param>
+    /// <param name="classNode">Copy of class to create</param>
     /// <param name="args">Arguments for function 'new'</param>
     /// <returns>New instance</returns>
     /// <exception cref="QlangRuntimeException">If was sent invalid parameters</exception>
-    private DynamicClass GetNewClass(DynamicClass dynamicClass, List<object?> args)
+    private DynamicClass GetNewClass(ClassNode classNode, List<object?> args)
     {
-        var dClass = dynamicClass.Clone();
+        var dClass = ToDynamicClass((ClassNode)classNode.Clone());
 
         var fromClass = GetFunctionFromClass(dClass, _stringPoolTable.Add(Keywords.CreateClassInstanceKeyword), args);
 
         var indexOfNewClass = _stringPoolTable.Add(Keywords.CreateClassInstanceKeyword);
         if (dClass.Body.OfType<FunctionNode>().Any(f => f.NameId == indexOfNewClass) &&
             fromClass.function == null)
-            throw new QlangRuntimeException($"Can't initialize class '{dynamicClass.ClassName}' with this parameters.", GetStackTrace());
+            throw new QlangRuntimeException($"Can't initialize class '{_stringPoolTable[classNode.NameId]}' with this parameters.", GetStackTrace());
 
         if (fromClass.function != null)
             ExecuteFunction(ToDynamicFunction(fromClass.function), fromClass.Args, dClass, null);
@@ -379,7 +385,7 @@ public partial class Interpreter
                             if (int.TryParse(hexSpan, 
                                     System.Globalization.NumberStyles.HexNumber,
                                     null,
-                                    out int code))
+                                    out var code))
                             {
                                 sb.Append((char)code);
                                 i += 5;
@@ -496,7 +502,7 @@ public partial class Interpreter
             @namespace = ns;
         }
 
-        var classNode = @namespace.Classes.FirstOrDefault(x => x.Name == _stringPoolTable[pointer.NameId]);
+        var classNode = @namespace.Classes.FirstOrDefault(x => x.NameId == pointer.NameId);
         
         if (classNode is null)
             throw new QlangRuntimeException("Class is not founded.", GetCurrentDebug(), GetStackTrace());

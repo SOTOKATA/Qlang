@@ -126,6 +126,13 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         // return statement
         if (Check(Tokens.Keyword, Keywords.ReturnKeyword))
             return ParseReturn();
+        
+        // new statement
+        if (Check(Tokens.Keyword, Keywords.CreateClassInstanceKeyword))
+        {
+            lineNode.Content = ParsePrimary();
+            return lineNode;
+        }
 
         // assignment
         if (Check(Tokens.Keyword, Keywords.VariableDeclaration) || Check(Tokens.Keyword, Keywords.ConstVariableDeclaration))

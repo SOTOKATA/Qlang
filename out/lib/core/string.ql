@@ -257,3 +257,4 @@ class String extends DataType: {
     function format(const<Collection> replacement):
         return _native("std", "string", "format", _value, replacement);
 }
+const String = new String("");

@@ -1,5 +1,6 @@
 import "$lib/core"
 
+const Object = new Object();
 class Object: {
     function<Boolean> isNull(let obj):
         return _native("std", "object", "is_null", obj);

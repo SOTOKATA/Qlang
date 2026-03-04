@@ -141,4 +141,5 @@ namespace std:  {
 
         function richTest(): RichConsole.richTest();
     }
+    const console = new std::Console();
 }

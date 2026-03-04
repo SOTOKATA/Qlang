@@ -24,13 +24,15 @@ public partial class Interpreter
         {
             case string str:
             {
-                @class = _dynamicNamespaces[GlobalNamespaceName].Classes.First(x => x.ClassName == QlSystemClasses.StringClassName);
+                var id = _stringPoolTable.Add(QlSystemClasses.StringClassName);
+                @class = ToDynamicClass(_dynamicNamespaces[GlobalNamespaceName].Classes.First(x => x.NameId == id));
                 @class.Variables["_value"].Value = str;
                 break;
             }
             case List<object?> arr:
             {
-                @class = _dynamicNamespaces[GlobalNamespaceName].Classes.First(x => x.ClassName == QlSystemClasses.ArrayClassName);
+                var id = _stringPoolTable.Add(QlSystemClasses.ArrayClassName);
+                @class = ToDynamicClass(_dynamicNamespaces[GlobalNamespaceName].Classes.First(x => x.NameId == id));
                 @class.Variables["_value"].Value = arr;
                 break;
             }
@@ -177,9 +179,6 @@ public partial class Interpreter
                     lastReturnValue = PrimitiveToDynamicClass(lastReturnValue);
                 }
                 
-                if (_stringPoolTable[fn.NameId] == Keywords.CreateClassInstanceKeyword && lastReturnValue is DynamicClass @class)
-                    return GetNewClass(@class, fn.Arguments.ConvertAll(EvaluateExpression));
-             
                 var function = FindFunction(fn, lastReturnValue, isPathStart);
                 
                 _allowPrivateCall = false;
@@ -257,22 +256,6 @@ public partial class Interpreter
                 return (pair.function, pair.args, CurrentContext?.Class, CurrentContext?.Namespace);
         }
         
-        // Try to get function from class function list;
-        if (lastObject is DynamicClass dClass)
-        {
-            pair = TryGetFunctionFromClass(dClass, node.NameId, args);
-            // Find class in namespaces
-            var @namespace = _dynamicNamespaces.FirstOrDefault(n => n.Value.Classes.Contains(dClass)).Value;
-            
-            if (pair.function is not null)
-            {
-                if (pair.function.IsPrivate && !_allowPrivateCall)
-                    throw new QlangRuntimeException($"Cannot get access to private function '{pair.function.Name}' from class '{dClass.ClassName}'",GetCurrentDebug(), GetStackTrace());
-                
-                return (pair.function, pair.args, dClass, @namespace);
-            }
-        }
-        
         // Try to get function from namespace function list;
         if (lastObject is DynamicNamespace dNamespace)
         {
@@ -283,6 +266,22 @@ public partial class Interpreter
                     throw new QlangRuntimeException($"Cannot get access to private function '{pair.function.Name}' from namespace '{dNamespace.Name}'", GetCurrentDebug(), GetStackTrace());
                 
                 return (pair.function, pair.args, null, dNamespace);
+            }
+        }
+
+        if (lastObject is DynamicClass dClass)
+        {
+            pair = TryGetFunctionFromClass(dClass, node.NameId, args);
+            if (pair.function is not null)
+            {
+                if (pair.function.IsPrivate)
+                    throw new QlangRuntimeException($"Cannot get access to private function '{pair.function.Name}' from class '{dClass.Name}'", GetCurrentDebug(), GetStackTrace());
+
+                var id = _stringPoolTable.Add(dClass.Name);
+                var @namespace =
+                    _dynamicNamespaces.FirstOrDefault(x => x.Value.Classes.Any(y => y.NameId == id));
+
+                return (pair.function, pair.args, dClass, @namespace.Value);
             }
         }
 
@@ -372,20 +371,6 @@ public partial class Interpreter
             var variable = _dynamicNamespaces[GlobalNamespaceName].Variables.FirstOrDefault(var => var.Value.Name == nodeName).Value;
             if (variable is not null)
                 return (variable, null);
-            
-            // Try to get CLASS from context namespace
-            if (HasContext)
-            {
-                var @class = CurrentContext?.Namespace?.Classes.FirstOrDefault(@class => @class.ClassName == nodeName);
-                if (@class is not null)
-                    return (@class, CurrentContext?.Namespace);
-            }
-            
-            // Try to get CLASS from global class list;
-            var dynamicClass = _dynamicNamespaces[GlobalNamespaceName].Classes
-                .FirstOrDefault(x => x.ClassName == nodeName);
-            if (dynamicClass is not null)
-                return (dynamicClass, null);
         }
 
         if (lastObject is null)
@@ -416,17 +401,6 @@ public partial class Interpreter
                             GetCurrentDebug(), GetStackTrace());
                     
                     return (var, null);
-                }
-            
-                // Try to get CLASS from namespace
-                var @class = dynamicNamespace.Classes.FirstOrDefault(@class => @class.ClassName == nodeName);
-                if (@class is not null)
-                {
-                    if (@class.IsPrivate)
-                        throw new QlangRuntimeException($"Cannot get access to private class '{@class.Name}' from namespace '{dynamicNamespace.Name}'.",
-                            GetCurrentDebug(), GetStackTrace());
-                    
-                    return (@class, null);
                 }
                 break;
         }
