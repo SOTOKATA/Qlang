@@ -68,8 +68,8 @@ public partial class Interpreter
             _dynamicNamespaces[_stringPoolTable[namespaceNode.NameId]] = ToDynamicNamespace(namespaceNode, null);
 
         // Convert variable values
-        foreach (var pair in _dynamicNamespaces)
-            pair.Value = ToDynamicNamespaceVariables(pair.Value);
+        foreach (var key in _dynamicNamespaces.Keys.ToList())
+            _dynamicNamespaces[key] = ToDynamicNamespaceVariables(_dynamicNamespaces[key]);
 
         // Search main function
         var function = _dynamicNamespaces[GlobalNamespaceName].Functions.FirstOrDefault(f => _stringPoolTable[f.NameId] == "main");

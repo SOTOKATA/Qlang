@@ -64,10 +64,6 @@ class String extends DataType: {
     function _operatorLess(const obj1, const obj2): 
         return obj1.length() < obj2.length();
 
-    function _cast(const obj): {
-
-    }
-
     function new(const input): {
         if String.isString(input):
             _value = input.getValue();

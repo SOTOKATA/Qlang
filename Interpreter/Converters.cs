@@ -15,16 +15,19 @@ public partial class Interpreter
     {
         foreach (var pair in variables)
             if (pair.Value.Value is ASTNode node)
+            {
                 pair.Value.Value = EvaluateExpression(node);
+                Console.WriteLine("Variable value: " + node + " : Evaluated to: " + pair.Value.Value);
+            }
 
         return variables;
     }
 
     private DynamicNamespace ToDynamicNamespaceVariables(DynamicNamespace dynamicNamespace)
     {
-        foreach (var dynamic in dynamicNamespace.Namespaces)
-            ToDynamicNamespaceVariables(dynamic);
-        
+        for (var index = 0; index < dynamicNamespace.Namespaces.Count; index++)
+            dynamicNamespace.Namespaces[index] = ToDynamicNamespaceVariables(dynamicNamespace.Namespaces[index]);
+
         dynamicNamespace.Variables = ToDynamicVariables(dynamicNamespace.Variables);
         
         return dynamicNamespace;
