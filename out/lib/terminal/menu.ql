@@ -41,7 +41,7 @@ namespace terminal: {
 
             for let i = 0; i < params.range; i++: {
                 std::Console.setCursorPosition(position.x, position.y + i + 1);
-                std::Console.print(String.new(" ", maxLength) + "  " + String.new(" ", <Number>`{(i + 1)}`));
+                std::Console.print(new String(" ", maxLength) + "  " + new String(" ", <Number>`{(i + 1)}`));
             }
 
             std::Console.setCursorPosition(position.x, position.y);
@@ -54,8 +54,8 @@ namespace terminal: {
                 const item = params.items.at(i);
 
                 if i == selected:
-                    std::Console.richPrint(`[color={params.highlightColor}]{params.selected}{num}{item}[/color]` + String.new(" ", maxLength));
-                else: std::Console.richPrint(num + item + String.new(" ", maxLength));
+                    std::Console.richPrint(`[color={params.highlightColor}]{params.selected}{num}{item}[/color]` + new String(" ", maxLength));
+                else: std::Console.richPrint(num + item + new String(" ", maxLength));
             }
 
             const input = std::Console.readkey(true);

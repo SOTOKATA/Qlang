@@ -15,10 +15,10 @@ namespace std: {
             });
 
             std::Console.println("\nRich tag test:");
-            std::Console.println(String.new("-", 10));
+            std::Console.println(new String("-", 10));
 
             keywords.forEach(function(const keyword): {
-                const spaces = String.new(" ") * std::Math.max(0, biggestLength - keyword.length());
+                const spaces = new String(" ") * std::Math.max(0, biggestLength - keyword.length());
 
                 richPrint(`{keyword}:{spaces.toString()} [{keyword}]Hello, World![/{keyword}]\n`);
             });
@@ -26,13 +26,13 @@ namespace std: {
             std::Console.println();
 
             colors.forEach(function(const keyword): {
-                const spaces = String.new(" ") * std::Math.max(0, biggestLength - keyword.length());
+                const spaces = new String(" ") * std::Math.max(0, biggestLength - keyword.length());
 
                 richPrint(`{keyword}:{spaces.toString()} [color={keyword}]Hello, World![/color]\n`);
             });
 
 
-            std::Console.println(String.new("-", 10) + "\n");
+            std::Console.println(new String("-", 10) + "\n");
         }
 
         function richPrint(const<String> message): {

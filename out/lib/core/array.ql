@@ -108,7 +108,7 @@ class Array extends DataType: {
 
         const length = length();
 
-        const newArray = Array.new([]);
+        const newArray = new Array([]);
 
         for let i = count; i < length; i++:
             newArray.push(at(i));
@@ -151,7 +151,7 @@ class Array extends DataType: {
 
         const length = length();
 
-        const arr = Array.new([]);
+        const arr = new Array([]);
 
         for let i = 0; i < length; i++: {
             if func(at(i)):
@@ -166,7 +166,7 @@ class Array extends DataType: {
 
         const length = length();
 
-        const arr = Array.new([]);
+        const arr = new Array([]);
 
         for let i = 0; i < length; i++:
             arr.push(func(at(i)));

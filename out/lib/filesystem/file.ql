@@ -30,7 +30,7 @@ namespace fs: {
             if exists(path) == false:
                 std::Throw.message("file path '" + path + "' is not found");
 
-            return String.new(_native("std", "filesystem", "get_content", path));
+            return new String(_native("std", "filesystem", "get_content", path));
         }
 
         // Create file

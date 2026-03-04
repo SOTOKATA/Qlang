@@ -21,11 +21,11 @@ namespace terminal: {
 
             let emptyDots = "";
             if blockCount + 2 < _size:
-                const emptyDots = String.new(".", _size - blockCount - 2); 
+                const emptyDots = new String(".", _size - blockCount - 2); 
 
             std::Console.setCursorPosition(_position.x, _position.y);
             if semiBlockCount > 0:
-                std::Console.richPrint("[" + String.new("#", blockCount) + emptyDots + "]");
+                std::Console.richPrint("[" + new String("#", blockCount) + emptyDots + "]");
             else: std::Console.richPrint("[]");
 
             std::Console.println();

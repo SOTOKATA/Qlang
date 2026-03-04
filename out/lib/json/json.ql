@@ -25,7 +25,7 @@ namespace json: {
 
             const value = dict.get(key);
             if typeof(value) == "Number" || typeof(value) == "Boolean":
-                output += String.new(value).toLower();
+                output += new String(value).toLower();
             else: output += `\"{value}\"`;
 
             first = false;
@@ -39,7 +39,7 @@ namespace json: {
     }
 
     function<Dictionary> deserialize(let content): {
-        const result = Dictionary.new();
+        const result = new Dictionary();
 
         content = content.trim().trim("{").trim("}");
 

@@ -26,7 +26,7 @@ public static class Program
 
         var qliProgram = Core.MessagePack.Deserialize<QLIProgram>(Brotli.Decompress(File.ReadAllBytes(programPath)));
         
-        var qliDebug = new QLIDebug()
+        var qliDebug = new QLIDebug
         {
             SourceFileTable = null,
             DebugTable = null

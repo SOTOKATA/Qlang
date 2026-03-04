@@ -38,6 +38,7 @@ public class Token(Tokens token, string value = "")
             Tokens.Keyword => " ",
             Tokens.Percent => " % ",
             Tokens.Question => " ? ",
+            _ => token.ToString()
         };
     }
 }

@@ -49,6 +49,7 @@ public static class Keywords
         ForBlock, ReturnKeyword, TrueKeyword, FalseKeyword, ImportKeyword, PrivateModificator, 
         ConstVariableDeclaration, ContinueKeyword, BreakKeyword, NullKeyword, ThisKeyword, ExtendsKeyword, 
         SwitchBlock, CaseKeyword, DefaultKeyword, NamespaceDeclaration,
-        UsingKeyword, TryKeyword, CatchKeyword, FinallyKeyword, ShortFunctionDeclaration
+        UsingKeyword, TryKeyword, CatchKeyword, FinallyKeyword, ShortFunctionDeclaration,
+        CreateClassInstanceKeyword
     ];
 }

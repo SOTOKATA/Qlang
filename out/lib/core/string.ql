@@ -11,11 +11,11 @@ class String extends DataType: {
 
     // Parse object to String
     function _createFrom(const obj):
-        return String.new(obj);
+        return new String(obj);
 
     // Parse additional operations
     function _operatorAddition(const obj1, const obj2):
-        return String.new(obj1.getValue() + obj2.getValue());
+        return new String(obj1.getValue() + obj2.getValue());
         
 
     // Parse multiplication operations
@@ -25,7 +25,7 @@ class String extends DataType: {
         for let i = 0; i < <Number>obj2.getValue(); i++:
             val = val + obj1;
 
-        return String.new(val);
+        return new String(val);
     }
 
     // Parse division operations
@@ -37,7 +37,7 @@ class String extends DataType: {
         for let i = 0; i < index; i++:
             val = val + obj1.charAt(i);
 
-        return String.new(val);
+        return new String(val);
     }
 
     // Parse '==' operations
@@ -81,7 +81,7 @@ class String extends DataType: {
         if count < 0: 
             std::Throw.message("Param 'count' must be more than 0");
 
-        if String.new(char).length() < 0:
+        if new String(char).length() < 0:
             std::Throw.message("Length of string must be more than 0");
 
         _value = _native("std", "string", "create", char, count);
@@ -121,21 +121,21 @@ class String extends DataType: {
 
         let result = "";
 
-        let arr = Array.new(collection);
+        let arr = new Array(collection);
 
         for let i = 0; i < arr.length(); i++: {
             result = result + arr.at(i);
         }
 
-        return String.new(result);
+        return new String(result);
     }
 
     function toLower(): {
-        return String.new(_native("std", "string", "to_lower", _str(_value)));
+        return new String(_native("std", "string", "to_lower", _str(_value)));
     }
 
     function toUpper(): {
-        return String.new(_native("std", "string", "to_upper", _str(_value)));
+        return new String(_native("std", "string", "to_upper", _str(_value)));
     }
 
     function isString(let value): {
@@ -148,7 +148,7 @@ class String extends DataType: {
     }
 
     function split(let<String> pattern): {
-        return Array.new(_native("std", "string", "split", _str(_value), _str(pattern)));
+        return new Array(_native("std", "string", "split", _str(_value), _str(pattern)));
     }
 
     function charAt(const<Number> index): {
@@ -172,7 +172,7 @@ class String extends DataType: {
         if typeof(strArr) == "Array":
             strArr = strArr.getCollection();
 
-        return String.new(_native("std", "string", "join", strArr, pattern));
+        return new String(_native("std", "string", "join", strArr, pattern));
     }
 
     // Get length of string
@@ -215,34 +215,34 @@ class String extends DataType: {
 
     // Trim string
     function trim(const<String> str):
-        return String.new(_native("std", "string", "trim_b", _str(_value), _str(str)));
+        return new String(_native("std", "string", "trim_b", _str(_value), _str(str)));
 
     // Trim start string
     function trimStart(const<String> str):
-        return String.new(_native("std", "string", "trim_start_b", _str(_value), _str(str)));
+        return new String(_native("std", "string", "trim_start_b", _str(_value), _str(str)));
 
     // Trim end string
     function trimEnd(const<String> str):
-        return String.new(_native("std", "string", "trim_end_b", _str(_value), _str(str)));
+        return new String(_native("std", "string", "trim_end_b", _str(_value), _str(str)));
 
         // Trim string
     function trim():
-        return String.new(_native("std", "string", "trim", _str(_value)));
+        return new String(_native("std", "string", "trim", _str(_value)));
 
     // Trim start string
     function trimStart():
-        return String.new(_native("std", "string", "trim_start", _str(_value)));
+        return new String(_native("std", "string", "trim_start", _str(_value)));
 
     // Trim end string
     function trimEnd():
-        return String.new(_native("std", "string", "trim_end", _str(_value)));
+        return new String(_native("std", "string", "trim_end", _str(_value)));
 
     // Cut string by 'startPos' and 'length'
     function subString(let<Number> startPos, let<Number> length): {
         if length() <= length:
             std::Throw.message("Value 'length' can't be more than string length");
 
-        return String.new(_native("std", "string", "substring", _str(_value), startPos, length));
+        return new String(_native("std", "string", "substring", _str(_value), startPos, length));
     }
 
     // get index of first 'toFind'

@@ -438,6 +438,7 @@ public partial class Interpreter
                 BinaryOperationNode binOp => EvaluateBinaryOperation(binOp),
                 CollectionNode collection => collection.Collection.ConvertAll(EvaluateExpression),
                 KeywordNode node when _stringPoolTable[node.KeywordId] == Keywords.NullKeyword => null,
+                NewNode newNode => EvaluateNewKeyword(newNode),
                 CallNode call => ExecuteObjectCalls(call),
                 FunctionNode fn => PrepareFunctionNodePointer(fn),
                 _ => throw new QlangRuntimeException(
@@ -473,6 +474,34 @@ public partial class Interpreter
         }
         
         return EvaluateExpression(ln.Content);
+    }
+
+    private DynamicClass EvaluateNewKeyword(NewNode node)
+    {
+        if (node.NodePath.Objects.Count < 1)
+            throw new QlangRuntimeException("Undefined path to class.", GetCurrentDebug(), GetStackTrace());
+        
+        var pointer = (FunctionPointerNode)node.NodePath.Objects[^1];
+
+        var @namespace = _dynamicNamespaces[GlobalNamespaceName];
+
+        if (node.NodePath.Objects.Count > 1)
+        {
+            node.NodePath.Objects = node.NodePath.Objects.SkipLast(1).ToList();
+            var obj = ExecuteObjectCalls(node.NodePath);
+
+            if (obj is not DynamicNamespace ns)
+                throw new QlangRuntimeException($"Undefined namespace: {obj}", GetCurrentDebug(), GetStackTrace());
+            
+            @namespace = ns;
+        }
+
+        var classNode = @namespace.Classes.FirstOrDefault(x => x.Name == _stringPoolTable[pointer.NameId]);
+        
+        if (classNode is null)
+            throw new QlangRuntimeException("Class is not founded.", GetCurrentDebug(), GetStackTrace());
+
+        return GetNewClass(classNode, pointer.Arguments.ConvertAll(EvaluateExpression));
     }
 
     /// <summary>

@@ -11,7 +11,7 @@ namespace std:  {
 
             switch typeof(message): {
                 case "Collection":
-                    return Array.new(message).toString();
+                    return new Array(message).toString();
             }
             
             const typeOfMessage = typeof(message);
@@ -81,11 +81,11 @@ namespace std:  {
 
         // Read line from console
         function<String> readln(): {
-            return String.new(_native("std", "console", "read"));
+            return new String(_native("std", "console", "read"));
         }
 
         function<String> readkey(const<Boolean> intercept = false): {
-            return String.new(_native("std", "console", "key", intercept));
+            return new String(_native("std", "console", "key", intercept));
         }
 
         function<String> isKeyAvailable(): {

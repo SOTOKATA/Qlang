@@ -7,11 +7,11 @@ namespace meta: {
         const types = _native("std", "meta", "var_type_list", cls);
         const values = _native("std", "meta", "var_value_list", cls);
 
-        const arr = Array.new([]);
+        const arr = new Array([]);
 
         const length = names.length();
         for let i = 0; i < length; i++:
-            arr.push(Variable.new(types.at(i), names.at(i), values.at(i)));
+            arr.push(new Variable(types.at(i), names.at(i), values.at(i)));
 
         return arr;
     }

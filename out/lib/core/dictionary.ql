@@ -5,15 +5,15 @@ class Dictionary: {
     private let _values;
 
     function new(): {
-        _keys = Array.new([]);
-        _values = Array.new([]);
+        _keys = new Array([]);
+        _values = new Array([]);
     }
     
     function<String> toString(): {
         let str = _keys.toString().toString();
         str = str + _values.toString().toString();
 
-        return String.new(str);
+        return new String(str);
     }
 
     function<Array> getKeys(): return _keys;

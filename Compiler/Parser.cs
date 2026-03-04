@@ -273,7 +273,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
     private FunctionNode ParseFunction(bool isPrivate = false)
     {
 
-        Expect(Tokens.Keyword, Keywords.FunctionDeclaration);
+        var debug = Expect(Tokens.Keyword, Keywords.FunctionDeclaration);
 
         // Type
         CallNode? returnType = null;
@@ -289,8 +289,11 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             returnType = callNode;
             Expect(Tokens.Greater);
         }
+
+        if (!Check(Tokens.Identifier) && !Check(Tokens.Keyword, Keywords.CreateClassInstanceKeyword))
+            throw new QlangCompileException("Cannot use this name for function", GetDebug(debug), "Parser");
         
-        var nameToken = Expect(Tokens.Identifier);
+        var nameToken = Advance();
         Expect(Tokens.LParen);
 
         List<AssignmentNode> parameters = [];
@@ -1228,7 +1231,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         return retValue;
     }
 
-    private CastNode? ParseCast()
+    private CastNode? ParsePrimaryCast()
     {
         if (!Check(Tokens.Less))
             return null;
@@ -1259,6 +1262,24 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         };
     }
 
+    private NewNode? ParsePrimaryNew()
+    {
+        if (!Check(Tokens.Keyword, Keywords.CreateClassInstanceKeyword))
+            return null;
+        
+        var debugIndex = Advance();
+
+        var primaryPath =  ParsePrimaryPath();
+        
+        if (primaryPath is not CallNode callNode)
+            throw new QlangCompileException("Undefined class reference for creating instance", GetDebug(debugIndex), "Parser");
+        
+        return new NewNode
+        {
+            NodePath = callNode
+        };
+    }
+
     
     private ASTNode ParsePrimary(bool isLoop = false)
     {
@@ -1270,7 +1291,11 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             return baseExpression;
         }
         
-        baseExpression = ParseCast();
+        baseExpression = ParsePrimaryCast();
+        if (baseExpression is not null)
+            return baseExpression;
+        
+        baseExpression = ParsePrimaryNew();
         if (baseExpression is not null)
             return baseExpression;
 
@@ -1341,7 +1366,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             
             throw new QlangCompileException(
                 $"""
-                 Incorrect syntax, expected '{Token.TokenToString(type)}', got '{Token.TokenToString(current.TokenType)}'
+                 Incorrect syntax, expected '{Token.TokenToString(type).Trim()}' ({value}), got '{current.Value}'
                  """,
                 GetDebug(current), "Parser");
         }
@@ -1382,7 +1407,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             throw new QlangCompileException("Debug index of token is too big", (-1, ""), "Parser");
         }
         
-        return (debugTable.GetLineIndex(token.DebugIndex),
+        return (debugTable.GetLineIndex(token.DebugIndex) + 1,
             sourceFileTable[debugTable.GetFileId(token.DebugIndex)]);
     }
 }

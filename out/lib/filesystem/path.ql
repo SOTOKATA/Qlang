@@ -4,7 +4,7 @@ import "$lib/filesystem"
 namespace fs: {
     class Path: {
         function<String> combine(const<Array> arr):
-            return String.new(_native("std", "filesystem", "combine", arr.getCollection()));
+            return new String(_native("std", "filesystem", "combine", arr.getCollection()));
 
         function<Boolean> exists(const<String> path):
             return _native("std", "filesystem", "path_exists", path);
