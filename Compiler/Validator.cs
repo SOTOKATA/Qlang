@@ -15,12 +15,15 @@ public class Validator(SourceFileTable? sourceFileTable, DebugTable? debugTable,
     
     private void CheckDuplicate(ProgramNode program)
     {
-        var classes = program.Statements
-            .OfType<ClassNode>()
-            .ToList();
+        List<ClassNode> classes = [];
+        
+        var namespaces = program.Statements.OfType<NamespaceNode>().ToList();
 
         foreach (var @namespace in program.Statements.OfType<NamespaceNode>())
             classes.AddRange(Parser.GetClassesFromNamespaceRecursively(@namespace));
+        
+        foreach (var @namespace in namespaces.ToList())
+            namespaces.AddRange(Parser.GetNamespacesFromNamespaceRecursively(@namespace));
 
         CheckDuplicateClasses(classes);
 
@@ -28,6 +31,12 @@ public class Validator(SourceFileTable? sourceFileTable, DebugTable? debugTable,
         {
             CheckDuplicateFunctions(classNode);
             CheckDuplicateAssignments(classNode);
+        }
+
+        foreach (var @namespace in namespaces)
+        {
+            CheckDuplicateFunctions(@namespace);
+            CheckDuplicateAssignments(@namespace);
         }
     }
 
@@ -43,11 +52,25 @@ public class Validator(SourceFileTable? sourceFileTable, DebugTable? debugTable,
             throw new QlangCompileException($"Duplicate class found: '{group.Key.Name}'", GetDebug(group.First()), "Validator");
     }
 
-    private void CheckDuplicateFunctions(ClassNode @class)
+    private void CheckDuplicateFunctions(object obj)
     {
-        var functions = @class.Body
-            .OfType<FunctionNode>()
-            .ToList();
+        List<FunctionNode> functions = [];
+        var objectName = "";
+        
+        if (obj is ClassNode @class)
+        {
+            functions = @class.Body
+                .OfType<FunctionNode>()
+                .ToList();
+            objectName = stringPoolTable[@class.NameId];
+        }
+        else if (obj is NamespaceNode @namespace)
+        {
+            functions = @namespace.Body
+                .OfType<FunctionNode>()
+                .ToList();
+            objectName = stringPoolTable[@namespace.NameId];
+        }
 
         var duplicateGroups = functions
             .GroupBy(f => new {
@@ -58,26 +81,42 @@ public class Validator(SourceFileTable? sourceFileTable, DebugTable? debugTable,
 
         foreach (var group in duplicateGroups)
             throw new QlangCompileException(
-                $"Duplicate function found: '{group.Key.Name}' in class '{@class.NameId}'",
+                $"Duplicate function found: '{stringPoolTable[group.Key.Name]}' in '{objectName}'",
                 GetDebug(group.First()),
                 "Validator"
             );
     }
     
-    private void CheckDuplicateAssignments(ClassNode @class)
+    private void CheckDuplicateAssignments(object obj)
     {
-        var assignments = @class.Body
-            .OfType<AssignmentNode>()
-            .ToList();
+        var objectName = "";
+        List<AssignmentNode> assignments = [];
 
+        if (obj is ClassNode @class)
+        {
+            assignments = @class.Body
+                .OfType<LineNode>().Select(x => (AssignmentNode)x.Content!)
+                .ToList();
+            objectName = stringPoolTable[@class.NameId];
+        } else if (obj is NamespaceNode @namespace)
+        {
+            assignments = @namespace.Body
+                .OfType<LineNode>().Select(x => (AssignmentNode)x.Content!)
+                .ToList();
+            objectName = stringPoolTable[@namespace.NameId];
+        }
+
+        if (assignments.Count == 0)
+            return;
+        
         var duplicateGroups = assignments
             .GroupBy(f => new {
-                VariableName = stringPoolTable[f.GetLastNameId()]
+                VariableNameId = f.GetLastNameId()
             })
             .Where(g => g.Count() > 1);
 
         foreach (var group in duplicateGroups)
-            throw new QlangCompileException($"Duplicate assignment found: '{group.Key.VariableName}' in class '{stringPoolTable[@class.NameId]}'", GetDebug(group.First()), "Validator");
+            throw new QlangCompileException($"Duplicate assignment found: '{stringPoolTable[group.Key.VariableNameId]}' in class '{objectName}'", GetDebug(group.First()), "Validator");
     }
     
     private (int, string) GetDebug(ASTNode node)

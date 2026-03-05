@@ -1393,6 +1393,16 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         
         return list;
     }
+    
+    public static List<NamespaceNode> GetNamespacesFromNamespaceRecursively(NamespaceNode @namespace)
+    {
+        var list = @namespace.Body.OfType<NamespaceNode>().ToList();
+
+        foreach (var subNamespace in @namespace.Body.OfType<NamespaceNode>().ToList())
+            list.AddRange(GetNamespacesFromNamespaceRecursively(subNamespace));
+        
+        return list;
+    }
 
     private void ThrowIfIsEnd()
     {

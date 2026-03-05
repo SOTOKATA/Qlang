@@ -1,9 +1,10 @@
 import "$lib/standard"
 
 namespace dt:  {
-    class Time: {
+    const time = new Time();
+    private class Time: {
         function wait(let<Number> millisec): {
-            millisec = std::Parser.asInt(millisec);
+            millisec = std::parser.asInt(millisec);
 
             _native("std", "datetime", "wait", millisec);
         }

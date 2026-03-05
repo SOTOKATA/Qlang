@@ -3,7 +3,8 @@ import "$lib/core"
 
 // Class to throw exceptions
 namespace std:  {
-    class Throw: {
+    const throw = new Throw();
+    private class Throw: {
         // std::Throw default exception
         function message(const<String> message): {
             _native("std", "exception", "throw", _str(message), true);

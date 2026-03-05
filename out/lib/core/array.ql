@@ -23,7 +23,7 @@ class Array extends DataType: {
     }
 
     function join(const<String> char):
-        return String.join(this, char);
+        return string.join(this, char);
 
     function<Boolean> isCollection(const collection):
         return _native("std", "array", "is", collection);
@@ -44,7 +44,7 @@ class Array extends DataType: {
         if typeof(items) == "Array":
             args = items.getValue();
         else if typeof(items) != "Collection":
-            std::Throw.message("Cannot push many of type: " + typeof(items));
+            std::throw.message("Cannot push many of type: " + typeof(items));
         
         _native("std", "array", "add_range", _value, args);
     }
@@ -57,7 +57,7 @@ class Array extends DataType: {
     function at(const<Number> index): {
         checkIndex(index);
 
-        index = std::Parser.asInt(index);
+        index = std::parser.asInt(index);
         return _native("std", "array", "get", _value, index);
     }
 
@@ -65,7 +65,7 @@ class Array extends DataType: {
     function setAt(const<Number> index, let item): {
         checkIndex(index);
         
-        index = std::Parser.asInt(index);
+        index = std::parser.asInt(index);
 
         _native("std", "array", "set", _value, index, item);
     }
@@ -73,7 +73,7 @@ class Array extends DataType: {
     function insert(const<Number> index, let item): {
         checkIndex(index);
         
-        index = std::Parser.asInt(index);
+        index = std::parser.asInt(index);
         _native("std", "array", "insert", _value, index, item);
     }
 
@@ -81,7 +81,7 @@ class Array extends DataType: {
     function removeAt(const<Number> index): {
         checkIndex(index);
 
-        index = std::Parser.asInt(index);
+        index = std::parser.asInt(index);
         _native("std", "array", "remove_at", _value, index);
     }
 
@@ -102,9 +102,9 @@ class Array extends DataType: {
 
     function skip(const<Number> count): {
         if count <= 0:
-            std::Throw.message("Count must be more than 0");
+            std::throw.message("Count must be more than 0");
         else if count > length():
-            std::Throw.message("Count must be less than array length");
+            std::throw.message("Count must be less than array length");
 
         const length = length();
 
@@ -122,26 +122,26 @@ class Array extends DataType: {
 
     private function callExceptionNotFunc(const func):
         if typeof(func) != "~function":
-            std::Throw.message("Unsupported type of function: " + typeof(func));
+            std::throw.message("Unsupported type of function: " + typeof(func));
 
     function max(): {
-        let max = std::Math.MIN_VALUE;
+        let max = std::math.MIN_VALUE;
 
         const length = length();
 
         for let i = 0; i < length; i++:
-            max = std::Math.max(max, <Number>at(i));
+            max = std::math.max(max, <Number>at(i));
 
         return max;
     }
 
     function min(): {
-        let min = std::Math.MAX_VALUE;
+        let min = std::math.MAX_VALUE;
 
         const length = length();
 
         for let i = 0; i < length; i++:
-            min = std::Math.min(min, <Number>at(i));
+            min = std::math.min(min, <Number>at(i));
 
         return min;
     }
@@ -224,6 +224,6 @@ class Array extends DataType: {
 
     private function checkIndex(const<Number> index): {
         if index < 0 || index >= length():
-            std::Throw.message("Index is out of range.");
+            std::throw.message("Index is out of range.");
     }
 }

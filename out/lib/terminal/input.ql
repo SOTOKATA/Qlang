@@ -6,20 +6,20 @@ namespace terminal: {
         let isNot = true;
 
         while isNot: {
-            std::Console.richPrint(message);
-            input = std::Console.readln();
+            std::console.richPrint(message);
+            input = std::console.readln();
             
             isNot = funcValidator(input);
 
             if isNot: 
-                std::Console.richPrint(errorMessage);
+                std::console.richPrint(errorMessage);
         }
 
         return input;
     }
 
     function<Number> inputNumber(const message, const errorMessage = ""): {
-        return <Number>_input(message, errorMessage, function(const i): Object.isNull(<Number>i););
+        return <Number>_input(message, errorMessage, function(const i): object.isNull(<Number>i););
     } 
 
     function<String> inputFromRange(const<String> message, let range, const<String> errorMessage = ""): {
@@ -28,7 +28,7 @@ namespace terminal: {
         if rangeType == "Array":
             range = range.getCollection();
         else if rangeType != "Collection":
-            Throw.message("Undefined array type");
+            throw.message("Undefined array type");
 
         const func = function(const i): {
             return range.any(function(const item): return item == i;) == false;

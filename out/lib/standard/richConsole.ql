@@ -1,38 +1,39 @@
 namespace std: {
+    private const richConsole = new RichConsole();
     private class RichConsole: {
         function richTest(): {
             const keywords = ["bold", "dim", "italic", "underline", "blink", "rapid_blink", "reverse", "hidden", "strike"];
 
-            const colors = std::Console.getColors();
+            const colors = std::console.getColors();
 
             let biggestLength = 0;
             keywords.forEach(function(const keyword): {
-                biggestLength = std::Math.max(biggestLength, keyword.length());
+                biggestLength = std::math.max(biggestLength, keyword.length());
             });
 
             colors.forEach(function(const color): {
-                biggestLength = std::Math.max(biggestLength, color.length());
+                biggestLength = std::math.max(biggestLength, color.length());
             });
 
-            std::Console.println("\nRich tag test:");
-            std::Console.println(new String("-", 10));
+            std::console.println("\nRich tag test:");
+            std::console.println(new String("-", 10));
 
             keywords.forEach(function(const keyword): {
-                const spaces = new String(" ") * std::Math.max(0, biggestLength - keyword.length());
+                const spaces = new String(" ") * std::math.max(0, biggestLength - keyword.length());
 
                 richPrint(`{keyword}:{spaces.toString()} [{keyword}]Hello, World![/{keyword}]\n`);
             });
 
-            std::Console.println();
+            std::console.println();
 
             colors.forEach(function(const keyword): {
-                const spaces = new String(" ") * std::Math.max(0, biggestLength - keyword.length());
+                const spaces = new String(" ") * std::math.max(0, biggestLength - keyword.length());
 
                 richPrint(`{keyword}:{spaces.toString()} [color={keyword}]Hello, World![/color]\n`);
             });
 
 
-            std::Console.println(new String("-", 10) + "\n");
+            std::console.println(new String("-", 10) + "\n");
         }
 
         function richPrint(const<String> message): {
@@ -52,7 +53,7 @@ namespace std: {
                         isCode = true;
 
                         if text != "": {
-                            std::Console.print(text);
+                            std::console.print(text);
                             text = "";
                         }
                     }
@@ -79,14 +80,14 @@ namespace std: {
             }
 
             if text != "": {
-                std::Console.print(text);
+                std::console.print(text);
                 text = "";
             }
         }
 
         private function useCode(let<String> keyword, const<String> value): {
             if keyword == "":
-                Throw.message("Keyword cannot be empty.");
+                throw.message("Keyword cannot be empty.");
 
             const isClose = keyword.charAt(0) == "/";
 
@@ -96,31 +97,31 @@ namespace std: {
             switch keyword: {
                 case "color": {
                     if isClose: 
-                        std::Console.resetColors();
-                    else: std::Console.setForeColor(value);
+                        std::console.resetColors();
+                    else: std::console.setForeColor(value);
                 }
                 case "bold":
-                    std::Console.print(boolCase(isClose, "\u001b[0m", "\u001b[1m"));
+                    std::console.print(boolCase(isClose, "\u001b[0m", "\u001b[1m"));
                 case "dim":
-                    std::Console.print(boolCase(isClose, "\u001b[0m", "\u001b[2m"));
+                    std::console.print(boolCase(isClose, "\u001b[0m", "\u001b[2m"));
                 case "italic":
-                    std::Console.print(boolCase(isClose, "\u001b[0m", "\u001b[3m"));
+                    std::console.print(boolCase(isClose, "\u001b[0m", "\u001b[3m"));
                 case "underline":
-                    std::Console.print(boolCase(isClose, "\u001b[0m", "\u001b[4m"));
+                    std::console.print(boolCase(isClose, "\u001b[0m", "\u001b[4m"));
                 case "blink":
-                    std::Console.print(boolCase(isClose, "\u001b[0m", "\u001b[5m"));
+                    std::console.print(boolCase(isClose, "\u001b[0m", "\u001b[5m"));
                 case "rapid_blink":
-                    std::Console.print(boolCase(isClose, "\u001b[0m", "\u001b[6m"));
+                    std::console.print(boolCase(isClose, "\u001b[0m", "\u001b[6m"));
                 case "reverse":
-                    std::Console.print(boolCase(isClose, "\u001b[0m", "\u001b[7m"));
+                    std::console.print(boolCase(isClose, "\u001b[0m", "\u001b[7m"));
                 case "hidden":
-                    std::Console.print(boolCase(isClose, "\u001b[0m", "\u001b[8m"));
+                    std::console.print(boolCase(isClose, "\u001b[0m", "\u001b[8m"));
                 case "strike":
-                    std::Console.print(boolCase(isClose, "\u001b[0m", "\u001b[9m"));
+                    std::console.print(boolCase(isClose, "\u001b[0m", "\u001b[9m"));
                 default: {
                     if value != "": 
-                        std::Console.print(`[{keyword}={value}]`);
-                    else: std::Console.print("[" + boolCase(isClose, "/", "") + `{keyword}]`);
+                        std::console.print(`[{keyword}={value}]`);
+                    else: std::console.print("[" + boolCase(isClose, "/", "") + `{keyword}]`);
                 }
             }
         }

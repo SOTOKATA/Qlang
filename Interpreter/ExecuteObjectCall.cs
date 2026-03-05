@@ -25,14 +25,14 @@ public partial class Interpreter
             case string str:
             {
                 var id = _stringPoolTable.Add(QlSystemClasses.StringClassName);
-                @class = ToDynamicClass(_dynamicNamespaces[GlobalNamespaceName].Classes.First(x => x.NameId == id));
+                @class = ToDynamicClass(_namespaces[GlobalNamespaceName].Classes.First(x => x.NameId == id));
                 @class.Variables["_value"].Value = str;
                 break;
             }
             case List<object?> arr:
             {
                 var id = _stringPoolTable.Add(QlSystemClasses.ArrayClassName);
-                @class = ToDynamicClass(_dynamicNamespaces[GlobalNamespaceName].Classes.First(x => x.NameId == id));
+                @class = ToDynamicClass(_namespaces[GlobalNamespaceName].Classes.First(x => x.NameId == id));
                 @class.Variables["_value"].Value = arr;
                 break;
             }
@@ -75,12 +75,7 @@ public partial class Interpreter
                         _stringPoolTable[pointer.NameId] is "Collection" or "Number" or "Boolean")
                         return _stringPoolTable[pointer.NameId];
 
-                    var result = ExecuteObjectCalls(call);
-
-                    if (result is DynamicClass dynamicClass)
-                        return dynamicClass.ClassName;
-
-                    return result?.ToString();
+                    return ExecutePathToClass(call).ClassName;
                 }
 
                 var type = arg?.GetType().Name;
@@ -279,7 +274,7 @@ public partial class Interpreter
 
                 var id = _stringPoolTable.Add(dClass.Name);
                 var @namespace =
-                    _dynamicNamespaces.FirstOrDefault(x => x.Value.Classes.Any(y => y.NameId == id));
+                    _namespaces.FirstOrDefault(x => x.Value.Classes.Any(y => y.NameId == id));
 
                 return (pair.function, pair.args, dClass, @namespace.Value);
             }
@@ -368,7 +363,7 @@ public partial class Interpreter
             }
 
             // Try to get VAR from global variable list;
-            var variable = _dynamicNamespaces[GlobalNamespaceName].Variables.FirstOrDefault(var => var.Value.Name == nodeName).Value;
+            var variable = _namespaces[GlobalNamespaceName].Variables.FirstOrDefault(var => var.Value.Name == nodeName).Value;
             if (variable is not null)
                 return (variable, null);
         }
@@ -412,7 +407,7 @@ public partial class Interpreter
     {
         var nodeName = _stringPoolTable[node.NameId];
 
-        if (_dynamicNamespaces.TryGetValue(nodeName, out var @namespace) && isPathStart)
+        if (_namespaces.TryGetValue(nodeName, out var @namespace) && isPathStart)
             return @namespace;
 
         if (HasContext && CurrentContext?.Namespace is not null && isPathStart)

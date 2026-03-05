@@ -2,7 +2,8 @@ import "$lib/standard"
 import "$lib/core"
 
 namespace std:  {
-    class Parser: {
+    const parser = new Parser();
+    private class Parser: {
         function asInt(const object): {
             return _native("std", "parser", "int", _str(object));
         }

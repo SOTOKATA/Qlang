@@ -2,7 +2,8 @@ import "$lib/standard"
 import "$lib/core"
 
 namespace std:  {
-    class Math: {
+    const math = new Math();
+    private class Math: {
         const MIN_VALUE = _native("std", "math", "min_value");
         const MAX_VALUE = _native("std", "math", "max_value");
         const PI = _native("std", "math", "pi");
@@ -17,7 +18,7 @@ namespace std:  {
 
         function<Number> rand(const<Number> min, const<Number> max): {
             if min >= max:
-                Throw.message("Min cannot be more than or equal to max.");
+                throw.message("Min cannot be more than or equal to max.");
 
             return _native("std", "math", "random", min, max);
         }
@@ -39,7 +40,7 @@ namespace std:  {
             const cos = cos(radians);
 
             if cos == 0:
-                std::Throw.message("Cos value cannot be zero!");
+                std::throw.message("Cos value cannot be zero!");
 
             return sin(radians) / cos;
         }
@@ -48,7 +49,7 @@ namespace std:  {
             const sin = sin(radians);
 
             if sin == 0:
-                std::Throw.message("Sin value cannot be zero!");
+                std::throw.message("Sin value cannot be zero!");
         
             return cos(radians) / sin;
         }

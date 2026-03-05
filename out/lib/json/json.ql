@@ -2,7 +2,7 @@
 namespace json: {
     function<String> serialize(const<Dictionary> dict, const<Boolean> indented = false): {
         if dict.length() < 1:
-            std::Throw.message("Cannot serialize empty dictionary");
+            std::throw.message("Cannot serialize empty dictionary");
 
         let first = true;
 

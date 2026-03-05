@@ -26,7 +26,7 @@ public static class CommandManager
                     ConsoleLogger.Info("Now, this function is not supported");
                     return;
                 case ["build"]:
-                    Build();
+                    Build(false);
                     return;
                 case ["set", var param, var value]:
                     Set(param.Trim(), value.Trim());
@@ -165,7 +165,6 @@ public static class CommandManager
     private static void Publish()
     {
         Build(true);
-
     }
 
     private static void Build(bool isPublish = false)

@@ -4,9 +4,10 @@ import "$lib/meta"
 
 // Class to make operations with console
 namespace std:  {
-    class Console: {
+    const console = new Console();
+    private class Console: {
         private function getStr(const message): {
-            if Object.isNull(message):
+            if object.isNull(message):
                 return "<null>";
 
             switch typeof(message): {
@@ -34,7 +35,7 @@ namespace std:  {
 
                     if typeof(value) == "String":
                         outputValue  = "\"" + value + "\"";
-                    else if Object.isSimplify(value) == false:
+                    else if object.isSimplify(value) == false:
                         outputValue  = value.toString();
                 
                     str += "    " + variable.type + " " + variable.name + " = " + outputValue  + "\n";
@@ -45,7 +46,7 @@ namespace std:  {
                 return str;
             }
 
-            if Object.isSimplify(message) == false:
+            if object.isSimplify(message) == false:
                 return message.toString();
 
             return message;
@@ -103,8 +104,8 @@ namespace std:  {
 
         // Set cursor position in console
         function setCursorPosition(let<Number> x, let<Number> y): {
-            x = Math.round(x);
-            y = Math.round(y);
+            x = math.round(x);
+            y = math.round(y);
 
             _native("std", "console", "cursor_position", x, y);
         }
@@ -137,9 +138,8 @@ namespace std:  {
 
 
         function richPrint(const<String> message):
-           RichConsole.richPrint(message);
+           richConsole.richPrint(message);
 
-        function richTest(): RichConsole.richTest();
+        function richTest(): richConsole.richTest();
     }
-    const console = new std::Console();
 }

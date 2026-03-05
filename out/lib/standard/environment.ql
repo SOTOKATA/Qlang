@@ -1,7 +1,8 @@
 import "$lib/standard"
 
 namespace std: {
-    class Environment: {
+    const environment = new Environment();
+    private class Environment: {
         const currentDirectory = _native("std", "env", "current_directory");
 
         const newLine = _native("std", "env", "new_line");

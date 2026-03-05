@@ -29,7 +29,7 @@ public partial class Interpreter
 
     private readonly List<double> _numberList;
 
-    private readonly Dictionary<string, DynamicNamespace> _dynamicNamespaces = new();
+    private readonly Dictionary<string, DynamicNamespace> _namespaces = new();
 
     private readonly Stack<ASTContext> _contextStack = new();
     private bool HasContext => _contextStack.Count > 0;
@@ -54,9 +54,9 @@ public partial class Interpreter
         {
             
             var dynamicNamespace = new DynamicNamespace(GlobalNamespaceName);
-            _dynamicNamespaces[GlobalNamespaceName] = dynamicNamespace;
+            _namespaces[GlobalNamespaceName] = dynamicNamespace;
             
-            _dynamicNamespaces[GlobalNamespaceName] = 
+            _namespaces[GlobalNamespaceName] = 
                 ToDynamicNamespace(globalNamespace, GlobalNamespaceName);
 
             program.Statements.Remove(globalNamespace);
@@ -65,14 +65,14 @@ public partial class Interpreter
        
             // Load namespaces
         foreach (var namespaceNode in program.Statements.OfType<NamespaceNode>().Where(x => _stringPoolTable[x.NameId] != GlobalNamespaceName))
-            _dynamicNamespaces[_stringPoolTable[namespaceNode.NameId]] = ToDynamicNamespace(namespaceNode, null);
+            _namespaces[_stringPoolTable[namespaceNode.NameId]] = ToDynamicNamespace(namespaceNode, null);
 
         // Convert variable values
-        foreach (var key in _dynamicNamespaces.Keys.ToList())
-            _dynamicNamespaces[key] = ToDynamicNamespaceVariables(_dynamicNamespaces[key]);
+        foreach (var key in _namespaces.Keys.ToList())
+            _namespaces[key] = ToDynamicNamespaceVariables(_namespaces[key]);
 
         // Search main function
-        var function = _dynamicNamespaces[GlobalNamespaceName].Functions.FirstOrDefault(f => _stringPoolTable[f.NameId] == "main");
+        var function = _namespaces[GlobalNamespaceName].Functions.FirstOrDefault(f => _stringPoolTable[f.NameId] == "main");
         if (function is null)
         {
             throw new QlangRuntimeException(
@@ -83,9 +83,9 @@ public partial class Interpreter
         
         // Run main function (and send arguments if exists)
         if (function.Parameters.Count == 0)
-            ExecuteFunction(ToDynamicFunction(function), [], null, _dynamicNamespaces[GlobalNamespaceName]);
+            ExecuteFunction(ToDynamicFunction(function), [], null, _namespaces[GlobalNamespaceName]);
         else 
-            ExecuteFunction(ToDynamicFunction(function), [args?.Cast<object?>().ToList()], null, _dynamicNamespaces[GlobalNamespaceName]);
+            ExecuteFunction(ToDynamicFunction(function), [args?.Cast<object?>().ToList()], null, _namespaces[GlobalNamespaceName]);
     }
     
     private void AddContext(ASTContext context)
@@ -156,8 +156,11 @@ public partial class Interpreter
             _isBreakKeyword = false;
             _isContinueKeyword = false;
 
-            if (function.ReturnType != null && Typeof(_returnValue) != Typeof(function.ReturnType))
-                throw new QlangRuntimeException("Function type and return type is not equals", GetCurrentDebug(),
+            var typeofReturnValue = Typeof(_returnValue);
+            var typeofFunction = Typeof(function.ReturnType);
+            
+            if (function.ReturnType != null && typeofReturnValue != typeofFunction)
+                throw new QlangRuntimeException($"Function return type '{typeofFunction}' is not equal to returned type '{typeofReturnValue}'", GetCurrentDebug(),
                     GetStackTrace());
             return _returnValue;
         }
@@ -305,7 +308,7 @@ public partial class Interpreter
             }
         }
 
-        _dynamicNamespaces[GlobalNamespaceName].Variables[assignName] = Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
+        _namespaces[GlobalNamespaceName].Variables[assignName] = Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
     }
 
     /// <summary>
@@ -489,7 +492,15 @@ public partial class Interpreter
         
         var pointer = (FunctionPointerNode)node.NodePath.Objects[^1];
 
-        var @namespace = _dynamicNamespaces[GlobalNamespaceName];
+        var isPrivate = false;
+
+        DynamicNamespace? @namespace = null;
+
+        if (HasContext)
+        {
+            @namespace = CurrentContext?.Namespace;
+            isPrivate = true;
+        }
 
         if (node.NodePath.Objects.Count > 1)
         {
@@ -497,17 +508,65 @@ public partial class Interpreter
             var obj = ExecuteObjectCalls(node.NodePath);
 
             if (obj is not DynamicNamespace ns)
-                throw new QlangRuntimeException($"Undefined namespace: {obj}", GetCurrentDebug(), GetStackTrace());
-            
+                throw new QlangRuntimeException($"Undefined namespace: '{obj}'", GetCurrentDebug(), GetStackTrace());
+
+            isPrivate = false;
             @namespace = ns;
         }
 
-        var classNode = @namespace.Classes.FirstOrDefault(x => x.NameId == pointer.NameId);
-        
+        var classNode = @namespace?.Classes.FirstOrDefault(x => x.NameId == pointer.NameId) ?? 
+                        _namespaces[GlobalNamespaceName].Classes.FirstOrDefault(x => x.NameId == pointer.NameId);
+
         if (classNode is null)
-            throw new QlangRuntimeException("Class is not founded.", GetCurrentDebug(), GetStackTrace());
+            throw new QlangRuntimeException($"Class '{_stringPoolTable[pointer.NameId]}' is not founded." +
+                                            (@namespace is not null ? $"\nIn namespace '{@namespace.Name}'" : ""), GetCurrentDebug(), GetStackTrace());
+        
+        if (!isPrivate)
+            throw new QlangRuntimeException($"Cannot instantiate private class '{_stringPoolTable[pointer.NameId]}'", GetCurrentDebug(), GetStackTrace());
 
         return GetNewClass(classNode, pointer.Arguments.ConvertAll(EvaluateExpression));
+    }
+
+    private DynamicClass ExecutePathToClass(CallNode callNode)
+    {
+        if (callNode.Objects.Count < 1)
+            throw new QlangRuntimeException("Undefined path to class.", GetCurrentDebug(), GetStackTrace());
+        
+        var pointer = (ObjectPointerNode)callNode.Objects[^1];
+
+        var isPrivate = false;
+        
+        var @namespace = _namespaces[GlobalNamespaceName];
+
+        if (HasContext)
+        {
+            isPrivate = true;
+            @namespace = CurrentContext?.Namespace;
+        }
+
+        if (callNode.Objects.Count > 1)
+        {
+            callNode.Objects = callNode.Objects.SkipLast(1).ToList();
+            var obj = ExecuteObjectCalls(callNode);
+
+            if (obj is not DynamicNamespace ns)
+                throw new QlangRuntimeException($"Undefined namespace: {obj}", GetCurrentDebug(), GetStackTrace());
+            
+            @namespace = ns;
+            isPrivate = false;
+        }
+
+        var classNode = @namespace?.Classes.FirstOrDefault(x => x.NameId == pointer.NameId) ?? 
+                        _namespaces[GlobalNamespaceName].Classes.FirstOrDefault(x => x.NameId == pointer.NameId);
+        
+        if (classNode is null)
+            throw new QlangRuntimeException($"Class '{_stringPoolTable[pointer.NameId]}' is not founded." +
+                                            (@namespace is not null ? $"\nIn namespace '{@namespace.Name}'" : ""), GetCurrentDebug(), GetStackTrace());
+        
+        if (!isPrivate)
+            throw new QlangRuntimeException($"Cannot instantiate private class '{_stringPoolTable[pointer.NameId]}'", GetCurrentDebug(), GetStackTrace());
+
+        return ToDynamicClass(classNode);
     }
 
     /// <summary>
@@ -890,7 +949,7 @@ public partial class Interpreter
     {
         args ??= [];
 
-        foreach (var function in _dynamicNamespaces[GlobalNamespaceName].Functions.Where(f => f.NameId == nameId))
+        foreach (var function in _namespaces[GlobalNamespaceName].Functions.Where(f => f.NameId == nameId))
             if (TryMatchFunction(function, args, out var finalArgs))
                 return (function, finalArgs);
 

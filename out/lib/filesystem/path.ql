@@ -2,7 +2,8 @@ import "$lib/core"
 import "$lib/filesystem"
 
 namespace fs: {
-    class Path: {
+    const path = new Path();
+    private class Path: {
         function<String> combine(const<Array> arr):
             return new String(_native("std", "filesystem", "combine", arr.getCollection()));
 

@@ -6,7 +6,7 @@ class String extends DataType: {
 
     // overriding functions 
     function toString(): {
-        return Object.toString(_value);
+        return object.toString(_value);
     }
 
     // Parse object to String
@@ -43,10 +43,11 @@ class String extends DataType: {
     // Parse '==' operations
     function _operatorEqual(const obj1, const obj2):
         return obj1.getValue() == obj2.getValue();
+        
 
     // Parse '!=' operations
     function _operatorNotEqual(const obj1, const obj2):
-        return obj1.getValue() == obj2.getValue();
+        return obj1.getValue() != obj2.getValue();
 
     // Parse '>=' operations
     function _operatorGreaterOrEqual(const obj1, const obj2): 
@@ -65,49 +66,49 @@ class String extends DataType: {
         return obj1.length() < obj2.length();
 
     function new(const input): {
-        if String.isString(input):
+        if isString(input):
             _value = input.getValue();
         else:
             _value = str(input);
     }
 
     function new(const<String> char, let<Number> count): {
-        count = std::Math.round(count, 0);
+        count = std::math.round(count, 0);
         
         if count < 0: 
-            std::Throw.message("Param 'count' must be more than 0");
+            std::throw.message("Param 'count' must be more than 0");
 
         if new String(char).length() < 0:
-            std::Throw.message("Length of string must be more than 0");
+            std::throw.message("Length of string must be more than 0");
 
         _value = _native("std", "string", "create", char, count);
     }
 
     function getPrimitive(const strOrPrimite, let allowOther = false): {
-        if Object.isNull(strOrPrimite):
-            std::Throw.message("Object is null");
+        if object.isNull(strOrPrimite):
+            std::throw.message("Object is null");
 
-        if String.isString(strOrPrimite):
+        if isString(strOrPrimite):
             return strOrPrimite.toString();
 
-        if String.isPrimitive(strOrPrimite):
+        if isPrimitive(strOrPrimite):
             return strOrPrimite;
 
         if allowOther:
             return strOrPrimite;
 
-        std::Throw.message("Object is not string or primitive");
+        std::throw.message("Object is not string or primitive");
     }
 
     private function _checkIsCollection(let value): {
         if Array.isCollection(value) == false: {
-            std::Throw.parceException("argument is not collection");
+            std::throw.parceException("argument is not collection");
         }
     }
 
     private function _checkIsArray(let value): {
         if typeof(value) != "Array": {
-            std::Throw.parceException("argument is not array");
+            std::throw.parceException("argument is not array");
         }
     }
 
@@ -149,21 +150,21 @@ class String extends DataType: {
 
     function charAt(const<Number> index): {
         if length() <= index:
-            std::Throw.message("The index must be less than the length of the string.");
+            std::throw.message("The index must be less than the length of the ");
 
         return _native("std", "string", "at", _str(_value), index);
     }
 
     function setAt(const<Number> index, const<String> replaceValue): {
         if length() <= index:
-            std::Throw.message("The index must be less than the length of the string.");
+            std::throw.message("The index must be less than the length of the ");
 
         _value = _native("std", "string", "set_at", _str(_value), _str(replaceValue), index);
     }
 
     function join(let strArr, let<String> pattern): {
         if (Array.isCollection(strArr) == false) && (typeof(strArr) != "Array"):
-            std::Throw.message("argument is not collection or array");
+            std::throw.message("argument is not collection or array");
 
         if typeof(strArr) == "Array":
             strArr = strArr.getCollection();
@@ -177,13 +178,13 @@ class String extends DataType: {
 
     // Check if string is empty or null
     function isNullOrEmpty(let str): {
-        if Object.isNull(str):
+        if object.isNull(str):
             return true;
 
-        if (String.isPrimitive(str) == false) && (String.isString(str) == false):
-            std::Throw.message("Param must be string class or primitive");
+        if (isPrimitive(str) == false) && (isString(str) == false):
+            std::throw.message("Param must be string class or primitive");
 
-        if String.isString(str):
+        if isString(str):
             str = str.toString();
 
         return _native("std", "string", "is_null_or_empty", _str(str));
@@ -191,13 +192,13 @@ class String extends DataType: {
     
     // Check if string is white space or null
     function isNullOrWhitespace(let str): {
-        if Object.isNull(str):
+        if object.isNull(str):
             return true;
 
-        if (String.isPrimitive(str) == false) && (String.isString(str) == false):
-            std::Throw.message("Param must be string class or primitive");
+        if (isPrimitive(str) == false) && (isString(str) == false):
+            std::throw.message("Param must be string class or primitive");
 
-        if String.isString(str): 
+        if isString(str): 
             str = str.toString();
 
         return _native("std", "string", "is_null_or_whitespace", _str(str));
@@ -236,7 +237,7 @@ class String extends DataType: {
     // Cut string by 'startPos' and 'length'
     function subString(let<Number> startPos, let<Number> length): {
         if length() <= length:
-            std::Throw.message("Value 'length' can't be more than string length");
+            std::throw.message("Value 'length' can't be more than string length");
 
         return new String(_native("std", "string", "substring", _str(_value), startPos, length));
     }
@@ -253,4 +254,4 @@ class String extends DataType: {
     function format(const<Collection> replacement):
         return _native("std", "string", "format", _value, replacement);
 }
-const String = new String("");
+const string = new String("");

@@ -1,6 +1,6 @@
 import "$lib/core"
 
-const Object = new Object();
+const object = new Object();
 class Object: {
     function<Boolean> isNull(let obj):
         return _native("std", "object", "is_null", obj);
@@ -27,10 +27,10 @@ class Object: {
 }
 
 function<String> str(const obj):
-    return Object.toString(obj);
+    return object.toString(obj);
 
 function boolCase(const condition, const trueResult, const falseResult):
     if condition: return trueResult; else: return falseResult;
 
 function<String> valueOrStrNull(const value):
-    if Object.isNull(value): return "null"; else: return value.toString();
+    if object.isNull(value): return "null"; else: return value.toString();

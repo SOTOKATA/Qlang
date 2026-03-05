@@ -51,7 +51,7 @@ class Dictionary: {
         let index = _keys.indexOf(key);
 
         if index == -1:
-            std::Throw.message("Key is not existent in dictionary");
+            std::throw.message("Key is not existent in dictionary");
 
         return _values.at(index);
     }

@@ -2,7 +2,8 @@ import "$lib/core"
 import "$lib/filesystem"
 
 namespace fs: {
-    class Directory: {
+    const directory = new Directory();
+    private class Directory: {
 
         // Return type: bool
         // Return true if directory exists
@@ -12,7 +13,7 @@ namespace fs: {
         // Create if not exists directory
         function create(const<String> path): {
             if exists(path) == true:
-                std::Throw.message("Directory already created.");
+                std::throw.message("Directory already created.");
 
             _native("std", "filesystem", "directory_create", path);
         }
@@ -20,14 +21,14 @@ namespace fs: {
         // Remove if exists directory (recursive)
         function remove(const<String> path): {
             if exists(path) == false:
-                std::Throw.message("Directory is not exists.");
+                std::throw.message("Directory is not exists.");
             
             _native("std", "filesystem", "directory_remove", path, true);
         }
 
         function<Array> getFiles(const<String> path, const<String> extension = ""): {
             if exists(path) == false:
-                Throw.message("Undefined directory path.");
+                throw.message("Undefined directory path.");
 
             return _native("std", "filesystem", "get_files", path, extension);
         }

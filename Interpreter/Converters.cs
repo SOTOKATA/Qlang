@@ -15,20 +15,21 @@ public partial class Interpreter
     {
         foreach (var pair in variables)
             if (pair.Value.Value is ASTNode node)
-            {
                 pair.Value.Value = EvaluateExpression(node);
-                Console.WriteLine("Variable value: " + node + " : Evaluated to: " + pair.Value.Value);
-            }
 
         return variables;
     }
 
     private DynamicNamespace ToDynamicNamespaceVariables(DynamicNamespace dynamicNamespace)
     {
+        AddContext(new ASTContext() { Namespace = dynamicNamespace });
+        
         for (var index = 0; index < dynamicNamespace.Namespaces.Count; index++)
             dynamicNamespace.Namespaces[index] = ToDynamicNamespaceVariables(dynamicNamespace.Namespaces[index]);
-
+        
         dynamicNamespace.Variables = ToDynamicVariables(dynamicNamespace.Variables);
+
+        RestoreContextStack();
         
         return dynamicNamespace;
     }
@@ -48,7 +49,7 @@ public partial class Interpreter
         };
         
         if (globalNamespaceName is not null)
-            _dynamicNamespaces[globalNamespaceName].Namespaces.Add(dynamicNamespace);
+            _namespaces[globalNamespaceName].Namespaces.Add(dynamicNamespace);
         
         // Add and convert all classes
         dynamicNamespace.Classes.AddRange(
@@ -143,7 +144,7 @@ public partial class Interpreter
     private DynamicClass ToQlangException(Exception ex)
     {
         var id = _stringPoolTable.Add(QlSystemClasses.ExceptionClassName);
-        var @class = ToDynamicClass(_dynamicNamespaces[GlobalNamespaceName].Classes
+        var @class = ToDynamicClass(_namespaces[GlobalNamespaceName].Classes
             .FirstOrDefault(x => x.NameId == id)!);
         
         @class.Variables["message"].Value = ex.ToString();

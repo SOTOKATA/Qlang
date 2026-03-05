@@ -8,32 +8,32 @@ namespace terminal: {
 
         function new(const<Number> size): {
             _currentValue = 0.0;
-            _size = std::Math.max(size, 6);
-            _position = std::Console.getCursorPosition();
-            std::Console.println("Initial Position: " + _position.x + " " + _position.y);
+            _size = std::math.max(size, 6);
+            _position = std::console.getCursorPosition();
+            std::console.println("Initial Position: " + _position.x + " " + _position.y);
         }
 
         private function _progress(): {
-            std::Console.cursorVisible(false);
+            std::console.cursorVisible(false);
 
             const blockCount = _currentValue / 100.0 * _size - 2;
-            const semiBlockCount = std::Math.round(blockCount / 2);
+            const semiBlockCount = std::math.round(blockCount / 2);
 
             let emptyDots = "";
             if blockCount + 2 < _size:
                 const emptyDots = new String(".", _size - blockCount - 2); 
 
-            std::Console.setCursorPosition(_position.x, _position.y);
+            std::console.setCursorPosition(_position.x, _position.y);
             if semiBlockCount > 0:
-                std::Console.richPrint("[" + new String("#", blockCount) + emptyDots + "]");
-            else: std::Console.richPrint("[]");
+                std::console.richPrint("[" + new String("#", blockCount) + emptyDots + "]");
+            else: std::console.richPrint("[]");
 
-            std::Console.println();
-            std::Console.cursorVisible(true);
+            std::console.println();
+            std::console.cursorVisible(true);
         }
 
         private function<Number> _toNormal(const<Number> value): {
-            return std::Math.min(std::Math.max(value, 0.0), 100.0);
+            return std::math.min(std::math.max(value, 0.0), 100.0);
         }
 
         function add(const<Number> value): {
