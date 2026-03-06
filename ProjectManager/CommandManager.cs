@@ -26,7 +26,7 @@ public static class CommandManager
                     ConsoleLogger.Info("Now, this function is not supported");
                     return;
                 case ["build"]:
-                    Build(false);
+                    Build();
                     return;
                 case ["set", var param, var value]:
                     Set(param.Trim(), value.Trim());

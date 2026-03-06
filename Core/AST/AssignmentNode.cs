@@ -32,6 +32,9 @@ public class AssignmentNode(bool isPrivate, bool isConst, bool isNew) : ASTNode
     
     public bool IsConst { get; set; } = isConst;
 
+    [IgnoreMember] 
+    public int FileId = -1;
+
     public int GetLastNameId() => (Path[^1] as ObjectPointerNode)!.NameId;
 
     public override ASTNode Clone()

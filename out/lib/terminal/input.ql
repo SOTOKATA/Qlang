@@ -1,4 +1,5 @@
 import "import"
+using std;
 
 namespace terminal: {
     private function<String> _input(const message, const errorMessage = "", const funcValidator): {
@@ -6,13 +7,13 @@ namespace terminal: {
         let isNot = true;
 
         while isNot: {
-            std::console.richPrint(message);
-            input = std::console.readln();
+            console.richPrint(message);
+            input = console.readln();
             
             isNot = funcValidator(input);
 
             if isNot: 
-                std::console.richPrint(errorMessage);
+                console.richPrint(errorMessage);
         }
 
         return input;

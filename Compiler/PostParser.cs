@@ -108,8 +108,12 @@ public class PostParser(SourceFileTable? table, DebugTable? debugTable, StringPo
                         NamespacePointerNode p => p.NameId,
                         ObjectPointerNode p => p.NameId,
                         FunctionPointerNode p => p.NameId,
+                        _ => -1
                     };
                 }).ToList();
+
+                if (callNames.Any(x => x == -1))
+                    continue;
 
                 if (usingNames.SequenceEqual(callNames))
                     toRemove.Add(call);
@@ -147,6 +151,7 @@ public class PostParser(SourceFileTable? table, DebugTable? debugTable, StringPo
             if (lastNamespace is null)
                 throw new QlangCompileException("Undefined using namespace", GetDebug(@using), "PostParser");
 
+            var fileId = @using.FileId;
             var usingNamespaces = lastNamespace.Body.OfType<NamespaceNode>().ToList();
             var usingClasses = lastNamespace.Body.OfType<ClassNode>().ToList();
             var usingFunctions = lastNamespace.Body.OfType<FunctionNode>().ToList();
@@ -154,7 +159,7 @@ public class PostParser(SourceFileTable? table, DebugTable? debugTable, StringPo
 
             foreach (var callNode in calls)
             {
-                if (processedCallNodes.Contains(callNode))
+                if (processedCallNodes.Contains(callNode) || callNode.FileId != fileId)
                     continue;
                 
                 var firstPathPart = callNode.Objects.First();

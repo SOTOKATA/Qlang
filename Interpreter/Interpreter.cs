@@ -577,7 +577,7 @@ public partial class Interpreter
     /// <exception cref="QlangRuntimeException">If casting is impossible (like bool to double)</exception>
     private object? CastObject(CastNode cast)
     {
-        var type = ExecuteObjectCalls(cast.TypeCastPath);
+        var type = ExecutePathToClass(cast.TypeCastPath);
         var @object = ExecuteObjectCalls(cast.ToCastObject);
         
         if (Typeof(type) == "Number" && @object is DynamicClass { ClassName: QlSystemClasses.StringClassName } @class &&
@@ -596,18 +596,16 @@ public partial class Interpreter
         if (Typeof(type) == "String" && @object is not null)
             return @object.ToString();
         
-        if (type is DynamicClass dc)
-            return CreateClassFrom(@object, dc);
+        return CreateClassFrom(@object, type);
 
-        var typeStr = type switch
-        {
-            DynamicClass dw => dw.ClassName,
-            null => "<null>",
-            _ => type.ToString()!
-        };
-        
-        throw new QlangRuntimeException($"Cannot cast object to type '{typeStr}'", GetCurrentDebug(),
-            GetStackTrace());
+        // var typeStr = type switch
+        // {
+        //     null => "<null>",
+        //     _ => type.ToString()!
+        // };
+        //
+        // throw new QlangRuntimeException($"Cannot cast object to type '{typeStr}'", GetCurrentDebug(),
+        //     GetStackTrace());
     }
     
     /// <summary>

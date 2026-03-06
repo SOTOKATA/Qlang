@@ -34,11 +34,14 @@ public class Compiler
         Console.WriteLine("Compiling " + outputScript.Split('\n').Length + " lines.");
         
         Console.Write("Lexing...");
-        var output = Lexer.Lex(fileName, outputScript, isPublish);
+        var output = Lexer.Lex(fileName, outputScript);
         Console.WriteLine(" success.");
 
-        SourceFileTable = output.sourceFileTable;
-        DebugTable = output.debugTable;
+        if (!isPublish)
+        {
+            SourceFileTable = output.sourceFileTable;
+            DebugTable = output.debugTable;
+        }
 
         Console.Write("Parsing...");
         (var programNode, StringPoolTable) = new Parser(output.sourceFileTable, output.debugTable, StringPoolTable).Parse(output.tokens);

@@ -25,7 +25,7 @@ namespace json: {
 
             const value = dict.get(key);
             if typeof(value) == "Number" || typeof(value) == "Boolean":
-                output += new String(value).toLower();
+                output += (new String(value)).toLower();
             else: output += `\"{value}\"`;
 
             first = false;

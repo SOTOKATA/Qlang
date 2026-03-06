@@ -12,7 +12,7 @@ namespace std:  {
 
             switch typeof(message): {
                 case "Collection":
-                    return new Array(message).toString();
+                    return (new Array(message)).toString();
             }
             
             const typeOfMessage = typeof(message);

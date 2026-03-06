@@ -1,4 +1,5 @@
 import "import"
+using std;
 
 namespace terminal: {
     class Progress: {
@@ -8,32 +9,32 @@ namespace terminal: {
 
         function new(const<Number> size): {
             _currentValue = 0.0;
-            _size = std::math.max(size, 6);
-            _position = std::console.getCursorPosition();
-            std::console.println("Initial Position: " + _position.x + " " + _position.y);
+            _size = math.max(size, 6);
+            _position = console.getCursorPosition();
+            console.println("Initial Position: " + _position.x + " " + _position.y);
         }
 
         private function _progress(): {
-            std::console.cursorVisible(false);
+            console.cursorVisible(false);
 
             const blockCount = _currentValue / 100.0 * _size - 2;
-            const semiBlockCount = std::math.round(blockCount / 2);
+            const semiBlockCount = math.round(blockCount / 2);
 
             let emptyDots = "";
             if blockCount + 2 < _size:
                 const emptyDots = new String(".", _size - blockCount - 2); 
 
-            std::console.setCursorPosition(_position.x, _position.y);
+            console.setCursorPosition(_position.x, _position.y);
             if semiBlockCount > 0:
-                std::console.richPrint("[" + new String("#", blockCount) + emptyDots + "]");
-            else: std::console.richPrint("[]");
+                console.richPrint("[" + new String("#", blockCount) + emptyDots + "]");
+            else: console.richPrint("[]");
 
-            std::console.println();
-            std::console.cursorVisible(true);
+            console.println();
+            console.cursorVisible(true);
         }
 
         private function<Number> _toNormal(const<Number> value): {
-            return std::math.min(std::math.max(value, 0.0), 100.0);
+            return math.min(math.max(value, 0.0), 100.0);
         }
 
         function add(const<Number> value): {

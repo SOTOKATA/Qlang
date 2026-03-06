@@ -6,6 +6,9 @@ public class UsingNode : ASTNode
 {
     [Key(0)]
     public required CallNode CallPath { get; set; }
+
+    [IgnoreMember] 
+    public int FileId = -1;
     
     public override string GetTree(string indent = "")
     {

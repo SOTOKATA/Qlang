@@ -167,26 +167,20 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             throw new QlangCompileException($"Undefined keyword for variable: {Current().TokenType}", GetDebug(Current()),"Parser");
 
         // Skip const or let
-        Advance();
+        var token = Advance();
 
         CallNode? type = null;
         if (Check(Tokens.Less))
         {
             if (!canUseType)
-            {
-                var token = Current();
                 throw new QlangCompileException(
                     "Using variables with types is only possible with function arguments", GetDebug(token), "Parser");
-            }
             // Skip <
             Expect(Tokens.Less);
             var returnValue  = ParsePrimaryPath();
 
             if (returnValue is not CallNode node)
-            {
-                var token = Current();
                 throw new QlangCompileException("Cannot use follow node as path to class", GetDebug(token), "Parser");
-            }
 
             type = node;
             
@@ -209,7 +203,8 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         {
             Path = [new ObjectPointerNode { NameId = stringPoolTable.Add(name) }],
             Value = value,
-            Type = type
+            Type = type,
+            FileId = debugTable?.GetFileId(token.DebugIndex) ?? -1
         };
 
         _assignmentNodes.Add(assignmentNode);
@@ -250,7 +245,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         callNode.Objects = newObjects.Cast<ASTNode>().ToList();
         return new UsingNode
         {
-            CallPath = callNode
+            CallPath = callNode, FileId = debugTable?.GetFileId(token.DebugIndex) ?? -1
         };
     }
 
@@ -1055,7 +1050,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
 
         var identifier = Current().Value;
         // Advance 'identifier'
-        Advance();
+        var token = Advance();
 
         if (Check(Tokens.LParen))
         {
@@ -1142,6 +1137,8 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             };
 
             ((AssignmentNode)current).Value = value;
+
+            ((AssignmentNode)current).FileId = debugTable?.GetFileId(token.DebugIndex) ?? -1;
             
             _assignmentNodes.Add((AssignmentNode)current);
 
@@ -1161,6 +1158,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
     {
         var astNode = ParsePrimary(true);
 
+        var token = Current();
         var isDot = Check(Tokens.Dot);
         var isDoubleColon = Check(Tokens.Colon) && Peek()?.TokenType == Tokens.Colon;
         
@@ -1185,7 +1183,10 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             };
 
             if (returnValue is CallNode cNode)
+            {
+                cNode.FileId = debugTable?.GetFileId(token.DebugIndex) ?? -1;
                 _callNodes.Add(cNode);
+            }
             
             return returnValue;
         }
@@ -1220,7 +1221,8 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             var assignment = new AssignmentNode(false, false, false)
             {
                 Path = path,
-                Value = assignmentNode.Value
+                Value = assignmentNode.Value,
+                FileId = debugTable?.GetFileId(token.DebugIndex) ?? -1
             };
             
             _assignmentNodes.Add(assignment);
@@ -1231,6 +1233,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         var retValue =  new CallNode
         {
             Objects =  path,
+            FileId = debugTable?.GetFileId(token.DebugIndex) ?? -1
         };
         
         _callNodes.Add(retValue);
@@ -1258,7 +1261,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
 
         if (path is not CallNode)
         {
-            callPathNode = new CallNode { Objects = [path] };
+            callPathNode = new CallNode { Objects = [path], FileId = debugTable?.GetFileId(token.DebugIndex) ?? -1 };
             _callNodes.Add(callPathNode);
         }
 

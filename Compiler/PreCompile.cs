@@ -243,7 +243,7 @@ public static class PreCompile
 
             stringList.StringPool[index] = ReplaceFormatting(outString);
             
-            var result = $"String.new({founded}).format([{string.Join(", ", GetFormatting(outString))}])";
+            var result = $"(new String({founded})).format([{string.Join(", ", GetFormatting(outString))}])";
             return result;
             
         });

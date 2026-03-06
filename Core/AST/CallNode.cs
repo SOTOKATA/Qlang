@@ -10,6 +10,9 @@ public class CallNode : ASTNode
     
     public List<ASTNode> Objects = [];
 
+    [IgnoreMember] 
+    public int FileId = -1;
+
     public override ASTNode Clone()
     {
         return new CallNode

@@ -14,7 +14,7 @@ namespace Compiler;
  */
 public static class Lexer
 {
-    public static (List<Token> tokens, SourceFileTable? sourceFileTable, DebugTable? debugTable) Lex(string fileName, string script, bool isPublish)
+    public static (List<Token> tokens, SourceFileTable? sourceFileTable, DebugTable? debugTable) Lex(string fileName, string script)
     {
         List<Token> tokens = [];
         SourceFileTable sourceFileTable = new();
@@ -49,8 +49,7 @@ public static class Lexer
 
                 if (TryCharToToken(line[pos], out var charToken))
                 {
-                    if (!isPublish)
-                        charToken!.DebugIndex = debugTable.Add(lineIndex, sourceFileTable.GetOrAdd(fileName));
+                    charToken!.DebugIndex = debugTable.Add(lineIndex, sourceFileTable.GetOrAdd(fileName));
                     
                     tokens.Add(charToken);
                     pos++;
@@ -67,8 +66,7 @@ public static class Lexer
                     var word = line[startPos..pos];
                     if (TryWordToToken(word, out var wordToken))
                     {
-                        if (!isPublish)
-                            wordToken!.DebugIndex = debugTable.Add(lineIndex, sourceFileTable.GetOrAdd(fileName));
+                        wordToken!.DebugIndex = debugTable.Add(lineIndex, sourceFileTable.GetOrAdd(fileName));
                         
                         tokens.Add(wordToken);
                         continue;
@@ -80,7 +78,7 @@ public static class Lexer
             lineIndex++;
         }
 
-        return (tokens, isPublish ? null : sourceFileTable, isPublish ? null :debugTable);
+        return (tokens, sourceFileTable, debugTable);
     }
 
     private static bool IsIdentifierStart(char c)
@@ -104,7 +102,6 @@ public static class Lexer
  
     private static bool IsKeyword(string word, out Token? token)
     {
-        // Список ключевых слов твоего языка
         var keywords = Keywords.GetKeywords().ToArray();
         
         if (keywords.Contains(word.ToLower()))
@@ -117,9 +114,9 @@ public static class Lexer
         return false;
     }
 
-    private static bool TryCharToToken(char keychar, out Token? token)
+    private static bool TryCharToToken(char keyChar, out Token? token)
     {
-        token = keychar switch
+        token = keyChar switch
         {
             '[' => new Token(Tokens.LSquareParen),
             ']' => new Token(Tokens.RSquareParen),
