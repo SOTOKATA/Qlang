@@ -1284,34 +1284,21 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         if (primaryPath is not CallNode callNode)
             throw new QlangCompileException("Undefined class reference for creating instance", GetDebug(debugIndex), "Parser");
         
-        return new NewNode
+        var newNode = new NewNode
         {
             NodePath = callNode
         };
+        
+        _callNodes.Add(newNode.NodePath);
+        
+        return newNode;
     }
 
     
     private ASTNode ParsePrimary(bool isLoop = false)
     {
-        ASTNode? baseExpression;
-
         if (!isLoop)
-        {
-            baseExpression = ParsePrimaryPath();
-            return baseExpression;
-        }
-        
-        baseExpression = ParsePrimaryCast();
-        if (baseExpression is not null)
-            return baseExpression;
-        
-        baseExpression = ParsePrimaryNew();
-        if (baseExpression is not null)
-            return baseExpression;
-
-        baseExpression = ParsePrimaryCallable();
-        if (baseExpression is not null)
-            return baseExpression;
+            return ParsePrimaryPath();
         
         var isMinus = false;
         if (Check(Tokens.Minus))
@@ -1319,27 +1306,15 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             isMinus = true;
             Advance();
         }
-
-        // Try keywords (null, true, false, break, continue, string/number refs)
-        baseExpression = ParsePrimaryKeywords(isMinus);
-        if (baseExpression is not null)
-            return baseExpression;
-
-        // Try extracted identifiers (___S*___, ___N*___, numbers)
-        baseExpression = ParsePrimaryExtracted(isMinus);
-        if (baseExpression is not null)
-            return baseExpression;
-
-        baseExpression = ParsePrimaryCall();
-        if (baseExpression is not null)
-            return baseExpression;
         
-        // Try parentheses and arrays
-        baseExpression = ParsePrimaryParens();
-        if (baseExpression is not null)
-            return baseExpression;
-        
-        throw new QlangCompileException($"Undefined part of expression: {Current().TokenType} ({(Current().Value == "" ? "<null>" : Current().Value)})", GetDebug(Current()), "Parser");
+        return ParsePrimaryCast()
+               ?? ParsePrimaryNew()
+               ?? ParsePrimaryCallable()
+               ?? ParsePrimaryKeywords(isMinus)
+               ?? ParsePrimaryExtracted(isMinus)
+               ?? ParsePrimaryCall()
+               ?? ParsePrimaryParens()
+               ?? throw new QlangCompileException($"Undefined part of expression: {Current().TokenType} ({(Current().Value == "" ? "<null>" : Current().Value)})", GetDebug(Current()), "Parser");
     }
 
     // Support methods
@@ -1375,9 +1350,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             var current = Current();
             
             throw new QlangCompileException(
-                $"""
-                 Incorrect syntax, expected '{Token.TokenToString(type).Trim()}' ({value}), got '{current.Value}'
-                 """,
+                $"\Incorrect syntax, expected '{Token.TokenToString(type).Trim()}'{(value is not null ? $" {value}" : "")}, got '{current.Value}'",
                 GetDebug(current), "Parser");
         }
 

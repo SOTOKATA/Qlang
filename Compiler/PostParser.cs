@@ -161,7 +161,7 @@ public class PostParser(SourceFileTable? table, DebugTable? debugTable, StringPo
             {
                 if (processedCallNodes.Contains(callNode) || callNode.FileId != fileId)
                     continue;
-                
+
                 var firstPathPart = callNode.Objects.First();
                 
                 switch (firstPathPart)
@@ -206,7 +206,12 @@ public class PostParser(SourceFileTable? table, DebugTable? debugTable, StringPo
                         var foundFunction = usingFunctions.FirstOrDefault(p => p.NameId == pointer.NameId && p.Parameters.Count == pointer.Arguments.Count);
 
                         if (foundFunction is null || foundFunction.IsPrivate)
-                            break;
+                        {
+                            var @class = usingClasses.FirstOrDefault(p => p.NameId == pointer.NameId);
+                            
+                            if (@class is null || @class.IsPrivate)
+                                break;
+                        }
                         
                         callNode.Objects.InsertRange(0, @using.CallPath.Objects);
                         processedCallNodes.Add(callNode);
@@ -398,7 +403,7 @@ public class PostParser(SourceFileTable? table, DebugTable? debugTable, StringPo
         {
             // return (debugTable.GetLineIndex(node.DebugIndex),
             //     table[debugTable.GetFileId(node.DebugIndex)]);
-            return (-1, "This is not supported");
+            return (0, "");
         }
         catch // Can be also if this is publish mode
         {

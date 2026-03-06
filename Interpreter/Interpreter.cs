@@ -489,84 +489,64 @@ public partial class Interpreter
     {
         if (node.NodePath.Objects.Count < 1)
             throw new QlangRuntimeException("Undefined path to class.", GetCurrentDebug(), GetStackTrace());
-        
+
         var pointer = (FunctionPointerNode)node.NodePath.Objects[^1];
-
-        var isPrivate = false;
-
-        DynamicNamespace? @namespace = null;
-
-        if (HasContext)
-        {
-            @namespace = CurrentContext?.Namespace;
-            isPrivate = true;
-        }
-
-        if (node.NodePath.Objects.Count > 1)
-        {
-            node.NodePath.Objects = node.NodePath.Objects.SkipLast(1).ToList();
-            var obj = ExecuteObjectCalls(node.NodePath);
-
-            if (obj is not DynamicNamespace ns)
-                throw new QlangRuntimeException($"Undefined namespace: '{obj}'", GetCurrentDebug(), GetStackTrace());
-
-            isPrivate = false;
-            @namespace = ns;
-        }
-
-        var classNode = @namespace?.Classes.FirstOrDefault(x => x.NameId == pointer.NameId) ?? 
-                        _namespaces[GlobalNamespaceName].Classes.FirstOrDefault(x => x.NameId == pointer.NameId);
-
-        if (classNode is null)
-            throw new QlangRuntimeException($"Class '{_stringPoolTable[pointer.NameId]}' is not founded." +
-                                            (@namespace is not null ? $"\nIn namespace '{@namespace.Name}'" : ""), GetCurrentDebug(), GetStackTrace());
+        var classNode = GetClassNodeByPath(node.NodePath);
         
-        if (!isPrivate)
-            throw new QlangRuntimeException($"Cannot instantiate private class '{_stringPoolTable[pointer.NameId]}'", GetCurrentDebug(), GetStackTrace());
 
         return GetNewClass(classNode, pointer.Arguments.ConvertAll(EvaluateExpression));
     }
 
     private DynamicClass ExecutePathToClass(CallNode callNode)
     {
-        if (callNode.Objects.Count < 1)
-            throw new QlangRuntimeException("Undefined path to class.", GetCurrentDebug(), GetStackTrace());
-        
-        var pointer = (ObjectPointerNode)callNode.Objects[^1];
+        return ToDynamicClass(GetClassNodeByPath(callNode));
+    }
 
-        var isPrivate = false;
-        
-        var @namespace = _namespaces[GlobalNamespaceName];
+    private ClassNode GetClassNodeByPath(CallNode node)
+    {
+        var pointer = node.Objects[^1];
+
+        var nameId = pointer switch
+        {
+            NamespacePointerNode fn => fn.NameId,
+            FunctionPointerNode fn => fn.NameId,
+            ObjectPointerNode ns => ns.NameId,
+            _ => throw new QlangRuntimeException($"Undefined call part: '{pointer}'", GetCurrentDebug(), GetStackTrace())
+        };
+
+        var isPrivateCall = false;
+
+        DynamicNamespace? @namespace = null;
 
         if (HasContext)
         {
-            isPrivate = true;
             @namespace = CurrentContext?.Namespace;
+            isPrivateCall = true;
         }
 
-        if (callNode.Objects.Count > 1)
+        if (node.Objects.Count > 1)
         {
-            callNode.Objects = callNode.Objects.SkipLast(1).ToList();
-            var obj = ExecuteObjectCalls(callNode);
+            node.Objects = node.Objects.SkipLast(1).ToList();
+            var obj = ExecuteObjectCalls(node);
 
             if (obj is not DynamicNamespace ns)
-                throw new QlangRuntimeException($"Undefined namespace: {obj}", GetCurrentDebug(), GetStackTrace());
-            
+                throw new QlangRuntimeException($"Undefined namespace: '{obj}'", GetCurrentDebug(), GetStackTrace());
+
+            isPrivateCall = false;
             @namespace = ns;
-            isPrivate = false;
         }
 
-        var classNode = @namespace?.Classes.FirstOrDefault(x => x.NameId == pointer.NameId) ?? 
-                        _namespaces[GlobalNamespaceName].Classes.FirstOrDefault(x => x.NameId == pointer.NameId);
-        
+        var classNode = @namespace?.Classes.FirstOrDefault(x => x.NameId == nameId) ?? 
+                        _namespaces[GlobalNamespaceName].Classes.FirstOrDefault(x => x.NameId == nameId);
+
         if (classNode is null)
-            throw new QlangRuntimeException($"Class '{_stringPoolTable[pointer.NameId]}' is not founded." +
+            throw new QlangRuntimeException($"Class '{_stringPoolTable[nameId]}' is not founded." +
                                             (@namespace is not null ? $"\nIn namespace '{@namespace.Name}'" : ""), GetCurrentDebug(), GetStackTrace());
         
-        if (!isPrivate)
-            throw new QlangRuntimeException($"Cannot instantiate private class '{_stringPoolTable[pointer.NameId]}'", GetCurrentDebug(), GetStackTrace());
+        if (!isPrivateCall && classNode.IsPrivate)
+            throw new QlangRuntimeException($"Cannot instantiate private class '{_stringPoolTable[classNode.NameId]}'", GetCurrentDebug(), GetStackTrace());
 
-        return ToDynamicClass(classNode);
+        return classNode;
     }
 
     /// <summary>

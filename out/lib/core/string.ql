@@ -19,10 +19,12 @@ class String extends DataType: {
         
 
     // Parse multiplication operations
-    function _operatorMultiplication(const obj1, const obj2): {
+    function _operatorMultiplication(const obj1, let obj2): {
         let val = "";
 
-        for let i = 0; i < <Number>obj2.getValue(); i++:
+        obj2 = <Number>obj2.getValue();
+
+        for let i = 0; i < obj2; i++:
             val = val + obj1;
 
         return new String(val);
