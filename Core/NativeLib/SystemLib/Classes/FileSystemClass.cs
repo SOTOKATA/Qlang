@@ -26,7 +26,8 @@ public class FileSystemClass : IQlangClass
             ("directory_exists", (Func<string, bool>)Directory.Exists),
             ("directory_create", (Action<string>)((path) => Directory.CreateDirectory(path))),
             ("directory_remove", (Action<string, bool>)Directory.Delete),
-            ("get_files", (Func<string, string, List<object?>>)((path, extension) => Directory.GetFiles(path, extension).Cast<object?>().ToList()))
+            ("get_files", (Func<string, string, List<object?>>)((path, extension) => Directory.GetFiles(path, extension).Cast<object?>().ToList())),
+            ("get_directories", (Func<string, string, List<object?>>)((path, searchPattern) => Directory.GetDirectories(path, searchPattern).Cast<object?>().ToList()))
         ];
     }
 }

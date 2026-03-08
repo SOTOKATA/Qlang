@@ -22,6 +22,9 @@ public class FunctionNode : ASTNode
     [Key(4)] 
     public CallNode? ReturnType { get; set; }
 
+    [Key(5)] 
+    public bool IsAsync { get; set; }
+
     [IgnoreMember] 
     public ASTContext? Context;
 

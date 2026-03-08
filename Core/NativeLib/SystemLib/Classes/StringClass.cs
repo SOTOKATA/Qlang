@@ -9,36 +9,36 @@ public class StringClass : IQlangClass
     public List<(string name, Delegate body)> GetFunctions()
     {
         return [
-            ("to_string", (Func<object?, string?>)(str => str?.ToString())),
+            ("toString", (Func<object?, string?>)(str => str?.ToString())),
             ("create", (Func<string, int, string>)((str, index) => new string(str[0], index))),
             ("at", (Func<string, int, string>)((str, index) => str[index].ToString())),
-            ("set_at", (Func<string, string, int, string>)((str, toAdd, index) =>
+            ("setAt", (Func<string, string, int, string>)((str, toAdd, index) =>
             {
                 var arr = str.ToCharArray();
                 arr[index] = toAdd[0];
 
                 return new string(arr);
             })),
-            ("is_primitive", (Func<object?, bool>)(str => str is string)),
-            ("is_str", (Func<object?, bool>)(str => str is DynamicClass { ClassName: "String" })),
-            ("is_null_or_empty", (Func<string, bool>)(string.IsNullOrEmpty)),
-            ("is_null_or_whitespace", (Func<string, bool>)(string.IsNullOrWhiteSpace)),
+            ("isPrimitive", (Func<object?, bool>)(str => str is string)),
+            ("isStr", (Func<object?, bool>)(str => str is DynamicClass { ClassName: "String" })),
+            ("isNullOrEmpty", (Func<string, bool>)(string.IsNullOrEmpty)),
+            ("isNullOrWhitespace", (Func<string, bool>)(string.IsNullOrWhiteSpace)),
             ("trim", (Func<string, string>)(msg => msg.Trim())),
-            ("trim_start", (Func<string, string>)(msg => msg.TrimStart())),
-            ("starts_with", (Func<string, string, bool>)((s, s1) => s.StartsWith(s1))),
-            ("ends_with", (Func<string, string, bool>)((s, s1) => s.EndsWith(s1))),
-            ("trim_end", (Func<string, string>)(msg => msg.TrimEnd())),
+            ("trimStart", (Func<string, string>)(msg => msg.TrimStart())),
+            ("startsWith", (Func<string, string, bool>)((s, s1) => s.StartsWith(s1))),
+            ("endsWith", (Func<string, string, bool>)((s, s1) => s.EndsWith(s1))),
+            ("trimEnd", (Func<string, string>)(msg => msg.TrimEnd())),
             ("trim_b", (Func<string, string, string>)((msg, str) => msg.Trim(str.FirstOrDefault()))),
-            ("trim_start_b", (Func<string, string, string>)((msg, str) => msg.TrimStart(str.FirstOrDefault()))),
-            ("trim_end_b", (Func<string, string, string>)((msg, str) => msg.TrimEnd(str.FirstOrDefault()))),
-            ("substring", (Func<string, int, int, string>)((msg, start, length) => msg.Substring(start, length))),
-            ("to_lower", (Func<string, string>)((str) => str.ToLower())),
-            ("to_upper", (Func<string, string>)((str) => str.ToUpper())),
+            ("trimStart_b", (Func<string, string, string>)((msg, str) => msg.TrimStart(str.FirstOrDefault()))),
+            ("trimEnd_b", (Func<string, string, string>)((msg, str) => msg.TrimEnd(str.FirstOrDefault()))),
+            ("subString", (Func<string, int, int, string>)((msg, start, length) => msg.Substring(start, length))),
+            ("toLower", (Func<string, string>)((str) => str.ToLower())),
+            ("toUpper", (Func<string, string>)((str) => str.ToUpper())),
             ("split", (Func<string, string, List<object?>>)((str, splitPattern) => str.Split(splitPattern).Cast<object>().ToList())),
             ("join", (Func<List<object?>, string, string>)((arr, joinPattern) => string.Join(joinPattern, arr))),
             ("length", (Func<string, double>)(msg => msg.Length)),
-            ("index_of", (Func<string, string, int>)((str, pattern) => str.IndexOf(pattern, StringComparison.CurrentCulture))),
-            ("last_index_of", (Func<string, string, int>)((str, pattern) => str.LastIndexOf(pattern, StringComparison.CurrentCulture))),
+            ("indexOf", (Func<string, string, int>)((str, pattern) => str.IndexOf(pattern, StringComparison.CurrentCulture))),
+            ("lastIndexOf", (Func<string, string, int>)((str, pattern) => str.LastIndexOf(pattern, StringComparison.CurrentCulture))),
             ("format", (Func<string, List<object?>, string?>)((str, numArray) => string.Format(str, numArray.ToArray()))),
         ];
     }

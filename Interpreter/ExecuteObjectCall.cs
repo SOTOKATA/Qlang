@@ -300,7 +300,7 @@ public partial class Interpreter
             if (node.NameId == _stringPoolTable.Add(Keywords.ThisKeyword) && HasContext)
             {
                 _allowPrivateCall = true;
-                return (CurrentContext.Class, CurrentContext.Namespace);
+                return (CurrentContext!.Class, CurrentContext.Namespace);
             }
 
             _allowPrivateCall = false;
@@ -309,7 +309,7 @@ public partial class Interpreter
             // Try to get VAR from current (class or namespace or function or blocks) context;
             if (HasContext)
             {
-                var block = CurrentContext.Blocks
+                var block = CurrentContext!.Blocks
                     .FirstOrDefault(b => b.Variables.ContainsKey(nodeName));
                 
                 var classIsNull = CurrentContext.Class is null;

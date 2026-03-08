@@ -32,5 +32,12 @@ namespace fs: {
 
             return _native("std", "filesystem", "get_files", path, extension);
         }
+
+        function<Array> getDirectories(const<String> path, const<String> searchPattern = ""): {
+            if exists(path) == false:
+                throw.message("Undefined directory path.");
+
+            return _native("std", "filesystem", "get_directories", path, searchPattern);
+        }
     }
 }

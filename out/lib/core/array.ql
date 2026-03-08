@@ -1,5 +1,6 @@
 import "$lib/core"
 
+const array = new Array();
 // Dynamic array
 class Array extends DataType: {
     // Create empty array

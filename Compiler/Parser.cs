@@ -1350,7 +1350,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             var current = Current();
             
             throw new QlangCompileException(
-                $"\Incorrect syntax, expected '{Token.TokenToString(type).Trim()}'{(value is not null ? $" {value}" : "")}, got '{current.Value}'",
+                $"Incorrect syntax, expected '{Token.TokenToString(type).Trim()}'{(value is not null ? $" {value}" : "")}, got '{current.Value}'",
                 GetDebug(current), "Parser");
         }
 

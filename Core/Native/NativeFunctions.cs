@@ -40,9 +40,11 @@ public class NativeFunctionRegistry
     public object? Call(string name, object?[]? args)
     {
         var func = _functions.FirstOrDefault(x => x.GetName() == name);
-        
+
         if (func == null)
-            throw new Exception($"Native function '{name}' not found");
+        {
+            throw new Exception($"Native function '{name}' not found\nList of all functions:\n  {string.Join("\n  ", _functions.Where(x => !x.GetName().StartsWith("std.")).Select(x => x.GetName()))}");
+        }
 
         if (args is not null)
         {
@@ -54,8 +56,12 @@ public class NativeFunctionRegistry
 
                 if (type.ParameterType == typeof(int))
                     args[index] = int.Parse(args[index]?.ToString());
+                if (type.ParameterType == typeof(float))
+                    args[index] = float.Parse(args[index]?.ToString());
                 else if (type.ParameterType == typeof(double))
                     args[index] = args[index]!.ToString().ParseNumber();
+                else if (type.ParameterType == typeof(string))
+                    args[index] = args[index]?.ToString();
             }
         }
 

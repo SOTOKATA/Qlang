@@ -15,14 +15,14 @@ class Object: {
         if isNull(obj):
             return "<null>";
             
-        return _native("std", "string", "to_string", obj);
+        return _native("std", "string", "toString", obj);
     }
 
     function<String> toString(): {
         if isNull(this):
             return "<null>";
             
-        return _native("std", "string", "to_string", this);
+        return _native("std", "string", "toString", this);
     } 
 }
 
