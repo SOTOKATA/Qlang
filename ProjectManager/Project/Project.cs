@@ -47,11 +47,14 @@ public partial class Project(ProjectSettings projectSettings, CompileSettings co
         var fullMainFilePath = Path.Combine(projectPath, mainFilePath);
         File.Create(fullMainFilePath).Close();
         File.WriteAllText(fullMainFilePath, """
+                                            // Import (load) file. Once imported file can used in whole project.
                                             import "$lib/standard"
+                                            // Using namespace (auto adding). It's are local changes for file.
                                             using std;
-
+                                            
                                             function main(): {
-                                                Console.println("Hello World!");
+                                                // Will write 'Hello, World!' in console.
+                                                console.println("Hello World!");
                                             }
                                             """);
     

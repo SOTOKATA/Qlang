@@ -22,3 +22,7 @@ out/qli.pdb
 /NumericLib/bin/
 /NumericLib/obj/
 /_bin
+out/.DS_Store
+.DS_Store
+out/ql
+out/qli

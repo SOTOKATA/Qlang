@@ -10,5 +10,7 @@ public class EnvironmentClass : IQlangClass
         ("machine_name", (Func<string>)(() => Environment.MachineName)),
         ("process_path", (Func<string?>)(() => Environment.ProcessPath)),
         ("user_name", (Func<string?>)(() => Environment.UserName)),
+        ("exit", (Action<int>)Environment.Exit),
+        
     ];
 }

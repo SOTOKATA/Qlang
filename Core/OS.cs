@@ -7,7 +7,7 @@ public static class OS
         if (OperatingSystem.IsWindows())
             return ".exe";
         if (OperatingSystem.IsMacOS())
-            return ".app";
+            return "";
         if (OperatingSystem.IsLinux())
             return ".so";
         
