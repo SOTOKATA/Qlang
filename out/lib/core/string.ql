@@ -2,12 +2,12 @@ import "$lib/core"
 
 // Class to make string operations
 class String extends DataType: {
-    private let _value = "";
-
     // overriding functions 
-    function toString(): {
+    function<String> toString():
         return object.toString(_value);
-    }
+
+    function<String> toNumberFormat(const<String> format):
+        return _native("std", "number", "to_string", <Number>_value, format.getValue());
 
     // Parse object to String
     function _createFrom(const obj):
@@ -254,6 +254,6 @@ class String extends DataType: {
 
     // Replace '{n}' to replacement
     function format(const<Collection> replacement):
-        return _native("std", "string", "format", _value, replacement);
+        return _native("std", "string", "format", _value, replacement.select(fn(const x): return x.toString();).getCollection());
 }
 const string = new String("");

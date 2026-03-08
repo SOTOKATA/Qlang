@@ -29,11 +29,11 @@ public partial class Interpreter
                 @class.Variables["_value"].Value = str;
                 break;
             }
-            case List<object?> arr:
+            case List<object?> arrNullable:
             {
                 var id = _stringPoolTable.Add(QlSystemClasses.ArrayClassName);
                 @class = ToDynamicClass(_namespaces[GlobalNamespaceName].Classes.First(x => x.NameId == id));
-                @class.Variables["_value"].Value = arr;
+                @class.Variables["_value"].Value = arrNullable;
                 break;
             }
         }

@@ -244,6 +244,7 @@ public static class PreCompile
             stringList.StringPool[index] = ReplaceFormatting(outString);
             
             var result = $"(new String({founded})).format([{string.Join(", ", GetFormatting(outString))}])";
+            
             return result;
             
         });
@@ -281,7 +282,11 @@ public static class PreCompile
 
             var value = stringValue.Substring(1, stringValue.Length - 2);
             
-            value = value.Replace("\"", "\"");
+            value = value
+                .Replace("\r\n", "\\n")
+                .Replace("\n", "\\n")
+                .Replace("\r", "\\n")
+                .Replace("\"", "\"");
 
             if (stringList.StringPool.IndexOf(value) != -1)
             {
