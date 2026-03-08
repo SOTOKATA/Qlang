@@ -17,6 +17,9 @@ public static class Keywords
     public static string CaseKeyword => "case";
     public static string DefaultKeyword => "default";
     
+    public static string AwaitKeyword => "await";
+    public static string AsyncKeyword => "async";
+    
     public static string IfBlock => "if";
     public static string ElseBlock => "else";
     public static string WhileBlock => "while";
@@ -50,6 +53,6 @@ public static class Keywords
         ConstVariableDeclaration, ContinueKeyword, BreakKeyword, NullKeyword, ThisKeyword, ExtendsKeyword, 
         SwitchBlock, CaseKeyword, DefaultKeyword, NamespaceDeclaration,
         UsingKeyword, TryKeyword, CatchKeyword, FinallyKeyword, ShortFunctionDeclaration,
-        CreateClassInstanceKeyword
+        CreateClassInstanceKeyword, AwaitKeyword, AsyncKeyword
     ];
 }

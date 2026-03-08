@@ -43,6 +43,9 @@ public partial class Interpreter
     
     private string? Typeof(object? arg)
     {
+        if (arg is null)
+            return "null";
+        
         switch (arg)
         {
             case DynamicClass @class:

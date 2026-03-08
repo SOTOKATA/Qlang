@@ -14,7 +14,7 @@ namespace std:  {
                 case "Collection":
                     return (new Array(message)).toString();
             }
-            
+
             const typeOfMessage = typeof(message);
             if typeOfMessage.startsWith("~object"): {
                 let str = "";

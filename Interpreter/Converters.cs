@@ -40,16 +40,13 @@ public partial class Interpreter
     /// <param name="namespaceNode">namespace to convert</param>
     /// <param name="globalNamespaceName">name of subnamespace</param>
     /// <returns>DynamicNamespace</returns>
-    private DynamicNamespace ToDynamicNamespace(NamespaceNode namespaceNode, string? globalNamespaceName)
+    private DynamicNamespace ToDynamicNamespace(NamespaceNode namespaceNode)
     {
         // Create dynamic instance
         var dynamicNamespace = new DynamicNamespace(_stringPoolTable[namespaceNode.NameId])
         {
             IsPrivate = namespaceNode.IsPrivate
         };
-        
-        if (globalNamespaceName is not null)
-            _namespaces[globalNamespaceName].Namespaces.Add(dynamicNamespace);
         
         // Add and convert all classes
         dynamicNamespace.Classes.AddRange(
@@ -61,7 +58,7 @@ public partial class Interpreter
         // Add and convert all namespaces
         dynamicNamespace.Namespaces.AddRange(
             namespaceNode.Body.OfType<NamespaceNode>()
-                .Select(x => ToDynamicNamespace(x, globalNamespaceName))
+                .Select(ToDynamicNamespace)
             );
         
 
@@ -81,9 +78,8 @@ public partial class Interpreter
     /// Convert static class to dynamic
     /// </summary>
     /// <param name="classNode">class to convert</param>
-    /// <param name="dynamicNamespace"></param>
     /// <returns>DynamicClass</returns>
-    private DynamicClass ToDynamicClass(ClassNode classNode, DynamicNamespace? dynamicNamespace = null)
+    private DynamicClass ToDynamicClass(ClassNode classNode)
     {
         // Create dynamic instance
         DynamicClass dynamicClass = new(_stringPoolTable[classNode.NameId])
@@ -101,6 +97,8 @@ public partial class Interpreter
         classNode = (classNode.Clone() as ClassNode)!;
         classNode.Body.RemoveAll(node => node is LineNode);
 
+        dynamicClass.Extends.AddRange(classNode.Extends.Select(x => _stringPoolTable[x]));
+        
         dynamicClass.Body = classNode.Body;
         
         return dynamicClass;

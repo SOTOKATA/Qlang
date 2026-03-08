@@ -19,14 +19,18 @@ public class ClassNode : ASTNode
     [Key(3)] 
     public bool IsPrivate { get; set; }
 
+    [Key(4)] 
+    public List<int> Extends { get; set; } = [];
+
     public override ASTNode Clone()
     {
         return new ClassNode
         {
             NameId = NameId, 
-            ExtendsPath = ExtendsPath,
+            ExtendsPath = (CallNode?)ExtendsPath?.Clone(),
             Body = Body.Select(node => node.Clone()).ToList(),
-            IsPrivate = IsPrivate
+            IsPrivate = IsPrivate,
+            Extends = [..Extends],
         };
     }
 

@@ -353,6 +353,12 @@ public class PostParser(SourceFileTable? table, DebugTable? debugTable, StringPo
             extends = ExtendClass(extends, globalNamespaces);
 
         extends.ExtendsPath = null;
+
+        @class.Extends.AddRange(extends.Extends);
+        @class.Extends.Add(extends.NameId);
+        // Remove all equals classes
+        @class.Extends = @class.Extends.Distinct().ToList();
+        
         
         @class.Body = MergeBodies(extends.Body, @class.Body);
         

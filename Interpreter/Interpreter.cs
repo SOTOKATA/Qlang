@@ -57,7 +57,7 @@ public partial class Interpreter
             _namespaces[GlobalNamespaceName] = dynamicNamespace;
             
             _namespaces[GlobalNamespaceName] = 
-                ToDynamicNamespace(globalNamespace, GlobalNamespaceName);
+                ToDynamicNamespace(globalNamespace);
 
             program.Statements.Remove(globalNamespace);
         }
@@ -65,7 +65,7 @@ public partial class Interpreter
        
             // Load namespaces
         foreach (var namespaceNode in program.Statements.OfType<NamespaceNode>().Where(x => _stringPoolTable[x.NameId] != GlobalNamespaceName))
-            _namespaces[_stringPoolTable[namespaceNode.NameId]] = ToDynamicNamespace(namespaceNode, null);
+            _namespaces[_stringPoolTable[namespaceNode.NameId]] = ToDynamicNamespace(namespaceNode);
 
         // Convert variable values
         foreach (var key in _namespaces.Keys.ToList())
@@ -122,8 +122,13 @@ public partial class Interpreter
                 {
                     var var = function.Variables[function.Parameters[i]];
 
-                    if (var.Type is not null && Typeof(var.Type) != Typeof(arguments[i]))
+                    if (var.Type is not null &&
+                        Typeof(var.Type) != Typeof(arguments[i]) &&
+                        (PrimitiveToDynamicClass(arguments[i]) is not DynamicClass d1 ||
+                         !d1.Extends.Exists(x => x == Typeof(var.Type))))
+                    {
                         throw new QlangRuntimeException($"The type of param is '{(Typeof(arguments[i]) ?? "<null>")}' but must be '{Typeof(var.Type)}' for function '{function.Name}'", GetStackTrace());
+                    }
                     
                     function.Variables[function.Parameters[i]] = new Variable(
                         function.Parameters[i],

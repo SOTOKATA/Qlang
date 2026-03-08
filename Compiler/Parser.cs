@@ -61,6 +61,14 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             isPrivate = true;
             Advance();
         }
+        
+        var isAsync = false;
+
+        if (Check(Tokens.Keyword, Keywords.AsyncKeyword))
+        {
+            isAsync = true;
+            Advance();
+        }
 
         if (Check(Tokens.Keyword, Keywords.BreakKeyword))
         {
@@ -93,7 +101,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
 
         // function declaration
         if (Check(Tokens.Keyword, Keywords.FunctionDeclaration))
-            return ParseFunction(isPrivate);
+            return ParseFunction(isPrivate, isAsync);
 
         // class declaration
         if (Check(Tokens.Keyword, Keywords.ClassDeclaration))
@@ -142,9 +150,9 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             lineNode.Content = var;
             return lineNode;
         }
-
+        
         // method call statement (Object.method(...)) || Call method from class pointer || [] || ()
-        if (Check(Tokens.Identifier) || (Check(Tokens.Keyword, Keywords.ThisKeyword)) || Check(Tokens.LParen) || Check(Tokens.LSquareParen))
+        if (Check(Tokens.Identifier) || (Check(Tokens.Keyword, Keywords.ThisKeyword)) || Check(Tokens.LParen) || Check(Tokens.LSquareParen) || Check(Tokens.Keyword, Keywords.AsyncKeyword))
         {
             var expr = ParseExpression();
             Expect(Tokens.Semicolon);
@@ -272,9 +280,8 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         };
     }
 
-    private FunctionNode ParseFunction(bool isPrivate = false)
+    private FunctionNode ParseFunction(bool isPrivate = false, bool isAsync = false)
     {
-
         var debug = Expect(Tokens.Keyword, Keywords.FunctionDeclaration);
 
         // Type
@@ -328,6 +335,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             Parameters = parameters,
             Body = body,
             IsPrivate = isPrivate,
+            IsAsync = isAsync,
             ReturnType = returnType
         };
     }
@@ -1294,6 +1302,27 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         return newNode;
     }
 
+    private AwaitNode? ParsePrimaryAwait()
+    {
+        if (!Check(Tokens.Keyword, Keywords.AwaitKeyword))
+            return null;
+
+        var token = Advance();
+        
+        var content = ParsePrimaryPath();
+        
+        if (content is not  CallNode callNode)
+            throw new QlangCompileException("Undefined await statement", GetDebug(token), "Parser");
+
+        var await = new AwaitNode
+        {
+            CallNode = callNode
+        };
+
+        _callNodes.Add(await.CallNode);
+        
+        return await;
+    }
     
     private ASTNode ParsePrimary(bool isLoop = false)
     {
@@ -1307,7 +1336,8 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             Advance();
         }
         
-        return ParsePrimaryCast()
+        return ParsePrimaryAwait() 
+               ?? ParsePrimaryCast()
                ?? ParsePrimaryNew()
                ?? ParsePrimaryCallable()
                ?? ParsePrimaryKeywords(isMinus)
