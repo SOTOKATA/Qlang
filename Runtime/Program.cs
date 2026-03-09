@@ -113,16 +113,9 @@ public static class Program
                 
                 foreach (var type in types)
                 {
-                    try
-                    {
-                        var instance = Activator.CreateInstance(type);
-                        if (instance is IQlangLib lib)
-                            nativeLibRegister.RegisterLib(lib);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"[QlangLoader] Failed to instantiate {type.FullName}: {ex.Message}");
-                    }
+                    var instance = Activator.CreateInstance(type);
+                    if (instance is IQlangLib lib)
+                        nativeLibRegister.RegisterLib(lib);
                 }
             }
         }

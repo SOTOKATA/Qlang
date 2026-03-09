@@ -132,9 +132,9 @@ namespace std:  {
         function resetColors():
             _native("std", "console", "reset_color");
 
-        const width = _native("std", "console", "width");
+        function width(): return _native("std", "console", "width");
 
-        const height = _native("std", "console", "height");
+        function height(): return _native("std", "console", "height");
 
 
         function richPrint(const<String> message):

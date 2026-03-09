@@ -582,15 +582,6 @@ public partial class Interpreter
             return @object.ToString();
         
         return CreateClassFrom(@object, type);
-
-        // var typeStr = type switch
-        // {
-        //     null => "<null>",
-        //     _ => type.ToString()!
-        // };
-        //
-        // throw new QlangRuntimeException($"Cannot cast object to type '{typeStr}'", GetCurrentDebug(),
-        //     GetStackTrace());
     }
     
     /// <summary>

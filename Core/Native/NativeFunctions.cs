@@ -17,7 +17,7 @@ public class NativeFunctionRegistry
     public void RegisterLib(IQlangLib lib)
     {
         if (string.IsNullOrWhiteSpace(lib.Name))
-            throw new QlangCompileException($"Native function register exception: Name cannot be empty", -1, "NativeFunctions", "undefined file");
+            throw new QlangCompileException($"Native function register exception: Library name cannot be empty", -1, "NativeFunctions", "undefined file");
         
         if (lib.Namespaces.Any(@namespace => string.IsNullOrWhiteSpace(@namespace.Name)))
             throw new QlangCompileException($"Native function register exception: Namespace cannot be empty (lib: '{lib.Name}')", -1, "NativeFunctions", "undefined file");

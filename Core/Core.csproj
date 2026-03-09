@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
 
         <PackageId>QlangCore</PackageId>
-        <Version>1.0.1</Version>
+        <Version>1.0.3</Version>
         <Authors>SOTOKATA</Authors>
         <Company>SOTOKATA</Company>
         <Description>Core library for Qlang</Description>
@@ -17,6 +17,6 @@
 
     <ItemGroup>
       <PackageReference Include="MessagePack" Version="3.1.4" />
+      <None Include="../out/icon.png" Pack="true" PackagePath="\" />
     </ItemGroup>
-
 </Project>
