@@ -142,7 +142,7 @@ public partial class Interpreter
 
             // Execute function body
             var current = CurrentContext(stack);
-            current.IsReturn = false;
+            current!.IsReturn = false;
             current.IsBreak = false;
             current.IsContinue = false;
             current.ReturnValue = null;
@@ -181,6 +181,7 @@ public partial class Interpreter
     /// Function used for execute lines or structures
     /// </summary>
     /// <param name="statement">Statement to execute</param>
+    /// <param name="stack">Current context stack</param>
     /// <exception cref="QlangRuntimeException">Will throw exception if statement is not exists</exception>
     private void ExecuteStatement(ASTNode? statement, Stack<ASTContext> stack)
     {
@@ -231,6 +232,7 @@ public partial class Interpreter
     /// Used for operate with assignments. Can create or change value
     /// </summary>
     /// <param name="assignmentNode">Assignment structure (like: 'const a = 1')</param>
+    /// <param name="stack">Current context stack</param>
     /// <exception cref="QlangRuntimeException">
     /// 1. If assignment path is empty.
     /// 2. If assignment try to re-assign const variable
@@ -323,6 +325,7 @@ public partial class Interpreter
     /// </summary>
     /// <param name="classNode">Copy of class to create</param>
     /// <param name="args">Arguments for function 'new'</param>
+    /// <param name="stack">Current context stack</param>
     /// <returns>New instance</returns>
     /// <exception cref="QlangRuntimeException">If was sent invalid parameters</exception>
     private DynamicClass GetNewClass(ClassNode classNode, List<object?> args, Stack<ASTContext> stack)
@@ -430,6 +433,7 @@ public partial class Interpreter
     /// Evaluate expressions like casting, keywords, string refs
     /// </summary>
     /// <param name="expr">Expression to evaluate</param>
+    /// <param name="stack">Current context stack</param>
     /// <returns></returns>
     /// <exception cref="QlangRuntimeException">Will throw if expression is undefined</exception>
     private object? EvaluateExpression(ASTNode? expr, Stack<ASTContext> stack)
@@ -558,6 +562,7 @@ public partial class Interpreter
     /// Casting objects, cannot cast dynamic classes at now
     /// </summary>
     /// <param name="cast">Cast node</param>
+    /// <param name="stack">Current context stack</param>
     /// <returns>Cast object</returns>
     /// <exception cref="QlangRuntimeException">If casting is impossible (like bool to double)</exception>
     private object? CastObject(CastNode cast, Stack<ASTContext> stack)
@@ -589,6 +594,7 @@ public partial class Interpreter
     /// </summary>
     /// <param name="left">To divide</param>
     /// <param name="right">Divisor</param>
+    /// <param name="stack">Current context stack</param>
     /// <returns>Divided value</returns>
     /// <exception cref="QlangRuntimeException">If divisor equal to 0</exception>
     private double DivideWithCheck(object left, object right, Stack<ASTContext> stack)
@@ -609,6 +615,7 @@ public partial class Interpreter
     /// Get number by reference
     /// </summary>
     /// <param name="numberRef">Reference node</param>
+    /// <param name="stack">Current context stack</param>
     /// <returns>Number</returns>
     /// <exception cref="QlangRuntimeException">If is undefined reference</exception>
     private double GetNumberRef(NumberRefNode numberRef, Stack<ASTContext> stack)
@@ -631,6 +638,7 @@ public partial class Interpreter
     /// </summary>
     /// <param name="obj">Object to cast</param>
     /// <param name="copy">Copy of class with function '_createFrom'</param>
+    /// <param name="stack">Current context stack</param>
     /// <returns>new class instance class</returns>
     /// <exception cref="QlangRuntimeException">Will throw if values is incompatible</exception>
     private DynamicClass CreateClassFrom(object? obj, DynamicClass copy, Stack<ASTContext> stack)
@@ -670,6 +678,7 @@ public partial class Interpreter
     /// <param name="left">First object</param>
     /// <param name="right">Second object</param>
     /// <param name="binOp">Binary process (with operator)</param>
+    /// <param name="stack">Current context stack</param>
     /// <returns>Output from binary operation</returns>
     /// <exception cref="QlangRuntimeException">Will throw if values is incompatible or undefined</exception>
     private object? EvaluateClassBinaryOperation(object left, object right, BinaryOperationNode binOp, Stack<ASTContext> stack)
@@ -760,6 +769,7 @@ public partial class Interpreter
     /// Evaluate binary operation like '1 + 1' or 'var % 2 == 0'
     /// </summary>
     /// <param name="binOp">Operation</param>
+    /// <param name="stack">Current context stack</param>
     /// <returns>Result of operation</returns>
     /// <exception cref="QlangRuntimeException"></exception>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
