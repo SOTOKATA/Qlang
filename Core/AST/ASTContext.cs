@@ -12,7 +12,7 @@ public class ASTContext
     
     public DynamicFunction? ParentFunction { get; init; }
 
-    public List<ASTBlock> Blocks { get; } = [];
+    public List<ASTBlock> Blocks { get; init; } = [];
     
     public ASTNode? CurrentNode { get; set; }
     public int CurrentDebugIndex { get; set; } = -1;
@@ -21,4 +21,5 @@ public class ASTContext
     public bool IsBreak = false;
     public bool IsContinue = false;
     public object? ReturnValue = null;
+    public bool AllowPrivateCall = false;
 }

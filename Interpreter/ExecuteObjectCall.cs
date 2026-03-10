@@ -7,7 +7,6 @@ namespace Interpreter;
 
 public partial class Interpreter
 {
-    private bool _allowPrivateCall;
     private object? PrimitiveToDynamicClass(object? primitive, Stack<ASTContext> stack)
     {
         switch (primitive)
@@ -179,7 +178,7 @@ public partial class Interpreter
                 
                 var function = FindFunction(fn, lastReturnValue, isPathStart, stack);
                 
-                _allowPrivateCall = false;
+                CurrentContext(stack).AllowPrivateCall = false;
 
                 if (function.function is null && _stringPoolTable[fn.NameId] == "toString")
                     return lastReturnValue?.ToString() ?? null;
@@ -211,28 +210,29 @@ public partial class Interpreter
         {
             if (HasContext(stack))
             {
+                var currentContext = CurrentContext(stack);
                 // Try to get function from function variables
-                if (CurrentContext(stack)?.Function is not null)
+                if (currentContext?.Function is not null)
                 {
-                    pair = TryGetFunctionFromFunctionVariables(CurrentContext(stack).Function, node.NameId, args, stack);
+                    pair = TryGetFunctionFromFunctionVariables(currentContext.Function, node.NameId, args, stack);
                     if (pair.function is not null)
-                        return (pair.function, pair.args, CurrentContext(stack).Class, CurrentContext(stack).Namespace);
+                        return (pair.function, pair.args, currentContext.Class, currentContext.Namespace);
                 }
                 
                 // Try to get function from class context;
-                if (CurrentContext(stack)?.Class is not null)
+                if (currentContext?.Class is not null)
                 {
-                    pair = TryGetFunctionFromClass(CurrentContext(stack).Class, node.NameId, args, stack);
+                    pair = TryGetFunctionFromClass(currentContext.Class, node.NameId, args, stack);
                     if (pair.function is not null)
-                        return (pair.function, pair.args, CurrentContext(stack).Class, CurrentContext(stack).Namespace);
+                        return (pair.function, pair.args, currentContext.Class, currentContext.Namespace);
                 }
                 
                 // Try to get function from namespace context;
-                if (CurrentContext(stack)?.Namespace is not null)
+                if (currentContext?.Namespace is not null)
                 {
-                    pair = TryGetFunctionFromNamespace(CurrentContext(stack).Namespace, node.NameId, args, stack);
+                    pair = TryGetFunctionFromNamespace(currentContext.Namespace, node.NameId, args, stack);
                     if (pair.function is not null)
-                        return (pair.function, pair.args, null, CurrentContext(stack).Namespace);
+                        return (pair.function, pair.args, null, currentContext.Namespace);
                 }
             }
             
@@ -242,6 +242,7 @@ public partial class Interpreter
             if (funcPair.function is not null)
                 return (ToDynamicFunction(funcPair.function, stack), funcPair.args, null, null);
             
+            Console.WriteLine($"Context: Class: {CurrentContext(stack)?.Class?.Name}; Function: {CurrentContext(stack)?.Function?.Name}; Namespace: {CurrentContext(stack)?.Namespace?.Name}");
             throw new QlangRuntimeException($"Function '{_stringPoolTable[node.NameId]}' is not found in current context {(lastObject is null ? "" : $"('{lastObject}')")}",
                 GetCurrentDebug(stack), GetStackTrace(stack));
         }
@@ -286,6 +287,8 @@ public partial class Interpreter
         if (_stringPoolTable[node.NameId] == "toString" && lastObject is not null)
             return (null, null, null, null);
         
+            Console.WriteLine($"Context: Class: {CurrentContext(stack)?.Class?.Name}; Function: {CurrentContext(stack)?.Function?.Name}; Namespace: {CurrentContext(stack)?.Namespace?.Name}");
+        
         throw new QlangRuntimeException($"Function '{_stringPoolTable[node.NameId]}' is not found in current context {(lastObject is null ? "" : $"('{lastObject}')")}",
             GetCurrentDebug(stack), GetStackTrace(stack));
     }
@@ -302,11 +305,11 @@ public partial class Interpreter
             // Get 'this'
             if (node.NameId == _stringPoolTable.Add(Keywords.ThisKeyword) && HasContext(stack))
             {
-                _allowPrivateCall = true;
+                CurrentContext(stack).AllowPrivateCall = true;
                 return (CurrentContext(stack)!.Class, CurrentContext(stack).Namespace);
             }
 
-            _allowPrivateCall = false;
+            CurrentContext(stack).AllowPrivateCall = false;
 
 
             // Try to get VAR from current (class or namespace or function or blocks) context;
@@ -383,7 +386,7 @@ public partial class Interpreter
                 // Try to get VAR from class
                 if (dynamicClass.Variables.TryGetValue(nodeName, out var var))
                 {
-                    if (var.IsPrivate && !_allowPrivateCall)
+                    if (var.IsPrivate && !CurrentContext(stack).AllowPrivateCall)
                         throw new QlangRuntimeException($"Cannot get access to private variable '{var.Name}' from class '{dynamicClass.ClassName}'.",
                             GetCurrentDebug(stack), GetStackTrace(stack));
                         

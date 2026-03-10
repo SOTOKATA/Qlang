@@ -222,6 +222,10 @@ public partial class Interpreter
                 EvaluateLine(lineNode, stack);
                 break;
             
+            case ParallelNode parallelNode:
+                ExecuteParallel(parallelNode, stack);
+                break;
+            
             default:
                 throw new QlangRuntimeException($"Unknown statement type: {statement?.GetType().Name ?? "<null>"}", GetCurrentDebug(stack), GetStackTrace(stack));
         }
@@ -280,7 +284,7 @@ public partial class Interpreter
                     throw new QlangRuntimeException($"Cannot re-assign const property '{_stringPoolTable[lastNode.NameId]}'", GetCurrentDebug(stack),
                         GetStackTrace(stack));
 
-                if (currentObject is not null && var.IsPrivate && !_allowPrivateCall)
+                if (currentObject is not null && var.IsPrivate && !CurrentContext(stack).AllowPrivateCall)
                     throw new QlangRuntimeException("Cannot access to private variable from external source",
                         GetCurrentDebug(stack), GetStackTrace(stack));
 
@@ -490,8 +494,48 @@ public partial class Interpreter
             ExecuteStatement(assignment, stack);
             return null;
         }
-        
+
         return EvaluateExpression(ln.Content, stack);
+    }
+    
+    private void ExecuteParallel(ParallelNode node, Stack<ASTContext> parentStack)
+    {
+        var currentCtx = CurrentContext(parentStack);
+
+        var tasks = node.Objects.Select(expr =>
+            Task.Run(() =>
+            {
+                // Каждый поток получает свой изолированный стек
+                var forkedStack = new Stack<ASTContext>();
+
+                // Копируем текущий контекст как стартовую точку
+                if (currentCtx is not null)
+                {
+                    forkedStack.Push(new ASTContext
+                    {
+                        Class     = currentCtx.Class,
+                        Namespace = currentCtx.Namespace,
+                        Function  = currentCtx.Function?.Clone(),
+                        ParentFunction = currentCtx.ParentFunction,
+                    });
+                }
+
+                EvaluateExpression(expr, forkedStack);
+            })
+        ).ToArray();
+
+        // Главный поток ждёт завершения всех веток
+        try
+        {
+            Task.WaitAll(tasks);
+        }
+        catch (AggregateException e)
+        {
+            throw e.InnerException!;
+        }
+    
+        // Пробрасываем исключения из параллельных потоков
+        // (Task.WaitAll сам бросит AggregateException если что-то упало)
     }
 
     private DynamicClass EvaluateNewKeyword(NewNode node, Stack<ASTContext> stack)
@@ -750,10 +794,10 @@ public partial class Interpreter
 
         if ((result is not DynamicClass dynamicClass || dynamicClass.ClassName != leftClass.ClassName) &&
             (originalOperator.Contains("Division") || originalOperator.Contains("Subtraction") || originalOperator.Contains("Multiplication") || originalOperator.Contains("Addition")))
-            Console.WriteLine($"warning: return value of {leftClass.ClassName} is not equal to self type");
-            // throw new QlangRuntimeException(
-            //     $"Return value of '_operator{originalOperator}' must be equal to type '{leftClass.ClassName}'", GetCurrentDebug(stack),
-            //     GetStackTrace(stack)); 
+            // Console.WriteLine($"warning: return value of {leftClass.ClassName} is not equal to self type");
+            throw new QlangRuntimeException(
+                $"Return value of '_operator{originalOperator}' must be equal to type '{leftClass.ClassName}'", GetCurrentDebug(stack),
+                GetStackTrace(stack)); 
         
         if (result is not bool &&
             (originalOperator.Contains("Equal") ||  originalOperator.Contains("Greater") || 

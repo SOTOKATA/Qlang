@@ -134,6 +134,9 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         // return statement
         if (Check(Tokens.Keyword, Keywords.ReturnKeyword))
             return ParseReturn();
+
+        if (Check(Tokens.Keyword, Keywords.ParallelKeyword))
+            return ParseParallel();
         
         // new statement
         if (Check(Tokens.Keyword, Keywords.CreateClassInstanceKeyword))
@@ -163,6 +166,37 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         ThrowIfIsEnd();
 
         throw new QlangCompileException($"Undefined keyword: {Current().TokenType} '{Current().Value}'", GetDebug(Current()), "Parser");
+    }
+
+    private ParallelNode ParseParallel()
+    {
+        ThrowIfIsEnd();
+     
+        var calls = new List<CallNode>();
+        
+        var token = Expect(Tokens.Keyword, Keywords.ParallelKeyword);
+        
+        Expect(Tokens.LParen);
+        
+        while (!Check(Tokens.RParen))
+        {
+            var call = ParsePrimary();
+
+            if (call is not CallNode callNode)
+                throw new QlangCompileException("Undefined expression for parallel keyword: " + call.GetType().Name, GetDebug(token), "Parser");
+            
+            calls.Add(callNode);
+
+            if (Check(Tokens.Comma))
+                Advance();
+        }
+
+        Advance();
+
+        return new ParallelNode
+        {
+            Objects = calls
+        };
     }
 
     private AssignmentNode ParseVariableDeclaration(bool canUseType, bool isPrivate = false, bool isConst = false, bool isNew = false)
