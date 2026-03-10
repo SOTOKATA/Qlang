@@ -32,6 +32,7 @@ public class DynamicFunction(string name)
         dynamicFunction.IsStatic = IsStatic;
         dynamicFunction.IsPrivate = IsPrivate;
         
+        // TODO: CLONE VARIABLES
         foreach (var variable in Variables.Keys)
             dynamicFunction.Variables.Add(variable, Variables[variable]);
 
