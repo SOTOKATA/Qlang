@@ -1,10 +1,12 @@
-﻿namespace Interpreter;
+﻿using Core.AST;
+
+namespace Interpreter;
 
 public partial class Interpreter
 {
-    private List<string> GetStackTrace(int skip = 0)
+    private List<string> GetStackTrace(Stack<ASTContext> stack, int skip = 0)
     {
-        return (from context in _contextStack
+        return (from context in stack
             let location = context.CurrentNode != null
                 ? $"{GetDebug(context.CurrentDebugIndex).Item2}:{GetDebug(context.CurrentDebugIndex).Item1}"
                 : "unknown"

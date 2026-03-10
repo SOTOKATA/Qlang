@@ -11,25 +11,25 @@ public partial class Interpreter
     /// </summary>
     /// <param name="variables">Variables to convert</param>
     /// <returns>Converted variables</returns>
-    private Dictionary<string, Variable> ToDynamicVariables(Dictionary<string, Variable> variables)
+    private Dictionary<string, Variable> ToDynamicVariables(Dictionary<string, Variable> variables, Stack<ASTContext> stack)
     {
         foreach (var pair in variables)
             if (pair.Value.Value is ASTNode node)
-                pair.Value.Value = EvaluateExpression(node);
+                pair.Value.Value = EvaluateExpression(node, stack);
 
         return variables;
     }
 
-    private DynamicNamespace ToDynamicNamespaceVariables(DynamicNamespace dynamicNamespace)
+    private DynamicNamespace ToDynamicNamespaceVariables(DynamicNamespace dynamicNamespace, Stack<ASTContext> stack)
     {
-        AddContext(new ASTContext() { Namespace = dynamicNamespace });
+        AddContext(stack, new ASTContext { Namespace = dynamicNamespace });
         
         for (var index = 0; index < dynamicNamespace.Namespaces.Count; index++)
-            dynamicNamespace.Namespaces[index] = ToDynamicNamespaceVariables(dynamicNamespace.Namespaces[index]);
+            dynamicNamespace.Namespaces[index] = ToDynamicNamespaceVariables(dynamicNamespace.Namespaces[index], stack);
         
-        dynamicNamespace.Variables = ToDynamicVariables(dynamicNamespace.Variables);
+        dynamicNamespace.Variables = ToDynamicVariables(dynamicNamespace.Variables, stack);
 
-        RestoreContextStack();
+        RestoreContextStack(stack);
         
         return dynamicNamespace;
     }
@@ -79,7 +79,7 @@ public partial class Interpreter
     /// </summary>
     /// <param name="classNode">class to convert</param>
     /// <returns>DynamicClass</returns>
-    private DynamicClass ToDynamicClass(ClassNode classNode)
+    private DynamicClass ToDynamicClass(ClassNode classNode, Stack<ASTContext> stack)
     {
         // Create dynamic instance
         DynamicClass dynamicClass = new(_stringPoolTable[classNode.NameId])
@@ -90,7 +90,7 @@ public partial class Interpreter
         // Add and convert all assignments
         foreach (var assignmentNode in classNode.Body.OfType<LineNode>().Select(x => (AssignmentNode)x.Content!))
                 dynamicClass.Variables[_stringPoolTable[assignmentNode.GetLastNameId()]] = new Variable(_stringPoolTable[assignmentNode.GetLastNameId()],
-                    EvaluateExpression(assignmentNode.Value),  assignmentNode
+                    EvaluateExpression(assignmentNode.Value, stack),  assignmentNode
                     .IsPrivate, assignmentNode.IsConst);
 
         // Remove all AssignmentNodes from body
@@ -109,7 +109,7 @@ public partial class Interpreter
     /// </summary>
     /// <param name="functionNode">function to convert</param>
     /// <returns>DynamicFunction</returns>
-    private DynamicFunction ToDynamicFunction(FunctionNode functionNode)
+    private DynamicFunction ToDynamicFunction(FunctionNode functionNode, Stack<ASTContext> stack)
     {
         // Create dynamic instance
         DynamicFunction dynamicFunction = new(_stringPoolTable[functionNode.NameId])
@@ -124,7 +124,7 @@ public partial class Interpreter
             var nodeName = _stringPoolTable[node.GetLastNameId()];
             dynamicFunction.Variables[nodeName] = new Variable(
                 nodeName,
-                EvaluateExpression(node.Value),
+                EvaluateExpression(node.Value, stack),
                 node.IsPrivate,
                 node.IsConst,
                 node.Type);
@@ -139,11 +139,11 @@ public partial class Interpreter
         return dynamicFunction;
     }
 
-    private DynamicClass ToQlangException(Exception ex)
+    private DynamicClass ToQlangException(Exception ex, Stack<ASTContext> stack)
     {
         var id = _stringPoolTable.Add(QlSystemClasses.ExceptionClassName);
         var @class = ToDynamicClass(_namespaces[GlobalNamespaceName].Classes
-            .FirstOrDefault(x => x.NameId == id)!);
+            .FirstOrDefault(x => x.NameId == id)!, stack);
         
         @class.Variables["message"].Value = ex.ToString();
         return @class;

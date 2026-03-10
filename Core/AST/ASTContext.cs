@@ -16,4 +16,9 @@ public class ASTContext
     
     public ASTNode? CurrentNode { get; set; }
     public int CurrentDebugIndex { get; set; } = -1;
+
+    public bool IsReturn = false;
+    public bool IsBreak = false;
+    public bool IsContinue = false;
+    public object? ReturnValue = null;
 }

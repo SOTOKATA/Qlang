@@ -7,53 +7,49 @@ namespace Interpreter;
 
 public partial class Interpreter
 {
-    private bool _return;
-    private object? _returnValue;
-    private bool _isBreakKeyword;
-    private bool _isContinueKeyword;
-    private void AddBlockToContext(ASTBlock block)
+    private void AddBlockToContext(ASTBlock block, Stack<ASTContext> stack)
     {
-        if (_contextStack.Count > 0)
-            CurrentContext!.Blocks.Add(block);
+        if (stack.Count > 0)
+            CurrentContext(stack)!.Blocks.Add(block);
     }
 
-    private void RemoveLastBlockFromContext()
+    private void RemoveLastBlockFromContext(Stack<ASTContext> stack)
     {
-        if (_contextStack.Count > 0 && CurrentContext!.Blocks.Count > 0)
-            CurrentContext.Blocks.RemoveAt(CurrentContext.Blocks.Count - 1);
+        if (stack.Count > 0 && CurrentContext(stack)!.Blocks.Count > 0)
+            CurrentContext(stack).Blocks.RemoveAt(CurrentContext(stack).Blocks.Count - 1);
     }
 
-    private void ExecuteWhile(WhileNode whileNode)
+    private void ExecuteWhile(WhileNode whileNode, Stack<ASTContext> stack)
     {
-        AddBlockToContext(whileNode);
+        AddBlockToContext(whileNode, stack);
 
-        var condition = whileNode.IsDoWhile || (bool)EvaluateExpression(whileNode.Condition)!;
+        var condition = whileNode.IsDoWhile || (bool)EvaluateExpression(whileNode.Condition, stack)!;
 
         while (condition)
         {
-            if (ExecuteBlock(whileNode.Body, true))
+            if (ExecuteBlock(whileNode.Body, true, stack))
             {
-                RemoveLastBlockFromContext();
+                RemoveLastBlockFromContext(stack);
                 return;
             }
 
-            condition = (bool)EvaluateExpression(whileNode.Condition)!;
+            condition = (bool)EvaluateExpression(whileNode.Condition, stack)!;
         }
 
-        RemoveLastBlockFromContext();
+        RemoveLastBlockFromContext(stack);
     }
 
-    private bool ExecuteBlock(List<ASTNode> block, bool isLoop)
+    private bool ExecuteBlock(List<ASTNode> block, bool isLoop, Stack<ASTContext> stack)
     {
         foreach (var statement in block)
         {
-            if (_return)
+            if (CurrentContext(stack).IsReturn)
                 return true;
 
             if (statement is ReturnNode returnNode)
             {
-                _returnValue = EvaluateExpression(returnNode.ReturnValue);
-                _return = true;
+                CurrentContext(stack).ReturnValue = EvaluateExpression(returnNode.ReturnValue, stack);
+                CurrentContext(stack).IsReturn = true;
                 return true;
             }
 
@@ -64,25 +60,25 @@ public partial class Interpreter
                     var nodeName = _stringPoolTable[kNode.KeywordId];
                     if (nodeName == Keywords.ContinueKeyword)
                     {
-                        _isContinueKeyword = false;
+                        CurrentContext(stack).IsContinue = false;
                         return false;
                     }
                 
                     if (nodeName == Keywords.BreakKeyword)
                     {
-                        _isBreakKeyword = false;
+                        CurrentContext(stack).IsBreak = false;
                         return true;
                     }
                 }
-                if (_isContinueKeyword)
+                if (CurrentContext(stack).IsContinue)
                 {
-                    _isContinueKeyword = false;
+                    CurrentContext(stack).IsContinue = false;
                     return false;
                 }
                 
-                if (_isBreakKeyword)
+                if (CurrentContext(stack).IsBreak)
                 {
-                    _isBreakKeyword = false;
+                    CurrentContext(stack).IsBreak = false;
                     return true;
                 }
             }
@@ -93,94 +89,94 @@ public partial class Interpreter
                     var nodeName = _stringPoolTable[kNode.KeywordId];
                     if (nodeName == Keywords.ContinueKeyword)
                     {
-                        _isContinueKeyword = true;
+                        CurrentContext(stack).IsContinue = true;
                         return true;
                     }
                     if (nodeName == Keywords.BreakKeyword)
                     {
-                        _isBreakKeyword = true;
+                        CurrentContext(stack).IsBreak = true;
                         return true;
                     }
                 }
             }
 
-            ExecuteStatement(statement);
+            ExecuteStatement(statement, stack);
         }
 
         return false;
     }
 
-    private void ExecuteFor(ForNode forNode)
+    private void ExecuteFor(ForNode forNode, Stack<ASTContext> stack)
     {
-        AddBlockToContext(forNode);
+        AddBlockToContext(forNode, stack);
 
         // Adding variable
-        ExecuteStatement(forNode.Assignment);
+        ExecuteStatement(forNode.Assignment, stack);
 
         // Add condition
-        var condition = (bool)EvaluateExpression(forNode.Condition)!;
+        var condition = (bool)EvaluateExpression(forNode.Condition, stack)!;
 
         while (condition)
         {
-            if (ExecuteBlock(forNode.Body, true))
+            if (ExecuteBlock(forNode.Body, true, stack))
             {
-                RemoveLastBlockFromContext();
+                RemoveLastBlockFromContext(stack);
                 return;
             }
 
-            ExecuteStatement(forNode.Statement);
-            condition = (bool)EvaluateExpression(forNode.Condition)!;
+            ExecuteStatement(forNode.Statement, stack);
+            condition = (bool)EvaluateExpression(forNode.Condition, stack)!;
         }
 
-        RemoveLastBlockFromContext();
+        RemoveLastBlockFromContext(stack);
 
     }
 
-    private void ExecuteIf(IfNode ifNode)
+    private void ExecuteIf(IfNode ifNode, Stack<ASTContext> stack)
     {
-        AddBlockToContext(ifNode);
-        var returnValue = EvaluateExpression(ifNode.Condition);
+        AddBlockToContext(ifNode, stack);
+        var returnValue = EvaluateExpression(ifNode.Condition, stack);
 
         if (returnValue is not bool condition)
-            throw new QlangRuntimeException("Cannot apply non bool condition in if", GetCurrentDebug(),
-                GetStackTrace());
+            throw new QlangRuntimeException("Cannot apply non bool condition in if", GetCurrentDebug(stack),
+                GetStackTrace(stack));
 
         if (condition)
-            ExecuteBlock(ifNode.ThenBlock, false);
+            ExecuteBlock(ifNode.ThenBlock, false, stack);
         else if (ifNode.ElseBlock.Count > 0)
-            ExecuteBlock(ifNode.ElseBlock, false);
+            ExecuteBlock(ifNode.ElseBlock, false, stack);
 
-        RemoveLastBlockFromContext();
+        RemoveLastBlockFromContext(stack);
     }
     
-    private void ExecuteTryCatch(TryCatchNode tryCatchNode)
+    private void ExecuteTryCatch(TryCatchNode tryCatchNode, Stack<ASTContext> stack)
     {
-        AddBlockToContext(tryCatchNode);
+        AddBlockToContext(tryCatchNode, stack);
 
         try
         {
-            ExecuteBlock(tryCatchNode.TryBody, false);
+            ExecuteBlock(tryCatchNode.TryBody, false, stack);
         }
         catch (Exception ex)
         {
             var assignment = (AssignmentNode)tryCatchNode.CatchAssignment.Content!;
-            _currentDebugIndex = tryCatchNode.CatchAssignment.DebugIndex;
+            stack.Peek().CurrentDebugIndex = tryCatchNode.CatchAssignment.DebugIndex;
             
-            tryCatchNode.Variables[_stringPoolTable[assignment.GetLastNameId()]] = new Variable(_stringPoolTable[assignment.GetLastNameId()], ToQlangException(ex), false, true);
+            tryCatchNode.Variables[_stringPoolTable[assignment.GetLastNameId()]] = new Variable(_stringPoolTable[assignment.GetLastNameId()], ToQlangException(ex, stack), false, true);
             
-            ExecuteBlock(tryCatchNode.CatchBody, false);
+            ExecuteBlock(tryCatchNode.CatchBody, false, stack);
         }
         finally
         {
-            ExecuteBlock(tryCatchNode.FinallyBody, false);
+            ExecuteBlock(tryCatchNode.FinallyBody, false, stack);
         }
 
-        RemoveLastBlockFromContext();
+        RemoveLastBlockFromContext(stack);
     }
     
-    private void ExecuteSwitch(SwitchNode switchNode)
+    private void ExecuteSwitch(SwitchNode switchNode, Stack<ASTContext> stack)
     {
-        AddBlockToContext(switchNode);
+        AddBlockToContext(switchNode, stack);
 
         var block = switchNode.DefaultBlock;
 
@@ -189,7 +185,7 @@ public partial class Interpreter
                      Left = pair.Condition,
                      Right = switchNode.Condition,
                      OperatorId = _stringPoolTable.Add("==")
-                 } let result = (bool)EvaluateBinaryOperation(binOp)! where result select pair)
+                 } let result = (bool)EvaluateBinaryOperation(binOp, stack)! where result select pair)
         {
             block = pair.CaseBlock;
             break;
@@ -197,12 +193,12 @@ public partial class Interpreter
 
         if (block is null)
         {
-            RemoveLastBlockFromContext();
+            RemoveLastBlockFromContext(stack);
             return;
         }
 
-        ExecuteBlock(block, false);
+        ExecuteBlock(block, false, stack);
 
-        RemoveLastBlockFromContext();
+        RemoveLastBlockFromContext(stack);
     }
 }
