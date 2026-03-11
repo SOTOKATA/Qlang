@@ -22,4 +22,25 @@ public class ASTContext
     public bool IsContinue = false;
     public object? ReturnValue = null;
     public bool AllowPrivateCall = false;
+
+    public ASTContext Copy()
+    {
+        return new ASTContext
+        {
+            Class = Class,
+            Namespace = Namespace,
+            Function = Function,
+            ParentFunction = ParentFunction,
+            Blocks = Blocks,
+
+            CurrentNode = CurrentNode,
+            CurrentDebugIndex = CurrentDebugIndex,
+
+            IsReturn = IsReturn,
+            IsBreak = IsBreak,
+            IsContinue = IsContinue,
+            ReturnValue = ReturnValue,
+            AllowPrivateCall = AllowPrivateCall,
+        };
+    }
 }

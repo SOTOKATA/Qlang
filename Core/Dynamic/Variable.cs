@@ -13,6 +13,8 @@ public class Variable(string name, object? value, bool isPrivate, bool isConst, 
         return Value?.ToString();       
     }
 
+    public Variable Clone() => new(Name, Value, IsPrivate, IsConst, Type);
+
     public static Variable FromAssignmentNode(AssignmentNode assignNode, object? value, StringPoolTable stringPoolTable)
     {
         return new Variable(stringPoolTable[assignNode.GetLastNameId()], value, assignNode.IsPrivate, assignNode.IsConst, assignNode.Type);

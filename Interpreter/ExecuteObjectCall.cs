@@ -178,7 +178,7 @@ public partial class Interpreter
                 
                 var function = FindFunction(fn, lastReturnValue, isPathStart, stack);
                 
-                CurrentContext(stack).AllowPrivateCall = false;
+                CurrentContext(stack)!.AllowPrivateCall = false;
 
                 if (function.function is null && _stringPoolTable[fn.NameId] == "toString")
                     return lastReturnValue?.ToString() ?? null;
@@ -242,7 +242,7 @@ public partial class Interpreter
             if (funcPair.function is not null)
                 return (ToDynamicFunction(funcPair.function, stack), funcPair.args, null, null);
             
-            Console.WriteLine($"Context: Class: {CurrentContext(stack)?.Class?.Name}; Function: {CurrentContext(stack)?.Function?.Name}; Namespace: {CurrentContext(stack)?.Namespace?.Name}");
+            // Console.WriteLine($"Context: Class: {CurrentContext(stack)?.Class?.Name}; Function: {CurrentContext(stack)?.Function?.Name}; Namespace: {CurrentContext(stack)?.Namespace?.Name}");
             throw new QlangRuntimeException($"Function '{_stringPoolTable[node.NameId]}' is not found in current context {(lastObject is null ? "" : $"('{lastObject}')")}",
                 GetCurrentDebug(stack), GetStackTrace(stack));
         }
@@ -287,7 +287,7 @@ public partial class Interpreter
         if (_stringPoolTable[node.NameId] == "toString" && lastObject is not null)
             return (null, null, null, null);
         
-            Console.WriteLine($"Context: Class: {CurrentContext(stack)?.Class?.Name}; Function: {CurrentContext(stack)?.Function?.Name}; Namespace: {CurrentContext(stack)?.Namespace?.Name}");
+        Console.WriteLine($"Context: Class: {CurrentContext(stack)?.Class?.Name}; Function: {CurrentContext(stack)?.Function?.Name}; Namespace: {CurrentContext(stack)?.Namespace?.Name}");
         
         throw new QlangRuntimeException($"Function '{_stringPoolTable[node.NameId]}' is not found in current context {(lastObject is null ? "" : $"('{lastObject}')")}",
             GetCurrentDebug(stack), GetStackTrace(stack));
@@ -305,11 +305,11 @@ public partial class Interpreter
             // Get 'this'
             if (node.NameId == _stringPoolTable.Add(Keywords.ThisKeyword) && HasContext(stack))
             {
-                CurrentContext(stack).AllowPrivateCall = true;
-                return (CurrentContext(stack)!.Class, CurrentContext(stack).Namespace);
+                CurrentContext(stack)!.AllowPrivateCall = true;
+                return (CurrentContext(stack)!.Class, CurrentContext(stack)!.Namespace);
             }
 
-            CurrentContext(stack).AllowPrivateCall = false;
+            CurrentContext(stack)!.AllowPrivateCall = false;
 
 
             // Try to get VAR from current (class or namespace or function or blocks) context;
@@ -317,55 +317,56 @@ public partial class Interpreter
             {
                 var block = CurrentContext(stack)!.Blocks
                     .FirstOrDefault(b => b.Variables.ContainsKey(nodeName));
-                
-                var classIsNull = CurrentContext(stack).Class is null;
-                var functionIsNull = CurrentContext(stack).Function is null;
-                var parentFunctionIsNull = CurrentContext(stack).ParentFunction is null;
-                var namespaceIsNull = CurrentContext(stack).Namespace is null;
+
+                var currentContext = CurrentContext(stack);
+                var classIsNull = currentContext!.Class is null;
+                var functionIsNull = currentContext.Function is null;
+                var parentFunctionIsNull = currentContext.ParentFunction is null;
+                var namespaceIsNull = currentContext.Namespace is null;
 
                 Variable? var;
                 
                 // Get from function
                 if (!functionIsNull)
                 {
-                    var = CurrentContext(stack).Function?.Variables.FirstOrDefault(funcVar => funcVar.Key == nodeName).Value;
+                    var = currentContext.Function?.Variables.FirstOrDefault(funcVar => funcVar.Key == nodeName).Value;
 
                     if (var is not null)
-                        return (var, CurrentContext(stack).Namespace);
+                        return (var, currentContext.Namespace);
                 }
                 
                 // Get from parent function
                 if (!parentFunctionIsNull)
                 {
-                    var = CurrentContext(stack).ParentFunction?.Variables.FirstOrDefault(funcVar => funcVar.Key == nodeName).Value;
+                    var = currentContext.ParentFunction?.Variables.FirstOrDefault(funcVar => funcVar.Key == nodeName).Value;
 
                     if (var is not null)
-                        return (var, CurrentContext(stack).Namespace);
+                        return (var, currentContext.Namespace);
                 }
 
 
                 // Get from class
                 if (!classIsNull)
                 {
-                    var = CurrentContext(stack).Class?.Variables.FirstOrDefault(classVar => classVar.Key == nodeName).Value;
+                    var = currentContext.Class?.Variables.FirstOrDefault(classVar => classVar.Key == nodeName).Value;
                     
                     if (var is not null)
-                        return (var, CurrentContext(stack).Namespace);
+                        return (var, currentContext.Namespace);
                 }
 
                 // Get from namespace
                 if (!namespaceIsNull)
                 {
-                    var = CurrentContext(stack).Namespace?.Variables.FirstOrDefault(namespaceVar =>
+                    var = currentContext.Namespace?.Variables.FirstOrDefault(namespaceVar =>
                         namespaceVar.Key == nodeName).Value;
                     
                     if (var is not null)
-                        return (var, CurrentContext(stack).Namespace);
+                        return (var, currentContext.Namespace);
                 }
                 
                 // Get from blocks
                 if (block != null && block.Variables.TryGetValue(nodeName, out var v))
-                    return (v, CurrentContext(stack).Namespace);
+                    return (v, currentContext.Namespace);
             }
 
             // Try to get VAR from global variable list;

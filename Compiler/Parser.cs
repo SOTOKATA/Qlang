@@ -136,7 +136,10 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             return ParseReturn();
 
         if (Check(Tokens.Keyword, Keywords.ParallelKeyword))
-            return ParseParallel();
+        {
+            lineNode.Content = ParseParallel();
+            return lineNode;
+        }
         
         // new statement
         if (Check(Tokens.Keyword, Keywords.CreateClassInstanceKeyword))
@@ -186,7 +189,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
                 throw new QlangCompileException("Undefined expression for parallel keyword: " + call.GetType().Name, GetDebug(token), "Parser");
             
             calls.Add(callNode);
-
+            
             if (Check(Tokens.Comma))
                 Advance();
         }

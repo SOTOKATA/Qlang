@@ -222,10 +222,6 @@ public partial class Interpreter
                 EvaluateLine(lineNode, stack);
                 break;
             
-            case ParallelNode parallelNode:
-                ExecuteParallel(parallelNode, stack);
-                break;
-            
             default:
                 throw new QlangRuntimeException($"Unknown statement type: {statement?.GetType().Name ?? "<null>"}", GetCurrentDebug(stack), GetStackTrace(stack));
         }
@@ -450,6 +446,12 @@ public partial class Interpreter
 
         try
         {
+            if (expr is ParallelNode parallel)
+            {
+                ExecuteParallel(parallel, stack);
+                return null;
+            }
+            
             return expr switch
             {
                 LineNode ln => EvaluateLine(ln, stack),
@@ -505,26 +507,15 @@ public partial class Interpreter
         var tasks = node.Objects.Select(expr =>
             Task.Run(() =>
             {
-                // Каждый поток получает свой изолированный стек
                 var forkedStack = new Stack<ASTContext>();
 
-                // Копируем текущий контекст как стартовую точку
                 if (currentCtx is not null)
-                {
-                    forkedStack.Push(new ASTContext
-                    {
-                        Class     = currentCtx.Class,
-                        Namespace = currentCtx.Namespace,
-                        Function  = currentCtx.Function?.Clone(),
-                        ParentFunction = currentCtx.ParentFunction,
-                    });
-                }
+                    forkedStack.Push(currentCtx.Copy());
 
                 EvaluateExpression(expr, forkedStack);
             })
         ).ToArray();
 
-        // Главный поток ждёт завершения всех веток
         try
         {
             Task.WaitAll(tasks);
@@ -533,9 +524,6 @@ public partial class Interpreter
         {
             throw e.InnerException!;
         }
-    
-        // Пробрасываем исключения из параллельных потоков
-        // (Task.WaitAll сам бросит AggregateException если что-то упало)
     }
 
     private DynamicClass EvaluateNewKeyword(NewNode node, Stack<ASTContext> stack)
