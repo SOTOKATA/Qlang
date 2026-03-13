@@ -174,31 +174,18 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
     private ParallelNode ParseParallel()
     {
         ThrowIfIsEnd();
-     
-        var calls = new List<CallNode>();
-        
-        var token = Expect(Tokens.Keyword, Keywords.ParallelKeyword);
-        
-        Expect(Tokens.LParen);
-        
-        while (!Check(Tokens.RParen))
-        {
-            var call = ParsePrimary();
-
-            if (call is not CallNode callNode)
-                throw new QlangCompileException("Undefined expression for parallel keyword: " + call.GetType().Name, GetDebug(token), "Parser");
-            
-            calls.Add(callNode);
-            
-            if (Check(Tokens.Comma))
-                Advance();
-        }
 
         Advance();
+        
+        // Expect(Tokens.LParen);
+        
+        var call = ParsePrimary();
+
+        // Expect(Tokens.RParen);
 
         return new ParallelNode
         {
-            Objects = calls
+            Object = call
         };
     }
 

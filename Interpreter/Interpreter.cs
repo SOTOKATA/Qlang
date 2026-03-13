@@ -111,7 +111,7 @@ public partial class Interpreter
         // Set new context
         var contextClass = function.Context?.Class ?? ownerClass ?? (HasContext(stack) ? CurrentContext(stack)?.Class : null);
         var contextNamespace = function.Context?.Namespace ?? ownerNamespace ?? (HasContext(stack) ? CurrentContext(stack)?.Namespace : null);
-        ASTContext newContext = new() { Function = function, ParentFunction = function.Context?.Function, Class = contextClass, Namespace = contextNamespace};
+        ASTContext newContext = new() { Function = function, ParentFunction = function.Context?.ParentFunction, Class = contextClass, Namespace = contextNamespace};
 
         AddContext(stack, newContext);
 
@@ -280,7 +280,7 @@ public partial class Interpreter
                     throw new QlangRuntimeException($"Cannot re-assign const property '{_stringPoolTable[lastNode.NameId]}'", GetCurrentDebug(stack),
                         GetStackTrace(stack));
 
-                if (currentObject is not null && var.IsPrivate && !CurrentContext(stack).AllowPrivateCall)
+                if (currentObject is not null && var.IsPrivate && !CurrentContext(stack)!.AllowPrivateCall)
                     throw new QlangRuntimeException("Cannot access to private variable from external source",
                         GetCurrentDebug(stack), GetStackTrace(stack));
 
@@ -425,7 +425,13 @@ public partial class Interpreter
 
     private static FunctionNode PrepareFunctionNodePointer(FunctionNode node, Stack<ASTContext> stack)
     {
-        node.Context = CurrentContext(stack);
+        var currentContext = CurrentContext(stack);
+        if (currentContext is not null && node.Context is null)
+        {
+            node.Context = currentContext.Copy();
+            node.Context.ParentFunction = node.Context.Function;
+        }
+        
         return node;
     }
 
@@ -504,17 +510,41 @@ public partial class Interpreter
     {
         var currentCtx = CurrentContext(parentStack);
 
-        var tasks = node.Objects.Select(expr =>
-            Task.Run(() =>
+        var expr = EvaluateExpression(node.Object, parentStack);
+        
+        // Array founded
+        if (expr is not DynamicClass { Name: QlSystemClasses.ArrayClassName } array)
+            throw new QlangRuntimeException("Undefined array", GetCurrentDebug(parentStack),
+                GetStackTrace(parentStack));
+
+        // Array has valid collection
+        if (array.Variables["_value"].Value is not List<object?> objects || objects.Any(x => x is not ASTNode))
+            throw new QlangRuntimeException("Undefined collection", GetCurrentDebug(parentStack),
+                GetStackTrace(parentStack));
+
+        var nodes = objects.Cast<ASTNode>().ToList();
+
+        var tasks =  nodes.Select(astNode =>
+        {
+            return Task.Run(() =>
             {
                 var forkedStack = new Stack<ASTContext>();
 
                 if (currentCtx is not null)
                     forkedStack.Push(currentCtx.Copy());
 
-                EvaluateExpression(expr, forkedStack);
-            })
-        ).ToArray();
+                // Get FunctionNode
+                var ret = EvaluateExpression(astNode, parentStack);
+
+                if (ret is not FunctionNode function)
+                    throw new QlangRuntimeException("Undefined function pointer", GetCurrentDebug(parentStack),
+                        GetStackTrace(parentStack));
+
+                var context = CurrentContext(forkedStack);
+                ExecuteFunction(ToDynamicFunction(function, forkedStack), [], context?.Class, context?.Namespace,
+                    forkedStack);
+            });
+        }).ToArray();
 
         try
         {

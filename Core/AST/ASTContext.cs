@@ -10,7 +10,7 @@ public class ASTContext
     
     public DynamicFunction? Function { get; init; }
     
-    public DynamicFunction? ParentFunction { get; init; }
+    public DynamicFunction? ParentFunction { get; set; }
 
     public List<ASTBlock> Blocks { get; init; } = [];
     

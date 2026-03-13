@@ -6,12 +6,12 @@ namespace Core.AST;
 public class ParallelNode : ASTNode
 {
     [Key(0)]
-    public List<CallNode> Objects = []; 
+    public ASTNode Object; 
     public override string GetTree(string indent = "")
     {
         return DebugIndent($"""
                            ParallelNode:
-                                Objects: {string.Join("\n", Objects.Select(o => o.GetTree("\t")).ToArray())}
+                                Objects: {string.Join("\n", Object.GetTree("\t"))}
                            """, indent);
     }
 
@@ -19,7 +19,7 @@ public class ParallelNode : ASTNode
     {
         return new ParallelNode
         {
-            Objects = Objects.Select(x => (CallNode)x.Clone()).ToList()
+            Object = Object.Clone()
         };
     }
 }

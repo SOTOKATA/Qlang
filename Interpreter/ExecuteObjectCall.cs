@@ -40,7 +40,7 @@ public partial class Interpreter
         return @class;
     }
     
-    private string? Typeof(object? arg, Stack<ASTContext> stack)
+    private string Typeof(object? arg, Stack<ASTContext> stack)
     {
         if (arg is null)
             return "null";
@@ -80,14 +80,15 @@ public partial class Interpreter
                     return ExecutePathToClass(call, stack).ClassName;
                 }
 
-                var type = arg?.GetType().Name;
+                var type = arg.GetType().Name;
         
                 return type;
             }
         }
     }
     
-    private object? ExecuteObjectCalls(CallNode call, Stack<ASTContext> stack)
+    private object? 
+        ExecuteObjectCalls(CallNode call, Stack<ASTContext> stack)
     {
         // overriding system calls
         if (call.Objects.Count > 0 && call.Objects[0] is FunctionPointerNode fn)
@@ -338,7 +339,7 @@ public partial class Interpreter
                 // Get from parent function
                 if (!parentFunctionIsNull)
                 {
-                    var = currentContext.ParentFunction?.Variables.FirstOrDefault(funcVar => funcVar.Key == nodeName).Value;
+                    var = currentContext.ParentFunction!.Variables.FirstOrDefault(funcVar => funcVar.Key == nodeName).Value;
 
                     if (var is not null)
                         return (var, currentContext.Namespace);
@@ -377,7 +378,7 @@ public partial class Interpreter
 
         if (lastObject is null)
         {
-            throw new QlangRuntimeException($"Object '{nodeName}' is not found in current context.",
+            throw new QlangRuntimeException($"Object '{nodeName}' is not found in current context.  PF:{CurrentContext(stack)?.ParentFunction?.Name} F:{CurrentContext(stack)?.Function?.Name}",
                 GetCurrentDebug(stack), GetStackTrace(stack));
         }
         
@@ -387,7 +388,7 @@ public partial class Interpreter
                 // Try to get VAR from class
                 if (dynamicClass.Variables.TryGetValue(nodeName, out var var))
                 {
-                    if (var.IsPrivate && !CurrentContext(stack).AllowPrivateCall)
+                    if (var.IsPrivate && !CurrentContext(stack)!.AllowPrivateCall)
                         throw new QlangRuntimeException($"Cannot get access to private variable '{var.Name}' from class '{dynamicClass.ClassName}'.",
                             GetCurrentDebug(stack), GetStackTrace(stack));
                         
@@ -419,7 +420,7 @@ public partial class Interpreter
 
         if (HasContext(stack) && CurrentContext(stack)?.Namespace is not null && isPathStart)
         {
-            var ns = CurrentContext(stack).Namespace.Namespaces.FirstOrDefault(ns => ns.Name == nodeName);
+            var ns = CurrentContext(stack)!.Namespace!.Namespaces.FirstOrDefault(ns => ns.Name == nodeName);
 
             if (ns is not null)
                 return ns;
@@ -436,9 +437,6 @@ public partial class Interpreter
                         GetCurrentDebug(stack), GetStackTrace(stack))
                     : ns;
         }
-
-        // TODO: Add 'namespace' to 'namespace'
-        // if (lastObject is DynamicNamespace dynamicNamespace)
 
         throw new QlangRuntimeException(
             $"Namespace '{_stringPoolTable[node.NameId]}' is not found in current context", GetCurrentDebug(stack),

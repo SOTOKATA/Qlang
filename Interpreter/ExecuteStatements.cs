@@ -15,8 +15,9 @@ public partial class Interpreter
 
     private void RemoveLastBlockFromContext(Stack<ASTContext> stack)
     {
-        if (stack.Count > 0 && CurrentContext(stack)!.Blocks.Count > 0)
-            CurrentContext(stack).Blocks.RemoveAt(CurrentContext(stack).Blocks.Count - 1);
+        var currentContext = CurrentContext(stack);
+        if (stack.Count > 0 && currentContext?.Blocks.Count > 0)
+            currentContext.Blocks.RemoveAt(currentContext.Blocks.Count - 1);
     }
 
     private void ExecuteWhile(WhileNode whileNode, Stack<ASTContext> stack)
@@ -43,13 +44,14 @@ public partial class Interpreter
     {
         foreach (var statement in block)
         {
-            if (CurrentContext(stack).IsReturn)
+            var currentContext = CurrentContext(stack)!;
+            if (currentContext.IsReturn)
                 return true;
 
             if (statement is ReturnNode returnNode)
             {
-                CurrentContext(stack).ReturnValue = EvaluateExpression(returnNode.ReturnValue, stack);
-                CurrentContext(stack).IsReturn = true;
+                currentContext.ReturnValue = EvaluateExpression(returnNode.ReturnValue, stack);
+                currentContext.IsReturn = true;
                 return true;
             }
 
@@ -60,25 +62,25 @@ public partial class Interpreter
                     var nodeName = _stringPoolTable[kNode.KeywordId];
                     if (nodeName == Keywords.ContinueKeyword)
                     {
-                        CurrentContext(stack).IsContinue = false;
+                        currentContext.IsContinue = false;
                         return false;
                     }
                 
                     if (nodeName == Keywords.BreakKeyword)
                     {
-                        CurrentContext(stack).IsBreak = false;
+                        currentContext.IsBreak = false;
                         return true;
                     }
                 }
-                if (CurrentContext(stack).IsContinue)
+                if (currentContext.IsContinue)
                 {
-                    CurrentContext(stack).IsContinue = false;
+                    currentContext.IsContinue = false;
                     return false;
                 }
                 
-                if (CurrentContext(stack).IsBreak)
+                if (currentContext.IsBreak)
                 {
-                    CurrentContext(stack).IsBreak = false;
+                    currentContext.IsBreak = false;
                     return true;
                 }
             }
@@ -89,12 +91,12 @@ public partial class Interpreter
                     var nodeName = _stringPoolTable[kNode.KeywordId];
                     if (nodeName == Keywords.ContinueKeyword)
                     {
-                        CurrentContext(stack).IsContinue = true;
+                        currentContext.IsContinue = true;
                         return true;
                     }
                     if (nodeName == Keywords.BreakKeyword)
                     {
-                        CurrentContext(stack).IsBreak = true;
+                        currentContext.IsBreak = true;
                         return true;
                     }
                 }
