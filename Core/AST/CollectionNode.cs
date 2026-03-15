@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 
 namespace Core.AST;
@@ -15,6 +16,9 @@ public class CollectionNode : ASTNode
                                 Collection: [{string.Join(",\n", Collection.Select(x => x.GetTree("\t")))}]
                             """, indent);
     }
+
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => string.Join("", Collection.Select(x => x.ToTokenString(stringPoolTable)));
 
     public override ASTNode Clone()
     {

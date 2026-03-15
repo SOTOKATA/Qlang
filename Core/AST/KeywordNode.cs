@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 
 namespace Core.AST;
@@ -13,6 +14,9 @@ public class KeywordNode : ASTNode
     {
         return KeywordId.ToString();
     }
+    
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => stringPoolTable[KeywordId];
 
     public override ASTNode Clone()
     {

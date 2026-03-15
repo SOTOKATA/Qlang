@@ -168,7 +168,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
 
         ThrowIfIsEnd();
 
-        throw new QlangCompileException($"Undefined keyword: {Current().TokenType} '{Current().Value}'", GetDebug(Current()), "Parser");
+        throw new QlangCompileException($"Undefined statement: {Token.TokenToString(Current())}", GetDebug(Current()), "Parser");
     }
 
     private ParallelNode ParseParallel()
@@ -177,11 +177,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
 
         Advance();
         
-        // Expect(Tokens.LParen);
-        
         var call = ParsePrimary();
-
-        // Expect(Tokens.RParen);
 
         return new ParallelNode
         {
@@ -196,7 +192,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         if (!Check(Tokens.Keyword) ||
             (Current().Value != Keywords.VariableDeclaration &&
              Current().Value != Keywords.ConstVariableDeclaration))
-            throw new QlangCompileException($"Undefined keyword for variable: {Current().TokenType}", GetDebug(Current()),"Parser");
+            throw new QlangCompileException($"Undefined keyword for variable: {Token.TokenToString(Current())}. Keywords 'const' or 'let' allowed only.", GetDebug(Current()),"Parser");
 
         // Skip const or let
         var token = Advance();
@@ -252,7 +248,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         var node = ParsePrimary();
 
         if (node is not CallNode callNode)
-            throw new QlangCompileException("Using must be path to namespace.", GetDebug(token), "Parser");
+            throw new QlangCompileException("Using call path must be path to namespace.", GetDebug(token), "Parser");
 
         var newObjects = new List<NamespacePointerNode>();
 
@@ -292,7 +288,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         var token = Expect(Tokens.Colon);
         
         if (!Check(Tokens.LBrace))
-            throw new QlangCompileException("Namespace's body cannot be one-line", GetDebug(token), "Parser");
+            throw new QlangCompileException("Namespace's body cannot be one-lined", GetDebug(token), "Parser");
         
         var body = ParseBlock();
         
@@ -317,7 +313,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             var expr = ParsePrimaryPath();
             
             if (expr is not CallNode callNode)
-                throw new QlangCompileException("Undefined function type path", GetDebug(debugToken), "Parser");
+                throw new QlangCompileException($"Cannot find function type by path '{expr.ToTokenString(stringPoolTable)}'.", GetDebug(debugToken), "Parser");
             
             returnType = callNode;
             Expect(Tokens.Greater);
@@ -345,7 +341,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             }
 
             if (!Check(Tokens.RParen))
-                throw new QlangCompileException("Undefined parameter", GetDebug(Current()), "Parser");
+                throw new QlangCompileException($"Undefined function parameter '{Token.TokenToString(Current())}'.", GetDebug(Current()), "Parser");
         }
 
         Expect(Tokens.RParen);
@@ -380,7 +376,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             var path = ParsePrimaryPath();
             
             if (path is not CallNode callNode)
-                throw new QlangCompileException("Undefined path to extends class", GetDebug(nameToken), "Parser");
+                throw new QlangCompileException("Undefined path to extended class", GetDebug(nameToken), "Parser");
 
             extends = callNode;
         }
@@ -388,7 +384,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         Expect(Tokens.Colon);
 
         if (!Check(Tokens.LBrace))
-            throw new QlangCompileException("Class's body cannot be one-line", GetDebug(nameToken), "Parser");
+            throw new QlangCompileException("Class's body cannot be one-lined", GetDebug(nameToken), "Parser");
 
         var body = ParseBlock();
 
@@ -905,7 +901,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
                 }
                 
                 if (!Check(Tokens.RParen))
-                    throw new QlangCompileException("Undefined parameter: " + Current().TokenType + " " + Current().Value, GetDebug(Current()), "Parser");
+                    throw new QlangCompileException("Undefined function parameter: " + Token.TokenToString(Current()), GetDebug(Current()), "Parser");
             }
             // Advance ')'
             Advance();
@@ -1283,7 +1279,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         var path = ParsePrimaryPath();
         
         if (path is not CallNode callNode)
-            throw new QlangCompileException("Cannot find type to cast", GetDebug(token), "Parser");
+            throw new QlangCompileException($"Cannot find type to cast by path '{path.ToTokenString(stringPoolTable)}'", GetDebug(token), "Parser");
         
         Expect(Tokens.Greater);
         
@@ -1422,7 +1418,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             var current = Current();
             
             throw new QlangCompileException(
-                $"Incorrect syntax, expected '{Token.TokenToString(type).Trim()}'{(value is not null ? $" {value}" : "")}, got '{current.Value}'",
+                $"Incorrect syntax, expected '{Token.TokenToString(new Token(type, value ?? ""))}', got '{current.Value}'",
                 GetDebug(current), "Parser");
         }
 

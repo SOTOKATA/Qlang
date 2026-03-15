@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 
 namespace Core.AST;
@@ -24,6 +25,9 @@ public class WhileNode : ASTBlock
             IsDoWhile = IsDoWhile
         };
     }
+
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => "While";
 
     public override string GetTree(string indent = "")
     {

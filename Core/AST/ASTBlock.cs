@@ -1,4 +1,5 @@
 ﻿using Core.Dynamic;
+using Core.Tables;
 using MessagePack;
 
 
@@ -19,5 +20,10 @@ public class ASTBlock : ASTNode
     public override ASTNode Clone()
     {
         throw new NotImplementedException("Cannot clone this ASTBlock");
+    }
+
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 
 namespace Core.AST;
@@ -14,6 +15,9 @@ public class IfNode : ASTBlock
     [Key(2)]
     
     public List<ASTNode> ElseBlock { get; set; } = [];
+
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => "if";
 
     public override ASTNode Clone()
     {

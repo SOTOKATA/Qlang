@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 
 namespace Core.AST;
@@ -17,6 +18,9 @@ public class NumberRefNode : ASTNode
         Index = Index, 
         IsNegative = IsNegative
     };
+
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => "Number";
 
     public override string GetTree(string indent = "")
     {

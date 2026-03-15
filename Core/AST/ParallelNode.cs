@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 namespace Core.AST;
 
@@ -14,6 +15,9 @@ public class ParallelNode : ASTNode
                                 Objects: {string.Join("\n", Object.GetTree("\t"))}
                            """, indent);
     }
+    
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => Object.ToTokenString(stringPoolTable);
 
     public override ASTNode Clone()
     {

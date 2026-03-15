@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 namespace Core.AST;
 
@@ -7,16 +8,20 @@ public class NewNode : ASTNode
 {
     [Key(0)]
     public required CallNode NodePath { get; init; }
-    
+
     public override string GetTree(string indent = "")
     {
         return DebugIndent(
             $"""
-            NewNode:
-                NodePath: {NodePath.GetTree("\t")}
-            """,
+             NewNode:
+                 NodePath: {NodePath.GetTree("\t")}
+             """,
             indent);
     }
+
+
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => $"new {NodePath.ToTokenString(stringPoolTable)}";
 
     public override ASTNode Clone() =>  new NewNode
         {

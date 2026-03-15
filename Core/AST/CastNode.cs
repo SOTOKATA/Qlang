@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 
 namespace Core.AST;
@@ -21,6 +22,9 @@ public class CastNode : ASTNode
                                 ToCastObject: {ToCastObject.GetTree()}
                             """, indent);
     }
+
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => $"<{TypeCastPath.ToTokenString(stringPoolTable)}>{ToCastObject.ToTokenString(stringPoolTable)}";
 
     public override ASTNode Clone()
     {

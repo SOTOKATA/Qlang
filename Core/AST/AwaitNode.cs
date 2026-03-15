@@ -1,4 +1,6 @@
-﻿namespace Core.AST;
+﻿using Core.Tables;
+
+namespace Core.AST;
 
 public class AwaitNode : ASTNode
 {
@@ -19,4 +21,6 @@ public class AwaitNode : ASTNode
             CallNode = (CallNode)CallNode.Clone()
         };
     }
+
+    public override string ToTokenString(StringPoolTable stringPoolTable) => "await " + CallNode.ToTokenString(stringPoolTable);
 }

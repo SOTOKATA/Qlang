@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 namespace Core.AST;
 
@@ -18,6 +19,9 @@ public class LineNode(int debugIndex) : ASTNode
                     Content: {Content?.GetTree("\t") ?? "<undefined>"}
                 """, indent);
     }
+    
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => Content.ToTokenString(stringPoolTable);
 
     public override ASTNode Clone()
     {

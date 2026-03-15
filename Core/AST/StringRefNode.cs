@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 
 namespace Core.AST;
@@ -13,6 +14,9 @@ public class StringRefNode : ASTNode
     {
         Index = Index
     };
+
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => $"{stringPoolTable[Index]}";
 
     public override string GetTree(string indent = "")
     {

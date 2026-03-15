@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 
 namespace Core.AST;
@@ -20,6 +21,9 @@ public class FunctionPointerNode : ASTNode
                                 Arguments: [{string.Join(",\n", Arguments.Select(x => x.GetTree("\t")))}]
                             """, indent);
     }
+    
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => $"{stringPoolTable[NameId]}({string.Join(", ", Arguments.Select(x => x.ToTokenString(stringPoolTable)))})";
 
     public override ASTNode Clone()
     {

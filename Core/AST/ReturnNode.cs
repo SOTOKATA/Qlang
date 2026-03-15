@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 
 namespace Core.AST;
@@ -13,6 +14,9 @@ public class ReturnNode : ASTNode
     {
         ReturnValue = ReturnValue?.Clone() 
     };
+
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => $"return {ReturnValue?.ToTokenString(stringPoolTable)}";
 
     public override string GetTree(string indent = "")
     {

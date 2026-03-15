@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 
 namespace Core.AST;
@@ -21,6 +22,9 @@ public class ClassNode : ASTNode
 
     [Key(4)] 
     public List<int> Extends { get; set; } = [];
+
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => stringPoolTable[NameId];
 
     public override ASTNode Clone()
     {

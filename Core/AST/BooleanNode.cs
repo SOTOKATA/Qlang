@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 
 namespace Core.AST;
@@ -12,6 +13,9 @@ public class BooleanNode : ASTNode
     public override ASTNode Clone() => new BooleanNode { 
             Value = Value
     };
+
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => Value ? "true" : "false";
 
     public override string GetTree(string indent = "")
     {

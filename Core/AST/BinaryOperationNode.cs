@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 
 namespace Core.AST;
@@ -26,6 +27,9 @@ public class BinaryOperationNode : ASTNode
             Right = Right?.Clone()
         };
     }
+
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+    => Left?.ToTokenString(stringPoolTable) + " " + stringPoolTable[OperatorId] + " " +  Right?.ToTokenString(stringPoolTable);
 
     public override string GetTree(string indent = "")
     {

@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 namespace Core.AST;
 
@@ -39,6 +40,8 @@ public abstract class ASTNode
     public abstract string GetTree(string indent = "");
     
     public abstract ASTNode Clone();
+    
+    public abstract string ToTokenString(StringPoolTable stringPoolTable);
     
     protected static string DebugIndent(string text, string indent) => "\n" + string.Join("\n", text.Split('\n').Select(line => indent + line));
 }

@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 
 namespace Core.AST;
@@ -22,6 +23,9 @@ public class SwitchCaseNode : ASTNode
             indent
             );
     }
+
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => "Switch";
 
     public override ASTNode Clone()
     {

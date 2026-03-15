@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 
 namespace Core.AST;
@@ -28,6 +29,10 @@ public class ForNode : ASTBlock
             Body = Body.Select(node => node.Clone()).ToList()
         };
     }
+
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        =>
+            $"for {Assignment.ToTokenString(stringPoolTable)}; {Condition.ToTokenString(stringPoolTable)}; {Statement.ToTokenString(stringPoolTable)}";
 
     public override string GetTree(string indent = "")
     {

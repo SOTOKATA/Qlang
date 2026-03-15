@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 
 namespace Core.AST;
@@ -39,6 +40,9 @@ public class FunctionNode : ASTNode
             Body = Body.Select(node => node.Clone()).ToList() 
         };
     }
+
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => stringPoolTable[NameId];
 
     public override string ToString()
     {

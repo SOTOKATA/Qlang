@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 
 namespace Core.AST;
@@ -13,6 +14,9 @@ public class NumberNode : ASTNode
     {
         Value = Value
     };
+
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => Value.ToString("0.00");
 
     public override string GetTree(string indent = "")
     {

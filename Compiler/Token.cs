@@ -7,10 +7,10 @@ public class Token(Tokens token, string value = "")
     
     // Debug variable
     public int DebugIndex;
-
-    public static string TokenToString(Tokens token)
+    
+    public static string TokenToString(Token token)
     {
-        return token switch
+        return token.TokenType switch
         {
             Tokens.LSquareParen => "[",
             Tokens.RSquareParen => "]",
@@ -19,26 +19,25 @@ public class Token(Tokens token, string value = "")
             Tokens.Semicolon => ";",
             Tokens.Or => "|",
             Tokens.And => "&",
-            Tokens.Identifier => "",
             Tokens.LParen => "(",
             Tokens.RParen => ")",
-            Tokens.Colon => ": ",
-            Tokens.Comma => ", ",
+            Tokens.Colon => ":",
+            Tokens.Comma => ",",
             Tokens.Dot => ".",
             Tokens.Not => "!",
             Tokens.Equals => "=",
             Tokens.Less => "<",
             Tokens.Greater => ">",
-            Tokens.Plus => " + ",
+            Tokens.Plus => "+",
             Tokens.Minus => "-",
-            Tokens.Star => " * ",
-            Tokens.Slash => " / ",
-            Tokens.StringRef => "",
-            Tokens.NumberRef => "",
-            Tokens.Keyword => " ",
-            Tokens.Percent => " % ",
-            Tokens.Question => " ? ",
-            _ => token.ToString()
+            Tokens.Star => "*",
+            Tokens.Slash => "/",
+            Tokens.StringRef => "StringReference",
+            Tokens.NumberRef => "NumberReference",
+            Tokens.Percent => "%",
+            Tokens.Question => "?",
+            _ when !string.IsNullOrWhiteSpace(token.Value) => token.Value,
+            _ => token.ToString()!
         };
     }
 }

@@ -1,3 +1,4 @@
+using Core.Tables;
 using MessagePack;
 
 
@@ -37,6 +38,9 @@ public class AssignmentNode(bool isPrivate, bool isConst, bool isNew) : ASTNode
 
     public int GetLastNameId() => (Path[^1] as ObjectPointerNode)!.NameId;
 
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => string.Join(".", Path.Select(x => x.ToTokenString(stringPoolTable)));
+    
     public override ASTNode Clone()
     {
         return new AssignmentNode(IsPrivate, IsConst, IsNew)

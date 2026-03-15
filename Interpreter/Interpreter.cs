@@ -76,7 +76,7 @@ public partial class Interpreter
         if (function is null)
         {
             throw new QlangRuntimeException(
-                "No 'main' function found in program",
+                "No 'main' function found in program.",
                 0, "",
                 []);
         }
@@ -128,7 +128,7 @@ public partial class Interpreter
                         (PrimitiveToDynamicClass(arguments[i], stack) is not DynamicClass d1 ||
                          !d1.Extends.Exists(x => x == Typeof(var.Type, stack))))
                     {
-                        throw new QlangRuntimeException($"The type of param is '{(Typeof(arguments[i], stack) ?? "<null>")}' but must be '{Typeof(var.Type, stack)}' for function '{function.Name}'", GetStackTrace(stack));
+                        throw new QlangRuntimeException($"The type of param is '{(Typeof(arguments[i], stack))}' but must be '{Typeof(var.Type, stack)}' for function '{function.Name}'", GetStackTrace(stack));
                     }
                     
                     function.Variables[function.Parameters[i]] = new Variable(
@@ -167,7 +167,7 @@ public partial class Interpreter
             var typeofFunction = Typeof(function.ReturnType, stack);
             
             if (function.ReturnType != null && typeofReturnValue != typeofFunction)
-                throw new QlangRuntimeException($"Function return type '{typeofFunction}' is not equal to returned type '{typeofReturnValue}'", GetCurrentDebug(stack),
+                throw new QlangRuntimeException($"Function return type '{typeofFunction}' is not equal to returned value type '{typeofReturnValue}'", GetCurrentDebug(stack),
                     GetStackTrace(stack));
             return current.ReturnValue;
         }
@@ -582,7 +582,7 @@ public partial class Interpreter
             NamespacePointerNode fn => fn.NameId,
             FunctionPointerNode fn => fn.NameId,
             ObjectPointerNode ns => ns.NameId,
-            _ => throw new QlangRuntimeException($"Undefined call part: '{pointer}'", GetCurrentDebug(stack), GetStackTrace(stack))
+            _ => throw new QlangRuntimeException($"Undefined call part: '{pointer.ToTokenString(_stringPoolTable)}'", GetCurrentDebug(stack), GetStackTrace(stack))
         };
 
         var isPrivateCall = false;
@@ -666,7 +666,7 @@ public partial class Interpreter
         if (Math.Abs(divisor) < double.Epsilon)
         {
             throw new QlangRuntimeException(
-                "Division by zero",
+                "Cannot divide by zero.",
                 GetCurrentDebug(stack),
                 GetStackTrace(stack));
         }
@@ -685,7 +685,7 @@ public partial class Interpreter
         if (numberRef.Index >= _numberList.Count || numberRef.Index < 0)
         {
             throw new QlangRuntimeException(
-                $"Undefined number reference: {numberRef.Index}",
+                $"Undefined number reference: '{numberRef.Index}'",
                 GetCurrentDebug(stack),
                 GetStackTrace(stack));
         }
@@ -714,7 +714,7 @@ public partial class Interpreter
 
         if (createFunction is null)
             throw new QlangRuntimeException(
-                "Second value is incompatible",
+                "Cannot apply this operation because neither class implements '_createFrom'.",
                 GetCurrentDebug(stack),
                 GetStackTrace(stack));
 
@@ -727,7 +727,7 @@ public partial class Interpreter
         if (created is not DynamicClass dClass ||
             dClass.ClassName != copy.ClassName)
             throw new QlangRuntimeException(
-                "Second value is null or incompatible",
+                "Cannot apply this operation between these classes because the second value is incompatible.",
                 GetCurrentDebug(stack),
                 GetStackTrace(stack));
 
@@ -864,7 +864,7 @@ public partial class Interpreter
                 {
                     if (!bool.TryParse(left.ToString(), out leftBool))
                         throw new QlangRuntimeException(
-                            $"Type error: Left operand of '&&' must be boolean, got '{left}'",
+                            $"Left operand of '&&' must be boolean, got '{left}'",
                             GetCurrentDebug(stack), GetStackTrace(stack));
 
                     if (!leftBool)
@@ -872,7 +872,7 @@ public partial class Interpreter
 
                     if (!bool.TryParse(right.ToString(), out rightBool))
                         throw new QlangRuntimeException(
-                            $"Type error: Right operand of '&&' must be boolean, got '{right}'",
+                            $"Right operand of '&&' must be boolean, got '{right}'",
                             GetCurrentDebug(stack), GetStackTrace(stack));
 
                     return rightBool;
@@ -881,7 +881,7 @@ public partial class Interpreter
                 {
                     if (!bool.TryParse(left.ToString(), out leftBool))
                         throw new QlangRuntimeException(
-                            $"Type error: Left operand of '||' must be boolean, got '{left}'",
+                            $"Left operand of '||' must be boolean, got '{left}'",
                             GetCurrentDebug(stack), GetStackTrace(stack));
 
                     if (leftBool)
@@ -889,7 +889,7 @@ public partial class Interpreter
 
                     if (!bool.TryParse(right.ToString(), out rightBool))
                         throw new QlangRuntimeException(
-                            $"Type error: Right operand of '||' must be boolean, got '{right}'",
+                            $"Right operand of '||' must be boolean, got '{right}'",
                             GetCurrentDebug(stack), GetStackTrace(stack));
 
                     return rightBool;
@@ -942,7 +942,7 @@ public partial class Interpreter
                 };
 
             throw new QlangRuntimeException(
-                $"Type error: Cannot apply operator '{@operator}' to " +
+                $"Cannot apply operator '{@operator}' to " +
                 $"'{left.ToString() ?? "null"}' ({left.GetType().Name}) and '{right.ToString() ?? "null"}' ({right.GetType().Name})",
                 GetCurrentDebug(stack),
                 GetStackTrace(stack));

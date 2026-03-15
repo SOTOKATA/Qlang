@@ -1,4 +1,5 @@
 ﻿
+using Core.Tables;
 using MessagePack;
 
 namespace Core.AST;
@@ -25,6 +26,9 @@ public class TryCatchNode : ASTBlock
             CatchAssignment = (LineNode)CatchAssignment.Clone(),
         };
     }
+
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => "TryCatch";
 
     public override string GetTree(string indent = "")
     {

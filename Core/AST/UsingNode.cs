@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 namespace Core.AST;
 [MessagePackObject]
@@ -17,6 +18,9 @@ public class UsingNode : ASTNode
                                 CallPath: {CallPath.GetTree("\t")}
                             """, indent);
     }
+    
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => "using " + CallPath.ToTokenString(stringPoolTable);
 
     public override ASTNode Clone()
     {

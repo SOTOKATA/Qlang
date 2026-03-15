@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 
 namespace Core.AST;
@@ -20,6 +21,9 @@ public class CallNode : ASTNode
             Objects = Objects.Select(node => node.Clone()).ToList(),
         };
     }
+    
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => string.Join(".", Objects.Select(x => x.ToTokenString(stringPoolTable)));
 
     public override string GetTree(string indent = "")
     {

@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 
 namespace Core.AST;
@@ -16,6 +17,9 @@ public class ParensNode : ASTNode
                                 Statement: {(Statement is null ? "<null>" : Statement.GetTree("\t"))}
                             """, indent);
     }
+
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => $"({Statement?.ToTokenString(stringPoolTable)})";
 
     public override ASTNode Clone()
     {

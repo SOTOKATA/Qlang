@@ -1,4 +1,5 @@
-﻿using MessagePack;
+﻿using Core.Tables;
+using MessagePack;
 
 
 namespace Core.AST;
@@ -13,6 +14,9 @@ public class ProgramNode : ASTNode
     {
         Statements = Statements.Select(node => node.Clone()).ToList()
     };
+
+    public override string ToTokenString(StringPoolTable stringPoolTable)
+        => "Program";
 
     public override string GetTree(string indent = "")
     {
