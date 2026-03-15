@@ -34,7 +34,7 @@ public class StringClass : IQlangClass
             ("subString", (Func<string, int, int, string>)((msg, start, length) => msg.Substring(start, length))),
             ("toLower", (Func<string, string>)((str) => str.ToLower())),
             ("toUpper", (Func<string, string>)((str) => str.ToUpper())),
-            ("split", (Func<string, string, List<object?>>)((str, splitPattern) => str.Split(splitPattern).Cast<object>().ToList())),
+            ("split", (Func<string, string, List<object?>>)((str, splitPattern) => str.Split(splitPattern).Cast<object>().ToList()!)),
             ("join", (Func<List<object?>, string, string>)((arr, joinPattern) => string.Join(joinPattern, arr))),
             ("length", (Func<string, double>)(msg => msg.Length)),
             ("indexOf", (Func<string, string, int>)((str, pattern) => str.IndexOf(pattern, StringComparison.CurrentCulture))),

@@ -173,9 +173,7 @@ public partial class Interpreter
             case FunctionPointerNode fn:
             {
                 if (!isPathStart)
-                {
                     lastReturnValue = PrimitiveToDynamicClass(lastReturnValue, stack);
-                }
                 
                 var function = FindFunction(fn, lastReturnValue, isPathStart, stack);
                 

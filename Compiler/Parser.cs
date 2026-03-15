@@ -1347,6 +1347,23 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         
         return await;
     }
+
+    private BinaryOperationNode? ParsePrimaryNotBool()
+    {
+        if (!Check(Tokens.Not))
+            return null;
+
+        Advance();
+        
+        var ast = ParseExpression();
+
+        return new BinaryOperationNode
+        {
+            Left = ast,
+            Right = new BooleanNode { Value = false },
+            OperatorId = stringPoolTable.Add("==")
+        };
+    }
     
     private ASTNode ParsePrimary(bool isLoop = false)
     {
@@ -1361,6 +1378,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         }
         
         return ParsePrimaryAwait() 
+               ?? ParsePrimaryNotBool()
                ?? ParsePrimaryCast()
                ?? ParsePrimaryNew()
                ?? ParsePrimaryCallable()

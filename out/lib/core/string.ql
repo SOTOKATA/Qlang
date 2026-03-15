@@ -1,6 +1,7 @@
 import "$lib/core"
 
 // Class to make string operations
+const string = new String("");
 class String extends DataType: {
     // overriding functions 
     function<String> toString():
@@ -253,7 +254,13 @@ class String extends DataType: {
         return _native("std", "string", "lastIndexOf", _value, toFind);
 
     // Replace '{n}' to replacement
-    function format(const<Collection> replacement):
-        return _native("std", "string", "format", _value, replacement.select(fn(const x): return x.toString();).getCollection());
+    function format(const<Collection> replacement): {
+        if replacement.length() == 0:
+            return _value;
+
+        return _native("std", "string", "format", _value, 
+            replacement.select(
+                fn(const x): return x.toString();)
+            .getCollection());
+    }
 }
-const string = new String("");
