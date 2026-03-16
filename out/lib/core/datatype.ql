@@ -6,7 +6,7 @@ class DataType extends Object: {
     private let _value;
 
     // Get current value
-    function getValue(): return _value;
+    function getValue() => _value;
 
     // Cast object to DataType
     function _cast(const object): std::throw.notImplementedException();

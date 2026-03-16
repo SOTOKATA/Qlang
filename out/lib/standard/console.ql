@@ -35,7 +35,7 @@ namespace std:  {
 
                     if typeof(value) == "String":
                         outputValue  = "\"" + value + "\"";
-                    else if object.isSimplify(value) == false:
+                    else if !object.isSimplify(value):
                         outputValue  = value.toString();
                 
                     str += "    " + variable.type + " " + variable.name + " = " + outputValue  + "\n";
@@ -46,7 +46,7 @@ namespace std:  {
                 return str;
             }
 
-            if object.isSimplify(message) == false:
+            if !object.isSimplify(message):
                 return message.toString();
 
             return message;
@@ -126,15 +126,15 @@ namespace std:  {
             _native("std", "console", "background", color);
 
         // Get all console colors
-        function<Collection> getColors(): return _native("std", "console", "colors");
+        function<Collection> getColors() => _native("std", "console", "colors");
 
         // Set default colors for console
         function resetColors():
             _native("std", "console", "reset_color");
 
-        function width(): return _native("std", "console", "width");
+        function width() => _native("std", "console", "width");
 
-        function height(): return _native("std", "console", "height");
+        function height() => _native("std", "console", "height");
 
 
         function richPrint(const<String> message):

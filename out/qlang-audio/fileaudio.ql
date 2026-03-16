@@ -5,7 +5,7 @@ namespace qlaudio: {
         private let _path;
 
         function new(const<String> path): {
-            if fs::file.exists(path) == false:
+            if fs::file.!exists(path):
                 throw.exception("Undefined audio path.");    
         
             _path = path;
@@ -41,10 +41,10 @@ namespace qlaudio: {
         function<Number> getPosition():
             return _native("QlAudio", "audio", "get_position", _path);
 
-        function<Boolean> isPlaying(): return getState() == "playing";
+        function<Boolean> isPlaying() => getState() == "playing";
 
-        function<Boolean> isStopped(): return getState() == "stopped";
+        function<Boolean> isStopped() => getState() == "stopped";
 
-        function<Boolean> isPaused(): return getState() == "paused";
+        function<Boolean> isPaused() => getState() == "paused";
     }
 }

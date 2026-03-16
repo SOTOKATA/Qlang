@@ -20,10 +20,9 @@ public class AssignmentNode(bool isPrivate, bool isConst, bool isNew) : ASTNode
     [Key(2)]
     
     public ASTNode? Value { get; set; }
-    
+
     [Key(3)]
-    
-    public CallNode? Type { get; set; }
+    public List<CallNode> Types { get; set; } = [];
 
     [Key(4)]
     
@@ -47,7 +46,7 @@ public class AssignmentNode(bool isPrivate, bool isConst, bool isNew) : ASTNode
         {
             Path = Path.Select(node => node.Clone()).ToList(),
             Value = Value?.Clone(),
-            Type = Type
+            Types = Types.Select(x => (CallNode)x.Clone()).ToList()
         };
     }
 
@@ -57,7 +56,7 @@ public class AssignmentNode(bool isPrivate, bool isConst, bool isNew) : ASTNode
                             VariableNode:
                                 Path: [{string.Join(",\n", Path.Select(x => x.GetTree("\t")))}]
                                 Value: {Value?.GetTree("\t") ?? "<undefined>"}
-                                Type: {Type?.GetTree("\t")}
+                                Types: {Types.Select(x => x.GetTree("\t"))}
                                 IsPrivate: {IsPrivate}
                                 IsConst: {IsConst}
                                 IsNew: {IsNew}

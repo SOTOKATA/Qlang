@@ -78,6 +78,7 @@ public partial class Interpreter
     /// Convert static class to dynamic
     /// </summary>
     /// <param name="classNode">class to convert</param>
+    /// <param name="stack">Current context stack</param>
     /// <returns>DynamicClass</returns>
     private DynamicClass ToDynamicClass(ClassNode classNode, Stack<ASTContext> stack)
     {
@@ -115,9 +116,9 @@ public partial class Interpreter
         DynamicFunction dynamicFunction = new(_stringPoolTable[functionNode.NameId])
         {
             Context = functionNode.Context,
-            ReturnType = (CallNode?)functionNode.ReturnType?.Clone(),
+            ReturnTypes = functionNode.ReturnTypes.Select(x => (CallNode)x.Clone()).ToList()
         };
-
+        
         // Add and convert all parameters
         foreach (var node in functionNode.Parameters)
         {
@@ -127,7 +128,7 @@ public partial class Interpreter
                 EvaluateExpression(node.Value, stack),
                 node.IsPrivate,
                 node.IsConst,
-                node.Type);
+                node.Types);
 
             dynamicFunction.Parameters.Add(nodeName);
         }

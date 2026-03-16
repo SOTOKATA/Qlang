@@ -19,7 +19,7 @@ public class NamespacePointerNode : ASTNode
     }
 
     public override string ToTokenString(StringPoolTable stringPoolTable)
-        => $"{stringPoolTable[NameId]}::";
+        => $"{stringPoolTable[NameId]}";
 
     public override ASTNode Clone()
     {

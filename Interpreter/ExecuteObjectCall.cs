@@ -73,9 +73,16 @@ public partial class Interpreter
                 if (arg is CallNode call)
                 {
                     var first = call.Objects.FirstOrDefault();
-                    if (first is ObjectPointerNode pointer &&
-                        _stringPoolTable[pointer.NameId] is "Collection" or "Number" or "Boolean")
-                        return _stringPoolTable[pointer.NameId];
+                    if (first is ObjectPointerNode pointer)
+                    {
+                        switch (_stringPoolTable[pointer.NameId])
+                        {
+                            case "Nullable":
+                                return Keywords.NullKeyword;
+                            case "Collection" or "Number" or "Boolean":
+                                return _stringPoolTable[pointer.NameId];
+                        }
+                    }
 
                     return ExecutePathToClass(call, stack).ClassName;
                 }

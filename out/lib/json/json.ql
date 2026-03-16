@@ -10,7 +10,7 @@ namespace json: {
 
         const length = dict.length();
         for let i = 0; i < length; i++: {
-            if first == false:
+            if !first:
                 output += ",";
 
             if indented:

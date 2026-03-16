@@ -50,9 +50,12 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         return (program, stringPoolTable);
     }
 
-    private ASTNode ParseStatement()
+    private ASTNode ParseStatement(bool isOneLineReturn = false)
     {
         var lineNode = new LineNode(IsAtEnd() ? -1 : Current().DebugIndex);
+        
+        if (isOneLineReturn && Check(Tokens.Equals) && Peek()?.TokenType == Tokens.Greater)
+            return ParseReturn(true);
 
         var isPrivate = false;
 
@@ -151,7 +154,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         // assignment
         if (Check(Tokens.Keyword, Keywords.VariableDeclaration) || Check(Tokens.Keyword, Keywords.ConstVariableDeclaration))
         {
-            var var = ParseVariableDeclaration(false, isPrivate, Check(Tokens.Keyword, Keywords.ConstVariableDeclaration), true);
+            var var = ParseVariableDeclaration(true, isPrivate, Check(Tokens.Keyword, Keywords.ConstVariableDeclaration), true);
             Expect(Tokens.Semicolon);
             lineNode.Content = var;
             return lineNode;
@@ -197,23 +200,14 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         // Skip const or let
         var token = Advance();
 
-        CallNode? type = null;
+        // Type
+        List<CallNode> types = [];
         if (Check(Tokens.Less))
         {
             if (!canUseType)
                 throw new QlangCompileException(
                     "Using variables with types is only possible with function arguments", GetDebug(token), "Parser");
-            // Skip <
-            Expect(Tokens.Less);
-            var returnValue  = ParsePrimaryPath();
-
-            if (returnValue is not CallNode node)
-                throw new QlangCompileException("Cannot use follow node as path to class", GetDebug(token), "Parser");
-
-            type = node;
-            
-            // Skip >
-            Expect(Tokens.Greater);
+            else types = ParseVariableTypes();
         }
 
         // Except var name
@@ -231,7 +225,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         {
             Path = [new ObjectPointerNode { NameId = stringPoolTable.Add(name) }],
             Value = value,
-            Type = type,
+            Types = types,
             FileId = debugTable?.GetFileId(token.DebugIndex) ?? -1
         };
 
@@ -300,25 +294,56 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         };
     }
 
+    private List<CallNode> ParseVariableTypes()
+    {
+        // Type
+        List<CallNode> returnTypes = [];
+        if (!Check(Tokens.Less)) 
+            return returnTypes;
+        
+        var debugToken = Expect(Tokens.Less);
+
+        while (!Check(Tokens.Greater))
+        {
+            var expr = ParsePrimaryPath();
+
+            if (expr is KeywordNode keyword && keyword.KeywordId == stringPoolTable.Add(Keywords.NullKeyword))
+                expr = new CallNode
+                {
+                    FileId = debugTable.GetFileId(debugToken.DebugIndex),
+                    Objects = [new ObjectPointerNode { NameId = stringPoolTable.Add("Nullable") }]
+                };
+
+            if (expr is not CallNode callNode)
+                throw new QlangCompileException(
+                    $"Cannot find function type by path '{expr.ToTokenString(stringPoolTable)}'.",
+                    GetDebug(debugToken), "Parser");
+
+            returnTypes.Add(callNode);
+
+            if (Check(Tokens.Or))
+            {
+                Advance();
+                continue;
+            }
+
+            if (!Check(Tokens.Greater))
+                throw new QlangCompileException($"Cannot define expression '{expr.ToTokenString(stringPoolTable)}'",
+                    GetDebug(debugToken), "Parser");
+        }
+
+        Expect(Tokens.Greater);
+
+        return returnTypes;
+    }
+
     private FunctionNode ParseFunction(bool isPrivate = false, bool isAsync = false)
     {
         var debug = Expect(Tokens.Keyword, Keywords.FunctionDeclaration);
 
         // Type
-        CallNode? returnType = null;
-        if (Check(Tokens.Less))
-        {
-            var debugToken = Expect(Tokens.Less);
-            
-            var expr = ParsePrimaryPath();
-            
-            if (expr is not CallNode callNode)
-                throw new QlangCompileException($"Cannot find function type by path '{expr.ToTokenString(stringPoolTable)}'.", GetDebug(debugToken), "Parser");
-            
-            returnType = callNode;
-            Expect(Tokens.Greater);
-        }
-
+        var returnTypes = Check(Tokens.Less) ? ParseVariableTypes() : [];
+       
         if (!Check(Tokens.Identifier) && !Check(Tokens.Keyword, Keywords.CreateClassInstanceKeyword))
             throw new QlangCompileException("Cannot use this name for function", GetDebug(debug), "Parser");
         
@@ -345,7 +370,9 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         }
 
         Expect(Tokens.RParen);
-        Expect(Tokens.Colon);
+        
+        if (!Check(Tokens.Equals) || Peek()?.TokenType != Tokens.Greater)
+            Expect(Tokens.Colon);
 
         var body = ParseBlock();
 
@@ -356,7 +383,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             Body = body,
             IsPrivate = isPrivate,
             IsAsync = isAsync,
-            ReturnType = returnType
+            ReturnTypes = returnTypes
         };
     }
 
@@ -401,7 +428,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
     {
         Expect(Tokens.Keyword, Keywords.ForBlock);
 
-        var assignment = ParseVariableDeclaration(false, false,
+        var assignment = ParseVariableDeclaration(true, false,
             Check(Tokens.Keyword) && Current().Value == Keywords.ConstVariableDeclaration,
             true);
         Expect(Tokens.Semicolon);
@@ -434,7 +461,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
 
         var assignment = new LineNode(token.DebugIndex)
         {
-            Content = ParseVariableDeclaration(false, false, true)
+            Content = ParseVariableDeclaration(true, false, true)
         };
         
         Expect(Tokens.RParen);
@@ -558,7 +585,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         // One line block
         // {
         if (!Check(Tokens.LBrace))
-            statements.Add(ParseStatement());
+            statements.Add(ParseStatement(true));
         else
         {
             Expect(Tokens.LBrace);
@@ -578,15 +605,20 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         return statements;
     }
 
-    private ReturnNode ParseReturn()
+    private ReturnNode ParseReturn(bool isOneLine = false)
     {
-        var debugIndex = Expect(Tokens.Keyword).DebugIndex;
+        var isGreater = Peek()?.TokenType == Tokens.Greater;
+        var debugIndex = Expect(isOneLine && Check(Tokens.Equals) ? Tokens.Equals : Tokens.Keyword).DebugIndex;
+
+        if (isOneLine && isGreater)
+            Expect(Tokens.Greater);
 
         ASTNode? node = null;
         if (!Check(Tokens.Semicolon))
             node = ParseExpression();
 
-        Expect(Tokens.Semicolon);
+        if (!isOneLine || !isGreater)
+            Expect(Tokens.Semicolon);
 
         return new ReturnNode { ReturnValue = node is LineNode ? node : new LineNode(debugIndex) { Content = node } };
     }
@@ -874,10 +906,14 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         // Function pointer
         if (Check(Tokens.Keyword) && 
             (Current().Value == Keywords.ShortFunctionDeclaration || Current().Value == Keywords.FunctionDeclaration) &&
-            Peek()?.TokenType == Tokens.LParen)
+            (Peek()?.TokenType == Tokens.LParen || Peek()?.TokenType == Tokens.Less))
         {
             // Advance 'function' or 'fn'
             Advance();
+
+            // Type
+            var returnTypes = Check(Tokens.Less) ? ParseVariableTypes() : [];
+            
             // Advance '('
             Advance();
             var func = new FunctionNode
@@ -909,10 +945,13 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             func.Parameters = parameters;
 
             // Advance ':'
-            Expect(Tokens.Colon);
+            if (!Check(Tokens.Equals) || Peek()?.TokenType != Tokens.Greater)
+                Expect(Tokens.Colon);
 
             func.Body = ParseBlock();
 
+            func.ReturnTypes = returnTypes.ToList();
+            
             return func;
         }
 
@@ -934,7 +973,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
                     Check(Tokens.Keyword, Keywords.VariableDeclaration))
                 {
                     var debugIndex = Current().DebugIndex;
-                    @class.Body.Add(new LineNode(debugIndex) { Content = ParseVariableDeclaration(false, false, Check(Tokens.Keyword, Keywords.ConstVariableDeclaration)) });
+                    @class.Body.Add(new LineNode(debugIndex) { Content = ParseVariableDeclaration(true, false, Check(Tokens.Keyword, Keywords.ConstVariableDeclaration)) });
                     continue;
                 }
                 if (Check(Tokens.Comma))
@@ -1348,11 +1387,10 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
     {
         if (!Check(Tokens.Not))
             return null;
-
         Advance();
         
-        var ast = ParseExpression();
-
+        var ast = ParsePrimary();
+        
         return new BinaryOperationNode
         {
             Left = ast,

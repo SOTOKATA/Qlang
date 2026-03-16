@@ -21,7 +21,7 @@ public class FunctionNode : ASTNode
     public List<ASTNode> Body { get; set; } = [];
 
     [Key(4)] 
-    public CallNode? ReturnType { get; set; }
+    public List<CallNode> ReturnTypes { get; set; } = [];
 
     [Key(5)] 
     public bool IsAsync { get; set; }
@@ -37,7 +37,8 @@ public class FunctionNode : ASTNode
             Parameters = Parameters.Select(node => node.Clone()).Cast<AssignmentNode>().ToList(),
             Context = Context,
             NameId = NameId, 
-            Body = Body.Select(node => node.Clone()).ToList() 
+            Body = Body.Select(node => node.Clone()).ToList(),
+            ReturnTypes = ReturnTypes.Select(node => node.Clone()).Cast<CallNode>().ToList(),
         };
     }
 

@@ -123,12 +123,14 @@ public partial class Interpreter
                 {
                     var var = function.Variables[function.Parameters[i]];
 
-                    if (var.Type is not null &&
-                        Typeof(var.Type, stack) != Typeof(arguments[i], stack) &&
+                    var typeofArgument = Typeof(arguments[i], stack);
+
+                    if (var.Types.Count > 0 &&
+                        var.Types.All(x => Typeof(x, stack) != typeofArgument) &&
                         (PrimitiveToDynamicClass(arguments[i], stack) is not DynamicClass d1 ||
-                         !d1.Extends.Exists(x => x == Typeof(var.Type, stack))))
+                         !d1.Extends.Exists(x => var.Types.Any(y => Typeof(y, stack) == x))))
                     {
-                        throw new QlangRuntimeException($"The type of param is '{(Typeof(arguments[i], stack))}' but must be '{Typeof(var.Type, stack)}' for function '{function.Name}'", GetStackTrace(stack));
+                        throw new QlangRuntimeException($"The type of param is '{(Typeof(arguments[i], stack))}' but must be '{string.Join("|", var.Types.Select(x => Typeof(x, stack)))}' for function '{function.Name}'", GetStackTrace(stack));
                     }
                     
                     function.Variables[function.Parameters[i]] = new Variable(
@@ -164,11 +166,14 @@ public partial class Interpreter
             current.IsContinue = false;
 
             var typeofReturnValue = Typeof(current.ReturnValue, stack);
-            var typeofFunction = Typeof(function.ReturnType, stack);
+            var functionTypes = function.ReturnTypes.Select(x => Typeof(x, stack)).ToList();
             
-            if (function.ReturnType != null && typeofReturnValue != typeofFunction)
-                throw new QlangRuntimeException($"Function return type '{typeofFunction}' is not equal to returned value type '{typeofReturnValue}'", GetCurrentDebug(stack),
+            if (functionTypes.Count > 0 && functionTypes.All(x => x != typeofReturnValue))
+                throw new QlangRuntimeException($"Function return type '{string.Join("|", functionTypes)}' is not equal to returned value type '{typeofReturnValue}'", GetCurrentDebug(stack),
                     GetStackTrace(stack));
+            
+            if (function.Name == "~function")
+                Console.WriteLine($"ReturnTypes: '{string.Join("|", function.ReturnTypes)}' for function ~function");
             return current.ReturnValue;
         }
         finally
@@ -244,8 +249,8 @@ public partial class Interpreter
         if (stack.Count == 0)
             return;
 
-        // Get evaluated value
         var value = EvaluateExpression(assignmentNode.Value, stack);
+        var valueType = Typeof(value, stack);
 
         var path = assignmentNode.Path;
 
@@ -256,7 +261,7 @@ public partial class Interpreter
 
         object? currentObject = null;
 
-        // Will execute all path until last path part (ex: 'obj.var1', will execute only 'obj')
+        // Execute path except last part
         if (path.Count > 1)
         {
             var callNode = new CallNode
@@ -266,59 +271,150 @@ public partial class Interpreter
 
             currentObject = ExecuteObjectCalls(callNode, stack);
         }
-        
+
         var assignName = _stringPoolTable[assignmentNode.GetLastNameId()];
 
-        // Change value
         if (!assignmentNode.IsNew)
         {
             var obj = FindObject(lastNode, currentObject, currentObject is null, stack);
 
             if (obj.@object is Variable var)
             {
-                if (var.IsConst && !assignmentNode.IsNew)
-                    throw new QlangRuntimeException($"Cannot re-assign const property '{_stringPoolTable[lastNode.NameId]}'", GetCurrentDebug(stack),
-                        GetStackTrace(stack));
+                if (var.IsConst)
+                    throw new QlangRuntimeException(
+                        $"Cannot re-assign const property '{_stringPoolTable[lastNode.NameId]}'",
+                        GetCurrentDebug(stack), GetStackTrace(stack));
 
                 if (currentObject is not null && var.IsPrivate && !CurrentContext(stack)!.AllowPrivateCall)
-                    throw new QlangRuntimeException("Cannot access to private variable from external source",
+                    throw new QlangRuntimeException(
+                        "Cannot access to private variable from external source",
+                        GetCurrentDebug(stack), GetStackTrace(stack));
+
+                if (var.Types.Count > 0 && var.Types.Any(x => Typeof(x, stack) != valueType))
+                    throw new QlangRuntimeException(
+                        $"Cannot assign value of type '{valueType}' to variable '{assignName}'. Expected type: '{string.Join("|", var.Types.Select(x => x.ToTokenString(_stringPoolTable)))}'",
                         GetCurrentDebug(stack), GetStackTrace(stack));
 
                 var.Value = value;
                 return;
             }
 
-            throw new QlangRuntimeException($"Invalid assignment target: {obj.@object?.GetType().Name}", GetCurrentDebug(stack),
-                GetStackTrace(stack));
+            throw new QlangRuntimeException(
+                $"Invalid assignment target: {obj.@object?.GetType().Name}",
+                GetCurrentDebug(stack), GetStackTrace(stack));
         }
 
-        // Try assign from context
+        Dictionary<string, Variable> variables;
+
         if (HasContext(stack))
         {
-            if (CurrentContext(stack)!.Function is not null)
-            {
-                CurrentContext(stack)!.Function!.Variables[assignName] =
-                    Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
-                return;
-            }
+            var ctx = CurrentContext(stack)!;
 
-            if (CurrentContext(stack)!.Class is not null)
-            {
-                CurrentContext(stack)!.Class!.Variables[assignName] =
-                    Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
-                return;
-            }
-
-            if (CurrentContext(stack)!.Namespace is not null)
-            {
-                CurrentContext(stack)!.Namespace!.Variables[assignName] =
-                    Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
-                return;
-            }
+            if (ctx.Function is not null)
+                variables = ctx.Function.Variables;
+            else if (ctx.Class is not null)
+                variables = ctx.Class.Variables;
+            else if (ctx.Namespace is not null)
+                variables = ctx.Namespace.Variables;
+            else
+                variables = _namespaces[GlobalNamespaceName].Variables;
         }
+        else
+            variables = _namespaces[GlobalNamespaceName].Variables;
+        
+        var variable = Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
+        
+        if (variable.Types.Count > 0 && variable.Types.Any(x => Typeof(x, stack) != valueType))
+            throw new QlangRuntimeException(
+                $"Cannot assign value of type '{valueType}' to variable '{assignName}'. Expected type: '{string.Join("|", variable.Types.Select(x => x.ToTokenString(_stringPoolTable)))}'",
+                GetCurrentDebug(stack), GetStackTrace(stack));
 
-        _namespaces[GlobalNamespaceName].Variables[assignName] = Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
+        variables[assignName] = Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
     }
+    // private void AssignmentNode(AssignmentNode assignmentNode, Stack<ASTContext> stack)
+    // {
+    //     if (stack.Count == 0)
+    //         return;
+    //
+    //     // Get evaluated value
+    //     var value = EvaluateExpression(assignmentNode.Value, stack);
+    //     var valueType = Typeof(value, stack);
+    //
+    //     var path = assignmentNode.Path;
+    //
+    //     if (path.Count == 0)
+    //         throw new QlangRuntimeException("Assignment path cannot be empty", GetCurrentDebug(stack), GetStackTrace(stack));
+    //
+    //     var lastNode = (ObjectPointerNode)path[^1];
+    //
+    //     object? currentObject = null;
+    //
+    //     // Will execute all path until last path part (ex: 'obj.var1', will execute only 'obj')
+    //     if (path.Count > 1)
+    //     {
+    //         var callNode = new CallNode
+    //         {
+    //             Objects = path.SkipLast(1).ToList(),
+    //         };
+    //
+    //         currentObject = ExecuteObjectCalls(callNode, stack);
+    //     }
+    //     
+    //     var assignName = _stringPoolTable[assignmentNode.GetLastNameId()];
+    //
+    //     // Change value
+    //     if (!assignmentNode.IsNew)
+    //     {
+    //         var obj = FindObject(lastNode, currentObject, currentObject is null, stack);
+    //
+    //         if (obj.@object is Variable var)
+    //         {
+    //             if (var.IsConst && !assignmentNode.IsNew)
+    //                 throw new QlangRuntimeException($"Cannot re-assign const property '{_stringPoolTable[lastNode.NameId]}'", GetCurrentDebug(stack),
+    //                     GetStackTrace(stack));
+    //
+    //             if (currentObject is not null && var.IsPrivate && !CurrentContext(stack)!.AllowPrivateCall)
+    //                 throw new QlangRuntimeException("Cannot access to private variable from external source",
+    //                     GetCurrentDebug(stack), GetStackTrace(stack));
+    //
+    //             if (var.Types.Count > 0 && var.Types.Any(x => Typeof(x, stack) != valueType))
+    //                 throw new QlangRuntimeException($"Cannot set variable value, because variable types '{string.Join("|", var.Types.Select(x => x.ToTokenString(_stringPoolTable)))}' is not equals to value type '{valueType}'");
+    //
+    //             var.Value = value;
+    //             return;
+    //         }
+    //
+    //         throw new QlangRuntimeException($"Invalid assignment target: {obj.@object?.GetType().Name}", GetCurrentDebug(stack),
+    //             GetStackTrace(stack));
+    //     }
+    //
+    //     // Try assign from context
+    //     if (HasContext(stack))
+    //     {
+    //         if (CurrentContext(stack)!.Function is not null)
+    //         {
+    //             CurrentContext(stack)!.Function!.Variables[assignName] =
+    //                 Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
+    //             return;
+    //         }
+    //
+    //         if (CurrentContext(stack)!.Class is not null)
+    //         {
+    //             CurrentContext(stack)!.Class!.Variables[assignName] =
+    //                 Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
+    //             return;
+    //         }
+    //
+    //         if (CurrentContext(stack)!.Namespace is not null)
+    //         {
+    //             CurrentContext(stack)!.Namespace!.Variables[assignName] =
+    //                 Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
+    //             return;
+    //         }
+    //     }
+    //
+    //     _namespaces[GlobalNamespaceName].Variables[assignName] = Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
+    // }
 
     /// <summary>
     /// Creates new class instance of sent class

@@ -4,8 +4,8 @@ const array = new Array();
 // Dynamic array
 class Array extends DataType: {
     // Create empty array
-    function new(const<Collection> collection = []):
-        _value = collection;
+    function new(const<Collection|Array> arr = []):
+        _value = arr.getCollection();
 
     function<String> toString(): {
         let str = "[";
@@ -93,7 +93,7 @@ class Array extends DataType: {
     // Get length
     function<Number> length():
         return _native("std", "array", "count", _value);
-    function count(): return length();
+    function count() => length();
 
     function forEach(const func): {
         const length = length();

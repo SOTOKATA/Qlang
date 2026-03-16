@@ -5,7 +5,7 @@ using MessagePack;
 namespace Core.Dynamic;
 
 [MessagePackObject]
-public class Variable(string name, object? value, bool isPrivate, bool isConst, CallNode? type = null)
+public class Variable(string name, object? value, bool isPrivate, bool isConst, List<CallNode>? types = null)
 {
     public Variable() : this("", null, false, false) {}
     public override string? ToString()
@@ -13,11 +13,11 @@ public class Variable(string name, object? value, bool isPrivate, bool isConst, 
         return Value?.ToString();       
     }
 
-    public Variable Clone() => new(Name, Value, IsPrivate, IsConst, Type);
+    public Variable Clone() => new(Name, Value, IsPrivate, IsConst, Types);
 
     public static Variable FromAssignmentNode(AssignmentNode assignNode, object? value, StringPoolTable stringPoolTable)
     {
-        return new Variable(stringPoolTable[assignNode.GetLastNameId()], value, assignNode.IsPrivate, assignNode.IsConst, assignNode.Type);
+        return new Variable(stringPoolTable[assignNode.GetLastNameId()], value, assignNode.IsPrivate, assignNode.IsConst, assignNode.Types);
     }
 
     [Key(1)]
@@ -25,7 +25,7 @@ public class Variable(string name, object? value, bool isPrivate, bool isConst, 
     [Key(2)]
     public object? Value { get; set; } = value;
     [Key(3)]
-    public CallNode? Type { get; set; } = type;
+    public List<CallNode> Types { get; set; } = types ?? [];
     [Key(4)]
     public bool IsConst { get; set; } = isConst;
     [Key(5)]

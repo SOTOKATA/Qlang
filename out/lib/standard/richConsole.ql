@@ -63,7 +63,7 @@ namespace std: {
                     }
                     case "=": if isCode: isValue = true;
                     default: {
-                        if isCode == false:
+                        if !isCode:
                             text += el;
                         else if isValue:
                             value += el;
@@ -71,7 +71,7 @@ namespace std: {
                     }
                 }
 
-                if keyword != "" && isCode == false: {
+                if keyword != "" && !isCode: {
                     useCode(keyword, value);
 
                     keyword = "";

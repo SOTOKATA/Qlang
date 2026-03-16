@@ -23,7 +23,24 @@ public class CallNode : ASTNode
     }
     
     public override string ToTokenString(StringPoolTable stringPoolTable)
-        => string.Join(".", Objects.Select(x => x.ToTokenString(stringPoolTable)));
+    {
+        var str = "";
+
+        for (var index = 0; index < Objects.Count; index++)
+        {
+            var obj = Objects[index];
+            str += obj.ToTokenString(stringPoolTable);
+
+            if (index == Objects.Count - 1)
+                continue;
+
+            if (obj is NamespacePointerNode)
+                str += "::";
+            else str += ".";
+        }
+
+        return str;
+    }
 
     public override string GetTree(string indent = "")
     {

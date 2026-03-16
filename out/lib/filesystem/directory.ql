@@ -20,21 +20,21 @@ namespace fs: {
 
         // Remove if exists directory (recursive)
         function remove(const<String> path): {
-            if exists(path) == false:
+            if !exists(path):
                 std::throw.message("Directory is not exists.");
             
             _native("std", "filesystem", "directory_remove", path, true);
         }
 
         function<Array> getFiles(const<String> path, const<String> extension = ""): {
-            if exists(path) == false:
+            if !exists(path):
                 throw.message("Undefined directory path.");
 
             return _native("std", "filesystem", "get_files", path, extension);
         }
 
         function<Array> getDirectories(const<String> path, const<String> searchPattern = ""): {
-            if exists(path) == false:
+            if !exists(path):
                 throw.message("Undefined directory path.");
 
             return _native("std", "filesystem", "get_directories", path, searchPattern);

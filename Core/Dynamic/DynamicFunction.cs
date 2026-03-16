@@ -15,7 +15,7 @@ public class DynamicFunction(string name)
 
     public readonly List<ASTNode> Body = [];
     
-    public CallNode? ReturnType = null;
+    public List<CallNode> ReturnTypes = [];
 
     public ASTContext? Context;
 
@@ -27,7 +27,7 @@ public class DynamicFunction(string name)
 
         dynamicFunction.Body.AddRange(Body.Select(x => x.Clone()).ToList());
 
-        dynamicFunction.ReturnType = (CallNode?)ReturnType?.Clone();
+        dynamicFunction.ReturnTypes = ReturnTypes.Select(x => (CallNode)x.Clone()).ToList();
         
         dynamicFunction.IsStatic = IsStatic;
         dynamicFunction.IsPrivate = IsPrivate;

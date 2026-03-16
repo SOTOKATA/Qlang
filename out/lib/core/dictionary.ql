@@ -16,8 +16,8 @@ class Dictionary: {
         return new String(str);
     }
 
-    function<Array> getKeys(): return _keys;
-    function<Array> getValues(): return _values;
+    function<Array> getKeys() => _keys;
+    function<Array> getValues() => _values;
 
     function set(let key, let item): {
         if _keys.contains(key) == true:

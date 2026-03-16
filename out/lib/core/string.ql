@@ -104,7 +104,7 @@ class String extends DataType: {
     }
 
     private function _checkIsCollection(let value): {
-        if array.isCollection(value) == false: {
+        if !array.isCollection(value): {
             std::throw.parceException("argument is not collection");
         }
     }
@@ -166,7 +166,7 @@ class String extends DataType: {
     }
 
     function join(let strArr, let<String> pattern): {
-        if (array.isCollection(strArr) == false) && (typeof(strArr) != "Array"):
+        if !array.isCollection(strArr) && (typeof(strArr) != "Array"):
             std::throw.message("argument is not collection or array");
 
         if typeof(strArr) == "Array":
@@ -184,7 +184,7 @@ class String extends DataType: {
         if object.isNull(str):
             return true;
 
-        if (isPrimitive(str) == false) && (isString(str) == false):
+        if !isPrimitive(str) && !isString(str):
             std::throw.message("Param must be string class or primitive");
 
         if isString(str):
@@ -198,7 +198,7 @@ class String extends DataType: {
         if object.isNull(str):
             return true;
 
-        if (isPrimitive(str) == false) && (isString(str) == false):
+        if !isPrimitive(str) && !isString(str):
             std::throw.message("Param must be string class or primitive");
 
         if isString(str): 
@@ -260,7 +260,7 @@ class String extends DataType: {
 
         return _native("std", "string", "format", _value, 
             replacement.select(
-                fn(const x): return x.toString();)
-            .getCollection());
+                fn(const x) => x.toString()
+            ).getCollection());
     }
 }
