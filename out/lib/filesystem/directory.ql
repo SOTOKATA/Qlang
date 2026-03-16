@@ -12,7 +12,7 @@ namespace fs: {
 
         // Create if not exists directory
         function create(const<String> path): {
-            if exists(path) == true:
+            if exists(path):
                 std::throw.message("Directory already created.");
 
             _native("std", "filesystem", "directory_create", path);

@@ -13,7 +13,6 @@ namespace std: {
 
         function getUserName() => _native("std", "env", "user_name");
 
-        function exit(const<Number> code = 0):
-            _native("std", "env", "exit", code);
+        function exit(const<Number> code = 0) => _native("std", "env", "exit", code);
     }
 }
