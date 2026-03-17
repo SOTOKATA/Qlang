@@ -10,9 +10,9 @@ namespace std:  {
         const E = _native("std", "math", "e");
         const TAU = _native("std", "math", "tau");
 
-        function<Number> max(const<Number> a, const<Number> b) => boolCase(a > b, a, b);
+        function<Number> max(const<Number> a, const<Number> b) => if a > b ? a : b;
 
-        function<Number> min(const<Number> a, const<Number> b) => boolCase(a < b, a, b);
+        function<Number> min(const<Number> a, const<Number> b) => if a < b ? a : b;
 
         function<Number> rand(const<Number> min, const<Number> max): {
             if min >= max:

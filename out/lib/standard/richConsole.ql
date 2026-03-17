@@ -91,9 +91,11 @@ namespace std: {
 
             const isClose = keyword.charAt(0) == "/";
 
-            if isClose:
+            if isClose: {
                 keyword = keyword.subString(1, keyword.length() - 1);
-
+                std::console.println("\u001b[0m");
+                return;
+            }
             switch keyword: {
                 case "color": {
                     if isClose: 
@@ -101,27 +103,27 @@ namespace std: {
                     else: std::console.setForeColor(value);
                 }
                 case "bold":
-                    std::console.print(boolCase(isClose, "\u001b[0m", "\u001b[1m"));
+                    std::console.print("\u001b[1m");
                 case "dim":
-                    std::console.print(boolCase(isClose, "\u001b[0m", "\u001b[2m"));
+                    std::console.print("\u001b[2m");
                 case "italic":
-                    std::console.print(boolCase(isClose, "\u001b[0m", "\u001b[3m"));
+                    std::console.print("\u001b[3m");
                 case "underline":
-                    std::console.print(boolCase(isClose, "\u001b[0m", "\u001b[4m"));
+                    std::console.print("\u001b[4m");
                 case "blink":
-                    std::console.print(boolCase(isClose, "\u001b[0m", "\u001b[5m"));
+                    std::console.print("\u001b[5m");
                 case "rapid_blink":
-                    std::console.print(boolCase(isClose, "\u001b[0m", "\u001b[6m"));
+                    std::console.print("\u001b[6m");
                 case "reverse":
-                    std::console.print(boolCase(isClose, "\u001b[0m", "\u001b[7m"));
+                    std::console.print("\u001b[7m");
                 case "hidden":
-                    std::console.print(boolCase(isClose, "\u001b[0m", "\u001b[8m"));
+                    std::console.print("\u001b[8m");
                 case "strike":
-                    std::console.print(boolCase(isClose, "\u001b[0m", "\u001b[9m"));
+                    std::console.print("\u001b[9m");
                 default: {
                     if value != "": 
                         std::console.print(`[{keyword}={value}]`);
-                    else: std::console.print("[" + boolCase(isClose, "/", "") + `{keyword}]`);
+                    else: std::console.print("[" + (if isClose ? "/" : "") + `{keyword}]`);
                 }
             }
         }

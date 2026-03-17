@@ -331,90 +331,6 @@ public partial class Interpreter
 
         variables[assignName] = Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
     }
-    // private void AssignmentNode(AssignmentNode assignmentNode, Stack<ASTContext> stack)
-    // {
-    //     if (stack.Count == 0)
-    //         return;
-    //
-    //     // Get evaluated value
-    //     var value = EvaluateExpression(assignmentNode.Value, stack);
-    //     var valueType = Typeof(value, stack);
-    //
-    //     var path = assignmentNode.Path;
-    //
-    //     if (path.Count == 0)
-    //         throw new QlangRuntimeException("Assignment path cannot be empty", GetCurrentDebug(stack), GetStackTrace(stack));
-    //
-    //     var lastNode = (ObjectPointerNode)path[^1];
-    //
-    //     object? currentObject = null;
-    //
-    //     // Will execute all path until last path part (ex: 'obj.var1', will execute only 'obj')
-    //     if (path.Count > 1)
-    //     {
-    //         var callNode = new CallNode
-    //         {
-    //             Objects = path.SkipLast(1).ToList(),
-    //         };
-    //
-    //         currentObject = ExecuteObjectCalls(callNode, stack);
-    //     }
-    //     
-    //     var assignName = _stringPoolTable[assignmentNode.GetLastNameId()];
-    //
-    //     // Change value
-    //     if (!assignmentNode.IsNew)
-    //     {
-    //         var obj = FindObject(lastNode, currentObject, currentObject is null, stack);
-    //
-    //         if (obj.@object is Variable var)
-    //         {
-    //             if (var.IsConst && !assignmentNode.IsNew)
-    //                 throw new QlangRuntimeException($"Cannot re-assign const property '{_stringPoolTable[lastNode.NameId]}'", GetCurrentDebug(stack),
-    //                     GetStackTrace(stack));
-    //
-    //             if (currentObject is not null && var.IsPrivate && !CurrentContext(stack)!.AllowPrivateCall)
-    //                 throw new QlangRuntimeException("Cannot access to private variable from external source",
-    //                     GetCurrentDebug(stack), GetStackTrace(stack));
-    //
-    //             if (var.Types.Count > 0 && var.Types.Any(x => Typeof(x, stack) != valueType))
-    //                 throw new QlangRuntimeException($"Cannot set variable value, because variable types '{string.Join("|", var.Types.Select(x => x.ToTokenString(_stringPoolTable)))}' is not equals to value type '{valueType}'");
-    //
-    //             var.Value = value;
-    //             return;
-    //         }
-    //
-    //         throw new QlangRuntimeException($"Invalid assignment target: {obj.@object?.GetType().Name}", GetCurrentDebug(stack),
-    //             GetStackTrace(stack));
-    //     }
-    //
-    //     // Try assign from context
-    //     if (HasContext(stack))
-    //     {
-    //         if (CurrentContext(stack)!.Function is not null)
-    //         {
-    //             CurrentContext(stack)!.Function!.Variables[assignName] =
-    //                 Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
-    //             return;
-    //         }
-    //
-    //         if (CurrentContext(stack)!.Class is not null)
-    //         {
-    //             CurrentContext(stack)!.Class!.Variables[assignName] =
-    //                 Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
-    //             return;
-    //         }
-    //
-    //         if (CurrentContext(stack)!.Namespace is not null)
-    //         {
-    //             CurrentContext(stack)!.Namespace!.Variables[assignName] =
-    //                 Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
-    //             return;
-    //         }
-    //     }
-    //
-    //     _namespaces[GlobalNamespaceName].Variables[assignName] = Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
-    // }
 
     /// <summary>
     /// Creates new class instance of sent class
@@ -568,6 +484,7 @@ public partial class Interpreter
                 KeywordNode node when _stringPoolTable[node.KeywordId] == Keywords.NullKeyword => null,
                 NewNode newNode => EvaluateNewKeyword(newNode, stack),
                 CallNode call => ExecuteObjectCalls(call, stack),
+                ShortHandIfNode shortIf => ExecuteShortIf(shortIf, stack),
                 FunctionNode fn => PrepareFunctionNodePointer(fn, stack),
                 _ => throw new QlangRuntimeException(
                     $"Unknown expression type: {expr.GetType().Name}",

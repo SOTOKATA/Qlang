@@ -151,6 +151,17 @@ public partial class Interpreter
         RemoveLastBlockFromContext(stack);
     }
     
+    private object? ExecuteShortIf(ShortHandIfNode ifNode, Stack<ASTContext> stack)
+    {
+        var returnValue = EvaluateExpression(ifNode.Condition, stack);
+
+        if (returnValue is not bool condition)
+            throw new QlangRuntimeException("Cannot apply non bool condition in if", GetCurrentDebug(stack),
+                GetStackTrace(stack));
+
+        return condition ? EvaluateExpression(ifNode.Then, stack) : EvaluateExpression(ifNode.Else, stack);
+    }
+    
     private void ExecuteTryCatch(TryCatchNode tryCatchNode, Stack<ASTContext> stack)
     {
         AddBlockToContext(tryCatchNode, stack);

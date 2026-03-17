@@ -174,6 +174,31 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         throw new QlangCompileException($"Undefined statement: {Token.TokenToString(Current())}", GetDebug(Current()), "Parser");
     }
 
+    private ShortHandIfNode? ParseShortHandIf()
+    {
+        if (!Check(Tokens.Keyword, Keywords.IfBlock))
+            return null;
+        
+        var debug = Expect(Tokens.Keyword, Keywords.IfBlock);
+
+        var condition = ParseExpression();
+
+        Expect(Tokens.Question);
+
+        var then = ParseExpression();
+
+        Expect(Tokens.Colon);
+
+        var @else = ParseExpression();
+        
+        return new ShortHandIfNode
+        {
+            Condition = condition,
+            Then = then,
+            Else = @else
+        };
+    }
+    
     private ParallelNode ParseParallel()
     {
         ThrowIfIsEnd();
@@ -1412,6 +1437,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         }
         
         return ParsePrimaryAwait() 
+               ?? ParseShortHandIf()
                ?? ParsePrimaryNotBool()
                ?? ParsePrimaryCast()
                ?? ParsePrimaryNew()

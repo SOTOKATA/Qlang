@@ -29,8 +29,5 @@ class Object: {
 function<String> str(const obj):
     return object.toString(obj);
 
-function boolCase(const condition, const trueResult, const falseResult):
-    if condition: return trueResult; else: return falseResult;
-
 function<String> valueOrStrNull(const value):
-    if object.isNull(value): return "null"; else: return value.toString();
+    return if object.isNull(value) ? "null" : value.toString();
