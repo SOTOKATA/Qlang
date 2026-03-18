@@ -179,7 +179,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         if (!Check(Tokens.Keyword, Keywords.IfBlock))
             return null;
         
-        var debug = Expect(Tokens.Keyword, Keywords.IfBlock);
+        Expect(Tokens.Keyword, Keywords.IfBlock);
 
         var condition = ParseExpression();
 
@@ -196,6 +196,90 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             Condition = condition,
             Then = then,
             Else = @else
+        };
+    }
+    
+    private ShortHandSwitchNode? ParseShortHandSwitch()
+    {
+        if (!Check(Tokens.Keyword, Keywords.SwitchBlock))
+            return null;
+        
+        var debugToken = Expect(Tokens.Keyword, Keywords.SwitchBlock);
+        
+        var value = ParseExpression();
+
+        ASTNode? defaultCase = null;
+
+        Expect(Tokens.Colon);
+        Expect(Tokens.LBrace);
+
+        Dictionary<ShortHandSwitchCase, ASTNode> cases = [];
+        while (!Check(Tokens.RBrace))
+        {
+            var isDefault = Check(Tokens.Keyword, Keywords.ElseBlock) || Check(Tokens.Keyword, Keywords.DefaultKeyword);
+
+            if (isDefault)
+                Advance();
+
+            var current = Current();
+            var next = Peek();
+
+            var operatorId = (current.TokenType, next?.TokenType) switch
+            {
+                (Tokens.Equals, Tokens.Equals) => Consume("==", 2),
+                (Tokens.Not, Tokens.Equals)    => Consume("!=", 2),
+                (Tokens.Greater, Tokens.Equals)=> Consume(">=", 2),
+                (Tokens.Less, Tokens.Equals)   => Consume("<=", 2),
+
+                (Tokens.Less, _)               => Consume("<", 1),
+                (Tokens.Greater, _)            => Consume(">", 1),
+
+                _ => null
+            };
+
+            var caseValue = isDefault ? null : ParsePrimary();
+            
+            // =>
+            Expect(Tokens.Equals);
+            Expect(Tokens.Greater);
+
+            var returnValue = ParseExpression();
+
+            if (caseValue is null)
+                defaultCase = returnValue;
+            else
+                cases[new ShortHandSwitchCase
+                {
+                    BinaryOperationId = operatorId,
+                    Key = caseValue
+                }] = returnValue;
+
+            if (Check(Tokens.Comma))
+            {
+                Advance();
+                continue;
+            }
+            
+            if (!Check(Tokens.RBrace))
+                throw new QlangCompileException("Expected ','", GetDebug(debugToken), "Parser");
+            continue;
+
+            int? Consume(string op, int count)
+            {
+                for (int i = 0; i < count; i++)
+                    Advance();
+
+                return stringPoolTable.Add(op);
+            }
+        }
+
+        Expect(Tokens.RBrace);
+
+        return new ShortHandSwitchNode
+        {
+            Value = value,
+            Default = defaultCase,
+            Cases = cases
         };
     }
     
@@ -1438,6 +1522,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         
         return ParsePrimaryAwait() 
                ?? ParseShortHandIf()
+               ?? ParseShortHandSwitch()
                ?? ParsePrimaryNotBool()
                ?? ParsePrimaryCast()
                ?? ParsePrimaryNew()

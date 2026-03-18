@@ -23,30 +23,25 @@ class Array extends DataType: {
         return str.toString();
     }
 
-    function join(const<String> char):
-        return string.join(this, char);
+    function join(const<String> char) => string.join(this, char);
 
-    function<Boolean> isCollection(const collection):
-        return _native("std", "array", "is", collection);
+    function<Boolean> isCollection(const collection) => _native("std", "array", "is", collection);
 
-    function<Collection> getCollection():
-        return _value;
+    function<Collection> getCollection() => _value;
 
-    function<Boolean> contains(const item):
-        return _native("std", "array", "contains", _value, item);
+    function<Boolean> contains(const item) => _native("std", "array", "contains", _value, item);
 
     // Add element
     function push(const item):
         _native("std", "array", "add", _value, item);
 
     // Add element
-    function pushMany(const items): {
+    function pushMany(const<Array|Collection> items): {
         let args = items;
+
         if typeof(items) == "Array":
             args = items.getValue();
-        else if typeof(items) != "Collection":
-            std::throw.message("Cannot push many of type: " + typeof(items));
-        
+
         _native("std", "array", "add_range", _value, args);
     }
 
@@ -59,6 +54,7 @@ class Array extends DataType: {
         checkIndex(index);
 
         index = std::parser.asInt(index);
+
         return _native("std", "array", "get", _value, index);
     }
 
@@ -87,16 +83,15 @@ class Array extends DataType: {
     }
 
     // Get index of item
-    function<Number> indexOf(let item):
-        return _native("std", "array", "index_of", _value, item);
+    function<Number> indexOf(let item) => _native("std", "array", "index_of", _value, item);
 
     // Get length
-    function<Number> length():
-        return _native("std", "array", "count", _value);
+    function<Number> length() =>_native("std", "array", "count", _value);
     function count() => length();
 
     function forEach(const func): {
         const length = length();
+
         for let i = 0; i < length; i++:
             func(at(i));
     }
@@ -117,9 +112,7 @@ class Array extends DataType: {
         return newArray;
     }
 
-    function last(): {
-        return at(length() - 1);
-    }
+    function last() => at(length() - 1);
 
     private function callExceptionNotFunc(const func):
         if typeof(func) != "~function":
@@ -220,11 +213,9 @@ class Array extends DataType: {
         return null;
     }
 
-    function getIndexes():
-        return _native("std", "array", "get_indexes", getCollection());
+    function getIndexes() => _native("std", "array", "get_indexes", getCollection());
 
-    private function checkIndex(const<Number> index): {
+    private function checkIndex(const<Number> index):
         if index < 0 || index >= length():
             std::throw.message("Index is out of range.");
-    }
 }

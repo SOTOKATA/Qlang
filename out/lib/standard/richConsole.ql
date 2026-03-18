@@ -93,39 +93,32 @@ namespace std: {
 
             if isClose: {
                 keyword = keyword.subString(1, keyword.length() - 1);
-                std::console.println("\u001b[0m");
+                std::console.print("\u001b[0m");
                 return;
             }
-            switch keyword: {
-                case "color": {
-                    if isClose: 
-                        std::console.resetColors();
-                    else: std::console.setForeColor(value);
-                }
-                case "bold":
-                    std::console.print("\u001b[1m");
-                case "dim":
-                    std::console.print("\u001b[2m");
-                case "italic":
-                    std::console.print("\u001b[3m");
-                case "underline":
-                    std::console.print("\u001b[4m");
-                case "blink":
-                    std::console.print("\u001b[5m");
-                case "rapid_blink":
-                    std::console.print("\u001b[6m");
-                case "reverse":
-                    std::console.print("\u001b[7m");
-                case "hidden":
-                    std::console.print("\u001b[8m");
-                case "strike":
-                    std::console.print("\u001b[9m");
-                default: {
-                    if value != "": 
-                        std::console.print(`[{keyword}={value}]`);
-                    else: std::console.print("[" + (if isClose ? "/" : "") + `{keyword}]`);
-                }
+
+            if keyword == "color": {
+                if isClose: 
+                    std::console.resetColors();
+                else: std::console.setForeColor(value);
+
+                return;
             }
+
+            std::console.print(switch keyword: {
+                "bold" => "\u001b[1m",
+                "dim" => "\u001b[2m",
+                "italic" => "\u001b[3m",
+                "underline" => "\u001b[4m",
+                "blink" => "\u001b[5m",
+                "rapid_blink" => "\u001b[6m",
+                "reverse" => "\u001b[7m",
+                "hidden" => "\u001b[8m",
+                "strike" => "\u001b[9m",
+                "new_line" => "\n",
+                "tab" => "\t",
+                default => if value != "" ? `[{keyword}={value}]` : `[{if isClose ? "/" : ""}{keyword}]`
+            });
         }
     }
 }

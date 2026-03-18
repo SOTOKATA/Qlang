@@ -286,7 +286,7 @@ public partial class Interpreter
         if (_stringPoolTable[node.NameId] == "toString" && lastObject is not null)
             return (null, null, null, null);
         
-        Console.WriteLine($"Context: Class: {CurrentContext(stack)?.Class?.Name}; Function: {CurrentContext(stack)?.Function?.Name}; Namespace: {CurrentContext(stack)?.Namespace?.Name}");
+        // Console.WriteLine($"Context: Class: {CurrentContext(stack)?.Class?.Name}; Function: {CurrentContext(stack)?.Function?.Name}; Namespace: {CurrentContext(stack)?.Namespace?.Name}");
         
         throw new QlangRuntimeException($"Function '{_stringPoolTable[node.NameId]}' is not found in current context {(lastObject is null ? "" : $"('{lastObject}')")}",
             GetCurrentDebug(stack), GetStackTrace(stack));

@@ -10,10 +10,8 @@ namespace std:  {
             if object.isNull(message):
                 return "<null>";
 
-            switch typeof(message): {
-                case "Collection":
-                    return (new Array(message)).toString();
-            }
+            if typeof(message) == "Collection":
+                return (new Array(message)).toString();
 
             const typeOfMessage = typeof(message);
             if typeOfMessage.startsWith("~object"): {

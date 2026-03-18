@@ -162,6 +162,27 @@ public partial class Interpreter
         return condition ? EvaluateExpression(ifNode.Then, stack) : EvaluateExpression(ifNode.Else, stack);
     }
     
+    private object? ExecuteShortSwitch(ShortHandSwitchNode switchNode, Stack<ASTContext> stack)
+    {
+        var block = switchNode.Default;
+
+        foreach (var pair in from pair in switchNode.Cases let binOp = new BinaryOperationNode
+                 {
+                     Left = switchNode.Value,
+                     Right = pair.Key.Key,
+                     OperatorId = pair.Key.BinaryOperationId ?? _stringPoolTable.Add("==")
+                 } let result = (bool)EvaluateBinaryOperation(binOp, stack)! where result select pair)
+        {
+            block = pair.Value;
+            break;
+        }
+
+        if (block is null)
+            throw new QlangRuntimeException("Unexpected case in short switch", GetDebug(CurrentContext(stack).CurrentDebugIndex), GetStackTrace(stack));
+
+        return EvaluateExpression(block, stack);
+    }
+    
     private void ExecuteTryCatch(TryCatchNode tryCatchNode, Stack<ASTContext> stack)
     {
         AddBlockToContext(tryCatchNode, stack);

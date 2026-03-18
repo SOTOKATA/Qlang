@@ -28,17 +28,13 @@ class Dictionary: {
         }
     }
 
-    function<Boolean> containsKey(let key):
-        return _keys.contains(key);
+    function<Boolean> containsKey(let key) => _keys.contains(key);
 
-    function<Boolean> containsValue(let item):
-        return _values.contains(item);
+    function<Boolean> containsValue(let item) => _values.contains(item);
 
-    function<Array> getKeys():
-        return _keys;
+    function<Array> getKeys() => _keys;
 
-    function<Array> getValues():
-        return _values;
+    function<Array> getValues() => _values;
 
     function clear(): {
         _keys.clear();

@@ -172,8 +172,6 @@ public partial class Interpreter
                 throw new QlangRuntimeException($"Function return type '{string.Join("|", functionTypes)}' is not equal to returned value type '{typeofReturnValue}'", GetCurrentDebug(stack),
                     GetStackTrace(stack));
             
-            if (function.Name == "~function")
-                Console.WriteLine($"ReturnTypes: '{string.Join("|", function.ReturnTypes)}' for function ~function");
             return current.ReturnValue;
         }
         finally
@@ -485,6 +483,7 @@ public partial class Interpreter
                 NewNode newNode => EvaluateNewKeyword(newNode, stack),
                 CallNode call => ExecuteObjectCalls(call, stack),
                 ShortHandIfNode shortIf => ExecuteShortIf(shortIf, stack),
+                ShortHandSwitchNode shortSwitch => ExecuteShortSwitch(shortSwitch, stack),
                 FunctionNode fn => PrepareFunctionNodePointer(fn, stack),
                 _ => throw new QlangRuntimeException(
                     $"Unknown expression type: {expr.GetType().Name}",

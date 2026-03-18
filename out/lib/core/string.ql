@@ -4,19 +4,15 @@ import "$lib/core"
 const string = new String("");
 class String extends DataType: {
     // overriding functions 
-    function<String> toString():
-        return object.toString(_value);
+    function<String> toString() => object.toString(_value);
 
-    function<String> toNumberFormat(const<String> format):
-        return _native("std", "number", "to_string", <Number>_value, format.getValue());
+    function<String> toNumberFormat(const<String> format) => _native("std", "number", "to_string", <Number>_value, format.getValue());
 
     // Parse object to String
-    function _createFrom(const obj):
-        return new String(obj);
+    function _createFrom(const obj) => new String(obj);
 
     // Parse additional operations
-    function _operatorAddition(const obj1, const obj2):
-        return new String(obj1.getValue() + obj2.getValue());
+    function _operatorAddition(const obj1, const obj2) => new String(obj1.getValue() + obj2.getValue());
         
 
     // Parse multiplication operations
@@ -44,13 +40,11 @@ class String extends DataType: {
     }
 
     // Parse '==' operations
-    function _operatorEqual(const obj1, const obj2):
-        return obj1.getValue() == obj2.getValue();
+    function _operatorEqual(const obj1, const obj2) => obj1.getValue() == obj2.getValue();
         
 
     // Parse '!=' operations
-    function _operatorNotEqual(const obj1, const obj2):
-        return obj1.getValue() != obj2.getValue();
+    function _operatorNotEqual(const obj1, const obj2) => obj1.getValue() != obj2.getValue();
 
     // Parse '>=' operations
     function _operatorGreaterOrEqual(const obj1, const obj2): 
@@ -130,26 +124,18 @@ class String extends DataType: {
         return new String(result);
     }
 
-    function toLower(): {
-        return new String(_native("std", "string", "toLower", _str(_value)));
-    }
+    function toLower() => new String(_native("std", "string", "toLower", _str(_value)));
 
-    function toUpper(): {
-        return new String(_native("std", "string", "toUpper", _str(_value)));
-    }
+    function toUpper() => new String(_native("std", "string", "toUpper", _str(_value)));
 
     function isString(let value): {
         value =  _native("std", "string", "isStr", value);
         return value;
     }
 
-    function isPrimitive(let value): {
-        return _native("std", "string", "isPrimitive", value);
-    }
+    function isPrimitive(let value) => _native("std", "string", "isPrimitive", value);
 
-    function split(let<String> pattern): {
-        return new Array(_native("std", "string", "split", _str(_value), _str(pattern)));
-    }
+    function split(let<String> pattern) => new Array(_native("std", "string", "split", _str(_value), _str(pattern)));
 
     function charAt(const<Number> index): {
         if length() <= index:
@@ -176,8 +162,7 @@ class String extends DataType: {
     }
 
     // Get length of string
-    function length():
-        return _native("std", "string", "length", _str(_value));
+    function length() => _native("std", "string", "length", _str(_value));
 
     // Check if string is empty or null
     function isNullOrEmpty(let str): {
@@ -207,35 +192,27 @@ class String extends DataType: {
         return _native("std", "string", "isNullOrWhitespace", _str(str));
     }
 
-    function startsWith(const<String> str):
-        return _native("std", "string", "startsWith", _str(_value), str);
+    function startsWith(const<String> str) => _native("std", "string", "startsWith", _str(_value), str);
 
-    function endsWith(const<String> str):
-        return _native("std", "string", "endsWith", _str(_value), str);
+    function endsWith(const<String> str) => _native("std", "string", "endsWith", _str(_value), str);
 
     // Trim string
-    function trim(const<String> str):
-        return new String(_native("std", "string", "trim_b", _str(_value), _str(str)));
+    function trim(const<String> str) => new String(_native("std", "string", "trim_b", _str(_value), _str(str)));
 
     // Trim start string
-    function trimStart(const<String> str):
-        return new String(_native("std", "string", "trimStart_b", _str(_value), _str(str)));
+    function trimStart(const<String> str) => new String(_native("std", "string", "trimStart_b", _str(_value), _str(str)));
 
     // Trim end string
-    function trimEnd(const<String> str):
-        return new String(_native("std", "string", "trimEnd_b", _str(_value), _str(str)));
+    function trimEnd(const<String> str) => new String(_native("std", "string", "trimEnd_b", _str(_value), _str(str)));
 
         // Trim string
-    function trim():
-        return new String(_native("std", "string", "trim", _str(_value)));
+    function trim() => new String(_native("std", "string", "trim", _str(_value)));
 
     // Trim start string
-    function trimStart():
-        return new String(_native("std", "string", "trimStart", _str(_value)));
+    function trimStart() => new String(_native("std", "string", "trimStart", _str(_value)));
 
     // Trim end string
-    function trimEnd():
-        return new String(_native("std", "string", "trimEnd", _str(_value)));
+    function trimEnd() => new String(_native("std", "string", "trimEnd", _str(_value)));
 
     // Cut string by 'startPos' and 'length'
     function subString(let<Number> startPos, let<Number> length): {
@@ -246,12 +223,10 @@ class String extends DataType: {
     }
 
     // get index of first 'toFind'
-    function indexOf(const<String> toFind):
-        return _native("std", "string", "indexOf", _value, toFind);
+    function indexOf(const<String> toFind) => _native("std", "string", "indexOf", _value, toFind);
 
     // get index of last 'toFind'
-    function lastIndexOf(const<String> toFind):
-        return _native("std", "string", "lastIndexOf", _value, toFind);
+    function lastIndexOf(const<String> toFind) => _native("std", "string", "lastIndexOf", _value, toFind);
 
     // Replace '{n}' to replacement
     function format(const<Collection> replacement): {

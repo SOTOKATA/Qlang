@@ -2,11 +2,9 @@ import "$lib/core"
 
 const object = new Object();
 class Object: {
-    function<Boolean> isNull(let obj):
-        return _native("std", "object", "is_null", obj);
+    function<Boolean> isNull(let obj) => _native("std", "object", "is_null", obj);
 
-    function<String> getType():
-        return _native("std", "object", "get_type", this);
+    function<String> getType() => _native("std", "object", "get_type", this);
 
     function<Boolean> isSimplify(const val): 
         return _native("std", "object", "is_simplify", val);
