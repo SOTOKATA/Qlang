@@ -132,20 +132,12 @@ class String extends DataType: {
     function length() => _native("std", "string", "length", _str(_value));
 
     // Check if string is empty or null
-    function isNullOrEmpty(const<String|null> str): {
-        if object.isNull(str):
-            return true;
-
-        return _native("std", "string", "isNullOrEmpty", _str(str));
-    }
+    function isNullOrEmpty(const<String|null> str)
+        => if typeof(str) == null ? true : _native("std", "string", "isNullOrEmpty", _str(str));
     
     // Check if string is white space or null
-    function isNullOrWhitespace(const<String|null> str): {
-        if object.isNull(str):
-            return true;
-
-        return _native("std", "string", "isNullOrWhitespace", _str(str));
-    }
+    function isNullOrWhitespace(const<String|null> str)
+        => if typeof(str) == null ? true : _native("std", "string", "isNullOrWhitespace", _str(str));
 
     function<Boolean> startsWith(const<String> str) => _native("std", "string", "startsWith", _str(_value), str);
 
@@ -194,7 +186,7 @@ class String extends DataType: {
             ).getCollection());
     }
 
-    private function<Boolean> throwIfNotInRange(const<Number> index):
+    private function throwIfNotInRange(const<Number> index):
         if index < 0 && index >= length():
             std::throw.message(`Index '{index}' is out of range.`);
 }

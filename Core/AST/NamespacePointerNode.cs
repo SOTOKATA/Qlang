@@ -4,11 +4,8 @@ using MessagePack;
 
 namespace Core.AST;
 [MessagePackObject]
-public class NamespacePointerNode : ASTNode
+public class NamespacePointerNode : CallPartNode
 {
-    [Key(0)]
-    
-    public int NameId { get; set; }
     
     public override string GetTree(string indent = "")
     {
@@ -26,6 +23,7 @@ public class NamespacePointerNode : ASTNode
         return new NamespacePointerNode
         {
             NameId = NameId,
+            IsNullable = IsNullable
         };
     }
 }

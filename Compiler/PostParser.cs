@@ -92,22 +92,13 @@ public class PostParser(SourceFileTable? table, DebugTable? debugTable, StringPo
             foreach (var @using in usings)
             {
                 var usingNames = @using.CallPath.Objects.Select((x) =>
-                {
-                    return x switch
-                    {
-                        NamespacePointerNode p => p.NameId,
-                        ObjectPointerNode p => p.NameId,
-                        FunctionPointerNode p => p.NameId,
-                    };
-                }).ToList();
+                    (x as CallPartNode).NameId).ToList();
                 
                 var callNames = call.Objects.Select((x) =>
                 {
                     return x switch
                     {
-                        NamespacePointerNode p => p.NameId,
-                        ObjectPointerNode p => p.NameId,
-                        FunctionPointerNode p => p.NameId,
+                        CallPartNode p => p.NameId,
                         _ => -1
                     };
                 }).ToList();

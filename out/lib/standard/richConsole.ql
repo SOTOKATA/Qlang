@@ -6,14 +6,7 @@ namespace std: {
 
             const colors = std::console.getColors();
 
-            let biggestLength = 0;
-            keywords.forEach(function(const keyword): {
-                biggestLength = std::math.max(biggestLength, keyword.length());
-            });
-
-            colors.forEach(function(const color): {
-                biggestLength = std::math.max(biggestLength, color.length());
-            });
+            let biggestLength = math.max(keywords.select(fn(const x) => x.length()).max(), colors.select(fn(const x) => x.length()).max());
 
             std::console.println("\nRich tag test:");
             std::console.println(new String("-", 10));
@@ -53,7 +46,7 @@ namespace std: {
                         isCode = true;
 
                         if text != "": {
-                            std::console.print(text);
+                            console.print(text);
                             text = "";
                         }
                     }

@@ -157,11 +157,15 @@ public partial class Interpreter
 
         object? returnVal = null;
         for (var i = 0; i < call.Objects.Count; i++)
-            returnVal = ExecuteObjectCall(call.Objects[i], returnVal, stack, i == 0);
+        {
+            (returnVal, var @break) = ExecuteObjectCall(call.Objects[i], returnVal, stack, i == 0);
+            if (@break)
+                break;
+        }
         return returnVal;
     }
 
-    private object? ExecuteObjectCall(ASTNode obj, object? lastReturnValue, Stack<ASTContext> stack, bool isPathStart = false)
+    private (object?, bool) ExecuteObjectCall(ASTNode obj, object? lastReturnValue, Stack<ASTContext> stack, bool isPathStart = false)
     {
         switch (obj)
         {
@@ -169,7 +173,7 @@ public partial class Interpreter
             {
                 var @namespace = FindNamespace(namespacePointer, lastReturnValue, isPathStart, stack);
 
-                return @namespace;
+                return (@namespace, false);
             }
             case FunctionPointerNode fn:
             {
@@ -181,9 +185,12 @@ public partial class Interpreter
                 CurrentContext(stack)!.AllowPrivateCall = false;
 
                 if (function.function is null && _stringPoolTable[fn.NameId] == "toString")
-                    return lastReturnValue?.ToString() ?? null;
+                    return (lastReturnValue?.ToString() ?? null, false);
                 
-                return ExecuteFunction(function.function, function.args ?? [], function.@class, function.@namespace, stack);
+                var funcReturnValue = ExecuteFunction(function.function, function.args ?? [], function.@class, function.@namespace,
+                    stack);
+                
+                return (funcReturnValue, funcReturnValue == null && fn.IsNullable);
             }
             case ObjectPointerNode objCall:
                 if (!isPathStart)
@@ -194,9 +201,12 @@ public partial class Interpreter
                 if (objectAndNamespace.@object is Variable var)
                     objectAndNamespace.@object = var.Value;
                 
-                return objectAndNamespace.@object;
+                if (objectAndNamespace.@object is null && objCall.IsNullable)
+                    return (null, true);
+                
+                return (objectAndNamespace.@object, false);
             default:
-                return EvaluateExpression(obj, stack);
+                return (EvaluateExpression(obj, stack), false);
         }
     }
 
@@ -282,6 +292,9 @@ public partial class Interpreter
                 return (pair.function, pair.args, dClass, @namespace.Value);
             }
         }
+        
+        if (lastObject is null && node.IsNullable)
+            return (null, [], null, null);
 
         if (_stringPoolTable[node.NameId] == "toString" && lastObject is not null)
             return (null, null, null, null);
@@ -376,6 +389,9 @@ public partial class Interpreter
 
         if (lastObject is null)
         {
+            if (node.IsNullable)
+                return (null, null);
+            
             throw new QlangRuntimeException($"Object '{nodeName}' is not found in current context.  PF:{CurrentContext(stack)?.ParentFunction?.Name} F:{CurrentContext(stack)?.Function?.Name}",
                 GetCurrentDebug(stack), GetStackTrace(stack));
         }

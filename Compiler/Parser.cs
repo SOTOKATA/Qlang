@@ -185,11 +185,24 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
 
         Expect(Tokens.Question);
 
+        var isNullable = Check(Tokens.Question);
+        if (isNullable) 
+            Advance();
+
         var then = ParseExpression();
 
-        Expect(Tokens.Colon);
+        if (!isNullable)
+            Expect(Tokens.Colon);
 
-        var @else = ParseExpression();
+        var @else = isNullable ? condition : ParseExpression();
+
+        if (isNullable)
+            condition = new BinaryOperationNode
+            {
+                Left = condition,
+                Right = new KeywordNode { KeywordId = stringPoolTable.Add(Keywords.NullKeyword) },
+                OperatorId = stringPoolTable.Add("==")
+            };
         
         return new ShortHandIfNode
         {
@@ -1221,6 +1234,8 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             Expect(Tokens.Keyword);
         }
 
+        var isNullable = false;
+
         if (Current().TokenType != Tokens.Identifier)
             return current;
 
@@ -1245,13 +1260,19 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             current = new FunctionPointerNode
             {
                 NameId = stringPoolTable.Add(identifier),
-                Arguments = args
+                Arguments = args,
+                IsNullable = Check(Tokens.Question) && Peek()?.TokenType == Tokens.Dot
             };
         }
 
+        isNullable = Check(Tokens.Question) && Peek()?.TokenType == Tokens.Dot;
+        if (isNullable)
+            Advance();
+
         current ??= new ObjectPointerNode
         {
-            NameId = stringPoolTable.Add(identifier)
+            NameId = stringPoolTable.Add(identifier),
+            IsNullable = isNullable
         };
 
         // Parse assign path 

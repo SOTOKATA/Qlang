@@ -4,29 +4,27 @@ using MessagePack;
 
 namespace Core.AST;
 [MessagePackObject]
-public class ObjectPointerNode : ASTNode
+public class ObjectPointerNode : CallPartNode
 {
-    [Key(0)]
-    
-    public int NameId;
-    
     public override string GetTree(string indent = "")
     {
         return DebugIndent($"""
                             ObjectPointerNode:
                                 Name: {NameId}
+                                IsNullable: {IsNullable}
                             """,
             indent);
     }
 
     public override string ToTokenString(StringPoolTable stringPoolTable)
-        => stringPoolTable[NameId];
+        => stringPoolTable[NameId] + (IsNullable ? "?" : "");
 
     public override ASTNode Clone()
     {
         return new ObjectPointerNode
         {
-            NameId = NameId
+            NameId = NameId,
+            IsNullable = IsNullable,
         };
     }
 }

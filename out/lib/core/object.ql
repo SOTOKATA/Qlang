@@ -8,23 +8,12 @@ class Object: {
 
     function<Boolean> isSimplify(const val) => _native("std", "object", "is_simplify", val);
 
-    function<String> toString(const obj): {
-        if isNull(obj):
-            return "<null>";
-            
-        return _native("std", "string", "toString", obj);
-    }
+    function<String> toString(const obj)
+        => if typeof(obj) == "null" ? "<null>" : _native("std", "string", "toString", obj);
 
-    function<String> toString(): {
-        if isNull(this):
-            return "<null>";
-            
-        return _native("std", "string", "toString", this);
-    } 
+    function<String> toString() => toString(this);
 }
 
-function<String> str(const obj):
-    return object.toString(obj);
+function<String> str(const obj) => object.toString(obj);
 
-function<String> valueOrStrNull(const value):
-    return if object.isNull(value) ? "null" : value.toString();
+function<String> valueOrStrNull(const value) => if object.isNull(value) ? "null" : value.toString();
