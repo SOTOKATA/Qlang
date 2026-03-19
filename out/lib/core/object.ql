@@ -6,8 +6,7 @@ class Object: {
 
     function<String> getType() => _native("std", "object", "get_type", this);
 
-    function<Boolean> isSimplify(const val): 
-        return _native("std", "object", "is_simplify", val);
+    function<Boolean> isSimplify(const val) => _native("std", "object", "is_simplify", val);
 
     function<String> toString(const obj): {
         if isNull(obj):

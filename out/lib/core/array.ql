@@ -89,7 +89,7 @@ class Array extends DataType: {
     function<Number> length() =>_native("std", "array", "count", _value);
     function count() => length();
 
-    function forEach(const func): {
+    function forEach(const<Func> func): {
         const length = length();
 
         for let i = 0; i < length; i++:
@@ -114,10 +114,6 @@ class Array extends DataType: {
 
     function last() => at(length() - 1);
 
-    private function callExceptionNotFunc(const func):
-        if typeof(func) != "~function":
-            std::throw.message("Unsupported type of function: " + typeof(func));
-
     function max(): {
         let max = std::math.MIN_VALUE;
 
@@ -140,24 +136,19 @@ class Array extends DataType: {
         return min;
     }
 
-    function where(const func): {
-        callExceptionNotFunc(func);
-
+    function where(const<Func> func): {
         const length = length();
 
         const arr = new Array([]);
 
-        for let i = 0; i < length; i++: {
+        for let i = 0; i < length; i++:
             if func(at(i)):
                 arr.push(at(i));
-        }
 
         return arr;
     }
 
-    function select(const func): {
-        callExceptionNotFunc(func);
-
+    function select(const<Func> func): {
         const length = length();
 
         const arr = new Array([]);
@@ -168,9 +159,7 @@ class Array extends DataType: {
         return arr;
     }
 
-    function count(const func): {
-        callExceptionNotFunc(func);
-
+    function count(const<Func> func): {
         const length = length();
         let count = 0;
 
@@ -181,9 +170,7 @@ class Array extends DataType: {
         return count;
     }
 
-    function<Boolean> any(const func): {
-        callExceptionNotFunc(func);
-
+    function<Boolean> any(const<Func> func): {
         const length = length();
         
         let isAny = false;
@@ -198,9 +185,7 @@ class Array extends DataType: {
         return false;
     }
 
-    function firstOrDefault(const func): {
-        callExceptionNotFunc(func);
-
+    function firstOrDefault(const<Func> func): {
         const length = length();
 
         for let i = 0; i < length; i++: {

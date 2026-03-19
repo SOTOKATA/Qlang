@@ -60,8 +60,8 @@ public partial class Interpreter
                 }
                 
                 return @class.ToString();
-            case FunctionNode fn:
-                return _stringPoolTable[fn.NameId];
+            case FunctionNode:
+                return "Func";
             case List<object?>:
                 return "Collection";
             case int or long or double or float:
@@ -79,7 +79,7 @@ public partial class Interpreter
                         {
                             case "Nullable":
                                 return Keywords.NullKeyword;
-                            case "Collection" or "Number" or "Boolean":
+                            case "Collection" or "Number" or "Boolean" or "Func":
                                 return _stringPoolTable[pointer.NameId];
                         }
                     }

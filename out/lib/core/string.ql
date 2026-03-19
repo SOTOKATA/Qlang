@@ -62,12 +62,8 @@ class String extends DataType: {
     function _operatorLess(const obj1, const obj2): 
         return obj1.length() < obj2.length();
 
-    function new(const input): {
-        if isString(input):
-            _value = input.getValue();
-        else:
-            _value = str(input);
-    }
+    function new(const input):
+        _value = if typeof(input) == "String" ? input.getValue() : str(input);
 
     function new(const<String> char, let<Number> count): {
         count = std::math.round(count, 0);
@@ -85,7 +81,7 @@ class String extends DataType: {
         if object.isNull(strOrPrimite):
             std::throw.message("Object is null");
 
-        if isString(strOrPrimite):
+        if typeof(strOrPrimite) == "String":
             return strOrPrimite.toString();
 
         if isPrimitive(strOrPrimite):
@@ -97,29 +93,14 @@ class String extends DataType: {
         std::throw.message("Object is not string or primitive");
     }
 
-    private function _checkIsCollection(let value): {
-        if !array.isCollection(value): {
-            std::throw.parceException("argument is not collection");
-        }
-    }
-
-    private function _checkIsArray(let value): {
-        if typeof(value) != "Array": {
-            std::throw.parceException("argument is not array");
-        }
-    }
-
     // Append two strings
-    function append(let collection): {
-        _checkIsCollection(collection);
-
+    function append(const<Array|Collection> collection): {
         let result = "";
 
         let arr = new Array(collection);
 
-        for let i = 0; i < arr.length(); i++: {
+        for let i = 0; i < arr.length(); i++:
             result = result + arr.at(i);
-        }
 
         return new String(result);
     }
@@ -128,108 +109,82 @@ class String extends DataType: {
 
     function toUpper() => new String(_native("std", "string", "toUpper", _str(_value)));
 
-    function isString(let value): {
-        value =  _native("std", "string", "isStr", value);
-        return value;
-    }
-
     function isPrimitive(let value) => _native("std", "string", "isPrimitive", value);
 
     function split(let<String> pattern) => new Array(_native("std", "string", "split", _str(_value), _str(pattern)));
 
     function charAt(const<Number> index): {
-        if length() <= index:
-            std::throw.message("The index must be less than the length of the ");
+        throwIfNotInRange(index);
 
         return _native("std", "string", "at", _str(_value), index);
     }
 
     function setAt(const<Number> index, const<String> replaceValue): {
-        if length() <= index:
-            std::throw.message("The index must be less than the length of the ");
+        throwIfNotInRange(index);
 
         _value = _native("std", "string", "setAt", _str(_value), _str(replaceValue), index);
     }
 
-    function join(let strArr, let<String> pattern): {
-        if !array.isCollection(strArr) && (typeof(strArr) != "Array"):
-            std::throw.message("argument is not collection or array");
-
-        if typeof(strArr) == "Array":
-            strArr = strArr.getCollection();
-
-        return new String(_native("std", "string", "join", strArr, pattern));
-    }
+    function join(const<Collection|Array> strArr, let<String> pattern)
+    => new String(_native("std", "string", "join", strArr.getCollection(), pattern));
 
     // Get length of string
     function length() => _native("std", "string", "length", _str(_value));
 
     // Check if string is empty or null
-    function isNullOrEmpty(let str): {
+    function isNullOrEmpty(const<String|null> str): {
         if object.isNull(str):
             return true;
-
-        if !isPrimitive(str) && !isString(str):
-            std::throw.message("Param must be string class or primitive");
-
-        if isString(str):
-            str = str.toString();
 
         return _native("std", "string", "isNullOrEmpty", _str(str));
     }
     
     // Check if string is white space or null
-    function isNullOrWhitespace(let str): {
+    function isNullOrWhitespace(const<String|null> str): {
         if object.isNull(str):
             return true;
-
-        if !isPrimitive(str) && !isString(str):
-            std::throw.message("Param must be string class or primitive");
-
-        if isString(str): 
-            str = str.toString();
 
         return _native("std", "string", "isNullOrWhitespace", _str(str));
     }
 
-    function startsWith(const<String> str) => _native("std", "string", "startsWith", _str(_value), str);
+    function<Boolean> startsWith(const<String> str) => _native("std", "string", "startsWith", _str(_value), str);
 
-    function endsWith(const<String> str) => _native("std", "string", "endsWith", _str(_value), str);
+    function<Boolean> endsWith(const<String> str) => _native("std", "string", "endsWith", _str(_value), str);
 
     // Trim string
-    function trim(const<String> str) => new String(_native("std", "string", "trim_b", _str(_value), _str(str)));
+    function<String> trim(const<String> str) => new String(_native("std", "string", "trim_b", _str(_value), _str(str)));
 
     // Trim start string
-    function trimStart(const<String> str) => new String(_native("std", "string", "trimStart_b", _str(_value), _str(str)));
+    function<String> trimStart(const<String> str) => new String(_native("std", "string", "trimStart_b", _str(_value), _str(str)));
 
     // Trim end string
-    function trimEnd(const<String> str) => new String(_native("std", "string", "trimEnd_b", _str(_value), _str(str)));
+    function<String> trimEnd(const<String> str) => new String(_native("std", "string", "trimEnd_b", _str(_value), _str(str)));
 
-        // Trim string
-    function trim() => new String(_native("std", "string", "trim", _str(_value)));
+    // Trim string
+    function<String> trim() => new String(_native("std", "string", "trim", _str(_value)));
 
     // Trim start string
-    function trimStart() => new String(_native("std", "string", "trimStart", _str(_value)));
+    function<String> trimStart() => new String(_native("std", "string", "trimStart", _str(_value)));
 
     // Trim end string
-    function trimEnd() => new String(_native("std", "string", "trimEnd", _str(_value)));
+    function<String> trimEnd() => new String(_native("std", "string", "trimEnd", _str(_value)));
 
     // Cut string by 'startPos' and 'length'
-    function subString(let<Number> startPos, let<Number> length): {
-        if length() <= length:
-            std::throw.message("Value 'length' can't be more than string length");
+    function<String> subString(let<Number> startPos, let<Number> length): {
+        throwIfNotInRange(startPos);
+        throwIfNotInRange(length);
 
         return new String(_native("std", "string", "subString", _str(_value), startPos, length));
     }
 
     // get index of first 'toFind'
-    function indexOf(const<String> toFind) => _native("std", "string", "indexOf", _value, toFind);
+    function<String> indexOf(const<String> toFind) => _native("std", "string", "indexOf", _value, toFind);
 
     // get index of last 'toFind'
-    function lastIndexOf(const<String> toFind) => _native("std", "string", "lastIndexOf", _value, toFind);
+    function<String> lastIndexOf(const<String> toFind) => _native("std", "string", "lastIndexOf", _value, toFind);
 
     // Replace '{n}' to replacement
-    function format(const<Collection> replacement): {
+    function<String> format(const<Collection|Array> replacement): {
         if replacement.length() == 0:
             return _value;
 
@@ -238,4 +193,8 @@ class String extends DataType: {
                 fn(const x) => x.toString()
             ).getCollection());
     }
+
+    private function<Boolean> throwIfNotInRange(const<Number> index):
+        if index < 0 && index >= length():
+            std::throw.message(`Index '{index}' is out of range.`);
 }
