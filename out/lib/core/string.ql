@@ -19,6 +19,9 @@ class String extends DataType: {
     function _operatorMultiplication(const obj1, let obj2): {
         let val = "";
 
+        if typeof(obj2) != "Number":
+            std::throw.message("Cannot apply multiplication");
+
         obj2 = <Number>obj2.getValue();
 
         for let i = 0; i < obj2; i++:
@@ -77,7 +80,7 @@ class String extends DataType: {
         _value = _native("std", "string", "create", char, count);
     }
 
-    function getPrimitive(const strOrPrimite, let allowOther = false): {
+    function getPrimitive(const strOrPrimite, let<Boolean> allowOther = false): {
         if object.isNull(strOrPrimite):
             std::throw.message("Object is null");
 

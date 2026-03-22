@@ -628,6 +628,11 @@ public partial class Interpreter
         
         if (!isPrivateCall && classNode.IsPrivate)
             throw new QlangRuntimeException($"Cannot instantiate private class '{_stringPoolTable[classNode.NameId]}'", GetCurrentDebug(stack), GetStackTrace(stack));
+        
+        AddContext(stack, new ASTContext
+        {
+            Namespace = @namespace,
+        });
 
         return classNode;
     }

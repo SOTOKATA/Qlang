@@ -105,6 +105,9 @@ namespace std:  {
             x = math.round(x);
             y = math.round(y);
 
+            if (x < 0 || x >= console.width()) || (y < 0 || y >= console.height()):
+                throw.message("Size is out of range.");
+
             _native("std", "console", "cursor_position", x, y);
         }
 
