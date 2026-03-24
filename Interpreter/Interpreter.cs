@@ -335,10 +335,11 @@ public partial class Interpreter
     /// </summary>
     /// <param name="classNode">Copy of class to create</param>
     /// <param name="args">Arguments for function 'new'</param>
+    /// <param name="namespace">Class namespace</param>
     /// <param name="stack">Current context stack</param>
     /// <returns>New instance</returns>
     /// <exception cref="QlangRuntimeException">If was sent invalid parameters</exception>
-    private DynamicClass GetNewClass(ClassNode classNode, List<object?> args, Stack<ASTContext> stack)
+    private DynamicClass GetNewClass(ClassNode classNode, List<object?> args, DynamicNamespace? @namespace, Stack<ASTContext> stack)
     {
         var dClass = ToDynamicClass((ClassNode)classNode.Clone(), stack);
 
@@ -350,7 +351,7 @@ public partial class Interpreter
             throw new QlangRuntimeException($"Can't initialize class '{_stringPoolTable[classNode.NameId]}' with this parameters.", GetStackTrace(stack));
 
         if (fromClass.function != null)
-            ExecuteFunction(ToDynamicFunction(fromClass.function, stack), fromClass.Args, dClass, null, stack);
+            ExecuteFunction(ToDynamicFunction(fromClass.function, stack), fromClass.Args, dClass, @namespace, stack);
 
         return dClass;
     }
@@ -577,15 +578,16 @@ public partial class Interpreter
         var classNode = GetClassNodeByPath(node.NodePath, stack);
         
 
-        return GetNewClass(classNode, pointer.Arguments.ConvertAll(x => EvaluateExpression(x, stack)), stack);
+        return GetNewClass(classNode.@class, pointer.Arguments.ConvertAll(x => EvaluateExpression(x, stack)), classNode.@namespace, stack);
     }
 
-    private DynamicClass ExecutePathToClass(CallNode callNode, Stack<ASTContext> stack)
+    private (DynamicClass @class, DynamicNamespace @namespace) ExecutePathToClass(CallNode callNode, Stack<ASTContext> stack)
     {
-        return ToDynamicClass(GetClassNodeByPath(callNode, stack), stack);
+        var obj = GetClassNodeByPath(callNode, stack);
+        return (ToDynamicClass(obj.@class, stack), obj.@namespace);
     }
 
-    private ClassNode GetClassNodeByPath(CallNode node, Stack<ASTContext> stack)
+    private (ClassNode @class, DynamicNamespace @namespace) GetClassNodeByPath(CallNode node, Stack<ASTContext> stack)
     {
         var pointer = node.Objects[^1];
 
@@ -629,12 +631,7 @@ public partial class Interpreter
         if (!isPrivateCall && classNode.IsPrivate)
             throw new QlangRuntimeException($"Cannot instantiate private class '{_stringPoolTable[classNode.NameId]}'", GetCurrentDebug(stack), GetStackTrace(stack));
         
-        AddContext(stack, new ASTContext
-        {
-            Namespace = @namespace,
-        });
-
-        return classNode;
+        return (classNode, @namespace)!;
     }
 
     /// <summary>
@@ -665,7 +662,7 @@ public partial class Interpreter
         if (Typeof(type, stack) == "String" && @object is not null)
             return @object.ToString();
         
-        return CreateClassFrom(@object, type, stack);
+        return CreateClassFrom(@object, type.@class, stack);
     }
     
     /// <summary>

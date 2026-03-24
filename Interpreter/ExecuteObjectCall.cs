@@ -84,7 +84,7 @@ public partial class Interpreter
                         }
                     }
 
-                    return ExecutePathToClass(call, stack).ClassName;
+                    return ExecutePathToClass(call, stack).@class.ClassName;
                 }
 
                 var type = arg.GetType().Name;
@@ -98,7 +98,7 @@ public partial class Interpreter
         ExecuteObjectCalls(CallNode call, Stack<ASTContext> stack)
     {
         // overriding system calls
-        if (call.Objects.Count > 0 && call.Objects[0] is FunctionPointerNode fn)
+        if (call.Objects.Count > 0 && call.Objects[0] is FunctionPointerNode fn && _stringPoolTable[fn.NameId] is "_str" or "_native" or "typeof" or "nameof")
         {
             var args = fn.Arguments.ConvertAll(x => EvaluateExpression(x, stack)).ToArray();
             
@@ -252,7 +252,7 @@ public partial class Interpreter
             if (funcPair.function is not null)
                 return (ToDynamicFunction(funcPair.function, stack), funcPair.args, null, null);
             
-            throw new QlangRuntimeException($"Function '{_stringPoolTable[node.NameId]}' is not found in current context {(lastObject is null ? "" : $"('{lastObject}')")}",
+            throw new QlangRuntimeException($"Function '{_stringPoolTable[node.NameId]}' with current arguments is not found in current context {(lastObject is null ? "" : $"('{lastObject}')")}",
                 GetCurrentDebug(stack), GetStackTrace(stack));
         }
 
@@ -298,8 +298,6 @@ public partial class Interpreter
 
         if (_stringPoolTable[node.NameId] == "toString" && lastObject is not null)
             return (null, null, null, null);
-        
-        // Console.WriteLine($"Context: Class: {CurrentContext(stack)?.Class?.Name}; Function: {CurrentContext(stack)?.Function?.Name}; Namespace: {CurrentContext(stack)?.Namespace?.Name}");
         
         throw new QlangRuntimeException($"Function '{_stringPoolTable[node.NameId]}' is not found in current context {(lastObject is null ? "" : $"('{lastObject}')")}",
             GetCurrentDebug(stack), GetStackTrace(stack));
@@ -392,7 +390,7 @@ public partial class Interpreter
             if (node.IsNullable)
                 return (null, null);
             
-            throw new QlangRuntimeException($"Object '{nodeName}' is not found in current context.  PF:{CurrentContext(stack)?.ParentFunction?.Name} F:{CurrentContext(stack)?.Function?.Name}",
+            throw new QlangRuntimeException($"Object '{nodeName}' is not found in current context. {string.Join(", ", CurrentContext(stack)?.Class?.Variables.Select(x => x.Key) ?? [])}  PF:{CurrentContext(stack)?.ParentFunction?.Name} F:{CurrentContext(stack)?.Function?.Name}",
                 GetCurrentDebug(stack), GetStackTrace(stack));
         }
         
