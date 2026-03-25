@@ -154,7 +154,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         // assignment
         if (Check(Tokens.Keyword, Keywords.VariableDeclaration) || Check(Tokens.Keyword, Keywords.ConstVariableDeclaration))
         {
-            var var = ParseVariableDeclaration(true, isPrivate, Check(Tokens.Keyword, Keywords.ConstVariableDeclaration), true);
+            var var = ParseVariableDeclaration(isPrivate: isPrivate, isConst: Check(Tokens.Keyword, Keywords.ConstVariableDeclaration), isNew: true);
             Expect(Tokens.Semicolon);
             lineNode.Content = var;
             return lineNode;
@@ -310,31 +310,27 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         };
     }
 
-    private AssignmentNode ParseVariableDeclaration(bool canUseType, bool isPrivate = false, bool isConst = false, bool isNew = false)
+    private AssignmentNode ParseVariableDeclaration(bool skipKeyword = false, bool isPrivate = false, bool isConst = false, bool isNew = false)
     {
         ThrowIfIsEnd();
         
-        if (!Check(Tokens.Keyword) ||
+        if (!skipKeyword && (!Check(Tokens.Keyword) ||
             (Current().Value != Keywords.VariableDeclaration &&
-             Current().Value != Keywords.ConstVariableDeclaration))
+             Current().Value != Keywords.ConstVariableDeclaration)))
             throw new QlangCompileException($"Undefined keyword for variable: {Token.TokenToString(Current())}. Keywords 'const' or 'let' allowed only.", GetDebug(Current()),"Parser");
-
+        
         // Skip const or let
-        var token = Advance();
+        if (Check(Tokens.Keyword, Keywords.VariableDeclaration) ||
+            Check(Tokens.Keyword, Keywords.ConstVariableDeclaration))
+            Advance();
 
         // Type
-        List<CallNode> types = [];
-        if (Check(Tokens.Less))
-        {
-            if (!canUseType)
-                throw new QlangCompileException(
-                    "Using variables with types is only possible with function arguments", GetDebug(token), "Parser");
-            else types = ParseVariableTypes();
-        }
+        var types = Check(Tokens.Less) ? ParseVariableTypes() : [];
 
         // Except var name
-        var name = Expect(Tokens.Identifier).Value;
-
+        var token = Expect(Tokens.Identifier);
+        var name = token.Value;
+        
         ASTNode? value = null;
         // Set if exists value
         if (Current().TokenType == Tokens.Equals)
@@ -477,7 +473,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         {
             if (Check(Tokens.Keyword))
             {
-                parameters.Add(ParseVariableDeclaration(true));
+                parameters.Add(ParseVariableDeclaration());
                 continue;
             }
 
@@ -550,9 +546,9 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
     {
         Expect(Tokens.Keyword, Keywords.ForBlock);
 
-        var assignment = ParseVariableDeclaration(true, false,
-            Check(Tokens.Keyword) && Current().Value == Keywords.ConstVariableDeclaration,
-            true);
+        var assignment = ParseVariableDeclaration(isPrivate: false,
+            isConst: Check(Tokens.Keyword) && Current().Value == Keywords.ConstVariableDeclaration,
+            isNew: true);
         Expect(Tokens.Semicolon);
         var condition = ParseExpression();
         Expect(Tokens.Semicolon);
@@ -583,7 +579,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
 
         var assignment = new LineNode(token.DebugIndex)
         {
-            Content = ParseVariableDeclaration(true, false, true)
+            Content = ParseVariableDeclaration(isPrivate: false, isConst: true)
         };
         
         Expect(Tokens.RParen);
@@ -1031,7 +1027,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             (Peek()?.TokenType == Tokens.LParen || Peek()?.TokenType == Tokens.Less))
         {
             // Advance 'function' or 'fn'
-            Advance();
+            var token = Advance();
 
             // Type
             var returnTypes = Check(Tokens.Less) ? ParseVariableTypes() : [];
@@ -1046,20 +1042,16 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             List<AssignmentNode> parameters = [];
             while (!Check(Tokens.RParen))
             {
-                if (Check(Tokens.Keyword, Keywords.ConstVariableDeclaration) ||
-                    Check(Tokens.Keyword, Keywords.VariableDeclaration))
-                {
-                    parameters.Add(ParseVariableDeclaration(true));
-                    continue;
-                }
+                if (Check(Tokens.Keyword, Keywords.VariableDeclaration))
+                    throw new QlangCompileException("Cannot instantiate variable as non const value", GetDebug(token), "Parser");
+                
                 if (Check(Tokens.Comma))
                 {
                     Advance();
                     continue;
                 }
-                
-                if (!Check(Tokens.RParen))
-                    throw new QlangCompileException("Undefined function parameter: " + Token.TokenToString(Current()), GetDebug(Current()), "Parser");
+
+                parameters.Add(ParseVariableDeclaration(true, isConst: true));
             }
             // Advance ')'
             Advance();
@@ -1095,7 +1087,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
                     Check(Tokens.Keyword, Keywords.VariableDeclaration))
                 {
                     var debugIndex = Current().DebugIndex;
-                    @class.Body.Add(new LineNode(debugIndex) { Content = ParseVariableDeclaration(true, false, Check(Tokens.Keyword, Keywords.ConstVariableDeclaration)) });
+                    @class.Body.Add(new LineNode(debugIndex) { Content = ParseVariableDeclaration(isPrivate: false, isConst: Check(Tokens.Keyword, Keywords.ConstVariableDeclaration)) });
                     continue;
                 }
                 if (Check(Tokens.Comma))

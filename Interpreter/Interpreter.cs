@@ -766,11 +766,22 @@ public partial class Interpreter
             leftClass = lc;
         else
             rightClass = (DynamicClass)right;
-
-        leftClass ??= CreateClassFrom(left, rightClass!, stack);
-        rightClass ??= CreateClassFrom(right, leftClass, stack);
-
+        
         var originalOperator = _stringPoolTable[binOp.OperatorId];
+
+        try
+        {
+            leftClass ??= CreateClassFrom(left, rightClass!, stack);
+            rightClass ??= CreateClassFrom(right, leftClass, stack);
+        }
+        catch
+        {
+            if (originalOperator.Any(c => c is '=' or '!'))
+                return false;
+
+            throw;
+        }
+        
         if (originalOperator.Any(c => c is '=' or '>' or '<' or '!' or '*' or '/' or '%' or '+' or '-'))
         {
             var @operator = "";
