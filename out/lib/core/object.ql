@@ -6,14 +6,14 @@ class Object: {
 
     function<String> getType() => _native("std", "object", "get_type", this);
 
-    function<Boolean> isSimplify(const val) => _native("std", "object", "is_simplify", val);
+    function<Boolean> isSimplify(val) => _native("std", "object", "is_simplify", val);
 
-    function<String> toString(const obj)
+    function<String> toString(obj)
         => if typeof(obj) == "null" ? "<null>" : _native("std", "string", "toString", obj);
 
     function<String> toString() => toString(this);
 }
 
-function<String> str(const obj) => object.toString(obj);
+function<String> str(obj) => if object.toString(obj) ?? "<null>";
 
-function<String> valueOrStrNull(const value) => if object.isNull(value) ? "null" : value.toString();
+function<String> valueOrStrNull(value) => if object.isNull(value) ? "null" : value.toString();

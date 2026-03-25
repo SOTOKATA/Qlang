@@ -10,27 +10,27 @@ namespace std:  {
         const E = _native("std", "math", "e");
         const TAU = _native("std", "math", "tau");
 
-        function<Number> max(const<Number> a, const<Number> b) => if a > b ? a : b;
+        function<Number> max(<Number> a, <Number> b) => if a > b ? a : b;
 
-        function<Number> min(const<Number> a, const<Number> b) => if a < b ? a : b;
+        function<Number> min(<Number> a, <Number> b) => if a < b ? a : b;
 
-        function<Number> rand(const<Number> min, const<Number> max): {
+        function<Number> rand(<Number> min, <Number> max): {
             if min >= max:
                 throw.message("Min cannot be more than or equal to max.");
 
             return _native("std", "math", "random", min, max);
         }
 
-        function<Number> abs(const<Number> n) => 0-n;
+        function<Number> abs(<Number> n) => 0-n;
         
-        function<Number> pow(const number, const pow) => _native("std", "math", "pow", number, pow);
+        function<Number> pow(number, pow) => _native("std", "math", "pow", number, pow);
 
-        function<Number> sin(const<Number> radians):
+        function<Number> sin(<Number> radians):
             return _native("std", "math", "sin", radians);
  
-        function<Number> cos(const<Number> radians) => _native("std", "math", "cos", radians);
+        function<Number> cos(<Number> radians) => _native("std", "math", "cos", radians);
 
-        function<Number> tan(const<Number> radians): {
+        function<Number> tan(<Number> radians): {
             const cos = cos(radians);
 
             if cos == 0:
@@ -39,7 +39,7 @@ namespace std:  {
             return sin(radians) / cos;
         }
     
-        function<Number> ctan(const<Number> radians): {
+        function<Number> ctan(<Number> radians): {
             const sin = sin(radians);
 
             if sin == 0:
@@ -48,7 +48,7 @@ namespace std:  {
             return cos(radians) / sin;
         }
 
-        function round(const<Number> value, const<Number> afterDot = 0)
+        function round(<Number> value, <Number> afterDot = 0)
             => _native("std", "math", "round", value, afterDot);
     }
 }

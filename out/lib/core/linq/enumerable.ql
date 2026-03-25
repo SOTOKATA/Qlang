@@ -7,7 +7,7 @@ namespace linq: {
         private let _source;
         private let _predicate;
 
-        function new(const<Enumerable|null> source, const<Func|null> predicate): {
+        function new(<Enumerable|null> source, <Func|null> predicate): {
             _source = source;
             _predicate = predicate;
         }
@@ -32,7 +32,7 @@ namespace linq: {
             return if typeof(item) != "null" ? item : null;
         }
 
-        function<Boolean> any(const<Func|null> predicate): {
+        function<Boolean> any(<Func|null> predicate): {
             let item = this.next();
 
             while typeof(item) != "null": {
@@ -48,7 +48,7 @@ namespace linq: {
             return false;
         }
 
-        function<Boolean> all(const<Func> predicate): {
+        function<Boolean> all(<Func> predicate): {
             let item = this.next();
 
             while typeof(item) != "null": {
@@ -115,7 +115,7 @@ namespace linq: {
             return minVal; 
         }
 
-        function where(const<Func> func) => new WhereEnumerable(this, func); 
-        function select(const<Func> func) => new SelectEnumerable(this, func); 
+        function where(<Func> func) => new WhereEnumerable(this, func); 
+        function select(<Func> func) => new SelectEnumerable(this, func); 
     }
 }

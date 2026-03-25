@@ -6,12 +6,12 @@ namespace std: {
 
             const colors = std::console.getColors();
 
-            let biggestLength = math.max(keywords.select(fn(const x) => x.length()).max(), colors.select(fn(const x) => x.length()).max());
+            let biggestLength = math.max(keywords.select(fn(x) => x.length()).max(), colors.select(fn(x) => x.length()).max());
 
             std::console.println("\nRich tag test:");
             std::console.println(new String("-", 10));
 
-            keywords.forEach(function(const keyword): {
+            keywords.forEach(function(keyword): {
                 const spaces = new String(" ") * std::math.max(0, biggestLength - keyword.length());
 
                 richPrint(`{keyword}:{spaces.toString()} [{keyword}]Hello, World![/{keyword}]\n`);
@@ -19,7 +19,7 @@ namespace std: {
 
             std::console.println();
 
-            colors.forEach(function(const keyword): {
+            colors.forEach(function(keyword): {
                 const spaces = new String(" ") * std::math.max(0, biggestLength - keyword.length());
 
                 richPrint(`{keyword}:{spaces.toString()} [color={keyword}]Hello, World![/color]\n`);
@@ -29,7 +29,7 @@ namespace std: {
             std::console.println(new String("-", 10) + "\n");
         }
 
-        function richPrint(const<String> message): {
+        function richPrint(<String> message): {
             const length = message.length();
             
             let isCode = false;

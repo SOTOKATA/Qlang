@@ -7,10 +7,10 @@ namespace linq: {
         private let _arr;
         private let _index = -1;
 
-        function new(const<Array|Collection> arr):
+        function new(<Array|Collection> arr):
             _arr = new Array(arr);
 
-        function new(const a, const b):
+        function new(a, b):
             throw.message("Cannot instantiate ArraySource with Enumerable params.");
 
         function next(): {

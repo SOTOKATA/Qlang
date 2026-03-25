@@ -9,10 +9,10 @@ class DataType extends Object: {
     function getValue() => _value;
 
     // Cast object to DataType
-    function _cast(const object): std::throw.notImplementedException();
+    function _cast(object): std::throw.notImplementedException();
 
     // Create new DataType instance
-    function _createFrom(const object): std::throw.notImplementedException();
+    function _createFrom(object): std::throw.notImplementedException();
 
     // Aritmetic operation addition
     function _operatorAddition(): std::throw.notImplementedException();

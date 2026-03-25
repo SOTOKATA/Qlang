@@ -6,11 +6,11 @@ namespace fs: {
     private class File: {
         // Return type: bool
         // Returns true if file found
-        function<Boolean> exists(const<String> path):
+        function<Boolean> exists(<String> path):
             return _native("std", "filesystem", "file_exists", path);
 
         // Override file content
-        function setContent(const<String> path, const<String> content): {
+        function setContent(<String> path, <String> content): {
             if !exists(path):
                 create(path);
 
@@ -18,7 +18,7 @@ namespace fs: {
         }
 
         // Append content to end file
-        function appendContent(const<String> path, const<String> content): {
+        function appendContent(<String> path, <String> content): {
             if !exists(path):
                 std::throw.message("file path '" + path + "' is not found");
 
@@ -27,7 +27,7 @@ namespace fs: {
 
         // Return type: string
         // Get file content
-        function<String> getContent(const<String> path): {
+        function<String> getContent(<String> path): {
             if !exists(path):
                 std::throw.message("file path '" + path + "' is not found");
 
@@ -35,11 +35,11 @@ namespace fs: {
         }
 
         // Create file
-        function create(const<String> path):
+        function create(<String> path):
             _native("std", "filesystem", "file_create", path);
 
         // Remove file
-        function remove(const<String> path): {
+        function remove(<String> path): {
             if !exists(path):
                 std::throw.message("file path '" + path + "' is not found");
 

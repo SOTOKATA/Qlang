@@ -7,7 +7,7 @@ class Array extends DataType: {
     private let<String|null> _type = null;
 
     // Create empty array
-    function new(const<Collection|Array> arr = [], const<String|null> type = null): {
+    function new(<Collection|Array> arr = [], <String|null> type = null): {
         _value = arr.getCollection();
     
         _type = type;
@@ -29,16 +29,16 @@ class Array extends DataType: {
         return str.toString();
     }
 
-    function join(const<String> char) => string.join(this, char);
+    function join(<String> char) => string.join(this, char);
 
-    function<Boolean> isCollection(const collection) => _native("std", "array", "is", collection);
+    function<Boolean> isCollection(collection) => _native("std", "array", "is", collection);
 
     function<Collection> getCollection() => _value;
 
-    function<Boolean> contains(const item) => _native("std", "array", "contains", _value, item);
+    function<Boolean> contains(item) => _native("std", "array", "contains", _value, item);
 
     // Add element
-    function push(const item): {
+    function push(item): {
         if _type != null && typeof(item) != _type:
             throw.message("Element type does not match array type.");
 
@@ -46,10 +46,10 @@ class Array extends DataType: {
     }
 
     // Add element
-    function pushMany(const<Array|Collection> items): {
+    function pushMany(<Array|Collection> items): {
         const args = items.getValue();
 
-        if _type != null && args.any(fn(const i) => i != _type):
+        if _type != null && args.any(fn(i) => i != _type):
             throw.message("Element type does not match array type.");
 
         _native("std", "array", "add_range", _value, args);
@@ -60,7 +60,7 @@ class Array extends DataType: {
         _value = _native("std", "array", "create");
 
     // Get at index
-    function at(const<Number> index): {
+    function at(<Number> index): {
         checkIndex(index);
 
         index = std::parser.asInt(index);
@@ -69,7 +69,7 @@ class Array extends DataType: {
     }
 
     // Set at index
-    function setAt(const<Number> index, let item): {
+    function setAt(<Number> index, let item): {
         checkIndex(index);
         
         index = std::parser.asInt(index);
@@ -80,7 +80,7 @@ class Array extends DataType: {
         _native("std", "array", "set", _value, index, item);
     }
 
-    function insert(const<Number> index, let item): {
+    function insert(<Number> index, let item): {
         checkIndex(index);
         
         index = std::parser.asInt(index);
@@ -92,7 +92,7 @@ class Array extends DataType: {
     }
 
     // Remove at index
-    function removeAt(const<Number> index): {
+    function removeAt(<Number> index): {
         checkIndex(index);
 
         index = std::parser.asInt(index);
@@ -106,14 +106,14 @@ class Array extends DataType: {
     function<Number> length() =>_native("std", "array", "count", _value);
     function count() => length();
 
-    function forEach(const<Func> func): {
+    function forEach(<Func> func): {
         const length = length();
 
         for let i = 0; i < length; i++:
             func(at(i));
     }
 
-    function skip(const<Number> count): {
+    function skip(<Number> count): {
         if count <= 0:
             std::throw.message("Count must be more than 0");
         else if count > length():
@@ -131,10 +131,10 @@ class Array extends DataType: {
 
     function last() => at(length() - 1);
     
-    function where(const<Func> func) => new linq::WhereEnumerable(new linq::ArraySource(this), func);
-    function select(const<Func> func) => new linq::SelectEnumerable(new linq::ArraySource(this), func);
-    function any(const<Func> func) => (new linq::ArraySource(this)).any(func);
-    function all(const<Func> func) => (new linq::ArraySource(this)).all(func);
+    function where(<Func> func) => new linq::WhereEnumerable(new linq::ArraySource(this), func);
+    function select(<Func> func) => new linq::SelectEnumerable(new linq::ArraySource(this), func);
+    function any(<Func> func) => (new linq::ArraySource(this)).any(func);
+    function all(<Func> func) => (new linq::ArraySource(this)).all(func);
 
     function max() => (new linq::ArraySource(this)).max();
     function min() => (new linq::ArraySource(this)).min();
@@ -142,7 +142,7 @@ class Array extends DataType: {
 
     function getIndexes() => _native("std", "array", "get_indexes", getCollection());
 
-    private function checkIndex(const<Number> index):
+    private function checkIndex(<Number> index):
         if index < 0 || index >= length():
             std::throw.message("Index is out of range.");
 }

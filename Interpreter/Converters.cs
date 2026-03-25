@@ -1,6 +1,7 @@
 ﻿using Core;
 using Core.AST;
 using Core.Dynamic;
+using Core.Exceptions;
 
 namespace Interpreter;
 
@@ -69,7 +70,13 @@ public partial class Interpreter
         foreach (var assignmentNode in namespaceNode.Body.OfType<LineNode>().Select(x => (AssignmentNode)x.Content!))
                 dynamicNamespace.Variables[_stringPoolTable[assignmentNode.GetLastNameId()]] = new Variable(_stringPoolTable[assignmentNode.GetLastNameId()],
                     assignmentNode.Value,  assignmentNode
-                        .IsPrivate, assignmentNode.IsConst);
+                        .IsPrivate, assignmentNode.IsConst, assignmentNode.Types);
+        
+        // Add and convert all assignments
+        foreach (var assignmentNode in namespaceNode.Body.OfType<LineNode>().Select(x => (AssignmentNode)x.Content!))
+            dynamicNamespace.Variables[_stringPoolTable[assignmentNode.GetLastNameId()]] = new Variable(_stringPoolTable[assignmentNode.GetLastNameId()],
+                assignmentNode.Value,  assignmentNode
+                    .IsPrivate, assignmentNode.IsConst);
         
         return dynamicNamespace;
     }
@@ -90,9 +97,20 @@ public partial class Interpreter
         
         // Add and convert all assignments
         foreach (var assignmentNode in classNode.Body.OfType<LineNode>().Select(x => (AssignmentNode)x.Content!))
-                dynamicClass.Variables[_stringPoolTable[assignmentNode.GetLastNameId()]] = new Variable(_stringPoolTable[assignmentNode.GetLastNameId()],
-                    EvaluateExpression(assignmentNode.Value, stack),  assignmentNode
-                    .IsPrivate, assignmentNode.IsConst);
+        {
+            var value = EvaluateExpression(assignmentNode.Value, stack);
+            var typeofValue = Typeof(value, stack);
+            var name = _stringPoolTable[assignmentNode.GetLastNameId()];
+            
+            if (!IsTypeCompatible(assignmentNode.Types, value, false, stack))
+                throw new QlangRuntimeException(
+                    $"Cannot assign value of type '{typeofValue}' to variable '{name}'. Expected type: '{string.Join("|", assignmentNode.Types.Select(x => x.ToTokenString(_stringPoolTable)))}'",
+                    GetCurrentDebug(stack), GetStackTrace(stack));
+            
+            dynamicClass.Variables[name] = new Variable(
+                name, value, assignmentNode.IsPrivate, assignmentNode.IsConst, assignmentNode.Types
+            );
+        }
 
         // Remove all AssignmentNodes from body
         classNode = (classNode.Clone() as ClassNode)!;
@@ -104,11 +122,12 @@ public partial class Interpreter
         
         return dynamicClass;
     }
-
+    
     /// <summary>
     /// Convert static function to dynamic
     /// </summary>
     /// <param name="functionNode">function to convert</param>
+    /// <param name="stack"></param>
     /// <returns>DynamicFunction</returns>
     private DynamicFunction ToDynamicFunction(FunctionNode functionNode, Stack<ASTContext> stack)
     {
@@ -123,12 +142,21 @@ public partial class Interpreter
         foreach (var node in functionNode.Parameters)
         {
             var nodeName = _stringPoolTable[node.GetLastNameId()];
+            var value = EvaluateExpression(node.Value, stack);
+            var typeofValue = Typeof(value, stack);
+
+            if (!IsTypeCompatible(node.Types, value, true, stack))
+                throw new QlangRuntimeException(
+                    $"Cannot assign value of type '{typeofValue}' to variable '{nodeName}'. Expected type: '{string.Join("|", node.Types.Select(x => Typeof(x, stack)))}'",
+                    GetCurrentDebug(stack), GetStackTrace(stack));
+
             dynamicFunction.Variables[nodeName] = new Variable(
                 nodeName,
-                EvaluateExpression(node.Value, stack),
+                value,
                 node.IsPrivate,
                 node.IsConst,
-                node.Types);
+                node.Types
+            );
 
             dynamicFunction.Parameters.Add(nodeName);
         }

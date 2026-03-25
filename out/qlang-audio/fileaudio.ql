@@ -4,7 +4,7 @@ namespace qlaudio: {
     class FileAudio: {
         private let _path;
 
-        function new(const<String> path): {
+        function new(<String> path): {
             if fs::file.!exists(path):
                 throw.exception("Undefined audio path.");    
         
@@ -26,13 +26,13 @@ namespace qlaudio: {
         function<Number> getState():
             return _native("QlAudio", "audio", "get_state", _path);
 
-        function setVolume(const<Number> volume):
+        function setVolume(<Number> volume):
             _native("QlAudio", "audio", "set_volume", _path, math.max(math.min(volume, 1), 0));
 
         function<Number> getVolume():
             return _native("QlAudio", "audio", "get_volume", _path);
 
-        function seek(const<Number> time):
+        function seek(<Number> time):
             _native("QlAudio", "audio", "seek", _path, time);
 
         function<Number> getDuration():

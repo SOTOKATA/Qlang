@@ -3,7 +3,7 @@ class Exception extends Object: {
     let message = "";
     let printStackTrace = false;
 
-    function new(const<String> message, const<Boolean> printStackTrace): {
+    function new(<String> message, <Boolean> printStackTrace): {
         this.message = message;
         this.printStackTrace = printStackTrace;
     }

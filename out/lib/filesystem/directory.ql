@@ -7,11 +7,11 @@ namespace fs: {
 
         // Return type: bool
         // Return true if directory exists
-        function<Boolean> exists(const<String> path):
+        function<Boolean> exists(<String> path):
             return _native("std", "filesystem", "directory_exists", path);
 
         // Create if not exists directory
-        function create(const<String> path): {
+        function create(<String> path): {
             if exists(path):
                 std::throw.message("Directory already created.");
 
@@ -19,21 +19,21 @@ namespace fs: {
         }
 
         // Remove if exists directory (recursive)
-        function remove(const<String> path): {
+        function remove(<String> path): {
             if !exists(path):
                 std::throw.message("Directory is not exists.");
             
             _native("std", "filesystem", "directory_remove", path, true);
         }
 
-        function<Array> getFiles(const<String> path, const<String> extension = ""): {
+        function<Array> getFiles(<String> path, <String> extension = ""): {
             if !exists(path):
                 throw.message("Undefined directory path.");
 
             return _native("std", "filesystem", "get_files", path, extension);
         }
 
-        function<Array> getDirectories(const<String> path, const<String> searchPattern = ""): {
+        function<Array> getDirectories(<String> path, <String> searchPattern = ""): {
             if !exists(path):
                 throw.message("Undefined directory path.");
 

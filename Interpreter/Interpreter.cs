@@ -123,21 +123,14 @@ public partial class Interpreter
                 {
                     var var = function.Variables[function.Parameters[i]];
 
-                    var typeofArgument = Typeof(arguments[i], stack);
-
-                    if (var.Types.Count > 0 &&
-                        var.Types.All(x => Typeof(x, stack) != typeofArgument) &&
-                        (PrimitiveToDynamicClass(arguments[i], stack) is not DynamicClass d1 ||
-                         !d1.Extends.Exists(x => var.Types.Any(y => Typeof(y, stack) == x))))
-                    {
+                    if (!IsTypeCompatible(var, arguments[i], stack))
                         throw new QlangRuntimeException($"The type of param is '{(Typeof(arguments[i], stack))}' but must be '{string.Join("|", var.Types.Select(x => Typeof(x, stack)))}' for function '{function.Name}'", GetStackTrace(stack));
-                    }
                     
                     function.Variables[function.Parameters[i]] = new Variable(
                         function.Parameters[i],
                         arguments[i],
                         function.IsStatic,
-                        false);
+                        false, var.Types);
                 }
             else
                 throw new QlangRuntimeException("The number of arguments must be equal to the number of params", GetStackTrace(stack));
@@ -165,13 +158,15 @@ public partial class Interpreter
             current.IsBreak = false;
             current.IsContinue = false;
 
-            var typeofReturnValue = Typeof(current.ReturnValue, stack);
-            var functionTypes = function.ReturnTypes.Select(x => Typeof(x, stack)).ToList();
-            
-            if (functionTypes.Count > 0 && functionTypes.All(x => x != typeofReturnValue))
-                throw new QlangRuntimeException($"Function return type '{string.Join("|", functionTypes)}' is not equal to returned value type '{typeofReturnValue}'", GetCurrentDebug(stack),
+            if (!IsTypeCompatible(function.ReturnTypes, current.ReturnValue, false, stack))
+            {
+                var functionTypes = function.ReturnTypes.Select(x => Typeof(x, stack)).ToList();
+                throw new QlangRuntimeException(
+                    $"Function return type '{string.Join("|", functionTypes)}' is not equal to returned value type '{Typeof(current.ReturnValue, stack)}'",
+                    GetCurrentDebug(stack),
                     GetStackTrace(stack));
-            
+            }
+
             return current.ReturnValue;
         }
         finally
@@ -288,7 +283,7 @@ public partial class Interpreter
                         "Cannot access to private variable from external source",
                         GetCurrentDebug(stack), GetStackTrace(stack));
 
-                if (var.Types.Count > 0 && var.Types.Any(x => Typeof(x, stack) != valueType))
+                if (!IsTypeCompatible(var, value, stack))
                     throw new QlangRuntimeException(
                         $"Cannot assign value of type '{valueType}' to variable '{assignName}'. Expected type: '{string.Join("|", var.Types.Select(x => x.ToTokenString(_stringPoolTable)))}'",
                         GetCurrentDebug(stack), GetStackTrace(stack));
@@ -322,12 +317,12 @@ public partial class Interpreter
         
         var variable = Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
         
-        if (variable.Types.Count > 0 && variable.Types.Any(x => Typeof(x, stack) != valueType))
+        if (!IsTypeCompatible(variable, value, stack))
             throw new QlangRuntimeException(
                 $"Cannot assign value of type '{valueType}' to variable '{assignName}'. Expected type: '{string.Join("|", variable.Types.Select(x => x.ToTokenString(_stringPoolTable)))}'",
                 GetCurrentDebug(stack), GetStackTrace(stack));
 
-        variables[assignName] = Variable.FromAssignmentNode(assignmentNode, value, _stringPoolTable);
+        variables[assignName] = variable;
     }
 
     /// <summary>

@@ -6,7 +6,7 @@ import "$lib/meta"
 namespace std:  {
     const console = new Console();
     private class Console: {
-        private function getStr(const message): {
+        private function getStr(message): {
             if object.isNull(message):
                 return "<null>";
 
@@ -14,6 +14,7 @@ namespace std:  {
                 return (new Array(message)).toString();
 
             const typeOfMessage = typeof(message);
+
             if typeOfMessage.startsWith("~object"): {
                 let str = "";
 
@@ -83,7 +84,7 @@ namespace std:  {
             return new String(_native("std", "console", "read"));
         }
 
-        function<String> readkey(const<Boolean> intercept = false): {
+        function<String> readkey(<Boolean> intercept = false): {
             return new String(_native("std", "console", "key", intercept));
         }
 
@@ -91,7 +92,7 @@ namespace std:  {
             return _native("std", "console", "key_available");
         }
 
-        function cursorVisible(const<Boolean> visible): {
+        function cursorVisible(<Boolean> visible): {
             _native("std", "console", "cursor_visible", visible);
         }
 
@@ -138,7 +139,7 @@ namespace std:  {
         function height() => _native("std", "console", "height");
 
 
-        function richPrint(const<String> message):
+        function richPrint(<String> message):
            richConsole.richPrint(message);
 
         function richTest(): richConsole.richTest();

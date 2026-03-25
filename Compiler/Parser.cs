@@ -471,20 +471,16 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         List<AssignmentNode> parameters = [];
         while (!Check(Tokens.RParen))
         {
-            if (Check(Tokens.Keyword))
-            {
-                parameters.Add(ParseVariableDeclaration());
-                continue;
-            }
-
             if (Check(Tokens.Comma))
             {
                 Advance();
                 continue;
             }
+            
+            parameters.Add(ParseVariableDeclaration(true, isConst: !Check(Tokens.Keyword, Keywords.VariableDeclaration)));
 
-            if (!Check(Tokens.RParen))
-                throw new QlangCompileException($"Undefined function parameter '{Token.TokenToString(Current())}'.", GetDebug(Current()), "Parser");
+            // if (!Check(Tokens.RParen))
+            //     throw new QlangCompileException($"Undefined function parameter '{Token.TokenToString(Current())}'.", GetDebug(Current()), "Parser");
         }
 
         Expect(Tokens.RParen);
@@ -1083,21 +1079,18 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             // While current token is not RBrace ('}')
             while (!Check(Tokens.RBrace))
             {
-                if (Check(Tokens.Keyword, Keywords.ConstVariableDeclaration) ||
-                    Check(Tokens.Keyword, Keywords.VariableDeclaration))
-                {
-                    var debugIndex = Current().DebugIndex;
-                    @class.Body.Add(new LineNode(debugIndex) { Content = ParseVariableDeclaration(isPrivate: false, isConst: Check(Tokens.Keyword, Keywords.ConstVariableDeclaration)) });
-                    continue;
-                }
+                var token = Current();
+                
                 if (Check(Tokens.Comma))
                 {
                     Advance();
                     continue;
                 }
                 
-                if (!Check(Tokens.RBrace))
-                    throw new QlangCompileException("Undefined variable: " + Current().TokenType + " " + Current().Value, GetDebug(Current()), "Parser");
+                @class.Body.Add(new LineNode(token.DebugIndex) { Content = ParseVariableDeclaration(true, isPrivate: false, isConst: !Check(Tokens.Keyword, Keywords.VariableDeclaration)) });
+                
+                // if (!Check(Tokens.RBrace))
+                    // throw new QlangCompileException("Undefined variable: " + Current().TokenType + " " + Current().Value, GetDebug(Current()), "Parser");
             }
 
             // Advance '}'

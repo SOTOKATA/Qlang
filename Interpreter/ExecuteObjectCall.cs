@@ -7,6 +7,43 @@ namespace Interpreter;
 
 public partial class Interpreter
 {
+    private bool IsTypeCompatible(List<CallNode> types, object? value, bool allowNullable, Stack<ASTContext> stack)
+    {
+        if (value is null && allowNullable)
+            return true;
+        
+        if (types.Count == 0)
+            return true;
+
+        var typeofValue = Typeof(value, stack);
+        var allowedTypes = types.Select(x => Typeof(x, stack)).ToList();
+
+        if (allowedTypes.Contains(typeofValue))
+            return true;
+
+        if (PrimitiveToDynamicClass(value, stack) is DynamicClass d1)
+            return d1.Extends.Any(baseType => allowedTypes.Contains(baseType));
+
+        return false;
+    }
+    
+    private bool IsTypeCompatible(Variable node, object? value, Stack<ASTContext> stack)
+    {
+        if (node.Types.Count == 0)
+            return true;
+
+        var typeofValue = Typeof(value, stack);
+        var allowedTypes = node.Types.Select(x => Typeof(x, stack)).ToList();
+
+        if (allowedTypes.Contains(typeofValue))
+            return true;
+
+        if (PrimitiveToDynamicClass(value, stack) is DynamicClass d1)
+            return d1.Extends.Any(baseType => allowedTypes.Contains(baseType));
+
+        return false;
+    }
+    
     private object? PrimitiveToDynamicClass(object? primitive, Stack<ASTContext> stack)
     {
         switch (primitive)
@@ -40,11 +77,11 @@ public partial class Interpreter
         return @class;
     }
     
-    private string Typeof(object? arg, Stack<ASTContext> stack)
+    private string Typeof(object? arg, Stack<ASTContext> stack, bool isTypeVerification = true)
     {
         if (arg is null)
-            return "null";
-        
+            return isTypeVerification ? "Nullable" : Keywords.NullKeyword;
+
         switch (arg)
         {
             case DynamicClass @class:
@@ -78,7 +115,7 @@ public partial class Interpreter
                         switch (_stringPoolTable[pointer.NameId])
                         {
                             case "Nullable":
-                                return Keywords.NullKeyword;
+                                return "Nullable";
                             case "Collection" or "Number" or "Boolean" or "Func":
                                 return _stringPoolTable[pointer.NameId];
                         }
@@ -149,7 +186,7 @@ public partial class Interpreter
 
                     return returnValue;
                 case "typeof":
-                    return Typeof(args[0], stack);
+                    return Typeof(args[0], stack, false);
                 case "nameof":
                     return args[0]?.ToString();
             }
@@ -390,7 +427,7 @@ public partial class Interpreter
             if (node.IsNullable)
                 return (null, null);
             
-            throw new QlangRuntimeException($"Object '{nodeName}' is not found in current context. {string.Join(", ", CurrentContext(stack)?.Class?.Variables.Select(x => x.Key) ?? [])}  PF:{CurrentContext(stack)?.ParentFunction?.Name} F:{CurrentContext(stack)?.Function?.Name}",
+            throw new QlangRuntimeException($"Object '{nodeName}' is not found in current context.",
                 GetCurrentDebug(stack), GetStackTrace(stack));
         }
         

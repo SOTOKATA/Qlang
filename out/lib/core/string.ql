@@ -6,17 +6,17 @@ class String extends DataType: {
     // overriding functions 
     function<String> toString() => object.toString(_value);
 
-    function<String> toNumberFormat(const<String> format) => _native("std", "number", "to_string", <Number>_value, format.getValue());
+    function<String> toNumberFormat(<String> format) => _native("std", "number", "to_string", <Number>_value, format.getValue());
 
     // Parse object to String
-    function _createFrom(const obj) => new String(obj);
+    function _createFrom(obj) => new String(obj);
 
     // Parse additional operations
-    function _operatorAddition(const obj1, const obj2) => new String(obj1.getValue() + obj2.getValue());
+    function _operatorAddition(obj1, obj2) => new String(obj1.getValue() + obj2.getValue());
         
 
     // Parse multiplication operations
-    function _operatorMultiplication(const obj1, let obj2): {
+    function _operatorMultiplication(obj1, let obj2): {
         let val = "";
 
         if typeof(obj2) != "Number":
@@ -31,7 +31,7 @@ class String extends DataType: {
     }
 
     // Parse division operations
-    function _operatorDivision(const obj1, const obj2): {
+    function _operatorDivision(obj1, obj2): {
         let val = "";
 
         const index = obj1.length() / obj2.getValue();
@@ -43,32 +43,32 @@ class String extends DataType: {
     }
 
     // Parse '==' operations
-    function _operatorEqual(const obj1, const obj2) => obj1.getValue() == obj2.getValue();
+    function _operatorEqual(obj1, obj2) => obj1.getValue() == obj2.getValue();
         
 
     // Parse '!=' operations
-    function _operatorNotEqual(const obj1, const obj2) => obj1.getValue() != obj2.getValue();
+    function _operatorNotEqual(obj1, obj2) => obj1.getValue() != obj2.getValue();
 
     // Parse '>=' operations
-    function _operatorGreaterOrEqual(const obj1, const obj2): 
+    function _operatorGreaterOrEqual(obj1, obj2): 
         return obj1.length() >= obj2.length();
 
     // Parse '<=' operations
-    function _operatorLessOrEqual(const obj1, const obj2): 
+    function _operatorLessOrEqual(obj1, obj2): 
         return obj1.length() <= obj2.length();
 
     // Parse '>' operations
-    function _operatorGreater(const obj1, const obj2): 
+    function _operatorGreater(obj1, obj2): 
         return obj1.length() > obj2.length();
 
     // Parse '<' operations
-    function _operatorLess(const obj1, const obj2): 
+    function _operatorLess(obj1, obj2): 
         return obj1.length() < obj2.length();
 
-    function new(const input):
+    function new(input):
         _value = if typeof(input) == "String" ? input.getValue() : str(input);
 
-    function new(const<String> char, let<Number> count): {
+    function new(<String> char, let<Number> count): {
         count = std::math.round(count, 0);
         
         if count < 0: 
@@ -80,7 +80,7 @@ class String extends DataType: {
         _value = _native("std", "string", "create", char, count);
     }
 
-    function getPrimitive(const strOrPrimite, let<Boolean> allowOther = false): {
+    function getPrimitive(strOrPrimite, let<Boolean> allowOther = false): {
         if object.isNull(strOrPrimite):
             std::throw.message("Object is null");
 
@@ -97,7 +97,7 @@ class String extends DataType: {
     }
 
     // Append two strings
-    function append(const<Array|Collection> collection): {
+    function append(<Array|Collection> collection): {
         let result = "";
 
         let arr = new Array(collection);
@@ -116,44 +116,44 @@ class String extends DataType: {
 
     function split(let<String> pattern) => new Array(_native("std", "string", "split", _str(_value), _str(pattern)));
 
-    function charAt(const<Number> index): {
+    function charAt(<Number> index): {
         throwIfNotInRange(index);
 
         return _native("std", "string", "at", _str(_value), index);
     }
 
-    function setAt(const<Number> index, const<String> replaceValue): {
+    function setAt(<Number> index, <String> replaceValue): {
         throwIfNotInRange(index);
 
         _value = _native("std", "string", "setAt", _str(_value), _str(replaceValue), index);
     }
 
-    function join(const<Collection|Array> strArr, let<String> pattern)
+    function join(<Collection|Array> strArr, let<String> pattern)
     => new String(_native("std", "string", "join", strArr.getCollection(), pattern));
 
     // Get length of string
     function length() => _native("std", "string", "length", _str(_value));
 
     // Check if string is empty or null
-    function isNullOrEmpty(const<String|null> str)
+    function isNullOrEmpty(<String|null> str)
         => if typeof(str) == null ? true : _native("std", "string", "isNullOrEmpty", _str(str));
     
     // Check if string is white space or null
-    function isNullOrWhitespace(const<String|null> str)
+    function isNullOrWhitespace(<String|null> str)
         => if typeof(str) == null ? true : _native("std", "string", "isNullOrWhitespace", _str(str));
 
-    function<Boolean> startsWith(const<String> str) => _native("std", "string", "startsWith", _str(_value), str);
+    function<Boolean> startsWith(<String> str) => _native("std", "string", "startsWith", _str(_value), str);
 
-    function<Boolean> endsWith(const<String> str) => _native("std", "string", "endsWith", _str(_value), str);
+    function<Boolean> endsWith(<String> str) => _native("std", "string", "endsWith", _str(_value), str);
 
     // Trim string
-    function<String> trim(const<String> str) => new String(_native("std", "string", "trim_b", _str(_value), _str(str)));
+    function<String> trim(<String> str) => new String(_native("std", "string", "trim_b", _str(_value), _str(str)));
 
     // Trim start string
-    function<String> trimStart(const<String> str) => new String(_native("std", "string", "trimStart_b", _str(_value), _str(str)));
+    function<String> trimStart(<String> str) => new String(_native("std", "string", "trimStart_b", _str(_value), _str(str)));
 
     // Trim end string
-    function<String> trimEnd(const<String> str) => new String(_native("std", "string", "trimEnd_b", _str(_value), _str(str)));
+    function<String> trimEnd(<String> str) => new String(_native("std", "string", "trimEnd_b", _str(_value), _str(str)));
 
     // Trim string
     function<String> trim() => new String(_native("std", "string", "trim", _str(_value)));
@@ -173,23 +173,23 @@ class String extends DataType: {
     }
 
     // get index of first 'toFind'
-    function<String> indexOf(const<String> toFind) => _native("std", "string", "indexOf", _value, toFind);
+    function<String> indexOf(<String> toFind) => _native("std", "string", "indexOf", _value, toFind);
 
     // get index of last 'toFind'
-    function<String> lastIndexOf(const<String> toFind) => _native("std", "string", "lastIndexOf", _value, toFind);
+    function<String> lastIndexOf(<String> toFind) => _native("std", "string", "lastIndexOf", _value, toFind);
 
     // Replace '{n}' to replacement
-    function<String> format(const<Collection|Array> replacement): {
+    function<String> format(<Collection|Array> replacement): {
         if replacement.length() == 0:
             return _value;
 
         return _native("std", "string", "format", _value, 
             replacement.select(
-                fn(const x) => x.toString()
+                fn(x) => x.toString()
             ).getCollection());
     }
 
-    private function throwIfNotInRange(const<Number> index):
+    private function throwIfNotInRange(<Number> index):
         if index < 0 && index >= length():
             std::throw.message(`Index '{index}' is out of range.`);
 }

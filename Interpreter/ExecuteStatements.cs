@@ -196,7 +196,7 @@ public partial class Interpreter
             var assignment = (AssignmentNode)tryCatchNode.CatchAssignment.Content!;
             stack.Peek().CurrentDebugIndex = tryCatchNode.CatchAssignment.DebugIndex;
             
-            tryCatchNode.Variables[_stringPoolTable[assignment.GetLastNameId()]] = new Variable(_stringPoolTable[assignment.GetLastNameId()], ToQlangException(ex, stack), false, true);
+            tryCatchNode.Variables[_stringPoolTable[assignment.GetLastNameId()]] = new Variable(_stringPoolTable[assignment.GetLastNameId()], ToQlangException(ex, stack), false, true, assignment.Types);
             
             ExecuteBlock(tryCatchNode.CatchBody, false, stack);
         }
