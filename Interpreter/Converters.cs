@@ -39,7 +39,6 @@ public partial class Interpreter
     /// Convert static namespace to dynamic
     /// </summary>
     /// <param name="namespaceNode">namespace to convert</param>
-    /// <param name="globalNamespaceName">name of subnamespace</param>
     /// <returns>DynamicNamespace</returns>
     private DynamicNamespace ToDynamicNamespace(NamespaceNode namespaceNode)
     {
@@ -71,12 +70,6 @@ public partial class Interpreter
                 dynamicNamespace.Variables[_stringPoolTable[assignmentNode.GetLastNameId()]] = new Variable(_stringPoolTable[assignmentNode.GetLastNameId()],
                     assignmentNode.Value,  assignmentNode
                         .IsPrivate, assignmentNode.IsConst, assignmentNode.Types);
-        
-        // Add and convert all assignments
-        foreach (var assignmentNode in namespaceNode.Body.OfType<LineNode>().Select(x => (AssignmentNode)x.Content!))
-            dynamicNamespace.Variables[_stringPoolTable[assignmentNode.GetLastNameId()]] = new Variable(_stringPoolTable[assignmentNode.GetLastNameId()],
-                assignmentNode.Value,  assignmentNode
-                    .IsPrivate, assignmentNode.IsConst);
         
         return dynamicNamespace;
     }

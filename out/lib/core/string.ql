@@ -74,7 +74,7 @@ class String extends DataType: {
         if count < 0: 
             std::throw.message("Param 'count' must be more than 0");
 
-        if (new String(char)).length() < 0:
+        if new String(char).length() < 0:
             std::throw.message("Length of string must be more than 0");
 
         _value = _native("std", "string", "create", char, count);

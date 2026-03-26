@@ -1138,7 +1138,10 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             // Advance ')'
             Expect(Tokens.RParen);
 
-            return parsed;
+            return new ParensNode
+            {
+                Statement = parsed
+            };
         }
 
         return null;
@@ -1396,7 +1399,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             
             // Do circle while '.' or '::'
         } while (Check(Tokens.Dot) || (Check(Tokens.Colon) && Peek()?.TokenType == Tokens.Colon));
-
+        
         if (path[^1] is AssignmentNode assignmentNode)
         {
             path[^1] = new ObjectPointerNode { NameId = assignmentNode.GetLastNameId() };

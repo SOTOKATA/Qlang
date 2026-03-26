@@ -52,7 +52,6 @@ public partial class Interpreter
 
         if (globalNamespace is not null)
         {
-            
             var dynamicNamespace = new DynamicNamespace(GlobalNamespaceName);
             _namespaces[GlobalNamespaceName] = dynamicNamespace;
             
@@ -468,6 +467,7 @@ public partial class Interpreter
             {
                 LineNode ln => EvaluateLine(ln, stack),
                 CastNode cast => CastObject(cast, stack),
+                ASTContainer container => container.Value,
                 StringRefNode strRef => _stringPoolTable[strRef.Index],
                 NumberRefNode numberRef => GetNumberRef(numberRef, stack),
                 ClassNode classNode => ToDynamicClass(classNode, stack),
@@ -481,6 +481,7 @@ public partial class Interpreter
                 ShortHandIfNode shortIf => ExecuteShortIf(shortIf, stack),
                 ShortHandSwitchNode shortSwitch => ExecuteShortSwitch(shortSwitch, stack),
                 FunctionNode fn => PrepareFunctionNodePointer(fn, stack),
+                ParensNode pn => EvaluateExpression(pn.Statement, stack),
                 _ => throw new QlangRuntimeException(
                     $"Unknown expression type: {expr.GetType().Name}",
                     GetCurrentDebug(stack),
@@ -564,16 +565,54 @@ public partial class Interpreter
         }
     }
 
-    private DynamicClass EvaluateNewKeyword(NewNode node, Stack<ASTContext> stack)
+    private object? EvaluateNewKeyword(NewNode node, Stack<ASTContext> stack)
     {
-        if (node.NodePath.Objects.Count < 1)
-            throw new QlangRuntimeException("Undefined path to class.", GetCurrentDebug(stack), GetStackTrace(stack));
+        var objects = node.NodePath.Objects;
 
-        var pointer = (FunctionPointerNode)node.NodePath.Objects[^1];
-        var classNode = GetClassNodeByPath(node.NodePath, stack);
-        
+        // 1. Находим первый вызов функции — это наш конструктор
+        var constructorIndex = objects.FindIndex(x => x is FunctionPointerNode);
 
-        return GetNewClass(classNode.@class, pointer.Arguments.ConvertAll(x => EvaluateExpression(x, stack)), classNode.@namespace, stack);
+        if (constructorIndex == -1)
+            throw new QlangRuntimeException("Constructor call expected.", GetCurrentDebug(stack), GetStackTrace(stack));
+
+        // 2. Создаем путь только до конструктора для поиска определения класса
+        var classPath = new CallNode {
+            Objects = objects.GetRange(0, constructorIndex + 1)
+        };
+
+        // 3. Получаем сам узел конструктора и ищем класс
+        var constructorPointer = (FunctionPointerNode)classPath.Objects[^1];
+        var classNode = GetClassNodeByPath(classPath, stack);
+
+        // 4. Инстанцируем класс
+        var instance = GetNewClass(
+            classNode.@class, 
+            constructorPointer.Arguments.ConvertAll(x => EvaluateExpression(x, stack)),
+            classNode.@namespace, 
+            stack
+        );
+
+        // 5. Обрабатываем последующие вызовы, если они есть
+        // Пропускаем всё до конструктора ВКЛЮЧИТЕЛЬНО (Skip(constructorIndex + 1))
+        var remainingCalls = objects.Skip(constructorIndex + 1).ToList();
+
+        if (remainingCalls.Count == 0)
+            return instance;
+
+        // Создаем временный CallNode для оставшейся цепочки
+        var tailCalls = new CallNode { Objects = remainingCalls };
+
+        // Вызываем методы у созданного инстанса
+        // Предполагается, что ExecuteObjectCalls принимает (объект, цепочка вызовов, стек)
+        var returnValue = ((object)instance, false);
+        foreach (var call in tailCalls.Objects)
+        {
+            returnValue = ExecuteObjectCall(call, returnValue.Item1, stack);
+            if (returnValue.Item2)
+                break;
+        }
+
+        return returnValue.Item1;
     }
 
     private (DynamicClass @class, DynamicNamespace @namespace) ExecutePathToClass(CallNode callNode, Stack<ASTContext> stack)

@@ -85,8 +85,8 @@ class Dictionary: {
         new linq::SelectEnumerable(new linq::DictionarySource(this), func);
 
     function any(<Func> func) => 
-        (new linq::DictionarySource(this)).any(func);
+        new linq::DictionarySource(this).any(func);
 
     function all(<Func> func) => 
-        (new linq::DictionarySource(this)).all(func);
+        new linq::DictionarySource(this).all(func);
 }

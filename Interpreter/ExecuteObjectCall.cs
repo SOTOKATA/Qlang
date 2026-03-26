@@ -219,7 +219,6 @@ public partial class Interpreter
                 return (@namespace, false);
             }
             case FunctionPointerNode fn:
-            {
                 if (!isPathStart)
                     lastReturnValue = PrimitiveToDynamicClass(lastReturnValue, stack);
                 
@@ -234,7 +233,6 @@ public partial class Interpreter
                     stack);
                 
                 return (funcReturnValue, funcReturnValue == null && fn.IsNullable);
-            }
             case ObjectPointerNode objCall:
                 if (!isPathStart)
                     lastReturnValue = PrimitiveToDynamicClass(lastReturnValue, stack);

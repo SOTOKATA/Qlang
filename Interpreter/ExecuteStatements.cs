@@ -166,9 +166,14 @@ public partial class Interpreter
     {
         var block = switchNode.Default;
 
+        var value = new ASTContainer()
+        {
+            Value = EvaluateExpression(switchNode.Value, stack)
+        };
+
         foreach (var pair in from pair in switchNode.Cases let binOp = new BinaryOperationNode
                  {
-                     Left = switchNode.Value,
+                     Left = value,
                      Right = pair.Key.Key,
                      OperatorId = pair.Key.BinaryOperationId ?? _stringPoolTable.Add("==")
                  } let result = (bool)EvaluateBinaryOperation(binOp, stack)! where result select pair)
@@ -214,10 +219,15 @@ public partial class Interpreter
 
         var block = switchNode.DefaultBlock;
 
+        var value = new ASTContainer()
+        {
+            Value = EvaluateExpression(switchNode.Condition, stack)
+        };
+
         foreach (var pair in from pair in switchNode.CaseBlocks let binOp = new BinaryOperationNode
                  {
-                     Left = pair.Condition,
-                     Right = switchNode.Condition,
+                     Left = value,
+                     Right = pair.Condition,
                      OperatorId = _stringPoolTable.Add("==")
                  } let result = (bool)EvaluateBinaryOperation(binOp, stack)! where result select pair)
         {

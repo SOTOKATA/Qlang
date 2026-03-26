@@ -9,7 +9,7 @@ namespace dt: {
 
         function new(): _value = _native("std", "dateTime", "now_ticks");
 
-        function now() => (new DateTime())._fromTicks(_native("std", "dateTime", "now_ticks"));
+        function now() => new DateTime()._fromTicks(_native("std", "dateTime", "now_ticks"));
 
         function _fromTicks(ticks): {
             let dt = new DateTime(1, 1, 1);

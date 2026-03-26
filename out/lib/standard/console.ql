@@ -6,16 +6,17 @@ import "$lib/meta"
 namespace std:  {
     const console = new Console();
     private class Console: {
-        private function getStr(message): {
-            if object.isNull(message):
-                return "<null>";
+        private function<String> getStr(message): {
+            if (typeof(message)).startsWith("~object"):
+                return new Dictionary(message).toString();
 
-            if typeof(message) == "Collection":
-                return (new Array(message)).toString();
+            if !object.isSimplify(message):
+                return message.toString();
 
-            const typeOfMessage = typeof(message);
+            return str(message);
+        }
 
-            if typeOfMessage.startsWith("~object"): {
+        /*if typeOfMessage.startsWith("~object"): {
                 let str = "";
 
                 if typeOfMessage.indexOf(":") != -1:
@@ -43,13 +44,7 @@ namespace std:  {
                 str += "}";
 
                 return str;
-            }
-
-            if !object.isSimplify(message):
-                return message.toString();
-
-            return message;
-        }
+            }*/
 
         // Print text to console
         function print(let message): {

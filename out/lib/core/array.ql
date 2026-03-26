@@ -1,4 +1,5 @@
 import "$lib/standard"
+import "$lib/core/linq"
 using std;
 
 const array = new Array();
@@ -133,22 +134,16 @@ class Array extends DataType: {
         return newArray;
     }
 
-    function forEach(const<Func> func): {
-        const length = length();
-        for let i = 0; i < length; i++:
-            func(at(i));
-    }
-
     function last() => at(length() - 1);
     
     function where(<Func> func) => new linq::WhereEnumerable(new linq::ArraySource(this), func);
     function select(<Func> func) => new linq::SelectEnumerable(new linq::ArraySource(this), func);
-    function any(<Func> func) => (new linq::ArraySource(this)).any(func);
-    function all(<Func> func) => (new linq::ArraySource(this)).all(func);
+    function any(<Func> func) => new linq::ArraySource(this).any(func);
+    function all(<Func> func) => new linq::ArraySource(this).all(func);
 
-    function max() => (new linq::ArraySource(this)).max();
-    function min() => (new linq::ArraySource(this)).min();
-    function sum() => (new linq::ArraySource(this)).sum();
+    function max() => new linq::ArraySource(this).max();
+    function min() => new linq::ArraySource(this).min();
+    function sum() => new linq::ArraySource(this).sum();
 
     function getIndexes() => _native("std", "array", "get_indexes", getCollection());
 
