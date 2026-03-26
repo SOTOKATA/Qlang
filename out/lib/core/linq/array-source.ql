@@ -4,8 +4,8 @@ using std;
 
 namespace linq: {
     class ArraySource extends linq::Enumerable: {
-        private let _arr;
-        private let _index = -1;
+        private let<Array|null> _arr;
+        private let<Number> _index = -1;
 
         function new(<Array|Collection> arr):
             _arr = new Array(arr);

@@ -96,16 +96,26 @@ public partial class Interpreter
         };
         
         // Add and convert all assignments
-        foreach (var assignmentNode in classNode.Body.OfType<LineNode>().Select(x => (AssignmentNode)x.Content!))
+        foreach (var lineNode in classNode.Body.OfType<LineNode>())
         {
+            var assignmentNode = (AssignmentNode)lineNode.Content!;
+            
             var value = EvaluateExpression(assignmentNode.Value, stack);
             var typeofValue = Typeof(value, stack);
             var name = _stringPoolTable[assignmentNode.GetLastNameId()];
             
+            AddContext(stack, new ASTContext
+            {
+                CurrentDebugIndex = lineNode.DebugIndex,
+                Class = dynamicClass,
+            });
+            
             if (!IsTypeCompatible(assignmentNode.Types, value, false, stack))
                 throw new QlangRuntimeException(
-                    $"Cannot assign value of type '{typeofValue}' to variable '{name}'. Expected type: '{string.Join("|", assignmentNode.Types.Select(x => x.ToTokenString(_stringPoolTable)))}'",
+                    $"Cannot assign value of type '{typeofValue}' to variable '{name}' in class '{dynamicClass.Name}'. Expected type: '{string.Join("|", assignmentNode.Types.Select(x => x.ToTokenString(_stringPoolTable)))}'",
                     GetCurrentDebug(stack), GetStackTrace(stack));
+            
+            RestoreContextStack(stack);
             
             dynamicClass.Variables[name] = new Variable(
                 name, value, assignmentNode.IsPrivate, assignmentNode.IsConst, assignmentNode.Types

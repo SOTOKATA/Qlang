@@ -186,7 +186,7 @@ class String extends DataType: {
         return _native("std", "string", "format", _value, 
             replacement.select(
                 fn(x) => x.toString()
-            ).getCollection());
+            ).toArray().getCollection());
     }
 
     private function throwIfNotInRange(<Number> index):

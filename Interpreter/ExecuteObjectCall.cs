@@ -85,15 +85,21 @@ public partial class Interpreter
         switch (arg)
         {
             case DynamicClass @class:
-                if (@class.ClassName == "~object" && @class.Variables.ContainsKey("_objectName"))
+                if (@class.ClassName == "~object")
                 {
-                    object? className;
+                    if (isTypeVerification)
+                        return QlSystemClasses.ObjectClassName;
 
-                    if (@class.Variables["_objectName"].Value is string or int or long or double or float or bool)
-                        className = @class.Variables["_objectName"].Value;
-                    else className = EvaluateExpression((ASTNode)@class.Variables["_objectName"].Value!, stack);
+                    if (@class.Variables.ContainsKey("_objectName"))
+                    {
+                        object? className;
 
-                    return @class.ToString() + ":" + (className?.ToString() ?? "");
+                        if (@class.Variables["_objectName"].Value is string or int or long or double or float or bool)
+                            className = @class.Variables["_objectName"].Value;
+                        else className = EvaluateExpression((ASTNode)@class.Variables["_objectName"].Value!, stack);
+
+                        return @class.ToString() + ":" + (className?.ToString() ?? "");
+                    }
                 }
                 
                 return @class.ToString();

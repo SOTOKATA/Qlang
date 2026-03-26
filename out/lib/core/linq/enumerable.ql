@@ -26,6 +26,19 @@ namespace linq: {
             return result;
         }
 
+        function<Dictionary> toDictionary(): {
+            const result = new Dictionary();
+
+            let item = this.next();
+
+            while typeof(item) != "null": {
+                result.set(item.key, item.value);
+                item = this.next();
+            }
+
+            return result;
+        }
+
         function first(): {
             let item = this.next();
 

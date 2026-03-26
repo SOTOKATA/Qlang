@@ -1,4 +1,5 @@
 import "$lib/core"
+import "$lib/meta"
 
 class Dictionary: {
     private let _keys;
@@ -8,11 +9,36 @@ class Dictionary: {
         _keys = new Array([]);
         _values = new Array([]);
     }
+
+    function new(const<Object|null> obj = null): {
+        _keys = new Array([]);
+        _values = new Array([]);
+
+        if typeof(obj) != "null":
+            meta::getVariableList(obj).forEach(fn(var): {
+                _keys.push(var.name);
+                _values.push(var.value);
+            });
+    }
     
     function<String> toString(): {
-        let str = _keys.toString().toString();
-        str = str + _values.toString().toString();
+        let str = "[";
 
+        const length = _keys.length();
+        for let i = 0; i < length; i++: {
+            const value = _values.at(i);
+
+            str += _keys.at(i).toString() + " => " + switch typeof(value): {
+                "String" => `"{value}"`,
+                default => value.toString()
+            };
+        
+            if i + 1 < length:
+                str += ", ";
+        }
+
+        str += "]";
+        
         return new String(str);
     }
 
@@ -51,4 +77,16 @@ class Dictionary: {
 
         return _values.at(index);
     }
+
+    function where(<Func> func) => 
+        new linq::WhereEnumerable(new linq::DictionarySource(this), func);
+        
+    function select(<Func> func) => 
+        new linq::SelectEnumerable(new linq::DictionarySource(this), func);
+
+    function any(<Func> func) => 
+        (new linq::DictionarySource(this)).any(func);
+
+    function all(<Func> func) => 
+        (new linq::DictionarySource(this)).all(func);
 }

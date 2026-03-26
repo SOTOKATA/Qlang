@@ -15,16 +15,20 @@ class Array extends DataType: {
 
     function<String> toString(): {
         let str = "[";
+        const length = length();
 
-        if length() > 0: {
-            for let i = 0; i < length(); i++:
-                str = str + "'" + at(i) + "',";
+        for let i = 0; i < length; i++: {
+            const item = at(i);
+            str += switch typeof(item): {
+                "String" => `"{item}"`,
+                default => item.toString()
+            };
 
-            str = str.subString(0, str.length() - 1);
+            if i + 1 < length:
+                str += ", ";
+        }
 
-            str = str + "]";
-        } else:
-            str = "[]";
+        str += "]";
 
         return str.toString();
     }
@@ -127,6 +131,12 @@ class Array extends DataType: {
             newArray.push(at(i));
 
         return newArray;
+    }
+
+    function forEach(const<Func> func): {
+        const length = length();
+        for let i = 0; i < length; i++:
+            func(at(i));
     }
 
     function last() => at(length() - 1);
