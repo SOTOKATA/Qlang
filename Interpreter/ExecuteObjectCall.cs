@@ -18,6 +18,9 @@ public partial class Interpreter
         var typeofValue = Typeof(value, stack);
         var allowedTypes = types.Select(x => Typeof(x, stack)).ToList();
 
+        if (allowedTypes.Contains("Any"))
+            return true;
+
         if (allowedTypes.Contains(typeofValue))
             return true;
 
@@ -34,6 +37,9 @@ public partial class Interpreter
 
         var typeofValue = Typeof(value, stack);
         var allowedTypes = node.Types.Select(x => Typeof(x, stack)).ToList();
+        
+        if (allowedTypes.Contains("Any"))
+            return true;
 
         if (allowedTypes.Contains(typeofValue))
             return true;
@@ -122,7 +128,7 @@ public partial class Interpreter
                         {
                             case "Nullable":
                                 return "Nullable";
-                            case "Collection" or "Number" or "Boolean" or "Func":
+                            case "Collection" or "Number" or "Boolean" or "Func" or "Any":
                                 return _stringPoolTable[pointer.NameId];
                         }
                     }
@@ -244,7 +250,17 @@ public partial class Interpreter
                 
                 if (objectAndNamespace.@object is null && objCall.IsNullable)
                     return (null, true);
-                
+
+                // Used in initialize dynamic namespaces
+                if (objectAndNamespace.@object is NewNode newNode)
+                {
+                    AddContext(stack, new ASTContext { Namespace = objectAndNamespace.@namespace });
+                    var returnValue = (EvaluateNewKeyword(newNode, stack), false);
+                    RestoreContextStack(stack);
+
+                    return returnValue;
+                }
+
                 return (objectAndNamespace.@object, false);
             default:
                 return (EvaluateExpression(obj, stack), false);
@@ -456,7 +472,7 @@ public partial class Interpreter
                         throw new QlangRuntimeException($"Cannot get access to private variable '{var.Name}' from namespace '{dynamicNamespace.Name}'.",
                             GetCurrentDebug(stack), GetStackTrace(stack));
                     
-                    return (var, null);
+                    return (var, dynamicNamespace);
                 }
                 break;
         }

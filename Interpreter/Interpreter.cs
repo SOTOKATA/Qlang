@@ -39,7 +39,7 @@ public partial class Interpreter
     /// <summary>
     /// Function to execute program
     /// </summary>
-    /// <param name="program">Program tu execute</param>
+    /// <param name="program">Program to execute</param>
     /// <param name="args">Args for main function</param>
     /// <exception cref="QlangRuntimeException">Any exception during program execute</exception>
     public void Execute(ProgramNode program, List<string?>? args = null)
@@ -47,23 +47,8 @@ public partial class Interpreter
         // Main thread
         var stack = new  Stack<ASTContext>();
         
-        // First is load global namespace with core classes
-        var globalNamespace = program.Statements.OfType<NamespaceNode>().FirstOrDefault(x => _stringPoolTable[x.NameId] == GlobalNamespaceName);
-
-        if (globalNamespace is not null)
-        {
-            var dynamicNamespace = new DynamicNamespace(GlobalNamespaceName);
-            _namespaces[GlobalNamespaceName] = dynamicNamespace;
-            
-            _namespaces[GlobalNamespaceName] = 
-                ToDynamicNamespace(globalNamespace);
-
-            program.Statements.Remove(globalNamespace);
-        }
-        
-       
-            // Load namespaces
-        foreach (var namespaceNode in program.Statements.OfType<NamespaceNode>().Where(x => _stringPoolTable[x.NameId] != GlobalNamespaceName))
+        // Load namespaces
+        foreach (var namespaceNode in program.Statements.OfType<NamespaceNode>())
             _namespaces[_stringPoolTable[namespaceNode.NameId]] = ToDynamicNamespace(namespaceNode);
 
         // Convert variable values
@@ -677,26 +662,24 @@ public partial class Interpreter
     /// <exception cref="QlangRuntimeException">If casting is impossible (like bool to double)</exception>
     private object? CastObject(CastNode cast, Stack<ASTContext> stack)
     {
-        var type = ExecutePathToClass(cast.TypeCastPath, stack);
+        var typeTuple = ExecutePathToClass(cast.TypeCastPath, stack);
+        var typeofClass = (Typeof(typeTuple.@class, stack));
+        
         var @object = ExecuteObjectCalls(cast.ToCastObject, stack);
         
-        if (Typeof(type, stack) == "Number" && @object is DynamicClass { ClassName: QlSystemClasses.StringClassName } @class &&
+        if (typeofClass == "Number" && @object is DynamicClass { ClassName: QlSystemClasses.StringClassName } @class &&
             @class.Variables["_value"].Value!.ToString().TryParseNumber(out var number))
             return number;
 
-        // cast string to number
-        if (Typeof(type, stack) == "Number" && @object is string str 
-                                            && str.TryParseNumber(out number)) 
-            return number;
-        
-        if (Typeof(type, stack) == "Number" && @object is int or long or double or float)
-            return Convert.ToDouble(@object);
-        
-        // cast any object to string
-        if (Typeof(type, stack) == "String" && @object is not null)
-            return @object.ToString();
-        
-        return CreateClassFrom(@object, type.@class, stack);
+        return typeofClass switch
+        {
+            // cast string to number
+            "Number" when @object is string str && str.TryParseNumber(out number) => number,
+            "Number" when @object is int or long or double or float => Convert.ToDouble(@object),
+            // cast any object to string
+            "String" when @object is not null => @object.ToString(),
+            _ => CreateClassFrom(@object, typeTuple.@class, stack)
+        };
     }
     
     /// <summary>

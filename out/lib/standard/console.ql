@@ -16,36 +16,6 @@ namespace std:  {
             return str(message);
         }
 
-        /*if typeOfMessage.startsWith("~object"): {
-                let str = "";
-
-                if typeOfMessage.indexOf(":") != -1:
-                    str += typeOfMessage + " = ";
-
-                str += "{\n";
-
-                const vars = meta::getVariableList(message);
-
-                const length = vars.length();
-                for let i = 0; i < length; i++: {
-                    const variable = vars.at(i);
-
-                    const value = variable.value;
-                    let outputValue = value;
-
-                    if typeof(value) == "String":
-                        outputValue  = "\"" + value + "\"";
-                    else if !object.isSimplify(value):
-                        outputValue  = value.toString();
-                
-                    str += "    " + variable.type + " " + variable.name + " = " + outputValue  + "\n";
-                }
-                
-                str += "}";
-
-                return str;
-            }*/
-
         // Print text to console
         function print(let message): {
             message = getStr(message);

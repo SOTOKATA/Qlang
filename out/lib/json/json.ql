@@ -1,59 +1,96 @@
-// Warning! Can serialize and deserialize primitive types only. Like: Boolean, Number, String
 namespace json: {
-    function<String> serialize(<Dictionary> dict, <Boolean> indented = false): {
-        if dict.length() < 1:
-            std::throw.message("Cannot serialize empty dictionary");
+    // Сериализация: добавлена поддержка Array и рекурсия для Dictionary
+    function<String> serialize(let input, <Boolean> indented = false, <Number> depth = 1): {
+        const type = typeof(input);
+        
+        // 1. Обработка Dictionary
+        if type == "Dictionary": {
+            if input.length() < 1: return "{}";
 
-        let first = true;
+            let output = "{";
+            const keys = input.getKeys();
+            const length = input.length();
 
-        let output = "{";
+            for let i = 0; i < length; i++: {
+                if i > 0: output += ",";
+                
+                if indented: output += "\n" + ("\t" * depth);
 
-        const length = dict.length();
-        for let i = 0; i < length; i++: {
-            if !first:
-                output += ",";
+                const key = keys.at(i);
+                const value = input.get(key);
 
-            if indented:
-                output += "\n\t";
+                output += `\"{key}\":`;
+                if indented: output += " ";
 
-            const key = dict.getKeys().at(i);
-            
-            output += `\"{key}\":`;
-           
-            if indented: 
-                output += " ";
+                // Рекурсивный вызов для значения
+                output += serialize(value, indented, depth + 1);
+            }
 
-            const value = dict.get(key);
-            if typeof(value) == "Number" || typeof(value) == "Boolean":
-                output += new String(value).toLower();
-            else: output += `\"{value}\"`;
-
-            first = false;
+            if indented: output += "\n" + ("\t" * (depth - 1));
+            output += "}";
+            return output;
         }
 
-        if indented:
-            output += "\n";
+        // 2. Обработка Array
+        else if type == "Array": {
+            let output = "[";
+            const length = input.length();
 
-        output += "}";
-        return output;
+            for let i = 0; i < length; i++: {
+                if i > 0: output += ",";
+                if indented: output += " ";
+
+                output += serialize(input.at(i), indented, depth + 1);
+            }
+            output += "]";
+            return output;
+        }
+
+        // 3. Базовые типы
+        else if type == "Number" || type == "Boolean":
+            return new String(input).toLower();
+        
+        // 4. Строки (и остальное как строки)
+        else:
+            return `\"{input}\"`;
     }
 
-    function<Dictionary> deserialize(let content): {
-        const result = new Dictionary();
+    // Десериализация: упрощенный пример поддержки вложенности
+    function<Dictionary|Array|Any> deserialize(let content): {
+        content = content.trim();
 
-        content = content.trim().trim("{").trim("}");
+        // Если это массив
+        if content.startsWith("["): {
+            const resArray = new Array();
+            // Убираем внешние скобки и разделяем по запятым (упрощенно)
+            const inner = content.subString(1, content.length() - 2);
+            // Тут в идеале нужен полноценный токенизатор, чтобы не разбить вложенный объект
+            // Но для простых структур используем split
+            inner.split(",").forEach(fn(item) => resArray.push(deserialize(item)));
+            return resArray;
+        }
 
-        const pairs = content.split(",");
+        // Если это объект
+        if content.startsWith("{"): {
+            const result = new Dictionary();
+            let inner = content.subString(1, content.length() - 2);
+            
+            const pairs = inner.split(",");
+            pairs.forEach(function(pair): {
+                const parts = pair.split(":");
+                const key = parts.at(0).trim().trim("\"");
+                // Рекурсивно десериализуем значение
+                const rawValue = parts.at(1).trim();
+                result.set(key, deserialize(rawValue));
+            });
+            return result;
+        }
+
+        // Если это примитив
+        if content.startsWith(`"`): return content.trim(`"`);
+        if content == "true": return true;
+        if content == "false": return false;
         
-        pairs.forEach(function(pair): {
-            const parts = pair.split(":");
-
-            const key = parts.at(0).trim().trim("\"");
-            const value = parts.at(1).trim().trim("\"");
-
-            result.set(key.toString(), value);
-        });
-
-        return result;
+        return std::parser.asNumber(content); 
     }
 }

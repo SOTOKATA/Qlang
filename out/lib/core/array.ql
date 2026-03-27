@@ -140,10 +140,11 @@ class Array extends DataType: {
     function select(<Func> func) => new linq::SelectEnumerable(new linq::ArraySource(this), func);
     function any(<Func> func) => new linq::ArraySource(this).any(func);
     function all(<Func> func) => new linq::ArraySource(this).all(func);
+    function<Number> index(item) => new linq::ArraySource(this).index(item);
 
-    function max() => new linq::ArraySource(this).max();
-    function min() => new linq::ArraySource(this).min();
-    function sum() => new linq::ArraySource(this).sum();
+    function<Number> max() => new linq::ArraySource(this).max();
+    function<Number> min() => new linq::ArraySource(this).min();
+    function<Number> sum() => new linq::ArraySource(this).sum();
 
     function getIndexes() => _native("std", "array", "get_indexes", getCollection());
 

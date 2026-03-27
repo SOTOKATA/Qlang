@@ -26,6 +26,21 @@ namespace linq: {
             return result;
         }
 
+        function<Number> index(const item): {
+            let currentIndex = 0; 
+            let currentElement = next(); 
+
+            while typeof(currentElement) != "null": {
+                if currentElement == item:
+                    return currentIndex;
+
+                currentElement = next();
+                currentIndex++;
+            };
+
+            return -1;
+        }
+
         function<Dictionary> toDictionary(): {
             const result = new Dictionary();
 

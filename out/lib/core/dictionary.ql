@@ -1,7 +1,7 @@
 import "$lib/core"
 import "$lib/meta"
 
-class Dictionary: {
+class Dictionary extends DataType: {
     private let _keys;
     private let _values;
 
@@ -19,6 +19,10 @@ class Dictionary: {
                 _keys.push(var.name);
                 _values.push(var.value);
             });
+    }
+
+    function _createFrom(obj): {
+        return new Dictionary(obj);
     }
     
     function<String> toString(): {
@@ -54,9 +58,9 @@ class Dictionary: {
         }
     }
 
-    function<Boolean> containsKey(let key) => _keys.contains(key);
+    function<Boolean> containsKey(key) => _keys.contains(key);
 
-    function<Boolean> containsValue(let item) => _values.contains(item);
+    function<Boolean> containsValue(item) => _values.contains(item);
 
     function<Array> getKeys() => _keys;
 
@@ -67,13 +71,13 @@ class Dictionary: {
         _values.clear();
     }
 
-    function<Number> length(): _keys.length();
+    function<Number> length() => _keys.length();
 
-    function get(let key): {
-        let index = _keys.indexOf(key);
+    function get(key): {
+        let index = _keys.index(key);
 
         if index == -1:
-            std::throw.message("Key is not existent in dictionary");
+            std::throw.message(`Key '{key}' is not existent in dictionary` + _keys.toString());
 
         return _values.at(index);
     }
