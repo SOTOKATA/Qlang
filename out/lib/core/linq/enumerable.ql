@@ -18,7 +18,7 @@ namespace linq: {
             const result = new Array();
             let item = this.next();
 
-            while typeof(item) != "null": {
+            while item is not null: {
                 result.push(item);
                 item = this.next();
             }
@@ -30,7 +30,7 @@ namespace linq: {
             let currentIndex = 0; 
             let currentElement = next(); 
 
-            while typeof(currentElement) != "null": {
+            while currentElement is not null: {
                 if currentElement == item:
                     return currentIndex;
 
@@ -46,7 +46,7 @@ namespace linq: {
 
             let item = this.next();
 
-            while typeof(item) != "null": {
+            while item is not null: {
                 result.set(item.key, item.value);
                 item = this.next();
             }
@@ -55,16 +55,14 @@ namespace linq: {
         }
 
         function first(): {
-            let item = this.next();
-
-            return if typeof(item) != "null" ? item : null;
+            return this.next();
         }
 
         function<Boolean> any(<Func|null> predicate): {
             let item = this.next();
 
-            while typeof(item) != "null": {
-                if typeof(predicate) == "null":
+            while item is not null: {
+                if predicate is null:
                     return true;
                 
                 if predicate(item):
@@ -79,7 +77,7 @@ namespace linq: {
         function<Boolean> all(<Func> predicate): {
             let item = this.next();
 
-            while typeof(item) != "null": {
+            while item is not null: {
                 if !predicate(item):
                     return false;
 
@@ -93,7 +91,7 @@ namespace linq: {
             let total = 0;
             let item = this.next();
 
-            while typeof(item) != "null": {
+            while item is not null: {
                 total = total + item;
                 item = this.next();
             }
@@ -104,7 +102,7 @@ namespace linq: {
         function<Number|null> max(): {
             let item = this.next();
             
-            if typeof(item) == "null":
+            if item is null:
                 return null;
 
             let maxVal = item; 
@@ -112,7 +110,7 @@ namespace linq: {
             while true: {
                 item = this.next();
                 
-                if typeof(item) == "null":
+                if item is null:
                     break;
 
                 if item > maxVal:
@@ -125,7 +123,7 @@ namespace linq: {
         function<Number|null> min(): {
             let item = this.next();
             
-            if typeof(item) == "null":
+            if item is null:
                 return null;
 
             let minVal = item;
@@ -133,7 +131,7 @@ namespace linq: {
             while true: {
                 item = this.next();
                 
-                if typeof(item) == "null":
+                if item is null:
                     break;
 
                 if item < minVal:

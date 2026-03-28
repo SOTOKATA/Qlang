@@ -1,35 +1,107 @@
 namespace std: {
     private const richConsole = new RichConsole();
     private class RichConsole: {
-        function richTest(): {
-            const keywords = ["bold", "dim", "italic", "underline", "blink", "rapid_blink", "reverse", "hidden", "strike"];
+        function richPrint(<String> message): {
+            if message == "": return;
+            message = "text: [color=yellow]Yello text[/color]";
+            std::console.cursorVisible(false);
+            let<String> msg = message;
 
-            const colors = std::console.getColors();
+            let indexofw = 0;
 
-            let biggestLength = math.max(keywords.select(fn(x) => x.length()).max(), colors.select(fn(x) => x.length()).max());
+            try: {
+                while msg.length() > 0: {
+                    indexofw++;
+                    const openIndex = msg.indexOf("[");
 
-            std::console.println("\nRich tag test:");
-            std::console.println(new String("-", 10));
+                    if openIndex == -1: {
+                        std::console.print(msg);
+                        break; 
+                    }
 
-            keywords.forEach(function(keyword): {
-                const spaces = new String(" ") * std::math.max(0, biggestLength - keyword.length());
+                    if openIndex > 0: {
+                        std::console.print(msg.subString(0, openIndex));
+                        // Отрезаем напечатанное
+                        msg = msg.subString(openIndex, msg.length() - openIndex);
+                    }
 
-                richPrint(`{keyword}:{spaces.toString()} [{keyword}]Hello, World![/{keyword}]\n`);
-            });
+                    // Теперь msg ГАРАНТИРОВАННО начинается с "["
+                    const closeIndex = msg.indexOf("]");
+                    
+                    if closeIndex == -1: {
+                        std::console.print(msg);
+                        break;
+                    }
 
-            std::console.println();
+                    // ИЗВЛЕКАЕМ ТЕГ
+                    // Индекс 0 это '[', индекс closeIndex это ']'
+                    // Длина содержимого между ними: closeIndex - 1
+                    const tagContent = msg.subString(1, closeIndex - 1);
+                    
+                    const parts = tagContent.split("=");
+                    const keyword = parts.at(0);
+                    const value = if parts.length() >= 2 ? parts.at(1) : "";
 
-            colors.forEach(function(keyword): {
-                const spaces = new String(" ") * std::math.max(0, biggestLength - keyword.length());
+                    useCode(keyword, value);
 
-                richPrint(`{keyword}:{spaces.toString()} [color={keyword}]Hello, World![/color]\n`);
-            });
+                    // ОТРЕЗАЕМ ТЕГ
+                    const nextStart = closeIndex + 1;
+                    const remainingLength = msg.length() - nextStart;
 
+                    if remainingLength <= 0: {
+                        break;
+                    }
+                    
+                    // Вот тут могла быть ошибка, если неправильно рассчитать длину
+                    msg = msg.subString(nextStart, remainingLength);
+                }
+            }
+            catch(const error): {
+                console.println(`\nDebugInfo: Index of while: {indexofw}\nmsg: {msg}\nopenIndex: {openIndex}\n`);
+                throw.exception(error);
+            }
 
-            std::console.println(new String("-", 10) + "\n");
+            std::console.cursorVisible(true);
         }
 
-        function richPrint(<String> message): {
+        function static_richPrint(<String> message): {
+            if message == "":
+                return;
+            
+            std::console.cursorVisible(false);
+
+            let currentIndex = 0;
+            const length = message.length();
+            let<String> msg = message;
+
+            while currentIndex < length: {
+                if currentIndex >= length:
+                    break;
+
+                const text = msg.trimStart("[");
+
+                currentIndex += text.length();
+
+                std::console.print(text);
+
+                msg = msg.subString(0, text.length() - 1);
+                
+                console.println("INDEX: " + msg);
+
+                if msg.length() > 0 && msg.charAt(0) == "[": {
+                    const index = msg.indexOf("]");
+                    const code = msg.subString(index, msg.length() - index).split("=");
+
+                    msg = msg.subString(0, index);
+
+                    useCode(code.at(0), if code.length() >= 2 ? code.at(1) : "");
+                }
+            }
+        }
+
+        function old_richPrint(<String> message): {
+            std::console.cursorVisible(false);
+
             const length = message.length();
             
             let isCode = false;
@@ -76,6 +148,8 @@ namespace std: {
                 std::console.print(text);
                 text = "";
             }
+    
+            std::console.cursorVisible(true);
         }
 
         private function useCode(let<String> keyword, const<String> value): {

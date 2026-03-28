@@ -16,5 +16,7 @@ public class DynamicClass(string name)
     
     public readonly List<string> Extends = [];
 
+    public Guid Id;
+
     public override string ToString() => $"{ClassName}";
 }

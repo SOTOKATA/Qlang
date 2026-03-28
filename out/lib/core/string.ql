@@ -19,7 +19,7 @@ class String extends DataType: {
     function _operatorMultiplication(obj1, let obj2): {
         let val = "";
 
-        if typeof(obj2) != "Number":
+        if obj2 is not Number:
             std::throw.message("Cannot apply multiplication");
 
         obj2 = <Number>obj2.getValue();
@@ -66,7 +66,7 @@ class String extends DataType: {
         return obj1.length() < obj2.length();
 
     function new(input):
-        _value = if typeof(input) == "String" ? input.getValue() : str(input);
+        _value = if input is String ? input.getValue() : str(input);
 
     function new(<String> char, let<Number> count): {
         count = std::math.round(count, 0);
@@ -81,10 +81,9 @@ class String extends DataType: {
     }
 
     function getPrimitive(strOrPrimite, let<Boolean> allowOther = false): {
-        if object.isNull(strOrPrimite):
+        if strOrPrimite is null:
             std::throw.message("Object is null");
-
-        if typeof(strOrPrimite) == "String":
+        else if strOrPrimite is String:
             return strOrPrimite.toString();
 
         if isPrimitive(strOrPrimite):
@@ -136,11 +135,11 @@ class String extends DataType: {
 
     // Check if string is empty or null
     function isNullOrEmpty(<String|null> str)
-        => if typeof(str) == null ? true : _native("std", "string", "isNullOrEmpty", _str(str));
+        => if str is null ? true : _native("std", "string", "isNullOrEmpty", _str(str));
     
     // Check if string is white space or null
     function isNullOrWhitespace(<String|null> str)
-        => if typeof(str) == null ? true : _native("std", "string", "isNullOrWhitespace", _str(str));
+        => if str is null ? true : _native("std", "string", "isNullOrWhitespace", _str(str));
 
     function<Boolean> startsWith(<String> str) => _native("std", "string", "startsWith", _str(_value), str);
 
@@ -167,16 +166,16 @@ class String extends DataType: {
     // Cut string by 'startPos' and 'length'
     function<String> subString(let<Number> startPos, let<Number> length): {
         throwIfNotInRange(startPos);
-        throwIfNotInRange(length);
+        throwIfNotInRange(startPos + length);
 
         return new String(_native("std", "string", "subString", _str(_value), startPos, length));
     }
 
     // get index of first 'toFind'
-    function<String> indexOf(<String> toFind) => _native("std", "string", "indexOf", _value, toFind);
+    function<Number> indexOf(<String> toFind) => _native("std", "string", "indexOf", _value, toFind);
 
     // get index of last 'toFind'
-    function<String> lastIndexOf(<String> toFind) => _native("std", "string", "lastIndexOf", _value, toFind);
+    function<Number> lastIndexOf(<String> toFind) => _native("std", "string", "lastIndexOf", _value, toFind);
 
     // Replace '{n}' to replacement
     function<String> format(<Collection|Array> replacement): {
@@ -190,6 +189,6 @@ class String extends DataType: {
     }
 
     private function throwIfNotInRange(<Number> index):
-        if index < 0 && index >= length():
+        if index < 0 || index >= length():
             std::throw.message(`Index '{index}' is out of range.`);
 }

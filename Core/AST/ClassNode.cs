@@ -23,6 +23,9 @@ public class ClassNode : ASTNode
     [Key(4)] 
     public List<int> Extends { get; set; } = [];
 
+    [Key(5)] 
+    public Guid Id { get; set; }
+
     public override string ToTokenString(StringPoolTable stringPoolTable)
         => stringPoolTable[NameId];
 
@@ -35,6 +38,7 @@ public class ClassNode : ASTNode
             Body = Body.Select(node => node.Clone()).ToList(),
             IsPrivate = IsPrivate,
             Extends = [..Extends],
+            Id = Id
         };
     }
 
@@ -42,6 +46,7 @@ public class ClassNode : ASTNode
     {
         return DebugIndent($"""
                 ClassNode:
+                    Id: {Id}
                     Name: {NameId}
                     IsPrivate: {IsPrivate}
                     Body: [{string.Join(",\n", Body.Select(x => x.GetTree("\t")))}]

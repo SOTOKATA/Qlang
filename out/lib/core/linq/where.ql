@@ -8,7 +8,7 @@ namespace linq: {
             while true: {
                 let item = _source.next();
                 
-                if typeof(item) == "null": 
+                if item is null: 
                     return null;
 
                 if _predicate(item):

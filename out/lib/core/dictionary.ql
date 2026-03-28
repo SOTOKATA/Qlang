@@ -14,7 +14,7 @@ class Dictionary extends DataType: {
         _keys = new Array([]);
         _values = new Array([]);
 
-        if typeof(obj) != "null":
+        if obj is not null:
             meta::getVariableList(obj).forEach(fn(var): {
                 _keys.push(var.name);
                 _values.push(var.value);
@@ -32,8 +32,8 @@ class Dictionary extends DataType: {
         for let i = 0; i < length; i++: {
             const value = _values.at(i);
 
-            str += _keys.at(i).toString() + " => " + switch typeof(value): {
-                "String" => `"{value}"`,
+            str += _keys.at(i).toString() + " => " + switch value: {
+                is String => `"{value}"`,
                 default => value.toString()
             };
         

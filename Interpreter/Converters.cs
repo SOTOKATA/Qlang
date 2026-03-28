@@ -11,6 +11,7 @@ public partial class Interpreter
     /// Convert variables with ASTNode values to normalized
     /// </summary>
     /// <param name="variables">Variables to convert</param>
+    /// <param name="stack">Local context stack</param>
     /// <returns>Converted variables</returns>
     private Dictionary<string, Variable> ToDynamicVariables(Dictionary<string, Variable> variables, Stack<ASTContext> stack)
     {
@@ -85,7 +86,8 @@ public partial class Interpreter
         // Create dynamic instance
         DynamicClass dynamicClass = new(_stringPoolTable[classNode.NameId])
         {
-            IsPrivate = classNode.IsPrivate
+            IsPrivate = classNode.IsPrivate,
+            Id = classNode.Id
         };
         
         // Add and convert all assignments

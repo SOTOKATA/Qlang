@@ -7,7 +7,7 @@ namespace linq: {
         function next(): {
             const item = _source.next();
 
-            if typeof(item) != "null":
+            if item is not null:
                 return _predicate(item);
 
             return null;

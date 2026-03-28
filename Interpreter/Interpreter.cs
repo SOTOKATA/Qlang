@@ -322,10 +322,11 @@ public partial class Interpreter
     {
         var dClass = ToDynamicClass((ClassNode)classNode.Clone(), stack);
 
-        var fromClass = GetFunctionFromClass(dClass, _stringPoolTable.Add(Keywords.CreateClassInstanceKeyword), stack, args);
+        var index = _stringPoolTable.Add(Keywords.CreateClassInstanceKeyword);
 
-        var indexOfNewClass = _stringPoolTable.Add(Keywords.CreateClassInstanceKeyword);
-        if (dClass.Body.OfType<FunctionNode>().Any(f => f.NameId == indexOfNewClass) &&
+        var fromClass = GetFunctionFromClass(dClass, index, stack, args);
+
+        if (dClass.Body.OfType<FunctionNode>().Any(f => f.NameId == index) &&
             fromClass.function == null)
             throw new QlangRuntimeException($"Can't initialize class '{_stringPoolTable[classNode.NameId]}' with this parameters.", GetStackTrace(stack));
 
@@ -451,6 +452,7 @@ public partial class Interpreter
             return expr switch
             {
                 LineNode ln => EvaluateLine(ln, stack),
+                TypeEqualityNode tp => EvaluateTypeEqual(tp, stack),
                 CastNode cast => CastObject(cast, stack),
                 ASTContainer container => container.Value,
                 StringRefNode strRef => _stringPoolTable[strRef.Index],
@@ -484,6 +486,27 @@ public partial class Interpreter
                 GetCurrentDebug(stack),
                 GetStackTrace(stack));
         }
+    }
+    
+    private bool EvaluateTypeEqual(TypeEqualityNode tp, Stack<ASTContext> stack)
+    {
+        var left = EvaluateExpression(tp.Left, stack);
+        var @class = ExecutePathToClass(tp.Class, stack).@class;
+    
+        var isMatch = false;
+
+        if (left is DynamicClass d1)
+        {
+            var d1Name = d1.ClassName;
+
+            isMatch = (@class.ClassName is "Collection" or "Number" or "Nullable" && @class.ClassName == d1Name) || 
+                      @class.Id.Equals(d1.Id);
+        }
+        else
+            isMatch = @class.ClassName == Typeof(left, stack) || !isMatch && left == null;
+
+        // (XOR)
+        return tp.IsNotEqual ^ isMatch;
     }
 
     private object? EvaluateLine(LineNode ln, Stack<ASTContext> stack)
@@ -879,6 +902,14 @@ public partial class Interpreter
     /// <exception cref="ArgumentOutOfRangeException"></exception>
     private object? EvaluateBinaryOperation(BinaryOperationNode binOp, Stack<ASTContext> stack)
     {
+        if ((binOp.OperatorId == _stringPoolTable.Add(Keywords.TypeEqualityKeyword) || binOp.OperatorId == _stringPoolTable.Add(Keywords.TypeNotEqualityKeyword)) && binOp.Right is CallNode call)
+            return EvaluateExpression(new TypeEqualityNode
+            {
+                Left = binOp.Left,
+                Class = call,
+                IsNotEqual = binOp.OperatorId == _stringPoolTable.Add(Keywords.TypeNotEqualityKeyword)
+            }, stack);
+        
         var left = EvaluateExpression(binOp.Left, stack);
         var right = EvaluateExpression(binOp.Right, stack);
 

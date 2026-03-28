@@ -36,6 +36,8 @@ public static class Keywords
     
     public static string TrueKeyword => "true";
     public static string FalseKeyword => "false";
+    public static string TypeEqualityKeyword => "is";
+    public static string TypeNotEqualityKeyword => "not";
 
     public static string ImportKeyword => "import";
     public static string ImportNativeKeyword => "native";
@@ -54,6 +56,7 @@ public static class Keywords
         ConstVariableDeclaration, ContinueKeyword, BreakKeyword, NullKeyword, ThisKeyword, ExtendsKeyword, 
         SwitchBlock, CaseKeyword, DefaultKeyword, NamespaceDeclaration,
         UsingKeyword, TryKeyword, CatchKeyword, FinallyKeyword, ShortFunctionDeclaration,
-        CreateClassInstanceKeyword, AwaitKeyword, AsyncKeyword, ParallelKeyword
+        CreateClassInstanceKeyword, AwaitKeyword, AsyncKeyword, ParallelKeyword,
+        TypeEqualityKeyword, TypeNotEqualityKeyword
     ];
 }

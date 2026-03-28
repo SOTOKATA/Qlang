@@ -9,7 +9,7 @@ class Object: {
     function<Boolean> isSimplify(val) => _native("std", "object", "is_simplify", val);
 
     function<String> toString(obj)
-        => if typeof(obj) == "null" ? "<null>" : _native("std", "string", "toString", obj);
+        => if obj is null ? "<null>" : _native("std", "string", "toString", obj);
 
     function<String> toString() => toString(this);
 }

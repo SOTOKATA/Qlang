@@ -20,8 +20,8 @@ class Array extends DataType: {
 
         for let i = 0; i < length; i++: {
             const item = at(i);
-            str += switch typeof(item): {
-                "String" => `"{item}"`,
+            str += switch item: {
+                is String => `"{item}"`,
                 default => item.toString()
             };
 
@@ -44,7 +44,7 @@ class Array extends DataType: {
 
     // Add element
     function push(item): {
-        if _type != null && typeof(item) != _type:
+        if _type is not null && typeof(item) != _type:
             throw.message("Element type does not match array type.");
 
         _native("std", "array", "add", _value, item);

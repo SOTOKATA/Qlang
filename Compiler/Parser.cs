@@ -250,6 +250,13 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
                 _ => null
             };
 
+            if (current.TokenType == Tokens.Keyword && current.Value == Keywords.TypeEqualityKeyword)
+            {
+                if (next?.TokenType == Tokens.Keyword && next.Value == Keywords.TypeNotEqualityKeyword)
+                    operatorId = Consume(Keywords.TypeNotEqualityKeyword, 2);
+                else operatorId =  Consume(Keywords.TypeEqualityKeyword, 1);
+            }
+
             var caseValue = isDefault ? null : ParsePrimary();
             
             // =>
@@ -279,7 +286,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
 
             int? Consume(string op, int count)
             {
-                for (int i = 0; i < count; i++)
+                for (var i = 0; i < count; i++)
                     Advance();
 
                 return stringPoolTable.Add(op);
@@ -534,7 +541,8 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             NameId = stringPoolTable.Add(nameToken.Value), 
             Body = body, 
             ExtendsPath = extends,
-            IsPrivate = isPrivate
+            IsPrivate = isPrivate,
+            Id = Guid.NewGuid()
         };
     }
 
@@ -742,8 +750,51 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
     /// </summary>
     private ASTNode ParseExpression()
     {
-        var result = ParseLogicalOr();
-        return result;
+        return ParseLogicalOr();
+    }
+    
+    /// <summary>
+    /// Parsing logical 'is' or 'is not'
+    /// </summary>
+    private ASTNode ParseLogicalIs()
+    {
+        var left = ParseComparison();
+
+        while (Check(Tokens.Keyword, Keywords.TypeEqualityKeyword))
+        {
+            var isNotEqual = false;
+
+            var token = Advance();
+
+            if (Check(Tokens.Keyword, Keywords.TypeNotEqualityKeyword))
+            {
+                isNotEqual = true;
+                Advance();
+            }
+            
+            var right = ParseComparison();
+            
+            if (right is KeywordNode keyword && keyword.KeywordId == stringPoolTable.Add(Keywords.NullKeyword))
+                right = new CallNode
+                {
+                    FileId = debugTable.GetFileId(token.DebugIndex),
+                    Objects = [new ObjectPointerNode { NameId = stringPoolTable.Add("Nullable") }]
+                };
+            
+
+            if (right is not CallNode callNode)
+                throw new QlangCompileException($"Cannot use object of type '{right.GetType().Name}' as path to class.",
+                    GetDebug(token), "Parser");
+            
+            left = new TypeEqualityNode
+            {
+                Left = left,
+                IsNotEqual = isNotEqual,
+                Class = callNode
+            };
+        }
+
+        return left;
     }
 
     /// <summary>
@@ -755,8 +806,8 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
 
         while (Check(Tokens.Or) && Peek()?.TokenType == Tokens.Or)
         {
-            Advance(); // первый |
-            Advance(); // второй |
+            Advance();
+            Advance();
             var right = ParseLogicalAnd();
             left = new BinaryOperationNode
             {
@@ -778,8 +829,8 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
 
         while (Check(Tokens.And) && Peek()?.TokenType == Tokens.And)
         {
-            Advance(); // первый &
-            Advance(); // второй &
+            Advance(); 
+            Advance(); 
             var right = ParseEquality();
             left = new BinaryOperationNode
             {
@@ -797,15 +848,15 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
     /// </summary>
     private ASTNode ParseEquality()
     {
-        var left = ParseComparison();
+        var left = ParseLogicalIs();
 
         while (true)
         {
             if (Check(Tokens.Equals) && Peek()?.TokenType == Tokens.Equals)
             {
-                Advance(); // первый =
-                Advance(); // второй =
-                var right = ParseComparison();
+                Advance(); 
+                Advance(); 
+                var right = ParseLogicalIs();
                 left = new BinaryOperationNode
                 {
                     Left = left,
@@ -1150,7 +1201,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
     // Allows += -= /= *= %= = ++ --
     private bool CanBeAssignmentNode()
     {
-        return (Check(Tokens.Equals) && Peek()?.TokenType != Tokens.Equals) ||
+        return (Check(Tokens.Equals) && Peek()?.TokenType != Tokens.Equals && Peek()?.TokenType != Tokens.Greater) ||
                (
                 (
                     Check(Tokens.Plus) || 
@@ -1172,7 +1223,6 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
 
         var currentIdentifier = Current().Value;
 
-        // Проверяем на специальные строковые константы
         if (currentIdentifier.StartsWith("___S"))
         {
             // Advance '___S*___'
@@ -1222,8 +1272,6 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             Expect(Tokens.Keyword);
         }
 
-        var isNullable = false;
-
         if (Current().TokenType != Tokens.Identifier)
             return current;
 
@@ -1253,7 +1301,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             };
         }
 
-        isNullable = Check(Tokens.Question) && Peek()?.TokenType == Tokens.Dot;
+        var isNullable = Check(Tokens.Question) && Peek()?.TokenType == Tokens.Dot;
         if (isNullable)
             Advance();
 
@@ -1281,7 +1329,6 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             if (@operator != "")
                 Advance();
             Advance();
-            
             
             current = new AssignmentNode(false, false, false)
             {
