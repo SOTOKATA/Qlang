@@ -9,8 +9,8 @@ namespace meta: {
 
         const arr = new Array([]);
 
-        const length = names.length();
-        for let i = 0; i < length; i++:
+        const len = names.length;
+        for let i = 0; i < len; i++:
             arr.push(new Variable(types.at(i), names.at(i), values.at(i)));
 
         return arr;

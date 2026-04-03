@@ -18,6 +18,8 @@ public class DynamicFunction(string name)
     public List<CallNode> ReturnTypes = [];
 
     public ASTContext? Context;
+    
+    public override string ToString() => Name;
 
     public DynamicFunction Clone()
     {

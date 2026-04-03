@@ -14,7 +14,7 @@ namespace linq: {
             throw.message("Cannot instantiate ArraySource with Enumerable params.");
 
         function next(): {
-            if _index + 1 < _arr.length(): {
+            if _index + 1 < _arr.length: {
                 _index++;
                 return _arr.at(_index);
             }

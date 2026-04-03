@@ -9,7 +9,7 @@ public class ObjectClass : IQlangClass
     public List<(string name, Delegate body)> GetFunctions()
     {
         return [
-            ("is_simplify",  (Func<object?, bool>)(obj => obj is int or long or double or float or string or bool or List<object?>)),
+            ("is_simplify",  (Func<object?, bool>)(obj => obj is int or null or long or double or float or string or bool or List<object?>)),
             ("equals", (Func<object?, object?, bool>)(ObjectsEqual))
         ];
     }

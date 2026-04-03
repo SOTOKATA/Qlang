@@ -16,9 +16,9 @@ namespace linq: {
         function next(): {
             const keys = _dict.getKeys();
             const values = _dict.getValues();
-            const length = keys.length();
+            const len = keys.length;
 
-            if _index + 1 < length: {
+            if _index + 1 < len: {
                 _index++;
                 return { key = keys.at(_index), value = values.at(_index) };
             }

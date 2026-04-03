@@ -226,7 +226,10 @@ public partial class Interpreter
         if (stack.Count == 0)
             return;
 
-        var value = EvaluateExpression(assignmentNode.Value, stack);
+        var value = assignmentNode.Value is FieldNode fn 
+            ? ToDynamicField(fn, stack) 
+            : EvaluateExpression(assignmentNode.Value, stack);
+        
         var valueType = Typeof(value, stack);
 
         var path = assignmentNode.Path;
@@ -244,6 +247,7 @@ public partial class Interpreter
             var callNode = new CallNode
             {
                 Objects = path.SkipLast(1).ToList(),
+                FileId  = -1,
             };
 
             currentObject = ExecuteObjectCalls(callNode, stack);
@@ -257,6 +261,12 @@ public partial class Interpreter
 
             if (obj.@object is Variable var)
             {
+                if (var.Value is DynamicField dynamicField)
+                {
+                    EvaluateSetField(var, dynamicField, value, stack);
+                    return;
+                }
+                
                 if (var.IsConst)
                     throw new QlangRuntimeException(
                         $"Cannot re-assign const property '{_stringPoolTable[lastNode.NameId]}'",
@@ -424,6 +434,30 @@ public partial class Interpreter
         }
         
         return node;
+    }
+
+    private object? EvaluateGetField(DynamicField dynamicField, Stack<ASTContext> stack)
+    {
+        if (dynamicField.GetFunction == null)
+            throw new QlangRuntimeException("Field access not implemented", GetCurrentDebug(stack), GetStackTrace(stack));
+        
+        var dynamicFunction = ToDynamicFunction(dynamicField.GetFunction, stack);
+        
+        dynamicFunction.Variables[dynamicField.PrivateVariable.Name] = dynamicField.PrivateVariable;
+        
+        return ExecuteFunction(dynamicFunction, [], CurrentContext(stack)?.Class, CurrentContext(stack)?.Namespace, stack);
+    }
+    
+    private void EvaluateSetField(Variable var, DynamicField dynamicField, object? value, Stack<ASTContext> stack)
+    {
+        if (dynamicField.SetFunction == null)
+            throw new QlangRuntimeException("Field access not implemented", GetCurrentDebug(stack), GetStackTrace(stack));
+        
+        var dynamicFunction = ToDynamicFunction(dynamicField.SetFunction, stack);
+        
+        dynamicFunction.Variables[dynamicField.PrivateVariable.Name] = dynamicField.PrivateVariable;
+
+        ExecuteFunction(dynamicFunction, [value], CurrentContext(stack)?.Class, CurrentContext(stack)?.Namespace, stack);
     }
 
     /// <summary>

@@ -17,7 +17,9 @@ public partial class Interpreter
     {
         foreach (var pair in variables)
             if (pair.Value.Value is ASTNode node)
-                pair.Value.Value = EvaluateExpression(node, stack);
+                pair.Value.Value = node is FieldNode fn 
+                    ? ToDynamicField(fn, stack) 
+                    : EvaluateExpression(node, stack);
 
         return variables;
     }
@@ -95,7 +97,10 @@ public partial class Interpreter
         {
             var assignmentNode = (AssignmentNode)lineNode.Content!;
             
-            var value = EvaluateExpression(assignmentNode.Value, stack);
+            var value = assignmentNode.Value is FieldNode fn 
+                ? ToDynamicField(fn, stack) 
+                : EvaluateExpression(assignmentNode.Value, stack);
+            
             var typeofValue = Typeof(value, stack);
             var name = _stringPoolTable[assignmentNode.GetLastNameId()];
             
@@ -129,6 +134,27 @@ public partial class Interpreter
     }
     
     /// <summary>
+    /// Convert static field to dynamic
+    /// </summary>
+    /// <param name="fieldNode">field to convert</param>
+    /// <param name="stack">Current context stack</param>
+    /// <returns>DynamicField</returns>
+    private DynamicField ToDynamicField(FieldNode fieldNode, Stack<ASTContext> stack)
+    {
+        var privateFieldVariable = new Variable(
+            _stringPoolTable[fieldNode.PrivateVariable.GetLastNameId()],
+            EvaluateExpression(fieldNode.PrivateVariable.Value, stack),
+            true, false, []
+            );
+
+        return new DynamicField(
+            privateFieldVariable,
+            fieldNode.GetFunction,
+            fieldNode.SetFunction
+        );
+    }
+    
+    /// <summary>
     /// Convert static function to dynamic
     /// </summary>
     /// <param name="functionNode">function to convert</param>
@@ -147,7 +173,10 @@ public partial class Interpreter
         foreach (var node in functionNode.Parameters)
         {
             var nodeName = _stringPoolTable[node.GetLastNameId()];
-            var value = EvaluateExpression(node.Value, stack);
+            var value = node.Value is FieldNode fn 
+            ? ToDynamicField(fn, stack) 
+            : EvaluateExpression(node.Value, stack);
+            
             var typeofValue = Typeof(value, stack);
 
             if (!IsTypeCompatible(node.Types, value, true, stack))

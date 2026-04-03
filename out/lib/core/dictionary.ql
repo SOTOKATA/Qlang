@@ -28,8 +28,8 @@ class Dictionary extends DataType: {
     function<String> toString(): {
         let str = "[";
 
-        const length = _keys.length();
-        for let i = 0; i < length; i++: {
+        const len = _keys.length;
+        for let i = 0; i < len; i++: {
             const value = _values.at(i);
 
             str += _keys.at(i).toString() + " => " + switch value: {
@@ -37,7 +37,7 @@ class Dictionary extends DataType: {
                 default => value.toString()
             };
         
-            if i + 1 < length:
+            if i + 1 < len:
                 str += ", ";
         }
 
@@ -71,7 +71,9 @@ class Dictionary extends DataType: {
         _values.clear();
     }
 
-    function<Number> length() => _keys.length();
+    const length = field(_): {
+        fn get() => _keys.length
+    };
 
     function get(key): {
         let index = _keys.index(key);

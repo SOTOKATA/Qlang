@@ -1,5 +1,6 @@
 using Core;
 using Core.AST;
+using Core.Dynamic;
 using Core.Exceptions;
 using Core.Tables;
 
@@ -462,9 +463,12 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         return returnTypes;
     }
 
-    private FunctionNode ParseFunction(bool isPrivate = false, bool isAsync = false)
+    private FunctionNode ParseFunction(bool isPrivate = false, bool isAsync = false, bool allowShortFn = false)
     {
-        var debug = Expect(Tokens.Keyword, Keywords.FunctionDeclaration);
+        if (!Check(Tokens.Keyword, Keywords.FunctionDeclaration) && (allowShortFn && !Check(Tokens.Keyword, Keywords.ShortFunctionDeclaration)))
+            throw new QlangCompileException("Cannot instantiate function without function keyword", GetDebug(Current()), "Parser");
+        
+        var debug = Advance();
 
         // Type
         var returnTypes = Check(Tokens.Less) ? ParseVariableTypes() : [];
@@ -1066,6 +1070,67 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         return null;
     }
 
+    private ASTNode? ParsePrimaryField()
+    {
+        if (!Check(Tokens.Keyword, Keywords.FieldKeyword))
+            return null;
+
+        var token = Advance();
+
+        Expect(Tokens.LParen);
+        
+        var privateVariableName = Expect(Tokens.Identifier).Value;
+        
+        ASTNode? expression = null;
+        if (Check(Tokens.Equals))
+        {
+            Advance();
+            
+            expression = ParseExpression();
+        }
+        
+        Expect(Tokens.RParen);
+        
+        Expect(Tokens.Colon);
+        
+        Expect(Tokens.LBrace);
+        
+        // Parse functions;
+        FunctionNode? getFunc = null;
+        FunctionNode? setFunc = null;
+        for (var i = 0; i < 4; i++)
+        {
+            if ((Check(Tokens.Keyword, Keywords.FunctionDeclaration) || Check(Tokens.Keyword, Keywords.ShortFunctionDeclaration)) && Peek()?.Value == "get")
+            {
+                getFunc = ParseFunction(true, false, true);
+                continue;
+            }
+            
+            if ((Check(Tokens.Keyword, Keywords.FunctionDeclaration) || Check(Tokens.Keyword, Keywords.ShortFunctionDeclaration)) && Peek()?.Value == "set")
+            {
+                setFunc = ParseFunction(true, false, true);
+                continue;
+            }
+        }
+        Expect(Tokens.RBrace);
+
+        return new FieldNode
+        {
+            PrivateVariable = new AssignmentNode
+            {
+                FileId = debugTable.GetFileId(token.DebugIndex),
+                IsConst = false,
+                IsNew = false,
+                IsPrivate = true,
+                Path = [new ObjectPointerNode {NameId = stringPoolTable.Add(privateVariableName)}],
+                Types = [],
+                Value = expression
+            },
+            GetFunction = getFunc,
+            SetFunction = setFunc
+        };
+    }
+
     private ASTNode? ParsePrimaryCallable()
     {
         // Function pointer
@@ -1332,7 +1397,8 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             
             current = new AssignmentNode(false, false, false)
             {
-                Path = [new ObjectPointerNode { NameId = stringPoolTable.Add(identifier) }]
+                Path = [new ObjectPointerNode { NameId = stringPoolTable.Add(identifier) }],
+                FileId = debugTable.GetFileId(token.DebugIndex)
             };
 
             var value = @operator switch
@@ -1341,7 +1407,8 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
                 {
                     Left = new CallNode
                     {
-                        Objects = [new ObjectPointerNode { NameId = stringPoolTable.Add(identifier) }]
+                        Objects = [new ObjectPointerNode { NameId = stringPoolTable.Add(identifier) }],
+                        FileId = debugTable.GetFileId(token.DebugIndex)
                     },
                     Right = new NumberNode { Value = 1 },
                     OperatorId = stringPoolTable.Add("+")
@@ -1350,7 +1417,8 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
                 {
                     Left = new CallNode
                     {
-                        Objects = [new ObjectPointerNode { NameId = stringPoolTable.Add(identifier) }]
+                        Objects = [new ObjectPointerNode { NameId = stringPoolTable.Add(identifier) }],
+                        FileId = debugTable.GetFileId(token.DebugIndex)
                     },
                     Right = new NumberNode { Value = 1 },
                     OperatorId = stringPoolTable.Add("-")
@@ -1361,7 +1429,8 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
                     {
                         Left = new CallNode
                         {
-                            Objects = [new ObjectPointerNode { NameId = stringPoolTable.Add(identifier) }]
+                            Objects = [new ObjectPointerNode { NameId = stringPoolTable.Add(identifier) }],
+                            FileId = debugTable.GetFileId(token.DebugIndex)
                         },
                         Right = ParseExpression(),
                         OperatorId = stringPoolTable.Add(@operator)
@@ -1401,15 +1470,18 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             {
                 ObjectPointerNode obj => new CallNode
                 {
-                    Objects = [obj]
+                    Objects = [obj],
+                    FileId = debugTable.GetFileId(token.DebugIndex)
                 },
                 NamespacePointerNode namespacePointer => new CallNode
                 {
-                    Objects = [namespacePointer]
+                    Objects = [namespacePointer],
+                    FileId = debugTable.GetFileId(token.DebugIndex)
                 },
                 FunctionPointerNode pointerFunction => new CallNode
                 {
                     Objects = [pointerFunction],
+                    FileId = debugTable.GetFileId(token.DebugIndex)
                 },
                 _ => astNode
             };
@@ -1493,7 +1565,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
 
         if (path is not CallNode)
         {
-            callPathNode = new CallNode { Objects = [path], FileId = debugTable?.GetFileId(token.DebugIndex) ?? -1 };
+            callPathNode = new CallNode { Objects = [path], FileId = debugTable.GetFileId(token.DebugIndex) };
             _callNodes.Add(callPathNode);
         }
 
@@ -1577,6 +1649,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         }
         
         return ParsePrimaryAwait() 
+               ?? ParsePrimaryField()
                ?? ParseShortHandIf()
                ?? ParseShortHandSwitch()
                ?? ParsePrimaryNotBool()
@@ -1623,7 +1696,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             var current = Current();
             
             throw new QlangCompileException(
-                $"Incorrect syntax, expected '{Token.TokenToString(new Token(type, value ?? ""))}', got '{current.Value}'",
+                $"Incorrect syntax, expected '{Token.TokenToString(new Token(type, value ?? ""))}', got '{Token.TokenToString(current)}'",
                 GetDebug(current), "Parser");
         }
 

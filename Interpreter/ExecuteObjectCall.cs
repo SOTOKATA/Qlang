@@ -260,6 +260,17 @@ public partial class Interpreter
 
                     return returnValue;
                 }
+                
+                if (objectAndNamespace.@object is DynamicField field)
+                {
+                    AddContext(stack, new ASTContext { Namespace = objectAndNamespace.@namespace, Class =  objectAndNamespace.@class });
+                    
+                    var result = (EvaluateGetField(field, stack), false);
+                    
+                    RestoreContextStack(stack);
+
+                    return result;
+                }
 
                 return (objectAndNamespace.@object, false);
             default:
@@ -355,12 +366,12 @@ public partial class Interpreter
 
         if (_stringPoolTable[node.NameId] == "toString" && lastObject is not null)
             return (null, null, null, null);
-        
+
         throw new QlangRuntimeException($"Function '{_stringPoolTable[node.NameId]}' is not found in current context {(lastObject is null ? "" : $"('{lastObject}')")}",
             GetCurrentDebug(stack), GetStackTrace(stack));
     }
 
-    private (object? @object, DynamicNamespace? @namespace) FindObject(ObjectPointerNode node, object? lastObject, bool isPathStart, Stack<ASTContext> stack)
+    private (object? @object, DynamicNamespace? @namespace, DynamicClass? @class) FindObject(ObjectPointerNode node, object? lastObject, bool isPathStart, Stack<ASTContext> stack)
     {
         if (node.NameId == -1)
             throw new QlangRuntimeException("Part of path is null.", GetCurrentDebug(stack), GetStackTrace(stack));
@@ -373,7 +384,7 @@ public partial class Interpreter
             if (node.NameId == _stringPoolTable.Add(Keywords.ThisKeyword) && HasContext(stack))
             {
                 CurrentContext(stack)!.AllowPrivateCall = true;
-                return (CurrentContext(stack)!.Class, CurrentContext(stack)!.Namespace);
+                return (CurrentContext(stack)!.Class, CurrentContext(stack)!.Namespace, CurrentContext(stack)!.Class);
             }
 
             CurrentContext(stack)!.AllowPrivateCall = false;
@@ -399,7 +410,7 @@ public partial class Interpreter
                     var = currentContext.Function?.Variables.FirstOrDefault(funcVar => funcVar.Key == nodeName).Value;
 
                     if (var is not null)
-                        return (var, currentContext.Namespace);
+                        return (var, currentContext.Namespace, null);
                 }
                 
                 // Get from parent function
@@ -408,7 +419,7 @@ public partial class Interpreter
                     var = currentContext.ParentFunction!.Variables.FirstOrDefault(funcVar => funcVar.Key == nodeName).Value;
 
                     if (var is not null)
-                        return (var, currentContext.Namespace);
+                        return (var, currentContext.Namespace, currentContext.Class);
                 }
 
 
@@ -418,7 +429,7 @@ public partial class Interpreter
                     var = currentContext.Class?.Variables.FirstOrDefault(classVar => classVar.Key == nodeName).Value;
                     
                     if (var is not null)
-                        return (var, currentContext.Namespace);
+                        return (var, currentContext.Namespace, currentContext.Class);
                 }
 
                 // Get from namespace
@@ -428,24 +439,24 @@ public partial class Interpreter
                         namespaceVar.Key == nodeName).Value;
                     
                     if (var is not null)
-                        return (var, currentContext.Namespace);
+                        return (var, currentContext.Namespace, null);
                 }
                 
                 // Get from blocks
                 if (block != null && block.Variables.TryGetValue(nodeName, out var v))
-                    return (v, currentContext.Namespace);
+                    return (v, currentContext.Namespace, currentContext.Class);
             }
 
             // Try to get VAR from global variable list;
             var variable = _namespaces[GlobalNamespaceName].Variables.FirstOrDefault(var => var.Value.Name == nodeName).Value;
             if (variable is not null)
-                return (variable, null);
+                return (variable, null, null);
         }
 
         if (lastObject is null)
         {
             if (node.IsNullable)
-                return (null, null);
+                return (null, null, null);
             
             throw new QlangRuntimeException($"Object '{nodeName}' is not found in current context.",
                 GetCurrentDebug(stack), GetStackTrace(stack));
@@ -461,7 +472,7 @@ public partial class Interpreter
                         throw new QlangRuntimeException($"Cannot get access to private variable '{var.Name}' from class '{dynamicClass.ClassName}'.",
                             GetCurrentDebug(stack), GetStackTrace(stack));
                         
-                    return (var, null);
+                    return (var, null, dynamicClass);
                 }
                 break;
             case DynamicNamespace dynamicNamespace:
@@ -472,7 +483,7 @@ public partial class Interpreter
                         throw new QlangRuntimeException($"Cannot get access to private variable '{var.Name}' from namespace '{dynamicNamespace.Name}'.",
                             GetCurrentDebug(stack), GetStackTrace(stack));
                     
-                    return (var, dynamicNamespace);
+                    return (var, dynamicNamespace, null);
                 }
                 break;
         }

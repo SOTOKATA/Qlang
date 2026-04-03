@@ -3,16 +3,27 @@ import "$lib/standard"
 namespace std: {
     const environment = new Environment();
     private class Environment: {
-        function getCurrentDirectory() => _native("std", "env", "current_directory");
+        const currentDirectory = field(_): {
+            fn get() => _native("std", "env", "getCurrentDirectory")
+            fn set(<String> str): _native("std", "env", "setCurrentDirectory", str);
+        };
 
-        function getNewLine() => _native("std", "env", "new_line");
-    
-        function getMachineName() => _native("std", "env", "machine_name");
+        const newLine = field(_): {
+            fn get() => _native("std", "env", "newLine")
+        };
 
-        function getProcessPath() => _native("std", "env", "process_path");
+        const machineName = field(_): {
+            fn get() => _native("std", "env", "machineName")
+        };
 
-        function getUserName() => _native("std", "env", "user_name");
+        const processPath = field(_): {
+            fn get() => _native("std", "env", "processPath")
+        };
 
-        function exit(<Number> code = 0) => _native("std", "env", "exit", code);
+        const userName = field(_): {
+            fn get() => _native("std", "env", "userName")
+        };
+
+        function exit(<Number> code = 0): _native("std", "env", "exit", code);
     }
 }

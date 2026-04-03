@@ -5,13 +5,13 @@ namespace json: {
         
         // 1. Обработка Dictionary
         if type == "Dictionary": {
-            if input.length() < 1: return "{}";
+            if input.length < 1: return "{}";
 
             let output = "{";
             const keys = input.getKeys();
-            const length = input.length();
+            const len = input.length;
 
-            for let i = 0; i < length; i++: {
+            for let i = 0; i < len; i++: {
                 if i > 0: output += ",";
                 
                 if indented: output += "\n" + ("\t" * depth);
@@ -34,9 +34,9 @@ namespace json: {
         // 2. Обработка Array
         else if type == "Array": {
             let output = "[";
-            const length = input.length();
+            const len = input.length;
 
-            for let i = 0; i < length; i++: {
+            for let i = 0; i < len; i++: {
                 if i > 0: output += ",";
                 if indented: output += " ";
 
@@ -62,10 +62,7 @@ namespace json: {
         // Если это массив
         if content.startsWith("["): {
             const resArray = new Array();
-            // Убираем внешние скобки и разделяем по запятым (упрощенно)
-            const inner = content.subString(1, content.length() - 2);
-            // Тут в идеале нужен полноценный токенизатор, чтобы не разбить вложенный объект
-            // Но для простых структур используем split
+            const inner = content.subString(1, content.length - 2);
             inner.split(",").forEach(fn(item) => resArray.push(deserialize(item)));
             return resArray;
         }
@@ -73,7 +70,7 @@ namespace json: {
         // Если это объект
         if content.startsWith("{"): {
             const result = new Dictionary();
-            let inner = content.subString(1, content.length() - 2);
+            let inner = content.subString(1, content.length - 2);
             
             const pairs = inner.split(",");
             pairs.forEach(function(pair): {

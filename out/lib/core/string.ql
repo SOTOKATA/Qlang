@@ -34,7 +34,7 @@ class String extends DataType: {
     function _operatorDivision(obj1, obj2): {
         let val = "";
 
-        const index = obj1.length() / obj2.getValue();
+        const index = obj1.length / obj2.getValue();
 
         for let i = 0; i < index; i++:
             val = val + obj1.charAt(i);
@@ -51,19 +51,19 @@ class String extends DataType: {
 
     // Parse '>=' operations
     function _operatorGreaterOrEqual(obj1, obj2): 
-        return obj1.length() >= obj2.length();
+        return obj1.length >= obj2.length;
 
     // Parse '<=' operations
     function _operatorLessOrEqual(obj1, obj2): 
-        return obj1.length() <= obj2.length();
+        return obj1.length <= obj2.length;
 
     // Parse '>' operations
     function _operatorGreater(obj1, obj2): 
-        return obj1.length() > obj2.length();
+        return obj1.length > obj2.length;
 
     // Parse '<' operations
     function _operatorLess(obj1, obj2): 
-        return obj1.length() < obj2.length();
+        return obj1.length < obj2.length;
 
     function new(input):
         _value = if input is String ? input.getValue() : str(input);
@@ -74,7 +74,7 @@ class String extends DataType: {
         if count < 0: 
             std::throw.message("Param 'count' must be more than 0");
 
-        if new String(char).length() < 0:
+        if new String(char).length < 0:
             std::throw.message("Length of string must be more than 0");
 
         _value = _native("std", "string", "create", char, count);
@@ -101,7 +101,7 @@ class String extends DataType: {
 
         let arr = new Array(collection);
 
-        for let i = 0; i < arr.length(); i++:
+        for let i = 0; i < arr.length; i++:
             result = result + arr.at(i);
 
         return new String(result);
@@ -131,7 +131,9 @@ class String extends DataType: {
     => new String(_native("std", "string", "join", strArr.getCollection(), pattern));
 
     // Get length of string
-    function length() => _native("std", "string", "length", _str(_value));
+    const length = field(_): {
+        fn get() => _native("std", "string", "length", _str(_value))
+    };
 
     // Check if string is empty or null
     function isNullOrEmpty(<String|null> str)
@@ -164,11 +166,11 @@ class String extends DataType: {
     function<String> trimEnd() => new String(_native("std", "string", "trimEnd", _str(_value)));
 
     // Cut string by 'startPos' and 'length'
-    function<String> subString(let<Number> startPos, let<Number> length): {
+    function<String> subString(let<Number> startPos, let<Number> len): {
         throwIfNotInRange(startPos);
-        throwIfNotInRange(startPos + length);
+        throwIfNotInRange(startPos + len);
 
-        return new String(_native("std", "string", "subString", _str(_value), startPos, length));
+        return new String(_native("std", "string", "subString", _str(_value), startPos, len));
     }
 
     // get index of first 'toFind'
@@ -179,7 +181,7 @@ class String extends DataType: {
 
     // Replace '{n}' to replacement
     function<String> format(<Collection|Array> replacement): {
-        if replacement.length() == 0:
+        if replacement.length == 0:
             return _value;
 
         return _native("std", "string", "format", _value, 
@@ -189,6 +191,6 @@ class String extends DataType: {
     }
 
     private function throwIfNotInRange(<Number> index):
-        if index < 0 || index >= length():
+        if index < 0 || index >= length:
             std::throw.message(`Index '{index}' is out of range.`);
 }

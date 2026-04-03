@@ -8,6 +8,7 @@ public static class Keywords
     public static string NamespaceDeclaration => "namespace";
     public static string VariableDeclaration => "let";
     public static string ConstVariableDeclaration => "const";
+    public static string FieldKeyword => "field";
     
     public static string ThisKeyword => "this";
     
@@ -57,6 +58,6 @@ public static class Keywords
         SwitchBlock, CaseKeyword, DefaultKeyword, NamespaceDeclaration,
         UsingKeyword, TryKeyword, CatchKeyword, FinallyKeyword, ShortFunctionDeclaration,
         CreateClassInstanceKeyword, AwaitKeyword, AsyncKeyword, ParallelKeyword,
-        TypeEqualityKeyword, TypeNotEqualityKeyword
+        TypeEqualityKeyword, TypeNotEqualityKeyword, FieldKeyword
     ];
 }

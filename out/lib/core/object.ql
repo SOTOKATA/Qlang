@@ -15,5 +15,3 @@ class Object: {
 }
 
 function<String> str(obj) => if object.toString(obj) ?? "<null>";
-
-function<String> valueOrStrNull(value) => if object.isNull(value) ? "null" : value.toString();

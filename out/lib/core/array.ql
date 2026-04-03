@@ -16,16 +16,16 @@ class Array extends DataType: {
 
     function<String> toString(): {
         let str = "[";
-        const length = length();
+        const len = length;
 
-        for let i = 0; i < length; i++: {
+        for let i = 0; i < len; i++: {
             const item = at(i);
             str += switch item: {
                 is String => `"{item}"`,
                 default => item.toString()
             };
 
-            if i + 1 < length:
+            if i + 1 < len:
                 str += ", ";
         }
 
@@ -108,33 +108,34 @@ class Array extends DataType: {
     function<Number> indexOf(let item) => _native("std", "array", "index_of", _value, item);
 
     // Get length
-    function<Number> length() =>_native("std", "array", "count", _value);
-    function count() => length();
+    const length = field(_): {
+        fn get() => _native("std", "array", "count", _value)
+    };
 
     function forEach(<Func> func): {
-        const length = length();
+        const len = length;
 
-        for let i = 0; i < length; i++:
+        for let i = 0; i < len; i++:
             func(at(i));
     }
 
     function skip(<Number> count): {
         if count <= 0:
             std::throw.message("Count must be more than 0");
-        else if count > length():
+        else if count > length:
             std::throw.message("Count must be less than array length");
 
-        const length = length();
+        const len = length;
 
         const newArray = new Array([]);
 
-        for let i = count; i < length; i++:
+        for let i = count; i < len; i++:
             newArray.push(at(i));
 
         return newArray;
     }
 
-    function last() => at(length() - 1);
+    function last() => at(length - 1);
     
     function where(<Func> func) => new linq::WhereEnumerable(new linq::ArraySource(this), func);
     function select(<Func> func) => new linq::SelectEnumerable(new linq::ArraySource(this), func);
@@ -149,6 +150,6 @@ class Array extends DataType: {
     function getIndexes() => _native("std", "array", "get_indexes", getCollection());
 
     private function checkIndex(<Number> index):
-        if index < 0 || index >= length():
+        if index < 0 || index >= length:
             std::throw.message("Index is out of range.");
 }

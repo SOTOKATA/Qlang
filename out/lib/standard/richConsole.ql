@@ -10,7 +10,7 @@ namespace std: {
             let indexofw = 0;
 
             try: {
-                while msg.length() > 0: {
+                while msg.length > 0: {
                     indexofw++;
                     const openIndex = msg.indexOf("[");
 
@@ -22,7 +22,7 @@ namespace std: {
                     if openIndex > 0: {
                         std::console.print(msg.subString(0, openIndex));
                         // Отрезаем напечатанное
-                        msg = msg.subString(openIndex, msg.length() - openIndex);
+                        msg = msg.subString(openIndex, msg.length - openIndex);
                     }
 
                     // Теперь msg ГАРАНТИРОВАННО начинается с "["
@@ -40,13 +40,13 @@ namespace std: {
                     
                     const parts = tagContent.split("=");
                     const keyword = parts.at(0);
-                    const value = if parts.length() >= 2 ? parts.at(1) : "";
+                    const value = if parts.length >= 2 ? parts.at(1) : "";
 
                     useCode(keyword, value);
 
                     // ОТРЕЗАЕМ ТЕГ
                     const nextStart = closeIndex + 1;
-                    const remainingLength = msg.length() - nextStart;
+                    const remainingLength = msg.length - nextStart;
 
                     if remainingLength <= 0: {
                         break;
@@ -71,30 +71,30 @@ namespace std: {
             std::console.cursorVisible(false);
 
             let currentIndex = 0;
-            const length = message.length();
+            const len = message.length;
             let<String> msg = message;
 
-            while currentIndex < length: {
-                if currentIndex >= length:
+            while currentIndex < len: {
+                if currentIndex >= len:
                     break;
 
                 const text = msg.trimStart("[");
 
-                currentIndex += text.length();
+                currentIndex += text.length;
 
                 std::console.print(text);
 
-                msg = msg.subString(0, text.length() - 1);
+                msg = msg.subString(0, text.length - 1);
                 
                 console.println("INDEX: " + msg);
 
-                if msg.length() > 0 && msg.charAt(0) == "[": {
+                if msg.length > 0 && msg.charAt(0) == "[": {
                     const index = msg.indexOf("]");
-                    const code = msg.subString(index, msg.length() - index).split("=");
+                    const code = msg.subString(index, msg.length - index).split("=");
 
                     msg = msg.subString(0, index);
 
-                    useCode(code.at(0), if code.length() >= 2 ? code.at(1) : "");
+                    useCode(code.at(0), if code.length >= 2 ? code.at(1) : "");
                 }
             }
         }
@@ -102,7 +102,7 @@ namespace std: {
         function old_richPrint(<String> message): {
             std::console.cursorVisible(false);
 
-            const length = message.length();
+            const len = message.length;
             
             let isCode = false;
             let isValue = false;
@@ -110,7 +110,7 @@ namespace std: {
             let value = "";
             let text = "";
             
-            for let i = 0; i < length; i++: {
+            for let i = 0; i < len; i++: {
                 const el = message.charAt(i);
 
                 switch el: {
@@ -159,7 +159,7 @@ namespace std: {
             const isClose = keyword.charAt(0) == "/";
 
             if isClose: {
-                keyword = keyword.subString(1, keyword.length() - 1);
+                keyword = keyword.subString(1, keyword.length - 1);
                 std::console.print("\u001b[0m");
                 return;
             }

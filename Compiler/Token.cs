@@ -32,12 +32,10 @@ public class Token(Tokens token, string value = "")
             Tokens.Minus => "-",
             Tokens.Star => "*",
             Tokens.Slash => "/",
-            Tokens.StringRef => "StringReference",
-            Tokens.NumberRef => "NumberReference",
             Tokens.Percent => "%",
             Tokens.Question => "?",
-            _ when !string.IsNullOrWhiteSpace(token.Value) => token.Value,
-            _ => token.ToString()!
+            var _ when !string.IsNullOrWhiteSpace(token.Value) => token.Value,
+            var _ => $"{token.TokenType}"
         };
     }
 }

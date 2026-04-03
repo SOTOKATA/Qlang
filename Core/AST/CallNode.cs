@@ -12,13 +12,14 @@ public class CallNode : ASTNode
     public List<ASTNode> Objects = [];
 
     [IgnoreMember] 
-    public int FileId = -1;
+    public int FileId;
 
     public override ASTNode Clone()
     {
         return new CallNode
         {
             Objects = Objects.Select(node => node.Clone()).ToList(),
+            FileId = FileId
         };
     }
     

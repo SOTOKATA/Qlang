@@ -8,17 +8,20 @@ public class ConsoleClass : IQlangClass
     {
         return [
             ("write", (Action<string?>)Console.Write),
-            ("cursor_visible", (Action<bool>)(isVisible => Console.CursorVisible = isVisible)),
+            ("setCursorVisible", (Action<bool>)(isVisible => Console.CursorVisible = isVisible)),
+            ("getCursorVisible", (Func<bool>)(() => Console.CursorVisible)),
             ("key", (Func<bool, string>)(intercept => {
                 var keyInfo = Console.ReadKey(intercept);
                 return char.IsControl(keyInfo.KeyChar)
                     ? keyInfo.Key.ToString().ToUpper()
                     : keyInfo.KeyChar.ToString();
             })),
-            ("key_available", (Func<bool>)(() => Console.KeyAvailable)),
+            ("keyAvailable", (Func<bool>)(() => Console.KeyAvailable)),
             ("clear", (Action)Console.Clear),
-            ("foreground", (Action<string>)SetForegroundColor),
-            ("background", (Action<string>)SetBackgroundColor),
+            ("setForeground", (Action<string>)SetForegroundColor),
+            ("setBackground", (Action<string>)SetBackgroundColor),
+            ("getForeground", (Func<string>)GetForegroundColor),
+            ("getBackground", (Func<string>)GetBackgroundColor),
             ("colors", (Func<List<object?>>)(() =>
                     {
                         return Enum.GetValues<ConsoleColor>().Select(c =>
@@ -30,13 +33,15 @@ public class ConsoleClass : IQlangClass
 
                     }
             )),
-            ("reset_color", Console.ResetColor),
-            ("cursor_position", (Action<int, int>)Console.SetCursorPosition),
-            ("get_current_x", (Func<int>)(() => Console.GetCursorPosition().Left)),
-            ("get_current_y", (Func<int>)(() => Console.GetCursorPosition().Top)),
+            ("resetColor", Console.ResetColor),
+            ("cursorPosition", (Action<int, int>)Console.SetCursorPosition),
+            ("getCurrentX", (Func<int>)(() => Console.GetCursorPosition().Left)),
+            ("getCurrentY", (Func<int>)(() => Console.GetCursorPosition().Top)),
             ("read", Console.ReadLine),
-            ("width", (Func<double>)(() => Console.WindowWidth)),
-            ("height", (Func<double>)(() => Console.WindowHeight))
+            ("getWidth", (Func<double>)(() => Console.WindowWidth)),
+            ("getHeight", (Func<double>)(() => Console.WindowHeight)),
+            ("setWidth", (Action<int>)((d) => Console.WindowWidth = d)),
+            ("setHeight", (Action<int>)((d) => Console.WindowHeight = d)),
         ];
     }
 
@@ -50,5 +55,17 @@ public class ConsoleClass : IQlangClass
     {
         if (Enum.TryParse(line, true, out ConsoleColor color))
             Console.ForegroundColor = color;
+    }
+    
+    private static string GetForegroundColor()
+    {
+        var rawName = Console.ForegroundColor.ToString();
+        return char.ToLower(rawName[0]) + rawName[1..];
+    }
+
+    private static string GetBackgroundColor()
+    {
+        var rawName = Console.BackgroundColor.ToString();
+        return char.ToLower(rawName[0]) + rawName[1..];
     }
 }

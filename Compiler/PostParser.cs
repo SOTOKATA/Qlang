@@ -78,7 +78,8 @@ public class PostParser(SourceFileTable? table, DebugTable? debugTable, StringPo
     {
         calls.AddRange(assignments.Where(x => x is { IsNew: false, IsPrivate: false }).Select(x => new CallNode
         {
-            Objects = x.Path
+            Objects = x.Path,
+            FileId = x.FileId
         }));
         
         // Get all usings and remove from list
@@ -211,6 +212,7 @@ public class PostParser(SourceFileTable? table, DebugTable? debugTable, StringPo
             }
         }
 
+        
         return program;
     }  
     

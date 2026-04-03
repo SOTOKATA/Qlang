@@ -54,12 +54,13 @@ namespace std:  {
         }
 
         function<String> isKeyAvailable(): {
-            return _native("std", "console", "key_available");
+            return _native("std", "console", "keyAvailable");
         }
 
-        function cursorVisible(<Boolean> visible): {
-            _native("std", "console", "cursor_visible", visible);
-        }
+        const cursorVisible = field(_): {
+            fn get() => _native("std", "console", "getCursorVisible")
+            fn set(<Boolean> visible): _native("std", "console", "setCursorVisible", visible);
+        };
 
         // Clear console
         function clear(): {
@@ -71,38 +72,45 @@ namespace std:  {
             x = math.round(x);
             y = math.round(y);
 
-            if (x < 0 || x >= console.width()) || (y < 0 || y >= console.height()):
+            if (x < 0 || x >= console.width) || (y < 0 || y >= console.height):
                 throw.message("Size is out of range.");
 
-            _native("std", "console", "cursor_position", x, y);
+            _native("std", "console", "cursorPosition", x, y);
         }
 
         function getCursorPosition(): {
-            const x = _native("std", "console", "get_current_x");
-            const y = _native("std", "console", "get_current_y");
+            const x = _native("std", "console", "getCurrentX");
+            const y = _native("std", "console", "getCurrentY");
 
-            return { const x = x, const y = y };
+            return { x = x, y = y };
         }
 
-        // Set foreground color for console
-        function setForeColor(let<String> color):
-            _native("std", "console", "foreground", color);
-        
-        // Set background color for console
-        function setBackColor(let<String> color):
-            _native("std", "console", "background", color);
+        const foreColor = field(_): {
+            fn get() => _native("std", "console", "getForeground")
+            fn set(<String> color): _native("std", "console", "setForeground", color);
+        };
+
+        const backColor = field(_): {
+            fn get() => _native("std", "console", "getBackground")
+            fn set(<String> color): _native("std", "console", "setBackground", color);
+        };
 
         // Get all console colors
         function<Collection> getColors() => _native("std", "console", "colors");
 
         // Set default colors for console
         function resetColors():
-            _native("std", "console", "reset_color");
+            _native("std", "console", "resetColor");
 
-        function width() => _native("std", "console", "width");
+        const width = field(_): {
+            fn get() => _native("std", "console", "getWidth")
+            fn set(<Number> num): _native("std", "console", "setWidth", num);
+        };
 
-        function height() => _native("std", "console", "height");
-
+        const height = field(_): {
+            fn get() => _native("std", "console", "getHeight")
+            fn set(<Number> num): _native("std", "console", "setHeight", num);
+        };
 
         function richPrint(<String> message):
            richConsole.richPrint(message);
