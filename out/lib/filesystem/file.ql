@@ -6,15 +6,14 @@ namespace fs: {
     private class File: {
         // Return type: bool
         // Returns true if file found
-        function<Boolean> exists(<String> path):
-            return _native("std", "filesystem", "file_exists", path);
+        function<Boolean> exists(<String> path) => #std.FileSystem.FileExists(path);
 
         // Override file content
         function setContent(<String> path, <String> content): {
             if !exists(path):
                 create(path);
 
-            _native("std", "filesystem", "set_content", path, _str(content));
+            #std.FileSystem.SetContent(path, _str(content));
         }
 
         // Append content to end file
@@ -22,7 +21,7 @@ namespace fs: {
             if !exists(path):
                 std::throw.message("file path '" + path + "' is not found");
 
-            _native("std", "filesystem", "append_content", path, _str(content));
+            #std.FileSystem.AppendContent(path, _str(content));
         }
 
         // Return type: string
@@ -31,19 +30,19 @@ namespace fs: {
             if !exists(path):
                 std::throw.message("file path '" + path + "' is not found");
 
-            return new String(_native("std", "filesystem", "get_content", path));
+            return new String(#std.FileSystem.GetContent(path));
         }
 
         // Create file
         function create(<String> path):
-            _native("std", "filesystem", "file_create", path);
+            #std.FileSystem.Create(path);
 
         // Remove file
         function remove(<String> path): {
             if !exists(path):
                 std::throw.message("file path '" + path + "' is not found");
 
-            _native("std", "filesystem", "file_remove", path);
+            #std.FileSystem.Remove(path);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace dt: {
         function new(ticks):
             _value = ticks;
 
-        function fromSeconds(s) => new TimeSpan(_native("std", "dateTime", "from_seconds", s));
+        function fromSeconds(s) => new TimeSpan(#std.DateTime.FromSeconds(s));
 
         function totalSeconds() => _value / 10000000;
         function totalMinutes() => totalSeconds() / 60;

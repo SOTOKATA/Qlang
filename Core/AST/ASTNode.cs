@@ -38,6 +38,7 @@ namespace Core.AST;
 [Union(31, typeof(ShortHandSwitchNode))]
 [Union(33, typeof(TypeEqualityNode))]
 [Union(34, typeof(FieldNode))]
+[Union(35, typeof(HashCallNode))]
 
 // ReSharper disable once InconsistentNaming
 public abstract class ASTNode

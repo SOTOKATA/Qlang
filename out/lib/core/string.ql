@@ -4,9 +4,9 @@ import "$lib/core"
 const string = new String("");
 class String extends DataType: {
     // overriding functions 
-    function<String> toString() => object.toString(_value);
+    function<String> toString() => object.ToString(_value);
 
-    function<String> toNumberFormat(<String> format) => _native("std", "number", "to_string", <Number>_value, format.getValue());
+    function<String> toNumberFormat(<String> format) => #std.Number.ToString(<Number>_value, format.getValue());
 
     // Parse object to String
     function _createFrom(obj) => new String(obj);
@@ -77,7 +77,7 @@ class String extends DataType: {
         if new String(char).length < 0:
             std::throw.message("Length of string must be more than 0");
 
-        _value = _native("std", "string", "create", char, count);
+        _value = #std.String.Create(char, count);
     }
 
     function getPrimitive(strOrPrimite, let<Boolean> allowOther = false): {
@@ -107,84 +107,84 @@ class String extends DataType: {
         return new String(result);
     }
 
-    function toLower() => new String(_native("std", "string", "toLower", _str(_value)));
+    function toLower() => new String(#std.String.ToLower(_str(_value)));
 
-    function toUpper() => new String(_native("std", "string", "toUpper", _str(_value)));
+    function toUpper() => new String(#std.String.ToUpper(_str(_value)));
 
-    function isPrimitive(let value) => _native("std", "string", "isPrimitive", value);
+    function isPrimitive(let value) => #std.String.IsPrimitive(value);
 
-    function split(let<String> pattern) => new Array(_native("std", "string", "split", _str(_value), _str(pattern)));
+    function split(let<String> pattern) => new Array(#std.String.Split(_str(_value), _str(pattern)));
 
     function charAt(<Number> index): {
         throwIfNotInRange(index);
 
-        return _native("std", "string", "at", _str(_value), index);
+        return #std.String.At(_str(_value), index);
     }
 
     function setAt(<Number> index, <String> replaceValue): {
         throwIfNotInRange(index);
 
-        _value = _native("std", "string", "setAt", _str(_value), _str(replaceValue), index);
+        _value = #std.String.SetAt(_str(_value), _str(replaceValue), index);
     }
 
     function join(<Collection|Array> strArr, let<String> pattern)
-    => new String(_native("std", "string", "join", strArr.getCollection(), pattern));
+    => new String(#std.String.Join(strArr.getCollection(), pattern));
 
     // Get length of string
     const length = field(_): {
-        fn get() => _native("std", "string", "length", _str(_value))
+        fn get() => #std.String.Length(_str(_value))
     };
 
     // Check if string is empty or null
     function isNullOrEmpty(<String|null> str)
-        => if str is null ? true : _native("std", "string", "isNullOrEmpty", _str(str));
+        => if str is null ? true : #std.String.IsNullOrEmpty(_str(str));
     
     // Check if string is white space or null
     function isNullOrWhitespace(<String|null> str)
-        => if str is null ? true : _native("std", "string", "isNullOrWhitespace", _str(str));
+        => if str is null ? true : #std.String.IsNullOrWhitespace(_str(str));
 
-    function<Boolean> startsWith(<String> str) => _native("std", "string", "startsWith", _str(_value), str);
+    function<Boolean> startsWith(<String> str) => #std.String.StartsWith(_str(_value), str);
 
-    function<Boolean> endsWith(<String> str) => _native("std", "string", "endsWith", _str(_value), str);
-
-    // Trim string
-    function<String> trim(<String> str) => new String(_native("std", "string", "trim_b", _str(_value), _str(str)));
-
-    // Trim start string
-    function<String> trimStart(<String> str) => new String(_native("std", "string", "trimStart_b", _str(_value), _str(str)));
-
-    // Trim end string
-    function<String> trimEnd(<String> str) => new String(_native("std", "string", "trimEnd_b", _str(_value), _str(str)));
+    function<Boolean> endsWith(<String> str) => #std.String.EndsWith(_str(_value), str);
 
     // Trim string
-    function<String> trim() => new String(_native("std", "string", "trim", _str(_value)));
+    function<String> trim(<String> str) => new String(#std.String.Trim_B(_str(_value), _str(str)));
 
     // Trim start string
-    function<String> trimStart() => new String(_native("std", "string", "trimStart", _str(_value)));
+    function<String> trimStart(<String> str) => new String(#std.String.TrimStart_B(_str(_value), _str(str)));
 
     // Trim end string
-    function<String> trimEnd() => new String(_native("std", "string", "trimEnd", _str(_value)));
+    function<String> trimEnd(<String> str) => new String(#std.String.TrimEnd_B(_str(_value), _str(str)));
+
+    // Trim string
+    function<String> trim() => new String(#std.String.Trim(_str(_value)));
+
+    // Trim start string
+    function<String> trimStart() => new String(#std.String.TrimStart(_str(_value)));
+
+    // Trim end string
+    function<String> trimEnd() => new String(#std.String.TrimEnd(_str(_value)));
 
     // Cut string by 'startPos' and 'length'
     function<String> subString(let<Number> startPos, let<Number> len): {
         throwIfNotInRange(startPos);
         throwIfNotInRange(startPos + len);
 
-        return new String(_native("std", "string", "subString", _str(_value), startPos, len));
+        return new String(#std.String.SubString(_str(_value), startPos, len));
     }
 
     // get index of first 'toFind'
-    function<Number> indexOf(<String> toFind) => _native("std", "string", "indexOf", _value, toFind);
+    function<Number> indexOf(<String> toFind) => #std.String.IndexOf(_value, toFind);
 
     // get index of last 'toFind'
-    function<Number> lastIndexOf(<String> toFind) => _native("std", "string", "lastIndexOf", _value, toFind);
+    function<Number> lastIndexOf(<String> toFind) => #std.String.LastIndexOf(_value, toFind);
 
     // Replace '{n}' to replacement
     function<String> format(<Collection|Array> replacement): {
         if replacement.length == 0:
             return _value;
 
-        return _native("std", "string", "format", _value, 
+        return #std.String.Format(_value, 
             replacement.select(
                 fn(x) => x.toString()
             ).toArray().getCollection());

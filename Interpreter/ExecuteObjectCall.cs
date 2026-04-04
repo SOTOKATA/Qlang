@@ -262,15 +262,12 @@ public partial class Interpreter
                 }
                 
                 if (objectAndNamespace.@object is DynamicField field)
-                {
-                    AddContext(stack, new ASTContext { Namespace = objectAndNamespace.@namespace, Class =  objectAndNamespace.@class });
-                    
-                    var result = (EvaluateGetField(field, stack), false);
-                    
-                    RestoreContextStack(stack);
-
-                    return result;
-                }
+                    return (EvaluateGetField(field, new ASTContext
+                    {
+                        Namespace = objectAndNamespace.@namespace, 
+                        Class =  objectAndNamespace.@class,
+                        ParentFunction = CurrentContext(stack)?.Function
+                    }, stack), false);
 
                 return (objectAndNamespace.@object, false);
             default:

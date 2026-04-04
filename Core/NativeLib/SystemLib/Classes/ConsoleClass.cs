@@ -2,27 +2,27 @@
 
 public class ConsoleClass : IQlangClass
 {
-    public string Name { get; init; } = "console";
+    public string Name { get; init; } = "Console";
 
     public List<(string name, Delegate body)> GetFunctions()
     {
         return [
-            ("write", (Action<string?>)Console.Write),
-            ("setCursorVisible", (Action<bool>)(isVisible => Console.CursorVisible = isVisible)),
-            ("getCursorVisible", (Func<bool>)(() => Console.CursorVisible)),
-            ("key", (Func<bool, string>)(intercept => {
+            ("Write", (Action<string?>)Console.Write),
+            ("SetCursorVisible", (Action<bool>)(isVisible => Console.CursorVisible = isVisible)),
+            ("GetCursorVisible", (Func<bool>)(() => Console.CursorVisible)),
+            ("ReadKey", (Func<bool, string>)(intercept => {
                 var keyInfo = Console.ReadKey(intercept);
                 return char.IsControl(keyInfo.KeyChar)
                     ? keyInfo.Key.ToString().ToUpper()
                     : keyInfo.KeyChar.ToString();
             })),
-            ("keyAvailable", (Func<bool>)(() => Console.KeyAvailable)),
-            ("clear", (Action)Console.Clear),
-            ("setForeground", (Action<string>)SetForegroundColor),
-            ("setBackground", (Action<string>)SetBackgroundColor),
-            ("getForeground", (Func<string>)GetForegroundColor),
-            ("getBackground", (Func<string>)GetBackgroundColor),
-            ("colors", (Func<List<object?>>)(() =>
+            ("IsKeyAvailable", (Func<bool>)(() => Console.KeyAvailable)),
+            ("Clear", (Action)Console.Clear),
+            ("SetForeground", (Action<string>)SetForegroundColor),
+            ("SetBackground", (Action<string>)SetBackgroundColor),
+            ("GetForeground", (Func<string>)GetForegroundColor),
+            ("GetBackground", (Func<string>)GetBackgroundColor),
+            ("GetColors", (Func<List<object?>>)(() =>
                     {
                         return Enum.GetValues<ConsoleColor>().Select(c =>
                             {
@@ -33,15 +33,15 @@ public class ConsoleClass : IQlangClass
 
                     }
             )),
-            ("resetColor", Console.ResetColor),
-            ("cursorPosition", (Action<int, int>)Console.SetCursorPosition),
-            ("getCurrentX", (Func<int>)(() => Console.GetCursorPosition().Left)),
-            ("getCurrentY", (Func<int>)(() => Console.GetCursorPosition().Top)),
-            ("read", Console.ReadLine),
-            ("getWidth", (Func<double>)(() => Console.WindowWidth)),
-            ("getHeight", (Func<double>)(() => Console.WindowHeight)),
-            ("setWidth", (Action<int>)((d) => Console.WindowWidth = d)),
-            ("setHeight", (Action<int>)((d) => Console.WindowHeight = d)),
+            ("ResetColors", Console.ResetColor),
+            ("SetCursorPosition", (Action<int, int>)Console.SetCursorPosition),
+            ("GetCurrentX", (Func<int>)(() => Console.GetCursorPosition().Left)),
+            ("GetCurrentY", (Func<int>)(() => Console.GetCursorPosition().Top)),
+            ("ReadLine", Console.ReadLine),
+            ("GetWidth", (Func<double>)(() => Console.WindowWidth)),
+            ("GetHeight", (Func<double>)(() => Console.WindowHeight)),
+            ("SetWidth", (Action<int>)((d) => Console.WindowWidth = d)),
+            ("SetHeight", (Action<int>)((d) => Console.WindowHeight = d)),
         ];
     }
 

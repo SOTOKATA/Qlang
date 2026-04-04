@@ -8,24 +8,24 @@ namespace fs: {
             => new String(_native("std", "filesystem", "combine", arr.getCollection()));
 
         function<Boolean> exists(<String> path) 
-            =>  _native("std", "filesystem", "path_exists", path);
+            => #std.FileSystem.PathExists(path);
 
         function<String> getExtension(<String> path) 
-            => _native("std", "filesystem", "extension", path);
+            => #std.FileSystem.Extension(path);
 
         function<Boolean> hasExtension(<String> path)
-            => _native("std", "filesystem", "has_extension", path);
+            => #std.FileSystem.HasExtension(path);
 
         function<String> changeExtension(<String> path, <String> extension)
-            => _native("std", "filesystem", "change_extension", path, extension);
+            => #std.FileSystem.ChangeExtension(path, extension);
 
         function<String> getFileName(<String> path)
-            => _native("std", "filesystem", "file_name_without_extension", path);
+            => #std.FileSystem.FileNameWithoutExtension(path);
 
         function<String> getFullFileName(<String> path)
-            => _native("std", "filesystem", "file_name", path);
+            => #std.FileSystem.FileName(path);
 
         function<String> getDirectory(<String> path)
-            => _native("std", "filesystem", "get_dir", path);
+            => #std.FileSystem.GetDirectory(path);
     }
 }

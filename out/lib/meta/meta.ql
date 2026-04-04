@@ -1,11 +1,11 @@
 namespace meta: {
     function<Array> getFunctionNameList(cls)
-        => _native("std", "meta", "fn_list", cls);
+        => #std.Meta.FnList(cls);
 
     function<Array> getVariableList(cls): {
-        const names = _native("std", "meta", "var_name_list", cls);
-        const types = _native("std", "meta", "var_type_list", cls);
-        const values = _native("std", "meta", "var_value_list", cls);
+        const names = #std.Meta.VarNameList(cls);
+        const types = #std.Meta.VarTypeList(cls);
+        const values = #std.Meta.VarValueList(cls);
 
         const arr = new Array([]);
 

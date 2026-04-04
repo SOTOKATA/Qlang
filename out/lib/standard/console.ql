@@ -20,52 +20,48 @@ namespace std:  {
         function print(let message): {
             message = getStr(message);
 
-            _native("std", "console", "write", _str(message));
+            #std.Console.Write(_str(message));
         }
 
         // Print text to console with new line
         function println(let message = ""): {
             message = getStr(message);
 
-            _native("std", "console", "write", _str(message + "\n"));
+            #std.Console.Write(_str(message + "\n"));
         }
 
         // Print Verbatim text to console
         function printVerbatim(let message): {
             message = getStr(message);
 
-            _native("std", "console", "write", message);
+            #std.Console.Write(message);
         }
 
         // Print Verbatim text to console with new line
         function printlnVerbatim(let message = ""): {
             message = getStr(message);
 
-            _native("std", "console", "write", message + _str("\n"));
+            #std.Console.Write(message + _str("\n"));
         }
 
         // Read line from console
         function<String> readln(): {
-            return new String(_native("std", "console", "read"));
+            return new String(#std.Console.ReadLine());
         }
 
         function<String> readkey(<Boolean> intercept = false): {
-            return new String(_native("std", "console", "key", intercept));
+            return new String(#std.Console.ReadKey(intercept));
         }
 
-        function<String> isKeyAvailable(): {
-            return _native("std", "console", "keyAvailable");
-        }
+        function<String> isKeyAvailable() => #std.Console.IsKeyAvailable();
 
         const cursorVisible = field(_): {
-            fn get() => _native("std", "console", "getCursorVisible")
-            fn set(<Boolean> visible): _native("std", "console", "setCursorVisible", visible);
+            fn get() => #std.Console.GetCursorVisible()
+            fn set(<Boolean> visible): #std.Console.SetCursorVisible(visible);
         };
 
         // Clear console
-        function clear(): {
-            _native("std", "console", "clear");
-        }
+        function clear(): #std.Console.Clear();
 
         // Set cursor position in console
         function setCursorPosition(let<Number> x, let<Number> y): {
@@ -75,41 +71,36 @@ namespace std:  {
             if (x < 0 || x >= console.width) || (y < 0 || y >= console.height):
                 throw.message("Size is out of range.");
 
-            _native("std", "console", "cursorPosition", x, y);
+            #std.Console.SetCursorPosition(x, y);
         }
 
-        function getCursorPosition(): {
-            const x = _native("std", "console", "getCurrentX");
-            const y = _native("std", "console", "getCurrentY");
-
-            return { x = x, y = y };
-        }
+        function getCursorPosition(): => { x = #std.Console.GetCurrentX(), y = #std.Console.GetCurrentY() };
 
         const foreColor = field(_): {
-            fn get() => _native("std", "console", "getForeground")
-            fn set(<String> color): _native("std", "console", "setForeground", color);
+            fn get() => #std.Console.GetForeground()
+            fn set(<String> color): #std.Console.SetForeground(color);
         };
 
         const backColor = field(_): {
-            fn get() => _native("std", "console", "getBackground")
-            fn set(<String> color): _native("std", "console", "setBackground", color);
+            fn get() => #std.Console.GetBackground()
+            fn set(<String> color): #std.Console.SetBackground(color);
         };
 
         // Get all console colors
-        function<Collection> getColors() => _native("std", "console", "colors");
+        function<Collection> getColors() => #std.Console.GetColors();
 
         // Set default colors for console
         function resetColors():
-            _native("std", "console", "resetColor");
+            #std.Console.ResetColors();
 
         const width = field(_): {
-            fn get() => _native("std", "console", "getWidth")
-            fn set(<Number> num): _native("std", "console", "setWidth", num);
+            fn get() => #std.Console.GetWidth()
+            fn set(<Number> num): #std.Console.SetWidth(num);
         };
 
         const height = field(_): {
-            fn get() => _native("std", "console", "getHeight")
-            fn set(<Number> num): _native("std", "console", "setHeight", num);
+            fn get() => #std.Console.GetHeight()
+            fn set(<Number> num): #std.Console.GetHeight(num);
         };
 
         function richPrint(<String> message):

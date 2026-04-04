@@ -263,7 +263,7 @@ public partial class Interpreter
             {
                 if (var.Value is DynamicField dynamicField)
                 {
-                    EvaluateSetField(var, dynamicField, value, stack);
+                    EvaluateSetField(dynamicField, value, stack);
                     return;
                 }
                 
@@ -436,19 +436,21 @@ public partial class Interpreter
         return node;
     }
 
-    private object? EvaluateGetField(DynamicField dynamicField, Stack<ASTContext> stack)
+    private object? EvaluateGetField(DynamicField dynamicField, ASTContext functionContext, Stack<ASTContext> stack)
     {
         if (dynamicField.GetFunction == null)
             throw new QlangRuntimeException("Field access not implemented", GetCurrentDebug(stack), GetStackTrace(stack));
         
         var dynamicFunction = ToDynamicFunction(dynamicField.GetFunction, stack);
+
+        dynamicFunction.Context = functionContext;
         
         dynamicFunction.Variables[dynamicField.PrivateVariable.Name] = dynamicField.PrivateVariable;
         
-        return ExecuteFunction(dynamicFunction, [], CurrentContext(stack)?.Class, CurrentContext(stack)?.Namespace, stack);
+        return ExecuteFunction(dynamicFunction, [], functionContext.Class, functionContext.Namespace, stack);
     }
     
-    private void EvaluateSetField(Variable var, DynamicField dynamicField, object? value, Stack<ASTContext> stack)
+    private void EvaluateSetField(DynamicField dynamicField, object? value, Stack<ASTContext> stack)
     {
         if (dynamicField.SetFunction == null)
             throw new QlangRuntimeException("Field access not implemented", GetCurrentDebug(stack), GetStackTrace(stack));
@@ -458,6 +460,36 @@ public partial class Interpreter
         dynamicFunction.Variables[dynamicField.PrivateVariable.Name] = dynamicField.PrivateVariable;
 
         ExecuteFunction(dynamicFunction, [value], CurrentContext(stack)?.Class, CurrentContext(stack)?.Namespace, stack);
+    }
+
+    private object? ExecuteHashCall(HashCallNode hashCall, Stack<ASTContext> stack)
+    {
+        object? returnValue;
+        try
+        {
+            returnValue = _nativeFunctions.Call(
+                $"{_stringPoolTable[hashCall.Namespace.NameId]}.{_stringPoolTable[hashCall.Class.NameId]}.{_stringPoolTable[hashCall.Function.NameId]}",
+                hashCall.Function.Arguments.ConvertAll(x => EvaluateExpression(x, stack)).ToArray()
+            );
+        }
+        catch (Exception ex)
+        {
+            switch (ex)
+            {
+                case QlangRuntimeException:
+                    throw new QlangRuntimeException(ex.Message, GetCurrentDebug(stack), GetStackTrace(stack, 1));
+                case QlangProgramException exp:
+                {
+                    var debug = exp.WriteStackTrace ? GetCurrentDebug(stack) : (-1, "undefined");
+                    var stackTrace = exp.WriteStackTrace ? GetStackTrace(stack, 1) : [];
+                    throw new QlangRuntimeException(ex.Message, debug, stackTrace);
+                }
+                default:
+                    throw new QlangRuntimeException(ex.Message, GetCurrentDebug(stack), GetStackTrace(stack));
+            }
+        }
+
+        return returnValue;
     }
 
     /// <summary>
@@ -486,7 +518,8 @@ public partial class Interpreter
             return expr switch
             {
                 LineNode ln => EvaluateLine(ln, stack),
-                TypeEqualityNode tp => EvaluateTypeEqual(tp, stack),
+                TypeEqualityNode tp => EvaluateTypeEqual(tp, stack), 
+                HashCallNode hash => ExecuteHashCall(hash, stack),
                 CastNode cast => CastObject(cast, stack),
                 ASTContainer container => container.Value,
                 StringRefNode strRef => _stringPoolTable[strRef.Index],

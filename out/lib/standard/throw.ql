@@ -7,10 +7,10 @@ namespace std:  {
     private class Throw: {
         // std::Throw default exception
         function message(<String> message):
-            _native("std", "exception", "throw", _str(message), true);
+            #std.Exception.Throw(_str(message), true);
 
         function exception(exception): 
-            _native("std", "exception", "throw", _str(exception.toString()), exception.printStackTrace);
+            #std.Exception.Throw(_str(exception.toString()), exception.printStackTrace);
 
         // Thow exception if function is not implement
         function notImplementedException():

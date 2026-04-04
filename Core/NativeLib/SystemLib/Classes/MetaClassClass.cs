@@ -4,16 +4,16 @@ namespace Core.NativeLib.SystemLib.Classes;
 
 public class MetaClassClass : IQlangClass
 {
-    public string Name { get; init; } = "class";
+    public string Name { get; init; } = "MetaClass";
     
     public List<(string name, Delegate body)> GetFunctions()
     {
         return [
-            ("has_variable", (Func<DynamicClass, string, bool>)((@class, varName) => @class.Variables.ContainsKey(varName))),
-            ("is_private", (Func<DynamicClass, bool>)((@class) => @class.IsPrivate)),
-            ("get_name", (Func<DynamicClass, string>)((@class) => @class.Name)),
-            ("getVariableValue", (Func<DynamicClass, string, object>)((@class, name) => @class.Variables[name])),
-            ("get_class_name", (Func<DynamicClass, string>)((@class) => @class.ClassName)),
+            ("HasVariable", (Func<DynamicClass, string, bool>)((@class, varName) => @class.Variables.ContainsKey(varName))),
+            ("IsPrivate", (Func<DynamicClass, bool>)((@class) => @class.IsPrivate)),
+            ("GetName", (Func<DynamicClass, string>)((@class) => @class.Name)),
+            ("GetVariableValue", (Func<DynamicClass, string, object>)((@class, name) => @class.Variables[name])),
+            ("GetClassName", (Func<DynamicClass, string>)((@class) => @class.ClassName)),
         ];
     }
 }

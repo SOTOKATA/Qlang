@@ -4,14 +4,14 @@ namespace Core.NativeLib.SystemLib.Classes;
 
 public class ParserClass : IQlangClass
 {
-    public string Name { get; init; } = "parser";
+    public string Name { get; init; } = "Parser";
     public List<(string name, Delegate body)> GetFunctions()
     {
         return [
-            ("int", (Func<object?, int>)(obj => (int)Parse(obj, "int")!)),
-            ("float", (Func<object, double>)(obj => (double)Parse(obj, "float")!)),
-            ("number", (Func<object, double>)(obj => (double)Parse(obj, "double")!)),
-            ("string", (Func<object, string>)(obj => (string)Parse(obj, "string")!)),
+            ("Int", (Func<object?, int>)(obj => (int)Parse(obj, "int")!)),
+            ("Float", (Func<object, double>)(obj => (double)Parse(obj, "float")!)),
+            ("Number", (Func<object, double>)(obj => (double)Parse(obj, "double")!)),
+            ("String", (Func<object, string>)(obj => (string)Parse(obj, "string")!)),
         ];
     }
     

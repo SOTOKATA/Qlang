@@ -2,15 +2,15 @@
 
 public class EnvironmentClass : IQlangClass
 {
-    public string Name { get; init; } = "env";
+    public string Name { get; init; } = "Env";
 
     public List<(string name, Delegate body)> GetFunctions() => [
-        ("getCurrentDirectory", (Func<string>)(() => Environment.CurrentDirectory)),
-        ("setCurrentDirectory", (Action<string>)((str) => Environment.CurrentDirectory = str)),
-        ("newLine", (Func<string>)(() => Environment.NewLine)),
-        ("machineName", (Func<string>)(() => Environment.MachineName)),
-        ("processPath", (Func<string?>)(() => Environment.ProcessPath)),
-        ("userName", (Func<string?>)(() => Environment.UserName)),
-        ("exit", (Action<int>)Environment.Exit),
+        ("GetCurrentDirectory", (Func<string>)(() => Environment.CurrentDirectory)),
+        ("SetCurrentDirectory", (Action<string>)((str) => Environment.CurrentDirectory = str)),
+        ("NewLine", (Func<string>)(() => Environment.NewLine)),
+        ("MachineName", (Func<string>)(() => Environment.MachineName)),
+        ("ProcessPath", (Func<string?>)(() => Environment.ProcessPath)),
+        ("UserName", (Func<string?>)(() => Environment.UserName)),
+        ("Exit", (Action<int>)Environment.Exit),
     ];
 }

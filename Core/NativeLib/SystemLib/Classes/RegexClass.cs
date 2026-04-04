@@ -4,12 +4,11 @@ namespace Core.NativeLib.SystemLib.Classes;
 
 public class RegexClass : IQlangClass
 {
-    public string Name { get; init; } = "regex";
+    public string Name { get; init; } = "Regex";
     public List<(string name, Delegate body)> GetFunctions()
     {
         return [
-            ("replace", (Func<string?, string, string, string?>)Regex.Replace),
-            ("match", (Func<string?, string, string, string?>)Regex.Replace)
+            ("Replace", (Func<string?, string, string, string?>)Regex.Replace)
         ];
     }
 }

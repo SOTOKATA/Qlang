@@ -4,13 +4,13 @@ namespace Core.NativeLib.SystemLib.Classes;
 
 public class ObjectClass : IQlangClass
 {
-    public string Name { get; init; } = "object";
+    public string Name { get; init; } = "Object";
     
     public List<(string name, Delegate body)> GetFunctions()
     {
         return [
-            ("is_simplify",  (Func<object?, bool>)(obj => obj is int or null or long or double or float or string or bool or List<object?>)),
-            ("equals", (Func<object?, object?, bool>)(ObjectsEqual))
+            ("IsSimplify",  (Func<object?, bool>)(obj => obj is int or null or long or double or float or string or bool or List<object?>)),
+            ("Equals", (Func<object?, object?, bool>)(ObjectsEqual))
         ];
     }
     

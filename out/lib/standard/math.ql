@@ -4,11 +4,11 @@ import "$lib/core"
 namespace std:  {
     const math = new Math();
     private class Math: {
-        const MIN_VALUE = _native("std", "math", "min_value");
-        const MAX_VALUE = _native("std", "math", "max_value");
-        const PI = _native("std", "math", "pi");
-        const E = _native("std", "math", "e");
-        const TAU = _native("std", "math", "tau");
+        const MIN_VALUE = #std.Math.MinValue();
+        const MAX_VALUE = #std.Math.MaxValue();
+        const PI = #std.Math.PI();
+        const E = #std.Math.E();
+        const TAU = #std.Math.Tau();
 
         function<Number> max(<Number> a, <Number> b) => if a > b ? a : b;
 
@@ -18,17 +18,17 @@ namespace std:  {
             if min >= max:
                 throw.message("Min cannot be more than or equal to max.");
 
-            return _native("std", "math", "random", min, max);
+            return #std.Math.Random(min, max);
         }
 
         function<Number> abs(<Number> n) => 0-n;
         
-        function<Number> pow(number, pow) => _native("std", "math", "pow", number, pow);
+        function<Number> pow(number, pow) => #std.Math.Pow(number, pow);
 
         function<Number> sin(<Number> radians):
-            return _native("std", "math", "sin", radians);
+            return #std.Math.Sin(radians);
  
-        function<Number> cos(<Number> radians) => _native("std", "math", "cos", radians);
+        function<Number> cos(<Number> radians) => #std.Math.Cos(radians);
 
         function<Number> tan(<Number> radians): {
             const cos = cos(radians);
@@ -49,6 +49,6 @@ namespace std:  {
         }
 
         function round(<Number> value, <Number> afterDot = 0)
-            => _native("std", "math", "round", value, afterDot);
+            => #std.Math.Round(value, afterDot);
     }
 }

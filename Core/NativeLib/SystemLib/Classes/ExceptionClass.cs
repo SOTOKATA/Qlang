@@ -4,11 +4,11 @@ namespace Core.NativeLib.SystemLib.Classes;
 
 public class ExceptionClass : IQlangClass
 {
-    public string Name { get; init; } = "exception";
+    public string Name { get; init; } = "Exception";
     public List<(string name, Delegate body)> GetFunctions()
     {
         return [
-            ("throw", (Action<string, bool>)((msg, writeStackTrace) => throw new QlangProgramException(msg, writeStackTrace)))
+            ("Throw", (Action<string, bool>)((msg, writeStackTrace) => throw new QlangProgramException(msg, writeStackTrace)))
         ];
     }
 }

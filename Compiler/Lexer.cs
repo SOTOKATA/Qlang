@@ -140,6 +140,7 @@ public static class Lexer
             '|' => new Token(Tokens.Or),
             '&' => new Token(Tokens.And),
             '?' => new  Token(Tokens.Question),
+            '#' => new Token(Tokens.Hash),
             var _ => null
         };
         

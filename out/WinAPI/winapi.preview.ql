@@ -1,0 +1,1 @@
+function LEGACY_winapi_initialize(): #winapi.legacy.initialize();

@@ -43,7 +43,7 @@ public class NativeFunctionRegistry
 
         if (func == null)
         {
-            throw new Exception($"Native function '{name}' not found\nList of all functions:\n  {string.Join("\n  ", _functions.Where(x => !x.GetName().StartsWith("std.")).Select(x => x.GetName()))}");
+            throw new Exception($"Native function '{name}' not found");
         }
 
         if (args is not null)

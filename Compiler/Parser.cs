@@ -162,7 +162,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         }
         
         // method call statement (Object.method(...)) || Call method from class pointer || [] || ()
-        if (Check(Tokens.Identifier) || (Check(Tokens.Keyword, Keywords.ThisKeyword)) || Check(Tokens.LParen) || Check(Tokens.LSquareParen) || Check(Tokens.Keyword, Keywords.AsyncKeyword))
+        if (Check(Tokens.Identifier) || (Check(Tokens.Keyword, Keywords.ThisKeyword)) || Check(Tokens.LParen) || Check(Tokens.LSquareParen) || Check(Tokens.Keyword, Keywords.AsyncKeyword) || Check(Tokens.Hash))
         {
             var expr = ParseExpression();
             Expect(Tokens.Semicolon);
@@ -1077,19 +1077,23 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
 
         var token = Advance();
 
-        Expect(Tokens.LParen);
-        
-        var privateVariableName = Expect(Tokens.Identifier).Value;
-        
+        var privateVariableName = "value";
         ASTNode? expression = null;
-        if (Check(Tokens.Equals))
+        if (Check(Tokens.LParen))
         {
             Advance();
-            
-            expression = ParseExpression();
-        }
+         
+            privateVariableName = Expect(Tokens.Identifier).Value;
         
-        Expect(Tokens.RParen);
+            if (Check(Tokens.Equals))
+            {
+                Advance();
+            
+                expression = ParseExpression();
+            }
+        
+            Expect(Tokens.RParen);
+        }
         
         Expect(Tokens.Colon);
         
@@ -1635,6 +1639,29 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             OperatorId = stringPoolTable.Add("==")
         };
     }
+
+    private HashCallNode? ParsePrimaryHashCall()
+    {
+        if (!Check(Tokens.Hash))
+            return null;
+
+        var debug = Advance();
+
+        var path = ParsePrimaryPath();
+
+        if (path is not CallNode callNode)
+            throw new QlangCompileException($"Undefined call path: '{path.ToTokenString(stringPoolTable)}'", GetDebug(debug), "Parser");
+        
+        if (callNode.Objects is not [ObjectPointerNode, ObjectPointerNode, FunctionPointerNode] objects)
+            throw new QlangCompileException("Incorrect structure of native call", GetDebug(debug), "Parser");
+        
+        return new HashCallNode
+        {
+            Namespace = (ObjectPointerNode)objects[0],
+            Class = (ObjectPointerNode)objects[1],
+            Function = (FunctionPointerNode)objects[2]
+        };
+    }
     
     private ASTNode ParsePrimary(bool isLoop = false)
     {
@@ -1649,6 +1676,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
         }
         
         return ParsePrimaryAwait() 
+               ?? ParsePrimaryHashCall()
                ?? ParsePrimaryField()
                ?? ParseShortHandIf()
                ?? ParseShortHandSwitch()

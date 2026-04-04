@@ -34,6 +34,7 @@ public class Token(Tokens token, string value = "")
             Tokens.Slash => "/",
             Tokens.Percent => "%",
             Tokens.Question => "?",
+            Tokens.Hash => "#",
             var _ when !string.IsNullOrWhiteSpace(token.Value) => token.Value,
             var _ => $"{token.TokenType}"
         };
@@ -67,5 +68,6 @@ public enum Tokens
     Percent,
     StringRef,
     NumberRef,
-    Question
+    Question,
+    Hash
 }

@@ -36,18 +36,18 @@ class Array extends DataType: {
 
     function join(<String> char) => string.join(this, char);
 
-    function<Boolean> isCollection(collection) => _native("std", "array", "is", collection);
+    function<Boolean> isCollection(collection) => #std.Array.IsCollection(collection);
 
     function<Collection> getCollection() => _value;
 
-    function<Boolean> contains(item) => _native("std", "array", "contains", _value, item);
+    function<Boolean> contains(item) => #std.Array.Contains(_value, item);
 
     // Add element
     function push(item): {
         if _type is not null && typeof(item) != _type:
             throw.message("Element type does not match array type.");
 
-        _native("std", "array", "add", _value, item);
+        #std.Array.Add(_value, item);
     }
 
     // Add element
@@ -57,12 +57,12 @@ class Array extends DataType: {
         if _type != null && args.any(fn(i) => i != _type):
             throw.message("Element type does not match array type.");
 
-        _native("std", "array", "add_range", _value, args);
+        #std.Array.AddRange(_value, args);
     }
 
     // Clear array
     function clear():
-        _value = _native("std", "array", "create");
+        _value = #std.Array.Create();
 
     // Get at index
     function at(<Number> index): {
@@ -70,7 +70,7 @@ class Array extends DataType: {
 
         index = std::parser.asInt(index);
 
-        return _native("std", "array", "get", _value, index);
+        return #std.Array.Get(_value, index);
     }
 
     // Set at index
@@ -82,7 +82,7 @@ class Array extends DataType: {
         if _type != null && typeof(item) != _type:
             throw.message("Element type does not match array type.");
 
-        _native("std", "array", "set", _value, index, item);
+        #std.Array.Set(_value, index, item);
     }
 
     function insert(<Number> index, let item): {
@@ -93,7 +93,7 @@ class Array extends DataType: {
         if _type != null && typeof(item) != _type:
             throw.message("Element type does not match array type.");
 
-        _native("std", "array", "insert", _value, index, item);
+        #std.Array.Insert(_value, index, item);
     }
 
     // Remove at index
@@ -101,15 +101,15 @@ class Array extends DataType: {
         checkIndex(index);
 
         index = std::parser.asInt(index);
-        _native("std", "array", "remove_at", _value, index);
+        #std.Array.RemoveAt(_value, index);
     }
 
     // Get index of item
-    function<Number> indexOf(let item) => _native("std", "array", "index_of", _value, item);
+    function<Number> indexOf(let item) => #std.Array.IndexOf(_value, item);
 
     // Get length
     const length = field(_): {
-        fn get() => _native("std", "array", "count", _value)
+        fn get() => #std.Array.Count(_value)
     };
 
     function forEach(<Func> func): {
@@ -147,7 +147,7 @@ class Array extends DataType: {
     function<Number> min() => new linq::ArraySource(this).min();
     function<Number> sum() => new linq::ArraySource(this).sum();
 
-    function getIndexes() => _native("std", "array", "get_indexes", getCollection());
+    function getIndexes() => #std.Array.GetIndexes(getCollection());
 
     private function checkIndex(<Number> index):
         if index < 0 || index >= length:

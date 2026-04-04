@@ -1,14 +1,14 @@
 namespace meta: {
     namespace cls: {
-        function<Boolean> isPrivate(cls) => _native("std", "class", "is_private", cls);
+        function<Boolean> isPrivate(cls) => #std.MetaClass.IsPrivate(cls);
         
-        function<Boolean> hasVariable(cls, <String> name) => _native("std", "class", "has_variable", cls, name);
+        function<Boolean> hasVariable(cls, <String> name) => #std.MetaClass.HasVariable(cls, name);
 
-        function<String> getName(cls) => _native("std", "class", "get_name", cls);
+        function<String> getName(cls) => #std.MetaClass.GetName(cls);
 
         function getVariableValue(cls, varName)
-            => _native("std", "class", "getVariableValue", cls, varName);
+            => #std.MetaClass.GetVariableValue(cls, varName);
 
-        function<String> getClassName(cls) => _native("std", "class", "get_class_name", cls);
+        function<String> getClassName(cls) => #std.MetaClass.GetClassName(cls);
     }
 }

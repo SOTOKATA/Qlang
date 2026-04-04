@@ -2,18 +2,18 @@
 
 public class MathClass : IQlangClass
 {
-    public string Name { get; init; } = "math";
+    public string Name { get; init; } = "Math";
 
     public List<(string name, Delegate body)> GetFunctions() => [
-        ("min_value", (Func<double>)(()=>double.MinValue)),
-        ("max_value", (Func<double>)(()=>double.MaxValue)),
-        ("pow", (Func<double, double, double>) Math.Pow),
-        ("sin", (Func<double, double>) Math.Sin),
-        ("cos", (Func<double, double>) Math.Cos),
-        ("e", (Func<double>)(() => Math.E)),
-        ("pi", (Func<double>)(() => Math.PI)),
-        ("tau", (Func<double>)(() => Math.Tau)),
-        ("random", (Func<int, int, int>)((num1, num2) => new Random().Next(num1, num2))),
-        ("round", (Func<double, int, double>)(Math.Round)),
+        ("MinValue", (Func<double>)(()=>double.MinValue)),
+        ("MaxValue", (Func<double>)(()=>double.MaxValue)),
+        ("Pow", (Func<double, double, double>) Math.Pow),
+        ("Sin", (Func<double, double>) Math.Sin),
+        ("Cos", (Func<double, double>) Math.Cos),
+        ("E", (Func<double>)(() => Math.E)),
+        ("PI", (Func<double>)(() => Math.PI)),
+        ("Tau", (Func<double>)(() => Math.Tau)),
+        ("Random", (Func<int, int, int>)((num1, num2) => new Random().Next(num1, num2))),
+        ("Round", (Func<double, int, double>)Math.Round),
     ];
 }
