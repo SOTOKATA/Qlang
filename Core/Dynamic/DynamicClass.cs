@@ -7,6 +7,8 @@ public class DynamicClass(string name)
     public readonly string Name = name;
 
     public readonly string ClassName = name;
+
+    public DynamicNamespace? Namespace = null;
     
     public readonly Dictionary<string, Variable> Variables = [];
 

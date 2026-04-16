@@ -4,9 +4,7 @@ import "$lib/core"
 const string = new String("");
 class String extends DataType: {
     // overriding functions 
-    function<String> toString() => object.ToString(_value);
-
-    function<String> toNumberFormat(<String> format) => #std.Number.ToString(<Number>_value, format.getValue());
+    function<String> toString() => object.toString(_value);
 
     // Parse object to String
     function _createFrom(obj) => new String(obj);

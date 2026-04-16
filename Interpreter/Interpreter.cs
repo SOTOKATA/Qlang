@@ -330,7 +330,7 @@ public partial class Interpreter
     /// <exception cref="QlangRuntimeException">If was sent invalid parameters</exception>
     private DynamicClass GetNewClass(ClassNode classNode, List<object?> args, DynamicNamespace? @namespace, Stack<ASTContext> stack)
     {
-        var dClass = ToDynamicClass((ClassNode)classNode.Clone(), stack);
+        var dClass = ToDynamicClass((ClassNode)classNode.Clone(), @namespace, stack);
 
         var index = _stringPoolTable.Add(Keywords.CreateClassInstanceKeyword);
 
@@ -524,7 +524,7 @@ public partial class Interpreter
                 ASTContainer container => container.Value,
                 StringRefNode strRef => _stringPoolTable[strRef.Index],
                 NumberRefNode numberRef => GetNumberRef(numberRef, stack),
-                ClassNode classNode => ToDynamicClass(classNode, stack),
+                ClassNode classNode => ToDynamicClass(classNode, null, stack),
                 BooleanNode booleanNode => booleanNode.Value,
                 NumberNode num => num.Value,
                 BinaryOperationNode binOp => EvaluateBinaryOperation(binOp, stack),
@@ -693,7 +693,7 @@ public partial class Interpreter
     private (DynamicClass @class, DynamicNamespace @namespace) ExecutePathToClass(CallNode callNode, Stack<ASTContext> stack)
     {
         var obj = GetClassNodeByPath(callNode, stack);
-        return (ToDynamicClass(obj.@class, stack), obj.@namespace);
+        return (ToDynamicClass(obj.@class, obj.@namespace, stack), obj.@namespace);
     }
 
     private (ClassNode @class, DynamicNamespace @namespace) GetClassNodeByPath(CallNode node, Stack<ASTContext> stack)
@@ -730,8 +730,14 @@ public partial class Interpreter
             @namespace = ns;
         }
 
-        var classNode = @namespace?.Classes.FirstOrDefault(x => x.NameId == nameId) ?? 
-                        _namespaces[GlobalNamespaceName].Classes.FirstOrDefault(x => x.NameId == nameId);
+        var foundNamespace = @namespace;
+        var classNode = @namespace?.Classes.FirstOrDefault(x => x.NameId == nameId);
+        
+        if (classNode == null)
+        {
+            foundNamespace = _namespaces[GlobalNamespaceName];
+            classNode = foundNamespace.Classes.FirstOrDefault(x => x.NameId == nameId);
+        }
 
         if (classNode is null)
             throw new QlangRuntimeException($"Class '{_stringPoolTable[nameId]}' is not founded." +
@@ -740,7 +746,7 @@ public partial class Interpreter
         if (!isPrivateCall && classNode.IsPrivate)
             throw new QlangRuntimeException($"Cannot instantiate private class '{_stringPoolTable[classNode.NameId]}'", GetCurrentDebug(stack), GetStackTrace(stack));
         
-        return (classNode, @namespace)!;
+        return (classNode, foundNamespace)!;
     }
 
     /// <summary>

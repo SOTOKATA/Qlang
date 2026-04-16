@@ -67,14 +67,14 @@ public partial class Interpreter
             case string str:
             {
                 var id = _stringPoolTable.Add(QlSystemClasses.StringClassName);
-                @class = ToDynamicClass(_namespaces[GlobalNamespaceName].Classes.First(x => x.NameId == id), stack);
+                @class = ToDynamicClass(_namespaces[GlobalNamespaceName].Classes.First(x => x.NameId == id), null, stack);
                 @class.Variables["_value"].Value = str;
                 break;
             }
             case List<object?> arrNullable:
             {
                 var id = _stringPoolTable.Add(QlSystemClasses.ArrayClassName);
-                @class = ToDynamicClass(_namespaces[GlobalNamespaceName].Classes.First(x => x.NameId == id), stack);
+                @class = ToDynamicClass(_namespaces[GlobalNamespaceName].Classes.First(x => x.NameId == id), null, stack);
                 @class.Variables["_value"].Value = arrNullable;
                 break;
             }
@@ -132,7 +132,7 @@ public partial class Interpreter
                                 return _stringPoolTable[pointer.NameId];
                         }
                     }
-
+                
                     return ExecutePathToClass(call, stack).@class.ClassName;
                 }
 
@@ -280,12 +280,12 @@ public partial class Interpreter
         var args = node.Arguments.ConvertAll(x => EvaluateExpression(x, stack));
         (DynamicFunction? function, List<object?>? args) pair;
         
+        var currentContext = CurrentContext(stack);
         // if is path start like: call().., other..
         if (isPathStart)
         {
             if (HasContext(stack))
             {
-                var currentContext = CurrentContext(stack);
                 // Try to get function from function variables
                 if (currentContext?.Function is not null)
                 {
@@ -324,9 +324,10 @@ public partial class Interpreter
             // Try to get function from function variables
         if (lastObject is DynamicFunction function)
         {
+            
             pair = TryGetFunctionFromFunctionVariables(function, node.NameId, args, stack);
             if (pair.function is not null)
-                return (pair.function, pair.args, CurrentContext(stack)?.Class, CurrentContext(stack)?.Namespace);
+                return (pair.function, pair.args, currentContext?.Class, currentContext?.Namespace);
         }
         
         // Try to get function from namespace function list;
@@ -352,9 +353,12 @@ public partial class Interpreter
 
                 var id = _stringPoolTable.Add(dClass.Name);
                 var @namespace =
-                    _namespaces.FirstOrDefault(x => x.Value.Classes.Any(y => y.NameId == id));
+                    _namespaces.FirstOrDefault(x => x.Value.Classes.Any(y => y.NameId == id)).Value;
+                
+                if (dClass.Namespace is null)
+                    dClass.Namespace = @namespace;
 
-                return (pair.function, pair.args, dClass, @namespace.Value);
+                return (pair.function, pair.args, dClass, dClass.Namespace);
             }
         }
         
@@ -375,13 +379,14 @@ public partial class Interpreter
         
         var nodeName = _stringPoolTable[node.NameId];
             
+        var currentContext = CurrentContext(stack);
         if (isPathStart)
         {
             // Get 'this'
             if (node.NameId == _stringPoolTable.Add(Keywords.ThisKeyword) && HasContext(stack))
             {
-                CurrentContext(stack)!.AllowPrivateCall = true;
-                return (CurrentContext(stack)!.Class, CurrentContext(stack)!.Namespace, CurrentContext(stack)!.Class);
+                currentContext!.AllowPrivateCall = true;
+                return (currentContext.Class, currentContext.Namespace, currentContext.Class);
             }
 
             CurrentContext(stack)!.AllowPrivateCall = false;
@@ -393,11 +398,10 @@ public partial class Interpreter
                 var block = CurrentContext(stack)!.Blocks
                     .FirstOrDefault(b => b.Variables.ContainsKey(nodeName));
 
-                var currentContext = CurrentContext(stack);
                 var classIsNull = currentContext!.Class is null;
-                var functionIsNull = currentContext.Function is null;
-                var parentFunctionIsNull = currentContext.ParentFunction is null;
-                var namespaceIsNull = currentContext.Namespace is null;
+                var functionIsNull = currentContext!.Function is null;
+                var parentFunctionIsNull = currentContext!.ParentFunction is null;
+                var namespaceIsNull = currentContext!.Namespace is null;
 
                 Variable? var;
                 
@@ -407,7 +411,7 @@ public partial class Interpreter
                     var = currentContext.Function?.Variables.FirstOrDefault(funcVar => funcVar.Key == nodeName).Value;
 
                     if (var is not null)
-                        return (var, currentContext.Namespace, null);
+                        return (var, currentContext.Namespace, currentContext.Class);
                 }
                 
                 // Get from parent function
@@ -469,7 +473,7 @@ public partial class Interpreter
                         throw new QlangRuntimeException($"Cannot get access to private variable '{var.Name}' from class '{dynamicClass.ClassName}'.",
                             GetCurrentDebug(stack), GetStackTrace(stack));
                         
-                    return (var, null, dynamicClass);
+                    return (var, dynamicClass.Namespace, dynamicClass);
                 }
                 break;
             case DynamicNamespace dynamicNamespace:

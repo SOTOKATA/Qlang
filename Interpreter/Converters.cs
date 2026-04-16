@@ -1,4 +1,4 @@
-﻿using Core;
+using Core;
 using Core.AST;
 using Core.Dynamic;
 using Core.Exceptions;
@@ -83,12 +83,13 @@ public partial class Interpreter
     /// <param name="classNode">class to convert</param>
     /// <param name="stack">Current context stack</param>
     /// <returns>DynamicClass</returns>
-    private DynamicClass ToDynamicClass(ClassNode classNode, Stack<ASTContext> stack)
+    private DynamicClass ToDynamicClass(ClassNode classNode, DynamicNamespace? dynamicNamespace, Stack<ASTContext> stack)
     {
         // Create dynamic instance
         DynamicClass dynamicClass = new(_stringPoolTable[classNode.NameId])
         {
             IsPrivate = classNode.IsPrivate,
+            Namespace = dynamicNamespace,
             Id = classNode.Id
         };
         
@@ -97,18 +98,20 @@ public partial class Interpreter
         {
             var assignmentNode = (AssignmentNode)lineNode.Content!;
             
+            // Add context before evaluation to allow lookup in the current class/namespace
+            AddContext(stack, new ASTContext
+            {
+                CurrentDebugIndex = lineNode.DebugIndex,
+                Class = dynamicClass,
+                Namespace = dynamicNamespace
+            });
+
             var value = assignmentNode.Value is FieldNode fn 
                 ? ToDynamicField(fn, stack) 
                 : EvaluateExpression(assignmentNode.Value, stack);
             
             var typeofValue = Typeof(value, stack);
             var name = _stringPoolTable[assignmentNode.GetLastNameId()];
-            
-            AddContext(stack, new ASTContext
-            {
-                CurrentDebugIndex = lineNode.DebugIndex,
-                Class = dynamicClass,
-            });
             
             if (!IsTypeCompatible(assignmentNode.Types, value, false, stack))
                 throw new QlangRuntimeException(
@@ -206,7 +209,7 @@ public partial class Interpreter
     {
         var id = _stringPoolTable.Add(QlSystemClasses.ExceptionClassName);
         var @class = ToDynamicClass(_namespaces[GlobalNamespaceName].Classes
-            .FirstOrDefault(x => x.NameId == id)!, stack);
+            .FirstOrDefault(x => x.NameId == id)!, _namespaces[GlobalNamespaceName], stack);
         
         @class.Variables["message"].Value = ex.ToString();
         return @class;
