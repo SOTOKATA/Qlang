@@ -11,5 +11,11 @@ namespace std:  {
         function<String> asString(object) => #std.Parser.String(_str(object));
         
         function<Number> asNumber(object) => #std.Parser.Number(_str(object));
+
+        function<Number|null> tryParseNumber(object):
+            try:
+                return parser.asNumber(object);    
+            catch(const<Exception> ex):
+                return null;
     }
 }

@@ -1,7 +1,7 @@
 import "$lib/core"
 
 // Class to make string operations
-const string = new String("");
+const string = new String(""); 
 class String extends DataType: {
     // overriding functions 
     function<String> toString() => object.toString(_value);
@@ -66,7 +66,7 @@ class String extends DataType: {
     function new(input):
         _value = if input is String ? input.getValue() : str(input);
 
-    function new(<String> char, let<Number> count): {
+    function new(<String> char, let<Number> count): { 
         count = std::math.round(count, 0);
         
         if count < 0: 
@@ -189,6 +189,6 @@ class String extends DataType: {
     }
 
     private function throwIfNotInRange(<Number> index):
-        if index < 0 || index >= length:
+        if index < 0 || index > length:
             std::throw.message(`Index '{index}' is out of range.`);
 }

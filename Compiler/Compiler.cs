@@ -33,9 +33,13 @@ public class Compiler
         outputScript = PreCompile.ReturnFileStrings(outputScript, StringPoolTable);
         Console.WriteLine("Compiling " + outputScript.Split('\n').Length + " lines.");
         
+        File.WriteAllText("pre_compile.ql", outputScript);
+        
         Console.Write("Lexing...");
         var output = Lexer.Lex(fileName, outputScript);
         Console.WriteLine(" success.");
+
+        File.WriteAllText("lexer.ql", string.Join(" ", output.tokens.Select(t => t.TokenType.ToString())));
 
         if (!isPublish)
         {
@@ -46,6 +50,7 @@ public class Compiler
         Console.Write("Parsing...");
         (var programNode, StringPoolTable) = new Parser(output.sourceFileTable, output.debugTable, StringPoolTable).Parse(output.tokens);
         Console.WriteLine(" success.");
+        File.WriteAllText("parser.txt", programNode.GetTree());
         
         stopWatch.Stop();
         

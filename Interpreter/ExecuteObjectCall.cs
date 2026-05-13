@@ -25,7 +25,7 @@ public partial class Interpreter
             return true;
 
         if (PrimitiveToDynamicClass(value, stack) is DynamicClass d1)
-            return d1.Extends.Any(baseType => allowedTypes.Contains(baseType));
+            return d1.Extends.Any(allowedTypes.Contains);
 
         return false;
     }
@@ -45,7 +45,7 @@ public partial class Interpreter
             return true;
 
         if (PrimitiveToDynamicClass(value, stack) is DynamicClass d1)
-            return d1.Extends.Any(baseType => allowedTypes.Contains(baseType));
+            return d1.Extends.Any(allowedTypes.Contains);
 
         return false;
     }
@@ -143,8 +143,7 @@ public partial class Interpreter
         }
     }
     
-    private object? 
-        ExecuteObjectCalls(CallNode call, Stack<ASTContext> stack)
+    private object? ExecuteObjectCalls(CallNode call, Stack<ASTContext> stack)
     {
         // overriding system calls
         if (call.Objects.Count > 0 && call.Objects[0] is FunctionPointerNode fn && _stringPoolTable[fn.NameId] is "_str" or "_native" or "typeof" or "nameof")

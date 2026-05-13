@@ -14,6 +14,16 @@ class Array extends DataType: {
         _type = type;
     }
 
+    function<Array> take(<Number> count): {
+        const content = new Array();
+        const len = std::math.min(length, count);
+
+        for let i = 0; i < len; i++:
+            content.push(at(i));
+
+        return content;
+    }
+    
     function<String> toString(): {
         let str = "[";
         const len = length;

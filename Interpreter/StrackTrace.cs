@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using Core.AST;
+﻿using Core.AST;
 
 namespace Interpreter;
 

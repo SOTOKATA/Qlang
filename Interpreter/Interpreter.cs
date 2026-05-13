@@ -600,7 +600,7 @@ public partial class Interpreter
         if (expr is not DynamicClass { Name: QlSystemClasses.ArrayClassName } array)
             throw new QlangRuntimeException("Undefined array", GetCurrentDebug(parentStack),
                 GetStackTrace(parentStack));
-
+        
         // Array has valid collection
         if (array.Variables["_value"].Value is not List<object?> objects || objects.Any(x => x is not ASTNode))
             throw new QlangRuntimeException("Undefined collection", GetCurrentDebug(parentStack),
@@ -692,6 +692,7 @@ public partial class Interpreter
 
     private (DynamicClass @class, DynamicNamespace @namespace) ExecutePathToClass(CallNode callNode, Stack<ASTContext> stack)
     {
+        Console.WriteLine(callNode.Objects.Select(x => x.GetType().Name));
         var obj = GetClassNodeByPath(callNode, stack);
         return (ToDynamicClass(obj.@class, obj.@namespace, stack), obj.@namespace);
     }
@@ -702,9 +703,7 @@ public partial class Interpreter
 
         var nameId = pointer switch
         {
-            NamespacePointerNode fn => fn.NameId,
-            FunctionPointerNode fn => fn.NameId,
-            ObjectPointerNode ns => ns.NameId,
+            CallPartNode fn => fn.NameId,
             _ => throw new QlangRuntimeException($"Undefined call part: '{pointer.ToTokenString(_stringPoolTable)}'", GetCurrentDebug(stack), GetStackTrace(stack))
         };
 

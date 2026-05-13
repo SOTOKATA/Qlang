@@ -35,14 +35,14 @@ namespace fs: {
 
         // Create file
         function create(<String> path):
-            #std.FileSystem.Create(path);
+            #std.FileSystem.FileCreate(path);
 
         // Remove file
         function remove(<String> path): {
             if !exists(path):
                 std::throw.message("file path '" + path + "' is not found");
 
-            #std.FileSystem.Remove(path);
+            #std.FileSystem.FileRemove(path);
         }
     }
 }

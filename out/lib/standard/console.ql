@@ -53,7 +53,7 @@ namespace std:  {
             return new String(#std.Console.ReadKey(intercept));
         }
 
-        function<String> isKeyAvailable() => #std.Console.IsKeyAvailable();
+        function<Boolean> isKeyAvailable() => #std.Console.IsKeyAvailable();
 
         const cursorVisible = field(_): {
             fn get() => #std.Console.GetCursorVisible()

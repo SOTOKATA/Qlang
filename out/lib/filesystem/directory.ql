@@ -27,16 +27,16 @@ namespace fs: {
 
         function<Array> getFiles(<String> path, <String> extension = ""): {
             if !exists(path):
-                throw.message("Undefined directory path.");
+                std::throw.message("Undefined directory path.");
 
-            return #std.FileSystem.GetFiles(path, extension);
+            return new Array(#std.FileSystem.GetFiles(path, extension));
         }
 
         function<Array> getDirectories(<String> path, <String> searchPattern = ""): {
             if !exists(path):
-                throw.message("Undefined directory path.");
+                std::throw.message("Undefined directory path.");
 
-            return #std.FileSystem.GetDirectories(path, searchPattern);
+            return new Array(#std.FileSystem.GetDirectories(path, searchPattern));
         }
     }
 }
