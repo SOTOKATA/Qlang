@@ -1769,10 +1769,7 @@ public class Parser(SourceFileTable? sourceFileTable, DebugTable? debugTable, St
             return (-1, "debug is not included");
 
         if (token.DebugIndex >= debugTable.LineIndexes.Count)
-        {
-            Console.WriteLine("DebugIndex of token: " + token.DebugIndex + " | Debug size: " +  debugTable.LineIndexes.Count);
             throw new QlangCompileException("Debug index of token is too big", (-1, ""), "Parser");
-        }
         
         return (debugTable.GetLineIndex(token.DebugIndex) + 1,
             sourceFileTable[debugTable.GetFileId(token.DebugIndex)]);

@@ -644,22 +644,18 @@ public partial class Interpreter
     {
         var objects = node.NodePath.Objects;
 
-        // 1. Находим первый вызов функции — это наш конструктор
         var constructorIndex = objects.FindIndex(x => x is FunctionPointerNode);
 
         if (constructorIndex == -1)
             throw new QlangRuntimeException("Constructor call expected.", GetCurrentDebug(stack), GetStackTrace(stack));
 
-        // 2. Создаем путь только до конструктора для поиска определения класса
         var classPath = new CallNode {
             Objects = objects.GetRange(0, constructorIndex + 1)
         };
 
-        // 3. Получаем сам узел конструктора и ищем класс
         var constructorPointer = (FunctionPointerNode)classPath.Objects[^1];
         var classNode = GetClassNodeByPath(classPath, stack);
 
-        // 4. Инстанцируем класс
         var instance = GetNewClass(
             classNode.@class, 
             constructorPointer.Arguments.ConvertAll(x => EvaluateExpression(x, stack)),
@@ -667,18 +663,13 @@ public partial class Interpreter
             stack
         );
 
-        // 5. Обрабатываем последующие вызовы, если они есть
-        // Пропускаем всё до конструктора ВКЛЮЧИТЕЛЬНО (Skip(constructorIndex + 1))
         var remainingCalls = objects.Skip(constructorIndex + 1).ToList();
 
         if (remainingCalls.Count == 0)
             return instance;
 
-        // Создаем временный CallNode для оставшейся цепочки
         var tailCalls = new CallNode { Objects = remainingCalls };
 
-        // Вызываем методы у созданного инстанса
-        // Предполагается, что ExecuteObjectCalls принимает (объект, цепочка вызовов, стек)
         var returnValue = ((object)instance, false);
         foreach (var call in tailCalls.Objects)
         {
@@ -692,7 +683,6 @@ public partial class Interpreter
 
     private (DynamicClass @class, DynamicNamespace @namespace) ExecutePathToClass(CallNode callNode, Stack<ASTContext> stack)
     {
-        Console.WriteLine(callNode.Objects.Select(x => x.GetType().Name));
         var obj = GetClassNodeByPath(callNode, stack);
         return (ToDynamicClass(obj.@class, obj.@namespace, stack), obj.@namespace);
     }
@@ -949,7 +939,6 @@ public partial class Interpreter
 
         if ((result is not DynamicClass dynamicClass || dynamicClass.ClassName != leftClass.ClassName) &&
             (originalOperator.Contains("Division") || originalOperator.Contains("Subtraction") || originalOperator.Contains("Multiplication") || originalOperator.Contains("Addition")))
-            // Console.WriteLine($"warning: return value of {leftClass.ClassName} is not equal to self type");
             throw new QlangRuntimeException(
                 $"Return value of '_operator{originalOperator}' must be equal to type '{leftClass.ClassName}'", GetCurrentDebug(stack),
                 GetStackTrace(stack)); 
