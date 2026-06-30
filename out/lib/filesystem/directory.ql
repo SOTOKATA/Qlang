@@ -7,7 +7,7 @@ namespace fs: {
 
         // Return type: bool
         // Return true if directory exists
-        function<Boolean> exists(<String> path) => #std.FileSystem.DirectoryExists(path);
+        function<Boolean> exists(<String> path) => #std.FileSystem.DirectoryExists(path.toString());
 
         // Create if not exists directory
         function create(<String> path): {
@@ -29,7 +29,7 @@ namespace fs: {
             if !exists(path):
                 std::throw.message("Undefined directory path.");
 
-            return new Array(#std.FileSystem.GetFiles(path, extension));
+            return new Array(#std.FileSystem.GetFiles(path.toString(), extension));
         }
 
         function<Array> getDirectories(<String> path, <String> searchPattern = ""): {

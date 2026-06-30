@@ -7,7 +7,7 @@ public class FileSystemClass : IQlangClass
     public List<(string name, Delegate body)> GetFunctions()
     {
         return [
-            ("FileExists", (Func<string, bool>)File.Exists),
+            ("FileExists", (Func<string, bool>)(File.Exists)),
             ("SetContent", (Action<string, string>)File.WriteAllText),
             ("AppendContent", (Action<string, string>)File.AppendAllText),
             ("GetContent", (Func<string, string>)File.ReadAllText),

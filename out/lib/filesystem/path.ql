@@ -5,7 +5,7 @@ namespace fs: {
     const path = new Path();
     private class Path: {
         function<String> combine(<Array> arr) 
-            => new String(_native("std", "filesystem", "combine", arr.getCollection()));
+            => new String(#std.FileSystem.Combine(arr.getCollection()));
 
         function<Boolean> exists(<String> path) 
             => #std.FileSystem.PathExists(path);

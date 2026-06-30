@@ -4,7 +4,7 @@ import "$lib/core"
 const string = new String(""); 
 class String extends DataType: {
     // overriding functions 
-    function<String> toString() => object.toString(_value);
+    function<String> toString() => _value;
 
     // Parse object to String
     function _createFrom(obj) => new String(obj);

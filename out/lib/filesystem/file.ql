@@ -6,7 +6,7 @@ namespace fs: {
     private class File: {
         // Return type: bool
         // Returns true if file found
-        function<Boolean> exists(<String> path) => #std.FileSystem.FileExists(path);
+        function<Boolean> exists(<String> path) => #std.FileSystem.FileExists(path.toString());
 
         // Override file content
         function setContent(<String> path, <String> content): {
