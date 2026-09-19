@@ -4,7 +4,7 @@ Qlang - modern programming language, compiler and runtime written on c#. Syntax 
 
 Example of "Hello, World!":
 
-```ql
+```js
 import "$lib/standard"
 
 function main(): {
